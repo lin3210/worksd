@@ -1,0 +1,221 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="/indexCms.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                Xác thực người LH(联系人)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcmsAction?function=GetContactorList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                               <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              Mã số khách hàng:
+		                      </label>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                              <!-- <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              审核状态:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="commit">
+                                  <option value="0">
+                                    --请选择--
+                                  </option>
+                                  <option value="-1">
+                                    待审核
+                                  </option>
+                                  <option value="1">
+                                    成功
+                                  </option>
+                                  <option value="2">
+                                    失败
+                                  </option>
+                                </select>
+                              </div> -->
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Xác thực người LH(联系人)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          Mã số khách hàng(用户编号)
+		                        </th>
+		                        <th>
+		                          Số ĐTDĐ(手机号码)
+		                        </th>
+		                        <th>
+		                           Quan hệ 01(关系1)
+		                        </th>
+                                <th>
+		                          Họ tên người liên hệ thứ 1(姓名1)
+		                        </th>
+                                <th>
+		                          Số ĐTDĐ người liên hệ thứ 1(手机号1)
+		                        </th>
+		                         <th>
+		                           Quan hệ 02(关系2)
+		                        </th>
+                                <th>
+		                          Họ tên người liên hệ thứ 2(姓名2)
+		                        </th>
+                                <th>
+		                          Số ĐTDĐ người liên hệ thứ 2(手机号2)
+		                        </th>     
+		                        
+                                <th>
+		                          Thời gian tạo TK(认证时间)
+		                        </th>
+                                
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>tin，mỗi trang chứa được <font id="numperpage"></font> tin，hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font>Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+
+<script>
+     
+     function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+  
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	
+	  var tempval=$("#tempVelue").val();
+	  var commit=$("#commit").val();
+	  var para={curPage:$("#cupage").val(),tempvl:tempval,type:commit};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  //sd_user.id as id , sd_user.createTime,sd_user.mobilePhone as phone ,contactname ,contactRelationship, contactPhone ,nativePlaceCity 
+		  for(var i=0;i<list.length;i++)
+		  {
+		      
+				html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].phone+"</td><td>"+list[i].guanxi1+"</td><td>"+list[i].contact1+"</td><td>"+list[i].tel1+"</td><td>"+list[i].guanxi2+"</td><td>"+ list[i].contact2+"</td><td>"+list[i].tel2+"</td><td>"+list[i].createtime+"</td>";
+				/*  if(list[i].list==1)
+				{
+					html_ +="<td>成功</td>";
+				}
+				else 
+				{
+					html_ +="<td>待审核</td>";
+				} */
+				html_ +="</tr>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

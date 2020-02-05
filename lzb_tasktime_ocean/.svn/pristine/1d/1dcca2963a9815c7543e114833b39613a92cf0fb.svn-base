@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/com/RonBao=UTF-8
+encoding//src/com/lianpay/constant/PaymentStatusEnum.java=UTF-8
+encoding//src/com/service/GsdLoanService.java=UTF-8
+encoding//src/com/task/GsdLoanTask.java=UTF-8
+encoding//src/com/util/FuyouPay.java=UTF-8
+encoding//src/com/util/HttpSender.java=UTF-8
+encoding//src/com/util/HttpSenderTest.java=UTF-8
+encoding//src/com/util/ZmxyGSUtils.java=UTF-8
+encoding//src/service/bfpay/SignServlet.java=UTF-8
+encoding/<project>=UTF-8

@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+<html lang="en">  
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>人人闪贷后台业务管理系统</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+     <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+      <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+    <link href="/assets/css/date_css/dateRange.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="/assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="/plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.tooltip.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.resize.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.time.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.growraf.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/moment.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/daterangepicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/blockui/jquery.blockUI.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/fullcalendar/fullcalendar.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/jquery.noty.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/layouts/top.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/themes/default.js">
+    </script>
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/select2/select2.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/app.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.form-components.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/page.js">
+    </script>
+	<script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/monthPicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/dateRange.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        Plugins.init();
+        FormComponents.init()
+    
+      });
+    </script>
+    <script type="text/javascript" src="/assets/js/custom.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/json.js">
+    </script>
+    
+
+
+</head>
+<style>
+   .nu{text-align:center};
+</style>
+<body>
+	<div id="container">
+		<div id="content" style="margin-left:0px;">
+			<div  style="width: 70%;  margin:auto; background-color:#FFFFFF">
+	            <div class="page-header">
+		            <div class="page-title" style="margin-bottom:-30px;">
+		              <h3>
+		                  <div class="am-fl am-cf"><strong >【人人闪贷】数据报告分析</strong> / <small>报告时间：<b><font color="red" id="day"></font></b></small></div>
+		              </h3>
+		            </div>
+                   
+		         </div>
+                  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+                             <input type="hidden" id="cupage_" value="1"/>
+                             <input type="hidden" id="total_" value="1"/>
+				 </div>
+                <!--运营商数据-->
+                
+              <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    手机运营商数据
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    
+                      <tr>
+                         <th colspan="20" style="border-bottom:0px solid #ddd">
+                            <div style="border:1px solid #e9ecf1; height:60px; text-align:center;">
+                               <ul style="border:0px solid #15ec7e; height:50px; margin-top:5px;">
+                                  <li style="border:0px solid #e9ecf1; height:40px; margin-top:5px; width:33%; float:right;font-size:1.3rem;  color:red">
+                                      芝麻分：<font id="zmf">未知</font><br/></font>手机号码：<font id="phone">未知</font>
+                                  </li>
+                                   <li style="border:1px solid #e9ecf1; height:40px; margin-top:5px; width:33%;border-bottom:0px; border-top:0px;color:#5eb95e;font-size:1.3rem; float:right;">
+                                       姓名：<font id="username">未知</font><br/></font>省份/城市：<font id="city">未知</font>
+                                  </li>
+                                  <li style="border:0px solid #bc3057; height:40px; margin-top:5px; width:33%; color:#f37b1d;font-size:1.3rem;">
+                                     状态：<font id="province">未知</font><br/></font>套餐名称：<font id="pagename">未知</font>
+                                  </li>
+                               </ul>
+                            </div>
+                         </th>
+                      </tr>
+                      <tr>
+                        <th colspan="20" style="border-bottom:0px solid #ddd; border-top:0px solid #ddd;">
+                         <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        筛选条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		                    <div class="form-group">
+                              <div class="col-md-3">
+                                  <select class="form-control" name="select" id="tempselect">
+                                      
+                               	  </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="加载中...">
+			                                     查 询
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+                         </th>
+                      </tr>
+                      <tr>
+                      <tr>
+                         <th colspan="20" style=" border-bottom:1px;font-family:cursive;font-weight:bold;">总的通话条数：<span id="zts" style="color:red; font-size:16px;"></span>&nbsp;条</th>
+                      </tr>
+                      </tr>
+                      <tr>
+                        <th>
+                          序号
+                        </th>
+                        <th>
+                          手机号码
+                        </th>
+                        <th>
+                          通话时间
+                        </th>
+                        <th class="hidden-xs">
+                          通话对象
+                        </th>
+                        <th>
+                        通话条数
+                        </th>
+                        <th>
+                          通话地(自己的)
+                        </th>
+                        <th>
+                        通话地类型
+                        </th>
+                        <th>
+                        通话时长(秒)
+                        </th>
+                        <th>
+                        通话方式
+                        </th>
+                      
+                        <th>
+                        创建时间
+                        </th>
+                        <th>
+                        最后修改时间
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="load_data">
+                      
+                    </tbody>
+                  </table>
+                  
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+                </div>
+                 
+              </div>
+              
+              
+            
+<script src="/assets/js/jquery.artZoom.js"></script>
+<script>
+   function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+	 function formate(d){
+	  return d>9?d:'0'+d;
+ }
+  $("#btn-load").on("click", function() {
+ 
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	});
+	load_data();
+	function load_data()
+	{
+
+	  var th_phone_=$("#tempselect").val();
+	 
+	  var user_id_=GetQueryString("user_id");
+	 /*  alert(th_phone_); */
+	  var para={curPage:$("#cupage").val(),th_phone:th_phone_,user_id:user_id_};
+	  loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxPhone",para,function(data){
+	    if(data.error < 0 )
+		   {
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		   }
+		  $("#load_data").html("");
+		 
+		  var list = data.list.data;	
+		  var html_="";
+		  $("#zts").html(data.tonghuaCount);
+		
+		  if(list.length>0)
+		  {
+			  for(var i=0;i<list.length;i++)
+			  {  
+				  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].phone+"</td><td>"+init2(list[i].tonghua_time.time)+"</td><td>"+list[i].peer_number+"</td><td>"+list[i].geshu+"</td>";
+				  if(list[i].location!=null)
+				  {
+					  html_ +="<td>"+list[i].location+"</td>";
+				  }
+				  else
+				  {
+					  html_ +="<td>无</td>";
+				  }
+				  if(list[i].location_type!=null)
+				  {
+					  html_ +="<td>"+list[i].location_type+"</td>";
+				  }
+				  else
+				  {
+					   html_ +="<td>无</td>";
+				  }
+				  html_ +="<td>"+list[i].duration+"</td>";
+				  
+				  if(list[i].dial_type == "DIAL")
+				  {
+					  html_ +="<td><span class='label label-success'>主叫</span></td>";
+				  }
+				  else if(list[i].dial_type == "DIALED")
+				  {
+					  html_ +="<td><span class='label label-warning'>被叫</span></td>"
+				  }
+				  html_ +="<td>"+init2(list[i].create_time.time)+"</td><td>"+init2(list[i].update_time.time)+"</td>";
+				  html_ +="</tr>";
+			  }
+		  }
+		  else
+		  {
+			  html_+="<tr><td colspan='15' class='nu'>暂无数据</td></tr>"
+		  }
+		  
+		  if(data.usertonghua!=null)
+		  {
+		   var dr=data.usertonghua;	
+		   var hmzt ="正常" ;
+		   if(dr.state ==-1 ){
+		        
+		        hmzt="未知" ;
+		   
+		   }else if (dr.state ==0 ){
+		        hmzt="正常" ;
+		   
+		   }else if (dr.state ==1 ){
+		        hmzt="单向停机" ;
+		        		   
+		   }else if (dr.state ==2 ){
+		         hmzt="停机" ;
+		   
+		   }else if (dr.state ==3 ){
+		         hmzt="预销户" ;
+		   
+		   }else if (dr.state ==4 ){
+		         hmzt="销户" ;
+		   
+		   }else if (dr.state ==5 ){
+		         hmzt="过户" ;
+		   
+		   }else if (dr.state ==6 ){
+		         hmzt="改号" ;
+		   
+		   }else if (dr.state ==99 ){
+		         
+		         hmzt="号码不存在" ;
+		   
+		   } 
+			  
+			  $("#zmf").html("--");
+			  
+			  $("#phone").html(dr.phone);
+			  $("#username").html(dr.name);
+			  $("#city").html(dr.province+"省/"+dr.city+"市");			
+			  $("#province").html(hmzt);
+			  $("#pagename").html(dr.package_name);
+			  $("#day").html(init2(dr.last_modify_time.time));
+		  }
+	    var con=data.lxrhm;
+		  var htm_="<option value='0'>请选择查询条件</option>";
+		
+		 htm_ +="<option value='"+con.contactphone+"'>"+con.contactrelationship+"&nbsp;&nbsp;&nbsp;"+con.contactname+"&nbsp;&nbsp;&nbsp;"+con.contactphone+"</option>";
+		 htm_ +="<option value='"+con.contactphone02+"'>"+con.contactrelationship02+"&nbsp;&nbsp;&nbsp;"+con.contactname02+"&nbsp;&nbsp;&nbsp;"+con.contactphone02+"</option>";
+		  $("#tempselect").html(htm_);
+		  if(data.th_phone!=null && data.th_phone!="")
+		  {
+			  $("#tempselect").val(data.th_phone);
+		  }  
+		  $("#load_data").append(html_);
+		 
+		  page_value(data); 
+		  page_data(); 
+		  $("#btn-load").button("reset");
+	    });
+   }  
+
+</script>
+
+                <!--京东数据-->
+                <div class="widget box widget-closed">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    京东数据
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div style="display: none;" class="widget-content">
+                 
+                </div>
+                
+                <div style="display: none;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                         <th colspan="9" style="font-size:16px; text-align:center; color:#147ee0; border-bottom:1px;">地址信息</th>
+                      </tr>
+                      <tr>
+     
+                        <th>
+                       收货地址
+                        </th>
+                        <th>
+                          详细地址
+                        </th>
+                        <th class="hidden-xs">
+                         城市
+                        </th>
+                        <th>
+                          是否默认
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="JD_address">
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div style="display: none;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                         <th colspan="6" style="font-size:16px; text-align:center; color:#147ee0; border-bottom:1px;">交易记录&nbsp;&nbsp; &nbsp; &nbsp;<font style=" border-bottom:1px;font-family:cursive;font-weight:bold">总消费金额:<span id="z_amount" style="color:red; font-size:15px;"></span></span></th>
+     
+                     </tr>
+                      <tr>
+                        <th>
+                          姓名
+                        </th>
+                  
+                        <th>
+                          商品
+                        </th>
+                        <th class="hidden-xs">
+                          交易时间
+                        </th>
+                     
+                        <th>
+                        交易金额
+                        </th>
+                        <th>
+                        数据更新时间
+                        </th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody id="JD_data">
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+            
+<script src="/assets/js/jquery.artZoom.js"></script>
+<script>
+  JD_data();
+
+  function JD_data()
+	{
+		var user_id_=GetQueryString("user_id");
+		var para={user_id:user_id_};
+		loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxJD",para,function(data){
+	      if(data.error < 0 )
+		   {
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		   }
+	        var html_jd="";
+			var list=data.list.data;
+			var z_amount=0;
+			if(list.length>0)
+			{
+				for(var i=0;i<list.length;i++)
+				  {
+					  z_amount=z_amount+parseInt(list[i].real_total);
+					  html_jd+="<tr><td>"+list[i].receiver+"</td>";		
+					  var create_time =	list[i].trade_createtime ;	
+					  html_jd+="<td>"+list[i].item_name+"</td><td>"+create_time.substring(0,create_time.indexOf("."))+"</td><td>"+list[i].real_total+"</td><td>"+init2(list[i].update_time.time)+"</td>";
+				  }
+			}
+			else
+			{
+				html_jd+="<tr><td colspan='15' class='nu'>暂无数据</td></tr>";
+			} 
+			
+			$("#z_amount").html("￥"+z_amount.toFixed(2));
+		    html_jd +="</tr>";
+			$("#JD_data").html(html_jd); 
+			var html_adr="";
+			if(data.listadr.length>0)
+			{
+				var drlisr=data.listadr;
+				for(var j=0;j<drlisr.length;j++)
+				 {
+					 html_adr +="<tr><td>"+drlisr[j].address+"</td><td>"+drlisr[j].fu_address+"</td><td>"+drlisr[j].city+"</td>";
+					
+					  if(drlisr[j].default2=="true")
+					 {			
+						 html_adr +="<td>是</td>";
+					 }
+					 else
+					 {
+						 html_adr +="<td>否</td>";
+					 }
+				 }
+			}
+			else
+			{
+				html_adr+="<tr><td colspan='15' class='nu'>暂无数据</td></tr>";
+			}
+			$("#JD_address").html(html_adr);
+			var ht_info="";
+			if(data.jd_info!=null)
+			{
+				
+				 ht_info +="<tr><td>"+data.jd_info.realname+"</td><td>"+data.jd_info.nick+"</td><td>"+data.jd_info.loginname+"</td>";
+						 if(data.jd_info.gender=="SECRET")
+						 {
+							 ht_info +="<td>秘密</td>";
+						 }
+						 else if(data.jd_info.gender=="FEMALE")
+						 {
+							 ht_info +="<td>女</td>";
+						 }
+						 else if(data.jd_info.gender=="MALE")
+						 {
+							 ht_info +="<td>男</td>";
+						 }
+						 ht_info +="<td>"+data.jd_info.lastmodifytime+"</td></tr>";
+			}
+			else
+			{
+				ht_info+="<tr><td colspan='8' class='nu'>暂无数据</td></tr>";
+			}
+			$("#JD_info").html(ht_info);
+		});
+		
+		
+		
+				 
+    }  
+</script>
+
+                <!--淘宝数据-->
+                <div class="widget box  widget-closed">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    淘宝数据
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div style="display: none;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                         <th colspan="9" style="font-size:16px; text-align:center; color:#147ee0; border-bottom:1px;">淘宝用户信息</th>
+                      </tr>
+                      <tr>
+                        <th>
+                          姓名
+                        </th>
+                        <th>
+                          昵称
+                        </th>
+                        <th>
+                          手机号码
+                        </th>
+                        <th class="hidden-xs">
+                       淘宝积分
+                        </th>
+                        <th>
+                          头像地址
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="TB_info">
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div style="display: none;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                         <th colspan="9" style="font-size:16px; text-align:center; color:#147ee0; border-bottom:1px;">地址信息</th>
+                      </tr>
+                      <tr>
+                     
+                        <th>
+                          收货地址
+                        </th>
+                        <th>
+                          详细地址
+                        </th>
+                        <th class="hidden-xs">
+                          城市
+                        </th>
+                        <th>
+                          是否默认
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="TB_address">
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div style="display: none;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                         <th colspan="4" style="font-size:16px; text-align:center; color:#147ee0; border-bottom:1px;">交易记录</th>
+                         <th style=" border-bottom:1px;font-family:cursive;font-weight:bold">总消费金额:<span id="tb_z_amount" style="color:red; font-size:15px;"></span></th>
+                      </tr>
+                      <tr>
+                        <th>
+                          商品名称
+                        </th>
+                        <th>
+                          交易金额
+                        </th>
+                        <th>
+                          交易数量
+                        </th>
+                        <th class="hidden-xs">
+                          交易时间
+                        </th>
+                        <th>
+                          数据更新时间
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="TB_data">
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+<script src="/assets/js/jquery.artZoom.js"></script>
+<script>
+     TB_data();
+	function TB_data()
+	{
+		var user_id_=GetQueryString("user_id");
+		var para={user_id:user_id_};
+		loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxTB",para,function(data){
+	        var html_tb="";
+			var list=data.listadr;
+			var z_amount=0;
+		   if(data.error < 0 )
+		   {
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		   }
+			if(list.length>0)
+			{
+				for(var i=0;i<list.length;i++)
+				  {
+					  html_tb +="<tr><td>"+list[i].address+"</td><td>"+list[i].fu_address+"</td><td>"+list[i].city+"</td>";
+					 if(list[i].default2=="true")
+					 {
+						 html_tb +="<td>是</td>";
+					 }
+					 else
+					 {
+						 html_tb +="<td>否</td>";
+					 }
+				  }
+			}
+			else
+			{
+				html_tb+="<tr><td colspan='15' class='nu'>暂无数据</td></tr>";
+			}
+		    html_tb +="</tr>";
+			$("#TB_address").html(html_tb);
+			var tb_lisr=data.list.data;
+			var tb_html_="";
+			var tb_z_amount=0;
+			if(tb_lisr.length>0)
+			{
+				for(var j=0;j<tb_lisr.length;j++)
+				{
+            		var createTime =tb_lisr[j].trade_createtime
+            		    
+					    tb_z_amount=tb_z_amount+parseInt(tb_lisr[j].real_total);
+		  
+					    tb_html_ +="<tr><td>"+tb_lisr[j].item_name+"</td><td>"+tb_lisr[j].real_total+"</td><td>"+tb_lisr[j].quantity+"</td><td>"+createTime.substring(0,createTime.indexOf("."))+"</td><td>"+init2(tb_lisr[j].update_time.time)+"</td></tr>";
+				}
+			}
+			else
+			{
+				tb_html_ +="<tr><td colspan='15' class='nu'>暂无数据</td></tr>";
+			}
+		
+			$("#tb_z_amount").html(tb_z_amount.toFixed(2));
+			$("#TB_data").html(tb_html_);
+			
+			var tb_data=data.taobaouserInfo;
+			var ht_info="";
+			if(tb_data!=null)
+			{
+				 ht_info +="<tr><td>"+tb_data.real_name+"</td><td>"+tb_data.nick+"</td><td>"+tb_data.phone_number+"</td><td>"+tb_data.vip_count+"</td><td><a href='"+tb_data.pic+"'>点击查看</a></td></tr>";
+			}
+			else
+			{
+				ht_info+="<tr><td colspan='8' class='nu'>暂无数据</td></tr>";
+			}
+			$("#TB_info").html(ht_info);
+		});
+    }  
+</script>
+
+                <!--邮箱数据-->
+                   
+              <!--信用卡邮箱数据-->
+               <div class="widget box  widget-closed" style="display:none">
+                <div class="widget-header">
+                  <h4>
+                    <i class="icon-reorder">
+                    </i>
+                    信用卡邮箱数据
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="icon-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display:none;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                         <th colspan="9" style="font-size:16px; text-align:center; color:#147ee0; border-bottom:1px;">信用卡账单信息</th>
+                      </tr>
+                      <tr>
+                        <th>
+                          姓名
+                        </th>
+                        <th>
+                          账单日
+                        </th>
+                        <th>
+                          还款日
+                        </th>
+                        <th class="hidden-xs">
+                          额度
+                        </th>
+                        <th>
+                          本期账单金额
+                        </th>
+                        <th>
+                          卡号末四位
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="email_info">
+                      
+                    </tbody>
+                  </table>
+                </div>
+                 <div style="display:none;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                         <th colspan="9" style="font-size:16px; text-align:center; color:#147ee0; border-bottom:1px;">消费记录信息</th>
+                      </tr>
+                      <tr>
+                        <th>
+                          交易时间
+                        </th>
+                        <th>
+                          交易地点
+                        </th>
+                        <th>
+                          交易类型
+                        </th>
+                        <th class="hidden-xs">
+                          交易金额
+                        </th>
+                        <th>
+                          卡号未四位
+                        </th>
+                        <th>
+                          数据采摘时间
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="email_shop">
+                      
+                    </tbody>
+                   
+                  </table>
+                   
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows_"></font> 条记录，每页 <font id="numperpage_"></font> 条，当前第 <font id="currentpage_"></font> / <font id="totalpages_"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable_"></div></div></div></div>
+
+
+                </div>
+                
+              </div>
+            
+<script src="/assets/js/jquery.artZoom.js"></script>
+<!-- <script>
+	 email_data();
+	
+		function email_data()
+		{
+			var user_id_=GetQueryString("user_id");
+			var para={user_id:user_id_};
+			loadGetServer("/tzms/mjzx_email/getMjzx_email",para,function(data){
+				  var email_html="";
+				  var list=data.adrlist;
+				  if(list.length>0)
+				  {
+					  for(var i=0;i<list.length;i++)
+					  {
+						  email_html+="<tr><td>"+list[i].nameoncard+"</td><td>"+list[i].billdate+"</td><td>"+list[i].paymentduedate+"</td><td>"+list[i].creditlimit+"</td><td>"+list[i].newbalance+"</td><td>*** ***"+list[i].cardnumber+"</td></tr>";
+					  }
+				  }
+				  else
+				  {
+					  email_html+="<tr><td colspan='9' class='nu'>暂无数据</td></tr>";
+				  }
+				  
+				  $("#email_info").html(email_html);
+				});
+		}
+	
+	load_data_();
+		function load_data_()
+		{
+			var user_id_=GetQueryString("user_id");
+			var para={curPage:$("#cupage_").val(),user_id:user_id_};
+			loadGetServer("/tzms/mjzx_email/getMjzx_emailpdage",para,function(data){
+				  var shop_html="";
+				  var shoplist=data.list.data;
+				  if(shoplist.length>0)
+				  {
+					  for(var j=0;j<shoplist.length;j++)
+					  {
+						  shop_html+="<tr><td>"+shoplist[j].transdate+"</td><td>"+shoplist[j].description+"</td><td>"+shoplist[j].transtype+"</td><td>"+shoplist[j].transorgamount+"</td><td>*** ***"+shoplist[j].cardno+"</td><td>"+shoplist[j].lastmodifytime+"</td></tr>";
+					  }
+				  }
+				  else 
+				  {
+					  shop_html+="<tr><td colspan='9' class='nu'>暂无数据</td></tr>";
+				  }
+				  page_value_(data);
+			      page_data_();
+				  $("#email_shop").html(shop_html);
+				})
+		}
+</script>
+ -->
+              
+           
+              
+		    </div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="/assets/js/jquery.artZoom.js"></script>
+

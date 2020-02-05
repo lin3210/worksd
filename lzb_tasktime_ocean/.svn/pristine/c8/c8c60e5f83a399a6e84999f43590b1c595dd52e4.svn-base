@@ -1,0 +1,314 @@
+package com.util ;
+import java.net.URLDecoder;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.antgroup.zmxy.openplatform.api.DefaultZhimaClient;
+import com.antgroup.zmxy.openplatform.api.FileItem;
+import com.antgroup.zmxy.openplatform.api.ZhimaApiException;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaAuthInfoAuthorizeRequest;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaAuthInfoAuthqueryRequest;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaCreditIvsDetailGetRequest;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaCreditScoreGetRequest;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaCreditWatchlistiiGetRequest;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaCustomerCertificationCertifyRequest;
+import com.antgroup.zmxy.openplatform.api.response.ZhimaAuthInfoAuthorizeResponse;
+import com.antgroup.zmxy.openplatform.api.response.ZhimaAuthInfoAuthqueryResponse;
+import com.antgroup.zmxy.openplatform.api.response.ZhimaCreditIvsDetailGetResponse;
+import com.antgroup.zmxy.openplatform.api.response.ZhimaCreditScoreGetResponse;
+import com.antgroup.zmxy.openplatform.api.response.ZhimaCreditWatchlistiiGetResponse;
+import com.thinkive.base.util.DateHelper;
+ 
+public class ZmxyGSUtils {
+    //֥�鿪��ƽ̨��ַ
+    private static String gatewayUrl     = "https://zmopenapi.zmxy.com.cn/openapi.do";
+    //�̻�Ӧ�� Id
+    private static String appId          = "1002180";
+    //�̻� RSA ˽Կ
+    private static String privateKey     = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAMFOBWu4P+SCGoG1qySBOT6kv9F+Gw9YsXHg5/7EhQozcrUdT+EYO7lYyFk+PFE6sTZMgXFLhc1OC/W3i0n7UPcm8hVMXm4kAuIpDJuEL5vWycV7KMJ7NN95i1mOZmgmyXoDXyatw0ce1DneuDqn+Nk0TlFpnvcIwcrx7ctw4HT7AgMBAAECgYB/FNjxeV7fzjy424MY66+DpHHKuvn1O9zkPfSnA/FmxG377bpPBEx3TIviR80Fpe1NAjzzC7B6SX4JW1JCH+uYe6nhWYpoWouJHCLZa7D7QeqSwwCBpghI8iCxJoO7F8HvMro+vCyALzD6EMbl/MbNvgXgOlFCAXm6a/Dl3emGWQJBAOWG0BaQmFlUowsDIi2do9A9//Bdbw1hQIOZCp5brgp1W+pS1LNtV8AQE9iN12HMUP8d+b7sxAKB36+bP9NLHOUCQQDXmbFvv9ZF9el2jq25KkMQf9k2PFcFQ6WNuXxd8/XnzCcmLT8iVYdkOcgZNYYl7GTQV4bZWQeXg9bzwLxzrgxfAkApp9vgHIHpxHiKqRjs2m0+f+IRR4O+E+ZXe9D3iH//mekCj+HWZoPEcaaIaMWsFB6nDlOjGOlB4zwrbKuat0kZAkEAiMFCXWHPpny/Y6ZI52S5OWP/AXnwsLQh9O2sx2ORnUBPrNWScFLUGGzWUbczqiZyI/0A2iiwuhi0ZdThNHc3/QJBAKPGRr5jevgxXXfDxaauI9C9dicOHbkLFfoTq7lGe4xoJcd2lyO7Aj7sWg+aAHNv8Fn8zBinygWYX9qJ+zM+bA4=";
+    //֥�� RSA ��Կ
+    private static String zhimaPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDxRLQhY1Agql7P8jNuCXLyeuDTlaVW+/gXhhKW47wf1xJnwSkLYhlIpxjOWNy1zYyO6vx+FB8WIelejYaXa/SUoflM9x+1OfgGCQIh7vwKlaZ2LbWlXXGN+n/+p0WvNlYR7CDLCu+41p250MdbzXiszYsakGbxa4zSeNd93gYCQwIDAQAB";
+ 
+    public String  testZhimaAuthInfoAuthorize(String realname ,String idNo ,String userid) {
+        ZhimaAuthInfoAuthorizeRequest req = new ZhimaAuthInfoAuthorizeRequest();
+        req.setChannel("apppc");
+        req.setPlatform("zmop");
+               req.setIdentityType("2");// ��Ҫ����        
+               req.setIdentityParam("{\"name\":\""+realname+"\",\"certType\":\"IDENTITY_CARD\",\"certNo\":\""+idNo+"\"}"); 
+               req.setBizParams("{\"auth_code\":\"M_H5\",\"channelType\":\"app\",\"state\":\""+userid+"\"}");       
+                DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, appId, privateKey,
+            zhimaPublicKey);
+        String url ="" ;
+        try {
+        	url = client.generatePageRedirectInvokeUrl(req);  
+        } catch (ZhimaApiException e) {
+            e.printStackTrace();
+        }
+        return url  ;
+    }
+ 
+  /*  public static void main(String[] args) {
+        ZmxyUtils result = new  ZmxyUtils();
+       System.out.println(result.testZhimaAuthInfoAuthorize("��С��","430482199406085866"));
+    }*/
+    
+    /**
+     * ȥ��url�е�·����������������
+     * @param strURL url��ַ
+     * @return url��������
+     */
+    private static String TruncateUrlPage(String strURL)
+    {
+      String strAllParam=null;
+      String[] arrSplit=null;
+     
+      strURL=strURL.trim();
+     
+      arrSplit=strURL.split("[?]");
+      if(strURL.length()>1)
+      {
+          if(arrSplit.length>1)
+          {
+                  if(arrSplit[1]!=null)
+                  {
+                  strAllParam=arrSplit[1];
+                  }
+          }
+      }
+     
+    return strAllParam;   
+    }
+    /**
+     * ������url�����еļ�ֵ��
+     * �� "index.jsp?Action=del&id=123"��������Action:del,id:123����map��
+     * @param URL  url��ַ
+     * @return  url��������
+     */
+    public static Map<String, String> URLRequest(String URL)
+    {
+    Map<String, String> mapRequest = new HashMap<String, String>();
+   
+      String[] arrSplit=null;
+     
+    String strUrlParam=TruncateUrlPage(URL);
+    if(strUrlParam==null)
+    {
+        return mapRequest;
+    }
+      //ÿ����ֵΪһ�� www.2cto.com
+    arrSplit=strUrlParam.split("[&]");
+    for(String strSplit:arrSplit)
+    {
+          String[] arrSplitEqual=null;         
+          arrSplitEqual= strSplit.split("[=]");
+         
+          //��������ֵ
+          if(arrSplitEqual.length>1)
+          {
+              //��ȷ����
+              mapRequest.put(arrSplitEqual[0], arrSplitEqual[1]);
+             
+          }
+          else
+          {
+              if(arrSplitEqual[0]!="")
+              {
+              //ֻ�в���û��ֵ��������
+              mapRequest.put(arrSplitEqual[0], "");       
+              }
+          }
+    }   
+    return mapRequest;   
+    }
+    
+    
+    public static Map<String, String> URLRequest2(String strUrlParam)
+    {
+    Map<String, String> mapRequest = new HashMap<String, String>();
+    String[] arrSplit=null;
+    arrSplit=strUrlParam.split("[&]");
+    for(String strSplit:arrSplit)
+    {
+          String[] arrSplitEqual=null;         
+          arrSplitEqual= strSplit.split("[=]");
+         
+          //��������ֵ
+          if(arrSplitEqual.length>1)
+          {
+              //��ȷ����
+              mapRequest.put(arrSplitEqual[0], arrSplitEqual[1]);
+             
+          }
+          else
+          {
+              if(arrSplitEqual[0]!="")
+              {
+              //ֻ�в���û��ֵ��������
+              mapRequest.put(arrSplitEqual[0], "");       
+              }
+          }
+    }   
+    return mapRequest;   
+    }
+    
+    public Boolean  testZhimaAuthInfoAuthquery(String open_id ,String app_id) {
+        ZhimaAuthInfoAuthqueryRequest req = new ZhimaAuthInfoAuthqueryRequest();
+        req.setChannel("apppc");
+        req.setPlatform("zmop");
+    	String zhimaPublicKey2 ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBWJaqNpIEoZnB6aeU/mojJujibGtUyAeWWLtCtqVHDi9VV2ufzVBGcBF0rik2zDEwrVKVNeyQVATjzTHnwEzCYY1WYVFZaKbjGufn9qqoRrhTL0Zs1cPJY0XxDKlA8WOEbPR4H6ryuYNkZCWMk3GIZ/lBQjfyq4U4KYOz2QhW2wIDAQAB";
+    	//根据appid 判断选择得私秘是多少
+    	 if(app_id.equals("1002180")){
+    		 zhimaPublicKey2 ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDxRLQhY1Agql7P8jNuCXLyeuDTlaVW+/gXhhKW47wf1xJnwSkLYhlIpxjOWNy1zYyO6vx+FB8WIelejYaXa/SUoflM9x+1OfgGCQIh7vwKlaZ2LbWlXXGN+n/+p0WvNlYR7CDLCu+41p250MdbzXiszYsakGbxa4zSeNd93gYCQwIDAQAB";
+    	 }
+    	boolean result =false ;
+               req.setIdentityType("0");// ��Ҫ����        
+               req.setIdentityParam("{\"openId\":\""+open_id+"\"}");// ��Ҫ����        
+                DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, app_id, privateKey,
+            zhimaPublicKey2);
+        try {
+            ZhimaAuthInfoAuthqueryResponse response = client.execute(req);
+           
+            result=response.getAuthorized();
+          
+        } catch (ZhimaApiException e) {
+            e.printStackTrace();
+        }
+        return result ;
+    }
+ 
+    
+    //��ȡOPenid 
+    public String getOpenId(String params ,String sign ){
+
+    	 String result ="";
+    	  try {
+    	    	if(params.indexOf("%")!=-1){
+    	  	        params=URLDecoder.decode(params,"UTF-8");
+    	  	          }
+    	  	    
+    	  	    if(sign.indexOf("%")!=-1){
+    	  	        sign=URLDecoder.decode(sign,"UTF-8");
+    	  	          }
+    	  	    
+    	  	    DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, appId, privateKey,zhimaPublicKey);
+    	  	    result = client.decryptAndVerifySign(params,sign); 	
+    	  	    System.out.println(result);
+    	  	    } catch (Exception e) {
+    	  	        e.printStackTrace();
+    	  	    }
+    	return result ;
+    }
+  
+    
+    public String  testZhimaCreditScoreGet(String open_id) {
+        ZhimaCreditScoreGetRequest req = new ZhimaCreditScoreGetRequest();
+        String result ="";
+        req.setPlatform("zmop");
+        Date  currentTime = new Date();		
+   	    String curdateY = DateHelper.formatDate(currentTime, "yyyy");//��ǰ��		
+        String transaction_id=curdateY+currentTime.getTime()+currentTime.getTime() ;  
+      /*  System.out.println("id:"+transaction_id);*/
+        req.setTransactionId(transaction_id);// ��Ҫ����         
+        req.setProductCode("w1010100100000000001");// ��Ҫ����         
+        req.setOpenId(open_id);// ��Ҫ����         
+        DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, appId, privateKey,
+            zhimaPublicKey);
+        try {
+            ZhimaCreditScoreGetResponse response =(ZhimaCreditScoreGetResponse)client.execute(req);
+            result = response.getBody() ; 
+           
+        } catch (ZhimaApiException e) {
+            e.printStackTrace();
+        }
+        return  result ;
+    }
+    //��ҵ
+    public String  testZhimaCreditWatchlistiiGet(String appid ,String open_id) {
+    	
+    	String zhimaPublicKey2 ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBWJaqNpIEoZnB6aeU/mojJujibGtUyAeWWLtCtqVHDi9VV2ufzVBGcBF0rik2zDEwrVKVNeyQVATjzTHnwEzCYY1WYVFZaKbjGufn9qqoRrhTL0Zs1cPJY0XxDKlA8WOEbPR4H6ryuYNkZCWMk3GIZ/lBQjfyq4U4KYOz2QhW2wIDAQAB";
+    	//根据appid 判断选择得私秘是多少
+    	 if(appid.equals("1002180")){
+    		 zhimaPublicKey2 ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDxRLQhY1Agql7P8jNuCXLyeuDTlaVW+/gXhhKW47wf1xJnwSkLYhlIpxjOWNy1zYyO6vx+FB8WIelejYaXa/SUoflM9x+1OfgGCQIh7vwKlaZ2LbWlXXGN+n/+p0WvNlYR7CDLCu+41p250MdbzXiszYsakGbxa4zSeNd93gYCQwIDAQAB";
+    	 }
+    	 String result ="" ;
+        ZhimaCreditWatchlistiiGetRequest req = new ZhimaCreditWatchlistiiGetRequest();
+        req.setPlatform("zmop");
+        req.setProductCode("w1010100100000000022");// ��Ҫ����         
+        Date  currentTime = new Date();		
+   	    String curdateY = DateHelper.formatDate(currentTime, "yyyy");//��ǰ��		
+        String transaction_id=curdateY+currentTime.getTime()+currentTime.getTime() ;  
+        req.setTransactionId(transaction_id);// ��Ҫ����         
+        req.setOpenId(open_id);// ��Ҫ����         
+        DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl,appid, privateKey,
+        		zhimaPublicKey2);
+        try {
+            ZhimaCreditWatchlistiiGetResponse response =(ZhimaCreditWatchlistiiGetResponse)client.execute(req);
+          
+            if(response.isSuccess()==true){
+            	
+            	 result  = response.getBody();	
+            } else {
+            	result= "false" ;
+            	
+            }
+        } catch (ZhimaApiException e) {
+        	result= "false" ;
+            e.printStackTrace();
+        }
+        return result ;
+    }
+ 
+    public static void main(String[] args) {
+        
+    	ZhimaCustomerCertificationCertifyRequest request = new ZhimaCustomerCertificationCertifyRequest();
+    	request.setPlatform("zmop");
+    	request.setBizNo("ZM201612013000000242400404124269");// 必要参数
+    	// 设置回调地址,必填. 如果需要直接在支付宝APP里面打开回调地址使用alipay协议
+    	// alipay://www.taobao.com 或者 alipays://www.taobao.com,分别对应http和https请求
+    	request.setReturnUrl("1s491797d3.51mypc.cn/servlet/current/JBDcms2Action?function=GetZmyRzHTML2");// 必要参数
+    	   DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl,appId, privateKey,
+           		zhimaPublicKey);
+       /*DefaultZhimaClient client = new DefaultZhimaClient(
+    	    "https://zmopenapi.zmxy.com.cn/openapi.do", "app_id", "your private_key",
+    	    "zhima_public_key");*/
+    	try {
+    	    String url = client.generatePageRedirectInvokeUrl(request);
+    	    System.out.println("generateCertifyUrl url:" + url);
+    	} catch (ZhimaApiException e) {
+    	    e.printStackTrace();
+    	}
+      
+    }
+ 
+    public String   testZhimaCreditIvsDetailGet(String userName ,String userMobile ,String userBankCard ,String app_id ,String idNo) {
+    	
+    	String result = "" ;
+    	String zhimaPublicKey2 ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBWJaqNpIEoZnB6aeU/mojJujibGtUyAeWWLtCtqVHDi9VV2ufzVBGcBF0rik2zDEwrVKVNeyQVATjzTHnwEzCYY1WYVFZaKbjGufn9qqoRrhTL0Zs1cPJY0XxDKlA8WOEbPR4H6ryuYNkZCWMk3GIZ/lBQjfyq4U4KYOz2QhW2wIDAQAB";
+    	//根据appid 判断选择得私秘是多少
+    	 if(app_id.equals("1002180")){
+    		 zhimaPublicKey2 ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDxRLQhY1Agql7P8jNuCXLyeuDTlaVW+/gXhhKW47wf1xJnwSkLYhlIpxjOWNy1zYyO6vx+FB8WIelejYaXa/SUoflM9x+1OfgGCQIh7vwKlaZ2LbWlXXGN+n/+p0WvNlYR7CDLCu+41p250MdbzXiszYsakGbxa4zSeNd93gYCQwIDAQAB";
+    	 }
+        ZhimaCreditIvsDetailGetRequest req = new ZhimaCreditIvsDetailGetRequest();
+        req.setPlatform("zmop");
+        req.setProductCode("w1010100000000000103");// 必要参数         
+        Date  currentTime = new Date();		
+   	    String curdateY = DateHelper.formatDate(currentTime, "yyyy");	
+        String transaction_id=curdateY+currentTime.getTime()+currentTime.getTime() ;  
+        req.setTransactionId(transaction_id);// 必要参数            
+        req.setCertNo(idNo);                
+        req.setName(userName);//         
+        req.setMobile(userMobile);//
+        req.setBankCard(userBankCard);
+        DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, app_id, privateKey,
+            zhimaPublicKey2);
+        try {
+            ZhimaCreditIvsDetailGetResponse response =(ZhimaCreditIvsDetailGetResponse)client.execute(req);
+            result = response.getBody();
+        } catch (ZhimaApiException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+}

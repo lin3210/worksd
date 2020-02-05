@@ -1,0 +1,354 @@
+
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                Danh sách vay thành công
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                    Danh sách vay thành công
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetRecordListChg111"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                      Toàn bộ
+                                      </option>               
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập điều kiện tìm kiếm" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+                              Thời gian nhận tiền:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+                              Tình trạng trả vay:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="hkst">
+                                  <option value="0">
+                                    --Chọn--
+                                  </option>
+                                </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                  Tìm kiếm
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                    Danh sách vay thành công
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                  
+		                  <h4>Tổng người đăng kí：</h4><span id="zhucerenshu"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  <h4>Tổng số lượt đề xuất vay：</h4><span id="zsqjk"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  <h4>Tổng lượt giải ngân：</h4><span id="fkzrs"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  
+		                  
+		                  
+		                    <!-- <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div> -->
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                        Mã số khách hàng
+		                        </th>
+		                        <th>
+		                        Tên khách hàng
+		                        </th>
+		                        <th>
+		                        Số điện thoại
+		                        </th>
+		                        <th>
+		                        CMND
+		                        </th>
+		                        
+		                        <th>
+		                        Số tiền có thể vay
+		                        </th>
+                                <th>
+                                Số tiền thực nhận
+		                        </th>
+                                <th>
+                                Thời hạn vay
+		                        </th>
+                                <th>
+                                Thời gian nhận tiền
+		                        </th>
+                                <th>
+                                Thời gian trả vay
+		                        </th>
+		                          
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+		                  
+<div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin，mỗi trang chứa được <font id="numperpage"></font> tin，hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font> Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+		<!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+<script>
+
+    function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	function toThousands(num) {  
+	    		var num = (num || 0).toString(), result = '';  
+	    		while (num.length > 3) {  
+	        		result = ',' + num.slice(-3) + result;  
+	        		num = num.slice(0, num.length - 3);  
+	    		}  
+	    		if (num) { 
+				result = num + result; 
+			}  
+    			return result;  
+		     }
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0 &&tempsele!=14)
+	  {
+		  if(tempval=="" && tempsele!=11 && tempsele!=12)
+		  {
+			  alert("Vui lòng nhập điều kiện tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val()};
+	  loadGetServer($("#formurl").val(),para,function(data){
+	  	  //var aa = parseInt(data.totalFmoney.replace(/,/g,""))*2;
+	  	  $("#totalFmoney").html(data.totalFmoney);
+	  	  
+	  	  $("#totalCapital").html(data.totalCapital);
+	  	  //var bb = parseInt(data.totalWmoney.replace(/,/g,""))*2;
+	  	  $("#totalWmoney").html(data.totalWmoney);
+	  	  //var cc = parseInt(data.totalYmoney.replace(/,/g,""))*2;
+	  	  $("#totalYmoney").html(data.totalYmoney);
+	  	  
+	  	  $("#totalLY").html(data.totalLY);
+	  	  $("#totalDHSInterest").html(data.totalDHSInterest);
+	  	  $("#totalYQZB").html(data.totalYQZB);
+	  	  $("#totalYQZBJ").html(data.totalYQZBJ);
+	  	  $("#totalDSYQZBJ").html(data.totalDSYQZBJ);
+	  	  $("#totalDSYQZBJLX").html(data.totalDSYQZBJLX);
+	  	  $("#totalOverdueInterest").html(data.totalOverdueInterest);
+	  	  $("#totalDHSYQLX").html(data.totalDHSYQLX);
+	  	  $("#totalWHSYQLX").html(data.totalWHSYQLX);
+	  	  $("#totalZFQBJ").html(data.totalZFQBJ);
+	  	  $("#totalDSFQBJ").html(data.totalDSFQBJ);
+	  	  $("#totalYSFQLX").html(data.totalYSFQLX);
+	  	  $("#zhucerenshu").html(data.zhucerenshu);
+	  	  $("#zsqjk").html(data.zsqjk);
+	  	  $("#fkzrs").html(data.fkzrs);
+	  	  $("#yqbl").html(data.yqbl+"%");
+	  	  
+	  	   //var dd = parseInt(data.yqwhbl.replace(/,/g,""))-10;
+	  	  $("#yqwhbl").html(data.yqwhbl+"%");
+	  	   //var ee = parseInt(data.ylbl.replace(/,/g,""))+11;
+	  	  $("#ylbl").html(data.ylbl+"%");
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jkqx ="15Ngày" ;
+		  var fwfy ;
+		  var yhje = 0;
+		  for(var i=0;i<list.length;i++)
+		  {
+		       
+		        fwfy=(list[i].yuq_lx+list[i].sjsh_money-list[i].sjds_money).toFixed(2) ;
+
+		        if(list[i].jk_date ==2){		        
+		            jkqx="30Ngày";
+		        }else if(list[i].jk_date ==1){
+		            jkqx="15Ngày";
+		        }else if(list[i].jk_date ==3){
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>";
+		        }else if(list[i].jk_date ==4){
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>";
+		        }
+               //已还金额   
+              /*  if(list[i].sfyhw == "1"){
+                   yhje =(list[i].sjsh_money+list[i].yuq_lx).toFixed(2);
+               }else {
+                  yhje = 0;
+               } */
+				var name = list[i].realname.substring(0,3)+"*******";
+				html_ += "<tr><td>"+list[i].username+"</td><td>"+name+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].idno+"</td><td>"+list[i].sjsh_money+"</td>";
+				html_ += "<td>"+list[i].sjds_money+"</td><td>"+jkqx+"</td>";
+				
+				if(list[i].sfyfk == 2)
+				{
+					html_ +="<td>NULL</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].fkr_time+"</td>";
+				}
+				if(list[i].sfyfk == 2)
+				{
+					html_ +="<td>NULL</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].hkyq_time+"</td>";
+				}
+				
+				html_ +="</tr>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			$("#hkst").val(data.hkstat);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+
+ function kk_ck(jkId,userId,money){
+ 	var con = confirm("是否确定扣款？");
+ 	if(con==true){
+ 		var para={money_order:money,userid:userId,jkid:jkId};
+	    loadGetServer("/servlet/current/JBDLLpayAction?function=QYPayment",para,function(data){
+	  		alert(data.msg);
+	  	});
+	  	load_data();
+	 }
+ }
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+    function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+    /*------查看更多信息(征信数据)------*/
+ function get_zx(jk_id)
+ {
+	 $("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/user_chenggong.html?record_id="+jk_id);	 
+ }
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

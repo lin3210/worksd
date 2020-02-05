@@ -1,0 +1,298 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               投资统计列表
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        筛选条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/tzms/tongj/getTjrInfo"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        全部
+                                      </option>
+                                       <option value="1">
+                                       投资人编号
+                                      </option>
+                                      <option value="2">
+                                       投资人姓名
+                                      </option>
+                                      <option value="3">
+                                       手机号码
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="请输入查询条件" >
+		                      </div>
+                             
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="加载中...">
+			                                     查 询
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                 投资统计列表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+                                    <th>
+                                        用户编号
+                                    </th>
+                                    <th>
+                                         真实姓名
+                                    </th>
+                                    <th>
+                                         手机号码
+                                    </th>
+                                    <th>
+                                         放款笔数
+                                    </th>
+                                    <th>
+                                        放款总额
+                                    </th>
+                                    <th>
+                                        待收笔数
+                                    </th>
+                                    <th>
+                                        待收本金
+                                    </th>
+                                    <th>
+                                         总逾期笔数
+                                    </th>
+                                     <th>
+                                         逾期笔数
+                                    </th>
+                                    <th>
+                                         逾期本金(未还)
+                                    </th>
+                                    <th>
+                                         罚息收益(已还)
+                                    </th>
+                                    <th>
+                                         平台服务费(+已还罚息)
+                                    </th>
+                                    <th>
+                                         已赚净收益(+已还罚息)
+                                    </th>
+                                    <th>
+                                         当前逾期率
+                                    </th>
+                                    <th>
+                                       当天放款笔数
+                                    </th>
+		                      </tr>
+		                    </thead>
+                            <tfoot>
+                              <tr>
+                                <td colspan="3" style="text-align:center; font-size:14px; font-weight:bold">合计</td>
+                                <td><span class="label label-success"><font id="fkcount">&nbsp;</font>笔</span></td>
+                                <td><span class="label label-success"><font id="fkmoney">&nbsp;</font>元</span></td>
+                                <td><span class="label label-success"><font id="dscount">&nbsp;</font>笔</span></td>
+                                <td><span class="label label-success"><font id="dsmoney">&nbsp;</font>元</span></td>
+                                <td><span class="label label-success"><font id="syycount">&nbsp;</font>笔</span></td>
+                                <td><span class="label label-success"><font id="yqcount">&nbsp;</font>笔</span></td>
+                                <td><span class="label label-success"><font id="yqbj">&nbsp;</font>元</span></td>
+                                <td><span class="label label-success"><font id="fxsy">&nbsp;</font>元</span></td>
+                                <td><span class="label label-success"><font id="dsdmoney">&nbsp;</font>元</span></td>
+                                <td><span class="label label-success"><font id="tzmoney">&nbsp;</font>元</span></td>
+                                <td><span class="label label-success"><font id="yqbfb">&nbsp;</td>
+                                <td><span class="label label-success"><font id="z_new_fk_count">&nbsp;</font>笔</span></td>
+                              </tr>
+                           </tfoot>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr><td>"+list[i].userid+"</td><td>"+list[i].realname+"</td><td>"+list[i].cellphone+"</td><td>"+list[i].zcount+"</td><td>"+list[i].zmoney+"</td><td>"+list[i].dcount+"</td><td>"+list[i].dmoney+"</td>";
+				if(list[i].syycount == null)
+				{
+					html_ +="<td>0</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].syycount+"</td>";
+				}
+				if(list[i].ycount == null)
+				{
+					html_ +="<td>0</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].ycount+"</td>";
+				}
+				if(list[i].whymoney == null)
+				{
+					html_ +="<td>0</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].whymoney+"</td>";
+				}
+				if(list[i].fxsy == null)
+				{
+					html_ +="<td>0</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].fxsy.toFixed(2)+"</td>";
+				}
+				if(list[i].ztc == null)
+				{
+					list[i].ztc=0;
+				}
+				if(list[i].tzlx==null)
+				{
+					list[i].tzlx=0;
+				}
+				html_ +="<td>"+(list[i].ptzqsy+list[i].dsdlx).toFixed(2)+"</td>";
+				html_ +="<td><a title='利息："+(list[i].yhzqsy+list[i].xxhb).toFixed(2)+"元,罚息："+list[i].tzlx+"元,提成："+list[i].ztc+"元'>"+((list[i].yhzqsy+list[i].tzlx)+list[i].ztc+list[i].xxhb).toFixed(2)+"</a></td>";
+				/*总的逾期率html_ +="<td>"+(list[i].yqbfb)+"%</td>";*/
+				if(list[i].ycount == null)
+				{
+					html_ +="<td>0%</td>";
+				}
+				else
+				{
+					html_ +="<td>"+velocity(list[i].whymoney,list[i].zmoney,list[i].dmoney)+"%</td>";
+				}
+				if(list[i].new_fk_count==null)
+				{
+					html_ +="<td>0</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].new_fk_count+"</td>";
+				}
+				html_ +="</tr>";
+		   }
+		    $("#fkcount").html(data.tzhj.zzcount);
+			$("#fkmoney").html(data.tzhj.zzmoney);
+			$("#dsmoney").html(data.tzhj.zdmoney);
+			$("#dscount").html(data.tzhj.zdcount);
+			$("#yqcount").html(data.tzhj.zycount);
+			$("#yqbj").html(data.tzhj.whymoney);
+			$("#fxsy").html(data.tzhj.fxsy);
+			$("#z_new_fk_count").html(data.tzhj.z_new_fk_count);
+			$("#dsdmoney").html((data.tzhj.ptzqsy+data.tzhj.dsdlx).toFixed(2));
+			$("#tzmoney").html((data.tzhj.yhzqsy+data.tzhj.tzlx).toFixed(2));
+			$("#syycount").html(data.tzhj.syycount);
+			/*总的逾期利息$("#yqbfb").html(data.tzhj.yqbfb+"%");*/
+			$("#yqbfb").html(velocity(data.tzhj.whymoney,data.tzhj.zzmoney,data.tzhj.zdmoney)+"%");
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+	
+	function velocity (distance,timecnt,dsmoney){
+	   return(((distance/(timecnt-dsmoney+distance))*100).toFixed(2));
+	}
+   
+   load_data();
+   
+
+   
+</script>
+<script type="text/javascript" src="/main/js/date_time.js"></script>

@@ -1,0 +1,407 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container" style="width:1200px">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                               Danh sách thống kê truy thu
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetCuishouAccount123"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1" id="dd">
+                                        Họ tên người xét duyệt
+                                      </option>
+                                      <option value="2" id="ee">
+                                       Số ĐTDĐ
+                                      </option>
+                                      <option value="3" id="eeeeee">
+                                       day
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                             <label class="col-md-0 control-label" style="padding-top:5px;" id="ff">
+		                                             Thời gian thống kê:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;
+                              <button type="button" class="btn btn-success" onclick="method5('tableExcel')">excel</button>
+			                  
+		                    <input type="hidden" id="recode">
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="gg">
+		                    <i class="icon-reorder">
+		                    </i>
+		                               Danh sách thống kê truy thu
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center" id="tableExcel">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;" id="hh">
+                                          Mã số người truy thu
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="ii">
+                                         Họ tên người truy thu
+                                    </th>
+                                    <th colspan="6" style=" font-size:14px; font-weight:bold;" id="kkkk">
+                                          KPI
+                                    </th>
+                                    
+		                      </tr>
+                              <tr  style="text-align:center">
+									<th id="rrrrrrrr">
+                                         总笔数
+                                    </th>
+                                    <th id="mmmm">
+                                         逾期1天
+                                    </th>
+                                    <th id="nnnn">
+                                         逾期2天
+                                    </th>
+                                    <th id="nnnnnn">
+                                         逾期3天
+                                    </th>
+                                    <th id="hhhh">
+                                         逾期1-3天总笔数
+                                    </th>
+                                    <th id="iii">
+                                         比例
+                                    </th>
+                                    
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>tin, mỗi trang chứa được <font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	function toThousands(num) {  
+	    		var num = (num || 0).toString(), result = '';  
+	    		while (num.length > 3) {  
+	        		result = ',' + num.slice(-3) + result;  
+	        		num = num.slice(0, num.length - 3);  
+	    		}  
+	    		if (num) { 
+				result = num + result; 
+			}  
+    			return result;  
+	}
+	function load_data()
+	{
+	var recode_ =$("#recode").val();
+
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jrzbs = 0;
+		  var jrzbsje = 0;
+			var jrtxzbs = 0;
+			var jrcszbs1 = 0;
+			
+			var zbs = 0;
+			var zbsSS = 0;
+			var ycszbs = 0;
+			var cszbs1 = 0;
+			var cszbs1SS = 0;
+			var cszje1 = 0;
+			
+			var zcsjebyq = 0;
+			var zcsjebyqSS = 0;
+			var zcsje = 0;
+			var zcsjeSS = 0;
+			var zcsbl = 0;
+			var zcsblSS = 0;
+			var yqzbs = 0;
+			var zcsjeyyq = 0;
+			var yqzje = 0;
+			var yqzbl = 0;
+			var txzbs = 0;
+			var txyhzbs = 0;
+			var txzje = 0;
+			var txyhzje = 0;
+			var txyhzbl = 0;
+		  for(var i=0;i<list.length;i++)
+		  {
+		  	var ycstotal = parseInt(list[i].one)+parseInt(list[i].two)+parseInt(list[i].three)+parseInt(list[i].threeTG) ;
+		  	
+		  	var ycstotalSS = parseInt(list[i].oneSS)
+			
+			var aa = list[i].jrtotalYCSmoney.replace(/,/g,"");
+			var bb = list[i].jrtotalCSmoney.replace(/,/g,"");
+			var jrcsbl = 0; 
+			if(parseInt(aa) == 0){
+				jrcsbl=0;
+			}else{
+				jrcsbl= parseInt(parseInt(aa) *100 / parseInt(bb)) ;
+			}
+			var aaa = list[i].totalYCSmoney.replace(/,/g,"");
+			var bbb = list[i].totalCSmoney1.replace(/,/g,"");
+			var ycsbl = 0; 
+			if(parseInt(aaa) == 0){
+				ycsbl=0;
+			}else{
+				ycsbl= parseInt(parseInt(aaa) *100 / parseInt(bbb)) ;
+			}
+			var aaaaaa = list[i].totalYCSmoneyDT;
+			var bbbbbb = list[i].countSS;
+			var kpi = 0; 
+			if(parseInt(aaaaaa) == 0){
+				kpi=0;
+			}else{
+				kpi= parseInt(parseInt(aaaaaa) *100 / parseInt(bbbbbb)) ;
+			}
+			var aaaa = list[i].totalYCSmoney2.replace(/,/g,"");
+			var bbbb = list[i].totalCSmoney.replace(/,/g,"");
+			var ycsblyq = 0; 
+			if(parseInt(aaaa) == 0){
+				ycsblyq=0;
+			}else{
+				ycsblyq= parseInt(parseInt(aaaa) *100 / parseInt(bbbb)) ;
+			}
+			var zszs = parseInt(list[i].jrcount);
+			/* if(list[i].userid == "19" || list[i].userid == "23"){
+				html_ += "<tr><td bgcolor='#CCCCCC'>BPXLN"+list[i].userid+"</td><td bgcolor='#CCCCCC'>"+list[i].userName+"</td><td bgcolor='#CCCCCC'>"+list[i].phone+"</td><td bgcolor='#CCCCCC'><span class='label label-success'>"+list[i].nowCount+"</span></td><td bgcolor='#CCCCCC'>"+list[i].nowOnesh+"</td><td bgcolor='#CCCCCC'>"+list[i].nowTwosh+"</td><td bgcolor='#CCCCCC'>"+list[i].nowThreesh+"</td><td bgcolor='#CCCCCC'>"+list[i].nowFoursh+"</td><td bgcolor='#CCCCCC'><span class='label label-success'>"+list[i].count+"</span>-<span style='color:#F00'>"+ycstotal+"</span></td><td bgcolor='#CCCCCC'>"+list[i].one+"</td><td bgcolor='#CCCCCC'>"+list[i].onemoney+"</td><td bgcolor='#CCCCCC'>"+list[i].two+"</td><td bgcolor='#CCCCCC'>"+list[i].twomoney+"</td><td bgcolor='#CCCCCC'>"+list[i].three+"</td><td bgcolor='#CCCCCC'>"+list[i].threemoney+"</td><td bgcolor='#CCCCCC'>"+list[i].threeTG+"</td><td bgcolor='#CCCCCC'>"+list[i].threeTGmoney+"</td><td bgcolor='#CCCCCC'>"+list[i].totalCSmoney1+"</td><td bgcolor='#CCCCCC'>"+list[i].totalYCSmoney+"</td><td bgcolor='#CCCCCC'>"+ycsbl+"%</td><td bgcolor='#CCCCCC'><span class='label label-success'>"+zszs+"</span>-<span style='color:#F00'>"+list[i].jrycscount+"</span></td><td bgcolor='#CCCCCC'>"+list[i].jrtotalCSmoney+"</td><td bgcolor='#CCCCCC'>"+list[i].jrtotalYCSmoney+"</td><td bgcolor='#CCCCCC'>"+jrcsbl+"%</td><td bgcolor='#CCCCCC'><span class='label label-success'>"+list[i].countyq+"</td><td bgcolor='#CCCCCC'>"+list[i].totalCSmoney+"</td><td bgcolor='#CCCCCC'>"+list[i].totalYCSmoney2+"</td><td bgcolor='#CCCCCC'>"+ycsblyq+"%</td>";
+				html_ +="</tr>";
+			}else{ */
+				html_ += "<tr><td>BPXLN"+list[i].userid+"</td><td>"+list[i].userName+"</td><td><span class='label label-success'>"+list[i].countSS+"</span>-<span style='color:#F00'>"+ycstotalSS+"</span></td><td>"+list[i].totalCSmoneySS+"</td><td>"+list[i].totalYCSmoneySS+"</td><td>"+list[i].nowCount+"</td><td><span class='label label-success'>"+list[i].totalYCSmoneyDT+"</span></td><td>"+kpi+"%</td>"; //<td><span class='label label-success'>"+list[i].countyq+"</td><td>"+list[i].totalCSmoney+"</td><td>"+list[i].totalYCSmoney2+"</td><td>"+ycsblyq+"%</td>
+				html_ +="</tr>";
+				//}
+			
+			jrzbs += list[i].nowCount;
+			
+			jrtxzbs += list[i].jrnowOnesh;
+			//jrcszbs1 += list[i].nowOnesh;
+			
+			zbs += list[i].count;
+			zbsSS += list[i].countSS;
+			ycszbs += ycstotal;
+			cszbs1 += list[i].one;
+			cszbs1SS += list[i].oneSS;
+			cszje1 += parseInt(list[i].onemoney.replace(/,/g,""));
+			jrzbsje += parseInt(list[i].totalYCSmoneyDT);
+			
+			zcsjebyq += parseInt(list[i].totalCSmoneySS);
+			
+			zcsjebyqSS += parseInt(list[i].countSS);
+			
+			zcsje += parseInt(list[i].totalYCSmoneySS);
+			
+			zcsjeSS += parseInt(list[i].totalYCSmoneyDT.replace(/,/g,""));
+			
+			yqzbs += list[i].countyq;
+			zcsjeyyq += parseInt(list[i].totalCSmoney.replace(/,/g,""));
+			yqzje += parseInt(list[i].totalYCSmoney2.replace(/,/g,""));
+			
+			txzbs += zszs;
+			txyhzbs += list[i].jrycscount;
+			txzje += parseInt(list[i].jrtotalCSmoney.replace(/,/g,""));
+			txyhzje += parseInt(list[i].jrtotalYCSmoney.replace(/,/g,""));
+		   }
+		   if(zcsjebyq != 0){
+		   		zcsbl = parseInt(zcsje * 100 / zcsjebyq);
+		   	}
+		   if(zcsjebyqSS != 0){
+		   		zcsblSS = parseInt(jrzbsje * 100 / zcsjebyqSS);
+		   	}
+		   if(zcsjeyyq != 0){
+		   		yqzbl = parseInt(yqzje * 100 / zcsjeyyq);
+		   	}
+		   if(txzje != 0){
+		   		txyhzbl = parseInt(txyhzje * 100 / txzje);
+		   	}
+		   	html_ += "<tr><td>Thống kê tổng</td><td>Thống kê tổng</td><td><span class='label label-success'>"+zcsjebyqSS+"</span>-<span style='color:#F00'>"+cszbs1SS+"</span></td><td>"+zcsjebyq+"</td><td>"+zcsje+"</td><td>"+jrzbs+"</td><td><span class='label label-success'>"+jrzbsje+"</span></td><td>"+zcsblSS+"%</td>";//<td><span class='label label-success'>"+yqzbs+"</td><td>"+toThousands(zcsjeyyq)+"</td><td>"+toThousands(yqzje)+"</td><td>"+yqzbl+"%</td>
+			html_ +="</tr>";
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+function loadQB(){
+	$("#recode").val(1);
+	load_data();
+}    
+
+   
+</script>
+
+<script>
+ var idTmr;  
+        function  getExplorer() {  
+            var explorer = window.navigator.userAgent ;  
+            //ie  
+            if (explorer.indexOf("MSIE") >= 0) {  
+                return 'ie';  
+            }  
+            //firefox  
+            else if (explorer.indexOf("Firefox") >= 0) {  
+                return 'Firefox';  
+            }  
+            //Chrome  
+            else if(explorer.indexOf("Chrome") >= 0){  
+                return 'Chrome';  
+            }  
+            //Opera  
+            else if(explorer.indexOf("Opera") >= 0){  
+                return 'Opera';  
+            }  
+            //Safari  
+            else if(explorer.indexOf("Safari") >= 0){  
+                return 'Safari';  
+            }  
+        }  
+        function method5(tableid) {  
+            if(getExplorer()=='ie')  
+            {  
+                var curTbl = document.getElementById(tableid);  
+                var oXL = new ActiveXObject("Excel.Application");  
+                var oWB = oXL.Workbooks.Add();  
+                var xlsheet = oWB.Worksheets(1);  
+                var sel = document.body.createTextRange();  
+                sel.moveToElementText(curTbl);  
+                sel.select();  
+                sel.execCommand("Copy");  
+                xlsheet.Paste();  
+                oXL.Visible = true;  
+  
+                try {  
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");  
+                } catch (e) {  
+                    print("Nested catch caught " + e);  
+                } finally {  
+                    oWB.SaveAs(fname);  
+                    oWB.Close(savechanges = false);  
+                    oXL.Quit();  
+                    oXL = null;  
+                    idTmr = window.setInterval("Cleanup();", 1);  
+                }  
+  
+            }  
+            else  
+            {  
+                tableToExcel(tableid)  
+            }  
+        }  
+        function Cleanup() {  
+            window.clearInterval(idTmr);  
+            CollectGarbage();  
+        }  
+        var tableToExcel = (function() {  
+            var uri = 'data:application/vnd.ms-excel;base64,',  
+                    template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',  
+                    base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },  
+                    format = function(s, c) {  
+                        return s.replace(/{(\w+)}/g,  
+                                function(m, p) { return c[p]; }) }  
+            return function(table, name) {  
+                if (!table.nodeType) table = document.getElementById(table)  
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}  
+                window.location.href = uri + base64(format(template, ctx))  
+            }  
+        })()  
+
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

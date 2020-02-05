@@ -1,0 +1,930 @@
+
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                Danh sách vay quá hạn chưa trả(尚未偿还的逾期贷款清单M2)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=getYqM2List"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+                             <input type="hidden" id="s_day" value="0"/>
+                             <input type="hidden" id="e_day" value="0"/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                     <option value="0">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1">
+                                         Mã số khách hàng (người vay)
+                                      </option>
+                                      <option value="2">
+                                        Họ tên (Người vay)
+                                      </option>
+                                      <option value="3">
+                                        Số ĐTDĐ
+                                      </option>
+                                      <option value="4">
+                                        Số CMND
+                                      </option>
+                                      <option value="5">
+                                        ID truy thu
+                                      </option>
+                                      <option value="6">
+                                        Thời hạn vay7/14
+                                      </option>
+                                      <option value="7">
+                                        Số ngày quá hạn
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="请输入查询条件" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                             Số ngày quá hạn:
+		                      </label>
+                              <div class="col-md-4" style="width:150px;">
+                                
+                                  <select class="form-control" name="se_day" id="se_day" onChange="sele_day()" >
+                                      <option value="0">
+                                        Vui lòng chọn
+                                      </option>
+                                      <option value="1">
+                                         1-15 Ngày
+                                      </option>
+                                      <option value="2">
+                                         15-45 Ngày
+                                      </option>
+                                      <option value="3">
+                                         45 Ngày Trên
+                                      </option>
+                                     
+                               	  </select>
+                              </div>
+                         
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button> 
+		                    </div> 
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                    Danh sách vay quá hạn chưa trả(尚未偿还的逾期贷款清单M2)
+		                  </h4>
+		                  <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  <button data-bb-handler="success" type="button" class="btn btn-success" onclick="sousuo13()">Đoàn Văn Qui:13</button>
+		                  
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  <button data-bb-handler="success" type="button" class="btn btn-success" onclick="sousuo2002()">luu phuoc thien:2014</button>
+		                  
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  <button data-bb-handler="success" type="button" class="btn btn-success" onclick="sousuo2005()">Nguyễn Thành Tâm:2005</button>
+		                  
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  <button data-bb-handler="success" type="button" class="btn btn-success" onclick="sousuo2032()">nguyen thu thuy:2032</button> -->
+		                  
+		                  <div class="toolbar no-padding">
+		                  <h4>Tổng số tiền hiện tại cần truy thu：</h4><span id="totalFmoney"></span>&nbsp;
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                    <th>
+	                          Tên đăng nhập(用户名)
+	                        </th>
+	                        <th>
+	                          Họ tên khách hàng(客户姓名)
+	                        </th>
+	                        <th>
+	                          Số ĐTDĐ(手机号码)
+	                        </th>
+	                       
+                       <th>
+                        Nhân viên truy thu(催收人)
+                       </th>
+                       <th>
+	                          Số ngày quá hạn(逾期天数)
+	                        </th>
+                       <th>
+                       Phí phạt quá hạn(逾期罚款) <!-- Lãi suất -->
+	                        </th>
+                       <th>
+	                          Số tiền vay(贷款额)
+	                        </th>
+                       <th>
+	                          Số tiền phải trả(总金额)
+	                        </th>
+	                        <th>
+	                          Thời hạn vay(贷款期限)
+	                        </th>
+	                        <th>
+	                        Lãi và phí dịch vụ(利息和服务费)  <!--利息 -->
+	                        </th>
+	                        <th>
+	                          Thời gian giải ngân(放款时间)
+	                        </th>
+                 <th>
+	                          Đăng ủy nhiệm chi(还款凭证)
+	                        </th>
+	                        <th>
+	                         Thời gian trả vay(贷款还款期)
+	                        </th>
+                 <th>
+	                          Thời gian gia hạn(延期)
+	                        </th>
+                        <th>
+                        Ghi chú mới nhất(最新备注)
+                       </th> 
+                       <th>
+	                          Thao tác(操作)
+	                        </th>
+                       <th>
+	                          Tra thông tin cá nhân(查找个人信息)
+	                        </th>
+                       <th>
+	                          Ghi chú(备注)
+	                        </th>
+                       <th>
+	                        Liệt vào DS đen(列入黑名单)
+	                        </th>
+	                          <th>
+	                        Hồ sơ trở lại(还款记录)
+	                        </th>
+	                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được  <font id="numperpage"></font> tin, hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font> trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+            
+     <!--添加逾期备注信息-->
+     <div id="add_content_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#add_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Nhập ghi chép cuộc gọi</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height:360px;" id="div_a">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                           <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">Nhân viên truy thu
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <span name="cs_name" id="cs_name"></span>
+                                                  </div>
+                                           </div>
+                                          <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">Mã số vay
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="rec_id" id="rec_id"  readonly class="form-control required" >
+                                                  </div>
+                                           </div>
+                                           <div class="form-group" id="has-real_name">
+                                            <label class="col-md-3 control-label">Họ tên khách hàng
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_1" id="real_name" readonly  class="form-control required">
+                                                  </div>
+                                              </div>
+                                          
+                                          <!--   <div class="form-group has-error" id="has-cuilevel" >
+                                                <label class="col-md-3 control-label">催收等级<span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <select class="form-control" name="cuilevel" id="cuilevel" onChange="se_iszero('cuilevel','has-cuilevel','lab_cuilevel')">
+                                                      
+                                                  </select>
+                                                  <label for="range1" generated="true" class="has-error help-block" id="lab_cuilevel" ></label>
+                                              </div>
+                                            </div> -->
+                                             <div class="form-group" style="display:none" id="jilu">
+                                            <!--<label class="col-md-1 control-label">备注记录
+                                              </label>-->
+                                               
+                                              </div>
+                                            <div class="form-group has-error" id="has_coll_ms">
+                                            <label class="col-md-3 control-label">Ghi chú
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <textarea rows="3" cols="5" name="coll_ms" class="form-control" id="coll_ms" onBlur="isnull_value('coll_ms','has_coll_ms','lab_coll_ms')"></textarea>
+                                                  
+                                                  <label for="range1" generated="true" class="help-block" id="lab_coll_ms"></label>
+                                                  </div>
+                                              </div>
+                                              <input type="hidden" id="u_id"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_content_html').hide()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+	<!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+         <div id="bathc_grade_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#bathc_grade_html').hide()">x</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Thông tin khách hàng</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height: 400px;">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                         
+                                            <div class="form-group" id="has-remark">
+                                            <label class="col-md-3 control-label">Ghi chép cuộc gọi
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <textarea rows="15" cols="5" name="coll_ms" class="form-control" id="remark_hmd"></textarea>
+                                                  </div>
+                                              </div>
+                                              <input type="hidden" id="batc_id"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz_hmd()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#bathc_grade_html').hide()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+         <!-- 还款信息 -->
+        <div id="bathc_grade_html_recharge" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                       <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                       	<th>
+		                          Thời gian tài chính<!--财务操作时间  -->
+		                        </th>
+		                        <th>
+		                          Thời gian sử dụng<!--用户还款时间时间  -->
+		                        </th>
+		                        <th>
+		                         Số tiền truy thu<!--催回金额 -->
+		                        </th>		                        
+		                        <th>
+		                         Gia hạn<!--延期  -->
+		                        </th>
+		                        <th>
+		                         Nhân viên truy thu<!-- 催收人员 -->
+		                        </th>
+		                                                                        
+		                    </thead>
+		                    <tbody id="load_recharge">
+		                    </tbody>
+		                  </table>                                         
+		                </div>                               
+                  	<div class="modal-footer">                     
+                         <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#bathc_grade_html_recharge').hide()">Đóng</button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        </div> 
+         
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	function toThousands(num) {  
+	    		var num = (num || 0).toString(), result = '';  
+	    		while (num.length > 3) {  
+	        		result = ',' + num.slice(-3) + result;  
+	        		num = num.slice(0, num.length - 3);  
+	    		}  
+	    		if (num) { 
+				result = num + result; 
+			}  
+    			return result;  
+		     }
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="" && tempsele != 6)
+		  {
+			  alert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var st_day=$("#s_day").val().trim();
+	  var et_day=$("#e_day").val().trim();	
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val(),s_day:st_day,e_day:et_day,starTime:starTime,endTime:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  $("#totalFmoney").html(data.hkje);
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+		  var aa = parseInt(list[i].yuq_lx.replace(/,/g,""));
+		  var bb = parseInt(list[i].sjsh_money.replace(/,/g,""));
+		  var cc = aa + bb;
+		  var zje = toThousands(cc);
+		  var mobilephone = list[i].mobilephone;
+		     if(mobilephone.length > 8){
+		 		mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
+		 	 }
+		 	 var jkqx ="15天" ;
+		 	 if(list[i].jk_date ==2){		        
+		            jkqx="30 ngày";
+		        }else if(list[i].jk_date ==1){
+		            jkqx="15 ngày";
+		        }else if(list[i].jk_date ==3){
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>";
+		        }else if(list[i].jk_date ==4){
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>";
+		        }
+		 	//利息
+		      var userid = list[i].userid;
+		      var sjshmoney =  parseInt(list[i].sjsh_money.replace(/,/g,""));
+		      var jklx = "";
+			  if(list[i].jk_date==1){
+				  jklx="30%";
+			  }else if(list[i].jk_date==2) {
+				  jklx="30%";
+			  }else if(list[i].jk_date==4) {
+				  jklx="30%";
+			  }else if(list[i].jk_date==3) {
+				  jklx="30%";
+			  }
+			  
+		      html_ += "<tr>";
+		      //if((list[i].fkr_time.substring(0,2)<"09" && list[i].fkr_time.substring(3,5)=="05") || list[i].fkr_time.substring(3,5)<"05"){
+		      if(1 != 1){
+					html_ += "<td><span style='color:#F00'>"+list[i].username+"</span></td><td><span style='color:#F00'>"+list[i].realname+"</span></td><td><span style='color:#F00'>"+list[i].mobilephone+"</span></td>";			
+					
+				   
+					if(list[i].csname!=null)
+					{ 				   				   
+						html_ +="<td><span style='color:#F00'>"+list[i].csname+"</span></td>";
+					}
+					else
+					{   
+						html_ +="<td><span style='color:#F00'>Không có</span></td>";
+					}
+					html_ +="<td><span style='color:#F00'>"+list[i].yuq_ts+"</span></td><td><span style='color:#F00'>"+list[i].yuq_lx+"</span></td><td><span style='color:#F00'>"+list[i].sjsh_money+"</span></td><td><span style='color:#F00'>"+zje+"</span></td><td><span style='color:#F00'>"+jkqx+"</span></td>";
+					if(jklx=="30%" || jklx=="25%") {
+						html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
+			     	}else {
+						html_ += " <td><span style='color:#F00'>"+jklx+"</span></td>";
+				    }
+					
+					html_ +="<td><span style='color:#F00'>"+list[i].fkr_time+"</span></td>";
+					if(list[i].hkqd == "0")
+					{
+						html_+="<td><span style='color:#F00'>Không có</span></td>";
+					}
+					else
+					{
+						html_+="<td><span style='color:#F00'>Xem ủy nhiệm chi</span></td>";
+						
+					}
+					html_ +="<td><span style='color:#F00'>"+list[i].hk_time+"</span></td>";
+					if(list[i].hkfq_time == null || list[i].hkfq_time == "")
+					{
+						html_+="<td><span style='color:#F00'>Không có</span></td>";
+					}
+					else
+					{
+						html_ +="<td><span style='color:#F00'>("+list[i].hkfq_cishu.length+")"+list[i].hkfq_time+"</span></td>";
+						
+					}
+				    if(list[i].msg == null)
+					{
+						html_+="<td><span style='color:#F00'>Không có</span></td>";
+					}
+					else
+					{
+						html_+="<td><span style='color:#F00'>"+list[i].msg+"</span></td>";
+						
+					} 
+			   }else{
+					html_ += "<td>"+list[i].username+"</td></span><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td>";			
+					
+				   
+					if(list[i].csname!=null)
+					{ 				   				   
+						html_ +="<td>"+list[i].csname+"</td>";
+					}
+					else
+					{   
+						html_ +="<td>Không có</td>";
+					}
+					html_ +="<td>"+list[i].yuq_ts+"</td><td>"+list[i].yuq_lx+"</td><td>"+list[i].sjsh_money+"</td><td>"+zje+"</td><td>"+jkqx+"</td>";
+					if(jklx=="30%" || jklx=="25%" ) {
+						html_ += " <td><span style='color:#F82E03;font-weight:bolder'>"+jklx+"</span></td>";
+				    }else {
+						html_ += " <td><span>"+jklx+"</span></td>";
+					}
+					
+					html_ +="<td>"+list[i].fkr_time+"</td>";
+					if(list[i].hkqd == "0")
+					{
+						html_+="<td>Không có</td>";
+					}
+					else
+					{
+						html_+="<td>Xem ủy nhiệm chi</td>";
+						
+					}
+					html_ +="<td>"+list[i].hk_time+"</td>";
+					if(list[i].hkfq_time == null || list[i].hkfq_time == "")
+					{
+						html_+="<td>Không có</td>";
+					}
+					else
+					{
+						html_ +="<td>("+list[i].hkfq_cishu.length+")"+list[i].hkfq_time+"</td>";
+						
+					}
+					if(list[i].msg == null)
+					{
+						html_+="<td>Không có</td>";
+					}
+					else
+					{
+						html_+="<td>"+list[i].msg+"</td>";
+						
+					} 
+				}
+					html_ +="<td><button class='btn btn-xs btn-info' onclick='send_yuq("+list[i].userid+","+list[i].jkid2+")'>Gửi SMS</button></td>";
+					html_ +="<td><button class='btn btn-xs btn-primary'  onclick='chg_user_load("+list[i].jkid2+")'>Xem thông tin cá nhân</button></td>";
+					html_ +="<td><button class='btn btn-xs btn-success'  onclick=\"load_beiz('"+list[i].jkid2+"','"+list[i].realname+"','"+list[i].userid+"','"+list[i].csname+"')\">Thêm ghi chú</button></td>";
+					if(list[i].heihu_zt == "0"){
+						html_ +="<td><button class='btn btn-xs btn-danger'  onclick=\"load_beiz_hmd('"+list[i].jkid2+"','"+list[i].userid+"')\">Liệt vào DS đen</button></td>";
+					}else{
+						html_ +="<td>DS đen</td>";
+					}
+					
+					/* if(list[i].hkstate == "0"){
+						html_ += "<td>TVTB&nbsp;&nbsp;<button class='btn btn-xs btn-primary'  onclick='change_hkfs2("+list[i].jkid2+")'>TV1P</button>&nbsp;&nbsp;<button class='btn btn-xs btn-primary'  onclick='change_hkfs3("+list[i].jkid2+")'>GH</button></td>"
+					}else if (list[i].hkstate == "1"){
+						html_ += "<td><button class='btn btn-xs btn-primary'  onclick='change_hkfs1("+list[i].jkid2+")'>TVTB</button>&nbsp;&nbsp;TV1P&nbsp;&nbsp;<button class='btn btn-xs btn-primary'  onclick='change_hkfs3("+list[i].jkid2+")'>GH</button></td>"
+					}else if (list[i].hkstate == "2"){
+						html_ += "<td><button class='btn btn-xs btn-primary'  onclick='change_hkfs1("+list[i].jkid2+")'>TVTB</button>&nbsp;&nbsp;<button class='btn btn-xs btn-primary'  onclick='change_hkfs2("+list[i].jkid2+")'>TV1P</button>&nbsp;&nbsp;GH</td>"
+					} */
+					
+					html_ +="<td><button class='btn btn-xs btn-primary'  onclick='get_recharge("+list[i].jkid2+")'>Hoàn vốn</button></td>";
+					html_ +="</tr>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   
+   function sele_day()
+   {
+	   var str=$("#se_day option:selected").text();
+	   var befor="";
+	   var end="";
+	   if(str.indexOf("-")>-1)
+	   {
+		   befor=str.split("-",1);
+		   end=str.substring(str.indexOf("-")+1,str.indexOf("Ngày"));
+	   }
+	   else
+	   {
+		   if($("#se_day option:selected").val()==0)
+		   {
+			    befor=0;
+		   }
+		   else
+		   {
+			   befor=str.split("Ngày",1);
+		   }
+		   end=0;
+	   }
+	   if('请选择'==str)
+	   {
+		   befor=0;
+		   end=0;
+	   }
+	   $("#s_day").val(befor);
+	   $("#e_day").val(end);
+	    load_data();
+   }
+   
+  /*  <!--非空判断(v_id:该input的id，d_id:该input的div，l_id：该input的lable)--> */
+ function isnull_value(v_id,d_id,l_id)
+ {
+	var obj = $("#"+v_id).val();
+	$("#"+d_id).attr("class","form-group  has-error");
+	if(obj == null || obj == "")
+	{
+		$("#"+l_id).html("值不能为空");
+	}
+	else
+	{
+		$("#"+l_id).html("");
+		$("#"+d_id).attr("class","form-group  has-success");
+	}
+ }
+    function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+   /* <!--读取用户信息--> */
+   function chg_user_load(id)
+   {
+	    /*  $("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/user_chenggongcuishou.html?record_id="+id); */
+	   window.open("/sdmain/record_detail/user_chenggongcuishou.html?record_id="+id);
+   }
+   
+   /* <!--逾期短信--> */
+    function send_yuq(userid,recorid)
+   {
+	    var para={"userid":userid,"recorid":recorid};
+	    loadGetServer("/servlet/current/JBDcms2Action?function=getSendCuiS",para,function(data){
+			   alert(data.msg);
+		});
+   }
+   
+   
+   /* <!--查询备注类型--> */
+   function load_beiz(re_id,real_name,user_id,csname)
+   {     
+       if(csname !=null){  
+           
+         $("#cs_name").html(csname);                         
+       }
+       if(csname == "null") { 
+                
+         $("#cs_name").html("暂无催收人员");        
+       }      
+	   document.getElementById("jilu").style.display="none";
+	   document.getElementById("div_a").style.height="400px";
+	   $("#coll_ms").val("");
+	   loadGetServer("/servlet/current/JBDcms2Action?function=getCuisByid",{record_:re_id},function(data){
+		  
+		   if(data.error>0)
+		   {			 		  
+			  $("#has-cuilevel").attr("class","form-group  has-success");
+	          $("#has_coll_ms").attr("class","form-group  has-success");
+			  $("#lab_coll_ms").html("");
+	       
+			  if(data.cslist.length>0)
+			  {		  
+				  var htl_="";
+				  document.getElementById("jilu").style.display="block";
+				  
+				  for(var i=0;i<data.cslist.length;i++)
+				  {
+					var hei_=$("#div_a").height()+40;
+					var top_=0;
+					if(data.cslist.length-i>1)
+					{
+						top_+=45;
+					}
+					var row_=1;
+					if(data.cslist[i].msg.length>20)
+					{
+						row_+=1;
+						top_+=20;
+						hei_=$("#div_a").height()+60;
+					}	
+					
+					htl_ +="<div style='padding-bottom: "+top_+"px;' ><div class=\"col-md-4\"><input type=\"text\" value='"+data.cslist[i].create_time+"' disabled class=\"form-control required\" ><input type=\"text\" value='"+data.cslist[i].name+"' disabled class=\"form-control required\" ></div>";
+					htl_ +="<div class=\"col-md-8\"><textarea rows='"+row_+"' cols=\"5\" name=\"coll_ms\" class=\"form-control\" disabled>"+data.cslist[i].msg+"</textarea></div></div>";
+					document.getElementById("div_a").style.height=hei_+"px";
+				  }
+				 
+				  $("#jilu").html(htl_);
+			  }
+		   }
+		   else
+		   {
+			  $("#has-cuilevel").attr("class","form-group  has-error");
+	          $("#has_coll_ms").attr("class","form-group  has-error");			
+			  $("#coll_ms").val("");
+		   }
+		 
+	   });
+	   
+	   $("#rec_id").val(re_id);
+	   $("#real_name").val(real_name);
+	   $("#add_content_html").show();
+	   $("#u_id").val(user_id);
+   }
+   /* <!--拉入黑名单--> */
+   function load_beiz_hmd(re_id,user_id)
+   {     
+	   $("#bathc_grade_html").show();
+	   $("#rec_id").val(re_id);
+	   $("#u_id").val(user_id);
+   }
+   
+   /*  <!--下拉列表--> */
+ function se_iszero(v_id,d_id,l_id)
+ {
+	 var v=$("#"+v_id).val();
+	 if(v != 0)
+	 {
+		 $("#"+l_id).html("");
+		 $("#"+d_id).attr("class","form-group  has-success");
+	 }
+	 else
+	 {
+		 $("#"+l_id).html("请选择等级");
+		 $("#"+d_id).attr("class","form-group  has-error");
+	 }
+ }
+   
+  /*  <!--添加或者修改催收备注--> */
+   function add_beiz()
+   {
+	   var lab_ms=$("#lab_coll_ms").html();
+         
+		   var para={re_id:$("#rec_id").val(),user_id:$("#u_id").val(),remark:$("#coll_ms").val()};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=addcuisremark",para,function(data){
+			   if(data.error>0)
+			   {
+				   $("#add_content_html").hide();
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+   function add_beiz_hmd()
+   {
+		   var para={re_id:$("#rec_id").val(),user_id:$("#u_id").val(),remark:$("#remark_hmd").val()};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=addcuisremarkhmd",para,function(data){
+			   if(data.error>0)
+			   {
+				   $("#bathc_grade_html").hide();
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+        /*  <!--添加或者修改催收备注--> */
+   function change_hkfs1(jkid_)
+   {
+		   var para={jkid:jkid_};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=ChangeHKFS1",para,function(data){
+			   if(data.error>0)
+			   {
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+   function change_hkfs2(jkid_)
+   {
+		   var para={jkid:jkid_};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=ChangeHKFS2",para,function(data){
+			   if(data.error>0)
+			   {
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+   function change_hkfs3(jkid_)
+   {
+		   var para={jkid:jkid_};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=ChangeHKFS3",para,function(data){
+			   if(data.error>0)
+			   {
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+  function sousuo13(){
+ 	$("#tempselect").val(5);
+ 	$("#tempVelue").val("13");
+ 	load_data();
+ }
+  function sousuo2002(){
+ 	$("#tempselect").val(5);
+ 	$("#tempVelue").val("2002");
+ 	load_data();
+ }
+  function sousuo2005(){
+ 	$("#tempselect").val(5);
+ 	$("#tempVelue").val("2005");
+ 	load_data();
+ }
+  function sousuo2032(){
+ 	$("#tempselect").val(5);
+ 	$("#tempVelue").val("2032");
+ 	load_data();
+ }
+
+  
+  function get_recharge(csjkid) {
+		
+		$("#lab").val(0);
+		var para = {
+			jkid : csjkid
+		};
+		loadGetServer("/servlet/current/JBDcms2Action?function=GetRechargeByJkid",para,function(data) {
+					
+				if (data.error > 0) {
+						$("#bathc_grade_html_recharge").show();
+						
+						 var rec=data.rechargelist;
+										 
+						 var list = data.rechargelist;						 							 						
+						var html_="";
+						for (var i = 0; i < list.length; i++) {
+						/* 	console.log(csidlist[i].cuishouid); */
+														
+							html_ += "<tr><td>"+list[i].retime+"</td><td>"+list[i].userhktime+"</td><td>"+list[i].money+"</td><td>"+list[i].yqdate+"</td><td>"+list[i].csname+"</td></tr>";							
+						}
+											
+						$("#load_recharge").html('').append(html_);					
+					} else {
+						alert(data.msg);
+						
+					}
+				})
+	}
+   
+</script>
+  <script>
+
+   function call_phone(phone_)
+   {
+	  
+		   var para={phone:phone_};
+		   loadGetServer("/servlet/current/JBDcms3Action?function=DHGSphone",para,function(data){
+			   if(data.error>0)
+			   {
+			   	   alert(data.msg);
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

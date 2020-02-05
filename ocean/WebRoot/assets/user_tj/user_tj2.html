@@ -1,0 +1,87 @@
+<!-- 不用提交 -->
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+   <div style="padding: 15px;height: 500px">
+       <div id="container" style="height: 100%"></div>
+	   </div>
+        <script src="../../assets/phoneMap/echarts.min.js"></script>
+		<script type="text/javascript" src="../../assets/phoneMap/dataTool.min.js"></script>
+		<script type="text/javascript" src="../../assets/phoneMap/china.js"></script>
+		
+		<script type="text/javascript" src="../../assets/phoneMap/bmap.min.js"></script>
+		<script src="../../assets/phoneMap/jquery.min.js"></script>
+		<script type="text/javascript" src="../../assets/phoneMap/json.js"></script>
+       <!-- <script type="text/javascript" src="/js/json.js"></script> -->
+       <script type="text/javascript">
+		var dom = document.getElementById("container");
+		var myChart = echarts.init(dom);
+		var app = {};
+		option = null;
+		//loadGetServer("/servlet/current/AccountManAction?function=AddGetAllChart","",function(data_map)
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllChartCS","",function(data_map){
+		option = {
+		
+		
+    tooltip: {
+        trigger: 'axis'
+    },
+    toolbox: {
+        feature: {
+            dataView: {show: false, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar']},
+            restore: {show: true},
+            saveAsImage: {show: false}
+        }
+    },
+    legend: {
+        data:['Số người đến hạn chưa trả vay trong ngày(待提醒人数)']
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: data_map.xdata
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: 'Số người',
+            min: 0,
+            interval: 200,
+            axisLabel: {
+                formatter: '{value} 人'
+            }
+        },
+        {
+            type: 'value',
+            name: 'Số người',
+            min: 0,
+            interval: 200,
+            axisLabel: {
+                formatter: '{value} 人'
+            }
+        }
+        
+    ],
+    series: [
+        {
+            name:'Số người đến hạn chưa trả vay trong ngày(待提醒人数)',
+            type:'line',
+            data:data_map.yrzdata
+        }
+    ]
+}
+if (option && typeof option === "object") {
+			    myChart.setOption(option, true);
+			}
+})
+		
+		
+		
+       </script>
+   </body>
+</html>

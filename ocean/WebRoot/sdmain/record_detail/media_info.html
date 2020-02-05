@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Ocean</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome.min.css">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+      <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+    <link href="/assets/css/date_css/dateRange.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="/assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="/plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.tooltip.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.resize.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.time.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.growraf.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/moment.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/daterangepicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/blockui/jquery.blockUI.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/fullcalendar/fullcalendar.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/jquery.noty.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/layouts/top.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/themes/default.js">
+    </script>
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/select2/select2.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/app.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.form-components.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/page.js">
+    </script>
+	<script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/monthPicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/dateRange.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        Plugins.init();
+        FormComponents.init()
+      });
+    </script>
+    <script type="text/javascript" src="/assets/js/custom.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/json.js">
+    </script>
+    
+
+
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="/plugins/video_play/ckplayer/ckplayer.js"> </script>
+<link rel="stylesheet" href="/assets/css/jquery.artZoom.css" />
+<link href="/assets/css/main_bz.css" rel="stylesheet" type="text/css" />
+<style>.col-md-0{ position: relative; min-height: 1px; padding-left: 15px } .col-md-0{ float: left } .table td{height: 45px;line-height: 45px;}</style></head>
+<body>
+  <div id="container" class="sidebar-closed">
+    <div id="content">
+      <div class="container">
+        <div class="crumbs">
+          <ul id="breadcrumbs" class="breadcrumb">
+            <li>
+              <i class="icon-home"></i>
+              <a href="index.html"></a>
+            </li>
+            <li class="current">
+              <a href="javascript:void(0)" title="">Thông tin người dùng</a></li>
+          </ul>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-12">
+              <div class="tabbable tabbable-custom tabbable-full-width">
+                <ul class="nav nav-tabs">
+                  <li class="active">
+                    <a href="#tab_overview" data-toggle="tab">
+                      Thẩm định video khách hàng 
+                    </a>
+                  </li>
+                </ul>
+                <div class="tab-content row">
+                  <div class="tab-pane active" id="tab_overview">
+                    <div class="col-md-3">
+                      <div class="list-group">
+                        <li class="list-group-item no-padding"  id="user_img">
+                         <!--  <img alt=""  onerror="nofind(this)"> -->
+                        </li>
+                        <a href="javascript:void(0);" class="list-group-item" id="user_name">
+                        
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item" id="user_cell">
+                         
+                        </a>
+                        <a href="javascript:void(0);" class="list-group-item" id="user_idno">
+                         
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="row profile-info">
+                        <div class="col-md-6" style="margin-top :-19px;">
+                          <div class="modal-body" id="a1">
+                              
+                        </div>
+                        </div>
+                       <div  class="col-md-6">
+                        <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#two_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Thông tin thẩm định lần cuối</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height: 600px;">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Mã số khách hàng：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="user_id" id="user_id" readonly class="form-control required">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Số tiền đề xuất vay：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="re_money" id="re_money" readonly class="form-control required email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Thời hạn vay：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="re_qx" id="re_qx" readonly class="form-control required required">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Số tiền được vay：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="kj_money" id="kj_money" readonly class="form-control required required">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Tiền gốc và lãi vay：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="kj_lx" id="kj_lx" readonly class="form-control required required">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Số tiền thực nhận：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="sj_money" id="sj_money" readonly class="form-control required required">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Kết quả thẩm định：</label>
+                                                <div class="col-md-9">
+                                                    <label class='radio-inline'><input name='shh_end' value='1'  type='radio' checked="checked" onclick="radi()">Thẩm định thông qua</label>
+                                                    <label class='radio-inline'><input name='shh_end' value='2'  type='radio' onclick="radi()">Trả về video</label>
+                                                    <label class='radio-inline'><input name='shh_end' value='3'  type='radio' onclick="radi()">Thẩm định bị trả về</label>
+                                                    <label class='radio-inline'><input name='shh_end' value='4'  type='radio' onclick="radi()">Liệt vào DS đen</label>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="col-md-3 control-label">Ý kiến thẩm định：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="shh_remark" id="shh_remark" value="thẩm định đã thông qua " class="form-control required url">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                       <!--  <button data-bb-handler="success" type="button" class="btn btn-success" onclick="subSP_Three()">视频外链</button> -->
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="four_ck()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="parent.f_hide_ifm(GetQueryString('apply_id'));">Đóng trang</button>
+                    </div>
+                      </div>
+                      </div>
+                    </div> 
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 15%;">
+              <!--   <div >
+                  <img src="/assets/img/loading.gif">
+                    
+                </div> -->
+            </div>
+        </div>
+        </div>
+      <div id="shiplist"></div>
+                 <!--二次确认-->
+     <div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>Xác nhận</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body">
+					<label class="col-md-0 control-label" style="padding-top:5px;letter-spacing:2px;" id="remark_tr"></label>
+				</div>
+                <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="sub_Three()">Xác nhận</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_html').hide()">Đóng</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+  </script>
+  
+  <script>
+  var shipinUrl ="" ;
+  $(function() {
+	  //$("#load_html").show();
+	  var apply_id_=GetQueryString("apply_id");
+	  sip_load(apply_id_);
+})
+
+   
+   <!--视频播放-->
+   function sip_load(apply_id_)
+   {
+	  var para={apply_id:apply_id_};
+	 //loadGetServer("/tzms/record/getPlayApplyMedia",para,function(data){
+	  loadGetServer("/servlet/current/JBDcmsAction?function=GetPlayApplyMedia",para,function(data){
+	 
+	       if(data.error>=0)
+		   {
+		       var  qixian ="15"
+		    if(data.re_qx==2){
+		        qixian ="30" ;
+		    }else if(data.re_qx==3){
+		    	qixian ="7" ;
+		    }else if(data.re_qx==4){
+		    	qixian ="14" ;
+		    }
+		    if(data.p3.slice(0,2) == "H5"){
+				$("#user_img").html("<img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' onerror='nofind(this)' style='height: 500px;width: 100%'  alt=''>");					 		    
+		    }else{
+		    	$("#user_img").html("<img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' onerror='nofind(this)' style='height: 500px;width: 100%'  alt=''>");
+		    }
+			 				 
+			 $("#user_name").html("Họ tên："+data.realname);
+			 $("#user_idno").html("Số CMND："+data.cardid);
+			 $("#user_cell").html("Số ĐTDĐ："+data.cellphone.substring(0,3)+"*****");
+			 $("#user_id").val(data.user_id);			 		
+			 $("#re_money").val(data.re_money);
+			 $("#re_qx").val(qixian+"ngày");
+			 $("#kj_money").val(data.kj_money);
+			 $("#kj_lx").val(data.kj_lx);
+			 $("#sj_money").val(data.sj_money);
+			 $("#reco_id").val(data.id);
+			 if(data.mediaUrl.slice(0,2) == "H5"){
+				 var mediaUrl2 = "http://abc-dong.oss-cn-hongkong.aliyuncs.com/"+data.mediaUrl;
+		    }else{
+		    	 var mediaUrl2 = "http://abc-dong.oss-cn-hongkong.aliyuncs.com/"+data.mediaUrl;
+		    }
+			
+			// var mediaUrl2 = "http://sd-shipin.oss-cn-shenzhen.aliyuncs.com/6571=1490188843923.mp4";
+			 shipinUrl =mediaUrl2;
+			  medir(mediaUrl2);
+			  $("#load_html").hide();
+		   }
+		   else
+		   {
+			   alert(data.msg);
+			   parent.f_hide_ifm();
+		   }
+	 });   
+   }
+
+
+   function open_weixin(id,user_id)
+   {
+	  var path_=$("#wxid_"+id).val();
+	  var http_="http://www.loserbank.com/";
+	  var url_=http_+"usermedia/"+user_id+"/"+path_;
+	  medir(url_);
+   }
+   
+   function medir(mediaUrl)
+   {
+	    var flashvars={
+			 f: mediaUrl,
+			 c:'0',
+			 v:'100', 
+			 h:'4',
+			 q:'start'
+		 };
+		 var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:"transparent"};
+		 var video=[mediaUrl+'->video/mp4']; 
+		CKobject.embed('/plugins/video_play/ckplayer/ckplayer.swf', 'a1', 'ckplayer_a1', '580', '680',false, flashvars,video, params);
+     
+   }
+   
+    /*-------判断审核状态------*/
+ function radi()
+ {
+	var shh=$("input:radio[name='shh_end']:checked").val();
+	if(shh==1)
+	{
+		$("#shh_remark").val("thẩm định đã thông qua ");
+	}
+	else if(shh==2)
+	{
+		$("#shh_remark").val("video bị trả về ");
+	}
+	else if(shh==3)
+	{
+		$("#shh_remark").val("thẩm định không thông qua ");
+	}
+	else if(shh==4)
+	{
+		$("#shh_remark").val("mức độ tín dụng không đủ ");
+	}
+ }
+ 
+
+  function sub_Three()
+  {
+	var state_=$("input:radio[name='shh_end']:checked").val();
+	var rec_id_=$("#reco_id").val();
+	var remarks_=$("#shh_remark").val();
+	var para={rec_id:rec_id_,state:state_,remarks:remarks_,userid:$("#user_id").val()};
+	
+	loadGetServer("/servlet/current/JBDLLpayAction?function=GetShenhThreeYN",para,function(data){
+		if(data.error>0)
+		{
+			parent.f_hide_ifm();
+		}
+		else
+		{
+			alert(data.msg);
+			parent.f_hide_ifm();
+		}
+	});
+   }
+     function four_ck()
+   {
+	   $("#remark_tr").html("Xác nhận lần nữa kết quả thẩm định?");
+	 
+	   $("#msg_content_html").show();
+   }
+   function subSP_Three(){
+     
+     window.open(shipinUrl);
+   }
+</script>

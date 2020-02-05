@@ -1,0 +1,56 @@
+package com.task;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.apache.log4j.Logger;
+
+import com.service.AccountUserService;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.timerengine.Task;
+
+public class AccountUserTask implements Task{
+
+	private static Logger logger = Logger.getLogger(AccountUserTask.class);
+	private static AccountUserService accountUserService=new AccountUserService();
+	
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
+		String time = sdf.format(new Date());
+		Calendar cd = Calendar.getInstance();
+		try {
+			cd.setTime(sdf.parse(time));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date datenow = cd.getTime();
+		String nowdate = sdf.format(datenow); // 后面日期 
+		cd.add(Calendar.DATE, -1);//
+		Date date = cd.getTime();
+		String dateno = sdf.format(date); // 前面日期
+		int yizhuce = accountUserService.getCreateTimeByDate(dateno,nowdate );
+		int yirenzheng = accountUserService.getVipCreateTimeByDate(dateno,nowdate);
+		int bi = 0;
+		if (yirenzheng != 0 && yizhuce != 0) {
+			bi = (yirenzheng * 100 / yizhuce) ;
+		} else if (yirenzheng != 0 && yizhuce == 0) {
+			bi = 1;
+		}
+		DataRow dr = new DataRow();
+		dr.set("createcount", yizhuce);
+		dr.set("viprzcount", yirenzheng);
+		dr.set("rzdata", bi);
+		dr.set("time", dateno);
+		if (accountUserService.deleteAcountByTime(dateno)) {
+			accountUserService.addAcountUser("sd_accountuser", dr);
+		}
+	}
+ 
+}

@@ -1,0 +1,264 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container">
+				
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        筛选条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetShuJuAccount"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              
+                             <label class="col-md-0 control-label" style="padding-top:5px;" id="fff">
+		                                             统计时间:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                    查询
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+			               
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="ff">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                 数据统计列表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;" id="gg">
+                                         数据 
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="hh">
+                                         总放款数
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="ii">
+                                        总还款数
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="iii">
+                                        总逾期数
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="iii">
+                                        总到期应还数
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="mmm">
+                                        逾期比例
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="iiii">
+                                        总逾期未还数
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="iiiii">
+                                        逾期未还比例
+                                    </th>
+                                    
+		                      </tr>
+                             
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+function changeLan(){
+	document.getElementById("aa").innerHTML = "审核统计列表";
+	document.getElementById("bb").innerHTML = "筛选条件";
+	document.getElementById("cc").innerHTML = "全部";
+	document.getElementById("dd").innerHTML = "审核人姓名";
+	document.getElementById("ee").innerHTML = "手机号码";
+	document.getElementById("fff").innerHTML = "统计时间";
+	document.getElementById("ff").innerHTML = "审核统计列表";
+	document.getElementById("gg").innerHTML = "审核人编号";
+	document.getElementById("hh").innerHTML = "审核人姓名";
+	document.getElementById("ii").innerHTML = "手机号码";
+	document.getElementById("jj").innerHTML = "当天笔数统计";
+	document.getElementById("kk").innerHTML = "总笔数统计";
+	document.getElementById("ll").innerHTML = "客服查询次数";
+	document.getElementById("mm").innerHTML = "总笔数";
+	document.getElementById("nn").innerHTML = "一审笔数";
+	document.getElementById("oo").innerHTML = "二审笔数";
+	document.getElementById("pp").innerHTML = "三审笔数";
+	document.getElementById("qq").innerHTML = "总笔数";
+	document.getElementById("rr").innerHTML = "一审笔数";
+	document.getElementById("rrr").innerHTML = "一审通过比例";
+	document.getElementById("ss").innerHTML = "二审笔数";
+	document.getElementById("tt").innerHTML = "三审笔数";
+	document.getElementById("uu").innerHTML = "三审通过笔数";
+	document.getElementById("uuu").innerHTML = "二审通过笔数";
+	document.getElementById("vv").innerHTML = "逾期笔数";
+	document.getElementById("ww").innerHTML = "逾期比例";
+	document.getElementById("xxx").innerHTML = "逾期（未还）笔数";
+	document.getElementById("xx").innerHTML = "逾期（未还）比例";
+	document.getElementById("yy").innerHTML = "总次数";
+}
+</script>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var html_="";
+		html_ += "<tr>";
+		html_ += "<td>总统计</td><td>"+data.zong[0]+"</td><td>"+data.zong[1]+"</td><td>"+data.zong[2]+"</td><td>"+data.zong[3]+"</td><td>"+data.zong[4]+"%</td><td>"+data.zong[5]+"</td><td>"+data.zong[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>IOS</td><td>"+data.iosjk[0]+"</td><td>"+data.iosjk[1]+"</td><td>"+data.iosjk[2]+"</td><td>"+data.iosjk[3]+"</td><td>"+data.iosjk[4]+"%</td><td>"+data.iosjk[5]+"</td><td>"+data.iosjk[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>AND</td><td>"+data.andjk[0]+"</td><td>"+data.andjk[1]+"</td><td>"+data.andjk[2]+"</td><td>"+data.andjk[3]+"</td><td>"+data.andjk[4]+"%</td><td>"+data.andjk[5]+"</td><td>"+data.andjk[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款期限15天</td><td>"+data.fifteen[0]+"</td><td>"+data.fifteen[1]+"</td><td>"+data.fifteen[2]+"</td><td>"+data.fifteen[3]+"</td><td>"+data.fifteen[4]+"%</td><td>"+data.fifteen[5]+"</td><td>"+data.fifteen[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款期限30天</td><td>"+data.thirty[0]+"</td><td>"+data.thirty[1]+"</td><td>"+data.thirty[2]+"</td><td>"+data.thirty[3]+"</td><td>"+data.thirty[4]+"%</td><td>"+data.thirty[5]+"</td><td>"+data.thirty[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>男</td><td>"+data.manjk[0]+"</td><td>"+data.manjk[1]+"</td><td>"+data.manjk[2]+"</td><td>"+data.manjk[3]+"</td><td>"+data.manjk[4]+"%</td><td>"+data.manjk[5]+"</td><td>"+data.manjk[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>女</td><td>"+data.womenjk[0]+"</td><td>"+data.womenjk[1]+"</td><td>"+data.womenjk[2]+"</td><td>"+data.womenjk[3]+"</td><td>"+data.womenjk[4]+"%</td><td>"+data.womenjk[5]+"</td><td>"+data.womenjk[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>新用户(一次借款)</td><td>"+data.newuser[0]+"</td><td>"+data.newuser[1]+"</td><td>"+data.newuser[2]+"</td><td>"+data.newuser[3]+"</td><td>"+data.newuser[4]+"%</td><td>"+data.newuser[5]+"</td><td>"+data.newuser[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>老用户(大于一次借款)</td><td>"+data.olduser[0]+"</td><td>"+data.olduser[1]+"</td><td>"+data.olduser[2]+"</td><td>"+data.olduser[3]+"</td><td>"+data.olduser[4]+"%</td><td>"+data.olduser[5]+"</td><td>"+data.olduser[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>有匹配到数据</td><td>"+data.havashuju[0]+"</td><td>"+data.havashuju[1]+"</td><td>"+data.havashuju[2]+"</td><td>"+data.havashuju[3]+"</td><td>"+data.havashuju[4]+"%</td><td>"+data.havashuju[5]+"</td><td>"+data.havashuju[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>没有匹配到数据</td><td>"+data.noshuju[0]+"</td><td>"+data.noshuju[1]+"</td><td>"+data.noshuju[2]+"</td><td>"+data.noshuju[3]+"</td><td>"+data.noshuju[4]+"%</td><td>"+data.noshuju[5]+"</td><td>"+data.noshuju[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>评分为3</td><td>"+data.pingfen3[0]+"</td><td>"+data.pingfen3[1]+"</td><td>"+data.pingfen3[2]+"</td><td>"+data.pingfen3[3]+"</td><td>"+data.pingfen3[4]+"%</td><td>"+data.pingfen3[5]+"</td><td>"+data.pingfen3[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>评分为2</td><td>"+data.pingfen2[0]+"</td><td>"+data.pingfen2[1]+"</td><td>"+data.pingfen2[2]+"</td><td>"+data.pingfen2[3]+"</td><td>"+data.pingfen2[4]+"%</td><td>"+data.pingfen2[5]+"</td><td>"+data.pingfen2[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>评分为1</td><td>"+data.pingfen1[0]+"</td><td>"+data.pingfen1[1]+"</td><td>"+data.pingfen1[2]+"</td><td>"+data.pingfen1[3]+"</td><td>"+data.pingfen1[4]+"%</td><td>"+data.pingfen1[5]+"</td><td>"+data.pingfen1[6]+"%</td>";
+		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>评分为-1</td><td>"+data.pingfenf1[0]+"</td><td>"+data.pingfenf1[1]+"</td><td>"+data.pingfenf1[2]+"</td><td>"+data.pingfenf1[3]+"</td><td>"+data.pingfenf1[4]+"%</td><td>"+data.pingfenf1[5]+"</td><td>"+data.pingfenf1[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>总借款用户（不重复）</td><td>"+data.totaluser[0]+"</td><td>"+data.totaluser[1]+"</td><td>"+data.totaluser[2]+"</td><td>"+data.totaluser[3]+"</td><td>"+data.totaluser[4]+"%</td><td>"+data.totaluser[5]+"</td><td>"+data.totaluser[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款2次以上的用户</td><td>"+data.twicejk[0]+"</td><td>"+data.twicejk[1]+"</td><td>"+data.twicejk[2]+"</td><td>"+data.twicejk[3]+"</td><td>"+data.twicejk[4]+"%</td><td>"+data.twicejk[5]+"</td><td>"+data.twicejk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款3次以上的用户</td><td>"+data.thirdjk[0]+"</td><td>"+data.thirdjk[1]+"</td><td>"+data.thirdjk[2]+"</td><td>"+data.thirdjk[3]+"</td><td>"+data.thirdjk[4]+"%</td><td>"+data.thirdjk[5]+"</td><td>"+data.thirdjk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款4次以上的用户</td><td>"+data.fourjk[0]+"</td><td>"+data.fourjk[1]+"</td><td>"+data.fourjk[2]+"</td><td>"+data.fourjk[3]+"</td><td>"+data.fourjk[4]+"%</td><td>"+data.fourjk[5]+"</td><td>"+data.fourjk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款5次以上的用户</td><td>"+data.fivejk[0]+"</td><td>"+data.fivejk[1]+"</td><td>"+data.fivejk[2]+"</td><td>"+data.fivejk[3]+"</td><td>"+data.fivejk[4]+"%</td><td>"+data.fivejk[5]+"</td><td>"+data.fivejk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款6次以上的用户</td><td>"+data.sixjk[0]+"</td><td>"+data.sixjk[1]+"</td><td>"+data.sixjk[2]+"</td><td>"+data.sixjk[3]+"</td><td>"+data.sixjk[4]+"%</td><td>"+data.sixjk[5]+"</td><td>"+data.sixjk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款7次以上的用户</td><td>"+data.sevenjk[0]+"</td><td>"+data.sevenjk[1]+"</td><td>"+data.sevenjk[2]+"</td><td>"+data.sevenjk[3]+"</td><td>"+data.sevenjk[4]+"%</td><td>"+data.sevenjk[5]+"</td><td>"+data.sevenjk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款8次以上的用户</td><td>"+data.eightjk[0]+"</td><td>"+data.eightjk[1]+"</td><td>"+data.eightjk[2]+"</td><td>"+data.eightjk[3]+"</td><td>"+data.eightjk[4]+"%</td><td>"+data.eightjk[5]+"</td><td>"+data.eightjk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款9次以上的用户</td><td>"+data.ninejk[0]+"</td><td>"+data.ninejk[1]+"</td><td>"+data.ninejk[2]+"</td><td>"+data.ninejk[3]+"</td><td>"+data.ninejk[4]+"%</td><td>"+data.ninejk[5]+"</td><td>"+data.ninejk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款10次以上的用户</td><td>"+data.tenjk[0]+"</td><td>"+data.tenjk[1]+"</td><td>"+data.tenjk[2]+"</td><td>"+data.tenjk[3]+"</td><td>"+data.tenjk[4]+"%</td><td>"+data.tenjk[5]+"</td><td>"+data.tenjk[6]+"%</td>";
+   		html_ += "</tr>";
+		html_ += "<tr>";
+		html_ += "<td>借款大于10次以上的用户</td><td>"+data.dytenjk[0]+"</td><td>"+data.dytenjk[1]+"</td><td>"+data.dytenjk[2]+"</td><td>"+data.dytenjk[3]+"</td><td>"+data.dytenjk[4]+"%</td><td>"+data.dytenjk[5]+"</td><td>"+data.dytenjk[6]+"%</td>";
+   		html_ += "</tr>";
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   load_data();
+
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

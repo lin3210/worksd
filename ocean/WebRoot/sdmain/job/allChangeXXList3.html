@@ -1,0 +1,173 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+
+
+<div  class="container">
+    <!-- ，头导向 -->
+	    <div class="crumbs">
+	    <ul id="breadcrumbs" class="breadcrumb">
+	      <li>
+	        <i class="icon-home">
+	        </i>
+	        <a href="/indexCms.html">
+	        </a>
+	      </li>
+	      <li class="current">
+	        <a href="/pages_calendar.html" title="" id="aa">
+	        		Thông tin cá nhân của người dùng
+	        </a>
+	      </li>
+	    </ul>
+	   </div>
+    <!-- ，搜索区域 -->
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder">
+                        </i>
+                        	Điều kiện tìm kiếm
+                    </h4>
+                </div>
+                <div class="widget-content">
+
+                    <div>
+                       <input type="hidden" id="cupage" value="1"/>
+                       <input type="hidden" id="total" value="1"/>
+                        <input type="hidden" id="starTime" value=""/>
+                        <input type="hidden" id="endTime" value=""/>
+                    </div>
+	                    <div class="form-group">
+	                    <div class="col-md-4" style="width:150px;">
+	                      <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+	                          <option value="2">
+	                          		Số CMND
+	                          </option>
+	                          
+	                   	  </select>
+	                  </div>
+	                  <div class="col-md-1" style="width:200px;">
+	                    <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Xin nhập điều kiện tìm kiếm" >
+	                  </div>
+	                   
+                      <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+                      		Tìm kiếm
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ，数据区域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder"></i>
+                          Danh sách thông tin
+                    </h4>
+                   
+                </div>
+                <div class="widget-content">
+                   
+
+			              <div class="modal-body">
+			                <div class="bootbox-body"  style="height: 600px;">
+			                   <div class="col-md-12">
+			                      <div class="widget box">
+			                          <div class="widget-header">
+			                          </div>
+			                          <div class="widget-content" style="padding:15px;">
+			                              <form class="form-horizontal row-border" >
+			                                  
+			                              <div class="list-group" id="shenfen">
+			                              
+			                              </div>
+			                                 
+			                              </form>
+			                          </div>
+			                      </div>
+			                  </div>
+			              </div>
+			          </div>
+                   
+                
+                
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    load_data();
+    function load_data() {
+        var recode_ =$("#recode").val();
+        var tempsele=$("#tempselect").val();
+        var tempval= $("#tempVelue").val();
+        var starTime=$("#starTime").val();
+        var endTime=$("#endTime").val();
+
+        var para={temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+   
+        var formurl = "/servlet/current/JBDcmsAction?function=GetUserChangXXL2";
+        loadGetServer(formurl,para,function(data){
+        	var html_p="";
+			   
+	  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img id='shenfen1' src='" + data.user_p1 +"' class='roomimg' style='height: 300px;width: 50%;' onclick='lookimg(this.src);'  alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
+	   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img id='shenfen2' src='" + data.user_p2 +"' class='roomimg' style='height: 350px;width: 50%;' onclick='lookimg(this.src);'  alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
+	  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img id='shenfen3' src='" + data.user_p3 +"' class='roomimg' style='height: 300px;width: 50%;' onclick='lookimg(this.src);'  alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
+			   
+			
+        	$("#btn-load").button("reset");
+        	$(".list-group").html(html_p);
+        	
+
+            $("#load_data").append(html_);
+            $("#tempselect").val(data.temp);
+            $("#tempVelue").val(data.tempvalu);
+   
+        })
+
+    }
+    
+    $("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		load_data();
+	
+	});
+    
+    
+</script>
+<script>
+
+function lookimg(str)
+{
+var newwin=window.open()
+newwin.document.write("<img src="+str+" />")
+}
+
+
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

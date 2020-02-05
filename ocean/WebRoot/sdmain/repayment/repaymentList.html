@@ -1,0 +1,284 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               还款列表
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        筛选条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms3Action?function=getRepaymentList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        全部
+                                      </option>
+                                      <option value="1">
+                                         用户id
+                                      </option>
+                                      <option value="2">
+                                         真实姓名
+                                      </option>
+                                      <option value="3">
+                                         手机号码
+                                      </option>
+                                      <option value="4">
+                                         身份证
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="请输入查询条件" >
+		                      </div>
+		                      <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              还款状态:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="hkst">
+                                  <option value="0">
+                                    --请选择--
+                                  </option>
+                                  <option value="1">
+                                   成功
+                                  </option>
+                                  <option value="2">
+                                  失败
+                                  </option>
+                                </select>
+                              </div>
+		                      
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              还款时间:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                                                                                                                 
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="加载中...">
+			                                                 查 询
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                 还款列表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+                             
+		                        <th>
+		                          用户名
+		                        </th>
+		                        <th>
+		                          用户姓名
+		                        </th>
+		                        <th>
+		                          手机号码
+		                        </th>
+                                <th>
+                                  身份证号码
+                                </th>
+		                        <th>
+		                          还款卡
+		                        </th>
+		                        <th>
+		                          还款金额
+		                        </th>
+                                <th>
+		                          实际还款时间
+		                        </th>
+         
+                                <th>
+		                          还款状态
+		                        </th>
+                                <th>
+		                          订单备注
+		                        </th>
+							
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+    function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+    
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("请输入查询数据");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val()};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+			  html_ += "<tr><td>"+list[i].username+"</td><td>"+list[i].cardusername+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].idno+"</td><td>"+list[i].cardno+"</td><td>"+list[i].rechargemoney+"</td><td>"+list[i].rechargetime+"</td>" ;
+			 
+			  if(list[i].result == 1)
+			  {
+				  html_ +="<td><span class='label label-success'>还款成功</span></td>";
+			  }
+			  else if(list[i].result == 0)
+			   {
+				   html_ +="<td><span class='label label-info'>还款失败</span></td>";
+			   }
+			   else if(list[i].result == 2)
+			   {
+				    html_ +="<td><span class='label label-info'>还款失败</span></td>";
+			   }
+			  if(list[i].resultinfo == null)
+			  {
+				  if(list[i].bkrzcard == "111111")
+				  {
+					  html_ +="<td>后台代扣成功</td>";
+				  }
+				  else
+				  {
+					  if(list[i].result == 1)
+					  {
+						   html_ +="<td>支付完成</td>";
+					  }
+					  else
+					  {
+						   html_ +="<td>未完成支付操作</td>";
+					  }
+					 
+				  }
+			  }
+			  else
+			  {
+				  html_ +="<td>"+list[i].resultinfo+"</td>";
+			  }
+			 
+		  }
+		   html_ +="</tr>";
+		  $("#load_data").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#tempVelue").val(data.tempvalu);
+		  $("#hkst").val(data.hkstat);
+		  page_value(data);
+		  page_data();
+		  $("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+
+    /* <!--读取用户信息--> */
+   function chg_user_load(id)
+   {
+	    window.open("/main/record_detail/chguser_info.html?record_id="+id);
+   }
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

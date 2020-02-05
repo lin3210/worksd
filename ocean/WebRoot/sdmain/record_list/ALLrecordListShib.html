@@ -1,0 +1,497 @@
+
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+
+</style>
+
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>
+			
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                               DSKH vay thất bại
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetRecordListShibALL"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Tất cả
+                                      </option>
+                                      <option value="1" id="dd">
+                                         Mã số khách hàng
+                                      </option>
+                                      <option value="2" id="ee">
+                                        Họ tên
+                                      </option>
+                                      <option value="3" id="ff">
+                                        Số ĐTDĐ
+                                      </option>
+                                      <option value="4" id="gg">
+                                        Người thẩm định
+                                      </option>
+                                      <option value="5" id="hh">
+                                        Độ tín dụng
+                                      </option>
+                                      <option value="6" id="hhh">
+                                        Sinh viên / Công việc
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div> 
+		                      <label class="col-md-0 control-label" style="padding-top:5px;" id="ii">
+		                                              Thời gian thẩm định:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                            Tra cứu
+			                  </button>
+			                  
+			                  <!-- <button type="button" onclick="method5('tableExcel')">导出Excel方法五</button>  -->
+		                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="jj">
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                               DS vay thất bại
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" id="tableExcel">
+		                    <thead>
+		                      <tr>
+		                        <th id="kk">
+		                          Mã số khách hàng
+		                        </th>
+		                        <th id="ll">
+		                          Tên khách hàng
+		                        </th>
+		                        <th id="mm">
+		                          Thời gian thẩm định lần 1
+		                        </th>
+		                        <th id="nn">
+		                          Người thẩm định lần 1
+		                        </th>
+                                <th id="oo">
+		                          Ý kiến thẩm định lần 1
+		                        </th>
+                                <th id="pp">
+		                          Thời gian thẩm định lần 2
+		                        </th>
+                                <th id="qq">
+		                          Người thẩm định lần 2
+		                        </th>
+                                <th id="rr">
+		                          Ý kiến thẩm định lần 2
+		                        </th>
+                                <th id="ss">
+		                          Thời gian thẩm định lần 3
+		                        </th>
+                                <th id="tt">
+		                          Người thẩm định lần 3
+		                        </th>
+                                <th id="uu">
+		                          Ý kiến thẩm định lần 3
+		                        </th>
+                                <th id="vv">
+		                          Giai đoạn thất bại
+		                        </th>
+                                <th id="ww">
+                                Xem thông tin cá nhân KH
+                                </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+		
+		<!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <script>
+function changeLan(){
+	document.getElementById("aa").innerHTML = "所有借款失败用户列表";
+	document.getElementById("bb").innerHTML = "筛选条件";
+	document.getElementById("cc").innerHTML = "全部";
+	document.getElementById("dd").innerHTML = "用户编号";
+	document.getElementById("ee").innerHTML = "真实姓名";
+	document.getElementById("ff").innerHTML = "手机号码";
+	document.getElementById("gg").innerHTML = "审核人";
+	document.getElementById("hh").innerHTML = "信用度";
+	document.getElementById("hhh").innerHTML = "学生/工作";
+	document.getElementById("ii").innerHTML = "审核时间";
+	document.getElementById("jj").innerHTML = "所有借款失败用户列表";
+	document.getElementById("kk").innerHTML = "用户编号";
+	document.getElementById("ll").innerHTML = "用户姓名";
+	document.getElementById("mm").innerHTML = "第一次审核时间";
+	document.getElementById("nn").innerHTML = "第一次审核人";
+	document.getElementById("oo").innerHTML = "第一次审核意见";
+	document.getElementById("pp").innerHTML = "第二次审核时间";
+	document.getElementById("qq").innerHTML = "第二次审核人";
+	document.getElementById("rr").innerHTML = "第二次审核意见";
+	document.getElementById("ss").innerHTML = "第三次审核时间";
+	document.getElementById("tt").innerHTML = "第三次审核人";
+	document.getElementById("uu").innerHTML = "第三次审核意见";
+	document.getElementById("vv").innerHTML = "失败阶段";
+	document.getElementById("ww").innerHTML = "查看用户个人信息";
+
+}
+
+</script>
+<script>   
+      function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+    
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val()};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var one ="";
+		  var two = "";
+		  var three = "";
+		  for(var i=0;i<list.length;i++)
+		  {      		     
+		  		if(list[i].cl_ren == "98"){
+					one = "PHAM THI MINH";
+				}else if(list[i].cl_ren == "99"){
+					one = "VO THI NGOC HANG";
+				}else if(list[i].cl_ren == "100"){
+					one = "TRAN THI THUY VAN";
+				}
+				else if(list[i].cl_ren == "888"){
+					one = "李佳";
+				}
+				else if(list[i].cl_ren == "8"){
+					one = "田果";
+				}
+				else if(list[i].cl_ren == "6"){
+					one = "罗正";
+				}
+				else if(list[i].cl_ren == "77"){
+					one = "phanngoctuan";
+				} 
+				else if(list[i].cl_ren == "50"){
+					one = "HUYNH NGUYEN DUONG";
+				} 
+				else if(list[i].cl_ren == "51"){
+					one = "DOAN THI HONG YEN";
+				} 
+				else if(list[i].cl_ren == "52"){
+					one = "LE HOANG MY";
+				} 
+				else if(list[i].cl_ren == "53"){
+					one = "ta quang van";
+				} 
+		        
+				html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].cl_time+"</td><td>"+one+"</td><td>"+list[i].cl_yj+"</td>";
+				
+				html_ += "<td>"+list[i].cl02_time+"</td>";
+				if(list[i].cl02_ren == "98"){
+					two = "PHAM THI MINH";
+				}else if(list[i].cl02_ren == "99"){
+					two = "VO THI NGOC HANG";
+				}else if(list[i].cl02_ren == "100"){
+					two = "TRAN THI THUY VAN";
+				}
+				else if(list[i].cl02_ren == "888"){
+					two = "李佳";
+				}
+				else if(list[i].cl02_ren == "8"){
+					two = "田果";
+				}
+				else if(list[i].cl02_ren == "6"){
+					two = "罗正";
+				}
+				else if(list[i].cl02_ren == "77"){
+					two = "phanngoctuan";
+				}
+				else if(list[i].cl02_ren == "50"){
+					two = "HUYNH NGUYEN DUONG";
+				} 
+				else if(list[i].cl02_ren == "51"){
+					two = "DOAN THI HONG YEN";
+				} 
+				else if(list[i].cl02_ren == "52"){
+					two = "LE HOANG MY";
+				} 
+				else if(list[i].cl02_ren == "53"){
+					two = "ta quang van";
+				} 
+				
+				if(list[i].cl03_ren == "98"){
+					three = "PHAM THI MINH";
+				}else if(list[i].cl03_ren == "99"){
+					three = "VO THI NGOC HANG";
+				}else if(list[i].cl03_ren == "100"){
+					three = "TRAN THI THUY VAN";
+				}
+				else if(list[i].cl03_ren == "888"){
+					three = "李佳";
+				}
+				else if(list[i].cl03_ren == "8"){
+					three = "田果";
+				}
+				else if(list[i].cl03_ren == "6"){
+					three = "罗正";
+				}
+				else if(list[i].cl03_ren == "77"){
+					three = "phanngoctuan";
+				}
+				else if(list[i].cl03_ren == "50"){
+					three = "HUYNH NGUYEN DUONG";
+				} 
+				else if(list[i].cl03_ren == "51"){
+					three = "DOAN THI HONG YEN";
+				} 
+				else if(list[i].cl03_ren == "52"){
+					three = "LE HOANG MY";
+				} 
+				else if(list[i].cl03_ren == "53"){
+					three = "ta quang van";
+				} 
+				html_ += "<td>"+two+"</td><td>"+list[i].cl02_yj+"</td><td>"+list[i].cl03_time+"</td><td>"+three+"</td><td>"+list[i].cl03_yj+"</td>";
+				
+			  	if(list[i].cl_status == 3){
+			  		html_ +="<td>Thẩm định lần 1</td>";
+			  	}else if(list[i].cl02_status == 3){
+			  		html_ +="<td>Thẩm định lần 2</td>";
+			  	}else if(list[i].cl03_status == 3){
+			  		html_ +="<td>Thẩm định lần 3</td>";
+			  	}
+				
+				
+				html_ +="<<td><button class='btn btn-xs btn-info' onclick='chg_user_load("+list[i].jkid+")'>Xem thông tin cá nhân KH</button></td>";
+				html_ +="</tr>";
+		    }
+		  
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			$("#hkst").val(data.hkstat);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+	function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+	
+	/*  <!--读取用户信息--> */
+   function chg_user_load(id)
+   {
+	     
+	   $("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/user_chenggong.html?record_id="+id);
+   }
+   
+   load_data();
+   
+</script>
+<script>
+ var idTmr;  
+        function  getExplorer() {  
+            var explorer = window.navigator.userAgent ;  
+            //ie  
+            if (explorer.indexOf("MSIE") >= 0) {  
+                return 'ie';  
+            }  
+            //firefox  
+            else if (explorer.indexOf("Firefox") >= 0) {  
+                return 'Firefox';  
+            }  
+            //Chrome  
+            else if(explorer.indexOf("Chrome") >= 0){  
+                return 'Chrome';  
+            }  
+            //Opera  
+            else if(explorer.indexOf("Opera") >= 0){  
+                return 'Opera';  
+            }  
+            //Safari  
+            else if(explorer.indexOf("Safari") >= 0){  
+                return 'Safari';  
+            }  
+        }  
+        function method5(tableid) {  
+            if(getExplorer()=='ie')  
+            {  
+                var curTbl = document.getElementById(tableid);  
+                var oXL = new ActiveXObject("Excel.Application");  
+                var oWB = oXL.Workbooks.Add();  
+                var xlsheet = oWB.Worksheets(1);  
+                var sel = document.body.createTextRange();  
+                sel.moveToElementText(curTbl);  
+                sel.select();  
+                sel.execCommand("Copy");  
+                xlsheet.Paste();  
+                oXL.Visible = true;  
+  
+                try {  
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");  
+                } catch (e) {  
+                    print("Nested catch caught " + e);  
+                } finally {  
+                    oWB.SaveAs(fname);  
+                    oWB.Close(savechanges = false);  
+                    oXL.Quit();  
+                    oXL = null;  
+                    idTmr = window.setInterval("Cleanup();", 1);  
+                }  
+  
+            }  
+            else  
+            {  
+                tableToExcel(tableid)  
+            }  
+        }  
+        function Cleanup() {  
+            window.clearInterval(idTmr);  
+            CollectGarbage();  
+        }  
+        var tableToExcel = (function() {  
+            var uri = 'data:application/vnd.ms-excel;base64,',  
+                    template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',  
+                    base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },  
+                    format = function(s, c) {  
+                        return s.replace(/{(\w+)}/g,  
+                                function(m, p) { return c[p]; }) }  
+            return function(table, name) {  
+                if (!table.nodeType) table = document.getElementById(table)  
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}  
+                window.location.href = uri + base64(format(template, ctx))  
+            }  
+        })()  
+
+</script>
+<script type="text/javascript" src="/main/js/date_time.js"></script>

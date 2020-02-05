@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>MOFA</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/gx.css">
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('static/images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-49">Trang cho vay</span>
+
+					<div class="wrap-input100-2 validate-input m-b-23" data-validate="5,000,000 VND">
+						<select class="form-control  " id="jk_money"  onChange="gradeChange()">
+					        <option  selected="selected" value="0">5,000,000 VND</option>
+					        <option  value = "1" >4,000,000 VND</option>
+							<option  value = "2" >3,000,000 VND</option>
+							<option  value = "3" >2,000,000 VND</option>
+							<option  value = "4" >1,000,000 VND</option>
+					    </select>
+					</div>
+
+					<div class="wrap-input100-2 validate-input" data-validate="Chọn ngân hàng">
+						<select class="form-control  " id="jk_date"  onChange="gradeChange()">
+					        <option  selected="selected" value="2">30 ngay</option>
+					        <option  value = "1" >15 ngay</option>
+					    </select>					 
+					</div>
+
+					<div class="wrap-input100-2 validate-input"  style="color:black;" data-validate="Phí dịch vụ">
+						<input class="input100 input100-2" type="text" value="Phí dịch vụ" readonly="readonly">
+						<input class="input100 input100-2" type="text" id="fuwufei" value="Phí dịch vụ" readonly="readonly">
+					</div>
+
+					<div class="wrap-input100-2 validate-input"  style="color:black;" data-validate="Lãi suất">
+						<input class="input100 input100-2" type="text" value="Lãi suất" readonly="readonly">
+						<input class="input100 input100-2" type="text" id="lixi" value="Lãi suất" readonly="readonly">
+					</div>
+					<div class="wrap-input100-2 validate-input"  style="color:black;" data-validate="Tổng số tiền thực nhận">
+						<input class="input100 input100-2" type="text" value="Tổng số tiền thực nhận" readonly="readonly">
+						<input class="input100 input100-2" type="text" id="sjds" value="Tổng số tiền thực nhận" readonly="readonly">
+					</div>
+
+					
+
+					<div class="text-right p-t-8 p-b-31"> 
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<input type="button" class="login100-form-btn" id="bankrz" value="Đề xuất vay" onClick="commitData();">
+						</div>
+					</div>
+
+					 
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="gx_alert">
+		<p class="gx_alert_p"></p>
+	</div>
+	<script src="static/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="static/js/tijiaojk.js"></script>
+	<script type="text/javascript" src="static/js/Ajax.js"></script>
+</body>
+<style type="text/css">
+
+@font-face {
+  font-family:'Calibri'; 
+  src: url('static/fonts/calibri.ttf');
+}
+	.wrap-input100-2 {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid #d9d9d9 !important;
+    /*border: 2px solid #d9d9d9;*/
+    margin-bottom: 20px;
+    color:#333333;
+} 
+ input::-webkit-input-placeholder { 
+       color: #333333 !important;
+     
+    }
+
+    ::-webkit-input-placeholder {  
+  color: #333333; 
+}
+
+::-moz-placeholder { 
+  color: #333333; 
+}
+
+:-ms-input-placeholder {  
+  color: #333333; 
+} 
+ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #333333; 
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #333333; 
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #333333; 
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #333333; 
+}
+.form-control {
+	font-family: 'Calibri';
+    border: 0;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: url(./static/images/1.png) 96% center no-repeat;
+    background-size: 12px;
+	padding: 0 7px 0 43px;
+}
+.input200 {
+	font-family: 'Calibri';
+    float: right;
+    margin: -30px 30px;
+    /* color: #d9d9d9; */
+    color: #333333;
+}
+
+
+</style>
+</html>

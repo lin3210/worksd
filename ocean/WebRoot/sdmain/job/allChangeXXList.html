@@ -1,0 +1,379 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="/indexCms.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               List so sánh thông tin điều chỉnh(更改信息)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcmsAction?function=GetChangeXXList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                                <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1">
+                                         Mã số KH
+                                      </option>
+                                      <option value="2">
+                                        Mã số vay
+                                      </option>
+                                      <option value="3">
+                                        Loại hình điều chỉnh
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Xin nhập điều kiện tìm kiếm" >
+		                      </div>
+                              
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                  <button id="beizhu" class="btn btn-success" onclick="load_beiz()">
+			                                    	 Thêm thông tin điều chỉnh
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                List điều chỉnh thông tin KH(更改信息)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        
+		                         <th>
+		                         Mã số KH(用户编号)
+		                        </th>
+		                        <th>
+		                          Mã số vay(借款编号)
+		                        </th>
+		                        <th>
+		                           Loại hình điều chỉnh(调整类型)
+		                        </th>
+		                        <th>
+		                          Thông tin trước điều chỉnh(更改之前的信息)
+		                        </th>
+		                        <th>
+		                          Thông tin sau điều chỉnh(更改之后的信息)
+		                        </th>
+		                        <th>
+		                          Người thao tác(操作人)
+		                        </th>
+		                         <th>
+		                          Thời gian(时间)
+		                        </th>
+		                         <th>
+		                          Thao tác(操作)
+		                        </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>  tin，mỗi trang chứa được<font id="numperpage"></font>   tin，hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+  <!--添加逾期备注信息-->
+     <div id="add_content_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#add_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Điều chỉnh thông tin KH</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height:360px;" id="div_a">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                           <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">Mã số KH
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_1" id="userid" class="form-control required">
+                                                  </div>
+                                           </div>
+                                          <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">Loại hình điều chỉnh
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                          <select class="form-control" name="select" id="lab" onChange="gradeChange1()">
+                                                <option value="0">Toàn bộ</option> 
+                                                <option value="1">Họ tên</option> 
+                                                <option value="2">Số CMND</option> 
+                                                <option value="3">Ngày sinh</option> 
+                                                <option value="4">Số tài khoản NH</option> 
+                                                <option value="5">Tên ngân hàng</option> 
+                                                <option value="6">Thời hạn vay</option>
+                                                <option value="7">Số tiền vay</option>
+                                          </select>
+                                                  </div>
+                                           </div>
+                                           <div class="form-group" id="has_jkid" style="display: none;">
+                                            <label class="col-md-3 control-label">Mã số vay
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_1" id="jkid" class="form-control required">
+                                                  </div>
+                                              </div>
+                                          
+                                            <div class="form-group has-error" id="has_coll_ms">
+                                            <label class="col-md-3 control-label">Nội dung điều chỉnh
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_1" id="remark" class="form-control required">
+                                                  
+                                                  </div>
+                                              </div>
+                                              <input type="hidden" id="u_id"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_content_html').hide()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>			
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("请输入查询数据");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var shenkzt ;
+		  var time = getNowFormatDate();
+		  for(var i=0;i<list.length;i++)
+		  {
+		       
+				html_ += "<tr><td>"+list[i].userid+"</td><td>"+list[i].jkid+"</td>";
+				if(list[i].changecode == 1){
+					html_ += "<td>Họ tên</td>";
+				}else if(list[i].changecode == 2){
+					html_ += "<td>Số CMND</td>";
+				}else if(list[i].changecode == 3){
+					html_ += "<td>Ngày sinh</td>";
+				}else if(list[i].changecode == 4){
+					html_ += "<td>Số tài khoản NH</td>";
+				}else if(list[i].changecode == 5){
+					html_ += "<td>Tên ngân hàng</td>";
+				}else if(list[i].changecode == 6){
+					html_ += "<td>Thời hạn vay</td>";
+				}else if(list[i].changecode == 7){
+					html_ += "<td>Số tiền vay</td>";
+				}
+				html_ += "<td>"+list[i].beforexx+"</td>";
+				html_ += "<td>"+list[i].afterxx+"</td>";
+				html_ += "<td>"+list[i].ccxxname+"</td>";
+				html_ += "<td>"+list[i].createtime+"</td>";
+				if(list[i].state == "1" && time == list[i].createtime.substring(0,10)){
+					html_ += "<td><button class='btn btn-xs btn-info' onclick='che_xiao("+list[i].id+")'>Hủy bỏ</button></td>";
+				}else{
+					html_ += "<td>"+list[i].cxname+"</td>";
+				}
+				html_ +="</tr>";
+		   }
+		  $("#load_data").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+	
+	  function gradeChange1(){
+	   var bhstate_=$("#lab").val();
+	   
+	   if(bhstate_== 3){
+		    var str = document.getElementById("remark");
+		    str.value = "Định dạng ngày sinh:XX-XX-XXXX";
+			str.onfocus = function(){
+				str.value = "";
+			}
+	    }
+	    if(bhstate_== 5){
+		    var str = document.getElementById("remark");
+		    str.value = "Định dạng tên ngân hàng:XXXX - XXXXXX";
+			str.onfocus = function(){
+				str.value = "";
+			}
+	    }
+	    
+		if(bhstate_== 6 || bhstate_== 7){
+			document.getElementById("has_jkid").style.display="block";
+		}else{
+			document.getElementById("has_jkid").style.display="none";
+		}
+	}
+	 /* <!--查询备注类型--> */
+   function load_beiz()
+   {     
+	   $("#add_content_html").show();
+	   document.getElementById("div_a").style.height="400px";
+   }
+      /*  <!--添加或者修改催收备注--> */
+   function add_beiz()
+   {
+	  var userid_=$("#userid").val();
+	  var lab_=$("#lab").val();
+	  var jkid_=$("#jkid").val();
+	  var remark_=$("#remark").val();
+	  
+		   var para={userid:userid_,lab:lab_,jkid:jkid_,remark:remark_};
+		   loadGetServer("/servlet/current/JBDcmsAction?function=ChangeUserXX",para,function(data){
+			   if(data.error>0)
+			   {
+				   $("#add_content_html").hide();
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = strDate + seperator1 + month + seperator1 + year;
+        return currentdate;
+    }
+   function che_xiao(id_){
+   		var para={id:id_};
+		   loadGetServer("/servlet/current/JBDcmsAction?function=CheXiaoXX",para,function(data){
+			   if(data.error>0)
+			   {
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+   }
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

@@ -1,0 +1,347 @@
+<style>
+    .col-md-0{
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px
+    }
+    .col-md-0{
+        float: left
+    }
+    a:hover {text-decoration: none;}
+</style>
+
+<div  class="container">
+    <!-- ，头导向 -->
+	 <div class="crumbs"> 
+	    <ul id="breadcrumbs" class="breadcrumb">
+	      <li>
+	         <i class="fa fa-home"></i>
+	         <a href=""></a>
+	      </li>
+	      <li class="current">
+	        <a href="" title="" id="aa">
+	            Thống kê số đơn truy thu
+	        </a>
+	      </li>
+	    </ul>
+	  </div>
+	  
+	  <div class="widget-content">
+      <div>
+         <input type="hidden" id="cupage" value="1"/>
+         <input type="hidden" id="total" value="1"/>
+         <input type="hidden" id="cupage_" value="1"/>
+         <input type="hidden" id="total_" value="1"/>
+          <input type="hidden" id="starTime" value=""/>
+          <input type="hidden" id="endTime" value=""/>
+      </div>
+      </div>
+      
+    <!-- ，搜索区域 -->
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder">
+                        </i>
+                         Lựa chọn 
+                    </h4>
+                </div>
+                <div class="widget-content">
+                    <div class="form-group">
+                      
+                        <div class="col-md-1" style="width:200px;">
+                             <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="ID thành viên"  >
+                        </div>
+                        <label class="col-md-0 control-label" style="padding-top:5px;">
+                                       Ngày tháng:     
+			            </label>
+			            <div class="col-md-2">
+			                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+			            </div>
+                        <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+                        Tìm kiếm
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ，数据区域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder"></i>
+                        Danh sách thống kê   
+                    </h4> 
+                </div>
+                
+                <div class="widget-content">
+                    <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+                       <thead>
+                        <tr style="text-align:center">
+                        	<th style=" font-size:14px; font-weight:bold; width:100px ;text-align:center;">
+                        				Thứ tự(序号)
+                        	</th> 
+                            <th style=" font-size:14px; font-weight:bold; width:100px ;text-align:center;">
+                            			ID thành viên(催收id)
+                            </th>
+                            <th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+                            			Họ tên(姓名)
+                            </th>
+            				<th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+                            			Office(在职状态)
+                            </th>
+              			    <th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+              			    			Số tiền truy thu(入催金额)
+                            </th>
+                           	<th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+                           				Tổng tiền đã truy thu(催回金额)
+                            </th>
+                        	<th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+                        				Số tiền truy thu trong ngày(当天催回金额)
+                            </th> 
+                            <th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+                            			Tổng tỷ lệ truy thu(催收比列)
+                            </th>
+                            <th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+                            			Tổng số hồ sơ truy thu hiện tại(催收总单)
+                            </th> 
+                            <th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+                            			Tổng hồ sơ đã truy thu(已催回总单)
+				            </th>
+            				<th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+        								Số hồ sơ gia hạn(延期总数)
+							</th>
+				            <th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+				            			Tổng hồ sơ chưa truy thu(当前未催回总数)
+				            </th>
+				             <th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+				             			Tổng số hồ sơ truy thu trong ngày(当天催回笔数)
+				            </th> 
+				            <th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+				            			Số hồ sơ đã xử lý(当日处理总数)
+   				            </th>
+				            <th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+				                        Số hồ sơ trên 3 ngày chưa xử lý(3天未处理数)
+				            </th> 
+				            <th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+				               			Số hồ sơ trên 7 ngày chưa xử lý(7天未处理数)
+				            </th> 
+                          	<th   style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+                          				Số hồ sơ chưa xử lý qua(从未处理数)
+				            </th>
+              				<th  style=" font-size:14px; font-weight:bold; text-align:center;"  id="hh">
+              							Số hồ sơ chia trong ngày(当天分单数)
+				            </th>
+                            
+                        </tr>
+       
+                       </thead>
+                       
+                       <!--d 表格数据区域-->
+                       <tbody  id="load_data"></tbody>
+
+                    </table>
+
+
+                    <!-- ，表格下面信息-->
+                    <div class="row">
+                        <div class="dataTables_footer clearfix">
+                            <div class="col-md-6">
+                                <div class="dataTables_info" id="DataTables_Table_0_info">
+                                			Tổng số
+                                    <font id="totalrows"></font>
+                                    		tin, mỗi trang chứa được 
+                                    <font id="numperpage"></font>
+                                    		tin, hiện tại trang số
+                                    <font id="currentpage"></font>
+                                    		/
+                                    <font id="totalpages"></font>
+                                    		trang
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+		                        <div class="dataTables_paginate paging_bootstrap" id="datatable">
+		
+		                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+<script>
+    function load_data(){
+        var recode_ = 6;
+        var tempsele=$("#tempselect").val();
+        var tempval=$("#tempVelue").val();
+        var starTime=$("#starTime").val();
+        var endTime=$("#endTime").val();
+        var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+        var formurl = "/servlet/current/AccountShenheAction?function=GetcuishoudantongjAccount";
+
+        loadGetServer(formurl,para,function(data){
+            //console.log(data)
+            $("#load_data").html("");
+            var list = data.list.data;
+            var html_="";
+    		var paixu =-1;
+    	
+    		var total_ycszjine = 0;
+        	var total_ychzjineMon = 0;
+        	var total_ychzjineDay = 0;
+        	var total_chbuserl = 0.00;
+        	
+        	var total_ycszdsuser = 0;
+        	var total_ychzdsuserMon = 0;
+        	var total_yqfqdsallMon =0;
+        	var total_wchzdsuser = 0;
+        	var total_ychzduserlDay = 0;
+        	var total_txscurtime = 0;
+        	var total_wtxs3 = 0;
+        	var total_wtxs7 = 0;
+        	var total_wtxs = 0;
+        	var total_fendans=0;
+        	
+    		 for(var i=0; i< list.length;i++) {
+             	if(i<(list.length-1)) {
+             		paixu= list[i].paixu;
+                 	if(paixu>0) {
+                 		html_ +="<tr>"
+                                 + "<td>"+list[i].paixu+"</td>"
+                                 + "<td>"+list[i].userid+"</td>"
+                                 +"<td align='left'>"+list[i].name+"</td>"
+                     			 +"<td>"+list[i].state+"</td>"
+                                 +"<td>"+list[i].tj_ycszjine+"</td>"
+                                 + "<td>"+list[i].tj_ychzjineMon+"</td>"
+                                 + "<td>"+list[i].tj_ychzjineDay+"</td>"
+                         		 + "<td>"+list[i].chbuserl+"</td>"
+                         		
+                         		 + "<td>"+list[i].tj_ycszdsuser+"</td>"
+                         		 + "<td>"+list[i].tj_ychzdsuserMon+"</td>"
+                 				 + "<td>"+list[i].tj_yqfqdsallMon+"</td>"
+                                 + "<td>"+list[i].tj_wchzdsuser+"</td>"
+                                 + "<td>"+list[i].tj_ychzduserlDay+"</td>"
+                         		 + "<td>"+list[i].tj_txscurtime+"</td>"
+                                 + "<td>"+list[i].tj_wtxs3+"</td>"
+                                 + "<td>"+list[i].tj_wtxs7+"</td>"
+                                 + "<td>"+list[i].tj_wtxs+"</td>"
+                        		 + "<td>"+list[i].fendans+"</td>"
+                                 + "</tr>";
+                                 
+ 		                		total_ycszjine+= parseInt(list[i].tj_ycszjine.replace(/,/g,""));
+ 		        		        total_ychzjineMon+=  parseInt(list[i].tj_ychzjineMon.replace(/,/g,""));
+ 		        		        total_ychzjineDay+=  parseInt(list[i].tj_ychzjineDay.replace(/,/g,""));
+ 		        	
+ 		                		total_ycszdsuser += list[i].tj_ycszdsuser;
+ 		                    	total_ychzdsuserMon += list[i].tj_ychzdsuserMon;
+ 		                    	total_yqfqdsallMon += list[i].tj_yqfqdsallMon;
+ 		                        total_wchzdsuser += list[i].tj_wchzdsuser;
+ 		                    	total_ychzduserlDay += list[i].tj_ychzduserlDay;
+ 		                    	total_txscurtime += list[i].tj_txscurtime;
+ 		                    	total_wtxs3 += list[i].tj_wtxs3;
+ 		                    	total_wtxs7 += list[i].tj_wtxs7;
+ 		                    	total_wtxs += list[i].tj_wtxs;
+ 		                    	total_fendans +=list[i].fendans;
+    
+                 	}else {
+                 		html_ +="<tr>"
+                                + "<td><font color='#DC143C'>"+list[i].paixu+"</font></td>"
+                                + "<td><font color='#DC143C'>"+list[i].userid+"</font></td>"
+                                +"<td><font color='#DC143C'>"+list[i].name+"</font></td>"
+                         		+"<td><font color='#DC143C'>"+list[i].state+"</font></td>"
+                                +"<td><font color='#DC143C'>"+list[i].tj_ycszjine+"</font></td>"
+                                + "<td><font color='#DC143C'>"+list[i].tj_ychzjineMon+"</font></td>"
+                                + "<td><font color='#DC143C'>"+list[i].tj_ychzjineDay+"</font></td>"
+                         		+ "<td><font color='#DC143C'>"+list[i].chbuserl+"</font></td>"
+                         		
+                         		+ "<td><font color='#DC143C'>"+list[i].tj_ycszdsuser+"</font></td>"
+                         		+ "<td><font color='#DC143C'>"+list[i].tj_ychzdsuserMon+"</font></td>"
+                         		+ "<td><font color='#DC143C'>"+list[i].tj_yqfqdsallMon+"</font></td>"
+                                + "<td><font color='#DC143C'>"+list[i].tj_wchzdsuser+"</font></td>"
+                                + "<td><font color='#DC143C'>"+list[i].tj_ychzduserlDay+"</font></td>"
+                         		+ "<td><font color='#DC143C'>"+list[i].tj_txscurtime+"</font></td>"
+                 				+"<td><font color='#DC143C'>"+list[i].tj_wtxs3+"</font></td>"
+             					+ "<td><font color='#DC143C'>"+list[i].tj_wtxs7+"</font></td>"
+             					+ "<td><font color='#DC143C'>"+list[i].tj_wtxs+"</font></td>"
+     							+ "<td><font color='#DC143C'>"+list[i].fendans+"</font></td>"
+             					+ "</tr>";
+                                 
+                 	}
+             	}else {
+             		var chbuserlv = "0";
+            		if(total_ycszjine!=0 && total_ychzjineMon!=0) {
+            			total_chbuserl=total_ychzjineMon/total_ycszjine;
+            			chbuserlv = (total_chbuserl*100).toFixed(2)+"%";
+            		}
+             		html_ +="<tr style='font-weight:bolder'>"
+                             + "<td><font color='#4744AD'>"+list[i].paixu+"</font></td>"
+                             + "<td><font color='#4744AD'>"+list[i].userid+"</font></td>"
+                             + "<td><font color='#4744AD'>"+list[i].name+"</font></td>"
+                 			 + "<td><font color='#4744AD'>"+list[i].state+"</font></td>"
+                             + "<td><font color='#4744AD'>"+toThousands(total_ycszjine)+"</font></td>"
+                             + "<td><font color='#4744AD'>"+toThousands(total_ychzjineMon)+"</font></td>"
+                             + "<td><font color='#4744AD'>"+toThousands(total_ychzjineDay)+"</font></td>"
+                     		 + "<td><font color='#4744AD'>"+chbuserlv+"</font></td>"
+                     		
+                     		 + "<td><font color='#4744AD'>"+total_ycszdsuser+"</font></td>"
+                     		 + "<td><font color='#4744AD'>"+total_ychzdsuserMon+"</font></td>"
+                     		 + "<td><font color='#4744AD'>"+total_yqfqdsallMon+"</font></td>"
+                             + "<td><font color='#4744AD'>"+total_wchzdsuser+"</font></td>"
+                             + "<td><font color='#4744AD'>"+total_ychzduserlDay+"</font></td>"
+                     		 + "<td><font color='#4744AD'>"+total_txscurtime+"</font></td>"
+                             + "<td><font color='#4744AD'>"+total_wtxs3+"</font></td>"
+                             + "<td><font color='#4744AD'>"+total_wtxs7+"</font></td>"
+                             + "<td><font color='#4744AD'>"+total_wtxs+"</font></td>"
+                             + "<td><font color='#4744AD'>"+total_fendans+"</font></td>"
+                             + "</tr>";
+             	}
+            
+             }
+
+            $("#load_data").append(html_);
+            $("#tempselect").val(data.temp);
+            $("#tempVelue").val(data.tempvalu);
+            page_value(data);
+            page_data();
+            $("#btn-load").button("reset");
+        })
+
+    }
+    load_data();
+    
+    $("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+    
+    function toThousands(num) {  
+	    var num = (num || 0).toString(), result = '';  
+	    while (num.length > 3) {  
+	        result = ',' + num.slice(-3) + result;  
+	        num = num.slice(0, num.length - 3);  
+	    }  
+	    if (num) { result = num + result; }  
+    return result;  
+   }
+    
+</script>
+
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

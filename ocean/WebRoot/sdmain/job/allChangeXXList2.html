@@ -1,0 +1,211 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+
+
+<div  class="container">
+    <!-- ，头导向 -->
+	    <div class="crumbs">
+	    <ul id="breadcrumbs" class="breadcrumb">
+	      <li>
+	        <i class="icon-home">
+	        </i>
+	        <a href="/indexCms.html">
+	        </a>
+	      </li>
+	      <li class="current">
+	        <a href="/pages_calendar.html" title="" id="aa">
+	        		Thông tin cá nhân của người dùng
+	        </a>
+	      </li>
+	    </ul>
+	   </div>
+    <!-- ，搜索区域 -->
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder">
+                        </i>
+                        	Điều kiện tìm kiếm
+                    </h4>
+                </div>
+                <div class="widget-content">
+
+                    <div>
+                       <input type="hidden" id="cupage" value="1"/>
+                       <input type="hidden" id="total" value="1"/>
+                        <input type="hidden" id="starTime" value=""/>
+                        <input type="hidden" id="endTime" value=""/>
+                    </div>
+	                    <div class="form-group">
+	                    <div class="col-md-4" style="width:150px;">
+	                      <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+	                          <option value="1">
+	                          		Mã số khách hàng
+	                          </option>
+	                          <option value="2">
+	                          		Số CMND
+	                          </option>
+	                          
+	                   	  </select>
+	                  </div>
+	                  <div class="col-md-1" style="width:200px;">
+	                    <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Xin nhập điều kiện tìm kiếm" >
+	                  </div>
+	                   
+                      <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+                      		Tìm kiếm
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ，数据区域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder"></i>
+                          Danh sách thông tin
+                    </h4>
+                   
+                </div>
+                <div class="widget-content">
+                   
+
+			              <div class="modal-body">
+			                <div class="bootbox-body"  style="height: 600px;">
+			                   <div class="col-md-12">
+			                      <div class="widget box">
+			                          <div class="widget-header">
+			                          </div>
+			                          <div class="widget-content" style="padding:15px;">
+			                              <form class="form-horizontal row-border" >
+			                                  <div class="form-group">
+			                                      <label class="col-md-3 control-label">Mã số khách hàng：</label>
+			                                      <div class="col-md-9">
+			                                          <input type="text" name="user_id" id="user_id" readonly class="form-control required">
+			                                      </div>
+			                                  </div>
+			                                  <div class="form-group">
+			                                      <label class="col-md-3 control-label">Họ  tên：</label>
+			                                      <div class="col-md-9">
+			                                          <input type="text" name="user_name" id="user_name" readonly class="form-control required email">
+			                                      </div>
+			                                  </div>
+			                                  <div class="form-group">
+			                                      <label class="col-md-3 control-label">Số CMND：</label>
+			                                      <div class="col-md-9">
+			                                          <input type="text" name="cmnd" id="user_cmnd" readonly class="form-control required required">
+			                                      </div>
+			                                  </div>
+			                                  <div class="form-group">
+			                                      <label class="col-md-3 control-label">Số ĐTDĐ ：</label>
+			                                      <div class="col-md-9">
+			                                          <input type="text" name="user_phone" id="user_phone"  class="form-control required required">
+			                                      </div>
+			                                  </div>
+			                                  <div class="form-group">
+			                                      <label class="col-md-3 control-label">Mặt trước：</label>
+			                                      <div class="col-md-9">
+			                                          <input type="text" name="user_p1" id="user_p1"  class="form-control required required">
+			                                      </div>
+			                                  </div>
+			                                  <div class="form-group">
+			                                      <label class="col-md-3 control-label">Mặt sau：</label>
+			                                      <div class="col-md-9">
+			                                          <input type="text" name="user_p2" id="user_p2"  class="form-control required required">
+			                                      </div>
+			                                  </div>
+			                                  <div class="form-group">
+		                                      	<label class="col-md-3 control-label">Hình tự cầm：</label>
+		                                      		<div class="col-md-9">
+		                                      			<input type="text" name="user_p3" id="user_p3"  class="form-control required required">
+		                                      		</div>				
+			                                  </div>
+			                                  <div class="form-group">
+			                                      <label class="col-md-3 control-label">Đánh giá video ：</label>
+			                                      <div class="col-md-9">
+			                                          <input type="text" name="user_vi" id="user_vi"  class="form-control required required">
+			                                      </div>
+			                                  </div>
+			                                 
+			                              </form>
+			                          </div>
+			                      </div>
+			                  </div>
+			              </div>
+			          </div>
+                   
+                
+                
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    load_data();
+    function load_data() {
+        var recode_ =$("#recode").val();
+        var tempsele=$("#tempselect").val();
+        var tempval= $("#tempVelue").val();
+        var starTime=$("#starTime").val();
+        var endTime=$("#endTime").val();
+
+        var para={temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+   
+        var formurl = "/servlet/current/JBDcmsAction?function=GetUserChangXXL2";
+        loadGetServer(formurl,para,function(data){
+        	$("#btn-load").button("reset");
+        	
+             $("#user_id").val(data.user_id);			 		
+			 $("#user_name").val(data.user_name);
+			 $("#user_cmnd").val(data.user_cmnd);
+			 $("#user_phone").val(data.user_phone);
+			 $("#user_p1").val(data.user_p1);
+			 $("#user_p2").val(data.user_p2);			 		
+			 $("#user_p3").val(data.user_p3);
+			 $("#user_vi").val(data.user_vi);
+
+            $("#load_data").append(html_);
+            $("#tempselect").val(data.temp);
+            $("#tempVelue").val(data.tempvalu);
+   
+        })
+
+    }
+    
+    $("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		load_data();
+	
+	});
+    
+    
+</script>
+
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

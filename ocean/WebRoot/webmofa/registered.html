@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>MOFA</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/gx.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79669133-3"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-79669133-3');
+	</script>
+</head>
+<style>
+	.title{
+		font-size: 20px;
+	}
+	.login-form-btn{
+		outline: none !important;
+		border: none;
+		font-family: 'Calibri';
+		font-size: 16px;
+		color: #fff;
+		line-height: 1.2;
+		text-transform: uppercase;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 20px;
+		width: 100%;
+		height: 50px;
+	}
+	.bg-tp{
+		background: transparent;
+	}
+</style>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('static/images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-49">
+						<img class="logo" src="static/images/logo.png" alt="">
+					</span>
+
+					<div class="wrap-input100 validate-input m-b-23" data-validate="Nhập số điện thoại của bạn">
+						<span class="label-input100 title">Số điện thoại di động</span>
+						<input class="input100 username" type="text" id="mobile" placeholder="Nhập số điện thoại của bạn" autocomplete="off">
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Nhập mã xác minh" style="height: 81px">
+						<span class="label-input100 title">Mã xác minh bằng hình ảnh</span>
+
+						<div class="input100 gx_code ">
+							<input class="input100 gx_code_input" type="text" id="vcode" placeholder="Nhập mã xác minh" autocomplete="off">
+							<div class="graphic_code" id="code" title="Xem không rõ, đổi hình khác"></div>
+						</div>
+
+					</div>
+
+					<div class="text-right p-t-8 p-b-31">
+
+					</div>
+					<div class="clearfix"></div>
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<input type="button" class="login-form-btn" id="bankrz" value="Bước tiếp theo" onClick="smsLogin();">
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="gx_alert">
+		<p class="gx_alert_p"></p>
+	</div>
+	<script src="https://sdk.accountkit.com/vi_VN/sdk.js"></script>
+	<script type="text/javascript" src="static/js/jquery-1.11.3.min.js"></script>
+	<script src="static/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="static/js/regismofa.js"></script>
+	<script type="text/javascript" src="static/js/Ajax.js"></script>
+	<script type="text/javascript" src="static/js/gVerify.js"></script>
+	<script type="text/javascript">
+		var verifyCode = new GVerify("code");
+	</script>
+	
+</body>
+
+<script>
+	$(".gx_code_input,.username").on('input propertychange',function(){
+		var username = $(".username").val();
+		var password = $(".gx_code_input").val();
+		if (username.length>1&&password.length>1){
+			$(".login-form-btn").addClass('bg-tp')
+		}else {
+			$(".login-form-btn").removeClass('bg-tp')
+		}
+	})
+</script>
+
+
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>MOFA</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+      <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+    <link href="/assets/css/date_css/dateRange.css" rel="stylesheet" type="text/css" />
+      <script language="Javascript">  
+document.oncontextmenu=new Function("event.returnValue=true");  
+document.onselectstart=new Function("event.returnValue=true");  
+</script> 
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="/assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="/plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.tooltip.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.resize.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.time.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.growraf.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/moment.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/daterangepicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/blockui/jquery.blockUI.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/fullcalendar/fullcalendar.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/jquery.noty.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/layouts/top.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/themes/default.js">
+    </script>
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/select2/select2.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/app.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.form-components.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/page.js">
+    </script>
+	<script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/monthPicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/dateRange.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        Plugins.init();
+        FormComponents.init()
+      });
+    </script>
+    <script type="text/javascript" src="/assets/js/custom.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/json.js">
+    </script>   
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<link rel="stylesheet" href="/assets/css/jquery.artZoom.css" />
+<link href="/assets/css/main_bz.css" rel="stylesheet" type="text/css" />
+<style>.col-md-0{ position: relative; min-height: 1px; padding-left: 15px } .col-md-0{ float: left } .table td{height: 45px;line-height: 45px;} </style></head>
+<body>
+	<div class="container">
+		<div class="crumbs">
+			<ul id="breadcrumbs" class="breadcrumb">
+				<li><i class="fa fa-home"> </i> <a href="/indexCms.html"> </a></li>
+				<li class="current"><a href="/indexCms.html" title="">
+						Danh sách thẩm định thất bại </a></li>
+			</ul>
+		</div>
+		<div class="row" style="margin-top: 10px;">
+			<div class="col-md-12">
+				<div class="widget box">
+					<div class="widget-header">
+						<h4>
+							<i class="fa fa-reorder"> </i> Điều kiện tìm kiếm
+						</h4>
+					</div>
+					<div class="widget-content">
+						<div>
+							<input type="hidden" id="cupage" value="1" /> <input
+								type="hidden" id="total" value="1" /> <input type="hidden"
+								id="formurl"
+								value="/servlet/current/JBDcms2Action?function=GetRecordListShib3" />
+							<input type="hidden" id="starTime" value="" /> <input
+								type="hidden" id="endTime" value="" />
+						</div>
+						<div class="form-group">
+							<div class="col-md-4" style="width: 150px;">
+								<select class="form-control" name="select" id="tempselect"
+									onChange="gradeChange()">
+									<option value="0">Toàn bộ</option>
+									<option value="1">Mã số khách hàng</option>
+									<option value="2">Họ tên KH</option>
+									<option value="3">Số ĐTDĐ</option>
+									<option value="4">CMND</option>
+									<option value="5">Thẩm định viên</option>
+								</select>
+							</div>
+							<div class="col-md-1" style="width: 200px;">
+								<input type="text" name="regular" class="form-control"
+									id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm">
+							</div>
+							<button id="btn-load" class="btn btn-primary"
+								data-loading-text="loading...">Tìm kiếm</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="widget box">
+					<div class="widget-header">
+						<h4>
+							<i class="fa fa-reorder"> </i> Danh sách thẩm định thất bại
+						</h4>
+						<div class="toolbar no-padding">
+							<div class="btn-group">
+								<span class="btn btn-xs widget-collapse"> <i
+									class="fa fa-angle-down"> </i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="widget-content">
+						<table
+							class="table table-hover table-striped table-bordered table-highlight-head">
+							<thead>
+								<tr>
+									<th>Mã số khách hàng</th>
+									<th>Tên khách hàng</th>
+									<th>Số ĐTDĐ</th>
+									<th>Số CMND</th>
+									<th>Số tiền vay</th>
+									<th>Thời gian đề xuất</th>
+									<th>Thời gian thẩm định</th>
+									<th>Thẩm định viên</th>
+									<th>Lý do thất bại</th>
+									<th>Giai đoạn thất bại</th>
+									<th>Xem thông tin cá nhân KH</th>
+								</tr>
+							</thead>
+							<tbody id="load_data">
+
+							</tbody>
+						</table>
+
+						<div class="row">
+							<div class="dataTables_footer clearfix">
+								<div class="col-md-6">
+									<div class="dataTables_info" id="DataTables_Table_0_info">
+										Tổng số<font id="totalrows"></font>tin, mỗi trang chứa được<font
+											id="numperpage"></font>tin, hiện tại trang số<font
+											id="currentpage"></font> / <font id="totalpages"></font>trang
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="dataTables_paginate paging_bootstrap"
+										id="datatable"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	 <div class="form-actions">			
+		<!-- <input type="button" value="Đóng trang"
+			class="btn btn-inverse  pull-right"
+			onClick="javascript:parent.f_hide_ifm(GetQueryString('day'))"> -->
+			<!-- <a href="javascript:window.opener=indexCms.html;window.open('','_self');window.close();">关闭</a> -->
+			<!-- <a href="indexCms.html" id='closeBtn'>关闭</a> -->
+		  <input type="button" value="Đóng trang" class="btn btn-inverse  pull-right" onClick="javascript:parent.f_hide_ifm(GetQueryString('record_id'))">                         
+	</div> 
+	
+	
+	
+
+	<!--加载图片-->
+	<div id="load_html" style="display: none;">
+		<div class="modal-backdrop fade in"></div>
+		<div class="bootbox modal fade in" tabindex="-1" role="dialog"
+			aria-hidden="false" style="display: block;">
+			<div class="modal-dialog" style="padding-top: 1%; width: 100%;">
+				<div>
+					<iframe id="load_one" style="margin-left: 10px;"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<!-- <script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage_").val("1");
+		load_data();
+		load_data_();
+	});
+</script> -->
+<script src="/assets/js/jquery.artZoom.js"></script>
+<script>
+		
+	 function load_data() {
+		var daytime = GetQueryString("day");
+		
+		if(daytime){
+            //url解码
+            daytime = window.decodeURIComponent(daytime);
+        }
+		
+		// $("#load_html").show();
+		var tempsele = $("#tempselect").val();
+		var tempval = $("#tempVelue").val();
+		if (tempsele != null && tempsele != 0) {
+			if (tempval == "") {
+				alert("请输入查询数据");
+				$("#btn-load").button("reset");
+				return;
+			}
+		}
+		var starTime = $("#starTime").val();
+		var endTime = $("#endTime").val();
+		var para = {
+			curPage : $("#cupage").val(),
+			temp : tempsele,
+			tempvl : tempval,
+			startDate : starTime,
+			endDate : endTime,
+			day : daytime,
+			hkstat : $("#hkst").val()
+		};
+		loadGetServer(
+				"/servlet/current/JBDcms2Action?function=GetRecordListOld",
+				para,
+				function(data) {
+					$("#load_data").html("");
+					var list = data.list.data;
+					var html_ = "";
+					for (var i = 0; i < list.length; i++) {
+						var shenhesj;					
+						var shenheclyj;						
+						html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].idno+"</td><td>"+list[i].jk_money+"</td><td>"+list[i].create_date+"</td><td>"+list[i].shenhetime+"</td>";
+						
+					    html_ +="<td>"+ list[i].name+"</td>";
+			
+						html_ +="<td>"+list[i].yijian+"</td>";
+						
+						html_ +="<td>"+list[i].shenheno+"</td>";
+						
+						html_ +="<td><button class='btn btn-xs btn-info' onclick='chg_user_load("+list[i].jkid+")'>Xem thông tin cá nhân KH</button></td>";
+						html_ +="</tr>";					
+					}
+
+					$("#load_data").append(html_);
+					$("#tempselect").val(data.temp);
+					$("#tempVelue").val(data.tempvalu);
+					$("#hkst").val(data.hkstat);
+					page_value(data);
+					page_data();
+					$("#btn-load").button("reset");
+				});
+	}	
+	 
+	 function chg_user_load(id){
+		   $("#load_one").width($(document).width()-50);
+		   $("#load_one").height($(document).height()-60);
+		   $("#load_html").show();
+		   $("#load_one").attr("src","/sdmain/record_detail/user_chenggong.html?record_id="+id);
+	   } 
+	  
+	 
+	 load_data(); 
+	 
+	  /* function clos_ck()
+	  {
+		  $("#load_html").hide();
+		  load_data();
+		  
+	  } */
+	  function f_hide_ifm(id)
+	   {
+		   $("#load_html").hide();
+		   load_data();
+		   $("#id_"+id).css("background-color","powderblue");
+	   }
+	
+	/* $(funtion(){
+		var search=location.search;
+		alert(search);		
+	}); */
+</script>
+
+<!-- <script>
+	function call_choice(phone_) {
+		$("#phone_").val(phone_);
+		$("#remark_tr").html("Xin chọn đầu số gọi ra!");
+		$("#msg_content_html").show();
+	}
+	function call_phone1(phone_) {
+		var code = 1;
+		call_phone(phone_, code);
+	}
+	function call_phone2(phone_) {
+		var code = 2;
+		call_phone(phone_, code);
+	}
+	function call_phone3(phone_) {
+		var code = 3;
+		call_phone(phone_, code);
+	}
+	function call_phone(phone_, code_) {
+
+		var para = {
+			phone : $("#phone_").val(),
+			code : code_
+		};
+
+		loadGetServer("/servlet/current/JBDcms3Action?function=DHGSphone",
+				para, function(data) {
+					if (data.error > 0) {
+						$("#msg_content_html").hide();
+						load_data();
+					} else {
+
+						alert(data.msg);
+					}
+				});
+
+	}
+</script> -->

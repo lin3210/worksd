@@ -1,0 +1,323 @@
+
+<style>
+    .col-md-0{
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px
+    }
+    .col-md-0{
+        float: left
+    }
+    a:hover {text-decoration: none;}
+</style>
+
+<div  class="container">
+    <!-- ，头导向 -->
+	 <div class="crumbs"> 
+	    <ul id="breadcrumbs" class="breadcrumb">
+	      <li>
+	         <i class="fa fa-home"></i>
+	         <a href=""></a>
+	      </li>
+	      <li class="current">
+	        <a href="" title="" id="aa">
+	        		老用户逾期统计
+	        </a>
+	      </li>
+	    </ul>
+	  </div>
+	  
+	  <div class="widget-content">
+      <div>
+         <input type="hidden" id="cupage" value="1"/>
+         <input type="hidden" id="total" value="1"/>
+          <input type="hidden" id="starTime" value=""/>
+          <input type="hidden" id="endTime" value=""/>
+      </div>
+      </div>
+      
+    <!-- ，搜索区域 -->
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder">
+                        </i>
+                        	查询选择
+                    </h4>
+                </div>
+                <div class="widget-content">
+                    <div class="form-group">
+                        <label class="col-md-0 control-label" style="padding-top:5px;">
+                        			日期:
+                        </label>
+                        <div class="col-md-2">
+                            <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                        </div>
+
+                        <div class="col-md-4" style="width:150px;">
+                            <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                <option value="1">
+                               			按月
+                               	</option>
+                                <option value="0">
+                                	按日
+                                </option>
+                                 
+                            </select>
+                            <input type="hidden" id="recode">
+                        </div>
+                      <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+                      		查询
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ，数据区域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder"></i>
+                        推广统计列表
+                    </h4>
+                   
+                </div>
+                <div class="widget-content">
+                    <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+                       <thead>
+                        <tr style="text-align:center">
+                            <th style=" line-height:130px; font-weight:bold; font-size:16px;"  height="110px" id="gg"  rowspan="3">
+                            				时    间
+                            </th>
+            				<th style=" line-height:130px; font-weight:bold; font-size:14px;"  height="110px"  id="gg"  rowspan="3">
+                           				还款数
+                           </th>
+                           <th style=" line-height:130px; font-weight:bold; font-size:14px;"  height="110px" id="gg"  rowspan="3">
+                           				逾期数
+                           </th>
+                            <th style=" line-height:130px; font-weight:bold; font-size:14px;"  height="110px"  id="gg"  rowspan="3">
+                            			催回数
+                            </th>
+                            <th style=" line-height:130px; font-weight:bold; font-size:14px;"  height="110px" id="gg"  rowspan="3">
+                            		        未还数
+                            </th>
+                        	<th style=" line-height:130px; font-weight:bold; font-size:14px;"  height="110px" id="gg"  rowspan="3">
+                           				逾期率
+                           </th>
+                            <th style=" line-height:130px; font-weight:bold; font-size:14px;"  height="110px"  id="gg"  rowspan="3">
+                            			催回率
+                            </th>
+                            <th style=" line-height:130px; font-weight:bold; font-size:14px;"  height="110px" id="gg"  rowspan="3">
+                            		        未还率
+                            </th>
+        			  		<th style=" text-align:center; font-weight:bold; font-size:20px;"  height="50px" id="gg"  colspan="7">
+        			  					新用户
+				            </th>
+        			  		<th style=" text-align:center; font-weight:bold; font-size:20px;"  height="50px" colspan="7">
+        			  					老用户                            
+				            </th>
+                        </tr>
+                        <tr style="text-align:center">
+			               
+			                <th  style=" font-size:14px; font-weight:bold; text-align:center;" height="30px" rowspan="2" >
+				                                                        逾期率
+				            </th>
+                    		<th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" rowspan="2">
+				                                                         未还率
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;" height="30px"  colspan="5">
+				                                                        逾期未还数
+				            </th>
+				                                                        
+                            <th  style=" font-size:14px; font-weight:bold; text-align:center;" height="30px" rowspan="2">
+				                                                        逾期率
+				            </th>
+                    		<th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" rowspan="2" >
+				                                                         未还率
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;" height="30px"  colspan="5">
+				                                                        逾期未还数
+				            </th>
+			            </tr>
+			            <tr style="text-align:center"> 
+			          
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+                                         1-3天
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+                           				3-7天
+				            </th>
+	               		   <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+	                                   7-14天
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+	                                   14-30天
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+				                                                        大于30天
+				            </th> 
+				                
+                            <!-- 老用户 -->
+			                <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+                            1-3天
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+			              				3-7天
+				            </th>
+			      		   <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+			                          7-14天
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+			                          14-30天
+				            </th>
+				            <th  style=" font-size:14px; font-weight:bold; text-align:center;"  height="30px" colspan="1">
+				                                                        大于30天
+				            </th> 
+			            </tr>
+                       </thead>
+                       
+                       <!--d 表格数据区域-->
+                       <tbody  id="load_data"></tbody>
+
+                    </table>
+
+
+                    <!-- ，表格下面信息-->
+                    <div class="row">
+                        <div class="dataTables_footer clearfix">
+                            <div class="col-md-6">
+                                <div class="dataTables_info" id="DataTables_Table_0_info">
+                                   		共
+                                    <font id="totalrows"></font>
+                                    	条记录，每页
+                                    <font id="numperpage"></font>
+                                    	条，当前第
+                                    <font id="currentpage"></font>
+                                    /
+                                    <font id="totalpages"></font>
+                                    	页
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+		                        <div class="dataTables_paginate paging_bootstrap" id="datatable">
+		
+		                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    load_data();
+    function load_data() {
+        var recode_ =$("#recode").val();
+        var tempsele=$("#tempselect").val();
+        var tempval=$("#tempVelue").val();
+        var starTime=$("#starTime").val();
+        var endTime=$("#endTime").val();
+        var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+        var formurl = "/servlet/current/AccountShenheAction?function=GetyhyuqlrtongjAccount";
+
+        loadGetServer(formurl,para,function(data){
+            //console.log(data)
+            $("#load_data").html("");
+            var list = data.list.data;
+            var html_="";
+			
+            if((list.length-1)>0) {
+            	
+            	var i= list.length-1;
+                html_ +="<tr>"
+                    + "<td>"+list[i].riqi+"</td>"
+                    + "<td>"+list[i].tjdhkzs+"</td>"
+                    + "<td>"+list[i].tjyuqzs+"</td>"
+	        		+ "<td>"+list[i].tjyuqyhzs+"</td>"
+	                + "<td>"+list[i].tjyuqwhzs+"</td>"
+	                + "<td>"+list[i].tjyuql+"</td>"
+	                + "<td>"+list[i].tjyuqyhl+"</td>"
+	                + "<td>"+list[i].tjyuqwhl+"</td>"
+                    
+                    + "<td>"+list[i].tjnewyuql+"</td>"
+                    + "<td>"+list[i].tjnewyuqwhl+"</td>"
+            		+ "<td>"+list[i].tjnewyuqwhl0+"</td>"
+					+ "<td>"+list[i].tjnewyuqwhl1+"</td>"
+					+ "<td>"+list[i].tjnewyuqwhl2+"</td>"
+					+ "<td>"+list[i].tjnewyuqwhl3+"</td>"
+	                + "<td>"+list[i].tjnewyuqwhl4+"</td>"
+	                
+	                + "<td>"+list[i].tjoldyuql+"</td>"
+	                + "<td>"+list[i].tjoldyuqwhl+"</td>"
+	        		+ "<td>"+list[i].tjoldyuqwhl0+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl1+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl2+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl3+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl4+"</td>"
+
+                    + "</tr>";
+            }
+            
+            for(var i=0; i< list.length-1;i++) {
+                html_ +="<tr>"
+                    + "<td>"+list[i].riqi+"</td>"
+                    + "<td>"+list[i].tjdhkzs+"</td>"
+                    + "<td>"+list[i].tjyuqzs+"</td>"
+	        		+ "<td>"+list[i].tjyuqyhzs+"</td>"
+	                + "<td>"+list[i].tjyuqwhzs+"</td>"
+	                + "<td>"+list[i].tjyuql+"</td>"
+	                + "<td>"+list[i].tjyuqyhl+"</td>"
+	                + "<td>"+list[i].tjyuqwhl+"</td>"
+                    
+                    + "<td>"+list[i].tjnewyuql+"</td>"
+                    + "<td>"+list[i].tjnewyuqwhl+"</td>"
+            		+ "<td>"+list[i].tjnewyuqwhl0+"</td>"
+					+ "<td>"+list[i].tjnewyuqwhl1+"</td>"
+					+ "<td>"+list[i].tjnewyuqwhl2+"</td>"
+					+ "<td>"+list[i].tjnewyuqwhl3+"</td>"
+	                + "<td>"+list[i].tjnewyuqwhl4+"</td>"
+	                
+	                + "<td>"+list[i].tjoldyuql+"</td>"
+	                + "<td>"+list[i].tjoldyuqwhl+"</td>"
+	        		+ "<td>"+list[i].tjoldyuqwhl0+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl1+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl2+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl3+"</td>"
+					+ "<td>"+list[i].tjoldyuqwhl4+"</td>"
+
+                    + "</tr>";
+            }
+
+            $("#load_data").append(html_);
+            $("#tempselect").val(data.temp);
+            $("#tempVelue").val(data.tempvalu);
+            page_value(data);
+            page_data();
+            $("#btn-load").button("reset");
+        })
+
+    }
+    
+    $("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+    
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

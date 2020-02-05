@@ -1,0 +1,251 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                               Danh sách thẩm định thống kê
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetShenheAccountDay"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1" id="dd">
+                                      Họ tên người thẩm định
+                                      </option>
+                                      <option value="2" id="ee">
+                                        Số ĐTDĐ
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                             <label class="col-md-0 control-label" style="padding-top:5px;" id="fff">
+		                                             Thời gian thống kê:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                    Tìm kiếm
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+			               
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="ff">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                 Danh sách thẩm định được thống kê
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;" id="gg">
+                                         ID 
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="hh">
+                                         Name
+                                    </th>
+                                    <th colspan="8" style=" font-size:14px; font-weight:bold;" id="jj">
+                                         Today(Có thể tìm kiếm thời gian)
+                                    </th>
+                                    
+                                    
+		                      </tr>
+                              <tr  style="text-align:center">
+
+                                    <th id="mmm">
+                                    Số lượng đơn xử lí
+                                    </th>
+                                    
+                                    <th id="uuu">
+                                    Số lượng đơn trả về
+                                    </th>
+                                    <th id="ww">
+                                    Số lượng đơn đã trả và lên lại
+                                    </th>
+                                    <th id="xx">
+                                    Tỉ lệ trả về
+                                    </th>
+                                     <th id="xx">
+                                    Số lượng đơn từ chối
+                                     </th>
+                                     <th id="xx">
+                                    Tỉ lệ từ chối
+                                     </th>
+                                     <th id="xx">
+                                    Số lượng đơn thông qua
+                                     </th>
+                                     <th id="xx">
+                                    Tỉ lệ thông qua
+                                     </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+/* function changeLan(){
+	document.getElementById("aa").innerHTML = "审核统计列表";
+	document.getElementById("bb").innerHTML = "筛选条件";
+	document.getElementById("cc").innerHTML = "全部";
+	document.getElementById("dd").innerHTML = "审核人姓名";
+	document.getElementById("ee").innerHTML = "手机号码";
+	document.getElementById("fff").innerHTML = "统计时间";
+	document.getElementById("ff").innerHTML = "审核统计列表";
+	document.getElementById("gg").innerHTML = "审核人编号";
+	document.getElementById("hh").innerHTML = "审核人姓名";
+	document.getElementById("ii").innerHTML = "手机号码";
+	document.getElementById("jj").innerHTML = "当天笔数统计";
+	document.getElementById("kk").innerHTML = "总笔数统计";
+	document.getElementById("mmm").innerHTML = "实际总人数";
+	document.getElementById("uuu").innerHTML = "三审通过放款笔数";
+	document.getElementById("ww").innerHTML = "逾期比例";
+	document.getElementById("xx").innerHTML = "逾期（未还）比例";
+} */
+</script>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jrnowCountsjrs =0 ;
+		  var jrnowOneshSBXXCW =0 ;
+		  var jrnowOneshSBXXCWHL =0 ;
+		  var jrnowOneshSB = 0;
+		  var jrnowtwotgfk = 0;
+		  var dhbl = 0;
+		  var jjbl = 0;
+		  var tgbl = 0;
+		  
+		  for(var i=0;i<list.length;i++)
+		  {	
+		  	    var ystgbl =0;
+		  	    if(list[i].one != "0"){
+		  			var ystgbl = parseInt((parseInt(list[i].one) - parseInt(list[i].oneSB))*100/parseInt(list[i].one));
+				}
+				var sstg = parseInt(list[i].nowThreesh) - parseInt(list[i].nowThreeshSB) ;
+				html_ += "<tr><td>BPTD"+list[i].userid+"</td><td>"+list[i].userName+"</td><td><span class='label label-info'>"+list[i].nowCountsjrs+"</span></td><td>"+list[i].nowOneshSBXXCW+"</td><td>"+list[i].oneSB+"</td><td>"+list[i].yqbl+"%"+"</td><td>"+list[i].nowOneshSB+"</td><td>"+list[i].yqwhbl+"%"+"</td><td>"+list[i].nowtwotgfk+"</td><td>"+list[i].nowCount+"%"+"</td>";
+				html_ +="</tr>";
+		   
+		   jrnowCountsjrs += list[i].nowCountsjrs;
+		   jrnowOneshSBXXCW += list[i].nowOneshSBXXCW;
+		   jrnowOneshSBXXCWHL += list[i].oneSB;
+		   jrnowOneshSB += list[i].nowOneshSB;
+		   jrnowtwotgfk += list[i].nowtwotgfk;
+		   
+		   }
+		   if(jrnowCountsjrs != 0){
+			  dhbl = parseInt(jrnowOneshSBXXCW * 100 / jrnowCountsjrs) ;
+			  jjbl = parseInt(jrnowOneshSB * 100 / jrnowCountsjrs) ;
+			  tgbl = parseInt(jrnowtwotgfk * 100 / jrnowCountsjrs) ;
+		   }
+		   html_ += "<tr><td>Total</td><td>Total</td><td><span class='label label-info'>"+jrnowCountsjrs+"</span></td><td>"+jrnowOneshSBXXCW+"</td><td>"+jrnowOneshSBXXCWHL+"</td><td>"+dhbl+"%"+"</td><td>"+jrnowOneshSB+"</td><td>"+jjbl+"%"+"</td><td>"+jrnowtwotgfk+"</td><td>"+tgbl+"%"+"</td>";
+		   html_ +="</tr>";
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

@@ -1,0 +1,19 @@
+package com.task;
+
+import java.util.Date;
+import java.util.List;
+
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.JdbcTemplate;
+import com.thinkive.base.util.DateHelper;
+
+public class Test {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+	}
+	
+}

@@ -1,0 +1,548 @@
+
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               借款逾期列表
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        筛选条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetYqList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        全部
+                                      </option>
+                                      <option value="1">
+                                      用户编号
+                                      </option>
+                                      <option value="2">
+                                        真实姓名
+                                      </option>
+                                      <option value="3">
+                                        手机号码
+                                      </option>
+                                      <option value="4">
+                                        催收姓名
+                                      </option>
+                                      <option value="5">
+                                        催收编号
+                                      </option>
+                                      <option value="6">
+                                        部分还款
+                                      </option>
+                                      <option value="7">
+                                        延期还款
+                                      </option>
+                                      <option value="8">
+                                        被禁用的单
+                                      </option>
+               
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="请输入查询条件" >
+		                      </div>
+		                      
+		                      <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                            还款时间:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                             <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              还款状态:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="hkst">
+                                  <option value="0">
+                                    --请选择--
+                                  </option>
+                                  <option value="1">
+                                    已还款
+                                  </option>
+                                  <option value="2">
+                                    未还款
+                                  </option>
+                                </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="加载中...">
+			                                     查 询
+			                  </button>
+			                  
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                 借款逾期列表
+		                  </h4>
+		                 
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          用户名
+		                        </th>
+		                        <th>
+		                          用户姓名
+		                        </th>
+		                        <th>
+		                          手机号码
+		                        </th>
+		                        <th>
+		                          入账银行卡
+		                        </th>
+		                        <th>
+		                          催收人
+		                        </th>
+                                <th>
+		                          逾期天数
+		                        </th>
+                                <th>
+		                          逾期罚费
+		                        </th>
+                                <th>
+		                          借款金额
+		                        </th>
+                                <th>
+		                          需还款金额
+		                        </th>
+                                
+                                <th>
+		                          审核时间
+		                        </th>
+                                <th>
+		                          系统还款时间
+		                        </th>
+                                <th>
+		                          部分还款金额
+		                        </th>
+                                <th>
+		                          已付延期还款金额
+		                        </th>
+                                <th>
+		                          延期还款时间
+		                        </th>
+                                <th>
+		                          停止计息
+		                        </th>
+                                <!-- <th>
+		                          查看个人信息
+		                        </th> -->
+		                        <th>
+		                          最新备注
+		                        </th>
+                                <th>
+		                          还款状态
+		                        </th>
+                                
+                                <th>
+		                          操作
+		                        </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+			
+			<!--二次审核-->
+     <div id="two_content_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 10%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#two_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>催收信息展示</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height: 400px;">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">用户编号：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="user_id" id="user_id" readonly class="form-control required">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">催收人ID：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="cuishouid" id="cuishouid" readonly class="form-control required email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">催收人姓名：</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="cuishouname" id="cuishouname" readonly class="form-control required url">
+                                                </div>
+                                            </div>
+                                            <div class="form-group has-error" id="has-group">
+                                                <label class="col-md-3 control-label">更换的催收人：</label>
+                                                <div class="col-md-9 ">
+                                             <select class="form-control" name="select" id="lab">
+                                                 <!-- <option value="0">请选择</option>
+                                                 <option value="12">5012  nguyen duy khiem</option>
+                                                 <option value="27">5027  nguyen thi cam tu</option>                                                  
+                                                 <option value="45">5045  Nguyễn Thanh Nhân</option>
+                                                 <option value="14">5014  NGUYEN THANH BINH</option>
+                                                 <option value="26">5026  NGUYEN THI NGOC ANH</option>
+                                                 <option value="49">5049  Nguyễn Thị Kim Anh </option> 
+                                                 <option value="54">5054  Trần Thành Đạo</option>
+                                                 <option value="59">5059  Phạm Sĩ Cường</option>
+                                                 <option value="62">5062  Hà Văn Hải</option>
+                                                 <option value="63">5063  Võ Hiếu Đạo</option>
+                                                 <option value="64">5064  Lương Chí Bảo</option>
+                                                 <option value="68">5068  Nguyễn&nbsp;Thái&nbsp;Sang</option>
+                                                 <option value="69">5069  Lương&nbsp;Kế&nbsp;Hào</option>
+                                                 
+                                                 
+                                                 <option>-------M2--------M2--------M2-------</option>
+                                                 <option value="23">5023  BUI THI UYEN THAO</option>
+                                                 <option value="25">5025 	NGUYEN THI MAI TRANG</option>
+                                                 <option value="34">5034  Vo An Phuoc</option>                                               
+                                                 
+                                                 <option>-------M3--------M3--------M3-------</option>
+                                                <option value="38">5038  Nguyễn Thị Kim Ngọc</option>                                                 
+                                                <option value="52">5052  Trương Thị Hồng Ngân</option> -->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                          </select>                                     
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="sub_Two()">确定</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="clos_ck()">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+	
+	
+	
+	<!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+<script>
+    function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+    
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	function toThousands(num) {  
+	    var num = (num || 0).toString(), result = '';  
+	    while (num.length > 3) {  
+	        result = ',' + num.slice(-3) + result;  
+	        num = num.slice(0, num.length - 3);  
+	    }  
+	    if (num) { result = num + result; }  
+    return result;  
+}
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0 && tempsele!=6 && tempsele!=7)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("请输入查询数据");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val()};
+	  	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+		        var aa = list[i].sjsh_money.replace(/,/g,"");
+		      
+		      
+		      var bb = list[i].yuq_lx.replace(/,/g,"")
+		        var hkjeje =parseInt(aa)+parseInt(bb);
+		        var hkje = toThousands(hkjeje);
+		        var cellphone = list[i].mobilephone;
+			 	if(cellphone.length > 8){
+			 		cellphone = list[i].mobilephone.substr(0, 3) + "*****" + list[i].mobilephone.substr(8);
+			 	}
+				html_ += "<tr><td>"+list[i].username+"</td><td>"+list[i].realname+"</td><td>"+cellphone+"</td><td>"+list[i].cardno+"</td><td>"+list[i].name+"</td><td>"+list[i].yuq_ts+"</td><td>"+list[i].yuq_lx+"</td><td>"+list[i].sjsh_money+"</td><td>"+hkje+"</td>";
+				
+				html_ +="<td>"+list[i].cl03_time+"</td><td>"+list[i].hk_time+"</td><td>"+list[i].yuq_yhlx+"</td><td>"+list[i].hkfq_lx+"</td><td>"+list[i].hkfq_time+"</td>";
+				
+				
+				if(list[i].tzjx==1){
+					html_ +="<td>已停止计息</td>";
+				}else{
+					html_ +="<td><button class='btn btn-xs btn-success' onclick='tzjx("+list[i].jkid+")'>停止计息</button></td>";
+				}
+				//html_ +="<td><button class='btn btn-xs btn-primary'  onclick='chg_user_load("+list[i].jkid+")'>查看个人信息</button></td>";
+				if(list[i].msg == null)
+					{
+						html_+="<td>没有</td>";
+					}
+					else
+					{
+						html_+="<td>"+list[i].msg+"</td>";
+						
+					}
+				if(list[i].sfyhw==1){
+				   
+				    html_ +="<td><span class='label label-success'>已还</span></td><td><span class='label label-success' >成功回款</span></td>";
+				}else {
+				
+				    html_ +="<td>未还</td><td><button class='btn btn-xs btn-success' onclick='two_ck("+list[i].jkid+")'>更换催收人</button></td>";
+				}
+				html_ +="</tr>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+    function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+   /* <!--读取用户信息--> */
+   function chg_user_load(id)
+   {
+	     $("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/user_chenggongcuishou.html?record_id="+id);
+   }
+   /*  <!-------二次审核-------> */
+  function two_ck(reid)
+  {
+	  get_Detail(reid);
+  }
+  
+
+	/*  <!--查询二次审核的数据--> */
+	/*  alert("请输入查询数据");
+						
+	alert("rec.userid"+rec.userid);	 */	
+	function get_Detail(reid) {
+		
+		$("#lab").val(0);
+		var para = {
+			recid : reid
+		};
+		loadGetServer("/servlet/current/JBDcms3Action?function=GetCuishouAj",para,function(data) {
+					if (data.error > 0) {
+						$("#two_content_html").show();
+						
+						 var rec=data.jkinfo;
+										 
+						 var csidlist = data.csidlist;						 							 						
+						var html_="";
+						for (var i = 0; i < csidlist.length; i++) {
+							console.log(csidlist[i].cuishouid);
+							/* html_ +='<option value="'+ csidlist[i].cuishouid +'">'+ csidlist[i].cuishouid+ '</option>'; */
+							
+							html_ +="<option value='"+csidlist[i].cuishouid+"'>"+csidlist[i].cuishouid+"-"+csidlist[i].name+"</option>";
+							/* console.log(html_); */
+						}
+											
+						$("#lab").html('').append(html_);
+						$("#user_id").val(rec.userid);
+						$("#cuishouid").val(rec.cuishou_id);
+						$("#cuishouname").val(rec.name);
+						$("#reco_id").val(reid);
+					} else {
+						alert(data.msg);
+						load_data();
+					}
+				})
+	}
+
+	//点击事件 select使用change
+	/* $('#lab').change(function() {
+		var text = $('#lab').val();
+		alert(text);		
+	}); */
+
+	/*  <!--关闭窗口--> */
+	function clos_ck() {
+		$('#two_content_html').hide();
+		load_data();
+
+	}
+
+	/* <!--提交二次审核结果--> */
+	function sub_Two() {
+
+		var jine_ = $("#lab").val();
+		/* var cuishouid = $("#cuishouid").val(); */
+		if (jine_ == 0) {
+			alert("请选择催收人！");		
+		}
+		var rec_id_ = $("#reco_id").val();
+		var user_id = $("#user_id").val();
+		var para = {
+			rec_id : rec_id_,
+			user_id : user_id,
+			csid : jine_
+		};
+		loadGetServer("/servlet/current/JBDcms3Action?function=TJCuishou",
+				para, function(data) {
+					if (data.error > 0) {
+						$("#two_content_html").hide();
+						load_data();
+					} else {
+						alert(data.msg);
+					}
+				});
+	}
+
+	/*  <!--逾期短信--> */
+	function send_yuq(userid, recorid) {
+		var para = {
+			"userid" : userid,
+			"recorid" : recorid
+		};
+		loadGetServer("/servlet/current/JBDcms2Action?function=getSendCuiS",
+				para, function(data) {
+					alert(data.msg);
+				});
+	}
+	function tzjx(jkId) {
+		var para = {
+			jkid : jkId
+		};
+		loadGetServer("/servlet/current/JBDcms3Action?function=OfflineTZJX",
+				para, function(data) {
+					if (data.error < 0) {
+
+						alert(data.msg);
+					}
+				});
+		load_data();
+	}
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

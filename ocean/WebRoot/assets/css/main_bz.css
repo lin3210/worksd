@@ -1,0 +1,76 @@
+
+.ribbon-wrapper {
+	width:85px;
+	height:88px;
+	overflow:hidden;
+	position:absolute;
+	top:-3px
+}
+.ribbon-wrapper.ribbon-top-right {
+	right:-3px
+}
+.ribbon-wrapper.ribbon-top-right .ribbon {
+	-webkit-transform:rotate(45deg);
+	-moz-transform:rotate(45deg);
+	-ms-transform:rotate(45deg);
+	-o-transform:rotate(45deg);
+	left:-5px;
+	top:15px
+}
+.ribbon-wrapper.ribbon-top-left {
+	left:-3px
+}
+.ribbon-wrapper.ribbon-top-left .ribbon {
+	-webkit-transform:rotate(-45deg);
+	-moz-transform:rotate(-45deg);
+	-ms-transform:rotate(-45deg);
+	-o-transform:rotate(-45deg);
+	left:-29px;
+	top:15px
+}
+.ribbon-wrapper .ribbon {
+	font-size:11px;
+	font-weight:600;
+	color:#fff;
+	text-align:center;
+	position:relative;
+	padding:7px 0;
+	width:120px
+}
+.ribbon-wrapper .ribbon:before,.ribbon-wrapper .ribbon:after {
+	content:"";
+	border-left:3px solid transparent;
+	border-right:3px solid transparent;
+	position:absolute;
+	bottom:-3px
+}
+.ribbon-wrapper .ribbon:before {
+	left:0
+}
+.ribbon-wrapper .ribbon:after {
+	right:0
+}
+.ribbon-wrapper .ribbon.red {
+	background-color:#e25856
+}
+.ribbon-wrapper .ribbon.red:before,.ribbon-wrapper .ribbon.red:after {
+	border-top:3px solid #b3211f
+}
+.ribbon-wrapper .ribbon.blue {
+	background-color:#54728c;
+}
+.ribbon-wrapper .ribbon.blue:before,.ribbon-wrapper .ribbon.blue:after {
+	border-top:3px solid #2e3e4c
+}
+.ribbon-wrapper .ribbon.green {
+	background-color:#94b86e
+}
+.ribbon-wrapper .ribbon.green:before,.ribbon-wrapper .ribbon.green:after {
+	border-top:3px solid #61813f
+}
+.ribbon-wrapper .ribbon.orange {
+	background-color:#f89406
+}
+.ribbon-wrapper .ribbon.orange:before,.ribbon-wrapper .ribbon.orange:after {
+	border-top:3px solid #945904
+}

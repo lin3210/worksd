@@ -1,0 +1,101 @@
+package com.task;
+
+import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import service.encrypt.RSA;
+import service.encrypt.TripleDes;
+import service.util.Base64;
+import service.util.SslConnection;
+import service.util.Strings;
+import service.util.Tools;
+import service.util.Util;
+import service.version2.MsgBean;
+import service.version2.MsgBody;
+
+import com.service.AotuTHLXSHService;
+import com.service.AotuTxService;
+import com.service.AotuZMSHService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.connection.Configure;
+import com.thinkive.timerengine.Task;
+import com.util.TxUtil;
+/**
+ * 自动审核借款
+ * @author Administrator
+ *
+ */
+public class AotuTHLXSHTask implements Task
+{
+
+	private static Logger logger = Logger.getLogger(AotuTHLXSHTask.class);
+	private static AotuTHLXSHService aotuTHLXSHService = new AotuTHLXSHService();
+	public void execute() 
+	{
+		//所有正在审核的借款记录
+		List<DataRow> list = aotuTHLXSHService.getAllZMSHList();
+		for (DataRow dataRow : list) 
+		{
+			try {				
+			
+				String userid =	dataRow.getString("userid");//借款用户id
+			    String jkid = dataRow.getString("jkid"); //借款id ; 
+				String phone1 = dataRow.getString("contactphone").replaceAll(" ", "").replaceAll("-", ""); //联系人01手机号
+				String phone2 = dataRow.getString("contactphone02").replaceAll(" ", "").replaceAll("-", ""); //联系人02手机号
+			    //根据用户id 得到联系人的通话条数
+				int thts01 = aotuTHLXSHService.getLxThts(userid ,phone1);
+				int thts02 = aotuTHLXSHService.getLxThts(userid ,phone2);
+				if(thts01 <25 || thts02< 25){
+			      
+					//更新借款项目
+			    	Date  date = new Date();
+					Calendar calendar =Calendar.getInstance();
+					SimpleDateFormat fmtrq  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
+			 		DataRow row = new DataRow() ;
+					row.set("id", jkid);
+					row.set("cl_status","3");
+					row.set("cl_yj","提供的亲属朋友联系人通话记录次数过少，建议更换联系人！。");	
+					row.set("cl_ren",161);				
+					row.set("cl_time",fmtrq.format(calendar.getTime()));
+					aotuTHLXSHService.updateUserJk(row);
+					
+					//更新用户信息（将用户联系人状态打回）
+					DataRow row2 = new DataRow() ;
+					row2.set("id", userid );
+					row2.set("isLianxi",0);
+					aotuTHLXSHService.updateUserInfo(row2);
+			     	//更新消息	
+					DataRow row3 =  new DataRow();	
+				    row3.set("userid", userid);
+				    row3.set("title", "审核通知") ;
+				    row3.set("neirong" ,"信息审核不通过： 提供的亲属朋友联系人通话记录次数过少，建议更换联系人！。");
+				    row3.set("fb_time", new Date());
+				    aotuTHLXSHService.insertUserMsg(row3);
+				}
+				
+			} catch (Exception e) {
+				
+				logger.error(e);
+			}
+		}
+		
+	
+	}
+    
+	public static void main(String[] args) 
+	{
+		String str = " 13543281052"; 
+		String str2 = str.replaceAll(" ", "").replaceAll("-", ""); 
+		System.out.println(str2); 
+
+						
+	}
+	
+	
+}

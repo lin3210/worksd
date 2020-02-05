@@ -1,0 +1,611 @@
+package com.task;
+
+import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import service.encrypt.RSA;
+import service.encrypt.TripleDes;
+import service.util.Base64;
+import service.util.SslConnection;
+import service.util.Strings;
+import service.util.Tools;
+import service.util.Util;
+import service.version2.MsgBean;
+import service.version2.MsgBody;
+
+import com.alibaba.fastjson.JSON;
+import com.service.AotuTxService;
+import com.service.AotuZDSHALLService;
+import com.service.AotuZDSHService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.connection.Configure;
+import com.thinkive.timerengine.Task;
+import com.util.PartnerRequestDemo;
+import com.util.TxUtil;
+import com.util.ZmxyGSUtils;
+/**
+ * 自动审核借款
+ * @author Administrator
+ *
+ */
+public class AotuZDSHALLTask implements Task
+{
+
+	private static Logger logger = Logger.getLogger(AotuZDSHALLTask.class);
+	private static AotuZDSHALLService aotuZDSHAllService = new AotuZDSHALLService();
+	public void execute() 
+	{
+		//查询所有待审核借款项目
+		List<DataRow> list = aotuZDSHAllService.getAllSHList();
+			
+		for (DataRow dataRow : list) 
+		{
+		  try {
+			String userid =	dataRow.getString("userid");//借款用户id
+		    String jkid = dataRow.getString("jkid"); //借款id ;
+		    
+		  //判断该用户是否为黑户
+			String heihu_zt = aotuZDSHAllService.getUserZt(userid);
+		
+		
+				 if(heihu_zt.equals("1")){
+				    	//更新借款项目
+					 logger.info("黑名单用户");
+				 		DataRow row = new DataRow() ;
+						row.set("id", jkid);
+						row.set("cl_status","3");
+						row.set("cl_yj","综合评分不足");	
+						row.set("cl_ren",161);				
+						row.set("cl_time",new Date());
+						aotuZDSHAllService.updateUserJk(row);
+				     	//更新消息	
+						DataRow row3 =  new DataRow();	
+					    row3.set("userid", userid);
+					    row3.set("title", "审核通知") ;
+					    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+					    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+					    row3.set("fb_time", new Date());
+					    aotuZDSHAllService.insertUserMsg(row3);
+		
+			     	
+			}else {			
+				
+				//判断该用户是否有成功借款记录
+				int successfulLoanCount =aotuZDSHAllService.getSuccessfulLoanCount(userid);//成功借款记录
+				if(successfulLoanCount >0){
+					logger.info("成功借款用户");
+					//直接到第二步审核
+					DataRow row = new DataRow() ;
+					row.set("id", jkid);
+					row.set("cl_status",1);
+					row.set("cl_yj","审核通过");	
+					row.set("cl_ren",161);				
+					row.set("cl_time",new Date());
+					aotuZDSHAllService.updateUserJk(row);	
+					
+					 DataRow row3 =  new DataRow();	
+					    row3.set("userid", userid);
+					    row3.set("title", "审核通知") ;
+					    row3.set("neirong" ,"初审审核通过，请耐心等待！");
+					    row3.set("fb_time", new Date());
+					    aotuZDSHAllService.insertUserMsg(row3);
+				
+				 }else{
+						
+						//判断芝麻分是否大于580
+						int zm_score = aotuZDSHAllService.getZmscore(userid);
+						if(zm_score <585){
+							 logger.info("芝麻分小于585的用户");
+							DataRow row = new DataRow() ;
+							row.set("id", jkid);
+							row.set("cl_status","3");
+							row.set("cl_yj","综合评分不足。");	
+							row.set("cl_ren",161);				
+							row.set("cl_time",new Date());
+							aotuZDSHAllService.updateUserJk(row);
+			
+					     	//更新消息	
+							DataRow row3 =  new DataRow();	
+						    row3.set("userid", userid);
+						    row3.set("title", "审核通知") ;
+						    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+						    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+						    row3.set("fb_time", new Date());
+						    aotuZDSHAllService.insertUserMsg(row3);										
+						  }else {
+							  //判断该用户通话记录是否 大于800 条
+							  int tonghuajilu  = aotuZDSHAllService.getTonghuats(userid);
+							    if(tonghuajilu < 800){
+							    	
+							    	 logger.info("通话记录少于800条的用户");
+								    //根据用户id 查询出用户的通话记录条数
+							    	//更新借款项目
+					
+							 		DataRow row = new DataRow() ;
+									row.set("id", jkid);
+									row.set("cl_status","3");
+									row.set("cl_yj","通话记录条数过少。");	
+									row.set("cl_ren",161);				
+									row.set("cl_time",new Date());
+									aotuZDSHAllService.updateUserJk(row);
+							
+							     	//更新消息	
+									DataRow row3 =  new DataRow();	
+								    row3.set("userid", userid);
+								    row3.set("title", "审核通知") ;
+								    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+								    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+								    row3.set("fb_time", new Date());
+								    aotuZDSHAllService.insertUserMsg(row3);
+								    
+							   }else {
+								   //判断联系人通话条数是否大于25 
+								   DataRow  dataRow3 =aotuZDSHAllService.getAllZMSHList(userid); 
+									String phone1 = dataRow3.getString("contactphone").replaceAll(" ", "").replaceAll("-", ""); //联系人01手机号
+									String phone2 = dataRow3.getString("contactphone02").replaceAll(" ", "").replaceAll("-", ""); //联系人02手机号
+								    //根据用户id 得到联系人的通话条数
+									 int thts01 =  aotuZDSHAllService.getLxThts(userid ,phone1);
+									 int thts02 =  aotuZDSHAllService.getLxThts(userid ,phone2);
+									
+									 if(thts01 <25 || thts02< 25){
+										 logger.info("联系人通话记录较少的用户");
+										//更新借款项目
+								    	Date  date = new Date();
+										Calendar calendar =Calendar.getInstance();
+										SimpleDateFormat fmtrq  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
+								 		DataRow row = new DataRow() ;
+										row.set("id", jkid);
+										row.set("cl_status","3");
+										row.set("cl_yj","提供的亲属朋友联系人通话记录次数过少，建议更换联系人！。");	
+										row.set("cl_ren",161);				
+										row.set("cl_time",fmtrq.format(calendar.getTime()));
+										 aotuZDSHAllService.updateUserJk(row);
+										
+										//更新用户信息（将用户联系人状态打回）
+										DataRow row2 = new DataRow() ;
+										row2.set("id", userid );
+										row2.set("isLianxi",0);
+										 aotuZDSHAllService.updateUserInfo(row2);
+								     	//更新消息	
+										DataRow row3 =  new DataRow();	
+									    row3.set("userid", userid);
+									    row3.set("title", "审核通知") ;
+									    row3.set("neirong" ,"信息审核不通过： 提供的亲属朋友联系人通话记录次数过少，建议更换联系人！。");
+									    row3.set("fb_time", new Date());
+									    aotuZDSHAllService.insertUserMsg(row3);
+									 }else {
+										 
+										//判断芝麻是否存在未还清的状态
+										String  yqmx = "false" ; //是否存在逾期未还清的情况 
+										DataRow  zmxyInfo = aotuZDSHAllService.getUserZmfs(userid);
+										if(zmxyInfo !=null )
+										{		
+								 			ZmxyGSUtils  result = new ZmxyGSUtils() ;
+								 			boolean jianquan =result.testZhimaAuthInfoAuthquery(zmxyInfo.getString("open_id"),
+								 					zmxyInfo.getString("app_id"));						 			
+								 			 if(jianquan)
+								 			 {
+								 				String zmyqjl =result.testZhimaCreditWatchlistiiGet(zmxyInfo.getString("app_id"),
+								 	 					zmxyInfo.getString("open_id"));
+			
+								 					    //解析芝麻验证结果
+								 				com.alibaba.fastjson.JSONObject reqObject1 = (com.alibaba.fastjson.JSONObject)JSON.parse(zmyqjl);          
+								 			            String is_matched = reqObject1.getString("is_matched");
+								 			            if(is_matched.equals("true"))
+								 			             {
+								 			            	//得到逾期明细       
+								 			            	String yq_detail =reqObject1.getString("details");
+								 			            	com.alibaba.fastjson.JSONArray details = reqObject1.getJSONArray("details");            
+								 			            	com.alibaba.fastjson.JSONObject detail=(com.alibaba.fastjson.JSONObject) details.get(0);
+								 			            	  yqmx = detail.getString("settlement");//是否还清逾期金额
+								 			              }
+								 				 
+								 				 
+								 			  }
+										 }
+										
+										if(yqmx.equals("true")){ // 表示存在逾期未还清的情况
+											 logger.info("芝麻存在逾期 未还清用户"); 
+											DataRow row = new DataRow() ;
+											row.set("id", jkid);
+											row.set("cl_status","3");
+											row.set("cl_yj","存在逾期情况未还清。");	
+											row.set("cl_ren",161);				
+											row.set("cl_time",new Date());
+											aotuZDSHAllService.updateUserJk(row);
+																					
+									     	//更新消息	
+											DataRow row3 =  new DataRow();	
+										    row3.set("userid", userid);
+										    row3.set("title", "审核通知") ;
+										    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+										    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+										    row3.set("fb_time", new Date());
+										    aotuZDSHAllService.insertUserMsg(row3);			
+										}else {
+											//借款平台数
+											//查询有盾 扫描 和活体的数据		
+									 		DataRow personYdInfo = aotuZDSHAllService.getPersonYdInfo(userid);	 		
+									 		//有盾扫描反馈信息
+									 		String ydInfoL ="" ;
+									 		PartnerRequestDemo ydInfo =new  PartnerRequestDemo();
+									 		String loanplatformcount = "0" ;
+									        double numberPlatforms = 0;
+									        Boolean ifDishonesty =false ;
+									 	    com.alibaba.fastjson.JSONObject user_detail = null  ;  //有盾反馈的个人信息
+									 	    com.alibaba.fastjson.JSONArray loan_industrys =null ;  //有盾反馈的行业借贷情况
+									 	    com.alibaba.fastjson.JSONArray devices =null ;//有盾个人设备使用信息
+									 	    com.alibaba.fastjson.JSONArray user_features =null ;//有盾个人设备使用信息
+									 	  
+									 		ydInfoL =ydInfo.getYdfkInfo(personYdInfo.getString("idnumber"), personYdInfo.getString("orderid"));
+									 	   if(ydInfoL.equals("fail")){		   
+									 		  ydInfoL =ydInfo.getYdfkInfo(personYdInfo.getString("idnumber"), personYdInfo.getString("orderid")); 		   
+									 	   }
+									 		com.alibaba.fastjson.JSONObject reqObject6 = (com.alibaba.fastjson.JSONObject) JSON.parse(ydInfoL);
+										   if(reqObject6.containsKey("header"))
+										   {	
+											 String header =reqObject6.getString("header");	
+											//解析消息
+											 com.alibaba.fastjson.JSONObject reqObject7 = (com.alibaba.fastjson.JSONObject) JSON.parse(header);		
+											if(reqObject7.getString("ret_code").equals("000000"))
+											{
+												    //解析数据
+												   String body1 =reqObject6.getString("body");												
+											       com.alibaba.fastjson.JSONObject reqObject2 = (com.alibaba.fastjson.JSONObject) JSON.parse(body1); 
+													//得到用户的基本信息	  
+											       if(reqObject2.containsKey("user_detail"))
+											       {
+													   user_detail = reqObject2.getJSONObject("user_detail");			   
+													   String user_detail2=reqObject2.getString("user_detail");
+													   com.alibaba.fastjson.JSONObject reqObject8 = (com.alibaba.fastjson.JSONObject) JSON.parse(user_detail2); 
+													   loanplatformcount= reqObject8.getString("loan_platform_count"); //借款平台数
+													  
+											          if(user_detail.containsKey("user_features"))
+											          {
+											        	  
+											        	  user_features =user_detail.getJSONArray("user_features"); //用户特征
+											        	  //遍历 json 集合
+											        	  com.alibaba.fastjson.JSONObject user_feature;
+											        
+																 for (int i = 0; i < user_features.size(); i++) 
+																 {  
+																	 DataRow  taobaosh = new DataRow();
+																	 user_feature =(com.alibaba.fastjson.JSONObject) user_features.get(i); 
+																			 if(user_feature.getString("user_feature_type").equals("12")||
+																					 user_feature.getString("user_feature_type").equals("16")||
+																					 user_feature.getString("user_feature_type").equals("7")||
+																					 user_feature.getString("user_feature_type").equals("6"))
+																			 {
+																				     ifDishonesty =true;
+																				 
+																			 }
+	
+																 }
+											            }
+											       
+											       }
+											       if(reqObject2.containsKey("devices"))
+											        {
+													   //得到用户移动设备使用情况	
+											    	   com.alibaba.fastjson.JSONObject device;
+													   devices = reqObject2.getJSONArray("devices"); 
+														   for (int i = 0; i < devices.size(); i++) 
+														    {  
+															   device = (com.alibaba.fastjson.JSONObject) devices.get(i); 
+															   String device_detail = device.getString("device_detail");														  
+															   com.alibaba.fastjson.JSONObject reqObject12 = (com.alibaba.fastjson.JSONObject) JSON.parse(device_detail); 												 
+															   if(reqObject12.containsKey("app_instalment_count")){
+																      numberPlatforms = numberPlatforms+Double.parseDouble(reqObject12.getString("app_instalment_count"));
+																     }
+														    }
+											        }			
+													
+											    }
+											
+											 } else {
+												
+												 loanplatformcount = personYdInfo.getString("loanplatformcount") ;
+										 		
+										 	  			
+										   }
+										   //根据有盾判断用户借款信息
+										   if(Double.parseDouble(loanplatformcount) > 8) {
+											   //借款平台大于8家 
+											   logger.info("借款平台大于10家用户");
+											   DataRow row = new DataRow() ;
+												row.set("id", jkid);
+												row.set("cl_status","3");
+												row.set("cl_yj","借款平台总数超过10家。");	
+												row.set("cl_ren",161);				
+												row.set("cl_time",new Date());
+												aotuZDSHAllService.updateUserJk(row);
+												
+											
+										     	//更新消息	
+												DataRow row3 =  new DataRow();	
+											    row3.set("userid", userid);
+											    row3.set("title", "审核通知") ;
+											    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+											    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+											    row3.set("fb_time", new Date());
+											    aotuZDSHAllService.insertUserMsg(row3);		
+											   
+										   }else if(ifDishonesty) {
+											   //高风险失信用户
+											   logger.info("高风险失信用户");
+											   DataRow row = new DataRow() ;
+												row.set("id", jkid);
+												row.set("cl_status","3");
+												row.set("cl_yj","命中高风险失信特征");	
+												row.set("cl_ren",161);				
+												row.set("cl_time",new Date());
+												aotuZDSHAllService.updateUserJk(row);
+												
+											
+										     	//更新消息	
+												DataRow row3 =  new DataRow();	
+											    row3.set("userid", userid);
+											    row3.set("title", "审核通知") ;
+											    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+											    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+											    row3.set("fb_time", new Date());
+											    aotuZDSHAllService.insertUserMsg(row3);	
+											   
+										   }else if(numberPlatforms >28){
+											   //安装平台大于28
+											   logger.info("安装APP大于 28家的记录");
+											   DataRow row = new DataRow() ;
+												row.set("id", jkid);
+												row.set("cl_status","3");
+												row.set("cl_yj","安装借款平台大于28家");	
+												row.set("cl_ren",161);				
+												row.set("cl_time",new Date());
+												aotuZDSHAllService.updateUserJk(row);
+												
+											
+										     	//更新消息	
+												DataRow row3 =  new DataRow();	
+											    row3.set("userid", userid);
+											    row3.set("title", "审核通知") ;
+											    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+											    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+											    row3.set("fb_time", new Date());
+											    aotuZDSHAllService.insertUserMsg(row3);	
+											   
+										   }else {
+											   //信息合适直接跳到第二步
+											   logger.info("条件符合 进入第二步用户");
+											   DataRow row = new DataRow() ;
+												row.set("id", jkid);
+												row.set("cl_status",1);
+												row.set("cl_yj","审核成功");	
+												row.set("cl_ren",161);
+												row.set("jyfk_money","600");	
+												row.set("cl_time",new Date());
+												aotuZDSHAllService.updateUserJk(row);		
+                                               DataRow row3 =  new DataRow();	
+												row3.set("userid", userid);
+											    row3.set("title", "审核通知") ;
+												row3.set("neirong" ,"初审审核通过，请耐心等待！");
+											    row3.set("fb_time", new Date());
+											    aotuZDSHAllService.insertUserMsg(row3);
+											   
+										   }
+										   
+										   
+										}
+										
+									}
+								   
+								 
+							   }
+					  
+				        } 
+				   }
+	
+			}
+		  }catch(Exception e) {
+			  
+			  e.printStackTrace() ;
+		  }
+		}	
+	}
+    
+	public static void main(String[] args) 
+	{
+		
+		//查询所有待审核借款项目
+				List<DataRow> list = aotuZDSHAllService.getAllSHList();
+					
+				for (DataRow dataRow : list) 
+				{
+				  try {
+					String userid =	dataRow.getString("userid");//借款用户id
+				    String jkid = dataRow.getString("jkid"); //借款id ;
+				  
+				    DataRow personYdInfo = aotuZDSHAllService.getPersonYdInfo(userid);	 		
+			 		//有盾扫描反馈信息
+			 		String ydInfoL ="" ;
+			 		PartnerRequestDemo ydInfo =new  PartnerRequestDemo();
+			 		String loanplatformcount = "0" ;
+			        double numberPlatforms = 0;
+			        Boolean ifDishonesty =false ;
+			 	    com.alibaba.fastjson.JSONObject user_detail = null  ;  //有盾反馈的个人信息
+			 	    com.alibaba.fastjson.JSONArray loan_industrys =null ;  //有盾反馈的行业借贷情况
+			 	    com.alibaba.fastjson.JSONArray devices =null ;//有盾个人设备使用信息
+			 	    com.alibaba.fastjson.JSONArray user_features =null ;//有盾个人设备使用信息
+			 	  
+			 		ydInfoL =ydInfo.getYdfkInfo(personYdInfo.getString("idnumber"), personYdInfo.getString("orderid"));
+			 	   if(ydInfoL.equals("fail")){		   
+			 		  ydInfoL =ydInfo.getYdfkInfo(personYdInfo.getString("idnumber"), personYdInfo.getString("orderid")); 		   
+			 	   }
+			 		com.alibaba.fastjson.JSONObject reqObject6 = (com.alibaba.fastjson.JSONObject) JSON.parse(ydInfoL);
+				   if(reqObject6.containsKey("header"))
+				   {	
+					 String header =reqObject6.getString("header");	
+					//解析消息
+					 com.alibaba.fastjson.JSONObject reqObject7 = (com.alibaba.fastjson.JSONObject) JSON.parse(header);		
+					if(reqObject7.getString("ret_code").equals("000000"))
+					{
+						    //解析数据
+						   String body1 =reqObject6.getString("body");												
+					       com.alibaba.fastjson.JSONObject reqObject2 = (com.alibaba.fastjson.JSONObject) JSON.parse(body1); 
+							//得到用户的基本信息	  
+					       if(reqObject2.containsKey("user_detail"))
+					       {
+							   user_detail = reqObject2.getJSONObject("user_detail");			   
+							   String user_detail2=reqObject2.getString("user_detail");
+							   com.alibaba.fastjson.JSONObject reqObject8 = (com.alibaba.fastjson.JSONObject) JSON.parse(user_detail2); 
+							   loanplatformcount= reqObject8.getString("loan_platform_count"); //借款平台数
+							  
+					          if(user_detail.containsKey("user_features"))
+					          {
+					        	  
+					        	  user_features =user_detail.getJSONArray("user_features"); //用户特征
+					        	  //遍历 json 集合
+					        	  com.alibaba.fastjson.JSONObject user_feature;
+					        
+										 for (int i = 0; i < user_features.size(); i++) 
+										 {  
+											 DataRow  taobaosh = new DataRow();
+											 user_feature =(com.alibaba.fastjson.JSONObject) user_features.get(i); 
+													 if(user_feature.getString("user_feature_type").equals("12")||
+															 user_feature.getString("user_feature_type").equals("16")||
+															 user_feature.getString("user_feature_type").equals("7")||
+															 user_feature.getString("user_feature_type").equals("6"))
+													 {
+														     ifDishonesty =true;
+														 
+													 }
+
+										 }
+					            }
+					       
+					       }
+					       if(reqObject2.containsKey("devices"))
+					        {
+							   //得到用户移动设备使用情况	
+					    	   com.alibaba.fastjson.JSONObject device;
+							   devices = reqObject2.getJSONArray("devices"); 
+								   for (int i = 0; i < devices.size(); i++) 
+								    {  
+									   device = (com.alibaba.fastjson.JSONObject) devices.get(i); 
+									   String device_detail = device.getString("device_detail");														  
+									   com.alibaba.fastjson.JSONObject reqObject12 = (com.alibaba.fastjson.JSONObject) JSON.parse(device_detail); 												 
+									   if(reqObject12.containsKey("app_instalment_count")){
+									      numberPlatforms = numberPlatforms+Double.parseDouble(reqObject12.getString("app_instalment_count"));
+									     }
+							    }
+					        }			
+							
+					    }
+					
+					 } else {
+						
+						 loanplatformcount = personYdInfo.getString("loanplatformcount") ;
+				 		
+				 	  			
+				   }
+				   //根据有盾判断用户借款信息
+				   if(Double.parseDouble(loanplatformcount) > 6) {
+					   //借款平台大于8家 
+					   logger.info("借款平台大于6家用户");
+					/*   DataRow row = new DataRow() ;
+						row.set("id", jkid);
+						row.set("cl_status","3");
+						row.set("cl_yj","借款平台总数超过8家。");	
+						row.set("cl_ren",161);				
+						row.set("cl_time",new Date());
+						aotuZDSHAllService.updateUserJk(row);
+						*/
+					
+				     	//更新消息	
+						DataRow row3 =  new DataRow();	
+					    row3.set("userid", userid);
+					    row3.set("title", "审核通知") ;
+					    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+					    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+					    row3.set("fb_time", new Date());
+					    aotuZDSHAllService.insertUserMsg(row3);		
+					   
+				   }else if(ifDishonesty) {
+					   //高风险失信用户
+					   logger.info("高风险失信用户");
+					/*   DataRow row = new DataRow() ;
+						row.set("id", jkid);
+						row.set("cl_status","3");
+						row.set("cl_yj","命中高风险失信特征");	
+						row.set("cl_ren",161);				
+						row.set("cl_time",new Date());
+						aotuZDSHAllService.updateUserJk(row);*/
+						
+					
+				     	//更新消息	
+						DataRow row3 =  new DataRow();	
+					    row3.set("userid", userid);
+					    row3.set("title", "审核通知") ;
+					    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+					    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+					    row3.set("fb_time", new Date());
+					    aotuZDSHAllService.insertUserMsg(row3);	
+					   
+				   }else if(numberPlatforms >25){
+					   //安装平台大于25
+					   logger.info("安装APP大于 25家的记录");
+					/*   DataRow row = new DataRow() ;
+						row.set("id", jkid);
+						row.set("cl_status","3");
+						row.set("cl_yj","安装借款平台大于25家");	
+						row.set("cl_ren",161);				
+						row.set("cl_time",new Date());
+						aotuZDSHAllService.updateUserJk(row);*/
+						
+					
+				     	//更新消息	
+						DataRow row3 =  new DataRow();	
+					    row3.set("userid", userid);
+					    row3.set("title", "审核通知") ;
+					    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+					    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+					    row3.set("fb_time", new Date());
+					    aotuZDSHAllService.insertUserMsg(row3);	
+					   
+				   }else {
+					   //信息合适直接跳到第二步
+					   logger.info("条件符合 进入第二步用户");
+					  /* DataRow row = new DataRow() ;
+						row.set("id", jkid);
+						row.set("cl_status",1);
+						row.set("cl_yj","审核成功");	
+						row.set("cl_ren",161);
+						row.set("jyfk_money","500");	
+						row.set("cl_time",new Date());
+						aotuZDSHAllService.updateUserJk(row);		*/
+                       DataRow row3 =  new DataRow();	
+						row3.set("userid", userid);
+					    row3.set("title", "审核通知") ;
+						row3.set("neirong" ,"初审审核通过，请耐心等待！");
+					    row3.set("fb_time", new Date());
+					    aotuZDSHAllService.insertUserMsg(row3);
+					   
+				   } 
+			
+				
+				  }catch(Exception e) {
+					  
+					  e.printStackTrace() ;
+				  }
+				}
+				
+		
+		
+	}
+	
+	
+}

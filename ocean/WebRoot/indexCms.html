@@ -1,0 +1,843 @@
+	<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Ocean</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+        <link href="font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE]>
+      <link href="fontawesome-4.2.0/css/font-awesome-ie7.min.css" rel="stylesheet" />
+     <![endif]-->
+    <!--[if IE 8]>
+      <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+    <link href="/assets/css/date_css/dateRange.css" rel="stylesheet" type="text/css" />
+   <script language="Javascript">  
+document.oncontextmenu=new Function("event.returnValue=false");  
+document.onselectstart=new Function("event.returnValue=false");  
+</script> 
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="/assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="/plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.tooltip.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.resize.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.time.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.growraf.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/moment.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/daterangepicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/blockui/jquery.blockUI.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/fullcalendar/fullcalendar.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/jquery.noty.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/layouts/top.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/themes/default.js">
+    </script>
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/select2/select2.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/app.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.form-components.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/page.js">
+    </script>
+	<script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/monthPicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/dateRange.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        Plugins.init();
+        FormComponents.init()
+      });
+    </script>
+    <script type="text/javascript" src="/assets/js/custom.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/json.js">
+    </script>
+    
+
+<!-- <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script> -->
+<script type="text/javascript" src="/sdmain/js/highcharts.js"></script>
+
+<link rel="stylesheet" href="/assets/css/spinners.css" type="text/css">
+<style>
+	.card {
+    /*background: white;
+    border: 1px solid #c3c6cf;*/
+    border-radius: 15px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 200px;
+    }
+    .cell {
+    margin: auto;
+    width: 50%;
+    box-sizing: border-box;
+    display: table;
+}
+</style>
+</head>
+<body>
+<!-- 	<div id="ajax_loading_content"style=""><div class="modal-backdrop fade in"></div><div class="bootbox modal fade in"tabindex="-1"role="dialog"aria-hidden="false"style="display: block;"><div class="modal-dialog"style="padding-top: 18%;text-align: center;"><div class=""><div class="cell"><div class="card"><span class="ball-loader">Loading…</span></div></div></div></div></div></div> -->
+	<header class="header navbar navbar-fixed-top" role="banner">
+	<div class="container">
+		<ul class="nav navbar-nav">
+			<li class="nav-toggle">
+				<a href="javascript:void(0);" title="">
+					<i class="icon-reorder">
+              </i>
+				</a>
+			</li>
+		</ul>
+		<a class="navbar-brand" href="indexCms.html">
+			<strong>
+                Hệ thống quản lý(管理系统)
+                          </strong>
+		</a>
+		<a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom" data-original-title="Toggle navigation">
+			<i class="fa fa-reorder">
+          </i>
+		</a>
+		<ul class="nav navbar-nav navbar-left hidden-xs hidden-sm">
+			<li>
+			<a href="/indexCms.html">
+                                               Trang chủ hệ thống(系统主页)
+            </a>
+			</li>
+			<li >
+			<a href="javascript:void(0)" id="cur_date">
+			 
+            </a>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a href="#" class="" id="fullscreen-toggler">
+					<i class="fa fa-arrows-alt">
+              </i>
+				</a>
+			</li>
+			<li class="dropdown" id="menus_click">
+				<a href="#" class="project-switcher-btn dropdown-toggle">
+					<i class="fa fa-th-large">
+              </i>
+					<span>
+                            Menu（菜单）
+              </span>
+				</a>
+			</li>
+			<li class="dropdown user">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  <span class="username" id="user_name_top">
+			    
+              </span>
+				</a>
+				
+			</li>
+		</ul>
+	</div>
+	<div id="project-switcher" class="container project-switcher">
+		<div id="scrollbar">
+			<div class="handle">
+			</div>
+		</div>
+		<div id="frame" >
+			<ul class="project-list" id="top_menu">
+			     <!--  <li data='0'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-user-md"></i></span><span class="title">Người sử dụng(用户管理)</span></a></li>
+			      <li data='1'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-jpy"></i></span><span class="title">Vay(借款管理)</span></a></li>
+			      <li data='2'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-list-alt"></i></span><span class="title">Tài chính(财务管理)</span></a></li>
+			      <li data='3'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-github-alt"></i></span><span class="title">Dịch vụ khách hàng(客服管理)</span></a></li>
+			      <li data='4'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-superscript"></i></span><span class="title">Thống kê(统计管理)</span></a></li>
+			      <li data='5'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-phone-square"></i></span><span class="title">Sau khi vay(贷后管理)</span></a></li>
+			      <li data='6'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-cogs"></i></span><span class="title">Hệ thống(系统管理)</span></a></li>
+			      <li data='7'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-group"></i></span><span class="title">Nhà đầu tư(投资人管理)</span></a></li>
+			      <li data='8'><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-group"></i></span><span class="title">其他</span></a></li>  -->
+			</ul>
+		</div>
+	</div>
+</header>
+<script>
+$("#fullscreen-toggler").on("click",
+	function() {
+	    var n = document.documentElement;
+	    $("body").hasClass("full-screen") ? ($("body").removeClass("full-screen"), $("#fullscreen-toggler").removeClass("active"), document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen()) : ($("body").addClass("full-screen"), $("#fullscreen-toggler").addClass("active"), n.requestFullscreen ? n.requestFullscreen() : n.mozRequestFullScreen ? n.mozRequestFullScreen() : n.webkitRequestFullscreen ? n.webkitRequestFullscreen() : n.msRequestFullscreen && n.msRequestFullscreen())
+});
+$("#user_name_top").click(function(){
+	
+	loadGetServer("/servlet/current/JBDcmsAction?function=CmslogOut",{},function(data){
+		if(data.msg="1")
+		{
+			window.location.href="/login.html";
+		}
+	})
+})
+
+</script>
+	<div id="container">
+		<div id="sidebar" class="sidebar-fixed">
+	<div id="sidebar-content">
+        <ul class="notifications demo-slide-in" style="margin-top: 10px;">
+			<li>
+				<div class="col-left">
+                  <img src="/assets/img/tx.jpg" width="50px" style="border-radius: 50%;" id="img"/>
+				</div>
+				<div class="col-right with-margin" style="margin-left: 60px;margin-top: 5px;">
+				<span class="message">
+                                                      Chào mừng（欢迎您，）<font id="left_user_name"></font>
+                </span>
+				<span class="time">
+                                                      IP:<font id="left_user_ip"></font>
+                </span>
+                <font id="left_user_id" style="display: none;">2</font>
+				</div>
+			</li>
+		</ul>
+		<div class="sidebar-title">
+			<span>
+                                    Menu（菜单）
+            </span>
+		</div>
+		<div id="menus" style="min-height: 400px;">
+		
+	
+		</div>
+		<div class="sidebar-title">
+			<span>
+              
+            </span>
+		</div>
+		<ul class="notifications demo-slide-in" id="message_tongzhi">
+			
+			
+		</ul>
+		<div class="sidebar-widget align-center">
+			<div class="btn-group" data-toggle="buttons" id="theme-switcher">
+				<label class="btn active">
+                <input type="radio" name="theme-switcher" data-theme="bright">
+                <i class="icon-sun">
+                </i>
+                Trong ngày（白天）
+              </label>
+				<label class="btn">
+                <input type="radio" name="theme-switcher" data-theme="dark">
+                <i class="icon-moon">
+                </i>
+                Ban đêm（夜晚）
+                              </label>
+			</div>
+		</div>
+	</div>
+	<div id="divider" class="resizeable">
+	</div>
+</div>
+<input type="hidden" id="current_url_value" />
+
+
+<script>
+	$(function(){
+		show_left_user();
+		load_powermain();
+		
+	});
+	
+	//加载用户一级权限
+	function load_powermain(){
+		 loadGetServer("/servlet/role/PowerAction?function=GetUserPowerMain",{roleid:$("#left_user_id").html()},function(data){
+		 var firstId=0;
+		 
+         if(data!=null)
+	   	    {
+	   	       var list = data;
+	   	       var html = "";
+	   	      
+	   	       for (var i=0;i<list.length;i++) {
+	   	       if(i==0){
+	   	       	firstId=list[i].id;
+	   	       }
+	   	             var id=list[i].id;
+	   	             var powerurl=list[i].powerurl;
+	   	             var powerclass=list[i].powerclass;
+	   	             var powername=list[i].powername;
+	   	        	 html += "<li data='"+id+"'><a href='"+powerurl+"' style='width: 150px;'><span class='image'><i class='"+powerclass+"'></i></span><span class='title'>"+powername+"</span></a></li>";
+	   	       }
+	   	       show_menu(firstId);
+	   	      $("#top_menu").html(html);
+	   	      $("#top_menu li").click(function(){
+		     	 show_menu($(this).attr("data"));
+		         $("#menus_click").click();
+		         $("#top_menu li").removeClass("current");
+		         $(this).addClass("current");
+	           });
+	   	      
+	   	    }
+	   	    
+	   	    //$("#load_data").html($("#loading").html());
+    }); 
+	}
+	
+    $.ajaxSettings.async = false;
+    var userid = null;
+    //判断后台用户是否登录 未登录退回登录界面
+    loadGetServer("/servlet/current/JBDcmsAction?function=iflogin",{},function(data){
+         if(data.err==-1){
+            window.location.href = "/login.html";
+         }
+         userid = data.userid ;
+         
+    }); 
+    var data_ = null;
+	
+   
+	
+	function show_menu(i)
+	{
+	 
+		 html_ = "<ul id='nav' >";	
+		 loadGetServer("/servlet/role/PowerAction?function=GetUserPower",{roleMain:i,roleid:$("#left_user_id").html()},function(data){
+         if(data!=null)
+	   	    {
+	   	       var list = data;
+	   	       var html = "";
+	   	       for (var i=0;i<list.length;i++) {
+	   	       		if(i==1 && list[i].powername == 'bộ phận Thu hồi nợ'){
+	   	       			html_ += "<li ><a href=javascript:void(0) onclick=location_menu_show() ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		else if(i==2 && list[i].powername == 'M(0)(1-3)' ){
+	   	       			html_ += "<li id='yccd2' style='display:none;'><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu_show0()  ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		 else if(i==3 && list[i].powername == 'I' ){
+	   	       			html_ += "<li id='yccd3' style='display:none;'><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		else if(i==4 && list[i].powername == 'M(1)(4-15)' ){
+	   	       			html_ += "<li id='yccd4' style='display:none;'><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu_show1()  ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		 else if(i==5 && list[i].powername == 'I' ){
+	   	       			html_ += "<li id='yccd5' style='display:none;'><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		else if(i==6 && list[i].powername == 'II' ){
+	   	       			html_ += "<li id='yccd6' style='display:none;'><a url='"+list[i].powerurl+"' href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		else if(i==7 && list[i].powername == 'III' ){
+	   	       			html_ += "<li id='yccd7' style='display:none;'><a url='"+list[i].powerurl+"' href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		
+	   	       		else if(i==8 && list[i].powername == 'IV' ){
+	   	       			html_ += "<li id='yccd8' style='display:none;'><a url='"+list[i].powerurl+"' href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		
+	   	       		else if(i==9 && list[i].powername == 'M(2)(16-45)' ){
+	   	       			html_ += "<li id='yccd9' style='display:none;'><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu_show2()  ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		
+	   	       		else if(i==10 && list[i].powername == 'I' ){
+	   	       			html_ += "<li id='yccd10' style='display:none;'><a url='"+list[i].powerurl+"' href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		} 
+	   	       		else if(i==11 && list[i].powername == 'M(3)(>45)' ){
+	   	       			html_ += "<li id='yccd11' style='display:none;'><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu_show3()  ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
+	   	       		
+	   	       		else if(i==12 && list[i].powername == 'I' ){
+	   	       			html_ += "<li id='yccd12' style='display:none;'><a url='"+list[i].powerurl+"' href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		} 
+	   	       		else{
+	   	       			html_ += "<li ><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	      	    }
+	   	       }
+	   	    }
+	   	    });
+	          
+		html_ += "</ul>"
+		
+		$("#menus").html(html_);
+		App.reset();
+	}
+ 	function location_menu_xia(obj)
+	{
+		var b = document.getElementById("yccd");
+	
+	}
+	function location_menu_show()
+	{
+		var b3 = document.getElementById("yccd2");
+		var b5 = document.getElementById("yccd4");
+		var b10 = document.getElementById("yccd9");
+		var b12 = document.getElementById("yccd11");
+		
+       var val3 = b3.style.display;
+       var val5 = b5.style.display;
+       var val10 = b10.style.display;
+       var val12 = b12.style.display;
+        
+		if(val5 == 'none'){
+		 	b3.style.display = 'block'; //显示
+		 	b5.style.display = 'block'; //显示
+		 	b10.style.display = 'block'; //显示
+		 	b12.style.display = 'block'; //显示
+		 	
+    	}else{
+        	b3.style.display = 'none'; //隐藏
+        	b5.style.display = 'none'; //隐藏
+        	b10.style.display = 'none'; //隐藏
+        	b12.style.display = 'none'; //隐藏
+        	
+    	}
+	}
+	 function location_menu_show0()
+	{
+		var b4 = document.getElementById("yccd3");
+		
+        var val4 = b4.style.display;
+        
+		if(val4 == 'none'){
+		 	b4.style.display = 'block'; //显示
+		 	
+    	}else{
+        	b4.style.display = 'none'; //隐藏
+        	
+    	}
+	} 
+	 function location_menu_show1()
+	{
+		var b6 = document.getElementById("yccd5");
+		var b7 = document.getElementById("yccd6");
+		var b8 = document.getElementById("yccd7");
+		var b9 = document.getElementById("yccd8");
+		
+        var val6 = b6.style.display;
+        var val7 = b7.style.display;
+        var val8 = b8.style.display;
+        var val9 = b9.style.display;
+        
+		if(val6 == 'none'){
+		 	b6.style.display = 'block'; //显示
+		 	b7.style.display = 'block'; //显示
+		 	b8.style.display = 'block'; //显示
+		 	b9.style.display = 'block'; //显示
+		 	
+    	}else{
+        	b6.style.display = 'none'; //隐藏
+        	b7.style.display = 'none'; //隐藏
+        	b8.style.display = 'none'; //隐藏
+        	b9.style.display = 'none'; //隐藏
+        	
+    	}
+	}
+	function location_menu_show2()
+	{
+		var b11 = document.getElementById("yccd10");
+		
+        var val11 = b11.style.display;
+        
+		if(val11 == 'none'){
+		 	b11.style.display = 'block'; //显示
+		 	
+    	}else{
+        	b11.style.display = 'none'; //隐藏
+        	
+    	}
+	} 
+	function location_menu_show3()
+	{
+		var b13 = document.getElementById("yccd12");
+		
+        var val13 = b13.style.display;
+        
+		if(val13 == 'none'){
+		 	b13.style.display = 'block'; //显示
+		 	
+    	}else{
+        	b13.style.display = 'none'; //隐藏
+        	
+    	}
+	} 
+    
+   
+	function location_menu(obj)
+	{
+		$("#menus li").removeClass("current");
+	    $(obj).parent().addClass("current");
+		$("#current_url_value").val($(obj).attr("url"));
+		if($(obj).attr("url")!="null")
+		{
+			$("#content").load($(obj).attr("url"));
+		}
+	}
+
+	function show_left_user()
+	{
+		
+		    loadGetServer("/servlet/current/JBDcmsAction?function=GetCmsuserInfo",{},function(data){
+		    $("#left_user_name").html(data.username);
+			$("#left_user_ip").html(data.ip);
+			$("#cur_date").html(data.cur_date);
+			$("#left_user_id").html(data.roleid);
+			$("#user_name_top").html(data.username+"[Thoát(退出)]");  
+		})
+		
+	}
+	show_left_user();
+	
+    $(function(){
+    	/* 
+    	window.setInterval(function(){
+    		var message_html_value = '<li style="display: none;"><div class="col-left"><span class="label label-danger"><i class="icon-warning-sign"></i></span></div><div class="col-right with-margin"><span class="message">服务器<strong>  #512</strong>crashed.</span><span class="time">'+new Date().getMinutes()+':'+new Date().getSeconds()+'</span></div></li>';
+    		$("#message_tongzhi").append(message_html_value);
+    		$("#message_tongzhi li").slideDown(500);
+    	},5000)
+    	 */
+    })
+    
+   /*  if(userid==164){
+    
+       $("#top_menu").html(""); 
+       $("#top_menu").html('<li data="5"><a href="javascript:void(0);" style="width: 150px;"><span class="image"><i class="fa fa-phone-square"></i></span><span class="title">贷后管理</span></a></li>"');
+       show_menu(data_,5);
+    } */
+   
+</script>
+
+		<div id="content">
+			<div class="container">
+			   <div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="indexCms.html">
+		                                         Trang chủ(主页)
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                                         Thống kê(待办事项与统计)
+		                </a>
+		              </li>
+		            </ul>
+	            </div>
+	            <div class="page-header">
+		            <div class="page-title">
+		              <h3>
+		                                        Cập nhật mỗi ba phút(待办事项(3分钟更新一次数据))
+		              </h3>
+		            </div>
+		            <ul class="page-stats">
+		              <li>
+		                <div class="summary">
+		                  <span class="label label-danger" style="color: #FFFFFF;">
+                                                                  Đang chờ xem xét(待审核笔数)
+                          </span>
+		                  <h3 style="margin-top: 5px;" id="pt_dsh">
+		                    
+		                  </h3>
+		                </div>
+		              </li>
+		              <li>
+		                <div class="summary">
+		                  <span class="label label-primary" style="color: #FFFFFF;">
+                                                                  Được cho vay(待放款笔数)
+                          </span>
+		                  <h3 style="margin-top: 5px;" id="pt_dfk">
+		                   
+		                  </h3>
+		                </div>
+		              </li>
+		              <li>
+		                <div class="summary">
+		                  <span class="label label-warning" style="color: #FFFFFF;">
+                                                                 Để được hoàn trả(待还款笔数)
+                          </span>
+		                  <h3 style="margin-top: 5px;" id="pt_dhk">
+		                    
+		                  </h3>
+		                </div>
+		              </li>
+		            </ul>
+		         </div>
+		         <div class="row row-bg" >
+		            <div class="col-sm-6 col-md-3" >
+		              <div class="statbox widget box box-shadow" >
+		                <div class="widget-content" >
+		                  <div class="visual red"  >
+		                    <i class="icon-group">
+		                    </i>
+		                  </div>
+		                  <div class="title"  >
+		                                              Đăng ký ngay hôm nay(今日注册人数)
+		                  </div>
+		                  <div class="value" id="pt_jrzc" >
+		                    
+		                  </div>
+		                  <a class="more" href="javascript:void(0);" >
+		                                              
+		                    <i class="pull-right icon-angle-right">
+		                    </i>
+		                  </a>
+		                </div>
+		              </div>
+		            </div>
+		            <div class="col-sm-6 col-md-3" >
+		              <div class="statbox widget box box-shadow" >
+		                <div class="widget-content">
+		                  <div class="visual red">
+		                    <i class="icon-group">
+		                    </i>
+		                  </div>
+		                  <div class="title" >
+		                                              Tổng số đăng ký(总注册人数)		                  </div>
+		                  <div class="value" id="pt_zzc" >
+		                  </div>
+		                  <a class="more" href="javascript:void(0);" >
+		                                              
+		                    <i class="pull-right icon-angle-right">
+		                    </i>
+		                  </a>
+		                </div>
+		              </div>
+		            </div>
+		            <div class="col-sm-6 col-md-3 hidden-xs" >
+		              <div class="statbox widget box box-shadow">
+		                <div class="widget-content">
+		                  <div class="visual yellow">
+		                    <i class="icon-credit-card">
+		                    </i>
+		                  </div>
+		                  <div class="title">
+		                                              Chứng nhận hôm nay (今日认证人数)
+		                  </div>
+		                  <div class="value" id="pt_jrrz">
+		                  </div>
+		                  <a class="more" href="javascript:void(0);">
+		                                        
+		                    <i class="pull-right icon-angle-right">
+		                    </i>
+		                  </a>
+		                </div>
+		              </div>
+		            </div>
+		            <div class="col-sm-6 col-md-3 hidden-xs">
+		              <div class="statbox widget box box-shadow">
+		                <div class="widget-content">
+		                  <div class="visual yellow">
+		                    <i class="icon-credit-card">
+		                    </i>
+		                  </div>
+		                  <div class="title">
+		                                              Tổng cộng có chứng nhận(总认证人数)
+		                  </div>
+		                  <div class="value" id="pt_zrz">
+		                  </div>
+		                  <a class="more" href="javascript:void(0);">
+		                                              
+		                    <i class="pull-right icon-angle-right">
+		                    </i>
+		                  </a>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		         
+		         <div class="row" style=" display: none;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                                  微信公众号用户统计
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		
+		                <div class="widget-content">
+		                  <div class="row">
+			                  <div id="weixin_chart_filled_blue" class="col-md-6" >
+			                         </div>
+			                  <div id="weixin_chart_filled_content" class="col-md-6" >
+			                         </div>
+		                   </div>	
+		                </div>
+		              </div>
+		            </div>
+                   </div>
+                   
+                   <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                     Thống kê người dùng(平台用户统计)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <div class="row">
+			                   <div id="pt_chart_filled_blue" >
+			                     <iframe src="/assets/user_tj/user_tj.html"  style="border: 0px;"  height="530px" width="100%"></iframe>
+							  </div>
+		                   </div>	
+		                </div>
+		              </div>
+		            </div>
+                   </div>
+		         <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                     Thống kê người dùng vay(平台用户借款统计)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		
+		                <div class="widget-content">
+		                  <div class="row">
+			                  <iframe src="/assets/user_tj/user_tj2.html" style="border: 0px;"  height="530px" width="100%"></iframe>
+			                         </div>
+		                   </div>	
+		                </div>
+		              </div>
+		            </div>
+		            
+                   </div>
+		         
+		         
+		    </div>
+		</div>
+</body>
+</html>
+<script type="text/javascript">
+  //$("#content").load("/main/system/jsmanage.html");
+  //$("#content").load("/main/tz/tz_index.html");
+  function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+  $("#theme-switcher label").eq(1).click();
+  
+  $(function(){
+  	
+  	loadGetServer("/servlet/current/JBDcmsAction?function=GetIndexInfo",{},function(data_){
+  		 //平台统计数据
+  		var aa = parseInt(data_.pt_jrzc);
+  		var bb = parseInt(data_.pt_zzc);
+  		var cc = parseInt(data_.pt_zrz);
+  		var dd = parseInt(data_.pt_jrrz);
+  		var ee = parseInt(data_.pt_dsh);
+  		var ff = parseInt(data_.pt_dfk);
+  		var gg = parseInt(data_.pt_dhk);
+
+  		$("#pt_jrzc").html(aa+"người(人)");
+  		$("#pt_zzc").html(bb+"người(人)");
+  		$("#pt_zrz").html(cc+"người(人)");
+  		$("#pt_jrrz").html(dd+"người(人)");
+  		$("#pt_dsh").html(ee+"người(人)");
+  		$("#pt_dfk").html(ff+"người(人)");
+  		$("#pt_dhk").html(gg+"người(人)");
+  		
+  			    
+	  }); 
+  });
+</script>

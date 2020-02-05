@@ -1,0 +1,354 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container" style="width:1500px">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                               Danh sách thống kê truy thu
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetCuishouAccountM1"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1" id="dd">
+                                        Họ tên người xét duyệt
+                                      </option>
+                                      <option value="2" id="ee">
+                                       Số ĐTDĐ
+                                      </option>
+                                      <option value="3" id="eeeeee">
+                                       day
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                             <label class="col-md-0 control-label" style="padding-top:5px;" id="ff">
+		                                             Thời gian thống kê:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;
+                              <button type="button" class="btn btn-success" onclick="method5('tableExcel')">excel</button>
+			                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+		                  
+			              
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="gg">
+		                    <i class="icon-reorder">
+		                    </i>
+		                               Danh sách thống kê truy thu
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center" id="tableExcel">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;" id="hh">
+                                          Mã số người truy thu
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="ii">
+                                         Họ tên người truy thu
+                                    </th>
+                                    <th colspan="4" style=" font-size:14px; font-weight:bold;" id="kkkk">
+                                          KPI
+                                    </th>
+                                    <th colspan="1" style=" font-size:14px; font-weight:bold;" id="kk">
+                                          Thống kê số món vay trong ngày
+                                    </th>
+                                   
+                                     
+                                    
+		                      </tr>
+                              <tr  style="text-align:center">
+									<th id="rrrrrrrr">
+                                         Tổng số lần vay
+                                    </th>
+                                    <th id="mmmm">
+                                         Tổng số tiền truy thu
+                                    </th>
+                                    <th id="nnnn">
+                                         Tổng số tiền đã truy thu
+                                    </th>
+                                    <th id="nnnnnn">
+                                         Tỷ lệ
+                                    </th>
+                                    
+                                    <th id="mm">
+                                         Tổng số món vay
+                                    </th>
+                                    
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>tin, mỗi trang chứa được <font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+function changeLan(){
+loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeCS",{},function(data){
+	if(data.error == 1){
+		document.getElementById("aa").innerHTML = data.aa;
+		document.getElementById("bb").innerHTML = data.bb;
+		document.getElementById("cc").innerHTML = data.cc;
+		document.getElementById("dd").innerHTML = data.dd;
+		document.getElementById("ee").innerHTML = data.ee;
+		document.getElementById("eeeeee").innerHTML = data.eeeeee;
+		document.getElementById("ff").innerHTML = data.ff;
+		document.getElementById("gg").innerHTML = data.gg;
+		document.getElementById("hh").innerHTML = data.hh;
+		document.getElementById("ii").innerHTML = data.ii;
+		document.getElementById("jj").innerHTML = data.jj;
+		document.getElementById("kk").innerHTML = data.kk;
+		document.getElementById("ll").innerHTML = data.ll;
+		document.getElementById("mm").innerHTML = data.mm;
+		
+	}else{
+		alert("error!");
+	}
+
+});
+	
+
+}
+
+</script>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	function toThousands(num) {  
+	    		var num = (num || 0).toString(), result = '';  
+	    		while (num.length > 3) {  
+	        		result = ',' + num.slice(-3) + result;  
+	        		num = num.slice(0, num.length - 3);  
+	    		}  
+	    		if (num) { 
+				result = num + result; 
+			}  
+    			return result;  
+	}
+	function load_data()
+	{
+	var recode_ =$("#recode").val();
+
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		    var jrzbs = 0;
+			var zbsSS = 0;
+			var cszbs1SS = 0;
+			var zcsjebyqSS = 0;
+			var zcsjeSS = 0;
+			var zcsblSS = 0;
+			
+		  for(var i=0;i<list.length;i++)
+		  {
+		  	
+		  	var ycstotalSS = parseInt(list[i].oneSS)
+			var aaaaaa = list[i].totalYCSmoneySS.replace(/,/g,"");
+			var bbbbbb = list[i].totalCSmoneySS.replace(/,/g,"");
+			var kpi = 0; 
+			if(parseInt(aaaaaa) == 0){
+				kpi=0;
+			}else{
+				kpi= parseInt(parseInt(aaaaaa) *100 / parseInt(bbbbbb)) ;
+			}
+			
+			html_ += "<tr><td>BPXLN"+list[i].userid+"</td><td>"+list[i].userName+"</td><td><span class='label label-success'>"+list[i].countSS+"</span>-<span style='color:#F00'>"+ycstotalSS+"</span></td><td>"+list[i].totalCSmoneySS+"</td><td>"+list[i].totalYCSmoneySS+"</td><td>"+kpi+"%</td><td><span class='label label-success'>"+list[i].nowCount+"</span></td>";
+			html_ +="</tr>";
+				
+			
+			jrzbs += list[i].nowCount;
+			zbsSS += list[i].countSS;
+			cszbs1SS += list[i].oneSS;
+			zcsjebyqSS += parseInt(list[i].totalCSmoneySS.replace(/,/g,""));
+			zcsjeSS += parseInt(list[i].totalYCSmoneySS.replace(/,/g,""));
+			}
+		    if(zcsjebyqSS != 0){
+		   		zcsblSS = parseInt(zcsjeSS * 100 / zcsjebyqSS);
+		   	}
+		   
+		   	html_ += "<tr><td>Thống kê tổng</td><td>Thống kê tổng</td><td><span class='label label-success'>"+zbsSS+"</span>-<span style='color:#F00'>"+cszbs1SS+"</span></td><td>"+toThousands(zcsjebyqSS)+"</td><td>"+toThousands(zcsjeSS)+"</td><td>"+zcsblSS+"%</td><td><span class='label label-success'>"+jrzbs+"</span></td>";
+			html_ +="</tr>";
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();   
+
+   
+</script>
+
+<script>
+ var idTmr;  
+        function  getExplorer() {  
+            var explorer = window.navigator.userAgent ;  
+            //ie  
+            if (explorer.indexOf("MSIE") >= 0) {  
+                return 'ie';  
+            }  
+            //firefox  
+            else if (explorer.indexOf("Firefox") >= 0) {  
+                return 'Firefox';  
+            }  
+            //Chrome  
+            else if(explorer.indexOf("Chrome") >= 0){  
+                return 'Chrome';  
+            }  
+            //Opera  
+            else if(explorer.indexOf("Opera") >= 0){  
+                return 'Opera';  
+            }  
+            //Safari  
+            else if(explorer.indexOf("Safari") >= 0){  
+                return 'Safari';  
+            }  
+        }  
+        function method5(tableid) {  
+            if(getExplorer()=='ie')  
+            {  
+                var curTbl = document.getElementById(tableid);  
+                var oXL = new ActiveXObject("Excel.Application");  
+                var oWB = oXL.Workbooks.Add();  
+                var xlsheet = oWB.Worksheets(1);  
+                var sel = document.body.createTextRange();  
+                sel.moveToElementText(curTbl);  
+                sel.select();  
+                sel.execCommand("Copy");  
+                xlsheet.Paste();  
+                oXL.Visible = true;  
+  
+                try {  
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");  
+                } catch (e) {  
+                    print("Nested catch caught " + e);  
+                } finally {  
+                    oWB.SaveAs(fname);  
+                    oWB.Close(savechanges = false);  
+                    oXL.Quit();  
+                    oXL = null;  
+                    idTmr = window.setInterval("Cleanup();", 1);  
+                }  
+  
+            }  
+            else  
+            {  
+                tableToExcel(tableid)  
+            }  
+        }  
+        function Cleanup() {  
+            window.clearInterval(idTmr);  
+            CollectGarbage();  
+        }  
+        var tableToExcel = (function() {  
+            var uri = 'data:application/vnd.ms-excel;base64,',  
+                    template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',  
+                    base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },  
+                    format = function(s, c) {  
+                        return s.replace(/{(\w+)}/g,  
+                                function(m, p) { return c[p]; }) }  
+            return function(table, name) {  
+                if (!table.nodeType) table = document.getElementById(table)  
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}  
+                window.location.href = uri + base64(format(template, ctx))  
+            }  
+        })()  
+
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

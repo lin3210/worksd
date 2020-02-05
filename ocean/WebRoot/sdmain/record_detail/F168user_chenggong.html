@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>MOFA</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+      <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+    <link href="/assets/css/date_css/dateRange.css" rel="stylesheet" type="text/css" />
+      <script language="Javascript">  
+document.oncontextmenu=new Function("event.returnValue=true");  
+document.onselectstart=new Function("event.returnValue=true");  
+</script> 
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="/assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="/plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.tooltip.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.resize.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.time.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.growraf.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/moment.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/daterangepicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/blockui/jquery.blockUI.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/fullcalendar/fullcalendar.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/jquery.noty.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/layouts/top.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/themes/default.js">
+    </script>
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/select2/select2.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/app.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.form-components.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/page.js">
+    </script>
+	<script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/monthPicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/dateRange.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        Plugins.init();
+        FormComponents.init()
+      });
+    </script>
+    <script type="text/javascript" src="/assets/js/custom.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/json.js">
+    </script>
+    
+
+
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<link rel="stylesheet" href="/assets/css/jquery.artZoom.css" />
+<link href="/assets/css/main_bz.css" rel="stylesheet" type="text/css" />
+<style>.col-md-0{ position: relative; min-height: 1px; padding-left: 15px } .col-md-0{ float: left } .table td{height: 45px;line-height: 45px;} </style></head>
+<body>
+
+   <div id="load_html" style="">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display:block;">
+            <div class="modal-dialog" style="padding-top: 15%;">
+                <div >
+                  <img src="/assets/img/loading-green-160px.gif">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+  <div id="container" class="sidebar-closed">
+    <div id="content">
+      <div class="container">
+        <div class="crumbs">
+          <ul id="breadcrumbs" class="breadcrumb">
+            <li>
+              <i class="fa fa-home"></i>
+              <a href="index.html"></a>
+            </li>
+            <li class="current">
+              <a href="javascript:void(0)" title="">Thông tin người dùng</a></li>
+          </ul>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-md-12">
+            <div class="tabbable tabbable-custom tabbable-full-width">
+              <ul class="nav nav-tabs">
+                <li class="active">
+                  <a href="#tab_overview" data-toggle="tab">Thông tin cơ bản</a></li>
+               <!--  <li>
+                  <a href="#tab_edit_account" data-toggle="tab">征信数据</a></li> -->
+              </ul>
+              <div class="tab-content row" style=" font-size:15px;">
+                <div class="tab-pane  active" id="tab_overview">
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                        
+               
+				
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							    <input type="hidden" id="cupage_" value="1"/>
+							 <input type="hidden" id="total_" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetRecordListChg"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+                             <input type="hidden" id="starTime1" value=""/>
+                             <input type="hidden" id="endTime1" value=""/>
+		       
+                    
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin cá nhân cơ bản</h4>
+                          </div>
+                          <div class="widget-content">
+                            <table class="table" style="margin-bottom: 0px;">
+                            <input type="hidden" name="cardid" id="cardid"/>
+                            <input type="hidden" name="reid" id="reid"/>
+                            <input type="hidden" name="i_id" id="i_id"/>
+                            <input type="hidden" name="j_id" id="j_id"/>
+                            <input type="hidden" name="user_id" id="user_id"/>
+                            <input type="hidden" name="cardphto" id="cardphto"/>
+                            <input type="hidden" name="positivepic" id="positivepic"/>
+                              <thead>
+                                <tr>
+                                  <th>Mã số</th>
+                                  <th>Loại điện thoại</th>
+                                  <th>Họ tên</th>
+                                  <th>Số CMND</th>
+                                  <th class="hidden-xs">Số ĐTDĐ</th>
+                                 <th>E-mail</th>
+                                  <th>Dòng máy điện thoại</th>
+                                  <th>Thời gian đăng ký</th>
+                                  
+                                  
+                                  </tr>
+                              </thead>
+                             
+                              <tbody id="personal">
+                               
+                              </tbody>
+                              <thead>
+                                  <th>Địa chỉ tạm trú</th>
+                                  <th>Địa chỉ thường trú</th>
+                                  <th>Ngày sinh</th>
+                                  <th>Tuổi</th>
+                                  <th>Số lần đề xuất vay</th>
+                                  <th>Số lần giải ngân thành công</th>
+                                  <th>Số lần trả vay quá hạn</th>
+                                  <th>Số lần gia hạn vay</th>
+                              </thead>
+                             
+                              <tbody id="personal1">
+                               
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                          
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin ngân hàng</h4>
+                          </div>
+                          <div class="widget-content">
+                          <div id="ribb_yh" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="yhri">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-top: 0px;">
+                              <tbody>
+                                <tr>
+                                <th>Họ tên</th>
+                                 <th>Số tài khoản NH</th>
+                                  <th>Tên ngân hàng</th>
+                       
+                      </tr> 
+                                <tr id="yh_2">
+                                </tr>
+                                  <tr >
+                                    <td id="rad_yh" colspan="8"></td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                          
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin công việc</h4>
+                          </div>
+                          <div class="widget-content">
+                          <div id="ribb_job" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="jobri">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-top: 0px;">
+                              <tbody>
+                                <tr>
+                                  <th>Tính chất công việc</th>
+                                  <th>Điện thoại cơ quan</th>
+                                  <th>Địa chỉ cơ quan</th>
+                                  <th>Tên cơ quan</th>
+                                  <th>Chức vụ</th>
+                                  <th>Mức lương</th>
+                                  <th>Thời gian nhậm chức</th>
+                                  <th>&nbsp;</th>
+                       <!-- <div id="work"> 
+                       <div >正面</div> 
+                       <div >反面</div> 
+                       <div >手持</div> 
+                       </div> -->
+                      </tr> 
+                                <tr id="job_2">
+                                </tr>
+                                  <tr >
+                                    <td id="rad_j" colspan="8"></td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                          
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin trường học</h4>
+                          </div>
+                          <div class="widget-content">
+                          <div id="ribb_school" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="schoolri">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-top: 0px;">
+                              <tbody>
+                                <tr>
+                                  <th>Tên trường</th>
+                                  <th>Địa chỉ trường</th>
+                                  <th>Tên lớp</th>
+                                  <th>Mã số sinh viên</th>
+                                  <th>Thời gian nhập học</th>
+                                  <th>&nbsp;</th>
+                       <div id="school"> 
+                       <div >Mặt trước</div> 
+                       <div >Mặt sau</div> 
+                       <div >Hình tự cầm</div> 
+                       </div>
+                      </tr> 
+                                <tr id="school_2">
+                                </tr>
+                                  <tr >
+                                    <td id="rad_s" colspan="8"></td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                        
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin người liên hệ</h4>
+                          </div>
+                          <div class="widget-content">
+                            <div id="ribb_lxr" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="lxrbr">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-bottom: 0px;" id="lianx">
+                       
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" id="shib1" style="display:none;" >
+                       
+                    </div>
+                    <div class="row" id="shib2" style="display:none;" >
+                       
+                    </div>
+                    <div class="row" id="shib3" style="display:none;">
+                       
+                    </div>
+                    <div class="row" id="win">
+                   
+                    </div>
+                    <div class="row" id="cscs">
+                   
+                    </div>       
+                    <div class="row" id="cscsjk">
+                   
+                    </div>       
+		      <!--   <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                              dữ liệu Liên hệ(通讯录数据)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content panel-collapse collapse">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          用户编号
+		                        </th>
+		                        <th>
+		                          用户姓名
+		                        </th>
+		                        <th>
+		                          手机号码
+		                        </th>
+		                        
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			 <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                              Lịch sử cuộc gọi(通话记录)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse" >
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content panel-collapse collapse">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          用户编号
+		                        </th>
+		                        <th>
+		                          用户姓名
+		                        </th>
+		                        <th>
+		                          手机号码
+		                        </th>
+		                        <th>
+		                          通话次数
+		                        </th>
+		                        <th>
+		                          呼入呼出
+		                        </th>             
+		                        <th>
+		                          通话时长
+		                        </th>             
+		                        <th>
+		                          拨打时间
+		                        </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data1">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows_"></font> 条记录，每页 <font id="numperpage_"></font> 条，当前第 <font id="currentpage_"></font> / <font id="totalpages_"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable_"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>  -->  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                            <h4>
+                              <i class="fa fa-reorder"></i>Chứng thực khác</h4>
+                          </div>
+                          <div class="widget-content">
+                            <div class="form-horizontal row-border" id="validate-2" novalidate>
+                              <div class="form-group">
+                                <label class="col-md-2 control-label">Số BHXH
+                                  <span class="required">*</span></label>
+                                  <div class="col-md-9" id="tond">
+                                
+                                  </div>
+                              </div>
+                               <div class="form-group">
+                                <label class="col-md-2 control-label">Điểm đánh giá thông minh
+                                  <span class="required">*</span></label>
+                                  <div class="col-md-9" id="pingfen">
+                                
+                                  </div>
+                              </div>
+                              <!-- <div class="form-group" id="has-sh_end">
+                                <label class="col-md-2 control-label">审核结果
+                                  <span class="required">*</span></label>
+                                <div class="col-md-9">
+                                     <label class='radio-inline'><input name='sh_end' value='1' type='radio' onclick='radi_end()' checked='cheched'>YES</label>
+                                     <label class='radio-inline'><input name='sh_end' value='0' type='radio' onclick='radi_end()'>NO</label>
+                                  </div>
+                              </div>
+                              
+                              <div class="form-group  has-error" id="has-group">
+                                <label class="col-md-2 control-label">建议额度
+                                  <span class="required">*</span></label>
+                                <div class="col-md-9">
+                                  <input type="text" name="minl1" id="edu" class="form-control required" minlength="5" onBlur="iblur()">
+                                  <label for="range1" generated="true" class="has-error help-block" id="lab">额度需要在500-5000之间</label>
+                                  </div>
+                              </div> -->
+                              
+                             <!--  <div class="form-group" id="nobeco">
+                                <label class="col-md-2 control-label">失败原因：
+                                  <span class="required">*</span></label>
+                                <div class="col-md-9" id="oando">
+                                  <label for="range1" generated="true" class="help-block">
+                                          <select class="form-control" name="select" id="bhstate">
+                                              <option value="0">请选择</option>
+                                                <option value="1">负面信息</option>
+                                                <option value="2">信用不良</option>
+                                                <option value="3">信息有误</option>
+                                                <option value="4">其他</option>
+                                                <option value="5">拉入黑名单</option>
+                                          </select>
+                                      </label>
+                                    <textarea rows="3" cols="5" name="textarea" class="form-control" id="remark" placeholder="请输入驳回备注"></textarea>
+                                    </div>
+                                      
+                              </div> -->
+                              
+                              <div class="form-actions">
+                              <input type="button" value="Phone/Zalo/FB" class="btn btn-primary pull-right" onClick="get_gaoji()">
+                                 <input type="button" value="Xem thông tin gốc" class="btn btn-primary pull-right" onClick="get_zx()"> 
+                                 <!-- <input type="button" value="确认审核" class="btn btn-success " onClick="sub_form()"> -->
+                                 <input type="button" value="Đóng trang" class="btn btn-inverse  pull-right" onClick="javascript:parent.f_hide_ifm(GetQueryString('record_id'))">                              
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="widget box">
+                      <div class="widget-header">
+                        <h4>
+                          <i class="icon-reorder"></i>Số CMND</h4>
+                        <div class="toolbar no-padding">
+                          <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse">
+                              <i class="icon-angle-down"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="widget-content">
+                               <div id="ribb_phone" style="display:none;">
+                                <div class='ribbon-wrapper ribbon-top-right' style="z-index: 10;"> <div class='ribbon orange' id="ribid" >Chờ thẩm định</div> </div>
+                               </div>
+                        <div class="list-group" id="shenfen">
+                        
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    <input style="display:none" type="hidden"/> 
+                  </form>
+                </div>
+                 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>Xác nhận</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body">
+					<label class="col-md-0 control-label" style="padding-top:5px;letter-spacing:2px;" id="remark_tr"></label>
+				</div>
+                <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+			</div>
+			<div class="modal-footer" style="text-align:center">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone1()">MOFA</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<!--<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone2()">MOFA</button>-->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="call_phone3()">Thẩm định</button>
+			</div>
+		</div>
+		<input type="hidden" name="phone_" id="phone_" class="form-control required url">
+	</div>
+</div>
+</div>
+</body>
+
+</html>
+
+<script>$("#btn-load").on("click",
+  function() {
+    var a = $(this);
+    a.button("loading");
+    $("#cupage_").val("1");
+    load_data();
+    load_data_();
+  });</script>
+<script src="/assets/js/jquery.artZoom.js"></script>
+<script>
+$(function() {
+	userdetail();
+	radi();
+	
+})
+/* load_data();
+load_data_();
+function load_data(){
+	var reid=GetQueryString("record_id");
+	console.log("111");
+	var para={curPage:$("#cupage").val(),reid:reid};
+	loadGetServer("/servlet/current/JBDcmsAction?function=GetTongxunlu",para,function(data){
+	$("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr id =id_"+list[i].id+"><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td></tr>";
+				
+		   }
+			$("#load_data").append(html_);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+  function load_data_(){
+	var reid=GetQueryString("record_id");
+	var para={curPage:$("#cupage_").val(),reid:reid};
+	loadGetServer("/servlet/current/JBDcmsAction?function=GetTonghuajilu",para,function(data){
+	$("#load_data1").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr id =id_"+list[i].id+"><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].geshu+"</td><td>"+list[i].dttype+"</td><td>"+list[i].callduration+"</td><td>"+list[i].calldatestr+"</td></tr>";
+				
+		   }
+			$("#load_data1").append(html_);
+			page_value_(data);
+			page_data_();
+			$("#btn-load").button("reset");
+	    });
+   } */
+ function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+
+ function userdetail()
+ {
+	 var reid=GetQueryString("record_id");
+	 var userid=GetQueryString("userid");
+	// $("#load_html").show();
+	 var para={reid:reid,userid:userid};
+	 loadGetServer("/servlet/current/JBDcmsAction?function=GetUserRecOneInfoYN",para,function(data){
+	   
+		 if(data.error < 0 )
+		 {
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	       /*  $("#load_html").hide(); */
+		 }
+		 
+			 var rad_id=0;
+			 /*-----------------个人基本资料---------------------*/
+			 var html_g="";
+			
+			var xm = "";
+			 if(data.xm != undefined){
+			 	xm = data.xm ;
+			 }
+			 var yddh = "";
+			 if(data.xm != undefined){
+			 	yddh = data.yddh ;
+			 }
+			 var czdz = "";
+			 if(data.xm != undefined){
+			 	czdz = data.czdz ;
+			 }
+			 var zzdz = "";
+			 if(data.xm != undefined){
+			 	zzdz = data.zzdz ;
+			 }
+			 var sr = "";
+			 if(data.xm != undefined){
+			 	sr = data.sr.slice(0,10) ;
+			 }
+			 html_g +="<tr>";
+			 html_g +="<td align=''>"+data.user_id+"";
+			 if(data.useridzu[0] != null){
+				 for(var n=0;n<data.useridzu.length;n++){
+				 	html_g +="[<a href='javascript:void(0);' onclick='open_user("+data.useridzu[n]+")'><span style='color:#F00'>"+data.useridzu[n]+"</span></a>]";
+				 }
+			 }
+			 html_g +="</td>";
+			 html_g +="<td align=''>"+data.username.slice(5,8)+"</td>";
+			 html_g +="<td align=''>"+data.userrealname+"[<span style='color:#0000FF'>"+xm+"</span>]</td>";
+			 html_g +="<td align=''>"+data.cardid+"</td>";
+			 var cellphone = data.cellphone;
+			 if(cellphone.length > 8){
+			 	cellphone = data.cellphone.substr(0, 3) + "*****" + data.cellphone.substr(8);
+			 }
+			 var dhyddh = yddh;
+			 if(dhyddh.length > 8){
+			 	dhyddh = yddh.substr(0, 3) + "*****" + yddh.substr(8);
+			 }
+			/*  var phonezu = data.phonezu;
+			 if(phonezu.length > 8){
+			 	phonezu = phonezu.substr(0, 3) + "*****" + phonezu.substr(8);
+			 } */
+			 html_g +="<td><a href='javascript:void(0);' onclick=\"call_choice('"+data.cellphone+"')\">"+cellphone+"</a>[<span style='color:#0000FF'><a href='javascript:void(0);' onclick=\"call_choice('"+yddh+"')\">"+dhyddh+"</a></span>]</td>";//[<span style='color:#F00'>"+phonezu+"</span>]
+			 
+			 html_g +="<td>"+data.email+"</td>";
+			 html_g +="<td>"+data.phonetype+"</td>";
+			 html_g +="<td>"+data.createtime.substring('0',data.createtime.length-2)+"</td>";
+		
+			 html_g +="</tr>";
+			
+			 $("#personal").html(html_g);	
+			  var html_gg="";
+			  html_gg +="<tr>";
+			  html_gg +="<td>"+data.homeaddress+"[<span style='color:#0000FF'>"+zzdz+"</span>]</td>";
+			  html_gg +="<td>"+data.address+"[<span style='color:#0000FF'>"+czdz+"</span>]</td>";
+			  
+			  html_gg +="<td>"+data.csrq+"[<span style='color:#0000FF'>"+sr+"</span>]";
+			  if(data.useridzuage[0] != null){
+				 for(var nn=0;nn<data.useridzuage.length;nn++){
+					 if(data.useridzuage[nn] != undefined){
+					 	html_gg +="[<a href='javascript:void(0);' onclick='open_user("+data.useridzuage[nn]+")'><span style='color:#F00'>"+data.useridzuage[nn]+"</span></a>]";
+					 }
+				 }
+			  }
+			  html_gg +="</td>";
+			  html_gg +="<td>"+data.age+"</td>";
+			  html_gg +="<td><span class='label label-success'>"+data.cou+"</span></td>";
+			  html_gg +="<td class='hidden-xs'><span class='label label-success'>"+data.usercgjk+"</span></td>";
+			  html_gg +="<td><span class='label label-success'>"+data.yuqcount+"</span></td></br>";
+			  html_gg +="<td><span class='label label-success'>"+data.jkfqcs+"</span></td></br>";
+			  html_gg +="</tr>";
+			  $("#personal1").html(html_gg);
+			  //  银行卡信息
+			   var html_yh2="";
+			   if(data.bank.cardusername != "")
+			 {
+				 html_yh2 +="<td>"+data.bank.cardusername+"</td>";	
+			 }
+			 else
+			 {
+				 html_yh2 +="<td>Tạm thời không có</td>";	
+			 }
+			  if(data.bank.cardno != "")
+			 {
+				 html_yh2 +="<td>"+data.bank.cardno+"</td>";	
+			 }
+			 else
+			 {
+				 html_yh2 +="<td>Tạm thời không có</td>";	
+			 }
+			 if(data.bank.cardname != null)
+			 {
+				 html_yh2 +="<td>"+data.bank.cardname+"</td>";
+			 }
+			 else
+			 {
+				 html_yh2 +="<td>Tạm thời không có</td>";
+			 }
+			 html_j2 +="<td>&nbsp;</td>";
+			 $("#yh_2").html(html_yh2);	
+			 var html_radyh="";	
+			/*  if(data.profession == 1)
+			 { */
+				 $("#yhri").attr("class","ribbon green");
+				 $("#yhri").html("Đã thẩm định")
+				 $("#ribb_yh").show();
+			 /* }
+			 else
+			 {
+				 //rad_id=rad_id+1;
+				  html_radyh +="<label class='radio-inline'><input name='yh' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_radyh +="<label class='radio-inline'><input name='yh' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 $("#yhri").attr("class","ribbon orange");
+				 $("#ribb_yh").show();
+			 } */
+			 $("#rad_yh").html(html_radyh);
+			/*-----------------工作信息------------------------*/
+
+			 var html_j2="";
+			  if(data.company != "")
+			 {
+				 html_j2 +="<td>"+data.company+"</td>";	
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";	
+			 }
+			 if(data.tel != null)
+			 {
+				 html_j2 +="<td>"+data.tel+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.workaddress != null)
+			 {
+				 html_j2 +="<td>"+data.workaddress+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.workname != null)
+			 {
+				 html_j2 +="<td>"+data.workname+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.position != null)
+			 {
+				 html_j2 +="<td>"+data.position+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.pay != null)
+			 {
+				 html_j2 +="<td>"+data.pay+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.worktime != null)
+			 {
+				 html_j2 +="<td>"+data.worktime+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 html_j2 +="<td>&nbsp;</td>";
+			 $("#job_2").html(html_j2);	
+			 /* var html_work="";
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yuenan.oss-cn-hongkong.aliyuncs.com/" + data.p1w +"' class='roomimg' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>正面</a></div>";			 
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yuenan.oss-cn-hongkong.aliyuncs.com/" + data.p2w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>反面</a></div>";
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yuenan.oss-cn-hongkong.aliyuncs.com/" + data.p3w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>手持</a></div>";
+			 $("#work").html(html_work); */
+			 var html_radj="";	
+			 /* if(data.status == 1)
+			 { */
+				 $("#jobri").attr("class","ribbon green");
+				 $("#jobri").html("Đã thẩm định")
+				 $("#ribb_job").show();
+			/*  }
+			 else
+			 {
+				 //rad_id=rad_id+1;
+				  html_radj +="<label class='radio-inline'><input name='job' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_radj +="<label class='radio-inline'><input name='job' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 $("#jobri").attr("class","ribbon orange");
+				 $("#ribb_job").show();
+			 } */
+			 $("#rad_j").html(html_radj);
+			  /*-----------------学校信息------------------------*/
+
+			 var html_s2="";
+			 if(data.schoolname != "")
+			 {
+				 html_s2 +="<td>"+data.schoolname+"</td>";	
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";	
+			 }
+			 if(data.schooladdress != null)
+			 {
+				 html_s2 +="<td>"+data.schooladdress+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.classname != null)
+			 {
+				 html_s2 +="<td>"+data.classname+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.stuid != null)
+			 {
+				 html_s2 +="<td>"+data.stuid+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.schooltime != null)
+			 {
+				 html_s2 +="<td>"+data.schooltime+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 html_s2 +="<td>&nbsp;</td>";
+			 $("#school_2").html(html_s2);	
+			 var html_school="";
+			 html_school +=" <div style='float:left; width:30%;'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p1s +"' class='roomimgschool' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt trước</a></div>";			 
+			 html_school +=" <div style='float:left; width:30%;'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p2s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt sau</a></div>";
+			 html_school +=" <div style='float:left; width:30%;'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p3s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a></div>";
+			 $("#school").html(html_school);
+			   	$('.roomimgschool').artZoom({
+		  path: '/assets/img',
+		  // 设置artZoom图片文件夹路径
+		  preload: true,
+		  // 设置是否提前缓存视野内的大图片
+		  blur: true,
+		  // 设置加载大图是否有模糊变清晰的效果
+		  // 语言设置
+		  left: 'turn left',
+		  // 左旋转按钮文字
+		  right: 'turn right',
+		  // 右旋转按钮文字
+		  //source: '看原图' // 查看原图按钮文字
+		});
+			 var html_rads="";	
+			 /* if(data.status == 1)
+			 { */
+				 $("#schoolri").attr("class","ribbon green");
+				 $("#schoolri").html("Đã thẩm định")
+				 $("#ribb_school").show();
+			/*  }
+			 else
+			 {
+				 //rad_id=rad_id+1;
+				 html_rads +="<label class='radio-inline'><input name='school' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_rads +="<label class='radio-inline'><input name='school' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 $("#schoolri").attr("class","ribbon orange");
+				 $("#ribb_school").show();
+			 } */
+			 $("#rad_s").html(html_rads);
+			
+			 /*-----------------联系人信息-----------------------*/
+			 var html_l="<thead>";
+			
+				 html_l +="<tr><th>Người liên hệ"+(1)+"</th><th>Quan hệ</th><th class='hidden-xs'>Số ĐTDĐ</th></thead>";
+				 html_l +="<tbody><tr>";
+				 html_l +="<td align=''>"+data.lianxi.contact1+"</td>";
+				 html_l +="<td>"+data.lianxi.guanxi1+"</td>";
+				 var tel1 = data.lianxi.tel1;
+			     if(tel1.length > 8){
+			 		tel1 = data.lianxi.tel1.substr(0, 3) + "*****" + data.lianxi.tel1.substr(8);
+			 	 }
+				
+				 html_l +="<td><a href='javascript:void(0);' onclick=\"call_phone('"+data.lianxi.tel1+"')\">"+tel1+"</a></td>";
+				 
+				 html_l +="</tr>";
+				 
+				 html_l +="<tr><th>Người liên hệ"+(2)+"</th><th>Quan hệ</th><th class='hidden-xs'>Số ĐTDĐ</th></thead>";
+				 html_l +="<tbody><tr>";
+				 html_l +="<td align=''>"+data.lianxi.contact2+"</td>";
+				 html_l +="<td>"+data.lianxi.guanxi2+"</td>";
+				 var tel2 = data.lianxi.tel2;
+			     if(tel2.length > 8){
+			 		tel2 = data.lianxi.tel2.substr(0, 3) + "*****" + data.lianxi.tel2.substr(8);
+			 	 }
+				 html_l +="<td><a href='javascript:void(0);' onclick=\"call_phone('"+data.lianxi.tel2+"')\">"+tel2+"</a></td>";
+				 
+				 html_l +="</tr>";
+			// if(data.isverified == 0)
+			//{
+				 
+			// }
+			/*  if(data.status == 1)
+			 { */
+				  $("#lxrbr").attr("class","ribbon green");
+				 $("#lxrbr").html("Đã thẩm định");
+				 $("#ribb_lxr").show();
+			 /* }
+			 else
+			 { 
+			  html_l +="<tr><td colspan='8';>";
+				 html_l +="<label class='radio-inline'><input name='con' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_l +="<label class='radio-inline'><input name='con' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 html_l +="</td></tr>";
+				 $("#lxrbr").attr("class","ribbon orange");
+				 $("#ribb_lxr").show();
+			 } */ 
+			
+			 html_l+="</tbody>";
+			 $("#lianx").html(html_l);
+			 /*-----------------第一阶段失败借款记录-----------------------*/
+			  if(data.numcount1.length>0)
+			 {		
+			     $("#shib1").show();
+				 var html_s="";
+				 html_s +="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='fa fa-reorder'></i>Hồ sơ thẩm định thất bại giai đoạn 1</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='fa fa-angle-down'></i></span></div></div></div>";
+				 html_s +="<div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian vay</th><th>Số tiền vay</th><th>Người thẩm định</th><th>Giai đoạn thất bại</th><th>Lý do thất bại</th><th class='hidden-xs'>Số tiền được duyệt</th><th>Thời gian thẩm định</th></tr></thead><tbody>";
+				 var listd =data.numcount1;
+				 for(var i=0;i<listd.length;i++)
+				 {
+				      var shenhesj ;
+		              var shenheren ="SYSTEM"
+		              var shenheclyj ;
+		              var shibaijieduan ;
+		              var shenped = "0"; 
+				      if(listd[i].cl_status =="3"){
+				           
+				           shenhesj=listd[i].cl_time ;
+				           if(typeof( shenhesj)=="undefined"){ 
+
+                            shenhesj=listd[i].cl_time; 
+
+                          } 
+				          if(listd[i].cl_ren =="6"){
+				                shenheren ="BRAIN" ;
+				            }				            
+							else if(listd[i].cl_ren == "2001"){
+								shenheren = "NGUYEN HUY VU";
+							} 				            
+							else if(listd[i].cl_ren == "2002"){
+								shenheren = "bui thi kieu nga";
+							} 				            
+							else if(listd[i].cl_ren == "2003"){
+								shenheren = "nguyen thi hanh nguyen";
+							} 				            
+							else if(listd[i].cl_ren == "2004"){
+								shenheren = "vo thi ngoc hang";
+							} 				            
+							else if(listd[i].cl_ren == "2005"){
+								shenheren = "nguyen thi thuy trang";
+							}		            
+							else if(listd[i].cl_ren == "2006"){
+								shenheren = "nguyen viet trinh";
+							}		            
+							else if(listd[i].cl_ren == "2007"){
+								shenheren = "phan ngoc thuong";
+							}		            
+							else if(listd[i].cl_ren == "2008"){
+								shenheren = "hoang nogc phuong diem";
+							}		            
+							else if(listd[i].cl_ren == "2009"){
+								shenheren = "Vo Thi Hong Gam";
+							}		            
+							else if(listd[i].cl_ren == "2010"){
+								shenheren = "nguyen vu tra my";
+							}		            
+							else if(listd[i].cl_ren == "2012"){
+								shenheren = "Bui thi xuan dong";
+							}		            
+							else if(listd[i].cl_ren == "2014"){
+								shenheren = "Tran thi viet trinh";
+							}		            
+							else if(listd[i].cl_ren == "2015"){
+								shenheren = "Vo thi xuan yen";
+							}
+							else if(listd[i].cl_ren == "2020"){
+								shenheren = "TRAN DINH TRUONG";
+							}		            
+							else if(listd[i].cl_ren == "2021"){
+								shenheren = "DO LE VI";
+							}		            
+							else if(listd[i].cl_ren == "2022"){
+								shenheren = "TRAN PHUONG THAO";
+							}		            
+							else if(listd[i].cl_ren == "2023"){
+								shenheren = "TRAN NGUYEN BA";
+							}		            
+							else if(listd[i].cl_ren == "2024"){
+								shenheren = "NGUYEN DUC HOANG NAM";
+							}		            
+							else if(listd[i].cl_ren == "2025"){
+								shenheren = "NGUYEN HUU HUY";
+							}		            
+							else if(listd[i].cl_ren == "2027"){
+								shenheren = "PHAM THI KIM THANH";
+							}		            
+							else if(listd[i].cl_ren == "2028"){
+								shenheren = "HUYNH NGOC TRANG";
+							}		            
+							else if(listd[i].cl_ren == "2029"){
+								shenheren = "HUYNH THI KHANH LINH";
+							}		            
+							else if(listd[i].cl_ren == "2030"){
+								shenheren = "NGUYEN HOA THANH";
+							}		            
+							else if(listd[i].cl_ren == "2031"){
+								shenheren = "NGUYEN NGOC HUY";
+							}		            
+							else if(listd[i].cl_ren == "2032"){
+								shenheren = "NGUYEN THI TRANG";
+							}		            
+							else if(listd[i].cl_ren == "2033"){
+								shenheren = "DUONG NGOC HUYEN";
+							}		            
+							else if(listd[i].cl_ren == "2034"){
+								shenheren = "TRAN MY THUY";
+							}		            
+							else if(listd[i].cl_ren == "2035"){
+								shenheren = "TRAN THI KHANH LINH";
+							}		            
+							else if(listd[i].cl_ren == "2037"){
+								shenheren = "PHAM HOANG PHUONG";
+							}		            
+							else if(listd[i].cl_ren == "2038"){
+								shenheren = "TRAN THI THUY VAN";
+							}		            
+							else if(listd[i].cl_ren == "2039"){
+								shenheren = "NGUYEN THI THUONG";
+							}		            
+							else if(listd[i].cl_ren == "2040"){
+								shenheren = "HO THI NGOC LIEN";
+							}		            
+							else if(listd[i].cl_ren == "2041"){
+								shenheren = "NGO LIEN TRAN CHAU";
+							}		            
+							else if(listd[i].cl_ren == "2042"){
+								shenheren = "TRAN THI HAI YEN";
+							}		            
+							else if(listd[i].cl_ren == "2043"){
+								shenheren = "NGUYEN HUU CANH";
+							}		            
+							else if(listd[i].cl_ren == "2044"){
+								shenheren = "TRAN THUY TRANG";
+							}		            
+				            shenheclyj = listd[i].cl_yj;
+				            shibaijieduan="Thẩm định lần 1"
+				        }
+				     html_s +="<td>"+ listd[i].create_date+"</td>";
+				     html_s +="<td>"+ listd[i].jk_money+"</td>";
+					 html_s +="<td align=''>"+shenheren+"</td>";					
+					 html_s +="<td>"+ shibaijieduan+"</td>";
+                    html_s +="<td>"+shenheclyj+"</td>";
+					 html_s +="<td>"+shenped+"</td>";
+					 html_s +="<td>"+shenhesj+"</td></tr>";
+				 }
+				 html_s +="</tbody></table></div></div></div>";
+				 $("#shib1").html(html_s)
+			 }
+       
+          /*-----------------第二阶段失败借款记录-----------------------*/
+			  if(data.numcount2.length>0)
+			 {		
+			     $("#shib2").show();
+				 var html_s="";
+				 html_s +="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='fa fa-reorder'></i>Hồ sơ thẩm định thất bại giai đoạn 2</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='fa fa-angle-down'></i></span></div></div></div>";
+				 html_s +="<div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian vay</th><th>Số tiền vay</th><th>Người thẩm định</th><th>Giai đoạn thất bại</th><th>Lý do thất bại</th><th class='hidden-xs'>Số tiền được duyệt</th><th>Thời gian thẩm định</th></tr></thead><tbody>";
+				 var listd =data.numcount2;
+				 for(var i=0;i<listd.length;i++)
+				 {
+				      var shenhesj ;
+		              var shenheren ="SYSTEM"
+		              var shenheclyj ;
+		              var shibaijieduan ;
+		              var shenped = "0"; 
+				        if(listd[i].cl02_status =="3"){
+				            shenhesj=listd[i].cl02_time ;
+				            
+				             if(typeof(shenhesj)=="undefined"){ 
+
+                            shenhesj=listd[i].cl02_time; 
+
+                            } 
+				            if(listd[i].cl02_ren =="6"){
+				                shenheren ="BRAIN" ;
+				            }
+							else if(listd[i].cl02_ren == "2001"){
+								shenheren = "NGUYEN HUY VU";
+							} 				            
+							else if(listd[i].cl02_ren == "2002"){
+								shenheren = "bui thi kieu nga";
+							} 				            
+							else if(listd[i].cl02_ren == "2003"){
+								shenheren = "nguyen thi hanh nguyen";
+							} 				            
+							else if(listd[i].cl02_ren == "2004"){
+								shenheren = "vo thi ngoc hang";
+							} 				            
+							else if(listd[i].cl02_ren == "2005"){
+								shenheren = "nguyen thi thuy trang";
+							} 
+							else if(listd[i].cl02_ren == "2006"){
+								shenheren = "nguyen viet trinh";
+							}		            
+							else if(listd[i].cl02_ren == "2007"){
+								shenheren = "phan ngoc thuong";
+							}		            
+							else if(listd[i].cl02_ren == "2008"){
+								shenheren = "hoang nogc phuong diem";
+							}		            
+							else if(listd[i].cl02_ren == "2009"){
+								shenheren = "Vo Thi Hong Gam";
+							}		            
+							else if(listd[i].cl02_ren == "2010"){
+								shenheren = "nguyen vu tra my";
+							}		            
+							else if(listd[i].cl02_ren == "2012"){
+								shenheren = "Bui thi xuan dong";
+							}		            
+							else if(listd[i].cl02_ren == "2014"){
+								shenheren = "Tran thi viet trinh";
+							}		            
+							else if(listd[i].cl02_ren == "2015"){
+								shenheren = "Vo thi xuan yen";
+							}
+							else if(listd[i].cl02_ren == "2020"){
+								shenheren = "TRAN DINH TRUONG";
+							}		            
+							else if(listd[i].cl02_ren == "2021"){
+								shenheren = "DO LE VI";
+							}		            
+							else if(listd[i].cl02_ren == "2022"){
+								shenheren = "TRAN PHUONG THAO";
+							}		            
+							else if(listd[i].cl02_ren == "2023"){
+								shenheren = "TRAN NGUYEN BA";
+							}		            
+							else if(listd[i].cl02_ren == "2024"){
+								shenheren = "NGUYEN DUC HOANG NAM";
+							}		            
+							else if(listd[i].cl02_ren == "2025"){
+								shenheren = "NGUYEN HUU HUY";
+							}		            
+							else if(listd[i].cl02_ren == "2027"){
+								shenheren = "PHAM THI KIM THANH";
+							}		            
+							else if(listd[i].cl02_ren == "2028"){
+								shenheren = "HUYNH NGOC TRANG";
+							}		            
+							else if(listd[i].cl02_ren == "2029"){
+								shenheren = "HUYNH THI KHANH LINH";
+							}		            
+							else if(listd[i].cl02_ren == "2030"){
+								shenheren = "NGUYEN HOA THANH";
+							}		            
+							else if(listd[i].cl02_ren == "2031"){
+								shenheren = "NGUYEN NGOC HUY";
+							}		            
+							else if(listd[i].cl02_ren == "2032"){
+								shenheren = "NGUYEN THI TRANG";
+							}		            
+							else if(listd[i].cl02_ren == "2033"){
+								shenheren = "DUONG NGOC HUYEN";
+							}		            
+							else if(listd[i].cl02_ren == "2034"){
+								shenheren = "TRAN MY THUY";
+							}		            
+							else if(listd[i].cl02_ren == "2035"){
+								shenheren = "TRAN THI KHANH LINH";
+							}		            
+							else if(listd[i].cl02_ren == "2037"){
+								shenheren = "PHAM HOANG PHUONG";
+							}		            
+							else if(listd[i].cl02_ren == "2038"){
+								shenheren = "TRAN THI THUY VAN";
+							}		            
+							else if(listd[i].cl02_ren == "2039"){
+								shenheren = "NGUYEN THI THUONG";
+							}		            
+							else if(listd[i].cl02_ren == "2040"){
+								shenheren = "HO THI NGOC LIEN";
+							}		            
+							else if(listd[i].cl02_ren == "2041"){
+								shenheren = "NGO LIEN TRAN CHAU";
+							}		            
+							else if(listd[i].cl02_ren == "2042"){
+								shenheren = "TRAN THI HAI YEN";
+							}		            
+							else if(listd[i].cl02_ren == "2043"){
+								shenheren = "NGUYEN HUU CANH";
+							}		            
+							else if(listd[i].cl02_ren == "2044"){
+								shenheren = "TRAN THUY TRANG";
+							}
+				            shenheclyj = listd[i].cl02_yj;
+				            shibaijieduan="Thẩm định lần 2"
+				        }
+				     html_s +="<td>"+ listd[i].create_date+"</td>";
+				     html_s +="<td>"+ listd[i].jk_money+"</td>";
+					 html_s +="<td align=''>"+shenheren+"</td>";					
+					 html_s +="<td>"+ shibaijieduan+"</td>";
+                    html_s +="<td>"+shenheclyj+"</td>";
+					 html_s +="<td>"+shenped+"</td>";
+					 html_s +="<td>"+shenhesj+"</td></tr>";
+				 }
+				 html_s +="</tbody></table></div></div></div>";
+				 $("#shib2").html(html_s)
+			 }
+       
+        /*-----------------第三阶段失败借款记录-----------------------*/
+			  if(data.numcount3.length>0)
+			 {		
+			     $("#shib3").show();
+				 var html_s="";
+				 html_s +="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='fa fa-reorder'></i>Hồ sơ thẩm định thất bại giai đoạn 3</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='fa fa-angle-down'></i></span></div></div></div>";
+				 html_s +="<div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian vay</th><th>Số tiền vay</th><th>Người thẩm định</th><th>Giai đoạn thất bại</th><th>Lý do thất bại</th><th class='hidden-xs'>Số tiền được duyệt</th><th>Thời gian thẩm định</th></tr></thead><tbody>";
+				 var listd =data.numcount3;
+				 for(var i=0;i<listd.length;i++)
+				 {
+				      var shenhesj ;
+		              var shenheren ="SYSTEM";
+		              var shenheclyj ;
+		              var shibaijieduan ;
+		              var shenped = "0"; 
+				        if(listd[i].cl03_status =="3"){		            
+				            shenhesj=listd[i].cl03_time ;
+				             if(typeof( shenhesj)=="undefined"){ 
+
+                            shenhesj=listd[i].cl03_time; 
+
+                          } 
+				             if(listd[i].cl03_ren =="6"){
+				                shenheren ="BRAIN" ;
+				            } 
+							else if(listd[i].cl03_ren == "2001"){
+								shenheren = "NGUYEN HUY VU";
+							} 				            
+							else if(listd[i].cl03_ren == "2002"){
+								shenheren = "bui thi kieu nga";
+							} 				            
+							else if(listd[i].cl03_ren == "2003"){
+								shenheren = "nguyen thi hanh nguyen";
+							} 				            
+							else if(listd[i].cl03_ren == "2004"){
+								shenheren = "vo thi ngoc hang";
+							} 				            
+							else if(listd[i].cl03_ren == "2005"){
+								shenheren = "nguyen thi thuy trang";
+							}
+							else if(listd[i].cl03_ren == "2006"){
+								shenheren = "nguyen viet trinh";
+							}		            
+							else if(listd[i].cl03_ren == "2007"){
+								shenheren = "phan ngoc thuong";
+							}		            
+							else if(listd[i].cl03_ren == "2008"){
+								shenheren = "hoang nogc phuong diem";
+							}		            
+							else if(listd[i].cl03_ren == "2009"){
+								shenheren = "Vo Thi Hong Gam";
+							}		            
+							else if(listd[i].cl03_ren == "2010"){
+								shenheren = "nguyen vu tra my";
+							}		            
+							else if(listd[i].cl03_ren == "2012"){
+								shenheren = "Bui thi xuan dong";
+							}		            
+							else if(listd[i].cl03_ren == "2014"){
+								shenheren = "Tran thi viet trinh";
+							}		            
+							else if(listd[i].cl03_ren == "2015"){
+								shenheren = "Vo thi xuan yen";
+							}
+							else if(listd[i].cl03_ren == "2020"){
+								shenheren = "TRAN DINH TRUONG";
+							}		            
+							else if(listd[i].cl03_ren == "2021"){
+								shenheren = "DO LE VI";
+							}		            
+							else if(listd[i].cl03_ren == "2022"){
+								shenheren = "TRAN PHUONG THAO";
+							}		            
+							else if(listd[i].cl03_ren == "2023"){
+								shenheren = "TRAN NGUYEN BA";
+							}		            
+							else if(listd[i].cl03_ren == "2024"){
+								shenheren = "NGUYEN DUC HOANG NAM";
+							}		            
+							else if(listd[i].cl03_ren == "2025"){
+								shenheren = "NGUYEN HUU HUY";
+							}		            
+							else if(listd[i].cl03_ren == "2027"){
+								shenheren = "PHAM THI KIM THANH";
+							}		            
+							else if(listd[i].cl03_ren == "2028"){
+								shenheren = "HUYNH NGOC TRANG";
+							}		            
+							else if(listd[i].cl03_ren == "2029"){
+								shenheren = "HUYNH THI KHANH LINH";
+							}		            
+							else if(listd[i].cl03_ren == "2030"){
+								shenheren = "NGUYEN HOA THANH";
+							}		            
+							else if(listd[i].cl03_ren == "2031"){
+								shenheren = "NGUYEN NGOC HUY";
+							}		            
+							else if(listd[i].cl03_ren == "2032"){
+								shenheren = "NGUYEN THI TRANG";
+							}		            
+							else if(listd[i].cl03_ren == "2033"){
+								shenheren = "DUONG NGOC HUYEN";
+							}		            
+							else if(listd[i].cl03_ren == "2034"){
+								shenheren = "TRAN MY THUY";
+							}		            
+							else if(listd[i].cl03_ren == "2035"){
+								shenheren = "TRAN THI KHANH LINH";
+							}		            
+							else if(listd[i].cl03_ren == "2037"){
+								shenheren = "PHAM HOANG PHUONG";
+							}		            
+							else if(listd[i].cl03_ren == "2038"){
+								shenheren = "TRAN THI THUY VAN";
+							}		            
+							else if(listd[i].cl03_ren == "2039"){
+								shenheren = "NGUYEN THI THUONG";
+							}		            
+							else if(listd[i].cl03_ren == "2040"){
+								shenheren = "HO THI NGOC LIEN";
+							}		            
+							else if(listd[i].cl03_ren == "2041"){
+								shenheren = "NGO LIEN TRAN CHAU";
+							}		            
+							else if(listd[i].cl03_ren == "2042"){
+								shenheren = "TRAN THI HAI YEN";
+							}		            
+							else if(listd[i].cl03_ren == "2043"){
+								shenheren = "NGUYEN HUU CANH";
+							}		            
+							else if(listd[i].cl03_ren == "2044"){
+								shenheren = "TRAN THUY TRANG";
+							}
+				            shenheclyj = listd[i].cl03_yj;
+				            shibaijieduan="Thẩm định lần 3"
+				            shenped =listd[i].sjsh_money;
+				        }
+				     html_s +="<td>"+ listd[i].create_date+"</td>";
+				     html_s +="<td>"+ listd[i].jk_money+"</td>";
+					 html_s +="<td align=''>"+shenheren+"</td>";					
+					 html_s +="<td>"+ shibaijieduan+"</td>";
+                    html_s +="<td>"+shenheclyj+"</td>";
+					 html_s +="<td>"+shenped+"</td>";
+					 html_s +="<td>"+shenhesj+"</td></tr>";
+				 }
+				 html_s +="</tbody></table></div></div></div>";
+				 $("#shib3").html(html_s)
+			 }
+       
+			 /*-----------------成功借款记录-----------------------*/
+		      if(data.windrsize.length>0)
+			 {
+				  var html_w="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='icon-reorder'></i>Hồ sơ vay thành công</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='icon-angle-down'></i></span></div></div></div><div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Họ tên người thẩm định lần 1</th><th>Thời gian thẩm định 1</th><th>Họ tên người thẩm định lần 2</th><th>Thời gian thẩm định 2</th><th>Họ tên người thẩm định lần 3</th><th>Thời gian thẩm định 3</th><th>Số tiền vay</th><th>Thời gian giải ngân</th><th>Thời gian trả vay hệ thống</th><th>Gia hạn thời gian đáo hạn</th><th>Thời gian khách trả vay</th><th>Số ngày quá hạn</th></tr></thead><tbody>";
+				 var listw=data.windrsize;
+				 for(var i=0;i<listw.length;i++)
+				 {  
+				     var shenheren1 ="SYSTEM";
+				   var shenheren2 ="SYSTEM";
+				   var shenheren3 ="SYSTEM";
+				   if(listw[i].cl_ren =="6"){
+				                shenheren1 ="BRAIN" ;
+				            }
+				   else if(listw[i].cl_ren == "2001"){
+						shenheren1 = "NGUYEN HUY VU";
+					} 				            
+					else if(listw[i].cl_ren == "2002"){
+						shenheren1 = "bui thi kieu nga";
+					} 				            
+					else if(listw[i].cl_ren == "2003"){
+						shenheren1 = "nguyen thi hanh nguyen";
+					} 				            
+					else if(listw[i].cl_ren == "2004"){
+						shenheren1 = "vo thi ngoc hang";
+					} 				            
+					else if(listw[i].cl_ren == "2005"){
+						shenheren1 = "nguyen thi thuy trang";
+					}
+					else if(listw[i].cl_ren == "2006"){
+						shenheren1 = "nguyen viet trinh";
+					}		            
+					else if(listw[i].cl_ren == "2007"){
+						shenheren1 = "phan ngoc thuong";
+					}		            
+					else if(listw[i].cl_ren == "2008"){
+						shenheren1 = "hoang nogc phuong diem";
+					}		            
+					else if(listw[i].cl_ren == "2009"){
+						shenheren1 = "Vo Thi Hong Gam";
+					}		            
+					else if(listw[i].cl_ren == "2010"){
+						shenheren1 = "nguyen vu tra my";
+					}		            
+					else if(listw[i].cl_ren == "2012"){
+						shenheren1 = "Bui thi xuan dong";
+					}		            
+					else if(listw[i].cl_ren == "2014"){
+						shenheren1 = "Tran thi viet trinh";
+					}		            
+					else if(listw[i].cl_ren == "2015"){
+						shenheren1 = "Vo thi xuan yen";
+					}
+					else if(listw[i].cl_ren == "2020"){
+						shenheren1 = "TRAN DINH TRUONG";
+					}		            
+					else if(listw[i].cl_ren == "2021"){
+						shenheren1 = "DO LE VI";
+					}		            
+					else if(listw[i].cl_ren == "2022"){
+						shenheren1 = "TRAN PHUONG THAO";
+					}		            
+					else if(listw[i].cl_ren == "2023"){
+						shenheren1 = "TRAN NGUYEN BA";
+					}		            
+					else if(listw[i].cl_ren == "2024"){
+						shenheren1 = "NGUYEN DUC HOANG NAM";
+					}		            
+					else if(listw[i].cl_ren == "2025"){
+						shenheren1 = "NGUYEN HUU HUY";
+					}		            
+					else if(listw[i].cl_ren == "2027"){
+						shenheren1 = "PHAM THI KIM THANH";
+					}		            
+					else if(listw[i].cl_ren == "2028"){
+						shenheren1 = "HUYNH NGOC TRANG";
+					}		            
+					else if(listw[i].cl_ren == "2029"){
+						shenheren1 = "HUYNH THI KHANH LINH";
+					}		            
+					else if(listw[i].cl_ren == "2030"){
+						shenheren1 = "NGUYEN HOA THANH";
+					}		            
+					else if(listw[i].cl_ren == "2031"){
+						shenheren1 = "NGUYEN NGOC HUY";
+					}		            
+					else if(listw[i].cl_ren == "2032"){
+						shenheren1 = "NGUYEN THI TRANG";
+					}		            
+					else if(listw[i].cl_ren == "2033"){
+						shenheren1 = "DUONG NGOC HUYEN";
+					}		            
+					else if(listw[i].cl_ren == "2034"){
+						shenheren1 = "TRAN MY THUY";
+					}		            
+					else if(listw[i].cl_ren == "2035"){
+						shenheren1 = "TRAN THI KHANH LINH";
+					}		            
+					else if(listw[i].cl_ren == "2037"){
+						shenheren1 = "PHAM HOANG PHUONG";
+					}		            
+					else if(listw[i].cl_ren == "2038"){
+						shenheren1 = "TRAN THI THUY VAN";
+					}		            
+					else if(listw[i].cl_ren == "2039"){
+						shenheren1 = "NGUYEN THI THUONG";
+					}		            
+					else if(listw[i].cl_ren == "2040"){
+						shenheren1 = "HO THI NGOC LIEN";
+					}		            
+					else if(listw[i].cl_ren == "2041"){
+						shenheren1 = "NGO LIEN TRAN CHAU";
+					}		            
+					else if(listw[i].cl_ren == "2042"){
+						shenheren1 = "TRAN THI HAI YEN";
+					}		            
+					else if(listw[i].cl_ren == "2043"){
+						shenheren1 = "NGUYEN HUU CANH";
+					}		            
+					else if(listw[i].cl_ren == "2044"){
+						shenheren1 = "TRAN THUY TRANG";
+					}				            
+							
+				   if(listw[i].cl02_ren =="6"){
+				                shenheren2 ="BRAIN" ;
+				            } 
+				   else if(listw[i].cl02_ren == "2001"){
+						shenheren2 = "NGUYEN HUY VU";
+					} 				            
+					else if(listw[i].cl02_ren == "2002"){
+						shenheren2 = "bui thi kieu nga";
+					} 				            
+					else if(listw[i].cl02_ren == "2003"){
+						shenheren2 = "nguyen thi hanh nguyen";
+					} 				            
+					else if(listw[i].cl02_ren == "2004"){
+						shenheren2 = "vo thi ngoc hang";
+					} 				            
+					else if(listw[i].cl02_ren == "2005"){
+						shenheren2 = "nguyen thi thuy trang";
+					}
+					else if(listw[i].cl02_ren == "2006"){
+						shenheren2 = "nguyen viet trinh";
+					}		            
+					else if(listw[i].cl02_ren == "2007"){
+						shenheren2 = "phan ngoc thuong";
+					}		            
+					else if(listw[i].cl02_ren == "2008"){
+						shenheren2 = "hoang nogc phuong diem";
+					}		            
+					else if(listw[i].cl02_ren == "2009"){
+						shenheren2 = "Vo Thi Hong Gam";
+					}		            
+					else if(listw[i].cl02_ren == "2010"){
+						shenheren2 = "nguyen vu tra my";
+					}		            
+					else if(listw[i].cl02_ren == "2012"){
+						shenheren2 = "Bui thi xuan dong";
+					}		            
+					else if(listw[i].cl02_ren == "2014"){
+						shenheren2 = "Tran thi viet trinh";
+					}		            
+					else if(listw[i].cl02_ren == "2015"){
+						shenheren2 = "Vo thi xuan yen";
+					}
+					else if(listw[i].cl02_ren == "2020"){
+						shenheren2 = "TRAN DINH TRUONG";
+					}		            
+					else if(listw[i].cl02_ren == "2021"){
+						shenheren2 = "DO LE VI";
+					}		            
+					else if(listw[i].cl02_ren == "2022"){
+						shenheren2 = "TRAN PHUONG THAO";
+					}		            
+					else if(listw[i].cl02_ren == "2023"){
+						shenheren2 = "TRAN NGUYEN BA";
+					}		            
+					else if(listw[i].cl02_ren == "2024"){
+						shenheren2 = "NGUYEN DUC HOANG NAM";
+					}		            
+					else if(listw[i].cl02_ren == "2025"){
+						shenheren2 = "NGUYEN HUU HUY";
+					}		            
+					else if(listw[i].cl02_ren == "2027"){
+						shenheren2 = "PHAM THI KIM THANH";
+					}		            
+					else if(listw[i].cl02_ren == "2028"){
+						shenheren2 = "HUYNH NGOC TRANG";
+					}		            
+					else if(listw[i].cl02_ren == "2029"){
+						shenheren2 = "HUYNH THI KHANH LINH";
+					}		            
+					else if(listw[i].cl02_ren == "2030"){
+						shenheren2 = "NGUYEN HOA THANH";
+					}		            
+					else if(listw[i].cl02_ren == "2031"){
+						shenheren2 = "NGUYEN NGOC HUY";
+					}		            
+					else if(listw[i].cl02_ren == "2032"){
+						shenheren2 = "NGUYEN THI TRANG";
+					}		            
+					else if(listw[i].cl02_ren == "2033"){
+						shenheren2 = "DUONG NGOC HUYEN";
+					}		            
+					else if(listw[i].cl02_ren == "2034"){
+						shenheren2 = "TRAN MY THUY";
+					}		            
+					else if(listw[i].cl02_ren == "2035"){
+						shenheren2 = "TRAN THI KHANH LINH";
+					}		            
+					else if(listw[i].cl02_ren == "2037"){
+						shenheren2 = "PHAM HOANG PHUONG";
+					}		            
+					else if(listw[i].cl02_ren == "2038"){
+						shenheren2 = "TRAN THI THUY VAN";
+					}		            
+					else if(listw[i].cl02_ren == "2039"){
+						shenheren2 = "NGUYEN THI THUONG";
+					}		            
+					else if(listw[i].cl02_ren == "2040"){
+						shenheren2 = "HO THI NGOC LIEN";
+					}		            
+					else if(listw[i].cl02_ren == "2041"){
+						shenheren2 = "NGO LIEN TRAN CHAU";
+					}		            
+					else if(listw[i].cl02_ren == "2042"){
+						shenheren2 = "TRAN THI HAI YEN";
+					}		            
+					else if(listw[i].cl02_ren == "2043"){
+						shenheren2 = "NGUYEN HUU CANH";
+					}		            
+					else if(listw[i].cl02_ren == "2044"){
+						shenheren2 = "TRAN THUY TRANG";
+					}			            
+							
+				   if(listw[i].cl03_ren =="6"){
+				                shenheren3 ="BRAIN" ;
+				            } 
+				   else if(listw[i].cl03_ren == "2001"){
+						shenheren3 = "NGUYEN HUY VU";
+					} 				            
+					else if(listw[i].cl03_ren == "2002"){
+						shenheren3 = "bui thi kieu nga";
+					} 				            
+					else if(listw[i].cl03_ren == "2003"){
+						shenheren3 = "nguyen thi hanh nguyen";
+					} 				            
+					else if(listw[i].cl03_ren == "2004"){
+						shenheren3 = "vo thi ngoc hang";
+					} 				            
+					else if(listw[i].cl03_ren == "2005"){
+						shenheren3 = "nguyen thi thuy trang";
+					}
+					else if(listw[i].cl03_ren == "2006"){
+						shenheren3 = "nguyen viet trinh";
+					}		            
+					else if(listw[i].cl03_ren == "2007"){
+						shenheren3 = "phan ngoc thuong";
+					}		            
+					else if(listw[i].cl03_ren == "2008"){
+						shenheren3 = "hoang nogc phuong diem";
+					}		            
+					else if(listw[i].cl03_ren == "2009"){
+						shenheren3 = "Vo Thi Hong Gam";
+					}		            
+					else if(listw[i].cl03_ren == "2010"){
+						shenheren3 = "nguyen vu tra my";
+					}		            
+					else if(listw[i].cl03_ren == "2012"){
+						shenheren3 = "Bui thi xuan dong";
+					}		            
+					else if(listw[i].cl03_ren == "2014"){
+						shenheren3 = "Tran thi viet trinh";
+					}		            
+					else if(listw[i].cl03_ren == "2015"){
+						shenheren3 = "Vo thi xuan yen";
+					}
+					else if(listw[i].cl03_ren == "2020"){
+						shenheren3 = "TRAN DINH TRUONG";
+					}		            
+					else if(listw[i].cl03_ren == "2021"){
+						shenheren3 = "DO LE VI";
+					}		            
+					else if(listw[i].cl03_ren == "2022"){
+						shenheren3 = "TRAN PHUONG THAO";
+					}		            
+					else if(listw[i].cl03_ren == "2023"){
+						shenheren3 = "TRAN NGUYEN BA";
+					}		            
+					else if(listw[i].cl03_ren == "2024"){
+						shenheren3 = "NGUYEN DUC HOANG NAM";
+					}		            
+					else if(listw[i].cl03_ren == "2025"){
+						shenheren3 = "NGUYEN HUU HUY";
+					}		            
+					else if(listw[i].cl03_ren == "2027"){
+						shenheren3 = "PHAM THI KIM THANH";
+					}		            
+					else if(listw[i].cl03_ren == "2028"){
+						shenheren3 = "HUYNH NGOC TRANG";
+					}		            
+					else if(listw[i].cl03_ren == "2029"){
+						shenheren3 = "HUYNH THI KHANH LINH";
+					}		            
+					else if(listw[i].cl03_ren == "2030"){
+						shenheren3 = "NGUYEN HOA THANH";
+					}		            
+					else if(listw[i].cl03_ren == "2031"){
+						shenheren3 = "NGUYEN NGOC HUY";
+					}		            
+					else if(listw[i].cl03_ren == "2032"){
+						shenheren3 = "NGUYEN THI TRANG";
+					}		            
+					else if(listw[i].cl03_ren == "2033"){
+						shenheren3 = "DUONG NGOC HUYEN";
+					}		            
+					else if(listw[i].cl03_ren == "2034"){
+						shenheren3 = "TRAN MY THUY";
+					}		            
+					else if(listw[i].cl03_ren == "2035"){
+						shenheren3 = "TRAN THI KHANH LINH";
+					}		            
+					else if(listw[i].cl03_ren == "2037"){
+						shenheren3 = "PHAM HOANG PHUONG";
+					}		            
+					else if(listw[i].cl03_ren == "2038"){
+						shenheren3 = "TRAN THI THUY VAN";
+					}		            
+					else if(listw[i].cl03_ren == "2039"){
+						shenheren3 = "NGUYEN THI THUONG";
+					}		            
+					else if(listw[i].cl03_ren == "2040"){
+						shenheren3 = "HO THI NGOC LIEN";
+					}		            
+					else if(listw[i].cl03_ren == "2041"){
+						shenheren3 = "NGO LIEN TRAN CHAU";
+					}		            
+					else if(listw[i].cl03_ren == "2042"){
+						shenheren3 = "TRAN THI HAI YEN";
+					}		            
+					else if(listw[i].cl03_ren == "2043"){
+						shenheren3 = "NGUYEN HUU CANH";
+					}		            
+					else if(listw[i].cl03_ren == "2044"){
+						shenheren3 = "TRAN THUY TRANG";
+					}	
+					var aa =	parseInt(listw[i].sjds_money.replace(/,/g,""));
+					var bb = parseInt(listw[i].lx.replace(/,/g,""));
+					var cc = aa + bb;
+		  			var zje = toThousands(cc);
+		  			
+					 html_w +="<tr><td align=''>"+shenheren1+"</td>";
+					 html_w +="<td align=''>"+listw[i].cl_time+"</td>";
+					 html_w +="<td align=''>"+shenheren2+"</td>";
+					 html_w +="<td align=''>"+listw[i].cl02_time+"</td>";
+				   	 html_w +="<td align=''>"+shenheren3+"</td>";
+					 html_w +="<td align=''>"+listw[i].cl03_time+"</td>";
+					 html_w +="<td>"+zje+"</td>";
+					 html_w +="<td>"+listw[i].fkdz_time+"</td>";
+					 html_w +="<td>"+listw[i].hkyq_time+"</td>";	
+					 
+					 if(listw[i].hkfq_time != undefined){
+					 	html_w +="<td>"+listw[i].hkfq_time+"</td>";
+					 }else{
+					 	html_w +="<td>Không</td>";
+					 }
+					 
+					 if(listw[i].sfyhw ==1){					 
+					    html_w +="<td>"+listw[i].hk_time +"</td>";   					      
+					 }else {					 
+					     html_w +="<td>Tạm thời chưa trả vay</td>"; 
+					 }
+					 html_w +="<td>"+listw[i].yuq_ts+"</td>";
+					 html_w +="</tr>";
+				 }
+				 $("#win").html(html_w);
+			 }
+			 	
+			 
+			 /*-----------------催收记录-----------------------*/
+		      if(data.cuishouxx.length>0)
+			 {
+				 var html_c="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='icon-reorder'></i>Ghi chú truy nợ</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='icon-angle-down'></i></span></div></div></div><div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian ghi chú</th><th>ID vay</th><th>Nội dung ghi chú</th><th class='hidden-xs'>Người truy nợ</th></tr></thead><tbody>";
+				 var listc=data.cuishouxx;
+				 for(var i=0;i<listc.length;i++)
+				 {  
+				   	var csr = "SYSTEM";
+					 html_c +="<tr><td align=''>"+listc[i].visitdate+"</td>";
+					 html_c +="<td>"+listc[i].jkjl_id+"</td>";
+					 html_c +="<td>"+listc[i].content+"</td>";
+					 if(listc[i].kefuid == "5001"){
+					    csr ="bui truong giang";
+					 }else if(listc[i].kefuid == "5002"){
+					 	csr ="nguyen hoang vien";
+					 }else if(listc[i].kefuid == "5003"){
+					 	csr ="vo thi thanh hang";
+					 }else if(listc[i].kefuid == "5004"){
+					 	csr ="pham thi ngan trang";
+					 }else if(listc[i].kefuid == "5005"){
+					 	csr ="vu hao hiep";
+					 }else{
+					 	csr =listc[i].kefuid;
+					 }		 
+					 html_c +="<td>"+csr +"</td>";   					      
+					  				
+					 html_c +="</tr>";
+				 }
+				 $("#cscs").html(html_c);
+			 }
+			 
+			/*  /*-----------------olava-----------------------
+		     
+				 var html_cs="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='icon-reorder'></i>Tình hình vay Olava</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='icon-angle-down'></i></span></div></div></div><div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Số lần thẩm định lần 1 thất bại</th><th>Số lần thẩm định lần 2 thất bại</th><th>Số lần thẩm định lần 3 thất bại</th><th>Số lần vay thành công</th><th>Số lần quá hạn</th><th class='hidden-xs'>Quá hạn chưa trả</th></tr></thead><tbody>";
+				 
+				
+					 html_cs +="<tr><td align=''>"+data.shibai1+"</td>";
+					 html_cs +="<td>"+data.shibai2+"</td>";
+					 html_cs +="<td>"+data.shibai3+"</td>";
+					 html_cs +="<td>"+data.chenggong +"</td>";   					      
+					 html_cs +="<td>"+data.yuqcs +"</td>";   					      
+					 html_cs +="<td>"+data.yqwh +"</td>";     					      
+					  				
+					 html_cs +="</tr>";
+				 
+				 $("#cscsjk").html(html_cs); 
+			 
+			 */
+			 /*--------个人照片信息 ---------*/
+			  var html_p="";
+			   if(data.p1.slice(0,2) == "H5"){
+			  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
+			   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
+			  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
+			   }else{
+			   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
+			   html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
+			   html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
+			   }
+
+              /*  if(data.status == "1")
+			 { */
+				 $("#ribid").attr("class","ribbon green");
+				 $("#ribid").html("Đã thẩm định")
+				 $("#ribb_phone").show();
+			/*  }
+			 else
+			 { */
+				//rad_id=rad_id+1;
+				/*  html_p +="<div style='margin-top:20px;'>"
+				 html_p +="<label class='radio-inline'><input name='ph' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_p +="<label class='radio-inline'><input name='ph' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 html_p +="</div>";
+				 $("#ribid").attr("class","ribbon orange");
+				 $("#ribb_phone").show();
+			 } */
+			 
+			  $(".list-group").html(html_p);
+			  $("#reid").val(data.user_id);
+			  $("#i_id").val(data.jk_id);
+			  	$('.roomimg').artZoom({
+		  //path: '/assets/img',
+		  // 设置artZoom图片文件夹路径
+		  preload: true,
+		  // 设置是否提前缓存视野内的大图片
+		  blur: true,
+		  // 设置加载大图是否有模糊变清晰的效果
+		  // 语言设置
+		  left: 'turn left',
+		  // 左旋转按钮文字
+		  right: 'turn right',
+		  // 右旋转按钮文字
+		  //source: '看原图' // 查看原图按钮文字
+		});
+			  //评分
+			  $("#pingfen").html(data.pingfen);
+			 
+	    /*   $("#load_html").hide(); */
+		});
+	}
+ 
+function toThousands(num) {  
+	    		var num = (num || 0).toString(), result = '';  
+	    		while (num.length > 3) {  
+	        		result = ',' + num.slice(-3) + result;  
+	        		num = num.slice(0, num.length - 3);  
+	    		}  
+	    		if (num) { 
+				result = num + result; 
+			}  
+    			return result;  
+		     }
+ /*-------判断审核状态------*/
+ function radi()
+ {
+	var job=$("input:radio[name='job']:checked").val();
+	var school=$("input:radio[name='school']:checked").val();
+	var con=$("input:radio[name='con']:checked").val();
+	var ph=$("input:radio[name='ph']:checked").val();
+	//alert("job---->"+job+"con---->"+con+"ph-------->"+ph);
+	if(job==0 || con==0 || ph==0||school==0)
+	{
+		document.getElementById("has-sh_end").style.display="none";
+		document.getElementById("nobeco").style.display="block";
+		document.getElementById("has-group").style.display="none";
+	}
+	else if(job==1 || con==1 || ph==1||school)
+	{
+		document.getElementById("has-sh_end").style.display="none";
+		document.getElementById("nobeco").style.display="none";
+		document.getElementById("has-group").style.display="block";
+	}
+	else if(job==null && con==null && ph==null&&school==null)
+	{
+		document.getElementById("nobeco").style.display="none";
+		document.getElementById("has-group").style.display="block";
+		document.getElementById("has-sh_end").style.display="block";
+	}
+ }
+ 
+ 
+ /* function iblur()
+ {
+	//验证非零的正整数
+	var type = /^\+?[1-9][0-9]*$/;
+	var reg = new RegExp(type);  
+	var obj = $("#edu").val();
+	$("#has-group").attr("class","form-group  has-error");
+	if(obj == null)
+	{
+		$("#lab").html("建议金额不能为空");
+	}
+	else
+	{
+		if(!reg.test(obj))
+		{  
+			$("#lab").html("请输入非零的正整数!");
+		}
+		else
+		{
+			if(obj<500 || obj>5000)
+			{
+				$("#lab").html("请输入500-5000的建议金额!");
+			}
+			else
+			{
+				// class="form-group  has-error" id="has-group"
+				$("#lab").html("");
+				$("#has-group").attr("class","form-group  has-success");
+			}
+		}
+	}
+ } */
+ 
+  /*--------提交审核结果---------*/
+ 
+ /* function sub_form(){
+	var zj_flag=0;
+	if(zj_flag == 1)
+	{
+		alert("数据正在提交,请稍等.....");
+	}
+	else
+	{
+		var bhstate_=$("#bhstate").val();
+		var job_=$("input:radio[name='job']:checked").val();
+		var school_=$("input:radio[name='school']:checked").val();
+		var con_=$("input:radio[name='con']:checked").val();
+		var ph_=$("input:radio[name='ph']:checked").val();
+		var cg_type_=0;
+		var remark_=$("#remark").val();
+		var flag=0;
+		var jymoney_=0;
+		if(job_==0 || con_==0 || ph_==0||school_==0)
+		{
+			if(bhstate_==0)
+			{
+				alert("您选择了驳回，请选择驳回理由");
+				flag=1;
+			}
+			else
+			{
+				if(remark_==null || remark_=="")
+				{
+					alert("请填写驳回备注");
+					flag=1;
+				}
+			}
+			if(ph_ == null)
+			{
+				ph_=4;
+			}
+			if(con_ == null)
+			{
+				con_=4;
+			}
+			if(job_ == null)
+			{
+				job_=4;
+			}
+			if(school_ == null)
+			{
+				school_=4;
+			}
+		}
+		else  if(job_==1 || con_==1 || ph_==1||school_==1)
+		{
+			var grop=$("#lab").html();
+			if(grop != "")
+			{
+				alert(grop);
+				flag=1;
+			}
+			else
+			{
+				jymoney_=$("#edu").val();
+			}
+			if(ph_ == null)
+			{
+				ph_=4;
+			}
+			if(con_ == null)
+			{
+				con_=4;
+			}
+			if(job_ == null)
+			{
+				job_=4;
+			}
+			if(school_ == null)
+			{
+				school_=4;
+			}
+		}
+		else if(job_==null && con_==null && ph_==null&&school_==null)
+		{
+			var sh_end_=$("input:radio[name='sh_end']:checked").val();
+			cg_type_=sh_end_;
+			if(sh_end_ == 1)
+			{
+				var grop=$("#lab").html();
+				if(grop != "")
+				{
+					alert(grop);
+					flag=1;
+				}
+				else
+				{
+					jymoney_=$("#edu").val();
+				}
+			}
+			else if(sh_end_ == 0)
+			{
+				if(bhstate_==0)
+				{
+					alert("您选择了驳回，请选择驳回理由");
+					flag=1;
+				}
+				else if(bhstate_ == 3)
+				{
+					alert("信息有误表示用户信息不正确,但是该用户信息已被审核,请重新选择拒绝理由");
+					flag=1;
+				}
+				else
+				{
+					if(remark_==null || remark_=="")
+					{
+						alert("请填写驳回备注");
+						flag=1;
+					}
+				}
+			}
+			ph_=3;
+			con_=3;
+			job_=3;
+			school_=3;
+		}
+		
+		if(flag == 0)
+		{
+			if(confirm("是否确认审核结果？"))
+			{
+				var remark_=$("#remark").val();
+				var reid_=$("#reid").val();
+				var i_id_=$("#i_id").val();
+				var j_id_=$("#j_id").val();
+				var para={reid:reid_,remark:remark_,jymoney:jymoney_,ph:ph_,con:con_,job:job_,school:school_,i_id:i_id_,bhstate:bhstate_,cg_type:cg_type_};
+				zj_flag=1;
+			 loadGetServer("/servlet/current/JBDcmsAction?function=GetShenhOne",para,function(data){
+					if(data.error == 1)
+					{
+						alert(data.msg);
+						parent.f_hide_ifm();
+					}
+					else if(data.error == 0)
+					{
+						window.close();
+					}
+					zj_flag=0;
+				});
+			}
+		}
+	}
+	
+ }
+  */
+ function radi_end()
+ {
+	 var job=$("input:radio[name='sh_end']:checked").val();
+	 if(job == 1)
+	 {
+		document.getElementById("has-group").style.display="block";
+		 document.getElementById("nobeco").style.display="none";
+	 }
+	 else
+	 {
+		 document.getElementById("has-group").style.display="none";
+		 document.getElementById("nobeco").style.display="block";
+	 }
+ }
+ 
+  function get_zx()
+    {
+	  var reid=GetQueryString("record_id");
+	 window.open("/sdmain/zx/H5YNindex.html?user_id="+$("#reid").val()+"&rec_id="+reid);
+	 } 
+	 function open_user(userid)
+   {
+	   window.open("/sdmain/record_detail/user_chenggong.html?record_id=0&userid="+userid);
+   }
+	 function get_gaoji()
+    {
+    console.log(111);
+	  loadGetServer("/servlet/current/JBDcms3Action?function=GetGaoji",{},function(data){
+					if(data.error == 1)
+					{
+						window.open("/sdmain/zx/Zaloindex.html?user_id="+$("#reid").val());
+					}
+					else
+					{
+						alert(data.msg);
+					}
+				});
+	 } 
+  $("#load_html").hide();
+	 
+  </script>
+  
+  <script>
+  function call_choice(phone_)
+   {
+   	   $("#phone_").val(phone_);
+	   $("#remark_tr").html("Xin chọn đầu số gọi ra!");
+	   $("#msg_content_html").show();
+   }
+function call_phone1(phone_){
+	var code = 1 ;
+	call_phone(phone_,code);
+}
+function call_phone2(phone_){
+	var code = 2 ;
+	call_phone(phone_,code);
+}
+function call_phone3(phone_){
+	var code = 3 ;
+	call_phone(phone_,code);
+}
+   function call_phone(phone_,code_)
+   {
+	  
+		   var para={phone:$("#phone_").val(),code:code_};
+
+		   loadGetServer("/servlet/current/JBDcms3Action?function=DHGSphone",para,function(data){
+			   if(data.error>0)
+			   {
+			   	   $("#msg_content_html").hide();
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+
+</script>

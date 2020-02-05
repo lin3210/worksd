@@ -1,0 +1,202 @@
+
+<!--
+	作者：offline
+	时间：2016-06-23
+	描述：权限管理块
+-->
+<script type="text/javascript" src="/assets/js/json.js"></script>
+<div id="qx_content_role">
+
+<input type="hidden" id="qx_role_id" />	
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#qx_content_role').hide()">×</button>
+				<h4 class="modal-title">权限分配</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+		            <div class="col-md-6">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                                  系统菜单
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		                  <p>
+		                    <ul id="tree_system" class="ztree"></ul>
+		                  </p>
+		                  <a class="more" href="javascript:void(0);" id="add_menus_node">
+		                                                   添加到右侧菜单
+		                    <i class="pull-right icon-arrow-right">
+		                    </i>
+		                  </a>
+		                </div>
+		              </div>
+		            </div>
+		            <div class="col-md-6">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                                   已分配菜单
+		                  </h4>
+		                </div>
+		                <div class="widget-content" >
+		                     <ul id="tree_yfp" class="ztree" style="min-height: 172px;"></ul>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_menus_list()">确认</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#qx_content_role').hide()">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<link rel="stylesheet" href="/assets/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="/assets/tree/jquery.ztree.all.min.js"></script>
+
+<script>
+
+var setting = {
+	check: {
+		enable: true,
+		chkboxType:{ "Y" : "ps", "N" : "ps" }
+	},
+	data: {
+		simpleData: {
+			enable: true,
+		}
+	}
+};
+
+/**
+ * 页面初始化
+ */
+$(document).ready(function(){
+  onLoadZTree();
+  onLoadZTreeOk();
+});
+
+/**
+ * 加载树形结构数据
+ */
+function onLoadZTree(){
+  var treeNodes;
+  $.ajax({
+    async:false,//是否异步
+    cache:false,//是否使用缓存
+    type:'POST',//请求方式：post
+    dataType:'json',//数据传输格式：json
+    url:"/servlet/role/PowerAction?function=GetAllPower",//请求的action路径
+    error:function(){
+      //请求失败处理函数
+      alert('亲，请求失败！');
+    },
+    success:function(data){
+      //console.log(data);
+      //请求成功后处理函数
+      treeNodes = data;//把后台封装好的简单Json格式赋给treeNodes
+    }
+  });
+  $.fn.zTree.init($("#tree_system"), setting, treeNodes);
+}
+/**
+ * 加载已分配树形结构数据
+ */
+function onLoadZTreeOk(){
+  var treeNodes;
+  $.ajax({
+    async:false,//是否异步
+    cache:false,//是否使用缓存
+    type:'POST',//请求方式：post
+    dataType:'json',//数据传输格式：json
+    data:"roleId="+$("#qx_role_id").val(),
+    url:"/servlet/role/PowerAction?function=GetPowerByRole",//请求的action路径
+    error:function(){
+      //请求失败处理函数
+      alert('亲，请求失败！');
+    },
+    success:function(data){
+      //console.log(data);
+      //请求成功后处理函数
+      treeNodes = data;//把后台封装好的简单Json格式赋给treeNodes
+    }
+  });
+  $.fn.zTree.init($("#tree_yfp"), setting, treeNodes);
+}
+
+var json_list = "";
+
+function checkNode(e) {
+	var zTree = $.fn.zTree.getZTreeObj("tree_system"),
+	type = e.data.type;
+	$.fn.zTree.destroy($("#tree_yfp"));
+	//var yTree = $.fn.zTree.getZTreeObj("tree_yfp");
+	/*
+	if (type.indexOf("All")<0 && nodes.length == 0) {
+		alert("请先选择一个节点");
+	}
+
+	if (type == "checkAllTrue") {
+		zTree.checkAllNodes(true);
+	} 
+	else if (type == "checkAllFalse") {
+		zTree.checkAllNodes(false);
+	} */
+	nodes = zTree.getChangeCheckedNodes();
+	var add_menus  = new Array();
+	json_list = "";
+	for (var i=0, l=nodes.length; i<l; i++) 
+	{
+		if(i==(nodes.length-1))
+		{
+			//json_list += '{"id":'+nodes[i].id+',"pId":'+nodes[i].pId+',"url":'+nodes[i].url+'}';
+			json_list +=nodes[i].url;
+		}
+		else
+		{
+			//json_list += '{"id":'+nodes[i].id+',"pId":'+nodes[i].pId+'},"url":'+nodes[i].url+'},';
+			json_list +=nodes[i].url+",";
+		}
+		add_menus[i] = {"id":nodes[i].id,"pId":nodes[i].pId,"name":nodes[i].name,"url":nodes[i].url}
+		//yTree.addNodes(nodes[i].getParentNode(),nodes[i].getNodeIndex(),nodes[i],false)
+	}
+	//json_list += "]";
+    $.fn.zTree.init($("#tree_yfp"), setting,add_menus);
+}
+$("#add_menus_node").bind("click", {type:"checkAllTrue"}, checkNode);	 
+
+function add_menus_list()
+{
+	if(json_list.length<2){alert("请分配菜单权限");return;}
+	loadGetServer("/servlet/role/PowerAction?function=AddMenuQx",{json_str:json_list,role_id:$("#qx_role_id").val()},function(data){
+		alert("添加成功");
+	});
+}
+
+function query_menus_list_fp()
+{
+  loadGetServer("/tzms/menu/getQxMenuList",{roleid:$("#qx_role_id").val()},function(data){
+  	
+  	if(data.length>0)
+  	{
+  		var query_menus =  new Array();
+		for (var i=0;i<data.length;i++) {
+			query_menus[i] = {"id":data[i].catalog_id,"pId":data[i].parent_id,"name":data[i].name}
+		}
+		$.fn.zTree.init($("#tree_yfp"), setting,query_menus);
+  	}
+  })	
+}
+
+</script>

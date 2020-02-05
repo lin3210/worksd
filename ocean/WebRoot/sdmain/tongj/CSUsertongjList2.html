@@ -1,0 +1,222 @@
+
+<style>
+    .col-md-0{
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px
+    }
+    .col-md-0{
+        float: left
+    }
+    a:hover {text-decoration: none;}
+</style>
+
+<div  class="container">
+    <!-- ，头导向 -->
+	 <div class="crumbs"> 
+	    <ul id="breadcrumbs" class="breadcrumb">
+	      <li>
+	         <i class="fa fa-home"></i>
+	         <a href=""></a>
+	      </li>
+	      <li class="current">
+	        <a href="" title="" id="aa">
+	        	Thống kê số đơn truy thu--01
+	        </a>
+	      </li>
+	    </ul>
+	  </div>
+	  
+	  <div class="widget-content">
+      <div>
+         <input type="hidden" id="cupage" value="1"/>
+         <input type="hidden" id="total" value="1"/>
+          <input type="hidden" id="starTime" value=""/>
+          <input type="hidden" id="endTime" value=""/>
+      </div>
+      </div>
+      
+      <!-- ，搜索区域 -->
+      <div class="row" style="margin-top: 10px;">
+          <div class="col-md-12">
+              <div class="widget box">
+                  <div class="widget-header">
+                      <h4>
+                          <i class="fa fa-reorder">
+                          </i>
+                          Tra xem 
+                      </h4>
+                  </div>
+                  <div class="widget-content">
+                      <div class="form-group">
+                        
+                          <div class="col-md-1" style="width:200px;">
+                               <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="ID thành viên"  >
+                          </div>
+                          <label class="col-md-0 control-label" style="padding-top:5px;">
+                                         Ngày tháng:     
+  			            </label>
+  			            <div class="col-md-2">
+  			                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+  			            </div>
+                          <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+                          Tra xem 
+                          </button>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    <!-- ，数据区域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder"></i>
+                        		Danh sách thống kê
+                    </h4>
+                </div>
+                
+                <div class="widget-content">
+                    <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+                       <thead>
+                        <tr style="text-align:center">
+                        <th style=" font-size:14px; font-weight:bold; width:100px ;text-align:center;">
+									Thứ tự(序号) 
+				    	</th> 
+				        <th style=" font-size:14px; font-weight:bold; width:100px ;text-align:center;">
+				        			ID thành viên(催收id)
+				        </th>
+				        <th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+				        			Tên họ(姓名)   
+				        </th> 
+						    <th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+						    			Số tiền truy thu(入催金额)
+				        </th>
+				       	<th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+				       				Tổng tiền đã truy thu(催回金额)
+				        </th>
+				    	<th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+				    				Số tiền truy thu trong ngày(当天催回金额) 
+				        </th> 
+				        <th   style=" font-size:14px; font-weight:bold;text-align:center;" id="ll" >
+				        			Tỷ lệ truy thu(催收比列)
+				        </th>
+                            
+                        </tr>
+       
+                       </thead>
+                       
+                       <!--d 表格数据区域-->
+                       <tbody  id="load_data"></tbody>
+
+                    </table>
+
+
+                    <!-- ，表格下面信息-->
+                    <div class="row">
+                    <div class="dataTables_footer clearfix">
+                        <div class="col-md-6">
+                            <div class="dataTables_info" id="DataTables_Table_0_info">
+                            			Tổng số
+                                <font id="totalrows"></font>
+                                		tin, mỗi trang chứa được 
+                                <font id="numperpage"></font>
+                                		tin, hiện tại trang số
+                                <font id="currentpage"></font>
+                                		/
+                                <font id="totalpages"></font>
+                                		trang
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+	                        <div class="dataTables_paginate paging_bootstrap" id="datatable">
+	
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    load_data();
+    function load_data() {
+        var recode_ =$("#recode").val();
+        var tempsele=$("#tempselect").val();
+        var tempval=$("#tempVelue").val();
+        var starTime=$("#starTime").val();
+        var endTime=$("#endTime").val();
+        var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+        var formurl = "/servlet/current/AccountShenheAction?function=GetcuishoudantongjAccount";
+
+        loadGetServer(formurl,para,function(data){
+            //console.log(data)
+            $("#load_data").html("");
+            var list = data.list.data;
+            var html_="";
+    		
+            for(var i=0; i< list.length;i++) {
+            	paixu= list[i].paixu;
+            	
+            	if(paixu>0) {
+            		html_ +="<tr>"
+                            + "<td>"+list[i].paixu+"</td>"
+                            + "<td>"+list[i].userid+"</td>";
+                            if(0==i) {
+                            	html_ += "<td>"+list[i].name+"</td>";
+                            }else {
+                            	html_ += "<td align='left'>"+list[i].name+"</td>";
+                            }
+                            
+                            html_ +="<td>"+list[i].tj_ycszjine+"</td>"
+                            + "<td>"+list[i].tj_ychzjineMon+"</td>"
+                            + "<td>"+list[i].tj_ychzjineDay+"</td>"
+                    		+ "<td>"+list[i].chbuserl+"</td>"
+                    		
+                            + "</tr>";
+            	}else {
+            		html_ +="<tr>"
+                            + "<td><font color='#DC143C'>"+list[i].paixu+"</font></td>"
+                            + "<td><font color='#DC143C'>"+list[i].userid+"</font></td>"
+                            +"<td><font color='#DC143C'>"+list[i].name+"</font></td>"
+                            +"<td><font color='#DC143C'>"+list[i].tj_ycszjine+"</font></td>"
+                            + "<td><font color='#DC143C'>"+list[i].tj_ychzjineMon+"</font></td>"
+                            + "<td><font color='#DC143C'>"+list[i].tj_ychzjineDay+"</font></td>"
+                    		+ "<td><font color='#DC143C'>"+list[i].chbuserl+"</font></td>"
+                    		
+                            + "</tr>";
+            	}
+                
+            }
+
+            $("#load_data").append(html_);
+            $("#tempselect").val(data.temp);
+            $("#tempVelue").val(data.tempvalu);
+            page_value(data);
+            page_data();
+            $("#btn-load").button("reset");
+        })
+
+    }
+    
+    $("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+    
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

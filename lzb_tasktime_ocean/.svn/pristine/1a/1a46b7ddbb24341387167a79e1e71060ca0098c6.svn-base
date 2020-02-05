@@ -1,0 +1,80 @@
+package com.task;
+
+import java.net.HttpURLConnection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import service.encrypt.RSA;
+import service.encrypt.TripleDes;
+import service.util.Base64;
+import service.util.SslConnection;
+import service.util.Strings;
+import service.util.Tools;
+import service.util.Util;
+import service.version2.MsgBean;
+import service.version2.MsgBody;
+
+import com.service.AotuTxService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.connection.Configure;
+import com.thinkive.timerengine.Task;
+import com.util.TxUtil;
+/**
+ * 自动转账task
+ * @author Administrator
+ *
+ */
+public class AotuTxTask implements Task
+{
+
+	private static Logger logger = Logger.getLogger(AotuTxTask.class);
+	private static AotuTxService aotuTxService = new AotuTxService();
+	public void execute() 
+	{
+		//查询需要转账的客户
+		List<DataRow> list = aotuTxService.getAllTxList();
+		for (DataRow dataRow : list) 
+		{
+			try {
+				if(dataRow.getString("pay_type").equals("1"))//融宝
+				{
+					TxUtil.rb_pay(dataRow);
+				}
+				else
+				{
+				    TxUtil.pay(dataRow);//贝付
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.error(e);
+			}
+		}
+	}
+    
+	public static void main(String[] args) 
+	{
+		Configure.getInstance();
+		List<DataRow> list = aotuTxService.getAllTxList();
+		for (DataRow dataRow : list) 
+		{
+			try {
+				if(dataRow.getString("pay_type").equals("1"))//融宝
+				{
+					TxUtil.rb_pay(dataRow);
+				}
+				else
+				{
+				    TxUtil.pay(dataRow);//贝付
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.error(e);
+			}
+		}
+	}
+	
+	
+}

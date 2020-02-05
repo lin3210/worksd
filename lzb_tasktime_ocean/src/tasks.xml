@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!--
+   说明：通过配置文件可以配置四种类型的任务，任务的类型由task-type配置参数进行指定，以下分别说明
+        第一种：只需执行一次的任务(task-type为1)。此时task-type,task-name,task-class必须指
+               定。
+        第二种：间隔执行的任务(task-type为2)。此时task-type,task-name,task-class，task-interval
+               必须指定。且task-interval的值表示间隔的时间，以毫秒为单位。
+        第三种：每周固定的时间执行(task-type为3)。此时task-type,task-name,task-class，task-interval
+               必须指定，且task-interval的值表示每周那些天执行，具体的格式如：0,1,2,3,4,5,6
+               表示每天都需执行，2,5，则表示星期二和星期五需要执行
+               0 ..... 星期日
+               1 ..... 星期一
+        第四种：每天固定的时间执行(task-type为4)。此时task-type,task-name,task-class，task-interval
+               必须指定，且task-interval的值表示每天执行的时间点，具体的格式如：10:25,20:20
+
+        注  意：若没有指定startdate的值，则系统会自动以当前的的时间作为startdate的值，并启动任务
+               但若指定了startdate的值，则startdate的格式必须是yyyy-mm-dd HH:mm:ss的格式，另
+               外startdate的时间应该比启动程序的时间晚，否则，将不能正常启动任务。
+               task-class指定了任务的运行类，必须实现Task接口
+
+               每个任务的id配置属性需要指定，且必须唯一
+               每个任务的task-name必须指定，且必须唯一
+-->
+<tasks>
+	<!-- 每天凌晨统计一天平台用户的比例 -->
+<!-- 	<task id="AccountUser"> -->
+<!--         <task-type>4</task-type> -->
+<!--         <task-name>AccountUser</task-name> -->
+<!--         <description>用户比例</description> -->
+<!--         <task-class>com.task.AccountUserTask</task-class> -->
+<!--         <task-interval>00:00</task-interval> -->
+<!-- 	</task> -->
+<!-- 	<task id="GsdLoan"> -->
+<!--         <task-type>3</task-type> -->
+<!--         <task-name>GsdLoan</task-name> -->
+<!--         <description>每4分钟执行一次放款</description> -->
+<!--         <task-class>com.task.GsdLoanTask</task-class> -->
+<!--         <task-interval>180000</task-interval> -->
+<!-- 	</task> -->
+	<task id="CopyuserTask">
+        <task-type>2</task-type>
+        <task-name>CopyuserTask</task-name>
+        <description>3分钟查一次需要查询放款结果的用户</description>
+        <task-class>com.task.CopyuserTask</task-class>
+        <task-interval>60000</task-interval>
+	</task>
+	<!-- <task id="DealmakingTask">
+        <task-type>4</task-type>
+        <task-name>DealmakingTask</task-name>
+        <description>利息计算</description>
+        <task-class>com.task.DealmakingTask</task-class>
+        <task-interval>08:00</task-interval>
+	</task>
+
+	<task id="AotuTxTask">
+        <task-type>2</task-type>
+        <task-name>AotuTxTask</task-name>
+        <description>5分钟查一次需要提现的用户</description>
+        <task-class>com.task.AotuTxTask</task-class>
+        <task-interval>300000</task-interval>
+	</task>
+	
+	<task id="AotuTxCxTask">
+        <task-type>2</task-type>
+        <task-name>AotuTxCxTask</task-name>
+        <description>5分钟查一次需要查询提现结果的用户</description>
+        <task-class>com.task.AotuTxCxTask</task-class>
+        <task-interval>300000</task-interval>
+	</task>
+	
+    闪贷放款查询
+	<task id="AotuSDFKCxTask">
+        <task-type>2</task-type>
+        <task-name>AotuSDFKCxTask</task-name>
+        <description>3分钟查一次需要查询放款结果的用户</description>
+        <task-class>com.task.AotuSDFKCxTask</task-class>
+        <task-interval>300000</task-interval>
+	</task>
+	闪贷自动审核黑户
+	<task id="AotuZDSHTask">
+        <task-type>2</task-type>
+        <task-name>AotuZDSHTask</task-name>
+        <description>3分钟自动审核一次借款情况</description>
+        <task-class>com.task.AotuZDSHTask</task-class>
+        <task-interval>180000</task-interval>
+	</task> -->
+   <!-- 闪贷逾期计算 -->
+    <!--<task id="SDYQTask">
+        <task-type>2</task-type>
+        <task-name>SDYQTask</task-name>
+        <description>逾期计算</description>
+        <task-class>com.task.SDYQTask</task-class>
+        <task-interval>180000</task-interval>
+	   </task> 
+	 <!-- <task id="AotuSDFKCxTask">
+        <task-type>2</task-type>
+        <task-name>AotuSDFKCxTask</task-name>
+        <description>3分钟查一次需要查询放款结果的用户</description>
+        <task-class>com.task.AotuSDFKCxTask</task-class>
+        <task-interval>300000</task-interval>
+	</task>  -->
+	   
+   
+<!-- 	<task id="WxSendTask">
+        <task-type>2</task-type>
+        <task-name>WxSendTask</task-name>
+        <description>5分钟查一次需要推送的信息</description>
+        <task-class>com.task.WxSendTask</task-class>
+        <task-interval>300000</task-interval>
+	</task>
+	
+	<task id="JoinJsTask">
+        <task-type>4</task-type>
+        <task-name>JoinJsTask</task-name>
+        <description>加盟者按月结算</description>
+        <task-class>com.task.JoinJsTask</task-class>
+        <task-interval>00:45</task-interval>
+	</task>
+
+	<task id="HongBaoTask">
+        <task-type>4</task-type>
+        <task-name>HongBaoTask</task-name>
+        <description>清除红包</description>
+        <task-class>com.task.HongBaoTask</task-class>
+        <task-interval>02:40</task-interval>
+	</task>
+
+	<task id="DcStatusTask">
+        <task-type>4</task-type>
+        <task-name>DcStatusTask</task-name>
+        <description>查定存达到100的用户</description>
+        <task-class>com.task.DcStatusTask</task-class>
+        <task-interval>00:10</task-interval>
+	</task> -->
+	
+	<!-- <task id="AotuZMSHTask">
+        <task-type>2</task-type>
+        <task-name>AotuZMSHTask</task-name>
+        <description>3分钟自动审核一次借款情况</description>
+        <task-class>com.task.AotuZMSHTask</task-class>
+        <task-interval>240000</task-interval>
+	</task> -->
+	<!-- <task id="AotuTHTSSHTask">
+        <task-type>2</task-type>
+        <task-name>AotuTHTSSHTask</task-name>
+        <description>3分钟自动审核一次借款情况</description>
+        <task-class>com.task.AotuTHTSSHTask</task-class>
+        <task-interval>280000</task-interval>
+	</task> -->
+	
+	<!-- <task id="AotuTHLXSHTask">
+        <task-type>2</task-type>
+        <task-name>AotuTHLXSHTask</task-name>
+        <description>3分钟自动审核一次借款情况</description>
+        <task-class>com.task.AotuTHLXSHTask</task-class>
+        <task-interval>320000</task-interval>
+	</task> -->
+	
+	<!-- <task id="AotuZDSHALLTask">
+        <task-type>2</task-type>
+        <task-name>AotuZDSHALLTask</task-name>
+        <description>51分钟自动审核一次借款情况</description>
+        <task-class>com.task.AotuZDSHALLTask</task-class>
+        <task-interval>3120000</task-interval>
+	</task> -->
+	
+	 <!-- <task id="AotuZDQRTask">
+        <task-type>2</task-type>
+        <task-name>AotuZDQRTask</task-name>
+        <description>3分钟自动审核一次借款情况</description>
+        <task-class>com.task.AotuZDQRTask</task-class>
+        <task-interval>3120000</task-interval>
+	</task> 
+	 -->
+</tasks>

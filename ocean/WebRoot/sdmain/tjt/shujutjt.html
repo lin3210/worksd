@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="/sdmain/tjt/echarts.min.js"></script>
+</head>
+<body>
+   
+    <div><!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 500px;height:300px;margin-top:100px;float:left;display:block"></div>
+    <div id="main1" style="width: 500px;height:300px;margin-top:100px;float:left;"></div>
+    <div id="main2" style="width: 500px;height:300px;margin-top:100px;float:left;"></div>
+    <div id="main4" style="width: 1200px;height:300px;margin-top:100px;float:left;"></div>
+    <div id="main3" style="width: 800px;height:300px;margin-top:100px;float:left;"></div>
+    <div id="main5" style="width: 800px;height:300px;margin-top:100px;float:left;"></div>
+    <div id="main6" style="width: 500px;height:300px;margin-top:100px;float:left;"></div>
+    <div id="main7" style="width: 500px;height:300px;margin-top:100px;"></div>
+    <!-- <div id="main111" style="width: 600px;margin:0 auto;margin-top:50px">
+    <input type="button" style=" font-size: 20px;width:150px;height:50px;margin:auto;" class="btn btn-xs btn-success" onclick="ChangeQB();" value="性别统计列表">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button"  style=" font-size: 20px;width:150px;height:50px;margin:auto;" class="btn btn-xs btn-success" onclick="ChangeJR();" value="年龄段统计列表">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button"  style=" font-size: 20px;width:150px;height:50px;margin:auto;" class="btn btn-xs btn-success" onclick="ChangeDD();" value="典当行统计列表">
+    </div> -->
+    </div>
+     <script type="text/javascript">
+    function ChangeQB(){
+        document.getElementById("main").style.display = "block";
+        document.getElementById("main1").style.display = "none";
+        document.getElementById("main2").style.display = "none";    
+	}
+    function ChangeJR(){
+        document.getElementById("main").style.display = "none";
+        document.getElementById("main1").style.display = "block";
+        document.getElementById("main2").style.display = "none";      
+	}
+    function ChangeDD(){
+        document.getElementById("main").style.display = "none";
+        document.getElementById("main1").style.display = "none";
+        document.getElementById("main2").style.display = "block";     
+	}
+    
+    
+  </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        option = null;
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllTJT","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '性别统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['男','女']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '50%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'总金额(万元)',
+            type:'pie',
+            radius : '50%',
+            center: ['60%', '50%'],
+            data:[
+            
+                {value:data_map.nancount, name:'男'},
+                {value:data_map.nvcount, name:'女'},
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main1'));
+        option = null;
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllTJT","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '年龄统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['<18','18-23','24-29','30-35','36-41','42-47','48-53','>54']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'年龄段统计列表',
+            type:'pie',
+            radius : '50%',
+            center: ['70%', '50%'],
+            data:[
+            
+                {value:data_map.zerocount, name:'<18'},
+                {value:data_map.onecount, name:'18-23'},
+                {value:data_map.twocount, name:'24-29'},
+                {value:data_map.threecount, name:'30-35'},
+                {value:data_map.fourcount, name:'36-41'},
+                {value:data_map.fivecount, name:'42-47'},
+                {value:data_map.sixcount, name:'48-53'},
+                {value:data_map.sevencount, name:'>54'}
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main2'));
+        option = null;
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllTJT","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '学生/工作统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['学生','工作']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'学生/工作统计列表',
+            type:'pie',
+            radius : '50%',
+            center: ['70%', '50%'],
+            data:[
+            
+                {value:data_map.xscount, name:'学生'},
+                {value:data_map.gzcount, name:'工作'}
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main3'));
+        option = null;
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllTJT","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '工作薪资统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['<5,000,000','5,000,000-10,000,000','10,000,000-15,000,000','15,000,000-20,000,000','>20,000,000']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'学生/工作统计列表',
+            type:'pie',
+            radius : '50%',
+            center: ['70%', '50%'],
+            data:[
+            
+                {value:data_map.xinzionecount, name:'<5,000,000'},
+                {value:data_map.xinzitwogzcount, name:'5,000,000-10,000,000'},
+                {value:data_map.xinzithreegzcount, name:'10,000,000-15,000,000'},
+                {value:data_map.xinzifourgzcount, name:'15,000,000-20,000,000'},
+                {value:data_map.xinzifivegzcount, name:'>20,000,000'},
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main4'));
+        option = null;
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllTJT","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '公司性质统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['Kinh doanh','Hành chính','Bảo vệ','Biên phiên dịch','Dệt may/ Giày da','Du lịch/ Khách sạn','Thể hình/ Spa','Mỹ phẩm/ Thời trang','Nông nghiệp','PG/ PB/ Lễ tân','Phục vụ/ Tạp vụ','Sản xuất','Tài xế/ Giao nhận','Bán thời gian','Thực phẩm/ Dịch vụ ăn uống','Tư vấn bảo hiểm','Sinh viên/ Mới tốt nghiệp','Khác','Đang tìm việc']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'公司性质统计列表',
+            type:'pie',
+            radius : '70%',
+            center: ['75%', '60%'],
+            data:[
+            
+                {value:data_map.company1, name:'Kinh doanh'},
+                {value:data_map.company2, name:'Hành chính'},
+                {value:data_map.company3, name:'Bảo vệ'},
+                {value:data_map.company4, name:'Biên phiên dịch'},
+                {value:data_map.company5, name:'Dệt may/ Giày da'},
+                {value:data_map.company6, name:'Du lịch/ Khách sạn'},
+                {value:data_map.company7, name:'Thể hình/ Spa'},
+                {value:data_map.company8, name:'Mỹ phẩm/ Thời trang'},
+                {value:data_map.company9, name:'Nông nghiệp'},
+                {value:data_map.company10, name:'PG/ PB/ Lễ tân'},
+                {value:data_map.company11, name:'Phục vụ/ Tạp vụ'},
+                {value:data_map.company12, name:'Sản xuất'},
+                {value:data_map.company13, name:'Tài xế/ Giao nhận'},
+                {value:data_map.company14, name:'Bán thời gian'},
+                {value:data_map.company15, name:'Thực phẩm/ Dịch vụ ăn uống'},
+                {value:data_map.company16, name:'Tư vấn bảo hiểm'},
+                {value:data_map.company17, name:'Sinh viên/ Mới tốt nghiệp'},
+                {value:data_map.company18, name:'Khác'},
+                {value:data_map.company19, name:'Đang tìm việc'}
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main5'));
+        option = null;
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllTJT","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '工作年限统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['<3个月','3个月-6个月','6个月-12个月','1年-3年','3年以上']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'工作年限统计列表',
+            type:'pie',
+            radius : '50%',
+            center: ['70%', '50%'],
+            data:[
+            
+                {value:data_map.time1, name:'<3个月'},
+                {value:data_map.time2, name:'3个月-6个月'},
+                {value:data_map.time3, name:'6个月-12个月'},
+                {value:data_map.time4, name:'1年-3年'},
+                {value:data_map.time5, name:'3年以上'}
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main6'));
+        option = null;
+		loadGetServer("/servlet/current/AccountManAction?function=GetAllTJT","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '手机品牌统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['Samsung','Huawei','Vivo','Oppo','Sony','Xiaomi','Iphone','其他']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'手机品牌统计列表',
+            type:'pie',
+            radius : '50%',
+            center: ['70%', '50%'],
+            data:[
+            
+                {value:data_map.shouji1, name:'Samsung'},
+                {value:data_map.shouji2, name:'Huawei'},
+                {value:data_map.shouji3, name:'Vivo'},
+                {value:data_map.shouji4, name:'Oppo'},
+                {value:data_map.shouji5, name:'Sony'},
+                {value:data_map.shouji6, name:'Xiaomi'},
+                {value:data_map.shouji7, name:'Iphone'},
+                {value:data_map.shouji8, name:'其他'}
+
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

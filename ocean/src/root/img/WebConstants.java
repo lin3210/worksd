@@ -1,0 +1,96 @@
+package root.img;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * 描述: 站点公用常量类
+ * 版权: Copyright (c) 2010
+ * 公司: 思迪
+ * 作者: 李建  lijian@thinkive.com
+ * 版本: 1.0
+ * 创建日期: Mar 11, 2010
+ * 创建时间: 5:29:43 PM
+ */
+public class WebConstants extends HashMap
+{
+	
+	
+	private static Log log = LogFactory.getLog(WebConstants.class);
+	
+	
+	private static Map map;
+	
+	
+	
+	//	>>>>>>>>>>>>>>>>>>>>>>>>>> 站点相关常量 开始	
+	
+	/**
+	 * web主站站点
+	 */
+	public static final String SITE_MAIN = "main";
+	
+	/**
+	 * 手机短信KEY
+	 */
+	public static final String APIKEY = "e781ca9195f427ac024200afc1c542b5";
+	
+	
+	public static String TICKET = "com.thinkive.cms.system.admin.ticket";
+	
+	
+	
+	//	<<<<<<<<<<<<<<<<<<<<<<<<<< 临时常量 结束
+	
+	/**
+	 * 使用该构造方法实现一个JSTL可访问的系统常量，
+	 */
+	public WebConstants()
+	{
+		// initialize only once...
+		if (map != null)
+			return;
+		
+		map = new HashMap();
+		Class c = this.getClass();
+		Field[] fields = c.getDeclaredFields();
+		for (int i = 0; i < fields.length; i++)
+		{
+			Field field = fields[i];
+			int modifier = field.getModifiers();
+			//排除private类型
+			if (Modifier.isFinal(modifier) && !Modifier.isPrivate(modifier))
+			{
+				try
+				{
+					this.put(field.getName(), field.get(this));
+				}
+				catch (IllegalAccessException e)
+				{
+					//e.printStackTrace();
+					log.error(e);
+				}
+			}
+		}
+	}
+	
+	
+	@Override
+	public Object get(Object key)
+	{
+		return map.get(key);
+	}
+	
+	
+	@Override
+	public Object put(Object key, Object value)
+	{
+		return map.put(key, value);
+	}
+	
+}

@@ -1,0 +1,244 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                DS thống kê giải ngân(放款统计)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetFKAccount"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Tất cả
+                                      </option>
+                                      <option value="1" id="dd">
+                                       Tên người giải ngân
+                                      </option>
+                                      <option value="2" id="ee">
+                                       Số ĐTDĐ
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                             
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                      Tìm kiếm
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="ff">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    DS thống kê giải ngân(放款统计)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;" id="gg">
+                                         Mã số người giải ngân(编号)
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="hh">
+                                         Tên người giải ngân(姓名)
+                                    </th>
+                                    <th colspan="1" style=" font-size:14px; font-weight:bold;" id="jj">
+                                         Thống kê số món vay trong ngày(当天的贷款统计)
+                                    </th>
+                                   <th colspan="4" style=" font-size:14px; font-weight:bold;" id="jjjjjj">
+                                      today Offline(今天线下放款数)
+                                    </th>
+                                   <th colspan="1" style=" font-size:14px; font-weight:bold;" id="jjjjjjjj">
+                                         today Online(今天线上放款数)
+                                    </th>
+                                     <th colspan="1"  style=" font-size:14px; font-weight:bold;" id="kk">
+                                         Tổng số món thống kê(统计总数)
+                                    </th>
+                                    
+		                      </tr>
+                              <tr  style="text-align:center">
+
+                                    <th id="ll">
+                                         Tổng số món vay(贷款总额)
+                                    </th>
+                                    
+                                    
+                                  
+                                    <th id="llll">
+                                         total Offline(总共线下数)
+                                    </th>
+                                    <th id="llll">
+                                         Agribank
+                                    </th>
+                                    <th id="mmmmmm">
+                                         VietcomBank
+                                    </th>
+                                    <th id="nnnnnn">
+                                         Sacombank
+                                    </th>
+                                    
+                                    <th id="nnnnnnnn">
+                                         OnlineSacombank(线上Sacombank)
+                                    </th>
+                                  
+                                     <th id="oo">
+                                         Tổng số món vay(贷款总额)
+                                    </th>
+                                    
+                                 
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số <font id="totalrows"></font>tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+function changeLan(){
+	document.getElementById("aa").innerHTML = "放款统计列表";
+	document.getElementById("bb").innerHTML = "筛选条件";
+	document.getElementById("cc").innerHTML = "全部";
+	document.getElementById("dd").innerHTML = "放款人姓名";
+	document.getElementById("ee").innerHTML = "手机号码";
+	document.getElementById("ff").innerHTML = "放款统计列表";
+	document.getElementById("gg").innerHTML = "放款人编号";
+	document.getElementById("hh").innerHTML = "放款人姓名";
+	document.getElementById("ii").innerHTML = "手机号码";
+	document.getElementById("jj").innerHTML = "当天笔数统计";
+	document.getElementById("kk").innerHTML = "总笔数统计";
+	document.getElementById("ll").innerHTML = "总笔数";
+	document.getElementById("oo").innerHTML = "总笔数";
+
+}
+
+</script>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var dtzs=0;
+		  var dtxxzs=0;
+		  var dtagrzs=0;
+		  var dtviezs=0;
+		  var dtoffsacomzs=0;
+		  var dtonsazs=0;
+		  var zs=0;
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr><td>BPKT"+list[i].userid+"</td><td>"+list[i].userName+"</td><td><span class='label label-success'>"+list[i].nowCount+"</span></td><td><span class='label label-success'>"+list[i].offlinezs+"</span></td><td>"+list[i].agribank+"</td><td>"+list[i].vietcombank+"</td><td>"+list[i].offSacombank+"</td><td><span class='label label-success'>"+list[i].onSacombank+"</span></td><td><span class='label label-success'>"+list[i].count+"</span></td>";
+				html_ +="</tr>";
+				dtzs += list[i].nowCount;
+				dtxxzs += list[i].offlinezs;
+				dtagrzs += list[i].agribank;
+				dtviezs += list[i].vietcombank;
+				dtoffsacomzs += list[i].offSacombank;
+				dtonsazs += list[i].onSacombank;
+				zs += list[i].count;
+		   }
+		   		html_ += "<tr><td>Thống kê tổng</td><td>Thống kê tổng</td><td><span class='label label-success'>"+dtzs+"</span></td><td><span class='label label-success'>"+dtxxzs+"</span></td><td>"+dtagrzs+"</td><td>"+dtviezs+"</td><td>"+dtoffsacomzs+"</td><td><span class='label label-success'>"+dtonsazs+"</span></td><td><span class='label label-success'>"+zs+"</span></td>";
+				html_ +="</tr>";
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   load_data();
+   
+
+   
+</script>
+<script type="text/javascript" src="/main/js/date_time.js"></script>

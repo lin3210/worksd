@@ -1,0 +1,453 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+
+</style>
+<script type="text/javascript" src="/plugins/video_play/ckplayer/ckplayer.js"></script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               Danh sách khách hàng cần gọi
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/KefuReturnVisitAction?function=GetReturnVisit"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1">
+                                         Mã số khách hàng
+                                      </option>
+                                      <option value="2">
+                                        Họ tên
+                                      </option>
+                                      <option value="3">
+                                      Số ĐTDĐ
+                                      </option>
+                                      <option value="4">
+                                        Số CMND
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              Thời gian thẩm định:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                           <!--   <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              还款状态:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="hkst">
+                                  <option value="0">
+                                    --请选择--
+                                  </option>
+                                  <option value="1">
+                                    已还款
+                                  </option>
+                                  <option value="2">
+                                    未还款
+                                  </option>
+                                </select>
+                              </div>-->
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                 Danh sách khách hàng cần gọi
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                     <tr>
+		                        <th>
+		                          Mã số khách hàng
+		                        </th>
+		                        <th>
+		                          Họ tên khách hàng
+		                        </th>
+		                        <th>
+		                           Số ĐTDĐ
+		                        </th>
+		                        <th>
+		                          Số CMND
+		                        </th>
+		                        <th>
+		                          Số tiền đề nghị
+		                        </th>
+		                        <th>
+		                          Số tiền có thể vay
+		                        </th>
+                                <th>
+		                           Thời hạn vay
+		                        </th>
+                                <th>
+		                          Trạng thái
+		                        </th>
+                                <th>
+                                 Thời gian thẩm định
+                                </th>
+                                <!-- <th>
+                                  视频
+                                </th> -->
+                                <th>
+		                          Thông tin cá nhân
+		                        </th>
+                                <th>
+		                          Họ tên đăng nhập của nhân viên thẩm định lần 2
+		                        </th>
+                                <th>
+                               Thao tác
+                                </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được <font id="numperpage"></font> tin, hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font> trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+         
+         <!--回访信息显示-->
+        <div id="bathc_grade_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#bathc_grade_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Ghi chép cuộc gọi</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height: 300px;">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                          <div class="form-group" id="has-grade2">
+                                            <label class="col-md-3 control-label">Mã số vay
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="jk_id" id="jk_id" readonly  class="form-control required" >
+                                                  </div>
+                                              </div>
+                                              
+                                              <div class="form-group" id="has-grade2">
+                                            <label class="col-md-3 control-label">Họ tên khách hàng
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="real_name" id="real_name" readonly  class="form-control required" >
+                                                  </div>
+                                              </div>
+                                              
+                                              <div class="form-group" id="has-show" >
+                                                <label class="col-md-3 control-label">Kết quả cuộc gọi<span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                   <label class='radio-inline'><input name="state" value='1' type='radio' checked="checked" onClick="radi()">Thành công</label>
+                                                   <label class='radio-inline'><input name="state" value='0' type='radio' onClick="radi()">Thất bại</label>
+                                              </div>
+                                            </div>
+                                            <div class="form-group" id="has-remark">
+                                            <label class="col-md-3 control-label">Ghi chép cuộc gọi
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="remark" id="remark"  class="form-control required" >
+                                                  </div>
+                                              </div>
+                                              <input type="hidden" id="batc_id"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="sub_kefu()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#bathc_grade_html').hide()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+<div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>Xác nhận</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body">
+					<label class="col-md-0 control-label" style="padding-top:5px;letter-spacing:2px;" id="remark_tr"></label>
+				</div>
+                <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+			</div>
+			<div class="modal-footer" style="text-align:center">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone1()">MOFA</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<!--<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone2()">MOFA</button>-->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="call_phone3()">Thẩm định</button>
+			</div>
+		</div>
+		<input type="hidden" name="phone_" id="phone_" class="form-control required url">
+	</div>
+</div>
+</div>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+			  var date=0;
+			  if(list[i].jk_date==1){
+			  	date=15;
+			  }else if(list[i].jk_date==2){
+			  	date=30;
+			  }else if(list[i].jk_date==4){
+				  	date=14;
+				  }
+			  var mobilephone = list[i].mobilephone;
+		     	if(mobilephone.length > 8){
+		 			mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
+		 	 	}
+				 html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td><a href='javascript:void(0);' onclick=\"call_choice('"+list[i].mobilephone+"')\">"+mobilephone+"</a></td><td>"+list[i].idno+"</td><td>"+list[i].jk_money+"</td><td>"+list[i].sjsh_money+"</td><td>"+date+"ngày</td><td>Đang xem xét</td><td>"+list[i].cl02_time+"</td>";
+				  html_ +="<td><button class='btn btn-xs btn-info' onclick='chg_user_load("+list[i].jkid+")'>Xem thông tin cá nhân</button></td>";  //<td><button class='btn btn-xs btn-warning' onclick='sip_load("+list[i].jkid+")'>视频播放</button></td>
+			  if(list[i].skname == "" || list[i].skname == 0 || list[i].skname == null)
+			  {
+				   html_ +="<td>admin</td>";
+			  }
+			  else
+			  {
+				  html_ +="<td>"+list[i].skname+"</td>";
+			  }
+			  html_ +="<td><button class='btn btn-xs btn-info' onclick=\"load_huif("+list[i].id+",'"+list[i].realname+"',"+list[i].jkid+","+$("#left_user_id").html()+")\">Nhập ghi chép cuộc gọi</button></td>";
+			  html_ +="</tr>";
+		   }
+		   
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   
+  /*   function radi()
+	   {
+		var state_=$("input:radio[name='state']:checked").val();
+		if(state_!=0)
+		{
+			document.getElementById("has-remark").style.display="block";
+		}
+		else
+		{
+			document.getElementById("has-remark").style.display="none";
+		}
+	 }  */
+   
+  /*  <!--显示用户的回访信息--> */
+   function load_huif(jk_id,real_name,jkid,userid)
+   {
+	   $("#jk_id").val(jkid);
+	   $("#real_name").val(real_name);
+	   $("#bathc_grade_html").show();
+	   radi();
+   }
+    function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+    /* <!--读取用户信息--> */
+   function chg_user_load(id)
+   {
+	     $("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/user_chenggong.html?record_id="+id);
+   }
+   
+  /*  <!--视频播放--> */
+   function sip_load(apply_id_)
+   {
+	    window.open("/sdmain/record_detail/allmedia_info.html?apply_id="+apply_id_);
+   }
+   
+  /*  <!--提交回访结果-->
+ */   function sub_kefu()
+   {
+	   var state_=$("input:radio[name='state']:checked").val();
+	   var para={reid:$("#jk_id").val(),state:state_,remark:$("#remark").val(),userid:$("#left_user_id").html()};
+	   loadGetServer("/servlet/current/KefuReturnVisitAction?function=AddReturnVisit",para,function(data){
+	    alert(data.msg);
+		$("#bathc_grade_html").hide();
+		load_data();
+		$("#remark").val("");
+	   });
+   }
+   
+</script>
+ <script>
+  function call_choice(phone_)
+   {
+   	   $("#phone_").val(phone_);
+	   $("#remark_tr").html("Xin chọn đầu số gọi ra!");
+	   $("#msg_content_html").show();
+   }
+function call_phone1(phone_){
+	var code = 1 ;
+	call_phone(phone_,code);
+}
+function call_phone2(phone_){
+	var code = 2 ;
+	call_phone(phone_,code);
+}
+function call_phone3(phone_){
+	var code = 3 ;
+	call_phone(phone_,code);
+}
+    function call_phone(phone_,code_)
+   {
+	  
+		   var para={phone:$("#phone_").val(),code:code_};
+
+		   loadGetServer("/servlet/current/JBDcms3Action?function=DHGSphone",para,function(data){
+			   if(data.error>0)
+			   {
+			   	   $("#msg_content_html").hide();
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+
+</script>
+<script type="text/javascript" src="/main/js/date_time.js"></script>

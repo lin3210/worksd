@@ -1,0 +1,258 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container woca">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                               Danh sách thẩm định thống kê
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		         <!--搜索框位置  -->
+		         <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		             
+						   <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="h5formurl" value="/servlet/current/H5AccountShenheAction?function=GetShenheAccount"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetShenheAccount"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1" id="dd">
+                                      Họ tên người thẩm định
+                                      </option>
+                                      <option value="2" id="ee">
+                                        Số ĐTDĐ
+                                      </option>
+                                      <option value="3">
+                                        h5
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+		                      
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                    Tìm kiếm
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+			                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="loadQB()">hiển thị tất cả</button>
+			                <input type="hidden" id="recode">
+		                   </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        	     
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="ff">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                 Danh sách thẩm định được thống kê
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                  
+		                  <h4>总成功还款用户数：</h4><span id="cghk"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  <h4>总复借数：</h4><span id="cghkjk"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                      
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th style=" font-size:14px; font-weight:bold;"  id="gg">
+                                                                                                      日期 
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;"  id="hhd">
+                                    	当日用户还款数量
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;"  id="hhdd">
+                                    	当日用户还款并再次借款
+                                    </th>                                                                  
+                                    <th   style=" font-size:14px; font-weight:bold;"  id="hh">
+                                         	老用户借款总人数
+                                    </th>
+                                    <th style=" font-size:14px; font-weight:bold;"  id="jj">
+                                        	 放款老用户
+                                    </th>
+                                   
+                                     <th  style=" font-size:14px; font-weight:bold;" id="kk">
+                                         	拒绝的老用户
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                  							老用户放款成功率                        
+                                    </th> 
+                                     <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                 							老用户放款失败率                        
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                 							放款失败老用户名单                       
+                                    </th>
+                                    <!--  <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                 							审核一组审核数量                        
+                                    </th>
+                                     <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                 							审核二组审核数量                        
+                                    </th>
+                                     <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                 							 审核四组审核数量                          
+                                    </th> -->
+                                                                   
+		                      </tr>		                      
+                             
+		                    </thead>
+	                    		<tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+  <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div> 
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+			
+			
+			<!--加载图片-->
+      <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+       </div> 
+<script>
+
+	
+	
+	function load_data()
+	{
+	  var recode_ =$("#recode").val();
+	  
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val(); 
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+	  var formurl = "/servlet/current/AccountShenheAction?function=GetOldYongHuAccount";
+	   /* if(tempsele==3){
+	       formurl= $("#h5formurl").val();
+	   }
+	   else{
+	   	   formurl =$("#formurl").val();
+	   }  */
+ 	 loadGetServer(formurl,para,function(data){
+ 		  console.log(data)
+		  $("#load_data").html("");
+ 		  var list = data.list.data;
+		  var html_="";
+		    	  
+		  for(var i=0;i<list.length;i++)
+		  {	
+		  	   
+				html_ +="<tr><td>"+list[i].day+"</td><td>"+list[i].daycghk+"</td><td>"+list[i].daycghkjk+"</td><td>"+list[i].olduserall+"</td><td>"+list[i].oldusercg+"</td><td>"+list[i].oldusersb+"</td><td>"+list[i].oldusercgl+"</td><td>"+list[i].oldusersbl+"</td>"//<td>"+list[i].onezu+"</td><td>"+list[i].twozu+"</td><td>"+list[i].fourzu+"</td>";		
+				html_ +="<td><button class='btn btn-xs btn-info' onclick='chg_user_load("+list[i].day.split("-").join("")+")'>Danh sách khách cũ vay thất bại</button></td>";
+				html_ +="</tr>";	
+		  }
+			$("#load_data").append(html_);
+			$("#cghk").html(data.cghk);
+			$("#cghkjk").html(data.cghkjk);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+				  
+   	 })
+	}
+	
+	
+	
+ 
+	 <!--读取老用户列表信息--> 
+	   function chg_user_load(day)
+	   {
+		     $("#load_one").width($(document).width()-50);
+		     $("#load_one").height($(document).height()-60);		 
+		     $("#load_html").show();
+		     console.log(day);
+		     $("#load_one").attr("src","/sdmain/record_list/recordListOld.html?day="+day)
+	   }
+	   function f_hide_ifm(id)
+	   {
+		   $("#load_html").hide();		  
+		   $("#id_"+id).css("background-color","powderblue");
+	   }
+	   load_data();
+	
+   /* function open_user(shenheid)
+   {
+	   window.open("/sdmain/record_detail/recordYuqNList.html?shenheid="+shenheid);
+   }
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	} */  
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>
+ <script type="text/javascript" src="/assets/js/json.js"></script>
+

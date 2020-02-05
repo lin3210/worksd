@@ -1,0 +1,166 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container woca">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                复借还款率统计表
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		         <!--搜索框位置  -->
+		         <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    复借还款率统计表
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        	     
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="ff">
+		                    <i class="icon-reorder">
+		                    </i>
+		                                 复借还款率统计表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                  
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                      
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th style=" font-size:14px; font-weight:bold;"  id="gg">
+                                                                                                      日期 
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;"  id="hhd">
+                                    	复借总笔数15天
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;"  id="hhdd">
+                                    	复借还款笔数15天
+                                    </th> 
+                                    <th style=" font-size:14px; font-weight:bold;"  id="jj">
+                                        复借还款率15天
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                                    复借总笔数30天                    
+                                    </th> 
+                                     <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                                     复借还款笔数30天                        
+                                    </th>
+                                    <th   style=" font-size:14px; font-weight:bold;" id="ll">
+                                    复借还款率30天                      
+                                    </th>
+                                                                   
+		                      </tr>		                      
+                             
+		                    </thead>
+	                    		<tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+  <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div> 
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+			
+			
+			<!--加载图片-->
+      <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+       </div> 
+<script>
+
+	
+	
+	function load_data()
+	{
+	  var recode_ =$("#recode").val();
+	  
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val(); 
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+	  var formurl = "/servlet/current/AccountShenheAction?function=GetOldYongHuAccountHK";
+	   /* if(tempsele==3){
+	       formurl= $("#h5formurl").val();
+	   }
+	   else{
+	   	   formurl =$("#formurl").val();
+	   }  */
+ 	 loadGetServer(formurl,para,function(data){
+ 		  console.log(data)
+		  $("#load_data").html("");
+ 		  var list = data.list.data;
+		  var html_="";
+		    	  
+		  for(var i=0;i<list.length;i++)
+		  {	
+		  	   
+				html_ +="<tr><td>"+list[i].day+"</td><td>"+list[i].fjzs15+"</td><td>"+list[i].fjhk15+"</td><td>"+list[i].fjhk15bl+"</td><td>"+list[i].fjzs30+"</td><td>"+list[i].fjhk30+"</td><td>"+list[i].fjhk30bl+"</td>"//<td>"+list[i].onezu+"</td><td>"+list[i].twozu+"</td><td>"+list[i].fourzu+"</td>";		
+				
+				html_ +="</tr>";	
+		  }
+			$("#load_data").append(html_);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+				  
+   	 })
+	}
+	load_data();
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>
+ <script type="text/javascript" src="/assets/js/json.js"></script>
+
