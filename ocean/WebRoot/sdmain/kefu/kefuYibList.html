@@ -300,7 +300,9 @@ a:hover {text-decoration: none;}
 				  	date=30;
 				  }else if(list[i].jk_date==4){
 					  	date=14;
-					  }
+				  }else if(list[i].jk_date==3){
+					  date=7;
+				  }
 				  var mobilephone = list[i].mobilephone;
 		     	if(mobilephone.length > 8){
 		 			mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);

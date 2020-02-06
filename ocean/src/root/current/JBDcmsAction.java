@@ -5662,7 +5662,7 @@ public class JBDcmsAction extends BaseAction {
 			user_pvi[3] = userjkinfo.getString("spdz");
 		}
 		logger.info("userid:"+userid+"realName:"+realName+"usercmnd"+usercmnd+"user_p1:"+user_pvi[0]+"user_vi:"+user_pvi[3]);
-	    String url ="https://abc-dong.oss-cn-hongkong.aliyuncs.com/";
+	    String url ="https://yn-ocean.oss-cn-hongkong.aliyuncs.com/";
 		//String url ="https://m99.oss-cn-hongkong.aliyuncs.com/";
 	    logger.info("url:"+url);
 		for (int i = 0; i < user_pvi.length; i++) {

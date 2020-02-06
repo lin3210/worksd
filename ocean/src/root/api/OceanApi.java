@@ -63,8 +63,8 @@ import root.current.OLVSacombank;
 import root.current.SSLClient;
 import root.order.UserMoneyBase;
 
-public class VanaApi extends BaseAction {
-	private static Logger logger = Logger.getLogger(VanaApi.class);
+public class OceanApi extends BaseAction {
+	private static Logger logger = Logger.getLogger(OceanApi.class);
 	/* private static UserService userService = new UserService(); */
 	private static JBDUserService jdbUserService = new JBDUserService();
 	private static JBDcms3Service jbdcms3Service = new JBDcms3Service();
@@ -75,13 +75,13 @@ public class VanaApi extends BaseAction {
 	String jiami = "S9uKJD8HEOI9j9O89ujhdf8H093kfld12NVbvc";
 	long time = 1000 * 60 * 3;
 
-	public ActionResult doVanaHome() throws IOException {
+	public ActionResult doOceanHome() throws IOException {  
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String miwen = jsonObj.getString("vanatoken");
-		int userId = jsonObj.getInteger("vanaid");
+		String miwen = jsonObj.getString("oceantoken");
+		int userId = jsonObj.getInteger("oceanid");
 		String jiamiwen = Encrypt.MD5(userId + jiami);
 		if (jiamiwen.equals(miwen)) {
 
@@ -108,71 +108,71 @@ public class VanaApi extends BaseAction {
 				String maxMoney = "";
 				int sjshmoney = userMoneyBase.getUMBaseMaxLoanMoney_showApp(userId);   //最大额度
 				int maxCount = userMoneyBase.getUMBaseSuccessfulLoanNum(userId, maxMoney);
-				row.set("vanaMm", famt.format(sjshmoney));
-				row.set("vanaMc", maxCount);
-				row.set("vanaSsr", 1);
-				row.set("vanaVc", 8);
+				row.set("oceanMm", famt.format(sjshmoney));
+				row.set("oceanMc", maxCount);
+				row.set("oceanSsr", 1);
+				row.set("oceanVc", 8);
 				if (data != null) {
 					String username = data.getString("username");
 					String phone = data.getString("mobilephone");
-					row.set("vanaCp", phone);
+					row.set("oceanCp", phone);
 
 					if (data4 != null) {
-						row.set("vanaIr", data4.getString("hkqd"));
+						row.set("oceanIr", data4.getString("hkqd"));
 					} else {
-						row.set("vanaIr", "0");
+						row.set("oceanIr", "0");
 					}
 					
-					row.set("vanaPd", data.getString("changejkts"));//1为7天和14天，0为15天和30天
+					row.set("oceanPd", data.getString("changejkts"));//1为7天和14天，0为15天和30天
 					
-					row.set("vanaFdv", "0.1955");
-					row.set("vanaTdv", "0.291");
-					row.set("vanaPs", "{\"7\":[0.0045,0.3]}");  //,\"30\":[0.009,0.4]
+					row.set("oceanFdv", "0.1955");
+					row.set("oceanTdv", "0.291");
+					row.set("oceanPs", "{\"7\":[0.0045,0.3]}");  //,\"30\":[0.009,0.4]
 					
 					if (rz != null) {
-						isStep1.set("vanaBun", rz.getString("cardusername"));
-						isStep1.set("vanaBn", rz.getString("bankname"));
-						isStep1.set("vanaCn", rz.getString("cardname"));
+						isStep1.set("oceanBun", rz.getString("cardusername"));
+						isStep1.set("oceanBn", rz.getString("bankname"));
+						isStep1.set("oceanCn", rz.getString("cardname"));
 						if (rz.getString("cardno").length() > 9) {
-							isStep1.set("vanaCd", "********" + rz.getString("cardno")
+							isStep1.set("oceanCd", "********" + rz.getString("cardno")
 									.substring(rz.getString("cardno").length() - 4, rz.getString("cardno").length()));
 
 						} else {
-							isStep1.set("vanaCd", "********" + rz.getString("cardno")
+							isStep1.set("oceanCd", "********" + rz.getString("cardno")
 									.substring(rz.getString("cardno").length() - 4, rz.getString("cardno").length()));
 
 						}
 					}
 
 					if (rzsf != null) {
-						isStep2.set("vanaIc", rzsf.getString("idno"));
-						isStep2.set("vanaHa", rzsf.getString("homeaddress"));
-						isStep2.set("vanaBir", rzsf.getString("age"));
-						isStep2.set("vanaAdd", rzsf.getString("address"));
+						isStep2.set("oceanIc", rzsf.getString("idno"));
+						isStep2.set("oceanHa", rzsf.getString("homeaddress"));
+						isStep2.set("oceanBir", rzsf.getString("age"));
+						isStep2.set("oceanAdd", rzsf.getString("address"));
 					} else {
-						isStep2.set("vanaIc", null);
+						isStep2.set("oceanIc", null);
 					}
 
 					if ("1".equals(data.getString("yhbd"))) {
-						isStep1.set("vanaS1", 1);
+						isStep1.set("oceanS1", 1);
 					} else {
-						isStep1.set("vanaS1", 0);
+						isStep1.set("oceanS1", 0);
 					}
 					if ("1".equals(data.getString("isshenfen"))) {
-						isStep2.set("vanaS2", 1);
+						isStep2.set("oceanS2", 1);
 					} else {
-						isStep2.set("vanaS2", 0);
+						isStep2.set("oceanS2", 0);
 					}
 					if ("1".equals(data.getString("islianxi"))) {
-						isStep3.set("vanaS3", 1);
+						isStep3.set("oceanS3", 1);
 					} else {
-						isStep3.set("vanaS3", 0);
+						isStep3.set("oceanS3", 0);
 					}
 				}
 				DataRow dataJK = jdbUserService.findUserJKByuserid(userId + "");
 				DataRow dataJKSB = jdbUserService.findUserJKByuseridSB(userId + "");
 				if (dataJKSB != null) {
-					row.set("vanaIfd", 3);
+					row.set("oceanIfd", 3);
 				}
 				if (dataJK != null) {
 
@@ -196,15 +196,15 @@ public class VanaApi extends BaseAction {
 					String hkfqcode = dataJK.getString("hkfq_code");
 					String hkfqcishu = dataJK.getString("hkfq_cishu");
 					if ("1".equals(hkfqcode)) {
-						row.set("vanaEt", hkfq);
+						row.set("oceanEt", hkfq);
 					} else {
-						row.set("vanaEt", hkyq);
+						row.set("oceanEt", hkyq);
 					}
-					row.set("vanaLd", jk_date);
-					row.set("vanaEd", yueqTs);
-					row.set("vanaIls", jksfwc);
-					row.set("vanaFam", sjdsMoney);
-					row.set("vanaFm", sjshMoney);
+					row.set("oceanLd", jk_date);
+					row.set("oceanEd", yueqTs);
+					row.set("oceanIls", jksfwc);
+					row.set("oceanFam", sjdsMoney);
+					row.set("oceanFm", sjshMoney);
 					int yanqi15 = 0;
 					if(Integer.parseInt(sjshMoney.replaceAll(",", "").replace(".", ""))<=1000000) {
 						yanqi15 = Integer.parseInt(sjshMoney.replaceAll(",", "").replace(".", "")) * 3 / 10;
@@ -213,41 +213,41 @@ public class VanaApi extends BaseAction {
 					}
 					int yanqi30 = Integer.parseInt(sjshMoney.replaceAll(",", "").replace(".", "")) * 3 / 10;
 					if(hkfqcishu.length()>=2 || Integer.parseInt(yueqTs)>15) {
-						row.set("vanaEs", 0);
+						row.set("oceanEs", 0);
 					}else {
-						row.set("vanaEs", 1);
+						row.set("oceanEs", 1);
 					}
-					row.set("vanaE15", famt.format(yanqi15));
-					row.set("vanaE30", famt.format(yanqi30));
+					row.set("oceanE15", famt.format(yanqi15));
+					row.set("oceanE30", famt.format(yanqi30));
 
-					row.set("vanaIuv", spzt);
-					row.set("vanaIltv", sfyfk);
-					row.set("vanaEif", yuqLx);
-					row.set("vanaLvl", jkMoney);
-					row.set("vanaIcrd", hk);
+					row.set("oceanIuv", spzt);
+					row.set("oceanIltv", sfyfk);
+					row.set("oceanEif", yuqLx);
+					row.set("oceanLvl", jkMoney);
+					row.set("oceanIcrd", hk);
 					if ("1".equals(cl) && "1".equals(cl02) && "0".equals(cl03) && "0".equals(spzt)) {
-						row.set("vanaIco", 3);// 上传视频
+						row.set("oceanIco", 3);// 上传视频
 					} else if ("1".equals(cl) && "1".equals(cl02) && "1".equals(cl03) && "1".equals(spzt)
 							&& "1".equals(sfyfk)) {
 						if ("0".equals(hkqd)) {
-							row.set("vanaIco", 4);// 还没上传还款凭证
+							row.set("oceanIco", 4);// 还没上传还款凭证
 						} else {
-							row.set("vanaIco", 5);// 已经上传还款凭证
+							row.set("oceanIco", 5);// 已经上传还款凭证
 						}
 					} else if ("1".equals(cl) && "1".equals(cl02) && "1".equals(cl03) && "1".equals(spzt) && "2".equals(sfyfk) ) {
-						row.set("vanaIco", 6);// 等待放款
+						row.set("oceanIco", 6);// 等待放款
 					}else if("1".equals(cl) && "1".equals(cl02) && "1".equals(cl03) && "1".equals(spzt) && "3".equals(sfyfk)) {
-						row.set("vanaIco", 2); //重新提交借款
+						row.set("oceanIco", 2); //重新提交借款
 					} else {
-						row.set("vanaIco", 7);// 审核中
+						row.set("oceanIco", 7);// 审核中
 					}
 				} else {
-					row.set("vanaIco", 2);// 提交借款
+					row.set("oceanIco", 2);// 提交借款
 				}
-				row.set("vanaS1", isStep1);
-				row.set("vanaS2", isStep2);
-				row.set("vanaS3", isStep3);
-				row.set("vanaurl", "https://m.me/vaytienvana");
+				row.set("oceanS1", isStep1);
+				row.set("oceanS2", isStep2);
+				row.set("oceanS3", isStep3);
+				row.set("oceanurl", "https://m.me/vaytienvana");
 				
 				DataRow dataAuth = jbdcms3Service.getAuthRow(userId+"");
 				if(dataAuth != null) {
@@ -265,8 +265,8 @@ public class VanaApi extends BaseAction {
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("vanaC", 101);
-			jsObj.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("oceanC", 101);
+			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 
 			return null;
@@ -275,16 +275,16 @@ public class VanaApi extends BaseAction {
 	
 
 //olava注册登录接口(FB)
-	public ActionResult doVanaLogin() throws Exception {
+	public ActionResult doOceanLogin() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		JSONObject jsonObject = new JSONObject();
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String phone = jsonObj.getString("vanaPhone").trim().replaceAll(" ", "");// 手机�??
+		String phone = jsonObj.getString("oceanPhone").trim().replaceAll(" ", "");// 手机�??
 		String appid = jsonObj.getString("appid");//app版本号
-		int phonetype = jsonObj.getInteger("vanaPhTy");
-		String miwen = jsonObj.getString("vanatoken");
+		int phonetype = jsonObj.getInteger("oceanPhTy");
+		String miwen = jsonObj.getString("oceantoken");
 
 		String jiamiwen = Encrypt.MD5(phone + phonetype + jiami);
 		if (jiamiwen.equals(miwen)) {
@@ -299,16 +299,16 @@ public class VanaApi extends BaseAction {
 			logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			logger.info("当前注册用户:手机号：" + phone + "IP:" + ip + "当前时间" + lastDate);
 			String code ="";
-			if (jsonObj.containsKey("vanaotp")) {
-			    code = jsonObj.getString("vanaotp");
+			if (jsonObj.containsKey("oceanotp")) {
+			    code = jsonObj.getString("oceanotp");
 			    String memyzm= "";
 				if(MemCachedUtil.cachedClient.keyExists(phone+"_HAHA"))
 				{
 					memyzm = (String)MemCachedUtil.cachedClient.get(phone+"_HAHA");
 				}
 			    if(!code.equals(memyzm)){
-					jsonObject.put("vanaC", -3);
-					jsonObject.put("vanaM", "Mã xác minh không chính xác");//验证码不正确
+					jsonObject.put("oceanC", -3);
+					jsonObject.put("oceanM", "Mã xác minh không chính xác");//验证码不正确
 					logger.warn("验证码不正确");
 					this.getWriter().write(jsonObject.toString());
 					return null;
@@ -316,9 +316,9 @@ public class VanaApi extends BaseAction {
 			}
 			long str = jdbUserService.getCountByPhone(phone);
 			if (str > 0) {
-				jsonObject.put("vanaC", 0);
+				jsonObject.put("oceanC", 0);
 				jsonObject.put("userId", respUserId);
-				jsonObject.put("vanaM", "Login Success");// 账号已注册，直接登录
+				jsonObject.put("oceanM", "Login Success");// 账号已注册，直接登录
 				jsonObject.put("isRegister", 1);// 账号已注册，直接登录
 				logger.info("账号已注册，直接登录");
 				this.getWriter().write(jsonObject.toString());
@@ -394,8 +394,8 @@ public class VanaApi extends BaseAction {
 						data11.set("isemulator", isemulator);
 						data11.set("createtime", new Date());
 						jdbUserService.addUserErrorPhoneType(data11);
-						jsonObject.put("vanaC", 8);
-						jsonObject.put("vanaM", "Tài khoản này đã bị hạn chế để đăng nhập");// 此帐户已被限制登�??
+						jsonObject.put("oceanC", 8);
+						jsonObject.put("oceanM", "Tài khoản này đã bị hạn chế để đăng nhập");// 此帐户已被限制登�??
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					}
@@ -434,8 +434,8 @@ public class VanaApi extends BaseAction {
 				jsonObject.put("cellphone", mobile);
 				jsonObject.put("userId", userid);
 				jsonObject.put("userName", username);
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Đăng nhập thành công");// 注册成功
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Đăng nhập thành công");// 注册成功
 				this.getSession().setAttribute("phone", phone);// —�?��?��??++—�??+—�??+—�??+LL
 
 				this.getWriter().write(jsonObject.toString());
@@ -443,27 +443,27 @@ public class VanaApi extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.error("登录失败" + e);
-				jsonObject.put("vanaC", 10);
-				jsonObject.put("vanaM", "Lỗi hệ thống, đăng ký không thành công!");// 系统错误，注册失�??
+				jsonObject.put("oceanC", 10);
+				jsonObject.put("oceanM", "Lỗi hệ thống, đăng ký không thành công!");// 系统错误，注册失�??
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
 		} else {
-			jsonObject.put("vanaC", 101);
-			jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsonObject.put("oceanC", 101);
+			jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
 
 	}
-	public ActionResult doVanaOTP() throws Exception {
+	public ActionResult doOceanOTP() throws Exception {
 		logger.info("请求ip"+getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonObj = getRequestJson(request);
 		String ip = getipAddr();
-		String miwen = jsonObj.getString("vanatoken");
+		String miwen = jsonObj.getString("oceantoken");
 		String type ="1";
-		String phone = jsonObj.getString("vanaPhone").trim().replaceAll(" ", "");
+		String phone = jsonObj.getString("oceanPhone").trim().replaceAll(" ", "");
 			
 		String jiamiwen = Encrypt.MD5(phone+jiami);
 		JSONObject jsonObject = new JSONObject();
@@ -475,8 +475,8 @@ public class VanaApi extends BaseAction {
 			 String  dateTE =fmtrq2.format(calendar.getTime());
 			int  dxtiaoshu  = jdbUserService.getDxtiaoshu(phone,dateTS,dateTE);
 			if(dxtiaoshu  >3){
-				jsonObject.put("vanaC", -1);
-				jsonObject.put("vanaM", "sms error");
+				jsonObject.put("oceanC", -1);
+				jsonObject.put("oceanM", "sms error");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -497,8 +497,8 @@ public class VanaApi extends BaseAction {
 					logger.info(Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY)+"___"+Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 					//存到缓存服务器
 					MemCachedUtil.cachedClient.set(phone+"_"+type, Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY), new Date(time));
-					jsonObject.put("vanaRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
-					jsonObject.put("vanaRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
+					jsonObject.put("oceanRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
+					jsonObject.put("oceanRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 					MemCachedUtil.cachedClient.set(phone+"_HAHA", randomCode, new Date(time));
 					logger.info("短信发送成功-----"+phone);
 					int smscode = jdbUserService.getSmsCode();
@@ -509,13 +509,13 @@ public class VanaApi extends BaseAction {
 					String returnString = SendMsg.sendMessageByGetOTP(con,phone);
 					if (returnString.equals("106")) 
 					{		
-						jsonObject.put("vanaC", 0);
-						jsonObject.put("vanaM", "Đã gửi thành công");
+						jsonObject.put("oceanC", 0);
+						jsonObject.put("oceanM", "Đã gửi thành công");
 						logger.info(Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY)+"___"+Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 						//存到缓存服务器
 						MemCachedUtil.cachedClient.set(phone+"_"+type, Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY), new Date(time));
-						jsonObject.put("vanaRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
-						jsonObject.put("vanaRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
+						jsonObject.put("oceanRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
+						jsonObject.put("oceanRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 						MemCachedUtil.cachedClient.set(phone+"_HAHA", randomCode, new Date(time));
 						logger.info("短信发送成功-----"+phone);
 						DataRow  ipInfo = new  DataRow();
@@ -527,8 +527,8 @@ public class VanaApi extends BaseAction {
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					}else{
-						jsonObject.put("vanaC", 4);
-						jsonObject.put("vanaM", "Gửi không thành công"); //发送失败
+						jsonObject.put("oceanC", 4);
+						jsonObject.put("oceanM", "Gửi không thành công"); //发送失败
 						logger.error("短信发送失败-----"+phone);
 						this.getWriter().write(jsonObject.toString());
 						return null;
@@ -536,11 +536,11 @@ public class VanaApi extends BaseAction {
 				}
 				else
 				{
-					jsonObject.put("vanaC", 5);
-					jsonObject.put("vanaM", "Mã xác thực đã gửi đi, thời hạn 3 phút"); //验证码已发送，3分钟内有效
+					jsonObject.put("oceanC", 5);
+					jsonObject.put("oceanM", "Mã xác thực đã gửi đi, thời hạn 3 phút"); //验证码已发送，3分钟内有效
 					logger.error("缓存内的验证码-----"+MemCachedUtil.cachedClient.get(phone+"_HAHA"));
-					jsonObject.put("vanaRc", memyzm.toString());
-					jsonObject.put("vanaRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
+					jsonObject.put("oceanRc", memyzm.toString());
+					jsonObject.put("oceanRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 					this.getWriter().write(jsonObject.toString());
 					return null;
 				}
@@ -548,8 +548,8 @@ public class VanaApi extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.info("由于系统原因，验证码发送失败"+e);
-				jsonObject.put("vanaC", 10);
-				jsonObject.put("vanaM", "Do lỗi hệ thống, mã xác thực không gửi được");//由于系统原因，验证码发送失败
+				jsonObject.put("oceanC", 10);
+				jsonObject.put("oceanM", "Do lỗi hệ thống, mã xác thực không gửi được");//由于系统原因，验证码发送失败
 				logger.error("短信发送失败-----"+phone);
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -558,23 +558,23 @@ public class VanaApi extends BaseAction {
 			return null;
 		}
 	}
-	public ActionResult doVanaSubCard() throws Exception {
+	public ActionResult doOceanSubCard() throws Exception {
 
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String userid = jsonObj.getString("vanaid");
-		String numberId = jsonObj.getString("vanaNi");
-		String addr = jsonObj.getString("vanaAddr");
-		String birthday = jsonObj.getString("vanaBir");
-		String miwen = jsonObj.getString("vanatoken");
+		String userid = jsonObj.getString("oceanid");
+		String numberId = jsonObj.getString("oceanNi");
+		String addr = jsonObj.getString("oceanAddr");
+		String birthday = jsonObj.getString("oceanBir");
+		String miwen = jsonObj.getString("oceantoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 		if (jiamiwen.equals(miwen)) {
-			String p1 = jsonObj.getString("vanaPo");
-			String p2 = jsonObj.getString("vanaPt");
-			String p3 = jsonObj.getString("vanaPtr");
+			String p1 = jsonObj.getString("oceanPo");
+			String p2 = jsonObj.getString("oceanPt");
+			String p3 = jsonObj.getString("oceanPtr");
 			String ui = jdbUserService.getUI(userid);
 			String bankcard = jdbUserService.getBK(userid);
 
@@ -586,8 +586,8 @@ public class VanaApi extends BaseAction {
 
 			if ("".equals(p1) || p1 == null || "".equals(p2) || p2 == null || "".equals(p3) || p3 == null) {
 
-				jsonObject.put("vanaC", -11);
-				jsonObject.put("vanaM", "Lỗi tải lên hình ảnh");// 图片上传错误
+				jsonObject.put("oceanC", -11);
+				jsonObject.put("oceanM", "Lỗi tải lên hình ảnh");// 图片上传错误
 				this.getWriter().write(jsonObject.toString());
 				return null;
 
@@ -640,39 +640,39 @@ public class VanaApi extends BaseAction {
 				}
 
 				jdbUserService.updateUserInfoH(row3);
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Thành công");// 成功
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Thành công");// 成功
 			} catch (Exception e) {
 
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("vanaC", 101);
-			jsObj.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("oceanC", 101);
+			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 
 	}
 
-	public ActionResult doVanaBankCopy() throws Exception {
+	public ActionResult doOceanBankCopy() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String name = jsonObj.getString("vanaUn").replace("&nbsp;", " ");
-		String userid = jsonObj.getString("vanaid");
+		String name = jsonObj.getString("oceanUn").replace("&nbsp;", " ");
+		String userid = jsonObj.getString("oceanid");
 
-		String cardId = jsonObj.getString("vanaUci");
-		String miwen = jsonObj.getString("vanatoken");
-		String bankName = jsonObj.getString("vanaBn");
-		String branchName = jsonObj.getString("vanaBcn");
+		String cardId = jsonObj.getString("oceanUci");
+		String miwen = jsonObj.getString("oceantoken");
+		String bankName = jsonObj.getString("oceanBn");
+		String branchName = jsonObj.getString("oceanBcn");
 		String jiamiwen = Encrypt.MD5(userid + cardId + jiami);
 
 		if (jiamiwen.equals(miwen)) {
@@ -681,8 +681,8 @@ public class VanaApi extends BaseAction {
 			String uisf = jdbUserService.getBK(userid);
 			int yhbd = dataRow.getInt("yhbd");
 			if (yhbd == 1) {
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
 
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -839,32 +839,32 @@ public class VanaApi extends BaseAction {
 								row3.set("id", userid);
 								row3.set("yhbd", 1);// 银行卡认证为1
 								mofaUserService.updateUserInfoH(row3);
-								jsonObject.put("vanaC", 0);
-								jsonObject.put("vanaM", "Thành công");// 成功
+								jsonObject.put("oceanC", 0);
+								jsonObject.put("oceanM", "Thành công");// 成功
 								this.getWriter().write(jsonObject.toString());
 								return null;
 							} catch (Exception e) {
 
-								jsonObject.put("vanaC", -3);
-								jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
+								jsonObject.put("oceanC", -3);
+								jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
 								e.printStackTrace();
 								this.getWriter().write(jsonObject.toString());
 								return null;
 							}
 						} else {
-							jsonObject.put("vanaC", -2);
-							jsonObject.put("vanaM", "Sai tên, vui lòng kiểm tra lại họ tên và số tài khoản ngân hàng");// 成功
+							jsonObject.put("oceanC", -2);
+							jsonObject.put("oceanM", "Sai tên, vui lòng kiểm tra lại họ tên và số tài khoản ngân hàng");// 成功
 							this.getWriter().write(jsonObject.toString());
 							return null;
 						}
 					} else if ("1".equals(checkstatus)) {
-						jsonObject.put("vanaC", -1);
-						jsonObject.put("vanaM", "Sai số tài khoản NH, vui lòng xác nhận lại");// 成功
+						jsonObject.put("oceanC", -1);
+						jsonObject.put("oceanM", "Sai số tài khoản NH, vui lòng xác nhận lại");// 成功
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					} else {
-						jsonObject.put("vanaC", -3);
-						jsonObject.put("vanaM", "Lỗi mạng, vui lòng đề xuất lại");// 成功
+						jsonObject.put("oceanC", -3);
+						jsonObject.put("oceanM", "Lỗi mạng, vui lòng đề xuất lại");// 成功
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					}
@@ -912,14 +912,14 @@ public class VanaApi extends BaseAction {
 				row3.set("id", userid);
 				row3.set("yhbd", 1);// 银行卡认证为1
 				mofaUserService.updateUserInfoH(row3);
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Thành công");// 成功
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Thành công");// 成功
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			} catch (Exception e) {
 
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
 				e.printStackTrace();
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -930,18 +930,18 @@ public class VanaApi extends BaseAction {
 
 	}
 
-	public ActionResult doVanaBank() throws Exception {
+	public ActionResult doOceanBank() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String name = jsonObj.getString("vanaUn").replace("&nbsp;", " ");
-		String userid = jsonObj.getString("vanaid");
+		String name = jsonObj.getString("oceanUn").replace("&nbsp;", " ");
+		String userid = jsonObj.getString("oceanid");
 
-		String cardId = jsonObj.getString("vanaUci");
-		String miwen = jsonObj.getString("vanatoken");
-		String bankName = jsonObj.getString("vanaBn");
-		String branchName = jsonObj.getString("vanaBcn");
+		String cardId = jsonObj.getString("oceanUci");
+		String miwen = jsonObj.getString("oceantoken");
+		String bankName = jsonObj.getString("oceanBn");
+		String branchName = jsonObj.getString("oceanBcn");
 		String jiamiwen = Encrypt.MD5(userid + cardId + jiami);
 
 		if (jiamiwen.equals(miwen)) {
@@ -952,8 +952,8 @@ public class VanaApi extends BaseAction {
 			int yhbd = dataRow.getInt("yhbd");
 
 			if (yhbd == 1) {
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
 
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -997,42 +997,42 @@ public class VanaApi extends BaseAction {
 				row3.set("id", userid);
 				row3.set("yhbd", 1);// 银行卡认证为1
 				jdbUserService.updateUserInfoH(row3);
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Thành công");// 成功
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Thành công");// 成功
 			} catch (Exception e) {
 
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("vanaC", 101);
-			jsObj.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("oceanC", 101);
+			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 
 	}
 
-	public ActionResult doVanaContact() throws Exception {
+	public ActionResult doOceanContact() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String userid = jsonObj.getString("vanaid");
+		String userid = jsonObj.getString("oceanid");
 
-		String contact1 = jsonObj.getString("vanaCo").trim().replace("&nbsp;", " ");
-		String contact2 = jsonObj.getString("vanaCt").trim().replace("&nbsp;", " ");
-		String tel1 = jsonObj.getString("vanaTo").trim().replace("&nbsp;", " ");
-		String tel2 = jsonObj.getString("vanaTt").trim().replace("&nbsp;", " ");
-		String miwen = jsonObj.getString("vanatoken");
+		String contact1 = jsonObj.getString("oceanCo").trim().replace("&nbsp;", " ");
+		String contact2 = jsonObj.getString("oceanCt").trim().replace("&nbsp;", " ");
+		String tel1 = jsonObj.getString("oceanTo").trim().replace("&nbsp;", " ");
+		String tel2 = jsonObj.getString("oceanTt").trim().replace("&nbsp;", " ");
+		String miwen = jsonObj.getString("oceantoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 		if (jiamiwen.equals(miwen)) {
-			String guanxi1 = jsonObj.getString("vanaRo").trim().replace("&nbsp;", " ");
-			String guanxi2 = jsonObj.getString("vanaRt").trim().replace("&nbsp;", " ");
+			String guanxi1 = jsonObj.getString("oceanRo").trim().replace("&nbsp;", " ");
+			String guanxi2 = jsonObj.getString("oceanRt").trim().replace("&nbsp;", " ");
 			String ui = jdbUserService.getUILianxi(userid);
 			JSONObject jsonObject = new JSONObject();
 
@@ -1077,32 +1077,32 @@ public class VanaApi extends BaseAction {
 					row3.set("vipStatus", 0);// 工作认证�??1
 				}
 				jdbUserService.updateUserInfoH(row3);
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Thành công");
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Thành công");
 			} catch (Exception e) {
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("vanaC", 101);
-			jsObj.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("oceanC", 101);
+			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 	}
 
-	public void doVanaAddBook() throws ServletException, IOException {
+	public void doOceanAddBook() throws ServletException, IOException {
 		logger.info("用户ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		JSONObject jsonObject = new JSONObject();
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String userid = jsonObj.getString("vanaid");
-		String miwen = jsonObj.getString("vanatoken");
+		String userid = jsonObj.getString("oceanid");
+		String miwen = jsonObj.getString("oceantoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 
 		if (jiamiwen.equals(miwen)) {
@@ -1139,8 +1139,8 @@ public class VanaApi extends BaseAction {
 				logger.info(jsonArray.toString());
 			}
 			if (jsonArray.size() > 0) {
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "right");
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "right");
 				for (int i = 0; i < jsonArray.size(); i++) {
 					com.alibaba.fastjson.JSONObject object = jsonArray.getJSONObject(i);
 					if (object.containsKey("dbTen") && object.containsKey("dbDienthoai")) {
@@ -1159,12 +1159,12 @@ public class VanaApi extends BaseAction {
 					}
 				}
 			} else {
-				jsonObject.put("vanaC", 1);
-				jsonObject.put("vanaM", "right");
+				jsonObject.put("oceanC", 1);
+				jsonObject.put("oceanM", "right");
 			}
 			if (jsonArray1.size() > 0) {
-				jsonObject.put("vanaC1", 0);
-				jsonObject.put("vanaM1", "成功");
+				jsonObject.put("oceanC1", 0);
+				jsonObject.put("oceanM1", "成功");
 				for (int i = 0; i < jsonArray1.size(); i++) {
 					com.alibaba.fastjson.JSONObject object = jsonArray1.getJSONObject(i);
 					if (object.containsKey("type") && object.containsKey("name") && object.containsKey("number")
@@ -1190,12 +1190,12 @@ public class VanaApi extends BaseAction {
 					}
 				}
 			} else {
-				jsonObject.put("vanaC1", 1);
-				jsonObject.put("vanaM1", "失败");
+				jsonObject.put("oceanC1", 1);
+				jsonObject.put("oceanM1", "失败");
 			}
 			if (jsonArray2.size() > 0) {
-				jsonObject.put("vanaC2", 0);
-				jsonObject.put("vanaM2", "成功");
+				jsonObject.put("oceanC2", 0);
+				jsonObject.put("oceanM2", "成功");
 				for (int i = 0; i < jsonArray2.size(); i++) {
 					com.alibaba.fastjson.JSONObject object = jsonArray2.getJSONObject(i);
 					if (object.containsKey("type") && object.containsKey("phone") && object.containsKey("person")
@@ -1222,13 +1222,13 @@ public class VanaApi extends BaseAction {
 					}
 				}
 			} else {
-				jsonObject.put("vanaC2", 1);
-				jsonObject.put("vanaM2", "失败");
+				jsonObject.put("oceanC2", 1);
+				jsonObject.put("oceanM2", "Fail");
 			}
 			this.getWriter().write(jsonObject.toString());
 		} else {
-			jsonObject.put("vanaC", 1);
-			jsonObject.put("vanaM", "Right!");
+			jsonObject.put("oceanC", 1);
+			jsonObject.put("oceanM", "Right!");
 			this.getWriter().write(jsonObject.toString());
 		}
 
@@ -1240,29 +1240,29 @@ public class VanaApi extends BaseAction {
 	 * 
 	 */
 
-	public ActionResult doVanaBorJ() throws Exception {
+	public ActionResult doOceanBorJ() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
 		JSONObject jsonObject = new JSONObject();
-		String jk_money = jsonObj.getString("vanaBm");
-		int jk_date = jsonObj.getInteger("vanaBd");
-		String borrMoney = jsonObj.getString("vanaBm");
+		String jk_money = jsonObj.getString("oceanBm");
+		int jk_date = jsonObj.getInteger("oceanBd");
+		String borrMoney = jsonObj.getString("oceanBm");
 		//String actualMoney = jsonObj.getString("actualMoney");
 		//String interesetFee = jsonObj.getString("interesetFee");
 		SimpleDateFormat famat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		int userid2 = jsonObj.getInteger("vanaid");
+		int userid2 = jsonObj.getInteger("oceanid");
 		String username = jdbUserService.getUsername(userid2);
 		String mobilePhone = jdbUserService.getMobilePhone(userid2);
 		DataRow jkDataLast = jdbUserService.getjkNumLast(userid2 + "");
 		//拒绝自然用户  2019年12月19日
 		int user_num = jdbUserService.getUserPhoneDXSH(mobilePhone) +jdbUserService.getUserPhoneDXHK(mobilePhone);
 		if(user_num <=0 && jkDataLast == null) {
-			jsonObject.put("vanaC", -1);
-			jsonObject.put("vanaM", "Kính chào quý khách hàng, xin thông báo hệ thống VANA tạm thời ngưng dịch vụ giải ngân, sẽ hoạt động bình thường vào ngày 02/02/2020, xin cám ơn ");
+			jsonObject.put("oceanC", -1);
+			jsonObject.put("oceanM", "Kính chào quý khách hàng, xin thông báo hệ thống OCEAN tạm thời ngưng dịch vụ giải ngân, sẽ hoạt động bình thường vào ngày 02/02/2020, xin cám ơn ");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1271,8 +1271,8 @@ public class VanaApi extends BaseAction {
 		DecimalFormat famt = new DecimalFormat("###,###");
 		//2019-7-24 lin 格式转换防止点号
 		if(borrMoney.isEmpty()) {
-			jsonObject.put("vanaC", -5);
-			jsonObject.put("vanaM", "Lỗi xảy ra khiến giá trị vay không đúng, vui lòng tắt app thử lại !");
+			jsonObject.put("oceanC", -5);
+			jsonObject.put("oceanM", "Lỗi xảy ra khiến giá trị vay không đúng, vui lòng tắt app thử lại !");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}else {
@@ -1283,8 +1283,8 @@ public class VanaApi extends BaseAction {
 		int aaa = time.compareTo("2018-12-24");
 		int bbb = "2019-01-08".compareTo(time);
 		if (jk_date == 2 && aaa > 0 && bbb > 0) {
-			jsonObject.put("vanaC", -1);
-			jsonObject.put("vanaM", "Thời điểm này VANA chỉ cung cấp khoản vay 15 ngày");
+			jsonObject.put("oceanC", -1);
+			jsonObject.put("oceanM", "Thời điểm này OCEAN chỉ cung cấp khoản vay 15 ngày");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1292,8 +1292,8 @@ public class VanaApi extends BaseAction {
 		int ccc = time.compareTo("2019-01-15");
 		int ddd = "2019-01-29".compareTo(time);
 		if (jk_date == 1 && ccc > 0 && ddd > 0) {
-			jsonObject.put("vanaC", -1);
-			jsonObject.put("vanaM", "Thời điểm này VANA chỉ cung cấp khoản vay 30 ngày");
+			jsonObject.put("oceanC", -1);
+			jsonObject.put("oceanM", "Thời điểm này OCEAN chỉ cung cấp khoản vay 30 ngày");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1302,8 +1302,8 @@ public class VanaApi extends BaseAction {
 		int ddd14 = "2020-01-19".compareTo(time);
 		
 		if (jk_date == 4 && ccc14 > 0 && ddd14 > 0) {
-			jsonObject.put("vanaC", -1);
-			jsonObject.put("vanaM", "Thời điểm này VANA chỉ cung cấp khoản vay 14 ngày");
+			jsonObject.put("oceanC", -1);
+			jsonObject.put("oceanM", "Thời điểm này OCEAN chỉ cung cấp khoản vay 14 ngày");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1312,8 +1312,8 @@ public class VanaApi extends BaseAction {
 		int fff = "2020-02-01".compareTo(time);
 		// 1月8-14号不放款
 		if (eee > 0 && fff > 0) {
-			jsonObject.put("vanaC", -1);
-			jsonObject.put("vanaM","Từ 20/01/2020 -01/02/2020, VANA tạm ngừng cung cấp dịch vụ vay. Qúy khách vui lòng đề xuất vay trước, VANA sẽ xử lý hồ sơ vào 02/02/2020.");
+			jsonObject.put("oceanC", -1);
+			jsonObject.put("oceanM","Từ 20/01/2020 -01/02/2020, OCEAN tạm ngừng cung cấp dịch vụ vay. Qúy khách vui lòng đề xuất vay trước, OCEAN sẽ xử lý hồ sơ vào 02/02/2020.");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1321,33 +1321,19 @@ public class VanaApi extends BaseAction {
 		// �??测是否全部已经认�??
 		DataRow datarow = jdbUserService.getALLRZ(userid2);
 		if (!(datarow.getInt("isshenfen") == 1 && datarow.getInt("yhbd") == 1 && datarow.getInt("islianxi") == 1)) {
-			jsonObject.put("vanaC", -1);
-			jsonObject.put("vanaM", "Còn những mục chưa xác minh, vui lòng hoàn tất xác minh");
+			jsonObject.put("oceanC", -1);
+			jsonObject.put("oceanM", "Còn những mục chưa xác minh, vui lòng hoàn tất xác minh");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
 
-		if ("TAFA".equals(username.substring(0, 4))) {
-			DataRow row11 = new DataRow();
-			row11.set("id", userid2);
-			row11.set("username", "F168" + username.substring(4) + "-TAFA");
-			row11.set("isshenfen", 0);
-			row11.set("isjop", 0);
-			row11.set("islianxi", 0);
-			row11.set("yhbd", 0);
-			jdbUserService.updateUserHH(row11);
-			jsonObject.put("vanaC", -1);
-			jsonObject.put("vanaM", "Thông tin thẩm định quá hạn, hãy gửi lại");
-			this.getWriter().write(jsonObject.toString());
-			return null;
-		}
-		String miwen = jsonObj.getString("vanatoken");
+		String miwen = jsonObj.getString("oceantoken");
 
 		String jiamiwen = Encrypt.MD5(userid2 + jiami);
 		if (jiamiwen.equals(miwen)) {
 			if (userid2 == 0) {
-				jsonObject.put("vanaC", -1);
-				jsonObject.put("vanaM", "Vui lòng đăng nhập trước");
+				jsonObject.put("oceanC", -1);
+				jsonObject.put("oceanM", "Vui lòng đăng nhập trước");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1363,14 +1349,14 @@ public class VanaApi extends BaseAction {
 			int hhzt = jdbUserService.getHHZT(userid2);
 			int hhzt_indo = jdbUserService.getusercmnd_state(idno);
 			if (jkcount > 0) {
-				jsonObject.put("vanaC", -2);
-				jsonObject.put("vanaM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
+				jsonObject.put("oceanC", -2);
+				jsonObject.put("oceanM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
 			if (hhzt == 1 ||  hhzt_indo >0) {
-				jsonObject.put("vanaC", -4);
-				jsonObject.put("vanaM", "Thẩm định không thông qua, vui lòng một tháng sau đề xuất lại.");
+				jsonObject.put("oceanC", -4);
+				jsonObject.put("oceanM", "Thẩm định không thông qua, vui lòng một tháng sau đề xuất lại.");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1378,8 +1364,8 @@ public class VanaApi extends BaseAction {
 			//借款金额不能小于150万
 			int money_jk=Integer.parseInt(jk_money.replace(",","").replace(".",""));
 			if(money_jk<1500000) {
-				jsonObject.put("vanaC", -1);
-				jsonObject.put("vanaM", "Tạm thời ngừng chức năng vay 1000.000 vnđ, vui lòng đề xuất lại khoản vay khác.");
+				jsonObject.put("oceanC", -1);
+				jsonObject.put("oceanM", "Tạm thời ngừng chức năng vay 1000.000 vnđ, vui lòng đề xuất lại khoản vay khác.");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1426,8 +1412,8 @@ public class VanaApi extends BaseAction {
 				long datemin = ((chazhi % (1000 * 60 * 60 * 24)) % (1000 * 60 * 60)) / (1000 * 60);
 				long datesec = (((chazhi % (1000 * 60 * 60 * 24)) % (1000 * 60 * 60)) % (1000 * 60)) / 1000;
 				if (chazhi > 0) {
-					jsonObject.put("vanaC", -4);
-					jsonObject.put("vanaM", "Cách lần vay kế tiếp còn " + dateday + " ngày " + datehour + " tiếng "
+					jsonObject.put("oceanC", -4);
+					jsonObject.put("oceanM", "Cách lần vay kế tiếp còn " + dateday + " ngày " + datehour + " tiếng "
 							+ datemin + " phút " + datesec + " giây");
 					this.getWriter().write(jsonObject.toString());
 					return null;
@@ -1448,8 +1434,8 @@ public class VanaApi extends BaseAction {
 					sfzu[i] = row11.getInt("userid");
 					jkcountzu[i] = jdbUserService.getJKCount(sfzu[i]);
 					if (jkcountzu[i] > 0) {
-						jsonObject.put("vanaC", -3);
-						jsonObject.put("vanaM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
+						jsonObject.put("oceanC", -3);
+						jsonObject.put("oceanM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
 						DataRow row = new DataRow();
 						row.set("userid", userid2);
 						row.set("idno", idno);
@@ -1687,8 +1673,8 @@ public class VanaApi extends BaseAction {
 				if (jkcount == 0) {
 					jdbUserService.insertJKInfo(data3);
 				}
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Đề nghị đã được gửi đi, nhân viên cần 1 ngày làm việc để xác nhận.");
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Đề nghị đã được gửi đi, nhân viên cần 1 ngày làm việc để xác nhận.");
 				// 增加消息
 				DataRow row = new DataRow();
 				row.set("userid", userid2);
@@ -1697,8 +1683,8 @@ public class VanaApi extends BaseAction {
 				row.set("fb_time", fmtrq.format(calendar.getTime()));
 				jdbUserService.insertUserMsg(row);
 			} catch (Exception e) {
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Lỗi hệ thống, đề nghị vay gửi đi không thành công");
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Lỗi hệ thống, đề nghị vay gửi đi không thành công");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -1710,46 +1696,46 @@ public class VanaApi extends BaseAction {
 	}
 
 	// ShowJKJD
-	public ActionResult doVanaBorHRe() throws Exception {
+	public ActionResult doOceanBorHRe() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		int userId = jsonObj.getInteger("vanaid");
+		int userId = jsonObj.getInteger("oceanid");
 		// 根据id 获取被邀请人的信�??
-		String miwen = jsonObj.getString("vanatoken");
+		String miwen = jsonObj.getString("oceantoken");
 
 		String jiamiwen = Encrypt.MD5(userId + jiami);
 
 		if (jiamiwen.equals(miwen)) {
 			DataRow row = new DataRow();
 			// 默认第一�??
-			int curPage = jsonObj.getInteger("vanaPn");
+			int curPage = jsonObj.getInteger("oceanPn");
 			JSONArray jsonArray = new JSONArray();
 			List<DataRow> list = jdbUserService.getBorrHisRecordListPage(curPage, 10, userId);
 
 			for (DataRow object : list) {
 				DataRow data = new DataRow();
 				data.put("id", object.getString("id"));
-				data.put("vanaIr", object.getString("hkqd"));
-				data.put("vanaFm", object.getString("sjsh_money"));
-				data.put("vanaDlo", object.getString("jk_date"));
-				data.put("vanaFam", object.getString("sjds_money"));
-				data.put("vanaLvl", object.getString("jk_money"));
-				data.put("vanaCd", object.getString("create_date"));
+				data.put("oceanIr", object.getString("hkqd"));
+				data.put("oceanFm", object.getString("sjsh_money"));
+				data.put("oceanDlo", object.getString("jk_date"));
+				data.put("oceanFam", object.getString("sjds_money"));
+				data.put("oceanLvl", object.getString("jk_money"));
+				data.put("oceanCd", object.getString("create_date"));
 				jsonArray.add(JSONObject.fromBean(data));
 			}
 
 			int moneycode = jdbUserService.getMoneyCode(userId);
-			row.set("vanaHlist", jsonArray);
-			row.set("vanaCv", moneycode + "");
+			row.set("oceanHlist", jsonArray);
+			row.set("oceanCv", moneycode + "");
 			JSONObject object = JSONObject.fromBean(row);
 			this.getWriter().write(object.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("vanaC", 101);
-			jsObj.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("oceanC", 101);
+			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
@@ -1757,22 +1743,22 @@ public class VanaApi extends BaseAction {
 	}
 
 	// 项目进行还款(详情)
-	public ActionResult doVanaRfuRe() throws Exception {
+	public ActionResult doOceanRfuRe() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		int jkid = jsonObj.getInteger("vanajkid");
+		int jkid = jsonObj.getInteger("oceanjkid");
 		JSONObject jsonObject = new JSONObject();
-		String miwen = jsonObj.getString("vanatoken");
+		String miwen = jsonObj.getString("oceantoken");
 
 		String jiamiwen = Encrypt.MD5(jkid + jiami);
 
 		if (jiamiwen.equals(miwen)) {
 			if (jkid == 0) {
-				jsonObject.put("vanaC", -1);
-				jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("oceanC", -1);
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1786,9 +1772,9 @@ public class VanaApi extends BaseAction {
 				dataJK = jdbUserService.findUserJKById(jkid);
 			}
 			JSONObject object = JSONObject.fromBean(dataJK);
-			object.put("vanaC", 0);
-			object.put("vanaYq15", yanqi15);
-			object.put("vanaYq30", yanqi30);
+			object.put("oceanC", 0);
+			object.put("oceanYq15", yanqi15);
+			object.put("oceanYq30", yanqi30);
 			this.getWriter().write(object.toString());
 			return null;
 		} else {
@@ -1798,16 +1784,16 @@ public class VanaApi extends BaseAction {
 	}
 
 	// 确定借款视频是否上传（返回结果）
-	public ActionResult doVanaViCh() throws Exception {
+	public ActionResult doOceanViCh() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String videoUrl = jsonObj.getString("vanaVu");
+		String videoUrl = jsonObj.getString("oceanVu");
 		logger.info("视频地址" + videoUrl);
-		int userid = jsonObj.getInteger("vanaid");
-		String miwen = jsonObj.getString("vanatoken");
+		int userid = jsonObj.getInteger("oceanid");
+		String miwen = jsonObj.getString("oceantoken");
 
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 
@@ -1815,8 +1801,8 @@ public class VanaApi extends BaseAction {
 			JSONObject jsonObject = new JSONObject();
 
 			if (userid == 0) {
-				jsonObject.put("vanaC", -1);
-				jsonObject.put("vanaM", "Vui lòng đăng nhập trước"); // 请先登录
+				jsonObject.put("oceanC", -1);
+				jsonObject.put("oceanM", "Vui lòng đăng nhập trước"); // 请先登录
 				this.getWriter().write(jsonObject.toString());
 
 				return null;
@@ -1829,8 +1815,8 @@ public class VanaApi extends BaseAction {
 			int jkshid = jdbUserService.getJKshid(userid);
 			if (jkshid == 0) {
 
-				jsonObject.put("vanaC", -2);
-				jsonObject.put("vanaM",
+				jsonObject.put("oceanC", -2);
+				jsonObject.put("oceanM",
 						"Video cần tải không tồn tại, vui lòng liên hệ bộ phận dịch vụ khách hàng để được hỗ trợ"); // 要上传的视频的项目不存在
 																													// 请联系客服处理
 				// 请联系客服处�??
@@ -1840,8 +1826,8 @@ public class VanaApi extends BaseAction {
 			
 			//判断视频地址
 			if(videoUrl == null  || videoUrl.isEmpty()) {
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM","Không thể đăng tải video của bạn do không tim thấy video của bạn. Vui lòng thử lại sau ít phút hoặc liên hệ CSKH của chúng tôi để được hỗ trợ đăng tả."); // 要上传的视频的地址不存在
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM","Không thể đăng tải video của bạn do không tim thấy video của bạn. Vui lòng thử lại sau ít phút hoặc liên hệ CSKH của chúng tôi để được hỗ trợ đăng tả."); // 要上传的视频的地址不存在
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1858,8 +1844,8 @@ public class VanaApi extends BaseAction {
 			row3.set("neirong", "Video của bạn đã đăng lên thành công , hãy lưu ý đến kết quả xét duyệt cuối cùng."); // 您的借款申请视频已上传成功，请留意最终审核结果
 			row3.set("fb_time", fmtrq.format(calendar.getTime()));
 			jdbUserService.insertUserMsg(row3);
-			jsonObject.put("vanaC", 0);
-			jsonObject.put("vanaM", "Cập nhật thành công video đề nghị vay"); // 更新借款视频成功
+			jsonObject.put("oceanC", 0);
+			jsonObject.put("oceanM", "Cập nhật thành công video đề nghị vay"); // 更新借款视频成功
 			this.getWriter().write(jsonObject.toString());
 
 			return null;
@@ -1869,15 +1855,15 @@ public class VanaApi extends BaseAction {
 
 	}
 
-	public ActionResult doVanaReMo() throws Exception {
+	public ActionResult doOceanReMo() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String userid = jsonObj.getString("vanaid");
-		String hkqd = jsonObj.getString("vanaHk");
+		String userid = jsonObj.getString("oceanid");
+		String hkqd = jsonObj.getString("oceanHk");
 
-		String miwen = jsonObj.getString("vanatoken");
+		String miwen = jsonObj.getString("oceantoken");
 
 		String jiamiwen = Encrypt.MD5(hkqd + userid + jiami);
 
@@ -1893,10 +1879,10 @@ public class VanaApi extends BaseAction {
 				row3.set("hkpz", hkqd);
 				row3.set("hkpz_time", fmtrq.format(calendar.getTime()));
 				jdbUserService.updateUserHKQD(row3);
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Thành công");
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Thành công");
 			} catch (Exception e) {
-				jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -1907,19 +1893,19 @@ public class VanaApi extends BaseAction {
 
 	}
 
-	public ActionResult doVanaUsIoC() throws Exception {
+	public ActionResult doOceanUsIoC() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String userid = jsonObj.getString("vanaid");
-		String miwen = jsonObj.getString("vanatoken");
+		String userid = jsonObj.getString("oceanid");
+		String miwen = jsonObj.getString("oceantoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 
 		if (jiamiwen.equals(miwen)) {
-			String dwlat = jsonObj.getString("vanaDa");
-			String dwlng = jsonObj.getString("vanaDn");
+			String dwlat = jsonObj.getString("oceanDa");
+			String dwlng = jsonObj.getString("oceanDn");
 
 			JSONObject jsonObject = new JSONObject();
 			try {
@@ -1940,12 +1926,12 @@ public class VanaApi extends BaseAction {
 				row5.set("create_time", new Date());
 				jdbUserService.addUserDWIP(row5);
 
-				jsonObject.put("vanaC", 0);
-				jsonObject.put("vanaM", "Location Success");
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Location Success");
 			} catch (Exception e) {
 
-				jsonObject.put("vanaC", -3);
-				jsonObject.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -2036,50 +2022,50 @@ public class VanaApi extends BaseAction {
 		return json.toString();
 	}
 
-	public ActionResult doVanaBaCRf() throws Exception {
+	public ActionResult doOceanBaCRf() throws Exception {
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		JSONObject jsonObject = new JSONObject();
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String miwen = jsonObj.getString("vanatoken");
+		String miwen = jsonObj.getString("oceantoken");
 		String jiamiwen = Encrypt.MD5("ourbk" + jiami);
 		if (jiamiwen.equals(miwen)) {
 			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
-			obj.put("vanaAt", "TRẦN THỊ HÀ MY");
-			obj.put("vanaCn", "0601 - 8865- 4226");
-			obj.put("vanaBn", "Sacombank - CN Nguyễn Văn Linh");
+			obj.put("oceanAt", "TRẦN THỊ HÀ MY");
+			obj.put("oceanCn", "0601 - 8865- 4226");
+			obj.put("oceanBn", "Sacombank - CN Nguyễn Văn Linh");
 //			JSONObject obj1 = new JSONObject();
-//			obj1.put("vanaAt", "CÔNG TY TNHH F168");
-//			obj1.put("vanaCn", "01810 - 0360 - 2501");
-//			obj1.put("vanaBn", "VIETCOMBANK - CN Nam Sài Gòn");
+//			obj1.put("oceanAt", "CÔNG TY TNHH F168");
+//			obj1.put("oceanCn", "01810 - 0360 - 2501");
+//			obj1.put("oceanBn", "VIETCOMBANK - CN Nam Sài Gòn");
 //			JSONObject obj2 = new JSONObject();
-//			obj2.put("vanaAt", "CÔNG TY TNHH F168");
-//			obj2.put("vanaCn", "63402 - 0101 - 7335");
-//			obj2.put("vanaBn", "AGRIBANK - CN Nhà Bè");
+//			obj2.put("oceanAt", "CÔNG TY TNHH F168");
+//			obj2.put("oceanCn", "63402 - 0101 - 7335");
+//			obj2.put("oceanBn", "AGRIBANK - CN Nhà Bè");
 			array.add(obj);
 //			array.add(obj1);
 //			array.add(obj2);
-			jsonObject.put("vanaBl", array);
+			jsonObject.put("oceanBl", array);
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("vanaC", 101);
-			jsObj.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("oceanC", 101);
+			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 
 	}
 
-	public ActionResult doVanaMeGt() throws Exception {
+	public ActionResult doOceanMeGt() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String miwen = jsonObj.getString("vanatoken");
+		String miwen = jsonObj.getString("oceantoken");
 		String jiamiwen = Encrypt.MD5("msg" + jiami);
 		JSONObject jsonObject = new JSONObject();
 		if (jiamiwen.equals(miwen)) {
@@ -2090,12 +2076,12 @@ public class VanaApi extends BaseAction {
 				jsonArray.add(JSONObject.fromBean(object));
 			}
 
-			jsonObject.put("vanaMl", jsonArray);
+			jsonObject.put("oceanMl", jsonArray);
 
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("vanaC", 101);
-			jsObj.put("vanaM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("oceanC", 101);
+			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 		}
 
@@ -2128,7 +2114,7 @@ public class VanaApi extends BaseAction {
 	public ActionResult doGetFBBook() throws Exception {
 		logger.info("用户ip" + getipAddr());
 		JSONObject jsonObject = new JSONObject();
-		String userid = getStrParameter("vanaid");
+		String userid = getStrParameter("oceanid");
 		
 		logger.info("认证Facebook："+userid);
 		SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -2224,8 +2210,8 @@ public class VanaApi extends BaseAction {
 				row111.set("rztime_fb", fmtrq.format(new Date()));
 				jbdcms3Service.addReporttoken(row111);
 			}
-			jsonObject.put("vanaC", 0);
-			jsonObject.put("vanaM", "Thành công");
+			jsonObject.put("oceanC", 0);
+			jsonObject.put("oceanM", "Thành công");
 			this.getWriter().write(jsonObject.toString());
 		}
 		return null;
@@ -2234,7 +2220,7 @@ public class VanaApi extends BaseAction {
 	public ActionResult doGetZaloAuth() throws Exception {
 		logger.info("用户ip" + getipAddr());
 		JSONObject jsonObject = new JSONObject();
-		String userid = getStrParameter("vanaid");
+		String userid = getStrParameter("oceanid");
 
 		logger.info("认证Zalo："+userid);
 		SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -2404,8 +2390,8 @@ public class VanaApi extends BaseAction {
 				row111.set("rztime_zalo", fmtrq.format(new Date()));
 				jbdcms3Service.addReporttoken(row111);
 			}
-			jsonObject.put("vanaC", 0);
-			jsonObject.put("vanaM", "Thành công");
+			jsonObject.put("oceanC", 0);
+			jsonObject.put("oceanM", "Thành công");
 			this.getWriter().write(jsonObject.toString());
 		}
 		return null;
@@ -2414,7 +2400,7 @@ public class VanaApi extends BaseAction {
 	public ActionResult doGetYYSPhone() throws Exception {
 		logger.info("用户ip" + getipAddr());
 		JSONObject jsonObject = new JSONObject();
-		String userid = getStrParameter("vanaid");
+		String userid = getStrParameter("oceanid");
 		
 		logger.info("认证运营商："+userid);
 		SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -2563,8 +2549,8 @@ public class VanaApi extends BaseAction {
 						row111.set("rztime_yys", fmtrq.format(new Date()));
 						jbdcms3Service.addReporttoken(row111);
 					}
-					jsonObject.put("vanaC", 0);
-					jsonObject.put("vanaM", "Thành công");
+					jsonObject.put("oceanC", 0);
+					jsonObject.put("oceanM", "Thành công");
 					this.getWriter().write(jsonObject.toString());
 				}
 			}

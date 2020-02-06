@@ -514,13 +514,13 @@ a:hover {text-decoration: none;}
 	                   var sjshmoney = parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
 				       var jklx = "";
 					  if(list[i].jk_date==1){
-						  jklx="35%";
+						  jklx="30%";
 					  }else if(list[i].jk_date==2) {
-						  jklx="35%";
+						  jklx="30%";
 					  }else if(list[i].jk_date==4) {
-						  jklx="35%";
+						  jklx="30%";
 					  }else if(list[i].jk_date==3) {
-						  jklx="35%";
+						  jklx="30%";
 					  }
 					  
 					html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].idno+"</td>";
@@ -530,7 +530,7 @@ a:hover {text-decoration: none;}
 						}else{
 							html_ +="<td>đã nhấn</td>";
 						}
-						html_ +="<td><button class='btn btn-success btn-info' onclick=\"window.open('http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Xem ủy nhiệm chi</button></td>";//
+						html_ +="<td><button class='btn btn-success btn-info' onclick=\"window.open('http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Xem ủy nhiệm chi</button></td>";//
 						if(list[i].tzjx == "0"){
 							html_ += "<td><button class='btn btn-xs btn-info'  onclick=\"tzjx('"+list[i].jkid+"')\">Dừng tính lãi</button></td>";
 						}else{
@@ -620,13 +620,13 @@ a:hover {text-decoration: none;}
 				       var sjshmoney = parseInt(list2[i].sjds_money.replace(/,/g,""))+parseInt(list2[i].lx.replace(/,/g,""));
 				       var jklx = "";
 					  if(list2[i].jk_date==1){
-						  jklx="35%";
+						  jklx="30%";
 					  }else if(list2[i].jk_date==2) {
-						  jklx="35%";
+						  jklx="30%";
 					  }else if(list2[i].jk_date==4) {
-						  jklx="35%";
+						  jklx="30%";
 					  }else if(list[i].jk_date==3) {
-						  jklx="35%";
+						  jklx="30%";
 					  }
 					  
 					html1_ += "<tr><td>"+list2[i].id+"</td><td>"+list2[i].realname+"</td><td>"+list2[i].idno+"</td>";
@@ -637,7 +637,7 @@ a:hover {text-decoration: none;}
 							html1_ +="<td>đã nhấn</td>";
 						}
 						
-						html1_ +="<td><button class='btn btn-success btn-info' onclick=\"window.open('http://abc-dong.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Xem ủy nhiệm chi</button></td>";//
+						html1_ +="<td><button class='btn btn-success btn-info' onclick=\"window.open('http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Xem ủy nhiệm chi</button></td>";//
 						
 						if(list2[i].tzjx == "0"){
 							html1_ += "<td><button class='btn btn-xs btn-info'  onclick=\"tzjx('"+list2[i].jkid+"')\">Dừng tính lãi</button></td>";

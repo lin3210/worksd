@@ -59,7 +59,7 @@ public class SDYQTask implements Task  {
 		 int tzjx_ts ;//停止计息天数
 		 String jkid ; //借款id 
 		 String userName ; //用户名
-		 String appName ="VANA" ; //APP名字
+		 String appName ="OCEAN" ; //APP名字
 		 String userId ; //用户id
 		 int threenum = 0;
 		 int dtnum = 0;
