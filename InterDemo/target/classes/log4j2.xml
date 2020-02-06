@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>  
+        <Property name="log-path">demo_log</Property>
+    </Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">  
+            <Filters>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>  
+            </Filters>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %class{36} Line:%L  - %msg%xEx%n"/> 
+        </Console>
+        <RollingFile name="app_debug" fileName="${log-path}/debug.log" filePattern="${log-path}/debug_%d{yyyy-MM-dd}_%i.log">
+            <Filters>
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="ACCEPT"/>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="NEUTRAL"/>  
+            </Filters>
+            <PatternLayout pattern="%d{MM.dd HH:mm:ss} [%t] %-5level %class{36} Line:%L - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1000" />
+        </RollingFile>
+        <RollingFile name="app_info" fileName="${log-path}/info.log" filePattern="${log-path}/info_%d{yyyy-MM-dd}_%i.log">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%d{MM.dd HH:mm:ss} [%t] %-5level %class{36} Line:%L - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1000" />
+        </RollingFile>
+        
+        <RollingFile name="app_error" fileName="${log-path}/error.log" filePattern="${log-path}/error_%d{yyyy-MM-dd}_%i.log">
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%d{MM.dd HH:mm:ss} [%t] %-5level %class{36} Line:%L - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="2MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1000" />
+        </RollingFile>
+        
+	    <RollingFile name="deliverRequest" fileName="${log-path}/request/deliver.log" filePattern="${log-path}/request/$${date:yyyy-MM}/deliver-%d{MM-dd-yyyy}.log.gz">
+            <Filters>  
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>   
+		    <Policies>
+		      <TimeBasedTriggeringPolicy />
+		    </Policies>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+	    </RollingFile>
+	</Appenders>
+	<Loggers>
+	  <Root level="trace">
+	  	<appender-ref ref="Console"/>
+        <appender-ref ref="app_debug"/>
+        <appender-ref ref="app_info"/>
+        <appender-ref ref="app_error"/>
+        <appender-ref ref="deliverRequest"/>
+	  </Root>
+	</Loggers>
+</Configuration>
