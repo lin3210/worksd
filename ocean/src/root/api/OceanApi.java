@@ -106,9 +106,11 @@ public class OceanApi extends BaseAction {
 			    }
 				DecimalFormat famt = new DecimalFormat("###,###");
 				String maxMoney = "";
-				int sjshmoney = userMoneyBase.getUMBaseMaxLoanMoney_showApp(userId);   //最大额度
+				int sjshmoneyshow = userMoneyBase.getUMBaseMaxLoanMoney_showApp(userId);   //最大额度显示
+				int sjshmoney = userMoneyBase.getUMBaseMaxLoanMoney(userId);   //最大额度选择
 				int maxCount = userMoneyBase.getUMBaseSuccessfulLoanNum(userId, maxMoney);
 				row.set("oceanMm", famt.format(sjshmoney));
+				row.set("oceanMmShow", famt.format(sjshmoneyshow));
 				row.set("oceanMc", maxCount);
 				row.set("oceanSsr", 1);
 				row.set("oceanVc", 8);
@@ -1254,18 +1256,24 @@ public class OceanApi extends BaseAction {
 		//String interesetFee = jsonObj.getString("interesetFee");
 		SimpleDateFormat famat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
+		if(jk_date==7) {   //2020年2月6日 ocean  只放7天
+			jk_date=3;
+		}else {
+			jk_date=3;
+		}
+		
 		int userid2 = jsonObj.getInteger("oceanid");
 		String username = jdbUserService.getUsername(userid2);
 		String mobilePhone = jdbUserService.getMobilePhone(userid2);
 		DataRow jkDataLast = jdbUserService.getjkNumLast(userid2 + "");
-		//拒绝自然用户  2019年12月19日
-		int user_num = jdbUserService.getUserPhoneDXSH(mobilePhone) +jdbUserService.getUserPhoneDXHK(mobilePhone);
-		if(user_num <=0 && jkDataLast == null) {
-			jsonObject.put("oceanC", -1);
-			jsonObject.put("oceanM", "Kính chào quý khách hàng, xin thông báo hệ thống OCEAN tạm thời ngưng dịch vụ giải ngân, sẽ hoạt động bình thường vào ngày 02/02/2020, xin cám ơn ");
-			this.getWriter().write(jsonObject.toString());
-			return null;
-		}
+//		//拒绝自然用户  2019年12月19日
+//		int user_num = jdbUserService.getUserPhoneDXSH(mobilePhone) +jdbUserService.getUserPhoneDXHK(mobilePhone);
+//		if(user_num <=0 && jkDataLast == null) {
+//			jsonObject.put("oceanC", -1);
+//			jsonObject.put("oceanM", "Kính chào quý khách hàng, xin thông báo hệ thống OCEAN tạm thời ngưng dịch vụ giải ngân, sẽ hoạt động bình thường vào ngày 02/02/2020, xin cám ơn ");
+//			this.getWriter().write(jsonObject.toString());
+//			return null;
+//		}
 		
 		
 		DecimalFormat famt = new DecimalFormat("###,###");
@@ -1313,7 +1321,7 @@ public class OceanApi extends BaseAction {
 		// 1月8-14号不放款
 		if (eee > 0 && fff > 0) {
 			jsonObject.put("oceanC", -1);
-			jsonObject.put("oceanM","Từ 20/01/2020 -01/02/2020, OCEAN tạm ngừng cung cấp dịch vụ vay. Qúy khách vui lòng đề xuất vay trước, OCEAN sẽ xử lý hồ sơ vào 02/02/2020.");
+			jsonObject.put("oceanM"," Từ 20/01/2020 -01/02/2020, OCEAN tạm ngừng cung cấp dịch vụ vay. Qúy khách vui lòng đề xuất vay trước, Ocean sẽ xử lý hồ sơ vào 02/02/2020.");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
