@@ -74,7 +74,7 @@ var loginData = new Object();
 			requestData.username = u_username;
 			requestData.password = u_password;
 			loadAjaxPost(
-					"GetMofaZaloRZ",
+					"GetOceanZaloRZ",
 					requestData,
 					function(data) {
 						if(data.error == 0){

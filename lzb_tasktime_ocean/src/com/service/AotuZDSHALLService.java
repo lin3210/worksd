@@ -186,7 +186,7 @@ public class AotuZDSHALLService extends BaseService
 									
 				}				
 				sql+= bufendansql ;			
-			 logger.info("mofa今天请假的人员sdcms_user=="+sql);
+			 logger.info("今天请假的人员sdcms_user=="+sql);
 		   // return getJdbcTemplate().queryIntArray(sql);			 
 			 return getJdbcTemplate().query(sql);		
 		 }
@@ -222,7 +222,7 @@ public class AotuZDSHALLService extends BaseService
 		 String sql = " UPDATE sdcms_user SET leaver="+leaver +"  where USER_ID ="+userid;
 		        
 		
-		 logger.info("mofa今天请假的人员sdcms_user"+sql);
+		 logger.info("今天请假的人员sdcms_user"+sql);
 		 return getJdbcTemplate().update(sql);
 	}
 

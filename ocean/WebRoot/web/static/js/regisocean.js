@@ -3,10 +3,10 @@
     AccountKit.init(
       {
         appId:"436349787125595", 
-        state:"mofamofa", 
+        state:"ocean", 
         version:"v1.0",
         fbAppEventsEnabled:true,
-        redirect:"https://www.mofavn.vn/webmofa/registered.html",
+        redirect:"https://www.oceanvay.com/web/registered.html",
 		debug:true
       }
     );
@@ -81,7 +81,7 @@
 			var token_ = code;
 			var para = {"mobile":u_mobile,"phonetype":phonetype,"token":token_,"refferee":"0010"};
 			$.ajaxSettings.async = false;
-			$.getJSON("/servlet/current/HtmlMofaAction?function=RegisterBookNewFaceHFive&time="+new Date().getTime(),para,function(data){
+			$.getJSON("/servlet/current/HtmlOceanAction?function=RegisterBookNewFaceHFive&time="+new Date().getTime(),para,function(data){
 				console.log(data);
 				if(data.error == 0 || data.error == -222){
 					localStorage.setItem("loginData", JSON.stringify(data));

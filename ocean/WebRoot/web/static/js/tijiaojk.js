@@ -48,22 +48,22 @@ function init(){
 }
 
 function gradeChange() {
-	var jk_money =5000000;
+	var jk_money =2000000;
 	var money = $("#jk_money").val();
 	if(money == 0){
-		jk_money =5000000;
+		jk_money =2000000;
 	}else if(money == 1){
-		jk_money =4000000;
+		jk_money =2500000;
 	}else if(money == 2){
 		jk_money =3000000;
 	}else if(money == 3){
-		jk_money =2000000;
+		jk_money =3500000;
 	}else if(money == 4){
-		jk_money =1000000;
+		jk_money =4000000;
 	}
 	var jk_date = $("#jk_date").val();
 	//测试
-	if (jk_date == 2) {
+	if (jk_date == 3) {
 		/* 展示的金额 = 申请金额 - （ 十五天的服务费 + 十五天利息） x 申请金额 */
 		var showManey = jk_money * 291 / 1000;
 		var showlixi = jk_money * 9 / 1000;
@@ -89,18 +89,18 @@ function gradeChange() {
 }
 /* commit user loan data  */
 function commitData() {
-	var jk_money =5000000;
+	var jk_money =2000000;
 	var money = $("#jk_money").val();
 	if(money == 0){
-		jk_money =5000000;
+		jk_money =2000000;
 	}else if(money == 1){
-		jk_money =4000000;
+		jk_money =2500000;
 	}else if(money == 2){
 		jk_money =3000000;
 	}else if(money == 3){
-		jk_money =2000000;
+		jk_money =3500000;
 	}else if(money == 4){
-		jk_money =1000000;
+		jk_money =4000000;
 	}
 	loginData = JSON.parse(localStorage.getItem("loginData"));
 	//用户输入的验证信息
@@ -109,7 +109,7 @@ function commitData() {
 
 	var para = {"userid":loginData.ui,"token":loginData.token,"jk_money":u_money,"jk_date":jk_date};
 	$.ajaxSettings.async = false;
-	$.getJSON("/servlet/current/HtmlMofaAction?function=HtmlTJJK&time="+new Date().getTime(),para,function(data){
+	$.getJSON("/servlet/current/HtmlOceanAction?function=HtmlTJJK&time="+new Date().getTime(),para,function(data){
 
 		if(data.error == 0){
 			window.location.href = "review.html";

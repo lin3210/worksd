@@ -55,8 +55,8 @@ import com.thinkive.base.util.StringHelper;
 import com.thinkive.web.base.ActionResult;
 import com.thinkive.web.base.BaseAction;
 
-public class HtmlMofaAction extends BaseAction {
-	private static Logger logger = Logger.getLogger(HtmlMofaAction.class);
+public class HtmlOceanAction extends BaseAction {
+	private static Logger logger = Logger.getLogger(HtmlOceanAction.class);
 	private static UserMoneyBase  userMoneyBase = new UserMoneyBase();
 	/*private static UserService userService = new UserService();*/
 	private static JBDUserService jdbUserService = new JBDUserService();
@@ -332,11 +332,11 @@ public class HtmlMofaAction extends BaseAction {
 				data.set("tokenhtml", token);//注册入口
 				if(vipstatus == 0){
 					if(phonetype == 1){
-						username = "TAFA-AND"+userid+"-MOFA";
+						username = "OCEAN-AND"+userid+"-on";
 					}else if(phonetype == 2){
-						username = "TAFA-IOS"+userid+"-MOFA";
+						username = "OCEAN-IOS"+userid+"-on";
 					}else{
-						username = "TAFA-WIN"+userid+"-MOFA";
+						username = "OCEAN-WIN"+userid+"-on";
 					}
 				}
 				data.set("username", username);
@@ -391,11 +391,11 @@ public class HtmlMofaAction extends BaseAction {
 			
 			String username = "";
 			if(phonetype == 1){
-				username = "TAFA-AND"+userid+"-off";
+				username = "OCEAN-AND"+userid+"-off";
 			}else if(phonetype == 2){
-				username = "TAFA-IOS"+userid+"-off";
+				username = "OCEAN-IOS"+userid+"-off";
 			}else{
-				username = "TAFA-WIN"+userid+"-off";
+				username = "OCEAN-WIN"+userid+"-off";
 			}
 			data.set("username", username);
 			jdbUserService.updateUser(userid, data);
@@ -944,7 +944,7 @@ public ActionResult doGetMofaBankRZ() throws Exception {
 		
 	}
 	
-public ActionResult doGetMofaZaloRZ() throws Exception {
+public ActionResult doGetOceanZaloRZ() throws Exception {
 	logger.info("请求ip"+getipAddr());
 	JSONObject jsonOb = new JSONObject();
 	String tokenhtml = SessionHelper.getString("tokenhtml", getSession());// 后台登录账户
