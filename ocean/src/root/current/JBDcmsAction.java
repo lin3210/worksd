@@ -249,18 +249,18 @@ public class JBDcmsAction extends BaseAction {
 			
 			DataRow ls=new DataRow();
 			
-			 try {
-				 logger.info(userid+":发送短信--开始");
-				 returnString = sendFTP.sendMessageFTP("ABCDong chuc mung ban la thanh vien VIP. Vao app quay ngay video de nhan duoc khoan vay. Lien he:http://bit.ly/2KIzoEe  Hotline: 1900234558",mobilePhone);
-				  if(returnString.length()>70) {
-					  returnString = returnString.substring(70,returnString.lastIndexOf("</"));
-				  }  
-				  logger.info(userid+":发送短信响应状态="+returnString);
-			} catch (Exception e) {
-				// TODO: handle exception
-				 logger.info(userid+":发送短信失败");
-				 throw new Exception("发送短信失败");
-			}
+//			 try {
+//				 logger.info(userid+":发送短信--开始");
+//  				 returnString = sendFTP.sendMessageFTP("ABCDong chuc mung ban la thanh vien VIP. Vao app quay ngay video de nhan duoc khoan vay. Lien he:http://bit.ly/2KIzoEe  Hotline: 1900234558",mobilePhone);
+//				  if(returnString.length()>70) {
+//					  returnString = returnString.substring(70,returnString.lastIndexOf("</"));
+//				  }  
+//				  logger.info(userid+":发送短信响应状态="+returnString);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//				 logger.info(userid+":发送短信失败");
+//				 throw new Exception("发送短信失败");
+//			}
 			 DataRow stm =new DataRow();
 			 stm.set("create_time", fmtday.format(new Date()));
 			 stm.set("userid", userid);

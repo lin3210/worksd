@@ -1,6 +1,6 @@
 function loadAjaxPost(url, data, resultData) {
 	
-	var path = "https://www.oceanvay.com/servlet/current/HtmlOceanAction?function=";
+	var path = "http://www.oceanvay.com/servlet/current/HtmlOceanAction?function=";
 
 	$.ajax({
 		type: "POST",

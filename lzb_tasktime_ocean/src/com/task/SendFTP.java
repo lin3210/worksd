@@ -78,7 +78,9 @@ public class SendFTP {
 	        System.out.println(fullUrl);
 	        PostHttp posthttp = new PostHttp();
 	        String resopodmf = posthttp.sendGet(fullUrl);
-	        return resopodmf;
+//	        return resopodmf; 2020年2月7日停用
+	        return "";
+	        
 	      }
 	 	public static boolean isVINAPHONE(String phone){
 			if("094".equals(phone.substring(0, 3))){

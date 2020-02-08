@@ -83,7 +83,9 @@ var loginData = new Object();
 					$("#bankrz").attr("disabled", false);
 					},3000);
 			}
+			console.log(123);
 			if(v0and9(u_idno)){
+				console.log(2222);
 				$(".gx_alert").css("display","block");
 				$(".gx_alert_p").html("CMND chỉ có thể nhập số")
 				$("#bankrz").attr("disabled", true);
@@ -92,6 +94,7 @@ var loginData = new Object();
 					$("#bankrz").attr("disabled", false);
 					},3000);
 			}
+			console.log(3333);
 			var requestData = new Object();
 			requestData.userid = loginData.ui;
 			requestData.token = loginData.token;
@@ -100,7 +103,7 @@ var loginData = new Object();
 			requestData.bankcard = u_bankcard;
 			requestData.cardName = u_sel1;
 			loadAjaxPost(
-					"GetMofaBankRZ",
+					"GetOceanBankRZ",
 					requestData,
 					function(data) {
 						if(data.error == 0){

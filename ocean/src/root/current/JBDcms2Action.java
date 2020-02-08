@@ -3429,9 +3429,9 @@ public  ActionResult doGetCuisByid()  throws Exception {
  	  if(userName.equals("ABCDong")){
  		  appName="ABCDong";					    	
  	  }
- 	  String content   ="Tai ngay "+appName+" de co co hoi vay tien nhanh len den 10.000.000vnd. Dang ky tai: http://bit.ly/2KIzoEe. Hotline: 1900234558";
-	  SendFTP sms = new SendFTP();
-      String  response = sms.sendMessageFTP(content,mobilePhone);
+// 	  String content   ="Tai ngay "+appName+" de co co hoi vay tien nhanh len den 10.000.000vnd. Dang ky tai: http://bit.ly/2KIzoEe. Hotline: 1900234558";
+//	  SendFTP sms = new SendFTP();
+//      String  response = sms.sendMessageFTP(content,mobilePhone);
  	  Date date=new Date();
  	  DateFormat format=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
  	  String time=format.format(date);

@@ -165,8 +165,8 @@ public class AotuZDSHALLTask implements Task
 			    
 			    String content   =  appName+" xin chao quy khach, do ngan hang cap nhat thong tin moi, vui long dang nhap vao app "+appName+" xac minh lai so tai khoan ngan hang de hoan tat thu tuc vay";
 				SendFTP sms = new SendFTP();
-				String  response = sms.sendMessageFTP(content,mobilePhone);
-				logger.info(response);
+				//String  response = sms.sendMessageFTP(content,mobilePhone);
+				//logger.info(response);
 				
 			}else if(myjkcode == 1 && userid2<1){
 				logger.info("认证没借款老一批的用户");

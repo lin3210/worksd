@@ -2,9 +2,9 @@
   AccountKit_OnInteractive = function(){
     AccountKit.init(
       {
-        appId:"436349787125595", 
-        state:"ocean", 
-        version:"v1.0",
+        appId:"1464848710356888", 
+        state:"OCEAN", 
+        version:"v6.0",
         fbAppEventsEnabled:true,
         redirect:"https://www.oceanvay.com/web/registered.html",
 		debug:true
@@ -44,13 +44,38 @@
 	if(phoneNumber.length != 10 || v0and9(phoneNumber)){
 		alert("Vui lòng nhập số điện thoại chính xác");
 	}
-    AccountKit.login(
-      'PHONE', 
-      {countryCode: countryCode, phoneNumber: phoneNumber}, // will use default values if not specified
-      loginCallback
-    );
+	$('#bankrz').attr("disabled",true);
+	alert("Đã gửi");
+	setTimeout(function(){
+		$("#bankrz").attr("disabled", false);
+		},120000);
+	var para = {"mobile":phoneNumber,"type":"1"};
+	$.getJSON("/servlet/current/HtmlOceanAction?function=HtmlSendUserIn&time="+new Date().getTime(),para,function(data){
+		if(data.error == 0){
+			window.location.href = "registered2.html"+"?mobile="+phoneNumber;
+		}else if(data.error == 5){
+			window.location.href = "registered2.html"+"?mobile="+phoneNumber;
+			alert(data.msg);
+		}else {
+			alert(data.msg);
+		}
+	})
+//    AccountKit.login(
+//      'PHONE', 
+//      {countryCode: countryCode, phoneNumber: phoneNumber}, // will use default values if not specified
+//      loginCallback
+//    );
   }
 
+  function smsLogin2() {
+	  
+    var smscode = document.getElementById("smscode").value;
+	if(smscode.length != 4 || v0and9(smscode)){
+		alert("Vui lòng nhập mã xác minh chính xác");
+	}else {
+		proving(smscode);
+	}
+  }
 
   // email form submission handler
   function emailLogin() {
@@ -74,8 +99,8 @@
 			if (isIOS) {
 				phonetype=2; // 跳AppStore下载地址
 			}
-			//用户输入的验证信息
-			var u_mobile = $("#mobile").val();
+			//用户输入的验证信息 var u_mobile = $("#mobile").val();
+			var u_mobile = GetQueryString("mobile");
 			//var profession=$("input:radio[name='demo-radio']:checked").val();
 			var profession=2;
 			var token_ = code;
@@ -87,6 +112,11 @@
 					localStorage.setItem("loginData", JSON.stringify(data));
 					window.location.href = "approveid.html";
 					
+				}else if(data.error == 3){
+					alert("Mã xác minh đã hết hạn");
+					window.location.href = "registered.html";
+				}else if(data.error == 4){
+					alert("Vui lòng nhập mã xác minh chính xác");
 				}else{
 					$(".gx_alert").css("display","block");
 					$(".gx_alert_p").html(data.msg)
@@ -146,3 +176,4 @@
       }
       return flag;
     }
+    function GetQueryString(name){var reg=new RegExp("(^|&)"+name+"=([^&]*)(&|$)","i");var r=window.location.search.substr(1).match(reg);if(r!=null){return unescape(r[2])}return null}

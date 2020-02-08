@@ -40,6 +40,7 @@ import root.SendFTP;
 import root.SendMsg;
 import root.img.WebConstants;
 import root.order.UserMoneyBase;
+import root.tool.SendMsgCL;
 
 import com.alibaba.fastjson.JSON;
 import com.project.constant.IConstants;
@@ -216,7 +217,7 @@ public class HtmlOceanAction extends BaseAction {
 		return newphone;
 	}
 	//h5注册接口facebook
-	public ActionResult doRegisterBookNewFaceHFive() throws Exception{  
+	public ActionResult doRegisterBookNewFaceHFiveCopy() throws Exception{  
 		HttpServletRequest request = getRequest();
 		JSONObject jsonObject = new JSONObject();
 		//String phone = getStrParameter("mobile").trim().replaceAll(" ", "");//手机号
@@ -224,7 +225,7 @@ public class HtmlOceanAction extends BaseAction {
 		logger.info(tokentoken);
 		
 		String url = "https://graph.accountkit.com/v1.3/access_token?grant_type=authorization_code&"
-				+"code="+tokentoken+"&access_token=AA|436349787125595|d1876a12a25b4abb24787ceb73524f65";
+				+"code="+tokentoken+"&access_token=AA|1464848710356888|d1876a12a25b4abb24787ceb73524f65";
 		
 	    StringBuilder json = new StringBuilder();
 	    
@@ -434,6 +435,175 @@ public class HtmlOceanAction extends BaseAction {
 			}
 		}
 }
+	
+	//h5注册接口facebook
+			public ActionResult doRegisterBookNewFaceHFive() throws Exception{  
+				HttpServletRequest request = getRequest();
+				JSONObject jsonObject = new JSONObject();
+				//String phone = getStrParameter("mobile").trim().replaceAll(" ", "");//手机号
+				String tokentoken = getStrParameter("token");
+				String phone = getStrParameter("mobile");
+				logger.info(tokentoken);
+				logger.info(phone);
+				String memyzm = "";
+				if (MemCachedUtil.cachedClient.keyExists(phone + "_HAHA")) {
+					memyzm = (String) MemCachedUtil.cachedClient.get(phone + "_HAHA");
+				}
+				logger.info("memyzm:" + memyzm + ",code:" + getStrParameter("code"));
+				String url = "https://graph.accountkit.com/v1.3/access_token?grant_type=authorization_code&"
+						+"code="+tokentoken+"&access_token=AA|436349787125595|d1876a12a25b4abb24787ceb73524f65";
+				if (StringUtils.isEmpty(memyzm)) {
+					jsonObject.put("error", 3);
+					jsonObject.put("msg", "Lỗi mã xác minh");// 验证码错误
+					logger.warn("验证码有误");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				}
+				if (!tokentoken.equals(memyzm)) {
+					jsonObject.put("error", 4);
+					jsonObject.put("msg", "Mã xác minh không chính xác");// 验证码不正确
+					logger.warn("验证码不正确");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				}
+				int phonetype = getIntParameter("phonetype");
+				String ip = getipAddr();//61.145.153.20
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+				SimpleDateFormat sdfday = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String lastDate = sdf.format(new Date());
+				String daytime = sdfday.format(new Date());
+				logger.info("当前注册用户:手机号："+phone+"IP："+ip+"当前时间"+lastDate);
+				
+				String refferee = getStrParameter("refferee", "-1");
+				logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+				logger.info("当前注册用户:手机号："+phone+"IP："+ip+"当前时间"+lastDate);
+				
+				//生成的秘钥
+				String token = System.currentTimeMillis()+getItemID(16);
+				long str = jdbUserService.getCountByPhone(phone);
+				if (str > 0) {
+					//添加登录记录
+					//获取用户ID用于生成用户名
+					String userid = jdbUserService.getIdByPhone(phone);
+					int vipstatus = jdbUserService.getVipstatus(userid);
+					String username = jdbUserService.getUsername(userid);
+					//存到缓存
+					SessionHelper.setString("tokenhtml",token,getSession());
+					DataRow row = new DataRow();
+					row.set("logindate", lastDate);
+					row.set("userid", userid);
+					jdbUserService.addUser("sduser_login_log",row);
+					
+					logger.info("当前登录用户"+userid+"ip"+ip+"时间"+lastDate);
+					try {      	
+						DataRow data = new DataRow();
+						data.set("lastIP", ip);
+						data.set("lastDate", lastDate);
+						data.set("tokenhtml", token);//注册入口
+						if(vipstatus == 0){
+							if(phonetype == 1){
+								username = "OCEAN-AND"+userid+"-on";
+							}else if(phonetype == 2){
+								username = "OCEAN-IOS"+userid+"-on";
+							}else{
+								username = "OCEAN-WIN"+userid+"-on";
+							}
+						}
+						data.set("username", username);
+						logger.info("userid:"+userid+",data"+data);
+						jdbUserService.updateUser(userid, data);
+						
+						String mobile = phone;
+						jsonObject.put("mobile", mobile);
+						jsonObject.put("ui", userid);
+						jsonObject.put("token", token);		
+						jsonObject.put("error", -222);
+						jsonObject.put("msg", "Thành công！");//注册成功
+						this.getWriter().write(jsonObject.toString());
+						return null;
+					} catch (Exception e) {
+						e.printStackTrace();
+						logger.error("登录失败"+e);
+						jsonObject.put("error", -10);
+						jsonObject.put("msg", "Lỗi hệ thống, đăng ký không thành công!");//系统错误，注册失败
+						this.getWriter().write(jsonObject.toString());
+						return null;
+					}
+				}else{
+					String pwd="";
+					//向sd_user添加注册信息
+					int intCount = (new Random()).nextInt(999999) + (new Random()).nextInt(999999);
+					pwd = intCount+"";
+					String resPWD = Encrypt.MD5(pwd + IConstants.PASS_KEY);
+					String table = "sd_user";
+					DataRow data = new DataRow();
+					data.set("mobilePhone", phone);
+					data.set("password", resPWD);
+					data.set("businessPwd", resPWD);//交易密码默认为登录密码
+					data.set("profession", 2);//职业状态
+					data.set("lastIP", ip);
+					data.set("hongbao", 0);
+					data.set("lastDate", lastDate);
+					data.set("createTime", lastDate);
+					data.set("yearmonthday", daytime);
+					if(!phone.equals(refferee)){
+						data.set("refferee", refferee);
+					}
+					//登录次数
+					data.set("loginCount", 0);
+					data.set("rating", 0);//注册入口
+					data.set("tokenhtml", token);//注册入口
+					jdbUserService.addUser(table,data);
+					//存到缓存
+					SessionHelper.setString("tokenhtml",token,getSession());
+					//获取用户ID用于生成用户名
+					String userid = jdbUserService.getIdByPhone(phone);
+					
+					String username = "";
+					if(phonetype == 1){
+						username = "OCEAN-AND"+userid+"-off";
+					}else if(phonetype == 2){
+						username = "OCEAN-IOS"+userid+"-off";
+					}else{
+						username = "OCEAN-WIN"+userid+"-off";
+					}
+					data.set("username", username);
+					jdbUserService.updateUser(userid, data);
+					logger.info("添加用户信息"+data);
+					//添加登录记录
+					DataRow row = new DataRow();
+					table = "sduser_login_log";
+					row.set("logindate", lastDate);
+					row.set("userid", userid);
+					jdbUserService.addUser(table,row);
+					
+					logger.info("当前登录用户"+userid+"ip"+ip+"时间"+lastDate);
+					try {      	
+						//有此用户  修改最后登录时间  添加登录日志
+						
+						data.set("lastIP", ip);
+						data.set("lastDate", lastDate);
+						logger.info("userid:"+userid+",data"+data);
+						jdbUserService.updateUser(userid, data);
+						
+						String mobile = phone;
+						jsonObject.put("mobile", mobile);
+						jsonObject.put("ui", userid);
+						jsonObject.put("token", token);		
+						jsonObject.put("error", 0);
+						jsonObject.put("msg", "Đăng ký thành công！");//注册成功			
+						this.getWriter().write(jsonObject.toString());
+						return null;
+					} catch (Exception e) {
+						e.printStackTrace();
+						logger.error("注册失败"+e);
+						jsonObject.put("error", -10);
+						jsonObject.put("msg", "Lỗi hệ thống, đăng ký không thành công!");//系统错误，注册失败
+						this.getWriter().write(jsonObject.toString());
+						return null;
+					}
+				}
+		}
 	/**
 		 * 设置返回消息
 		 * @param error
@@ -492,11 +662,12 @@ public class HtmlOceanAction extends BaseAction {
 					jsonObject.put("recivePhone", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 					MemCachedUtil.cachedClient.set(phone+"_HAHA", randomCode, new Date(time));
 					logger.info("短信发送成功-----"+phone);
-					String content = "[{\"PhoneNumber\":\""+phone+"\",\"Message\":\"OLAVA xin thong bao:Vui long nhap ma "+randomCode+", hieu luc 3phut. Vui long khong cung cap thong tin cho bat cu ai.\",\"SmsGuid\":\""+phone+"\",\"ContentType\":1}]";
-					String con = URLEncoder.encode(content, "utf-8");
-					SendMsg sendMsg = new SendMsg();
-					String returnString = SendMsg.sendMessageByGet(con,phone);
-					if (returnString.equals("106")){		
+	
+                    String content = "Ma xac thuc OTP cua ban la "+randomCode+", ma xac thuc co hieu luc trong thoi gian 5 phut ke tu khi ban gui tin nhan.";
+                    String returnString = SendMsgCL.sendOTP(content,phone);
+					//String returnString = SendFTP.sendMessageFTP(content,phone);//if (returnString.contains("Succes")) {
+					logger.info(returnString);
+					if (returnString.contains("0")) {
 						jsonObject.put("error", 0);
 						jsonObject.put("msg", "Đã gửi thành công");
 						logger.info(Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY)+"___"+Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
@@ -580,10 +751,11 @@ public class HtmlOceanAction extends BaseAction {
 						if (dataJK!=null) {
 							//已经放款了
 							if("1".equals(dataJK.getString("sfyfk"))){
+								
 								String newdateSH = dataJK.getString("sjsh_money").replace(",", "");
 								String yuqlx = dataJK.getString("yuq_lx").replace(",", "");
-								jsonOb.put("realname",rz.getString("cardusername"));
-								jsonOb.put("idno",rz.getString("remark").substring(0,4)+"********");
+								jsonOb.put("realname",rz!=null?rz.getString("cardusername"):"");
+								jsonOb.put("idno",rzsf!=null?rzsf.getString("idno").substring(0,4):""+"********");
 								jsonOb.put("sjsh_money",Integer.parseInt(newdateSH)+Integer.parseInt(yuqlx));
 								String hktime = dataJK.getString("hkyq_time");
 								if("1".equals(dataJK.getString("hkfq_code"))){
@@ -598,8 +770,8 @@ public class HtmlOceanAction extends BaseAction {
 								this.getWriter().write(jsonOb.toString());
 								return null;
 							}else{
-								jsonOb.put("realname",rz.getString("cardusername"));
-								jsonOb.put("idno",rz.getString("remark").substring(0,4)+"********");
+								jsonOb.put("realname",rz!=null?rz.getString("cardusername"):"");
+								jsonOb.put("idno",rzsf!=null?rzsf.getString("idno").substring(0,4):""+"********");
 								jsonOb.put("error",101);
 								jsonOb.put("msg", "Vui lòng đăng nhập trước"); // Vui lòng đăng	
 								this.getWriter().write(jsonOb.toString());
@@ -651,7 +823,7 @@ public class HtmlOceanAction extends BaseAction {
 			return null ;
 		}
 	}
-public ActionResult doGetMofaBankRZ() throws Exception {
+public ActionResult doGetOceanBankRZ() throws Exception {
 		logger.info("请求ip"+getipAddr());
 		JSONObject jsonOb = new JSONObject();
 		String tokenhtml = SessionHelper.getString("tokenhtml", getSession());// 后台登录账户
@@ -1276,13 +1448,13 @@ public ActionResult doHtmlTJJK() throws Exception
 						    data3.set("sfyfk","2");
 						    data3.set("cl03_time",fmtrq.format(calendar.getTime()));
 				    		
-							String appName ="MOFA/F168" ; //APP名字
-						    if(username.substring(0,4).equals("MOFA")){
-						    	appName="MOFA";					    	
+							String appName ="OCEAN" ; //APP名字
+						    if(username.substring(0,4).equals("OCEAN")){
+						    	appName="OCEAN";					    	
 						    }																
-							String content   =  appName+" chao "+user.getString("realname")+" de xuat vay cua ban da duoc chap thuan, sau 24h chua nhan duoc khoan vay xin lien he: http://bit.ly/2KIzoEe Hotline: 1900234558";
-							SendFTP sms = new SendFTP();
-							String  response = sms.sendMessageFTP(content,mobilePhone);
+//							String content   =  appName+" chao "+user.getString("realname")+" de xuat vay cua ban da duoc chap thuan, sau 24h chua nhan duoc khoan vay xin lien he: http://bit.ly/2KIzoEe Hotline: 1900234558";
+//							SendFTP sms = new SendFTP();
+//							String  response = sms.sendMessageFTP(content,mobilePhone);
 						}else if(yuqts>15) {
 							data3.set("cl_status", 1);
 							data3.set("cl02_status", 1);
@@ -1292,24 +1464,6 @@ public ActionResult doHtmlTJJK() throws Exception
 						    data3.set("cl02_yj","Old User");	
 						    data3.set("cl02_ren","888");
 						    int nn = Integer.parseInt(jkDataLast.getString("sjds_money").replace(",", "")) + Integer.parseInt(jkDataLast.getString("lx").replace(",", ""));
-							
-//							if(yuqts<6) {
-//								nn += 1000000;
-//							}else if(yuqts>15){
-//								 if(nn>=3000000) {
-//									 nn -= 1000000;
-//								 }
-//							}
-//							int fklv = 80;
-//							if (jk_date == 2) {
-//								fklv = 70;
-//							} else if (jk_date == 1) {
-//								if (nn <= 1000000) {
-//									fklv = 70;
-//								} else {
-//									fklv = 80;
-//								}
-//							}
 							
 							int fklv = 60;
 							nn = userMoneyBase.getUMBaseMaxLoanMoney(userid2);   //最大额度
@@ -1326,13 +1480,13 @@ public ActionResult doHtmlTJJK() throws Exception
 							data3.set("jyfk_money", famt.format(nn));
 							data3.set("lx", famt.format(nn * (100 - fklv) / 100));
 							
-							String appName ="MOFA/F168" ; //APP名字
-						    if(username.substring(0,4).equals("MOFA")){
-						    	appName="MOFA";					    	
+							String appName ="OCEAN" ; //APP名字
+						    if(username.substring(0,4).equals("OCEAN")){
+						    	appName="OCEAN";					    	
 						    }
-							String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut. Dang ky tai: http://bit.ly/2KIzoEe Hotline: 1900234558";
-							SendFTP sms = new SendFTP();
-							String  response = sms.sendMessageFTP(content,mobilePhone);
+//							String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut. Dang ky tai: http://bit.ly/2KIzoEe Hotline: 1900234558";
+//							SendFTP sms = new SendFTP();
+//							String  response = sms.sendMessageFTP(content,mobilePhone);
 						}
 						
 					}

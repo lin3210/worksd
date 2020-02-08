@@ -75,7 +75,8 @@ public class SendFTP {
 	        System.out.println(fullUrl);
 	        PostHttp posthttp = new PostHttp();
 	        String resopodmf = posthttp.sendGet(fullUrl);
-	        return resopodmf;
+	        //return resopodmf;
+	        return ""; //2020年2月7日 暂时停用
 	      }
 	 
 	 

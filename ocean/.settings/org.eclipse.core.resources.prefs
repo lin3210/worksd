@@ -58,6 +58,7 @@ encoding//WebRoot/sdmain/withdraw/withdrawOrderList.html=UTF-8
 encoding//src/com/project/constant/IConstants.java=UTF-8
 encoding//src/com/project/service=UTF-8
 encoding//src/com/project/utils/MemCachedUtil.java=UTF-8
+encoding//src/root/SendFTP.java=UTF-8
 encoding//src/root/api/OceanApi.java=UTF-8
 encoding//src/root/current/AccountManAction.java=UTF-8
 encoding//src/root/current/AccountShenheAction.java=UTF-8

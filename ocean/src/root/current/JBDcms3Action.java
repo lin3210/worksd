@@ -1640,9 +1640,9 @@ public class JBDcms3Action extends BaseAction {
 				if(!"".contains(row_hk.getString("content"))) {
 					msg_url=row_hk.getString("content");
 				}
-				String content   =  appName+" chao "+realname+",  cam on ban da thanh toan so tien "+money+". Moi thac mac lien he"+msg_url;
-				SendFTP sms = new SendFTP();
-				String  response = sms.sendMessageFTP(content,dataRow2.getString("mobilephone"));
+//				String content   =  appName+" chao "+realname+",  cam on ban da thanh toan so tien "+money+". Moi thac mac lien he"+msg_url;
+//				SendFTP sms = new SendFTP();
+//				String  response = sms.sendMessageFTP(content,dataRow2.getString("mobilephone"));
 			}
 		}
 		

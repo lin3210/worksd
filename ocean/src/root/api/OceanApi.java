@@ -249,7 +249,7 @@ public class OceanApi extends BaseAction {
 				row.set("oceanS1", isStep1);
 				row.set("oceanS2", isStep2);
 				row.set("oceanS3", isStep3);
-				row.set("oceanurl", "https://m.me/vaytienvana");
+				row.set("oceanurl", "https://m.me/vaytienocean");
 				
 				DataRow dataAuth = jbdcms3Service.getAuthRow(userId+"");
 				if(dataAuth != null) {
@@ -1547,9 +1547,9 @@ public class OceanApi extends BaseAction {
 					    if(username.substring(0,4).equals("OCEAN")){
 					    	appName="OCEAN";					    	
 					    }
-						String content   =  appName+" chao "+userrealname+" de xuat vay cua ban da duoc chap thuan, sau 24h chua nhan duoc khoan vay xin"+appurl;
-						SendFTP sms = new SendFTP();
-						String  response = sms.sendMessageFTP(content,mobilePhone);
+//						String content   =  appName+" chao "+userrealname+" de xuat vay cua ban da duoc chap thuan, sau 24h chua nhan duoc khoan vay xin"+appurl;
+//						SendFTP sms = new SendFTP();
+//						String  response = sms.sendMessageFTP(content,mobilePhone);
 					}else if(yuqts>15) {
 						data3.set("cl_status", 1);
 						data3.set("cl02_status", 1);
@@ -1573,9 +1573,9 @@ public class OceanApi extends BaseAction {
 					    if(username.substring(0,4).equals("OCEAN")){
 					    	appName="OCEAN";					    	
 					    }
-						String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut."+appurl;
-						SendFTP sms = new SendFTP();
-						String  response = sms.sendMessageFTP(content,mobilePhone);
+//						String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut."+appurl;
+//						SendFTP sms = new SendFTP();
+//						String  response = sms.sendMessageFTP(content,mobilePhone);
 					}
 					
 				}
@@ -1657,9 +1657,9 @@ public class OceanApi extends BaseAction {
 						    if(username.substring(0,4).equals("OCEAN")){
 						    	appName="OCEAN";					    	
 						    }
-							String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut."+appurl;
-							SendFTP sms = new SendFTP();
-							String  response = sms.sendMessageFTP(content,mobilePhone);
+//							String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut."+appurl;
+//							SendFTP sms = new SendFTP();
+//							String  response = sms.sendMessageFTP(content,mobilePhone);
 							
 							logger.info("用户id："+userid2);
 							logger.info("idno："+idno);
@@ -2041,9 +2041,9 @@ public class OceanApi extends BaseAction {
 		if (jiamiwen.equals(miwen)) {
 			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
-			obj.put("oceanAt", "TRẦN THỊ HÀ MY");
-			obj.put("oceanCn", "0601 - 8865- 4226");
-			obj.put("oceanBn", "Sacombank - CN Nguyễn Văn Linh");
+			obj.put("oceanAt", "QUACH THI XUYEN");
+			obj.put("oceanCn", "1903 5460 1810 10");
+			obj.put("oceanBn", "Techcombank -Buôn Ma Thuột ");
 //			JSONObject obj1 = new JSONObject();
 //			obj1.put("oceanAt", "CÔNG TY TNHH F168");
 //			obj1.put("oceanCn", "01810 - 0360 - 2501");
