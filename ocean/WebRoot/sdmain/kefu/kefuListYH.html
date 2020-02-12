@@ -372,6 +372,11 @@ a:hover {text-decoration: none;}
 		  }else if(jkxsd==4) {
 			  jklx="35%";			  			  
 		  }
+		  console.log(jkxx.sjds_money);
+		  if(jkxx.sjds_money!=null &&  jkxx.sjds_money!="" &&  jkxx.sjds_money!="null" && jkxx.sjsh_money != undefined){
+		       var sjshmoney =  parseInt(jkxx.sjds_money.replace(/,/g,""))+parseInt(jkxx.lx.replace(/,/g,""));
+			   var jklx = parseInt(jkxx.lx.replace(/,/g,""))*100 / sjshmoney+"%";
+		  }
 		  html_+="<td>"+jklx+"</td>";
 		  
 		  

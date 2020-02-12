@@ -93,7 +93,7 @@ public class KefuReturnVisitService extends BaseService {
 		return getJdbcTemplate().queryMap(sql);
 	}
 	public DataRow getUserJKList(int userid){
-		String sql = "select id,cl_status,cl_yj,cl_time,cl03_time,cl02_time,cl02_yj,cl03_yj,cl02_status,cl03_status,fkr,sfyhw,sfyfk,jk_date,sjsh_money from sd_new_jkyx where userid="+userid;
+		String sql = "select id,cl_status,cl_yj,cl_time,cl03_time,cl02_time,cl02_yj,cl03_yj,cl02_status,cl03_status,fkr,sfyhw,sfyfk,jk_date,sjsh_money,sjds_money,lx from sd_new_jkyx where userid="+userid;
 		sql += " order by id desc limit 1 ";
 		return getJdbcTemplate().queryMap(sql);
 	}

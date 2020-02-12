@@ -823,7 +823,128 @@ public class HtmlOceanAction extends BaseAction {
 			return null ;
 		}
 	}
-public ActionResult doGetOceanBankRZ() throws Exception {
+	
+	public ActionResult doGetOceanBankRZ() throws Exception {
+		logger.info("请求ip"+getipAddr());
+		JSONObject jsonOb = new JSONObject();
+		String tokenhtml = SessionHelper.getString("tokenhtml", getSession());// 后台登录账户
+		if (TextUtils.isEmpty(tokenhtml)) {
+			jsonOb.put("error", -1);
+			jsonOb.put("msg", "Vui lòng đăng nhập trước"); // Vui lòng đăng	
+			this.getWriter().write(jsonOb.toString());
+			return null;
+		}
+	 	HttpServletRequest request = getRequest();
+	 	String name =getStrParameter("username","none").replace("&nbsp;", " ");
+		String userid =getStrParameter("userid");
+		String numberId = getStrParameter("idno");
+		String cardId= getStrParameter("bankcard");
+		String childBank= getStrParameter("childBank");
+		if(TextUtils.isEmpty(name)){
+			jsonOb.put("error", -3);
+			jsonOb.put("msg", "Không thể để trống họ tên"); // Vui lòng đăng	
+			this.getWriter().write(jsonOb.toString());
+			return null;
+		}
+		if(TextUtils.isEmpty(numberId)){
+			jsonOb.put("error", -3);
+			jsonOb.put("msg", "Không thể để trống chứng minh thư"); // Vui lòng đăng	
+			this.getWriter().write(jsonOb.toString());
+			return null;
+		}
+		if(TextUtils.isEmpty(cardId)){
+			jsonOb.put("error", -3);
+			jsonOb.put("msg", "Không thể để trống tài khoản ngân hàng"); // Vui lòng đăng	
+			this.getWriter().write(jsonOb.toString());
+			return null;
+		}
+		String miwen = getStrParameter("token");
+		String useridtoken = jdbUserService.getIdByToken(userid);
+		if (!miwen.equals(useridtoken)) {
+			jsonOb.put("error", -1);
+			jsonOb.put("msg", "Vui lòng đăng nhập trước"); // Vui lòng đăng	
+			this.getWriter().write(jsonOb.toString());
+			return null;
+		}
+		if(tokenhtml.equals(miwen)){
+			JSONObject jsonObject = new JSONObject();
+			DataRow dataRow = jdbUserService.findUserById(userid);
+			 int yhbd = dataRow.getInt("yhbd");
+			 if(yhbd == 1) {
+				 jsonObject.put("error", -3);
+				 jsonObject.put("msg", "Bạn cần phải xác minh tài khoản ngân hàng");//此用户已经绑定银行卡
+				 
+				 this.getWriter().write(jsonObject.toString());	   	
+				 return null;
+			 }
+			 String cardName =request.getParameter("cardName").trim().replace("&nbsp;", " ");
+			 String ui = jdbUserService.getUICard(userid);
+			 String bankcardsfsf = jdbUserService.getBK(userid);
+			 
+			 Calendar calendar =Calendar.getInstance();
+			 SimpleDateFormat fmtrq  = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			 
+				try{
+					logger.info("其他银行");
+		   			 //将数据存到数据库中
+		   			 if (ui.equals("")) {
+		   				 DataRow row5= new DataRow() ;
+		   				 row5.set("userid", userid);
+		   				 row5.set("cardusername", name);
+		   				 row5.set("remark", numberId);
+		   				 row5.set("cardno", cardId);
+		   				 row5.set("cardname", cardName+"-"+childBank);
+		   				 row5.set("create_time", fmtrq.format(calendar.getTime()));
+		   				 jdbUserService.addUserCard(row5) ; 
+		   			 }else {
+		   				 DataRow row5= new DataRow() ;
+		   				 row5.set("userid", userid);
+		   				 row5.set("cardusername", name);
+		   				 row5.set("remark", numberId);
+		   				 row5.set("cardno", cardId);
+		   				 row5.set("cardname", cardName+"-"+childBank);
+		   				 row5.set("create_time", fmtrq.format(calendar.getTime()));
+		   				 jdbUserService.updateUserCard(row5) ;
+		   			 }
+		   			if (bankcardsfsf.equals("")) {
+	    		    	DataRow row1= new DataRow() ;
+	    			    //姓名添加进数据库
+	    			    row1.set("userid",userid);
+	    			    row1.set("realname",name);
+	    			    row1.set("idno",numberId);
+	    			    jdbUserService.addUserInfoHN(row1);
+	    			}else {
+	    				DataRow row1= new DataRow() ;
+	    			    //姓名添加进数据库
+	    			    row1.set("userid",userid);
+	    			    row1.set("realname",name);
+	    			    row1.set("idno",numberId);
+	    			    jdbUserService.updateInfoHN(row1); ;
+	    			}
+		   			 DataRow row3= new DataRow() ;
+		   			 row3.set("id",userid);
+		   			 row3.set("yhbd",1);//银行卡认证为1
+		   			 row3.set("isshenfen",1);//银行卡认证为1
+		   			 jdbUserService.updateUserInfoH(row3);
+		   			 jsonObject.put("error", 0);
+		   			 jsonObject.put("msg", "Thành công");//成功
+		   			 this.getWriter().write(jsonObject.toString());	   	
+		   			 return null;
+		   		 } catch(Exception e) {
+		   			 
+		   			 jsonObject.put("error", -3);
+		   			 jsonObject.put("msg", "Lỗi hệ thống, vui lòng thử lại sau！");//系统异常，请稍后再试！
+		   			 e.printStackTrace() ;
+		   			 this.getWriter().write(jsonObject.toString());	   	
+		   			 return null;
+		   		 }
+		}else{
+			return null ;
+		}
+		
+	}
+	
+public ActionResult doGetOceanBankRZCpoy() throws Exception {
 		logger.info("请求ip"+getipAddr());
 		JSONObject jsonOb = new JSONObject();
 		String tokenhtml = SessionHelper.getString("tokenhtml", getSession());// 后台登录账户
@@ -1346,16 +1467,18 @@ public ActionResult doHtmlTJJK() throws Exception
 	        	 
 //	        	 int shenhezu[] = {2038,2002,2003,2007,2009,2039,2044,2040,2042,2041,2043,2004,2005,2006,2014,2028,2034,2024};
 	        	 List<DataRow> list = jdbUserService.getAuditors();
-	                int shenhezu[] = new int[list.size()];
+	                int shenhezu[] = new int[list.size()>0?list.size():1];
 	                for (int i = 0, n = list.size(); i < n; i++) {
 	                    int cmsUserId = list.get(i).getInt("user_id");
 	                    shenhezu[i] = cmsUserId;
 	                }
-	        	 //int shenhezu[] = {2004, 2038};
-	        	// int shenhezu2[] = { 2004, 2038};
+	                if(list.size()<=0) {
+	                	shenhezu[0] = 2002;
+	                }
+
 	        	 Random random = new Random();
 	        	 int xiabiao = random.nextInt(shenhezu.length);
-	        	 //int xiabiao2 = random.nextInt(shenhezu2.length);
+
 	        	 int shenheren = shenhezu[xiabiao];
 	        	 int oldshenheren = jdbUserService.getShenHeRen(userid2);
 	        	 int stateold = jdbUserService.getOLDstate(oldshenheren);

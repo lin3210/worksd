@@ -93,10 +93,17 @@ public class UserService extends BaseService{
 	 * @param numPerPage
 	 * @return
 	 */
-	public DBPage selectUserList(int curPage ,int numPerPage, int type){
+	public DBPage selectUserList(int curPage ,int numPerPage, int type,int temp,String tempVelue){
 		String sql = "select user_id ,name, phone ,rolename ,login_times, last_time ,state from sdcms_user u left join sdcms_user_role r on u.roleid=r.id  where 1 =1 ";
 		if(type==1){
 			sql +="and u.roleid=10 and state=1";
+		}
+		if(!tempVelue.equals("")) {
+			if(1==temp) {
+				sql +="and user_id ="+tempVelue;
+			}else if(2==temp) {
+				sql +="and phone='"+tempVelue+"'";
+			}
 		}
 		sql +=" order by  last_time desc" ;
 	    return getJdbcTemplate().queryPage(sql, curPage, numPerPage);

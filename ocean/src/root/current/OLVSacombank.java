@@ -472,205 +472,211 @@ public static String getDefaultPrivateKey() {
 		   this.getWriter().write(jsonObject.toString());	
 		   return null;
 		}
-	    String nowtime = time.substring(11,13);
-		if((!(Integer.parseInt(nowtime)>=9 && Integer.parseInt(nowtime)<13)) && (!(Integer.parseInt(nowtime)>=13 && Integer.parseInt(nowtime)<21))){	    		
-			jsonObject.put("error", -1);
-			jsonObject.put("msg", "系统错误！");
-			this.getWriter().write(jsonObject.toString());	
-			return null;
-		}
-		int userid = getIntParameter("rec_id");
-		logger.info(userid);
-		int jkid = olvsacombankservice.getUserID(userid+"");
-		//用户是ACC（转账账号）还是 PAN（卡号）
-		int bankcardcode = olvsacombankservice.getUserBankcardcode(userid);
-		//用户在NAPAS的银行名字
-		String userbankname = olvsacombankservice.getUserBankcardname(userid);
-		//用户在NAPAS的银行代码
-		String userbankcode = olvsacombankservice.getUserBankNo(userid);
-		//用户的银行账号
-		String cardId = olvsacombankservice.getUserBankcardNo(userid);
-		//用户的姓名
-		String username = olvsacombankservice.getUserBankusername(userid);
+  		
+	   jsonObject.put("error", -1);
+	   jsonObject.put("msg", "Stop Auto Lending");
+	   this.getWriter().write(jsonObject.toString());	
+	   return null;
 		
-		String name = olvsacombankservice.getUserName(userid);
-		String phoneNumber = olvsacombankservice.getPhoneNumber(userid);
-		//用户当天的放款记录
-		int fkjl = olvsacombankservice.getAllFKcount(userid,timeday);
-		if(fkjl == 1){
-			jsonObject.put("error", -1);
-			jsonObject.put("msg", "Hôm nay đã giải ngân rồi, vui lòng liên hệ IT kiểm tra");
-			this.getWriter().write(jsonObject.toString());	
-			return null;
-		}
-		logger.info("userbankname:"+userbankname);
-		logger.info("userbankcard:"+userbankcode);
-		String sjdsmoney = olvsacombankservice.getUserSjdsmoney(jkid);
-		logger.info(sjdsmoney);
-		if(TextUtils.isEmpty(sjdsmoney)){
-			jsonObject.put("error", -1);
-			jsonObject.put("msg", "没有借款信息，请刷新页面！");
-			this.getWriter().write(jsonObject.toString());	
-			return null;
-		}
-		BigDecimal fkjine=new BigDecimal(sjdsmoney.replace(",", ""));
-		
-		System.out.println("放款金额是："+fkjine);
-	    
-	     if(fkjine.compareTo(new BigDecimal("10000000")) >= 0){
-	    	jsonObject.put("error", -7);
-	    	jsonObject.put("msg", "金额超过10.000.000,请联系技术人员更改！");
-	    	this.getWriter().write(jsonObject.toString());	
-			return null;
-	     }
-	    String orderNo = userid+"-"+jkid+"-"+System.currentTimeMillis();
-	    String remark = "abcdong Thanh Toán";
-	    String returnUrl = "http://www.abcdongvn.com/servlet/app/NewAppAc?function=FunPayHuiTiaoDZ";
-	    String urlString = "https://payment.funpay.asia/fun/transfer/transferMoney";
-		String String2 ="accountName="+name+"&accountNo="+cardId+"&accountType=0&amount="+fkjine+"&bankBranchNo=&bankLocation=vn"+"&bankNo="+userbankcode+"&businessID="+bussinessID+"&currency=VND&merchantID="+merchantID+"&orderNo="+orderNo+"&phoneNumber="+phoneNumber+"&remark="+remark+"&returnUrl="+returnUrl+"&timestamp="+timestamp+"&version="+version+secretkey;
-		String sign = Encrypt.MD5(String2).toUpperCase();
-		String String3 ="accountName="+name+"&accountNo="+cardId+"&accountType=0&amount="+fkjine+"&bankBranchNo=&bankLocation=vn"+"&bankNo="+userbankcode+"&businessID="+bussinessID+"&currency=VND&merchantID="+merchantID+"&orderNo="+orderNo+"&phoneNumber="+phoneNumber+"&remark="+remark+"&returnUrl="+returnUrl+"&timestamp="+timestamp+"&version="+version+"&sign="+sign;
-		String param =Base64.encode(String3.getBytes("UTF-8"));
-		String urlr = urlString+"?"+"param="+param;
-		String resopnser = sendGet(urlr);
-		com.alibaba.fastjson.JSONObject Objr = com.alibaba.fastjson.JSONObject.parseObject(resopnser);
-		String code = Objr.getString("code");
-		String msg = Objr.getString("msg");
-		if("10000".equals(code)) {
-			com.alibaba.fastjson.JSONObject result = com.alibaba.fastjson.JSONObject.parseObject(Objr.getString("result"));
-			int status = result.getInteger("status");
-			if(status == 0) {
-				logger.info("进入放款");
-		    	SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
-		    	SimpleDateFormat fmtrqday = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
-				Calendar calendar =Calendar.getInstance();
-		    	logger.info(userid);
-		    	int jkdate = olvsacombankservice.getJK(jkid);
-		    	DataRow user = olvsacombankservice.getUserRecThreeInfoYN(userid+""); 
-				String merchOrderId = orderNo;
-		    	
-			    DataRow row3 =  new DataRow();	
-			    row3.set("userid",userid);
-			    row3.set("title", "Thông báo chấp thuận đề xuất vay");//审核通知
-			    row3.set("neirong","Khoản vay của bạn đã được giải ngân vào tài khoản của bạn, vui lòng kiểm tra tài khoản.");	//您的借款已经汇入您的账户，请及时查收。	             
-			    row3.set("fb_time", fmtrq.format(calendar.getTime()));				
-			    olvsacombankservice.insertUserMsg(row3); 
-		         //还款期限			   
-			    DataRow row = new DataRow() ;
-			    DataRow row1 = new DataRow() ;
-			    row.set("fkdz_time", fmtrq.format(calendar.getTime())) ; 
-			    row.set("fkdz_time_day", fmtrqday.format(calendar.getTime())) ; 
-			    row.set("fkr_time",fmtrq.format(calendar.getTime()));
-			    row1.set("checktime", fmtrq.format(calendar.getTime())) ; 
-			    if(jkdate == 2){
-		        	 //当前时间加30天
-		        	  calendar.add(Calendar.DATE, 30);		        	
-		         }
-		         if(jkdate == 1){
-		        	 //当前时间加15天
-		        	  calendar.add(Calendar.DATE, 15);    	 
-		         }
-		         if(jkdate == 3){
-		        	 //当前时间加15天
-		        	 calendar.add(Calendar.DATE, 7);    	 
-		         }
-		         if(jkdate == 4){
-		        	 //当前时间加15天
-		        	 calendar.add(Calendar.DATE, 14);    	 
-		         }
-		         DecimalFormat famt = new DecimalFormat("###,###");
-		 		int hongbaoid = olvsacombankservice.getHongbaoid(userid+"");
-		 		int appflyer = olvsacombankservice.getAppflyer(userid+"");
-				int jkhongbaoid = olvsacombankservice.getHongbaoidJK(jkid+"");
-		
-				String sjsh_money = olvsacombankservice.getSjshsh(jkid+"");
-				int sjsh = Integer.parseInt(sjsh_money.replace(",", ""));
-				String lx = olvsacombankservice.getLX(jkid+"");
-				int lxlx = Integer.parseInt(lx.replace(",", ""));
-				
-				row.set("id", jkid);
-				row.set("hkyq_time", fmtrq.format(calendar.getTime())) ; 
-				row.set("hk_time", fmtrq.format(calendar.getTime())) ; 
-				row.set("sfyfk","1");
-				if(jkhongbaoid ==1){
-					row.set("sjsh_money",famt.format(sjsh-10000));
-		    		row.set("lx",famt.format(lxlx-10000));
-				}
-				row.set("fkr",cmsuserid);
-				olvsacombankservice.updateUserJk(row);	
-				row1.set("name", user.getString("cardusername"));
-				row1.set("cellphone", user.getString("mobilephone"));
-				row1.set("acount", user.getString("cardno"));
-				row1.set("sum", sjdsmoney);
-				row1.set("userid", userid);
-				row1.set("remark", "放款") ; 
-				row1.set("checkid", cmsuserid) ; 
-				row1.set("versoin", 1) ; 
-				row1.set("remarkresult", jkid) ; 
-				row1.set("orderid", merchOrderId) ; 
-				olvsacombankservice.updateUserFK(row1);
-				if(hongbaoid == 0 && jkhongbaoid ==1){
-					DataRow rowhong = new DataRow();
-		    		rowhong.set("id", userid);
-		    		rowhong.set("hongbao", 1);
-		    		olvsacombankservice.updateUserHongbao(rowhong);
-				}
-				if(appflyer == 2){
-					DataRow rowhong = new DataRow();
-		    		rowhong.set("id", userid);
-		    		rowhong.set("appflyer", 1);
-		    		olvsacombankservice.updateUserHongbao(rowhong);
-				}
-			   String userName =user.getString("username");
-			   String appName ="abcdong";
-			    userName =userName.substring(0,4);					  
-			    if(userName.equals("DONG")){
-			    	appName="abcdong";					    	
-			    }
-			   /*String content = "[{\"PhoneNumber\":\""+user.getString("mobilephone")+"\",\"Message\":\""+appName+" thong bao: So tien vay "+sjdsmoney+" da chuyen khoan den TK Ngan hang so cuoi "+user.getString("cardno").substring(user.getString("cardno").length()-4, user.getString("cardno").length())+".Neu sau 24 tieng chua nhan duoc tien, vui long goi hotline: 1900234558, inbox http://bit.ly/2QJAh16.\",\"SmsGuid\":\""+user.getString("mobilephone")+"\",\"ContentType\":1}]";
-			   String con = URLEncoder.encode(content, "utf-8");
-			   SendMsg sendMsg = new SendMsg();
-			   String returnString = SendMsg.sendMessageByGet(con,user.getString("mobilephone"));
-			   */
-		       jsonObject.put("error", 1);
-		       jsonObject.put("msg","Thành công");//成功 
-			   this.getWriter().write(jsonObject.toString());	
-			   return null ;
-			}else {	
-				jsonObject.put("newcode", -3);
-				jsonObject.put("newmsg", status);// 系统异常，请稍后再试�??
-				this.getWriter().write(jsonObject.toString());
-				return null;
-			}
-		}else{
-	    	SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
-	    	Calendar calendar =Calendar.getInstance();
-	    	DataRow user = olvsacombankservice.getUserRecThreeInfoYN(userid+"");
-	    	String merchOrderId = orderNo;
-	    	DataRow row1 = new DataRow() ;
-	    	row1.set("checktime", fmtrq.format(calendar.getTime())) ; 
-	    	row1.set("name", user.getString("cardusername"));
-			row1.set("cellphone", user.getString("mobilephone"));
-			row1.set("acount", user.getString("cardno"));
-			row1.set("jkid", jkid);
-			row1.set("sum", sjdsmoney);
-			row1.set("bankname", userbankname);
-			row1.set("bankid", userbankcode);
-			row1.set("userid", userid);
-			row1.set("remark", msg) ; 
-			row1.set("checkid", cmsuserid) ; 
-			row1.set("errstatus",code) ; 
-			row1.set("orderid", merchOrderId) ; 
-			olvsacombankservice.updateUserFKSB(row1);
-			DataRow row = new DataRow();
-			row.set("id", jkid);
-			row.set("fkr",cmsuserid);
-			olvsacombankservice.updateUserJk(row);	
-	    	jsonObject.put("error", -3);
-	   	 	jsonObject.put("msg",msg);
-	   	 	this.getWriter().write(jsonObject.toString());	
-		    return null;
-	    }
+//	    String nowtime = time.substring(11,13);
+//		if((!(Integer.parseInt(nowtime)>=9 && Integer.parseInt(nowtime)<13)) && (!(Integer.parseInt(nowtime)>=13 && Integer.parseInt(nowtime)<21))){	    		
+//			jsonObject.put("error", -1);
+//			jsonObject.put("msg", "系统错误！");
+//			this.getWriter().write(jsonObject.toString());	
+//			return null;
+//		}
+//		int userid = getIntParameter("rec_id");
+//		logger.info(userid);
+//		int jkid = olvsacombankservice.getUserID(userid+"");
+//		//用户是ACC（转账账号）还是 PAN（卡号）
+//		int bankcardcode = olvsacombankservice.getUserBankcardcode(userid);
+//		//用户在NAPAS的银行名字
+//		String userbankname = olvsacombankservice.getUserBankcardname(userid);
+//		//用户在NAPAS的银行代码
+//		String userbankcode = olvsacombankservice.getUserBankNo(userid);
+//		//用户的银行账号
+//		String cardId = olvsacombankservice.getUserBankcardNo(userid);
+//		//用户的姓名
+//		String username = olvsacombankservice.getUserBankusername(userid);
+//		
+//		String name = olvsacombankservice.getUserName(userid);
+//		String phoneNumber = olvsacombankservice.getPhoneNumber(userid);
+//		//用户当天的放款记录
+//		int fkjl = olvsacombankservice.getAllFKcount(userid,timeday);
+//		if(fkjl == 1){
+//			jsonObject.put("error", -1);
+//			jsonObject.put("msg", "Hôm nay đã giải ngân rồi, vui lòng liên hệ IT kiểm tra");
+//			this.getWriter().write(jsonObject.toString());	
+//			return null;
+//		}
+//		logger.info("userbankname:"+userbankname);
+//		logger.info("userbankcard:"+userbankcode);
+//		String sjdsmoney = olvsacombankservice.getUserSjdsmoney(jkid);
+//		logger.info(sjdsmoney);
+//		if(TextUtils.isEmpty(sjdsmoney)){
+//			jsonObject.put("error", -1);
+//			jsonObject.put("msg", "没有借款信息，请刷新页面！");
+//			this.getWriter().write(jsonObject.toString());	
+//			return null;
+//		}
+//		BigDecimal fkjine=new BigDecimal(sjdsmoney.replace(",", ""));
+//		
+//		System.out.println("放款金额是："+fkjine);
+//	    
+//	     if(fkjine.compareTo(new BigDecimal("10000000")) >= 0){
+//	    	jsonObject.put("error", -7);
+//	    	jsonObject.put("msg", "金额超过10.000.000,请联系技术人员更改！");
+//	    	this.getWriter().write(jsonObject.toString());	
+//			return null;
+//	     }
+//	    String orderNo = userid+"-"+jkid+"-"+System.currentTimeMillis();
+//	    String remark = "abcdong Thanh Toán";
+//	    String returnUrl = "http://www.abcdongvn.com/servlet/app/NewAppAc?function=FunPayHuiTiaoDZ";
+//	    String urlString = "https://payment.funpay.asia/fun/transfer/transferMoney";
+//		String String2 ="accountName="+name+"&accountNo="+cardId+"&accountType=0&amount="+fkjine+"&bankBranchNo=&bankLocation=vn"+"&bankNo="+userbankcode+"&businessID="+bussinessID+"&currency=VND&merchantID="+merchantID+"&orderNo="+orderNo+"&phoneNumber="+phoneNumber+"&remark="+remark+"&returnUrl="+returnUrl+"&timestamp="+timestamp+"&version="+version+secretkey;
+//		String sign = Encrypt.MD5(String2).toUpperCase();
+//		String String3 ="accountName="+name+"&accountNo="+cardId+"&accountType=0&amount="+fkjine+"&bankBranchNo=&bankLocation=vn"+"&bankNo="+userbankcode+"&businessID="+bussinessID+"&currency=VND&merchantID="+merchantID+"&orderNo="+orderNo+"&phoneNumber="+phoneNumber+"&remark="+remark+"&returnUrl="+returnUrl+"&timestamp="+timestamp+"&version="+version+"&sign="+sign;
+//		String param =Base64.encode(String3.getBytes("UTF-8"));
+//		String urlr = urlString+"?"+"param="+param;
+//		String resopnser = sendGet(urlr);
+//		com.alibaba.fastjson.JSONObject Objr = com.alibaba.fastjson.JSONObject.parseObject(resopnser);
+//		String code = Objr.getString("code");
+//		String msg = Objr.getString("msg");
+//		if("10000".equals(code)) {
+//			com.alibaba.fastjson.JSONObject result = com.alibaba.fastjson.JSONObject.parseObject(Objr.getString("result"));
+//			int status = result.getInteger("status");
+//			if(status == 0) {
+//				logger.info("进入放款");
+//		    	SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
+//		    	SimpleDateFormat fmtrqday = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+//				Calendar calendar =Calendar.getInstance();
+//		    	logger.info(userid);
+//		    	int jkdate = olvsacombankservice.getJK(jkid);
+//		    	DataRow user = olvsacombankservice.getUserRecThreeInfoYN(userid+""); 
+//				String merchOrderId = orderNo;
+//		    	
+//			    DataRow row3 =  new DataRow();	
+//			    row3.set("userid",userid);
+//			    row3.set("title", "Thông báo chấp thuận đề xuất vay");//审核通知
+//			    row3.set("neirong","Khoản vay của bạn đã được giải ngân vào tài khoản của bạn, vui lòng kiểm tra tài khoản.");	//您的借款已经汇入您的账户，请及时查收。	             
+//			    row3.set("fb_time", fmtrq.format(calendar.getTime()));				
+//			    olvsacombankservice.insertUserMsg(row3); 
+//		         //还款期限			   
+//			    DataRow row = new DataRow() ;
+//			    DataRow row1 = new DataRow() ;
+//			    row.set("fkdz_time", fmtrq.format(calendar.getTime())) ; 
+//			    row.set("fkdz_time_day", fmtrqday.format(calendar.getTime())) ; 
+//			    row.set("fkr_time",fmtrq.format(calendar.getTime()));
+//			    row1.set("checktime", fmtrq.format(calendar.getTime())) ; 
+//			    if(jkdate == 2){
+//		        	 //当前时间加30天
+//		        	  calendar.add(Calendar.DATE, 30);		        	
+//		         }
+//		         if(jkdate == 1){
+//		        	 //当前时间加15天
+//		        	  calendar.add(Calendar.DATE, 15);    	 
+//		         }
+//		         if(jkdate == 3){
+//		        	 //当前时间加15天
+//		        	 calendar.add(Calendar.DATE, 7);    	 
+//		         }
+//		         if(jkdate == 4){
+//		        	 //当前时间加15天
+//		        	 calendar.add(Calendar.DATE, 14);    	 
+//		         }
+//		         DecimalFormat famt = new DecimalFormat("###,###");
+//		 		int hongbaoid = olvsacombankservice.getHongbaoid(userid+"");
+//		 		int appflyer = olvsacombankservice.getAppflyer(userid+"");
+//				int jkhongbaoid = olvsacombankservice.getHongbaoidJK(jkid+"");
+//		
+//				String sjsh_money = olvsacombankservice.getSjshsh(jkid+"");
+//				int sjsh = Integer.parseInt(sjsh_money.replace(",", ""));
+//				String lx = olvsacombankservice.getLX(jkid+"");
+//				int lxlx = Integer.parseInt(lx.replace(",", ""));
+//				
+//				row.set("id", jkid);
+//				row.set("hkyq_time", fmtrq.format(calendar.getTime())) ; 
+//				row.set("hk_time", fmtrq.format(calendar.getTime())) ; 
+//				row.set("sfyfk","1");
+//				if(jkhongbaoid ==1){
+//					row.set("sjsh_money",famt.format(sjsh-10000));
+//		    		row.set("lx",famt.format(lxlx-10000));
+//				}
+//				row.set("fkr",cmsuserid);
+//				olvsacombankservice.updateUserJk(row);	
+//				row1.set("name", user.getString("cardusername"));
+//				row1.set("cellphone", user.getString("mobilephone"));
+//				row1.set("acount", user.getString("cardno"));
+//				row1.set("sum", sjdsmoney);
+//				row1.set("userid", userid);
+//				row1.set("remark", "放款") ; 
+//				row1.set("checkid", cmsuserid) ; 
+//				row1.set("versoin", 1) ; 
+//				row1.set("remarkresult", jkid) ; 
+//				row1.set("orderid", merchOrderId) ; 
+//				olvsacombankservice.updateUserFK(row1);
+//				if(hongbaoid == 0 && jkhongbaoid ==1){
+//					DataRow rowhong = new DataRow();
+//		    		rowhong.set("id", userid);
+//		    		rowhong.set("hongbao", 1);
+//		    		olvsacombankservice.updateUserHongbao(rowhong);
+//				}
+//				if(appflyer == 2){
+//					DataRow rowhong = new DataRow();
+//		    		rowhong.set("id", userid);
+//		    		rowhong.set("appflyer", 1);
+//		    		olvsacombankservice.updateUserHongbao(rowhong);
+//				}
+//			   String userName =user.getString("username");
+//			   String appName ="abcdong";
+//			    userName =userName.substring(0,4);					  
+//			    if(userName.equals("DONG")){
+//			    	appName="abcdong";					    	
+//			    }
+//			   /*String content = "[{\"PhoneNumber\":\""+user.getString("mobilephone")+"\",\"Message\":\""+appName+" thong bao: So tien vay "+sjdsmoney+" da chuyen khoan den TK Ngan hang so cuoi "+user.getString("cardno").substring(user.getString("cardno").length()-4, user.getString("cardno").length())+".Neu sau 24 tieng chua nhan duoc tien, vui long goi hotline: 1900234558, inbox http://bit.ly/2QJAh16.\",\"SmsGuid\":\""+user.getString("mobilephone")+"\",\"ContentType\":1}]";
+//			   String con = URLEncoder.encode(content, "utf-8");
+//			   SendMsg sendMsg = new SendMsg();
+//			   String returnString = SendMsg.sendMessageByGet(con,user.getString("mobilephone"));
+//			   */
+//		       jsonObject.put("error", 1);
+//		       jsonObject.put("msg","Thành công");//成功 
+//			   this.getWriter().write(jsonObject.toString());	
+//			   return null ;
+//			}else {	
+//				jsonObject.put("newcode", -3);
+//				jsonObject.put("newmsg", status);// 系统异常，请稍后再试�??
+//				this.getWriter().write(jsonObject.toString());
+//				return null;
+//			}
+//		}else{
+//	    	SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
+//	    	Calendar calendar =Calendar.getInstance();
+//	    	DataRow user = olvsacombankservice.getUserRecThreeInfoYN(userid+"");
+//	    	String merchOrderId = orderNo;
+//	    	DataRow row1 = new DataRow() ;
+//	    	row1.set("checktime", fmtrq.format(calendar.getTime())) ; 
+//	    	row1.set("name", user.getString("cardusername"));
+//			row1.set("cellphone", user.getString("mobilephone"));
+//			row1.set("acount", user.getString("cardno"));
+//			row1.set("jkid", jkid);
+//			row1.set("sum", sjdsmoney);
+//			row1.set("bankname", userbankname);
+//			row1.set("bankid", userbankcode);
+//			row1.set("userid", userid);
+//			row1.set("remark", msg) ; 
+//			row1.set("checkid", cmsuserid) ; 
+//			row1.set("errstatus",code) ; 
+//			row1.set("orderid", merchOrderId) ; 
+//			olvsacombankservice.updateUserFKSB(row1);
+//			DataRow row = new DataRow();
+//			row.set("id", jkid);
+//			row.set("fkr",cmsuserid);
+//			olvsacombankservice.updateUserJk(row);	
+//	    	jsonObject.put("error", -3);
+//	   	 	jsonObject.put("msg",msg);
+//	   	 	this.getWriter().write(jsonObject.toString());	
+//		    return null;
+//	    }
 	}
 	public ActionResult doPayFunPay() throws Exception{
 		JSONObject jsonObject = new JSONObject();

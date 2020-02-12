@@ -426,36 +426,36 @@ public class JBDcmsAction extends BaseAction {
 		SimpleDateFormat famat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		String time = famat.format(new Date());
 		String nowtime = time.substring(11, 13);
-		if (!phone.equals("0123456789") &&!phone.equals("15000291390") && !phone.equals("0947658884")&& !phone.equals("0986039373")&&!phone.equals("18818690187")) {
-
-			if (!ip.equals("118.69.224.164") && !ip.equals("192.168.1.146") && !ip.equals("192.168.1.77") && !ip.equals("127.0.0.1") 
-				    && !ip.equals("192.168.1.138") && !ip.equals("116.118.114.241") && !ip.equals("118.69.191.195") && !ip.equals("0:0:0:0:0:0:0:1")
-				    && !ip.equals("14.241.250.101")&& !ip.equals("222.255.200.218")&& !ip.equals("14.241.243.107")) {
-				jsonObject.put("code", -1);
-				jsonObject.put("error", "Prohibited");
-				DataRow row = new DataRow();
-				row.set("ip", ip);
-				row.set("createtime", new Date());
-				row.set("phone", phone);
-				row.set("result", "密码不正确");
-				jbdcmsService.insertCmsIP(row);
-				this.getWriter().write(jsonObject.toString());
-				return null;
-			}
-		}
+//		if (!phone.equals("0123456789") &&!phone.equals("15000291390") && !phone.equals("0947658884")&& !phone.equals("0986039373")&&!phone.equals("18818690187")) {
+//
+//			if (!ip.equals("118.69.224.164") && !ip.equals("192.168.1.146") && !ip.equals("192.168.1.77") && !ip.equals("127.0.0.1") 
+//				    && !ip.equals("192.168.1.138") && !ip.equals("116.118.114.241") && !ip.equals("118.69.191.195") && !ip.equals("0:0:0:0:0:0:0:1")
+//				    && !ip.equals("14.241.250.101")&& !ip.equals("222.255.200.218")&& !ip.equals("14.241.243.107")) {
+//				jsonObject.put("code", -1);
+//				jsonObject.put("error", "Prohibited");
+//				DataRow row = new DataRow();
+//				row.set("ip", ip);
+//				row.set("createtime", new Date());
+//				row.set("phone", phone);
+//				row.set("result", "ACOUNT/PASSWORD ERROR");
+//				jbdcmsService.insertCmsIP(row);
+//				this.getWriter().write(jsonObject.toString());
+//				return null;
+//			}
+//		}
 		if (StringUtils.isBlank(phone)) {// 帐号判断
 			jsonObject.put("code", 1);
-			jsonObject.put("error", "帐号不能为空");
+			jsonObject.put("error", "Account cannot be empty");
 			// 不为 null 判断是否为空字符串
 		} else if (phone.trim().isEmpty()) {
 			jsonObject.put("code", 1);
-			jsonObject.put("error", "帐号不能为字符串");
+			jsonObject.put("error", "Account number cannot be a string");
 		} else if (StringUtils.isBlank(pwd)) {// 密码判断
 			jsonObject.put("code", 2);
-			jsonObject.put("error", "密码不能为空");
+			jsonObject.put("error", "Password cannot be empt");
 		} else if (pwd.trim().isEmpty()) {
 			jsonObject.put("code", 2);
-			jsonObject.put("error", "密码不能为空字符串");
+			jsonObject.put("error", "Password number cannot be a string");
 		} else {
 			String resPWD = Encrypt.MD5(pwd + IConstants.PASS_KEY);
 			DataRow dr = jbdcmsService.getUserByNameAndPwd(phone, resPWD);

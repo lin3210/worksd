@@ -27,13 +27,52 @@ a:hover {text-decoration: none;}
 			</li>
 		</ul>
 	</div>
-	<div>
-		<input type="hidden" id="cupage" value="1"/>
-		<input type="hidden" id="total" value="1"/>
-		<input type="hidden" id="formurl" value="/servlet/role/UserAction?function=OLAVAGetUserList"/>
-		<input type="hidden" id="starTime" value=""/>
-		<input type="hidden" id="endTime" value=""/>
-	</div>
+	
+    <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        Điều kiện tìm kiếm
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		                
+					<div>
+						<input type="hidden" id="cupage" value="1"/>
+						<input type="hidden" id="total" value="1"/>
+						<input type="hidden" id="formurl" value="/servlet/role/UserAction?function=OLAVAGetUserList"/>
+						<input type="hidden" id="starTime" value=""/>
+						<input type="hidden" id="endTime" value=""/>
+					</div>
+					<div class="form-group">
+					              <div class="col-md-4" style="width:150px;">
+					                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >   
+					                      <option value="0">
+					                                                            全部                  
+					                      </option>
+					                     <option value="1">
+					                                                         编号
+					                      </option>
+					                      <option value="2">
+					                                                     电话号码
+					                      </option>
+					                   </select>
+					              </div>
+					              <div class="col-md-1" style="width:200px;">
+					          <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+					        </div>
+					     <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+					                                   查询
+					     </button>
+					   </div>
+	        </div>
+           </div>
+         </div>
+     </div>
+     
 	<div class="row" style="margin-top: 10px;">
 		<div class="col-md-12">
 			<div class="widget box">
@@ -208,12 +247,12 @@ a:hover {text-decoration: none;}
 	  {
 		  if(tempval=="")
 		  {
-			  alert("请输入查询数据");
+			  //alert("请输入查询数据");
 			  $("#btn-load").button("reset");
 			  return;
 		  }
 	  }
-	  var para={curPage:$("#cupage").val(),type:0};
+	  var para={curPage:$("#cupage").val(),type:0,temp:tempsele,tempvl:tempval};
 	  loadGetServer($("#formurl").val(),para,function(data){
 		  $("#load_data").html("");
 		  var list = data.list.data;

@@ -36,7 +36,7 @@ public class UserAction extends BaseAction{
 		int type=getIntParameter("type",0);
 		//默认第一页
 		int curPage  =getIntParameter("curPage",1);	
-		DBPage page = userService.selectUserList(curPage, 15,type); 
+		DBPage page = userService.selectUserList(curPage, 15,type,temp,tempVelue); 
 		DataRow row = new DataRow();
 		row.set("list", page);
 		row.set("temp",temp);

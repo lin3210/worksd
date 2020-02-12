@@ -62,6 +62,7 @@ import root.current.Base64;
 import root.current.OLVSacombank;
 import root.current.SSLClient;
 import root.order.UserMoneyBase;
+import root.tool.SendMsgCL;
 
 public class OceanApi extends BaseAction {
 	private static Logger logger = Logger.getLogger(OceanApi.class);
@@ -505,12 +506,16 @@ public class OceanApi extends BaseAction {
 					logger.info("短信发送成功-----"+phone);
 					int smscode = jdbUserService.getSmsCode();
 					
-					String content = "[{\"PhoneNumber\":\""+phone+"\",\"Message\":\"Ma xac thuc OTP cua ban la "+randomCode+", ma xac thuc co hieu luc trong thoi gian 5 phut ke tu khi ban gui tin nhan.\",\"SmsGuid\":\""+phone+"\",\"ContentType\":1}]";
-					String con = URLEncoder.encode(content, "utf-8");
-					SendMsg sendMsg = new SendMsg();
-					String returnString = SendMsg.sendMessageByGetOTP(con,phone);
-					if (returnString.equals("106")) 
-					{		
+//					String content = "[{\"PhoneNumber\":\""+phone+"\",\"Message\":\"Ma xac thuc OTP cua ban la "+randomCode+", ma xac thuc co hieu luc trong thoi gian 5 phut ke tu khi ban gui tin nhan.\",\"SmsGuid\":\""+phone+"\",\"ContentType\":1}]";
+//					String con = URLEncoder.encode(content, "utf-8");
+//					SendMsg sendMsg = new SendMsg();
+//					String returnString = SendMsg.sendMessageByGetOTP(con,phone);
+//					if (returnString.equals("106")) 
+					
+					String content = "Ma xac thuc OTP cua ban la "+randomCode+", ma xac thuc co hieu luc trong thoi gian 5 phut ke tu khi ban gui tin nhan.";
+                    String returnString = SendMsgCL.sendOTP(content,phone);
+					logger.info(returnString);
+					if (returnString.contains("0")) {	
 						jsonObject.put("oceanC", 0);
 						jsonObject.put("oceanM", "Đã gửi thành công");
 						logger.info(Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY)+"___"+Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
