@@ -628,9 +628,9 @@ public class JBDcms3Action extends BaseAction {
 						xsjsh = sjsh;
 						xyqlx = 0;
 						if(jkdate ==3 || jkdate ==4){
-							xyqlx = yylx + (xsjsh * 2 / 100) * ddday;
+							xyqlx = yylx + (xsjsh * 4 / 100) * ddday;
 						}else{
-							xyqlx = yylx + (xsjsh * 2 / 100) * ddday;
+							xyqlx = yylx + (xsjsh * 4 / 100) * ddday;
 						}
 						jkxm2.set("yuq_yhlx", df.format(hkm + yqyhlx));
 						jkxm2.set("yuq_lx", df.format(xyqlx - hkm));
@@ -638,9 +638,9 @@ public class JBDcms3Action extends BaseAction {
 						xsjsh = sjsh + yylx - hkm;
 						xyqlx = 0;
 						if(jkdate ==3 || jkdate ==4){
-							xyqlx = (xsjsh * 2 / 100) * ddday;
+							xyqlx = (xsjsh * 4 / 100) * ddday;
 						}else{
-							xyqlx = (xsjsh * 2 / 100) * ddday;
+							xyqlx = (xsjsh * 4 / 100) * ddday;
 						}
 						jkxm2.set("sjsh_money", df.format(xsjsh));
 						jkxm2.set("yuq_yhlx", df.format(yylx + yqyhlx));
@@ -767,9 +767,9 @@ public class JBDcms3Action extends BaseAction {
 				if (hkm >= yylx) {
 					xsjsh = sjsh - hkm + yylx;
 					if(jkdate == 3 || jkdate == 4){
-						xyqlx = (xsjsh * 2 / 100) * ddday;
+						xyqlx = (xsjsh * 4 / 100) * ddday;
 					}else{
-						xyqlx = (xsjsh * 2 / 100) * ddday;
+						xyqlx = (xsjsh * 4 / 100) * ddday;
 					}
 					
 					jkxm2.set("sjsh_money", df.format(xsjsh));
@@ -777,9 +777,9 @@ public class JBDcms3Action extends BaseAction {
 					jkxm2.set("yuq_lx", df.format(xyqlx));
 				} else {
 					if(jkdate == 3 || jkdate == 4){
-						xyqlx = yylx - hkm + (sjsh * 2 / 100) * ddday;
+						xyqlx = yylx - hkm + (sjsh * 4 / 100) * ddday;
 					}else{
-						xyqlx = yylx - hkm + (sjsh * 2 / 100) * ddday;
+						xyqlx = yylx - hkm + (sjsh * 4 / 100) * ddday;
 					}
 					jkxm2.set("yuq_yhlx", df.format(hkm + yqyhlx));
 					jkxm2.set("yuq_lx", df.format(xyqlx));
@@ -1267,9 +1267,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0;
 						if(jkdate==3 || jkdate == 4){
-							yqjdts = yylx / (sjsh * 2 / 100) ;
+							yqjdts = yylx / (sjsh * 4 / 100) ;
 						}else{
-							yqjdts = yylx / (sjsh * 2 / 100) ;
+							yqjdts = yylx / (sjsh * 4 / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts - yqjdts);
 						yqtsadd = yqtsadd + yqjdts;
@@ -1279,9 +1279,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0 ;
 						if(jkdate==3 || jkdate == 4){
-							yqjdts = (hkm - yqyqlx) / (sjsh * 2 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * 4 / 100) ;
 						}else{
-							yqjdts = (hkm - yqyqlx) / (sjsh * 2 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * 4 / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts- yqjdts);
 						yqtsadd = yqtsadd + yqjdts;
@@ -1415,9 +1415,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0;
 						if(jkdate ==3 || jkdate ==4){
-							yqjdts = yylx / (sjsh * 2 / 100) ;
+							yqjdts = yylx / (sjsh * 4 / 100) ;
 						}else{
-							yqjdts = yylx / (sjsh * 2 / 100) ;
+							yqjdts = yylx / (sjsh * 4 / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts - yqjdts);
 						yqtsadd = yqtsadd + yqjdts;
@@ -1427,9 +1427,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0;
 						if(jkdate ==3 || jkdate ==4){
-							yqjdts = (hkm - yqyqlx) / (sjsh * 2 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * 4 / 100) ;
 						}else{
-							yqjdts = (hkm - yqyqlx) / (sjsh * 2 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * 4 / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts - yqjdts);
 						yqtsadd = yqtsadd + yqjdts;

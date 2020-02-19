@@ -48,51 +48,33 @@ public class Fenpeicuishou implements Task {
 		List<DataRow> list = aotuZDSHALLService.getAllYQList(ri, yue);
 		// 把借款单根据用户名分单是分类
 		int size = list.size();
-		int txhk3 = aotuZDSHALLService.getTXHK3();
       		
-		/*int txhk1 = aotuZDSHALLService.getTXHK1();
+		int txhk1 = aotuZDSHALLService.getTXHK1();
 		int txhkbl1 = aotuZDSHALLService.getTXHKBL1();
 		int txhk2 = aotuZDSHALLService.getTXHK2();
 		int txhkbl2 = aotuZDSHALLService.getTXHKBL2();
-		int txhk3 = aotuZDSHALLService.getTXHK3();
-		//F458的客服人员
+		int txhk3 = aotuZDSHALLService.getTXHK3();	
+		//客服人员
 		int txhk4 = aotuZDSHALLService.getTXHK4();
 		//没有作用
-		//int txhkbl3 = aotuZDSHALLService.getTXHKBL3();
+		int txhkbl3 = aotuZDSHALLService.getTXHKBL3();
 		
 		
 		
 		try{
 			for(int i=0; i<size; i++){
 				DataRow dataRow = list.get(i);
-				int cuishou = txhk3;
+				int cuishou = 8888;
 				String username = dataRow.getString("username");								
 				
-				if("M88".equals(username.substring(0, 3))) {
-					cuishou = txhk1;
-					
-				}else if("M99".equals(username.substring(0, 3))){
-					cuishou = txhkbl1;
-					
-				}else if("MOFA".equals(username.substring(0, 4))){
-					cuishou = txhk2;
-					
-				}else if("F168".equals(username.substring(0, 4))){
-					cuishou = txhkbl2;
-					
-				//这是什么用户名开头前是这个做什么用的
-				}else if("TAVA".equals(username.substring(0, 4)) || "TAFA".equals(username.substring(0, 4))){
-					cuishou = txhk3;					
-				}else if("F458".equals(username.substring(0, 4))){
-					cuishou = txhk4;					
-				}
-					int jkid = dataRow.getInt("id");
-					DataRow row11 = new DataRow();
-					row11.set("id", jkid);
-					row11.set("cuishou_id", cuishou);
-					row11.set("cuishou_tx", cuishou);					
-					//按照规则表-系统设定的一些规则把
-					aotuZDSHALLService.updateUserFP(row11);													
+				cuishou = txhk1;
+				int jkid = dataRow.getInt("id");
+				DataRow row11 = new DataRow();
+				row11.set("id", jkid);
+				row11.set("cuishou_id", cuishou);
+				row11.set("cuishou_tx", cuishou);					
+				//按照规则表-系统设定的一些规则把
+				aotuZDSHALLService.updateUserFP(row11);													
 			}
 		}
 			 catch (Exception e) {
@@ -100,168 +82,64 @@ public class Fenpeicuishou implements Task {
 				 e.printStackTrace() ;
 			}
 		
-		*/
+
 		
-//****************************************客服分单
+//****************************************q客服分单
 //第二种分单方式	
-		int kefufendan=2;
-		int  xiangmu=0;
-		try{
-			for(int i=0; i<size; i++){
-				DataRow dataRow = list.get(i);
-				int cuishou = txhk3;
-				String username = dataRow.getString("username");								
-				
-				if("M88".equals(username.substring(0, 3))) {
-//					if(kefufendan%2==0) {
-//					cuishou = 8026;
-//					}else {
-//					cuishou = 8024;	
-//					}	
-					cuishou = 8024;	
-					kefufendan++;		
-				}else if("M99".equals(username.substring(0, 3))){					
-//					if(kefufendan%2==0) {
-//						cuishou = 8026;
-//					}else {
-//						cuishou = 8024;	
-//					}	
-					cuishou = 8024;	
-					kefufendan++;
-				}else if("MOFA".equals(username.substring(0, 4))){
-					cuishou =8011;
-					
-				}else if("F168".equals(username.substring(0, 4))){
-					cuishou =8011;
-					
-				//这是什么用户名开头前是这个做什么用的
-				}else if("TAVA".equals(username.substring(0, 4)) || "TAFA".equals(username.substring(0, 4))){
-					cuishou = 8011;					
-				}else if("F458".equals(username.substring(0, 4))){
-					xiangmu=3;
-					cuishou = 8013;
-					kefufendan++;					
-				}else if("VANA".equals(username.substring(0, 4))){
-					cuishou = 8024;				
-				}
-					int jkid = dataRow.getInt("id");
-					DataRow row11 = new DataRow();
-					row11.set("id", jkid);
-					row11.set("cuishou_id", cuishou);
-					row11.set("cuishou_tx", cuishou);					
-					//按照规则表-系统设定的一些规则把
-					aotuZDSHALLService.updateUserFP(row11);													
-			}
-		}catch (Exception e) {
-			// TODO: handle exception
-			 e.printStackTrace() ;
-		}
-////************************** M 1 2 3 分单**************************//
-//		int cuishouM123=0;
-//		int[] cuishouzuyqM123= getUserLeavetList(123);
-//		// 催收人员的数量
-//		int cuishouzuyqm123[] = new int[cuishouzuyqM123.length];
-//		// 催收人员的的id数组
-//		String  cuishou_M123="";
-//		for (int m = 0; m < cuishouzuyqM123.length; m++) {
-//			cuishouzuyqm123[m]=cuishouzuyqM123[m] ;
-//			cuishou_M123+= " and cuishou_id <>"+cuishouzuyqm123[m] ;
-//			logger.info("第"+m+"催收M123人：" +cuishouzuyqM123[m]);
-//		}
-//				
-//		List<DataRow> listyqdayM123 = aotuZDSHALLService.getAllYQListYQNewM123(cuishou_M123);
-//		
-//		// 1号统计催收人员剩余催收单数 lin 2019-7-8 M123
-//		if (time111.substring(7, 10).equals("-01")) {
-//			everyMoncuishoudantongji(cuishouzuyqm123, 123);
-//		}
-//		
-//		int ccM123 =0;
-//		int M123 =0;
-//		int ddM123 =cuishouzuyqM123.length;
+//		int kefufendan=2;
+//		int  xiangmu=0;
 //		try{
-//			for(int i=0; i<listyqdayM123.size(); i++){
+//			for(int i=0; i<size; i++){
+//				DataRow dataRow = list.get(i);
+//				int cuishou = txhk3;
+//				String username = dataRow.getString("username");								
 //				
-//				int xiabiao = ccM123%ddM123;
-//				int cuishou = cuishouzuyqM123[xiabiao];
-//				
-//				if(findStr(cuishou)) {
-//					if(cuishou==M123) {
-//						cuishouM123++;
-//					}
-//					if(cuishouM123 == 0) {
-//						M123 = cuishou;
-//						cuishouM123++;
-//					}
-//					if(cuishouM123%2==0) {						
-//						Random random1 = new Random();
-//						int xiabiao1= random1.nextInt(cuishouzuyqM123.length);
-//						cuishou = cuishouzuyqM123[xiabiao1];						
-//					}
-//				}
-//				DataRow dataRow = listyqdayM123.get(i);	
-//				int oldcuishou= dataRow.getInt("cuishou_id");
-//				int jkid = dataRow.getInt("id");
-//				String cuishouzz = aotuZDSHALLService.getCuishouzz(jkid+""); 
-//				
-//				dataRow.set("id", jkid);
-//				dataRow.set("cuishou_id", cuishou);
-//				dataRow.set("cuishou_m0", cuishou);
-//				dataRow.set("cuishou_m1", cuishou);
-//				dataRow.set("cuishou_m2", cuishou);
-//				dataRow.set("cuishou_m3", cuishou);
-//				dataRow.set("cuishouzz", cuishouzz + "," + cuishou);
-//				
-//				DataRow rowre = new DataRow();
-//				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-//
-//				String userid = aotuZDSHALLService.getUserid(jkid+""); 
-//				rowre.set("user_id",userid);
-//				rowre.set("rec_id",jkid);
-//				rowre.set("cmsuser_id",cuishou);
-//				rowre.set("create_time",df.format(new Date()));
-//				rowre.set("cmsuserld_id",6);
-//				rowre.set("oldcuishou_id",oldcuishou);
-//				
-//				String sjshjine = aotuZDSHALLService.getSJSHJE(jkid+"");
-//				String yuqlx = aotuZDSHALLService.getYQLX(jkid+"");
-//				int zje = Integer.parseInt(sjshjine.replace(",", ""))+Integer.parseInt(yuqlx.replace(",", ""));
-//				DataRow datacs = aotuZDSHALLService.getCuishouBG(cuishou,time111);
-//				List<DataRow> cuishoufendanList =aotuZDSHALLService.getcuishoufendanid(jkid,time111.substring(0, 7),4);
-//				int a = cuishoufendanList.size();
-//				//f 分出人更新
-//				DataRow  dataRow1 = new DataRow();
-//				if (0!=a ) {
-//					DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
-//					int fendanid = datafendan.getInt("id");
-//					int fendancs =datafendan.getInt("fendan_cs");
-//					int cuishou_id= datafendan.getInt("cuishou_id");
-//					double cuihuijine_old = aotuZDSHALLService.getfendancuihuijine(jkid,cuishou_id,time111.substring(0, 7));  //以前催回金额
-//					double cuihuijinezs = aotuZDSHALLService.getrechargeMoneyAccount(jkid,cuishou_id,today.substring(3, 10));  //a总催回金额
+//				if("M88".equals(username.substring(0, 3))) {
+////					if(kefufendan%2==0) {
+////					cuishou = 8026;
+////					}else {
+////					cuishou = 8024;	
+////					}	
+//					cuishou = 8024;	
+//					kefufendan++;		
+//				}else if("M99".equals(username.substring(0, 3))){					
+////					if(kefufendan%2==0) {
+////						cuishou = 8026;
+////					}else {
+////						cuishou = 8024;	
+////					}	
+//					cuishou = 8024;	
+//					kefufendan++;
+//				}else if("MOFA".equals(username.substring(0, 4))){
+//					cuishou =8011;
 //					
-//					dataRow1.set("id",fendanid);
-//					dataRow1.set("cuishou_jine",cuihuijinezs-cuihuijine_old);
-//					dataRow1.set("recharge_money",cuihuijinezs-cuihuijine_old);
-//					logger.info("M0 更新 ：fendanid： "+fendanid);
-//				}			 
-//				DataRow  acf = new DataRow();
-//				acf.set("user_id",dataRow.getInt("userid"));
-//				acf.set("jk_id",jkid);
-//				acf.set("cuishou_id",cuishou);
-//				acf.set("fendan_time",time111);
-//				acf.set("cuishou_jine",zje);
-//				acf.set("cuishou_z",123);
-//				acf.set("recharge_money",0);
-//				DataRow row11 = new DataRow();
-//				ccM123++;				
-//				aotuZDSHALLService.FenDanShiWu(dataRow, rowre,a, dataRow1, acf, row11, datacs );
-//			}						
-//		}
-//		catch (Exception e) {
+//				}else if("F168".equals(username.substring(0, 4))){
+//					cuishou =8011;
+//					
+//				//这是什么用户名开头前是这个做什么用的
+//				}else if("TAVA".equals(username.substring(0, 4)) || "TAFA".equals(username.substring(0, 4))){
+//					cuishou = 8011;					
+//				}else if("F458".equals(username.substring(0, 4))){
+//					xiangmu=3;
+//					cuishou = 8013;
+//					kefufendan++;					
+//				}else if("VANA".equals(username.substring(0, 4))){
+//					cuishou = 8024;				
+//				}
+//					int jkid = dataRow.getInt("id");
+//					DataRow row11 = new DataRow();
+//					row11.set("id", jkid);
+//					row11.set("cuishou_id", cuishou);
+//					row11.set("cuishou_tx", cuishou);					
+//					//按照规则表-系统设定的一些规则把
+//					aotuZDSHALLService.updateUserFP(row11);													
+//			}
+//		}catch (Exception e) {
 //			// TODO: handle exception
-//			e.printStackTrace() ;
+//			 e.printStackTrace() ;
 //		}
 		
+
 		
 //*******************M0*********************///
 		int suijiM0=0;
