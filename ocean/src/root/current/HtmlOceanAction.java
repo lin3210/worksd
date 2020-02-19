@@ -41,6 +41,7 @@ import root.SendMsg;
 import root.img.WebConstants;
 import root.order.UserMoneyBase;
 import root.tool.SendMsgCL;
+import root.tool.SendMsgTYH;
 
 import com.alibaba.fastjson.JSON;
 import com.project.constant.IConstants;
@@ -614,7 +615,7 @@ public class HtmlOceanAction extends BaseAction {
 		}
 		///////////////////////////////////////////////////////////////////	
 		//发送普通的短信接口
-		public ActionResult doHtmlSendUserIn() throws Exception {
+		public ActionResult doHtmlSendUserIn() throws Exception { 
 			logger.info("请求ip"+getipAddr());
 			HttpServletRequest request = getRequest();
 			JSONObject jsonObject = new JSONObject();
@@ -663,11 +664,11 @@ public class HtmlOceanAction extends BaseAction {
 					MemCachedUtil.cachedClient.set(phone+"_HAHA", randomCode, new Date(time));
 					logger.info("短信发送成功-----"+phone);
 	
-                    String content = "Ma xac thuc OTP cua ban la "+randomCode+", ma xac thuc co hieu luc trong thoi gian 5 phut ke tu khi ban gui tin nhan.";
-                    String returnString = SendMsgCL.sendOTP(content,phone);
+                    String content = "Mã đơn hàng của bạn là "+randomCode;
+                    String returnString = SendMsgTYH.SendMsgSMS(content,phone);
 					//String returnString = SendFTP.sendMessageFTP(content,phone);//if (returnString.contains("Succes")) {
 					logger.info(returnString);
-					if (returnString.contains("0")) {
+					if (returnString.equals("1")) {
 						jsonObject.put("error", 0);
 						jsonObject.put("msg", "Đã gửi thành công");
 						logger.info(Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY)+"___"+Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));

@@ -142,7 +142,7 @@ public class HttpUtil {
 	/**
 	 * http post请求
 	 * 
-	 * @param url
+	 * @param url 
 	 *            请求地址
 	 * @param params
 	 *            请求参数

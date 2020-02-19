@@ -23,7 +23,7 @@ a:hover {text-decoration: none;}
 		              </li>
 		              <li class="current">
 		                <a href="pages_calendar.html" title="">
-		                               DS nháº¯c khÃ¡ch tráº£ vay(æ��é†’è¿˜æ¬¾åˆ—è¡¨)
+		                               DS nhắc khách trả vay(提醒还款列表)
 		                </a>
 		              </li>
 		            </ul>
@@ -35,7 +35,7 @@ a:hover {text-decoration: none;}
 		                  <h4>
 		                    <i class="fa fa-reorder">
 		                    </i>
-		                    Ä�iá»�u kiá»‡n chá»�n(é€‰æ‹©æ�¡ä»¶)
+		                    Điều kiện chọn(选择条件)
 		                  </h4>
 		                </div>
 		                <div class="widget-content">
@@ -52,52 +52,52 @@ a:hover {text-decoration: none;}
                               <div class="col-md-4" style="width:150px;">
                                   <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
                                       <option value="0">
-                                        ToÃ n bá»™
+                                        Toàn bộ
                                       </option>
                                       <option value="1">
-                                         MÃ£ sá»‘ khÃ¡ch hÃ ng
+                                         Mã số khách hàng
                                       </option>
                                       <option value="2">
-                                        Há»� tÃªn
+                                        Họ tên
                                       </option>
                                       <option value="3">
-                                        Sá»‘ Ä�TDÄ�
+                                        Số ĐTDĐ
                                       </option>
                                       <option value="4">
                                         APP
                                       </option>
                                       <option value="5">
-                                        Thá»�i háº¡n vay7/14
+                                        Thời hạn vay7/14
                                       </option>
                                	  </select>
                               </div>
                               <div class="col-md-1" style="width:200px;">
-		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lÃ²ng nháº­p thÃ´ng tin tÃ¬m kiáº¿m" >
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
 		                      </div>
                               <label class="col-md-0 control-label" style="padding-top:5px;">
-		                                              Thá»�i gian tráº£ vay:
+		                                              Thời gian trả vay:
 		                      </label>
                                <div class="col-md-2">
                                 <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
                               </div>
                               <label class="col-md-0 control-label" style="padding-top:5px;">
-		                                              Tráº¡ng thÃ¡i tráº£ vay:
+		                                              Trạng thái trả vay:
 		                      </label>
                               <div class="col-md-1">
                                 <select class="form-control" name="select" id="hkst">
                                   <option value="0">
-                                    --Vui lÃ²ng chá»�n--
+                                    --Vui lòng chọn--
                                   </option>
                                   <option value="1">
-                                    Ä�Ã£ tráº£ vay
+                                    Đã trả vay
                                   </option>
                                   <option value="2">
-                                    ChÆ°a tráº£ vay
+                                    Chưa trả vay
                                   </option>
                                 </select>
                               </div>
 			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
-			                                     TÃ¬m kiáº¿m
+			                                     Tìm kiếm
 			                  </button>
 		                    </div>
 		                  
@@ -112,7 +112,7 @@ a:hover {text-decoration: none;}
 		                  <h4>
 		                    <i class="fa fa-reorder">
 		                    </i>
-		                    DS nháº¯c khÃ¡ch tráº£ vay(æ��é†’è¿˜æ¬¾åˆ—è¡¨)
+		                    DS nhắc khách trả vay(提醒还款列表)
 		                  </h4>
 		                  <div class="toolbar no-padding">
 		                    <div class="btn-group">
@@ -128,66 +128,66 @@ a:hover {text-decoration: none;}
 		                    <thead>
 		                      <tr>
 		                        <th>
-		                          MÃ£ sá»‘ khÃ¡ch hÃ ng(å®¢æˆ·ç¼–å�·)
+		                          Mã số khách hàng(客户编号)
 		                        </th>
                             <th>
-                              KÃ½ hiá»‡u(å¹³å�°)
+                              Ký hiệu(平台)
                             </th>
 		                        <th>
-		                          Há»� tÃªn khÃ¡ch hÃ ng(å®¢æˆ·å§“å��)
+		                          Họ tên khách hàng(客户姓名)
 		                        </th>
 		                        <th>
-		                          Sá»‘ Ä�TDÄ�(æ‰‹æœºå�·ç �)
+		                          Số ĐTDĐ(手机号码)
 		                        </th>
 		                       
 		                       <!--  <th>
-		                          å€Ÿæ¬¾é‡‘é¢�
+		                          借款金额
 		                        </th> -->
 		                        <th>
-		                          Sá»‘ tiá»�n cÃ³ thá»ƒ vay(å€Ÿæ¬¾é‡‘é¢�)
+		                          Số tiền có thể vay(借款金额)
 		                        </th>
                               <!--   <th>
-		                          å®žé™…åˆ°è´¦é‡‘é¢�
+		                          实际到账金额
 		                        </th> -->
                                 <th>
-		                          Thá»�i háº¡n vay(è´·æ¬¾æœŸé™�)
+		                          Thời hạn vay(贷款期限)
 		                        </th>
 		                         <th>
-		                        LÃ£i vÃ  phÃ­ dá»‹ch vá»¥(åˆ©æ�¯å’Œæœ�åŠ¡è´¹)  <!--åˆ©æ�¯ -->
+		                        Lãi và phí dịch vụ(利息和服务费)  <!--利息 -->
 		                        </th>
                                <!--  <th>
-		                          æœ�åŠ¡è´¹ç”¨
+		                          服务费用
 		                        </th> -->
                                <!--  <th>
-		                          å·²è¿˜é‡‘é¢�
+		                          已还金额
 		                        </th> -->
                                 <th>
-		                          Thá»�i gian giáº£i ngÃ¢n(æ”¾æ¬¾æ—¶é—´)
+		                          Thời gian giải ngân(放款时间)
 		                        </th>
                                 <th>
-		                          Thá»�i gian tráº£ vay(åˆ°æœŸæ—¶é—´)
+		                          Thời gian trả vay(到期时间)
 		                        </th>
                                 <th>
-		                          Thá»�i háº¡n gia háº¡n tráº£ vay(å»¶æœŸåˆ°æœŸæ—¶é—´)
+		                          Thời hạn gia hạn trả vay(延期到期时间)
 		                        </th>
                                 <th>
-		                          Thá»�i gian khÃ¡ch hÃ ng tráº£ vay(è¿˜æ¬¾æ—¶é—´)
+		                          Thời gian khách hàng trả vay(还款时间)
 		                        </th>
 		                        <th>
-                                 Ghi chÃº má»›i nháº¥t(æœ€æ–°å¤‡æ³¨)
+                                 Ghi chú mới nhất(最新备注)
                                 </th>
 		                        <th>
-                                              Thao tÃ¡c(æ“�ä½œ)
+                                              Thao tác(操作)
                                 </th>
 		                        <!-- <th>
-		                          æ“�ä½œ
+		                          操作
 		                        </th>
                            
                                 <th>
-		                          çŠ¶æ€�
+		                          状态
 		                        </th> -->
                                 <th>
-		                         Tráº¡ng thÃ¡i tráº£ vay(è¿˜æ¬¾çŠ¶æ€�)
+		                         Trạng thái trả vay(还款状态)
 		                        </th>
                                
 		                      </tr>
@@ -197,7 +197,7 @@ a:hover {text-decoration: none;}
 		                    </tbody>
 		                  </table>
                           
- <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tá»•ng sá»‘<font id="totalrows"></font>tin, má»—i trang chá»©a Ä‘Æ°á»£c<font id="numperpage"></font>tin, hiá»‡n táº¡i trang sá»‘<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
 
 
 		                </div>
@@ -211,8 +211,8 @@ a:hover {text-decoration: none;}
             <div class="modal-dialog" style="padding-top: 8%;">
                 <div class="modal-content" style="height:1000px;">
                     <div class="modal-header">
-                        <button type="button" class="bootbox-close-button close" onclick="$('#add_content_html').hide()">Ã—</button>
-                        <h4 class="modal-title"><span id="update_name"></span>Nháº­p ghi chÃ©p cuá»™c gá»�i</h4>
+                        <button type="button" class="bootbox-close-button close" onclick="$('#add_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Nhập ghi chép cuộc gọi</h4>
                     </div>
                     <div class="modal-body">
                           <div class="bootbox-body"  style="height:360px;" id="div_a">
@@ -223,50 +223,50 @@ a:hover {text-decoration: none;}
                                     <div class="widget-content" style="padding:15px;">
                                         <form class="form-horizontal row-border" >
                                            <div class="form-group" id="has-rec_id">
-                                            <label class="col-md-3 control-label">NhÃ¢n viÃªn truy thu
+                                            <label class="col-md-3 control-label">Nhân viên truy thu
                                               <span class="required">*</span></label>
                                                 <div class="col-md-9">
                                                   <span name="cs_name" id="cs_name"></span>
                                                   </div>
                                            </div>
                                           <div class="form-group" id="has-rec_id">
-                                            <label class="col-md-3 control-label">MÃ£ sá»‘ vay
+                                            <label class="col-md-3 control-label">Mã số vay
                                               <span class="required">*</span></label>
                                                 <div class="col-md-9">
                                                   <input type="text" name="rec_id" id="rec_id"  readonly class="form-control required" >
                                                   </div>
                                            </div>
                                            <div class="form-group" id="has-real_name">
-                                            <label class="col-md-3 control-label">Há»� tÃªn khÃ¡ch hÃ ng
+                                            <label class="col-md-3 control-label">Họ tên khách hàng
                                               <span class="required">*</span></label>
                                                 <div class="col-md-9">
                                                   <input type="text" name="grade_1" id="real_name" readonly  class="form-control required">
                                                   </div>
                                               </div>
                                           <div class="form-group" id="has-group">
-                                                <label class="col-md-3 control-label">Gá»­i tin nháº¯n SMSï¼š</label>
+                                                <label class="col-md-3 control-label">Gửi tin nhắn SMS：</label>
                                                 <div class="col-md-9 ">
                                              <select class="form-control" name="select" id="lab">
-                                                <option value="0">Vui lÃ²ng chá»�n</option>
-                                                <option value="1">Sá»‘ tiá»�n tráº£ vay vÃ  thá»�i háº¡n vay</option>
-                                                <option value="2">ThÃ´ng tin ngÃ¢n hÃ ng</option>
+                                                <option value="0">Vui lòng chọn</option>
+                                                <option value="1">Số tiền trả vay và thời hạn vay</option>
+                                                <option value="2">Thông tin ngân hàng</option>
                                           </select>
                                      
                                                 </div>
                                             </div>
                                           <div class="form-group" id="has-group">
-                                                <label class="col-md-3 control-label">Ghi chÃºï¼š</label>
+                                                <label class="col-md-3 control-label">Ghi chú：</label>
                                                 <div class="col-md-9 ">
                                              <select class="form-control" name="select1" id="labbz">
-                                                <option value="0">Vui lÃ²ng chá»�n</option>
-                                                <option value="1">KH sáº½ thanh toÃ¡n Ä‘Ãºng háº¡n</option>
-                                                <option value="2">KH háº¹n láº¡i ngÃ y thanh toÃ¡n</option>
-                                                <option value="3">KH xin gia háº¡n 15 ngÃ y</option>
-                                                <option value="4">KH xin gia háº¡n 30 ngÃ y</option>
-                                                <option value="5">KH khÃ´ng nghe mÃ¡y</option>
-                                                <option value="6">KH khÃ³a mÃ¡y</option>
-                                                <option value="7">ThuÃª bao ngá»«ng sá»­ dá»¥ng</option>
-                                                <option value="8">KhÃ¡c</option>
+                                                <option value="0">Vui lòng chọn</option>
+                                                <option value="1">KH sẽ thanh toán đúng hạn</option>
+                                                <option value="2">KH hẹn lại ngày thanh toán</option>
+                                                <option value="3">KH xin gia hạn 15 ngày</option>
+                                                <option value="4">KH xin gia hạn 30 ngày</option>
+                                                <option value="5">KH không nghe máy</option>
+                                                <option value="6">KH khóa máy</option>
+                                                <option value="7">Thuê bao ngừng sử dụng</option>
+                                                <option value="8">Khác</option>
                                           </select>
                                      
                                                 </div>
@@ -275,7 +275,7 @@ a:hover {text-decoration: none;}
                                            
                                               </div>
                                             <div class="form-group has-error" id="has_coll_ms">
-                                            <label class="col-md-3 control-label">Ghi chÃº
+                                            <label class="col-md-3 control-label">Ghi chú
                                               <span class="required">*</span></label>
                                                 <div class="col-md-9">
                                                   <textarea rows="3" cols="5" name="coll_ms" class="form-control" id="coll_ms" onBlur="isnull_value('coll_ms','has_coll_ms','lab_coll_ms')"></textarea>
@@ -291,8 +291,8 @@ a:hover {text-decoration: none;}
                         </div>
                     </div>
                     <div class="modal-footer" style="padding-top: 50%;">
-                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz()">XÃ¡c nháº­n</button>
-                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_content_html').hide()">Ä�Ã³ng</button>
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_content_html').hide()">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -305,8 +305,8 @@ a:hover {text-decoration: none;}
 	<div class="modal-dialog" style="padding-top: 15%;">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">Ã—</button>
-				<h4 class="modal-title"><span id="update_name"></span>XÃ¡c nháº­n</h4>
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>Xác nhận</h4>
 			</div>
 			<div class="modal-body">
 				<div class="bootbox-body">
@@ -319,7 +319,7 @@ a:hover {text-decoration: none;}
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<!--<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone2()">MOFA</button>-->
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="call_phone3()">Tháº©m Ä‘á»‹nh</button>
+				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="call_phone3()">Thẩm định</button>
 			</div>
 		</div>
 		<input type="hidden" name="phone_" id="phone_" class="form-control required url">
@@ -361,7 +361,7 @@ a:hover {text-decoration: none;}
 	  {
 		  if(tempval=="" && tempsele != 5)
 		  {
-			  alert("Vui lÃ²ng nháº­p thÃ´ng tin tÃ¬m kiáº¿m");
+			  alert("Vui lòng nhập thông tin tìm kiếm");
 			  $("#btn-load").button("reset");
 			  return;
 		  }
@@ -375,7 +375,7 @@ a:hover {text-decoration: none;}
 		  $("#load_data").html("");
 		  var list = data.list.data;
 		  var html_="";
-		  var jkqx ="15å¤©" ;
+		  var jkqx ="15天" ;
 		  var fwfy ;
 		  var yhje = 0;
 		  for(var i=0;i<list.length;i++)
@@ -384,33 +384,33 @@ a:hover {text-decoration: none;}
 		        //fwfy=(list[i].yuq_lx+list[i].sjsh_money-list[i].sjds_money).toFixed(2) ;
 
 		        if(list[i].jk_date ==2){		        
-		            jkqx="30 ngÃ y";
+		            jkqx="30 ngày";
 		        }else if(list[i].jk_date ==1){
-		            jkqx="15 ngÃ y";
+		            jkqx="15 ngày";
 		        }else if(list[i].jk_date ==3){
-		            jkqx="<span style='color:#0000FF;font-weight:bold'>7NgÃ y</span>";
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>";
 		        }else if(list[i].jk_date ==4){
-		            jkqx="<span style='color:#0000FF;font-weight:bold'>14NgÃ y</span>";
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>";
 		        }
-              /*  //å·²è¿˜é‡‘é¢�   
+              /*  //已还金额   
                if(list[i].sfyhw == "1"){
                    yhje =(list[i].sjsh_money+list[i].yuq_lx).toFixed(2);
                }else {
                   yhje = 0;
                } */
                
-		      //åˆ©æ�¯
+		      //利息
 		      var userid = list[i].id;
 		      var sjshmoney =  parseInt(list[i].sjsh_money.replace(/,/g,""));
 		      var jklx = "";
 			  if(list[i].jk_date==1){
-				  jklx="30%";
+				  jklx="35%";
 			  }else if(list[i].jk_date==2) {
-				  jklx="30%";
+				  jklx="35%";
 			  }else if(list[i].jk_date==3) {
-				  jklx="30%";
+				  jklx="35%";
 			  }else if(list[i].jk_date==4) {
-				  jklx="30%";
+				  jklx="35%";
 			  }
                
                var mobilephone = list[i].mobilephone;
@@ -429,7 +429,7 @@ a:hover {text-decoration: none;}
 					
 					if(list[i].sfyfk == 2)
 					{
-						html_ +="<td><span style='color:#F00'>KhÃ´ng cÃ³</span></td>";
+						html_ +="<td><span style='color:#F00'>Không có</span></td>";
 					}
 					else
 					{
@@ -437,7 +437,7 @@ a:hover {text-decoration: none;}
 					}
 					if(list[i].hkfq_code == 0)
 					{
-						html_ +="<td><span style='color:#F00'>KhÃ´ng cÃ³</span></td>";
+						html_ +="<td><span style='color:#F00'>Không có</span></td>";
 					}
 					else
 					{
@@ -446,7 +446,7 @@ a:hover {text-decoration: none;}
 					
 					if(list[i].sfyhw == "0")
 					{
-					html_ += " <td><span style='color:#F00'>KhÃ´ng cÃ³</span></td>";
+					html_ += " <td><span style='color:#F00'>Không có</span></td>";
 					}
 					else
 					{
@@ -455,7 +455,7 @@ a:hover {text-decoration: none;}
 					var totolMoney=parseInt(list[i].sjsh_money);
 					if(list[i].msg == null)
 					{
-						html_+="<td><span style='color:#F00'>KhÃ´ng cÃ³</span></td>";
+						html_+="<td><span style='color:#F00'>Không có</span></td>";
 					}
 					else
 					{
@@ -476,7 +476,7 @@ a:hover {text-decoration: none;}
 					}
 					if(list[i].sfyfk == 2)
 					{
-						html_ +="<td>KhÃ´ng cÃ³</td>";
+						html_ +="<td>Không có</td>";
 					}
 					else
 					{
@@ -484,7 +484,7 @@ a:hover {text-decoration: none;}
 					}
 					if(list[i].hkfq_code == 0)
 					{
-						html_ +="<td>KhÃ´ng cÃ³</td>";
+						html_ +="<td>Không có</td>";
 					}
 					else
 					{
@@ -493,7 +493,7 @@ a:hover {text-decoration: none;}
 					
 					if(list[i].sfyhw == "0")
 					{
-					html_ += " <td>KhÃ´ng cÃ³</td>";
+					html_ += " <td>Không có</td>";
 					}
 					else
 					{
@@ -502,29 +502,29 @@ a:hover {text-decoration: none;}
 					var totolMoney=parseInt(list[i].sjsh_money);
 					if(list[i].msg == null)
 					{
-						html_+="<td>KhÃ´ng cÃ³</td>";
+						html_+="<td>Không có</td>";
 					}
 					else
 					{
 						html_+="<td>"+list[i].msg+"</td>";
 					}
 				}
-				html_ +="<td><button class='btn btn-xs btn-success'  onclick=\"load_beiz('"+list[i].jkid+"','"+list[i].realname+"','"+list[i].id+"','"+list[i].cuishou_id+"')\">ThÃªm ghi chÃº</button></td>";
+				html_ +="<td><button class='btn btn-xs btn-success'  onclick=\"load_beiz('"+list[i].jkid+"','"+list[i].realname+"','"+list[i].id+"','"+list[i].cuishou_id+"')\">Thêm ghi chú</button></td>";
                 /* if(list[i].sfyhw == "0")
 				{
-				html_ += " <td><button class='btn btn-xs btn-info'  onclick=\"tx_ck('"+list[i].jkid+"','"+list[i].id+"','"+totolMoney+"')\">çº¿ä¸‹è¿˜æ¬¾</button></td>";
+				html_ += " <td><button class='btn btn-xs btn-info'  onclick=\"tx_ck('"+list[i].jkid+"','"+list[i].id+"','"+totolMoney+"')\">线下还款</button></td>";
 				}
 				else
 				{
 				   html_ += " <td>"+init2(list[i].hk_time.time)+"</td>";
 				}             
-				html_ +=" <td>å·²æ”¾æ¬¾</td>"; */	
+				html_ +=" <td>已放款</td>"; */	
 				if(list[i].sfyhw == "0"){
-			        html_ +=" <td><span class='label label-info'>KhÃ´ng cÃ³</span></td>";
+			        html_ +=" <td><span class='label label-info'>Không có</span></td>";
 				}else{
-				    html_ +=" <td><span class='label label-success'>KhÃ¡ch hÃ ng Ä‘Ã£ tráº£ vay</span></td>";
+				    html_ +=" <td><span class='label label-success'>Khách hàng đã trả vay</span></td>";
 				}
-				//html_ +=" <td><span class='label label-warning' onclick='get_zx("+list[i].jkid+")'>Xem thÃ´ng tin khÃ¡ch hÃ ng</span></td>";
+				//html_ +=" <td><span class='label label-warning' onclick='get_zx("+list[i].jkid+")'>Xem thông tin khách hàng</span></td>";
 				html_ +="</tr>";
 		   }
 			$("#load_data").append(html_);
@@ -561,7 +561,7 @@ a:hover {text-decoration: none;}
 	   $("#bathc_grade_html").show();
 	   //radi();
    }
-    /* <!--æŸ¥è¯¢å¤‡æ³¨ç±»åž‹--> */
+    /* <!--查询备注类型--> */
    function load_beiz(re_id,real_name,user_id,csname)
    {     
        if(csname !=null){  
@@ -570,7 +570,7 @@ a:hover {text-decoration: none;}
        }
        if(csname == "null") { 
                 
-         $("#cs_name").html("æš‚æ— å‚¬æ”¶äººå‘˜");        
+         $("#cs_name").html("暂无催收人员");        
        }      
 	   document.getElementById("jilu").style.display="none";
 	   document.getElementById("div_a").style.height="400px";
@@ -632,15 +632,15 @@ a:hover {text-decoration: none;}
 		var state_=$("input:radio[name='state']:checked").val();
 		if(state_!=0)
 		{
-			$("#remark").val("Lá»�i nháº¯c thÃ nh cÃ´ng");
+			$("#remark").val("Lời nhắc thành công");
 		}
 		else
 		{
-			$("#remark").val("Nháº¯c nhá»Ÿ tháº¥t báº¡i");
+			$("#remark").val("Nhắc nhở thất bại");
 		}
 	  }  
 
-    /*------æŸ¥çœ‹æ›´å¤šä¿¡æ�¯(å¾�ä¿¡æ•°æ�®)------*/
+    /*------查看更多信息(征信数据)------*/
    function add_beiz()
    {
 	   var lab_ms=$("#lab_coll_ms").html();
@@ -674,7 +674,7 @@ a:hover {text-decoration: none;}
   function call_choice(phone_)
    {
    	   $("#phone_").val(phone_);
-	   $("#remark_tr").html("Xin chá»�n Ä‘áº§u sá»‘ gá»�i ra!");
+	   $("#remark_tr").html("Xin chọn đầu số gọi ra!");
 	   $("#msg_content_html").show();
    }
 function call_phone1(phone_){

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GBK"?>
+<system>
+    <category name="system" description="系统相关配置">
+    	<item name="isOracleSequence" value="1" description="是否使用oracle的sequence(0或空不使用 1使用)"/>
+    	<item name="isAutoIncrement" value="0" description="是否使用自增字段(0或空不使用 1使用)"/>
+    </category>
+    <category name="pay" description="支付">
+    	<item name="dna_pub_key" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqWSfUW3fSyoOYzOG8joy3xldpBanLVg8gEDcvm9KxVjqvA/qJI7y0Rmkc1I7l9vAfWtNzphMC+wlulpaAsa/4PbfVj+WhoNQyhG+m4sP27BA8xuevNT9/W7/2ZVk4324NSowwWkaqo1yuZe1wQMcVhROz2h+g7j/uZD0fiCokWwIDAQAB" description="公钥"/>
+    	<item name="mer_pfx_key" value="E:\yilian.pfx" description="证书地址"/>
+    	<item name="mer_pfx_pass" value="11111111" description="私钥密码"/>
+    	<item name="url" value="https://58.248.38.253:9444/service" description="地址"/>
+    	<item name="user_name" value="13760136514" description="商户"/>
+    	
+    	<item name="MERCHANT_ID" value="002020000008" description="商户"/>
+    	<item name="MERCHANT_NOTIFY_URL" value="http://13651429256.oicp.net:10259/servlet/order/PcNotifyAction?ENCODING=UTF-8" description="商户"/> 
+<!--    	<item name="MERCHANT_NOTIFY_URL" value="http://sp94260.imwork.net:10465/servlet/order/PcNotifyAction?ENCODING=UTF-8" description="商户"/> -->
+    	<item name="MERCHANT_NOTIFY_URL_WX" value="http://sp94260.imwork.net:10465/servlet/order/NotifyAction?ENCODING=UTF-8" description="商户"/>
+    	<item name="MERCHANT_RETURN_URL" value="http://192.168.1.102:9260/servlet/order/ReturnOrderAction" description="商户"/>
+    	<item name="MERCHANT_RSA_PRIVATE_KEY" value="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKpZJ9Rbd9LKg5jM4byOjLfGV2kFqctWDyAQNy+b0rFWOq8D+okjvLRGaRzUjuX28B9a03OmEwL7CW6WloCxr/g9t9WP5aGg1DKEb6biw/bsEDzG5681P39bv/ZlWTjfbg1KjDBaRqqjXK5l7XBAxxWFE7PaH6DuP+5kPR+IKiRbAgMBAAECgYAfDloAkRxrRZhwRwnwglyNNI/DCdFGzM29Hrew6kujIQFZ3vPSBL3mb9/B7c6PhlGIpdpe/ywAIxw5GSMfG0XlQ6umgPSsxF6TaRCXkBE1B1QYn5L4jVgHkszTRMCXkTybtaxEqEh6nhA6Krj4Y5ki1wpDpwHToTUYwz3RHuxdgQJBAN8hkxIhQ0ERALsrOWRZoishT9Ci5BxUtCYwKKw4Und1w3ywvxT28kDO2tp8aZ9/JVcHcRW04I+MmS0ZEPzGYNECQQDDcRpeVL6DLC/+fWhsUK6PixSmfH+roZURpJXlRPmQlxQwluoaQ2b/KUouujycnsphXIIpWHCZenfrJrS1yB1rAkBgU/lPOWb0fyempil3xi55mj7/3mLGTFcdqWrVttb7Va7YdOF5Zob9LZBUBKQAxH5VTRQn/9d2gYdbbdfkmKwRAkEAljVaP7/AAE64wE4gMIc98kLBZ0duVDnGuR2WuvPtHuyObt2+JNtC0L8qLYmjRfhgsL2JqD85oyvV+Jvx7XhU6wJBALIT5T+T3HdFRXlRAH12X74VXOnfHZ79sU/NNDBBtRN2AKfNo/I9g9xV7hZiVGTWEuDK8NImWYBU33PejWCZdS8=" description="商户"/>
+    	<item name="PAYECO_URL" value="https://testmobile.payeco.com" description="商户"/>
+    	<item name="MERCHANT_NO_KEY" value="" description="商户"/>
+    	<item name="PAYECO_RSA_PUBLIC_KEY" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRxin1FRmBtwYfwK6XKVVXP0FIcF4HZptHgHu+UuON3Jh6WPXc9fNLdsw5Hcmz3F5mYWYq1/WSRxislOl0U59cEPaef86PqBUW9SWxwdmYKB1MlAn5O9M1vgczBl/YqHvuRzfkIaPqSRew11bJWTjnpkcD0H+22kCGqxtYKmv7kwIDAQAB" description="商户"/>
+    </category>
+
+</system>
+

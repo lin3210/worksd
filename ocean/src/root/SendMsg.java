@@ -77,6 +77,7 @@ public class SendMsg {
 	 */
 	 //get��ʽ����
 	 public static String sendMessageByGet(String content,String phone) throws UnsupportedEncodingException{
+
  	        if(isViettelPhone(phone) == true){
  	        	SendFTP sms = new SendFTP();
  			    try {
@@ -183,7 +184,7 @@ public class SendMsg {
 	      }
 
 		//post��ʽ����
-	     public static Map<String,String> sendMessageByPost(String content,String phones){
+	     public static Map<String,String> sendMessageByPost(String content,String phones){ 
 	         Map<String,String> map = new HashMap<String, String>();
 	        // ����Ĭ�ϵ�httpClientʵ��.    
 	         CloseableHttpClient httpclient = HttpClients.createDefault(); 

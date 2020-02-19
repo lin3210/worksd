@@ -61,22 +61,22 @@ public class SendFTP {
 	 
 	 public static String sendMessageFTP(String content,String phone) throws UnsupportedEncodingException{
 	        String map = "";
-	        HttpClient httpClient = new DefaultHttpClient();
-	        String fullUrl="";
-	        String con = URLEncoder.encode(content, "utf-8");
-	        /*
-			 * if(isViettelPhone(phone)) {
-			 * 
-			 * }
-			 */
-		    con = con.replaceFirst("MOFA", "F168").replaceFirst("Mofa", "F168");
-	        String phonenum = "84"+phone.substring(1);
-	        fullUrl = url + "?user="+Username+"&pass="+Password+"&sms="+con+"&senderName="+Brandname+"&phone="+phonenum+"&isFlash=False&isUnicode=False";
-	        System.out.println(fullUrl);
-	        PostHttp posthttp = new PostHttp();
-	        String resopodmf = posthttp.sendGet(fullUrl);
-	        //return resopodmf;
 	        return ""; //2020年2月7日 暂时停用
+//	        HttpClient httpClient = new DefaultHttpClient();
+//	        String fullUrl="";
+//	        String con = URLEncoder.encode(content, "utf-8");
+//	        /*
+//			 * if(isViettelPhone(phone)) {
+//			 * 
+//			 * }
+//			 */
+//		    con = con.replaceFirst("MOFA", "F168").replaceFirst("Mofa", "F168");
+//	        String phonenum = "84"+phone.substring(1);
+//	        fullUrl = url + "?user="+Username+"&pass="+Password+"&sms="+con+"&senderName="+Brandname+"&phone="+phonenum+"&isFlash=False&isUnicode=False";
+//	        System.out.println(fullUrl);
+//	        PostHttp posthttp = new PostHttp();
+//	        String resopodmf = posthttp.sendGet(fullUrl);
+	        //return resopodmf;
 	      }
 	 
 	 

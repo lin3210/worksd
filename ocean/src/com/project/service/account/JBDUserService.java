@@ -1458,5 +1458,9 @@ public class JBDUserService extends BaseService {
 		     return getJdbcTemplate().queryInt(sql);
 		}
 		
+		public void addSendSMSTYH(DataRow data) { 
+			getJdbcTemplate().insert("sd_sms_tyh", data);
+		}
+
 	
 }

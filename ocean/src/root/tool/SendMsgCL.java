@@ -14,7 +14,7 @@ import root.tool.HttpUtil;
  */
 
 public class SendMsgCL {
-	private static Logger logger = Logger.getLogger(HttpUtil.class);
+	private static Logger logger = Logger.getLogger(HttpUtil.class); 
 	
 
 	/**
@@ -28,11 +28,11 @@ public class SendMsgCL {
 		//请求地址
 		String url="http://intapi.253.com/send/json";
 		
-		//API账号，50位以内。必填   IM0476103       I0774456
-		String account="I0774456";	
+		//API账号，50位以内。必填   IM0476103      -- I0774456
+		String account="IM0476103";	
 		
-		//API账号对应密钥，联系客服获取。必填   M36LFo8N2c7e68
-		String password="8UwqxZuNoBa46a";
+		//API账号对应密钥，联系客服获取。必填   M36LFo8N2c7e68    --  8UwqxZuNoBa46a
+		String password="M36LFo8N2c7e68";
 		
 		//短信内容。长度不能超过536个字符。必填
 		//String msg="Your etracker otp content is";
@@ -88,10 +88,10 @@ public class SendMsgCL {
 		String url="http://intapi.253.com/send/json";
 		
 		//API账号，50位以内。必填   IM0476103 --M36LFo8N2c7e68       I0774456 --8UwqxZuNoBa46a
-		String account="IM0476103";	
+		String account="I0774456";	
 		
 		//API账号对应密钥，联系客服获取。必填   M36LFo8N2c7e68
-		String password="M36LFo8N2c7e68";
+		String password="8UwqxZuNoBa46a";
 		
 		//短信内容。长度不能超过536个字符。必填
 		//String msg="Your etracker otp content is";
