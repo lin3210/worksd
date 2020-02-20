@@ -420,9 +420,9 @@ load_data();
 			  for(var i=0;i<list.length;i++)
 			  {  
 			  	  var number = list[i].number;
-				  if(number.length > 8){
+				 /* if(number.length > 8){
 				 	 number = number.substr(0, 3) + "*****" + number.substr(8);
-				  }
+				  }*/
 			  	  
 				  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td><td><a href='javascript:void(0);' onclick=\"call_choice('"+list[i].number+"')\">"+number+"</a></td><td>"+list[i].geshu+"</td>";
 				
@@ -807,15 +807,15 @@ load_data_();
 				  
 				  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td>";
 				  html_ += "<td>";
-				  for(var mm=0;mm<arr.length;mm++){
+				  /*for(var mm=0;mm<arr.length;mm++){
 					  var cphone = arr[mm];
 					  if(cphone.length > 8){
 					 	 cphone = cphone.substr(0, 3) + "*****"+cphone.substr(8)+",";
 					  }
 				  	  html_ += "<a href='javascript:void(0);' onclick=\"call_choice('"+arr[mm]+"')\">"+cphone+"</a>";
 				  }
-				  html_ += "</td>"; 
-				  //html_ +="<td>"+list[i].phone+"</td>";
+				  html_ += "</td>"; */
+				  html_ +="<td>"+list[i].phone+"</td>";
 				  html_ +="</tr>";
 			  }
 		  }
@@ -1104,9 +1104,9 @@ load_data_();
 			    
 	
 			  var phone = list[i].phone ; 
-			   if(checkNumber(phone) == false && phone.length > 8){
+			  /* if(checkNumber(phone) == false && phone.length > 8){
 			   		phone = phone.substr(0, 3) + "*****" + phone.substr(8);
-			   }
+			   }*/
 				  html_ += "<tr><td>"+list[i].id+"</td><td>"+phone+"</td><td>"+content+"</td>";
 				if(list[i].type == "receive")
 				  {

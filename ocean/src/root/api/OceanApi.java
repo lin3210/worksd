@@ -2573,4 +2573,92 @@ public class OceanApi extends BaseAction {
 		return null;
 	}
 	
+	//工作认证
+	public ActionResult doOceanWorkRZ() throws Exception {
+		logger.info("请求ip" + getipAddr());
+		HttpServletRequest request = getRequest();
+		String workName = request.getParameter("workName").trim().replace("&nbsp;", " ");  //公司名称
+		String userid = getStrParameter("userid");
+		String tel = getStrParameter("tel");   //公司电话
+		String miwen = getStrParameter("token"); 
+		String jiamiwen = Encrypt.MD5(userid + tel + jiami);
+
+		if (jiamiwen.equals(miwen)) {
+			String address = request.getParameter("address").trim().replace("&nbsp;", " "); //公司地址
+			String position = request.getParameter("position").trim().replace("&nbsp;", " ");  //职位
+			String pay = request.getParameter("pay").trim().replace("&nbsp;", " ");   //薪资范围
+			String time = getStrParameter("time");    //入职时间
+			String company = request.getParameter("company").trim().replace("&nbsp;", " ");   //行业类型
+			String p1 = getStrParameter("p1");
+			String p2 = getStrParameter("p2");
+			String p3 = getStrParameter("p3");
+			String ui = mofaUserService.getUIWork(userid);
+
+			int yhbd = mofaUserService.getUserBank(userid);
+			int lianxi = mofaUserService.getUserLianXi(userid);
+			int shenfen = mofaUserService.getUserShenFen(userid);
+
+			JSONObject jsonObject = new JSONObject();
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			try {
+
+				// 将数据存到数据库中
+				if (ui.equals("")) {
+					DataRow row5 = new DataRow();
+					row5.set("userid", userid);
+					row5.set("workname", workName);
+					row5.set("tel", tel);
+					row5.set("address", address);
+					row5.set("position", position);
+					row5.set("pay", pay);
+					row5.set("time", time);
+					row5.set("company", company);
+					row5.set("p1", p1);
+					row5.set("p2", p2);
+					row5.set("p3", p3);
+					row5.set("create_time", fmtrq.format(calendar.getTime()));
+					mofaUserService.addUserWork(row5);
+				} else {
+					DataRow row5 = new DataRow();
+					row5.set("userid", userid);
+					row5.set("workname", workName);
+					row5.set("tel", tel);
+					row5.set("address", address);
+					row5.set("position", position);
+					row5.set("pay", pay);
+					row5.set("time", time);
+					row5.set("company", company);
+					row5.set("p1", p1);
+					row5.set("p2", p2);
+					row5.set("p3", p3);
+					row5.set("create_time", fmtrq.format(calendar.getTime()));
+					mofaUserService.updateUserWork(row5);
+				}
+				DataRow row3 = new DataRow();
+				row3.set("id", userid);
+				row3.set("isjop", 1);// 工作认证为1
+
+				if (yhbd == 1 & shenfen == 1 && lianxi == 1) {
+					row3.set("vipStatus", 1);// 工作认证为1
+				}
+
+				row3.set("profession", 2);// 工作认证为1
+				mofaUserService.updateUserInfoH(row3);
+				jsonObject.put("error", 0);
+				jsonObject.put("msg", "Thành công");
+			} catch (Exception e) {
+
+				jsonObject.put("error", -3);
+				jsonObject.put("msg", "Lỗi hệ thống, vui lòng thử lại sau！");
+				e.printStackTrace();
+			}
+			this.getWriter().write(jsonObject.toString());
+			return null;
+		} else {
+			return null;
+		}
+
+	}
+	
 }

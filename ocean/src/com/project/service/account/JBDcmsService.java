@@ -677,7 +677,8 @@ public class JBDcmsService extends BaseService {
 			String realName, String phone, String xypf, int cmsuserid,
 			String startDate, String endDate, String commit,String off,String shenheid) throws Exception {
 
-		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		//String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
 		if (!StringHelper.isEmpty(userId)) {
 
 			sql += " and  sd_user.id =" + userId;
@@ -727,7 +728,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,String off)
 			throws Exception {
 
-		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		//String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
 		if (!StringHelper.isEmpty(userId)) {
 
 			sql += " and  sd_user.id =" + userId;
@@ -774,7 +776,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,String shzu1[],String off,String shenheid)
 					throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		//String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
 		if (!StringHelper.isEmpty(userId)) {
 			
 			sql += " and  sd_user.id =" + userId;
@@ -829,7 +832,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,String shzu1[],String off,String shenheid)
 					throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and is_down =0";
+		//String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and is_down =0";
+		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex ,  mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and is_down =0";
 		if (!StringHelper.isEmpty(userId)) {
 			
 			sql += " and  sd_user.id =" + userId;
@@ -886,7 +890,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,String shzu1[],String off,String shenheid)
 					throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		//String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex ,  mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
 		if (!StringHelper.isEmpty(userId)) {
 			
 			sql += " and  sd_user.id =" + userId;
@@ -943,7 +948,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,String shzu1[],String off,String shenheid)
 					throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		//String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , INSERT(mobilePhone,4,4,'****') AS mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
+		String sql = "select sd_new_jkyx.id as jkid, sd_user.id as id ,sd_user.username as username ,b.realName ,b.sex , mobilePhone ,refferee,INSERT(idNo,4,4,'****') AS idNo, sd_new_jkyx.create_date,sd_new_jkyx.fsdxtime,jk_money,myjkcode,sd_new_jkyx.onesh,sdcms_user.name,hongbaoid,jk_date from  sd_new_jkyx  left join sdcms_user on sd_new_jkyx.onesh=sdcms_user.user_id left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT  join sd_user_finance b  on b.userId =sd_new_jkyx.userid   where  fsdxcode=0  and cl_status=0 and sd_new_jkyx.is_down =0";
 		if (!StringHelper.isEmpty(userId)) {
 			
 			sql += " and  sd_user.id =" + userId;
@@ -1609,7 +1615,8 @@ public class JBDcmsService extends BaseService {
 			String realName, String phone, String xypf, int cmsuserid,
 			String startDate, String endDate, String commit,String off) throws Exception {
 
-		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName , mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
 				+ "cl02_status ,sdcms_user.name as skname from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b  "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl_ren  where  1=1  and cl_status=1 and cl02_status = 0";
 		if (!StringHelper.isEmpty(userId)) {
@@ -1650,7 +1657,8 @@ public class JBDcmsService extends BaseService {
 			String realName, String phone, String xypf, int cmsuserid,
 			String startDate, String endDate, String commit,String off) throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh,sd_user.username, sd_user.id as id ,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh,sd_user.username, sd_user.id as id ,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh,sd_user.username, sd_user.id as id ,b.realName ,  mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
 				+ "cl02_status ,sdcms_user.name as skname from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b  "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl_ren  where  1=1  and cl_status=1 and cl02_status = 0";
 		if (!StringHelper.isEmpty(userId)) {
@@ -1694,7 +1702,8 @@ public class JBDcmsService extends BaseService {
 			String realName, String phone, String xypf, int cmsuserid,
 			String startDate, String endDate, String commit, String shzu1[],String off) throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName ,  mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
 				+ "cl02_status ,sdcms_user.name as skname from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b  "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl_ren  where  1=1  and cl_status=1 and cl02_status = 0";
 		if (!StringHelper.isEmpty(userId)) {
@@ -1744,7 +1753,8 @@ public class JBDcmsService extends BaseService {
 			String realName, String phone, String xypf, int cmsuserid,
 			String startDate, String endDate, String commit, String shzu1[],String off) throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.id as id ,sd_user.username,b.realName ,  mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
 				+ "cl02_status ,sdcms_user.name as skname from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b  "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl_ren  where  1=1  and cl_status=1 and cl02_status = 0";
 		if (!StringHelper.isEmpty(userId)) {
@@ -1797,7 +1807,8 @@ public class JBDcmsService extends BaseService {
 			String realName, String phone, String xypf, int cmsuserid,
 			String startDate, String endDate, String commit, String shzu1[],String off) throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh,sd_user.username, sd_user.id as id ,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh,sd_user.username, sd_user.id as id ,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh,sd_user.username, sd_user.id as id ,b.realName , mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
 				+ "cl02_status ,sdcms_user.name as skname from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b  "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl_ren  where  1=1  and cl_status=1 and cl02_status = 0";
 		if (!StringHelper.isEmpty(userId)) {
@@ -1849,7 +1860,8 @@ public class JBDcmsService extends BaseService {
 			String realName, String phone, String xypf, int cmsuserid,
 			String startDate, String endDate, String commit, String shzu1[],String off) throws Exception {
 		
-		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.username,sd_user.id as id ,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.username,sd_user.id as id ,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_new_jkyx.twosh, sd_user.username,sd_user.id as id ,b.realName ,  mobilePhone  ,sd_user.refferee,INSERT(idNo,4,4,'****') AS idNo, jk_money,pipei,cl_time, jk_date ,jyfk_money, "
 				+ "cl02_status ,sdcms_user.name as skname from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b  "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl_ren  where  1=1  and cl_status=1 and cl02_status = 0";
 		if (!StringHelper.isEmpty(userId)) {
@@ -1957,7 +1969,8 @@ public class JBDcmsService extends BaseService {
 			String userId, String realName, String phone, String xypf,
 			int cmsuserid, String startDate, String endDate, String commit,String off,int type) throws Exception {
 
-		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
 				+ "sdcms_user.name as skname, cl02_time ,spsj ,spdz from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl02_ren where cl02_status=1 and cl03_status = 0";
 		if(!StringHelper.isEmpty(String.valueOf(type))) {
@@ -2002,7 +2015,8 @@ public class JBDcmsService extends BaseService {
 			String userId, String realName, String phone, String xypf,
 			int cmsuserid, String startDate, String endDate, String commit,String off,int type) throws Exception {
 	
-		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName ,  mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
 				+ "sdcms_user.name as skname, cl02_time ,spsj ,spdz from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl02_ren where cl02_status=1 and cl03_status = 0";
 		if(!StringHelper.isEmpty(String.valueOf(type))) {
@@ -2048,7 +2062,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,
 			String shzu1[],String off,int type) throws Exception {
 	
-		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName ,  mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
 				+ "sdcms_user.name as skname, cl02_time ,spsj ,spdz from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl02_ren where cl02_status=1 and cl03_status = 0";
 		if(!StringHelper.isEmpty(String.valueOf(type))) {
@@ -2101,7 +2116,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,
 			String shzu1[],String off,int type) throws Exception {
 	
-		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName ,  mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
 				+ "sdcms_user.name as skname, cl02_time ,spsj ,spdz from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl02_ren where cl02_status=1 and cl03_status = 0";
 		if(!StringHelper.isEmpty(String.valueOf(type))) {
@@ -2154,7 +2170,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,
 			String shzu1[],String off,int type) throws Exception {
 	
-		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName ,  mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
 				+ "sdcms_user.name as skname, cl02_time ,spsj ,spdz from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl02_ren where cl02_status=1 and cl03_status = 0";
 		if(!StringHelper.isEmpty(String.valueOf(type))) {
@@ -2207,7 +2224,8 @@ public class JBDcmsService extends BaseService {
 			int cmsuserid, String startDate, String endDate, String commit,
 			String shzu1[],String off,int type) throws Exception {
 	
-		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		//String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName , INSERT(mobilePhone,4,4,'****') AS mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
+		String sql = "select sd_new_jkyx.id as jkid,sd_user.id as id ,sd_user.username,b.realName ,  mobilePhone  ,INSERT(idNo,4,4,'****') AS idNo,sd_user.refferee,jk_money, jk_date ,sjsh_money, "
 				+ "sdcms_user.name as skname, cl02_time ,spsj ,spdz from  sd_new_jkyx  left join sd_user on sd_new_jkyx.userid = sd_user.id LEFT join sd_user_finance b "
 				+ "on b.userId =sd_new_jkyx.userid LEFT JOIN sdcms_user on sdcms_user.USER_ID =sd_new_jkyx.cl02_ren where cl02_status=1 and cl03_status = 0";
 		if(!StringHelper.isEmpty(String.valueOf(type))) {

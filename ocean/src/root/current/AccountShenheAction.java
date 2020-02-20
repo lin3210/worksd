@@ -52,7 +52,6 @@ public class AccountShenheAction extends BaseAction {
 			
 			// 审核1小组每天1审核的数量（key日期，value值,按照日期降序）
 			TreeMap<String, Integer> result1 = new TreeMap<String, Integer>(new Comparator<String>() {
-				@Override
 				public int compare(String o1, String o2) {
 					return -o1.compareTo(o2);// 按照key顺序排列，o2-o1是逆序
 				}
@@ -188,7 +187,6 @@ public class AccountShenheAction extends BaseAction {
 		 List<String> dates = new ArrayList(e.keySet());
 		 
 	        Collections.sort(dates,new Comparator<String>(){
-	            @Override
 	            public int compare(String o1,String o2){
 	                return-o1.compareTo(o2);
 	            }

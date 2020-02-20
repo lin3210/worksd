@@ -19,21 +19,18 @@ public class SSLClient extends DefaultHttpClient {
 		SSLContext ctx = SSLContext.getInstance("TLS");
 		X509TrustManager tm = new X509TrustManager() {
 
-			@Override
 			public void checkClientTrusted(java.security.cert.X509Certificate[] ax509certificate, String s)
 					throws CertificateException {
 				// TODO Auto-generated method stub
 
 			}
 
-			@Override
 			public void checkServerTrusted(java.security.cert.X509Certificate[] ax509certificate, String s)
 					throws CertificateException {
 				// TODO Auto-generated method stub
 
 			}
 
-			@Override
 			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
 				// TODO Auto-generated method stub
 				return null;

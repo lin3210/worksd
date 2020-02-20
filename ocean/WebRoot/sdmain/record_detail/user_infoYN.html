@@ -867,13 +867,13 @@ function load_data(){
 			 html_g +="<td align=''>"+data.cardid+"</td>";
 			 
 			 var cellphone = data.cellphone;
-			 if(cellphone.length > 8){
+			 /*if(cellphone.length > 8){
 			 	cellphone = data.cellphone.substr(0, 3) + "*****" + data.cellphone.substr(8);
-			 }
+			 }*/
 			 var dhyddh = yddh;
-			 if(dhyddh.length > 8){
+			 /* if(dhyddh.length > 8){
 			 	dhyddh = yddh.substr(0, 3) + "*****" + yddh.substr(8);
-			 }
+			 }*/
 			 /* var phonezu = data.phonezu;
 			 if(phonezu.length > 8){
 			 	phonezu = phonezu.substr(0, 3) + "*****" + phonezu.substr(8);
@@ -1126,9 +1126,9 @@ function load_data(){
 				 html_l +="<td>"+data.lianxi.guanxi1+"</td>";
 				 
 				 var tel1 = data.lianxi.tel1;
-			     if(tel1.length > 8){
+			    /* if(tel1.length > 8){
 			 		tel1 = data.lianxi.tel1.substr(0, 3) + "*****" + data.lianxi.tel1.substr(8);
-			 	 }
+			 	 }*/
 				
 				 html_l +="<td><a href='javascript:void(0);' onclick=\"call_choice('"+data.lianxi.tel1+"')\">"+tel1+"</a></td>";
 				 
@@ -1140,9 +1140,9 @@ function load_data(){
 				 html_l +="<td>"+data.lianxi.guanxi2+"</td>";
 				 
 				 var tel2 = data.lianxi.tel2;
-			     if(tel2.length > 8){
+				 /* if(tel2.length > 8){
 			 		tel2 = data.lianxi.tel2.substr(0, 3) + "*****" + data.lianxi.tel2.substr(8);
-			 	 }
+			 	 }*/
 				 html_l +="<td><a href='javascript:void(0);' onclick=\"call_choice('"+data.lianxi.tel2+"')\">"+tel2+"</a></td>";
 				 
 				 html_l +="</tr>";
