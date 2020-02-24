@@ -5813,4 +5813,72 @@ public ActionResult doGetRecordListChg04() throws Exception {
 	return null ;  
 	
 }
+
+
+/** 2020年2月23日
+ * 添加审核通讯录页面FaceBook 备注
+ * AddSHBeizfb
+ */
+public  ActionResult doAddSHBeizfb() throws Exception {
+	  logger.info("添加通讯录页面FaceBook 备注");	
+	  JSONObject jsonObject = new JSONObject(); // 后台登录账户
+      int cmsuser_id =SessionHelper.getInt("cmsuserid", getSession());
+      cmsuser_id =accessVeritifivationbase.checkCMSidAndip(cmsuser_id, getipAddr());
+      if(cmsuser_id==0){
+			jsonObject.put("error", -1);
+			jsonObject.put("msg", "Vui lòng đăng nhập trước");
+			this.getWriter().write(jsonObject.toString());	
+			return null;		
+	  }
+	 logger.info("请求ID:" + cmsuser_id);
+	
+     int rec_id = getIntParameter("rec_id",0);//借款ID
+     int user_id=getIntParameter("user_id",0);
+     String remark=getStrParameter("remark","");  //备注信息
+     if(remark != "" || remark != null){
+		   remark = remark.replace("&nbsp;", " ");
+	 }
+
+	 if(user_id ==0){
+		   jsonObject.put("error", -1);
+	  	   jsonObject.put("msg", "User ID is Invalid");
+		  this.getWriter().write(jsonObject.toString());	
+		  return null;				
+	 }
+     if(rec_id ==0){
+	     jsonObject.put("error", -2);
+ 	     jsonObject.put("msg", "Borrowing does not exist");
+	     this.getWriter().write(jsonObject.toString());	
+	     return null;				
+      }	 
+
+     //添加备注
+       Date date=new Date();
+	   DateFormat format=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+	   String time=format.format(date);
+	   DataRow row7=  new DataRow();	
+	   row7.set("userid",user_id);	
+	   row7.set("msg" ,remark);
+	   row7.set("msgtype","fecebook_bz");
+	   row7.set("jkid",rec_id);//项目id
+	   row7.set("create_time", new Date());
+	   row7.set("cl_ren",cmsuser_id);
+	   row7.set("cszt",0);
+	   jbdcms2Service.insertUserChMsg(row7);
+	   
+	   DataRow row8=  new DataRow();	
+	   row8.set("user_id",user_id);	
+	   row8.set("content" ,remark);
+	   row8.set("jkjl_id",rec_id );
+	   row8.set("kefuid",cmsuser_id);
+	   row8.set("state",1);
+	   row8.set("code",8);
+	   row8.set("visitdate", time);
+	   jbdcms2Service.insertUserKFMsg(row8);
+
+	  jsonObject.put("error", 1);
+	  jsonObject.put("msg", "add success");
+	  this.getWriter().write(jsonObject.toString());	
+      return null ;
+   }
 }

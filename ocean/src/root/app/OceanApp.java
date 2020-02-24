@@ -1,4 +1,4 @@
-package root.api;
+package root.app;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -63,8 +63,8 @@ import root.order.UserMoneyBase;
 import root.tool.SendMsgCL;
 import root.tool.SendMsgTYH;
 
-public class OceanApi extends BaseAction {
-	private static Logger logger = Logger.getLogger(OceanApi.class);
+public class OceanApp extends BaseAction {
+	private static Logger logger = Logger.getLogger(OceanApp.class);
 	/* private static UserService userService = new UserService(); */
 	private static JBDUserService jdbUserService = new JBDUserService();
 	private static JBDcms3Service jbdcms3Service = new JBDcms3Service();
@@ -90,6 +90,7 @@ public class OceanApi extends BaseAction {
 			DataRow isStep1 = new DataRow();
 			DataRow isStep2 = new DataRow();
 			DataRow isStep3 = new DataRow();
+			DataRow isStep4 = new DataRow();
 			if (userId != 0) {
 				DataRow data = jdbUserService.findUserById(userId + "");
 				DataRow data1 = jdbUserService.findUserZPById(userId + "");
@@ -170,6 +171,11 @@ public class OceanApi extends BaseAction {
 					} else {
 						isStep3.set("oceanS3", 0);
 					}
+					if ("1".equals(data.getString("isjop"))) {
+						isStep4.set("oceanS4", 1);
+					} else {
+						isStep4.set("oceanS4", 0);
+					}
 				}
 				DataRow dataJK = jdbUserService.findUserJKByuserid(userId + "");
 				DataRow dataJKSB = jdbUserService.findUserJKByuseridSB(userId + "");
@@ -249,6 +255,7 @@ public class OceanApi extends BaseAction {
 				row.set("oceanS1", isStep1);
 				row.set("oceanS2", isStep2);
 				row.set("oceanS3", isStep3);
+				row.set("oceanS4", isStep4);
 				row.set("oceanurl", "https://m.me/vaytienocean");
 				
 				DataRow dataAuth = jbdcms3Service.getAuthRow(userId+"");
@@ -643,7 +650,7 @@ public class OceanApi extends BaseAction {
 				row3.set("id", userid);
 				row3.set("isShenfen", 1);
 
-				if (yhbd == 1 & lianxi == 1) {
+				if (yhbd == 1 & lianxi == 1  &&  work==1) {
 					row3.set("vipStatus", 1);// 工作认证�??1
 				} else {
 					row3.set("vipStatus", 0);// 工作认证�??1
@@ -1082,7 +1089,7 @@ public class OceanApi extends BaseAction {
 				row3.set("id", userid);
 				
 				row3.set("isLianxi", 1);
-				if (yhbd == 1 & shenfen == 1 ) {
+				if (yhbd == 1 & shenfen == 1 &&  work==1 ) {
 					row3.set("vipStatus", 1);// 工作认证�??1
 				} else {
 					row3.set("vipStatus", 0);// 工作认证�??1
@@ -1337,7 +1344,7 @@ public class OceanApi extends BaseAction {
 		
 		// �??测是否全部已经认�??
 		DataRow datarow = jdbUserService.getALLRZ(userid2);
-		if (!(datarow.getInt("isshenfen") == 1 && datarow.getInt("yhbd") == 1 && datarow.getInt("islianxi") == 1)) {
+		if (!(datarow.getInt("isshenfen") == 1 && datarow.getInt("yhbd") == 1 && datarow.getInt("islianxi") == 1 && datarow.getInt("isjop") == 1)) {
 			jsonObject.put("oceanC", -1);
 			jsonObject.put("oceanM", "Còn những mục chưa xác minh, vui lòng hoàn tất xác minh");
 			this.getWriter().write(jsonObject.toString());
@@ -1357,10 +1364,8 @@ public class OceanApi extends BaseAction {
 			
 			//a通讯录没有重复认证
 			int usertxl_num =  jdbUserService.getusertongxunlucount(userid2+"");
-			logger.info("------"+userid2+"usertxl_num："+usertxl_num);
 			if(usertxl_num<10  && jkDataLast ==null ) {
 				int rzcs = datarow.getInt("cfrz_cs");
-				logger.info("------"+userid2+"rzcs："+rzcs);
 				if(rzcs<6) {
 					DataRow row3 = new DataRow();
 					row3.set("id", userid2);
@@ -2501,18 +2506,26 @@ public class OceanApi extends BaseAction {
 	public ActionResult doOceanWorkRZ() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
-		String workName = request.getParameter("workName").trim().replace("&nbsp;", " ");  //公司名称
-		String userid = getStrParameter("userid");
-		String tel = getStrParameter("tel");   //公司电话
-		String miwen = getStrParameter("token"); 
+		
+		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
+		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
+
+		JSONObject jsonObject = new JSONObject();
+		
+		String workName = jsonObj.getString("workName").trim().replace("&nbsp;", " ");  //公司名称
+		String userid = jsonObj.getString("userid");
+		String tel = jsonObj.getString("tel");   //公司电话
+		String miwen = jsonObj.getString("token"); 
 		String jiamiwen = Encrypt.MD5(userid + tel + jiami);
 
+		logger.info("miwen上传：" +miwen);
+		logger.info("jiamiwen：" + jiamiwen);
 		if (jiamiwen.equals(miwen)) {
-			String address = request.getParameter("address").trim().replace("&nbsp;", " "); //公司地址
-			String position = request.getParameter("position").trim().replace("&nbsp;", " ");  //职位
-			String pay = request.getParameter("pay").trim().replace("&nbsp;", " ");   //薪资范围
-			String time = getStrParameter("time");    //入职时间
-			String company = request.getParameter("company").trim().replace("&nbsp;", " ");   //行业类型
+			String address = jsonObj.getString("address").trim().replace("&nbsp;", " "); //公司地址
+			String position = jsonObj.getString("position").trim().replace("&nbsp;", " ");  //职位
+			String pay = jsonObj.getString("pay").trim().replace("&nbsp;", " ");   //薪资范围
+			String time = jsonObj.getString("time");    //入职时间
+			String company = jsonObj.getString("company").trim().replace("&nbsp;", " ");   //行业类型
 			String p1 = getStrParameter("p1");
 			String p2 = getStrParameter("p2");
 			String p3 = getStrParameter("p3");
@@ -2522,7 +2535,6 @@ public class OceanApi extends BaseAction {
 			int lianxi = mofaUserService.getUserLianXi(userid);
 			int shenfen = mofaUserService.getUserShenFen(userid);
 
-			JSONObject jsonObject = new JSONObject();
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 			try {
@@ -2559,6 +2571,7 @@ public class OceanApi extends BaseAction {
 					row5.set("create_time", fmtrq.format(calendar.getTime()));
 					mofaUserService.updateUserWork(row5);
 				}
+				logger.info("WorkRZ:"+userid+"--:"+workName);
 				DataRow row3 = new DataRow();
 				row3.set("id", userid);
 				row3.set("isjop", 1);// 工作认证为1
@@ -2571,12 +2584,12 @@ public class OceanApi extends BaseAction {
 
 				row3.set("profession", 2);// 工作认证为1
 				mofaUserService.updateUserInfoH(row3);
-				jsonObject.put("error", 0);
-				jsonObject.put("msg", "Thành công");
+				jsonObject.put("oceanC", 0);
+				jsonObject.put("oceanM", "Thành công");
 			} catch (Exception e) {
 
-				jsonObject.put("error", -3);
-				jsonObject.put("msg", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -2586,5 +2599,6 @@ public class OceanApi extends BaseAction {
 		}
 
 	}
+	
 	
 }

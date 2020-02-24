@@ -553,7 +553,7 @@ public void updateUserInfoFB(DataRow row) throws Exception {
 public void addUserInfoFB(DataRow row) throws Exception {
 	getJdbcTemplate().insert("sd_facebook", row);
 }
-public void updateUserInfoH(DataRow row) throws Exception {
+public void updateUserInfoH(DataRow row) throws Exception { 
 	getJdbcTemplate().update("sd_user", row, "id", row.getString("id"));
 }
 public void updateUserHKQD(DataRow row) throws Exception {

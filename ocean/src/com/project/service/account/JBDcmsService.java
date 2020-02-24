@@ -3114,4 +3114,20 @@ public class JBDcmsService extends BaseService {
 		 List<DataRow> list = getJdbcTemplate().query(sql);
 		 return list;
 	 }
+	 
+	 /**
+		 * 审核备注统计表
+		 * @param userid
+		 * @return
+		 */
+		public DBPage getJKFaceBookbzPage(int curPage, int numPerPage, String userid,String jkid) throws Exception {
+			String sql = "select id,user_id,visitdate,jkjl_id,content,kefuid,code from sd_returnvisit where  user_id ="+ userid 
+					+  " ORDER BY CASE WHEN content LIKE '%www.facebook.com%' THEN 0 ELSE 1 END  ";
+			return getJdbcTemplate().queryPage(sql, curPage, numPerPage);
+		}
+		
+		public List<DataRow> getJKFaceBookbzList( String userid,String jkid) throws Exception {
+			String sql = "select id,user_id,visitdate,jkjl_id,content,kefuid,code from sd_returnvisit where  user_id ="+ userid ;
+			return getJdbcTemplate().query(sql);
+		}
 }

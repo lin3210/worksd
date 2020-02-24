@@ -246,7 +246,7 @@ public class JBDUserService extends BaseService {
 	}
 
 	public DataRow getALLRZ(int userid) {
-		String sql = "select isshenfen,isjop,islianxi,yhbd,isschool,profession from sd_user where id=" + userid;
+		String sql = "select isshenfen,isjop,islianxi,yhbd,isschool,profession,cfrz_cs from sd_user where id=" + userid;
 		return getJdbcTemplate().queryMap(sql);
 	}
 

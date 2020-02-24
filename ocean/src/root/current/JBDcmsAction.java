@@ -5698,4 +5698,48 @@ public class JBDcmsAction extends BaseAction {
 		this.getWriter().write(object.toString());
 		return null;
 	}
+	
+	/**
+	 * 2020年2月24日 FaceBook 备注信息
+	 * @return
+	 * @throws Exception
+	 */
+		public ActionResult doGetFacebookBeizhuinfoList() throws Exception {
+
+			logger.info("FaceBook 备注统计页面" );
+			JSONObject jsonObject = new JSONObject(); // 后台登录账户
+		    int cmsuser_id =SessionHelper.getInt("cmsuserid", getSession());
+		    cmsuser_id =accessVeritifivationbase.checkCMSidAndip(cmsuser_id, getipAddr());
+		    if(cmsuser_id==0){
+					jsonObject.put("error", -1);
+					jsonObject.put("msg", "Vui lòng đăng nhập trước");
+					this.getWriter().write(jsonObject.toString());	
+					return null;		
+			}
+			logger.info("请求ID:" + cmsuser_id);
+			
+			int temp = getIntParameter("temp", 0);
+			String tempVelue = getStrParameter("tempvl");
+			int curPage = getIntParameter("curPage", 1);
+
+			String rec_id = getStrParameter("rec_id");  //借款ID
+			String user_id = getStrParameter("user_id"); //用户ID
+
+			// 定义用户选择条件
+
+			DBPage page = jbdcmsService.getJKFaceBookbzPage(curPage, 10, user_id, rec_id);
+			List<DataRow> list = jbdcmsService.getJKFaceBookbzList( user_id, rec_id);
+			int tongxunlucount = list.size();
+			DataRow row = new DataRow();
+			row.set("list", page);
+			row.set("tongxunlucount", tongxunlucount);
+			row.set("tempvalu", tempVelue);
+			row.set("temp", temp);
+			row.set("error", 1);
+			row.set("msg", "");
+			
+			JSONObject object = JSONObject.fromBean(row);
+			this.getWriter().write(object.toString());
+			return null;
+		}
 }

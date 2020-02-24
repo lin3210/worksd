@@ -147,6 +147,175 @@ document.onselectstart=new Function("event.returnValue=true");
                              <input type="hidden" id="cupage_" value="1"/>
                              <input type="hidden" id="total_" value="1"/>
 				 </div>
+				  <!--  10 start-h -->          
+                <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    Dữ liệu  ghi  chú
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                     <!--  备注框 -->
+                        <div class="form-group">
+                             <label class="col-md-2 control-label">  Facebook  ghi  chú:<span class="required">*</span>
+                             </label>
+                  
+                             <div class="col-md-9" id="pingfen">
+                               <textarea rows="6" cols="8" name="textarea" class="form-control" id="remark_fb" placeholder="Vui lòng nhập ghi chú"></textarea>
+                             </div>
+                           <button  style="border:2px black solid;width:80px;height:150px;text-align:right" data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz_fb()">Gửi lên</button>
+                         </div>
+                      
+
+                      <tr>
+                         <th colspan="20" style=" border-bottom:1px;font-family:cursive;font-weight:bold;">Tổng số danh bạ：<span id="ztstxl10" style="color:red; font-size:16px;"></span>&nbsp;số</th>
+                      </tr>
+
+                      <tr>
+                        <th>
+                         Thời gian ghi chú
+                        </th>
+                        <th>
+                          Mã số
+                        </th>
+                        <th>
+                         ID vay
+                        </th>
+                        <th>
+                        Nội dung ghi chú
+                        </th>
+                        <th>
+                        Người truy nợ
+                        </th>
+                     </tr>
+                     
+                    </thead>
+                    <tbody id="load_data_h"></tbody>
+                  </table>
+                  
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows_h"></font>tin, mỗi trang chứa được <font id="numperpage_h"></font>tin, hiện tại trang số<font id="currentpage_h"></font> / <font id="totalpages_h"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable_h"></div></div></div></div>
+
+
+                </div>
+                 
+              </div>
+              
+  <script>
+  load_data_h();
+  $("#btn-loadtxl10").on("click", function() {
+	var a = $(this);
+	a.button("loading");
+	$("#cupage_h").val("1");
+	load_data_h();
+  }); 
+  
+	function gradeChangetxl10(){
+	   var tempselect=$("#tempselecttxl10").val();
+	   if(tempselect==0){
+	       $("#tempVeluetxl10").val("");
+	   }
+	}
+
+	function load_data_h()
+	{
+	    var tempsele=$("#tempselecttxl10").val();
+	  var tempval=$("#tempVeluetxl10").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-loadtxl10").button("reset");
+			  return;
+		  }
+	  }
+	  
+	  var rec_id_=GetQueryString("rec_id");
+	  var user_id_=GetQueryString("user_id");
+	  var para={curPage:$("#cupage_h").val(),user_id:user_id_,rec_id:rec_id_,temp:tempsele,tempvl:tempval};
+	  loadGetServer("/servlet/current/JBDcmsAction?function=GetFacebookBeizhuinfoList",para,function(data){
+
+		  if(data.error < 0 ){
+				 alert(data.msg);
+				 parent.f_hide_ifm(reid);
+		         $("#load_html").hide();
+			}
+		    
+			$("#load_data_h").html("");
+	        var list = data.list.data;	
+			var html_="";
+			$("#ztstxl10").html(data.tongxunlucount); 	
+			if(list.length>0)
+			  {
+				for(var i=0;i<list.length;i++)
+				  { 
+				  	 html_ +="<tr><td align=''>"+list[i].visitdate+"</td>";
+				  	 html_ +="<td>"+list[i].user_id+"</td>";
+				  	 html_ +="<td>"+list[i].jkjl_id+"</td>";
+				  	 
+					 var textR=list[i].content;
+			         var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+			         textR = textR.replace(reg, "<a href='$1$2' target=_blank >$1$2</a>");
+					 html_ +="<td>"+textR+"</td>"
+					 html_ +="<td>"+list[i].kefuid +"</td>";   			
+					 html_ +="</tr>";
+				  }
+			  }
+			
+			  $("#load_data_h").append(html_);
+			  $("#tempselecttxl10").val(data.temp);
+			  $("#tempVeluetxl10").val(data.tempvalu);
+			  page_value_h(data); 
+			  page_data_h(); 
+			  $("#btn-loadtxl10").button("reset");
+		 
+			  
+		   console.log(data.temp);
+			
+		  
+	    });
+	}
+	  
+	// 添加Facebook 备注
+	   function add_beiz_fb()
+	   {
+		   var remark=$("#remark_fb").val();
+		
+		   var rec_id=GetQueryString("rec_id");
+		   var user_id=GetQueryString("user_id");
+		   
+			   var para={rec_id:rec_id,user_id:user_id,remark:remark};
+			   loadGetServer("/servlet/current/JBDcms2Action?function=AddSHBeizfb",para,function(data){
+				   if(data.error>0)
+				   {
+					   alert(data.msg);
+					   $("#remark_fb").val("");
+				   }
+				   else
+				   {
+					    
+					   alert(data.msg);
+				   }
+			   });
+		
+	   }
+	
+ </script>	
+
+  <!-- 10 end h -->
                 <!--运营商数据-->
                 
                 <div class="widget box">
@@ -1200,3 +1369,34 @@ function call_phone3(phone_){
 </html>
 <script src="/assets/js/jquery.artZoom.js"></script>
 
+<script type="text/javascript" src="/plugins/date_page/page_a.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_b.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_c.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_d.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_e.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_f.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_g.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_h.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_k.js"></script>
+
+     <div>
+		<input type="hidden" id="cupage_a" value="1"/>
+		<input type="hidden" id="total_a" value="1"/>
+		<input type="hidden" id="cupage_b" value="1"/>
+		<input type="hidden" id="total_b" value="1"/>
+		<input type="hidden" id="cupage_c" value="1"/>
+		<input type="hidden" id="total_c" value="1"/>
+		<input type="hidden" id="cupage_d" value="1"/>
+		<input type="hidden" id="total_d" value="1"/>
+		<input type="hidden" id="cupage_e" value="1"/>
+		<input type="hidden" id="total_e" value="1"/>
+		<input type="hidden" id="cupage_f" value="1"/>
+		<input type="hidden" id="total_f" value="1"/>
+		<input type="hidden" id="cupage_g" value="1"/>
+		<input type="hidden" id="total_g" value="1"/>
+		<input type="hidden" id="cupage_h" value="1"/>
+		<input type="hidden" id="total_h" value="1"/>
+		<input type="hidden" id="cupage_k" value="1"/>
+		<input type="hidden" id="total_k" value="1"/>
+		
+     </div>
