@@ -959,15 +959,17 @@ public class OceanApi extends BaseAction {
 			String uisf = jdbUserService.getBK(userid);
 			JSONObject jsonObject = new JSONObject();
 			DataRow dataRow = jdbUserService.findUserById(userid);
-			int yhbd = dataRow.getInt("yhbd");
+			if(dataRow!=null) {
+				int yhbd = dataRow.getInt("yhbd");
+				if (yhbd == 1) {
+					jsonObject.put("oceanC", -3);
+					jsonObject.put("oceanM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
 
-			if (yhbd == 1) {
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
-
-				this.getWriter().write(jsonObject.toString());
-				return null;
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				}
 			}
+			
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 

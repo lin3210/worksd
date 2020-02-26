@@ -321,9 +321,9 @@ a:hover {text-decoration: none;}
 				  date=7;
 			  }
 			  var mobilephone = list[i].mobilephone;
-		     	if(mobilephone.length > 8){
-		 			mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
-		 	 	}
+		     	//if(mobilephone.length > 8){
+		 		//	mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
+		 	 	//}
 				 html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td><a href='javascript:void(0);' onclick=\"call_choice('"+list[i].mobilephone+"')\">"+mobilephone+"</a></td><td>"+list[i].idno+"</td><td>"+list[i].jk_money+"</td><td>"+list[i].sjsh_money+"</td><td>"+date+"ngày</td><td>Đang xem xét</td><td>"+list[i].cl02_time+"</td>";
 				  html_ +="<td><button class='btn btn-xs btn-info' onclick='chg_user_load("+list[i].jkid+")'>Xem thông tin cá nhân</button></td>";  //<td><button class='btn btn-xs btn-warning' onclick='sip_load("+list[i].jkid+")'>视频播放</button></td>
 			  if(list[i].skname == "" || list[i].skname == 0 || list[i].skname == null)

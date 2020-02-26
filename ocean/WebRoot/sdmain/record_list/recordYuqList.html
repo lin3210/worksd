@@ -380,9 +380,9 @@ a:hover {text-decoration: none;}
 		        var hkjeje =parseInt(aa)+parseInt(bb);
 		        var hkje = toThousands(hkjeje);
 		        var cellphone = list[i].mobilephone;
-			 	if(cellphone.length > 8){
-			 		cellphone = list[i].mobilephone.substr(0, 3) + "*****" + list[i].mobilephone.substr(8);
-			 	}
+			 	//if(cellphone.length > 8){
+			 	//	cellphone = list[i].mobilephone.substr(0, 3) + "*****" + list[i].mobilephone.substr(8);
+			 	//}
 				html_ += "<tr><td>"+list[i].username+"</td><td>"+list[i].realname+"</td><td>"+cellphone+"</td><td>"+list[i].cardno+"</td><td>"+list[i].name+"</td><td>"+list[i].yuq_ts+"</td><td>"+list[i].yuq_lx+"</td><td>"+list[i].sjsh_money+"</td><td>"+hkje+"</td>";
 				
 				html_ +="<td>"+list[i].cl03_time+"</td><td>"+list[i].hk_time+"</td><td>"+list[i].yuq_yhlx+"</td><td>"+list[i].hkfq_lx+"</td><td>"+list[i].hkfq_time+"</td>";

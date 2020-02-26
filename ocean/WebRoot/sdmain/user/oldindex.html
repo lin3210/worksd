@@ -418,9 +418,9 @@
 			  var cc = aa + bb;
 			  var zje = toThousands(cc);
 			  var mobilephone = list[i].mobilephone;
-			     if(mobilephone.length > 8){
-			 		mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
-			 	 }
+			     //if(mobilephone.length > 8){
+			 		// mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
+			 	// }
 				html_ += "<tr><td><span onclick=''>"+list[i].userid+"</span></td><td>"+list[i].username+"</td><td>"+list[i].realname+"</td><td><a href='javascript:void(0);' onclick=\"call_choice('"+list[i].mobilephone+"')\">"+mobilephone+"</a></td><td>"+zje+"</td><td>"+list[i].yuq_ts+"</td><td>"+list[i].jkcishu+"</td>";
 				
 				html_ +="<td>"+list[i].hk_time+"</td>";

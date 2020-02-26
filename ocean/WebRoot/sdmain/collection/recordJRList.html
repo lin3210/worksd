@@ -414,9 +414,9 @@ a:hover {text-decoration: none;}
 			  }
                
                var mobilephone = list[i].mobilephone;
-		     	if(mobilephone.length > 8){
-		 			mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
-		 	 	}
+		     	//if(mobilephone.length > 8){
+		 		//	mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
+		 	 	//}
 				if((list[i].fkdz_time.substring(0,2)<"25" && list[i].fkdz_time.substring(3,5)=="12") || list[i].fkdz_time.substring(3,5)<"12"){
 					html_ += "<tr><td><span style='color:#F00'>"+list[i].id+"</span></td><td><span style='color:#F00'>"+list[i].username+"</span></td><td><span style='color:#F00'>"+list[i].realname+"</span></td><td><span style='color:#F00'><a href='javascript:void(0);' onclick=\"call_choice('"+list[i].mobilephone+"')\">"+mobilephone+"</a></span></td><td><span style='color:#F00'>"+list[i].sjsh_money+"</span></td><td><span style='color:#F00'>"+jkqx+"</span></td>";  //<td>"+list[i].jk_money+"</td>  <td>"+list[i].sjds_money+"</td>  <td>"+fwfy+"</td>
 					if(jklx=="30%" || jklx=="25%" ) {
