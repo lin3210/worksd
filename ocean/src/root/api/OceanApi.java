@@ -90,6 +90,7 @@ public class OceanApi extends BaseAction {
 			DataRow isStep1 = new DataRow();
 			DataRow isStep2 = new DataRow();
 			DataRow isStep3 = new DataRow();
+			DataRow isStep4 = new DataRow();
 			if (userId != 0) {
 				DataRow data = jdbUserService.findUserById(userId + "");
 				DataRow data1 = jdbUserService.findUserZPById(userId + "");
@@ -170,6 +171,11 @@ public class OceanApi extends BaseAction {
 					} else {
 						isStep3.set("oceanS3", 0);
 					}
+					if ("1".equals(data.getString("isjop"))) {
+						isStep4.set("oceanS4", 1);
+					} else {
+						isStep4.set("oceanS4", 0);
+					}
 				}
 				DataRow dataJK = jdbUserService.findUserJKByuserid(userId + "");
 				DataRow dataJKSB = jdbUserService.findUserJKByuseridSB(userId + "");
@@ -249,6 +255,7 @@ public class OceanApi extends BaseAction {
 				row.set("oceanS1", isStep1);
 				row.set("oceanS2", isStep2);
 				row.set("oceanS3", isStep3);
+				row.set("oceanS4", isStep4);
 				row.set("oceanurl", "https://m.me/vaytienocean");
 				
 				DataRow dataAuth = jbdcms3Service.getAuthRow(userId+"");

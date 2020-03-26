@@ -59,8 +59,11 @@ public class UserMoneyBase  {
 		int return_Maxmoney = 2000000;
 	    List<DataRow> listjkDataMax = jbdUserBaseServiceBean.getUserjkMoneyMax(userid+"");
 	   
+	    int cgjk_cs =1;
 		if( null != listjkDataMax) {
 			for(DataRow jkDataMax:listjkDataMax) {
+				int hkcs=listjkDataMax.size();
+				
 				String sjdzMoney = jkDataMax.getString("sjds_money"); // Mas money
 				String  jklx = jkDataMax.getString("lx");    //loan interset
 				int yuqts = jkDataMax.getInt("yuq_ts");  //  overdue days
@@ -69,21 +72,83 @@ public class UserMoneyBase  {
 				if(nMaxmoney>=return_Maxmoney) {
 					return_Maxmoney = nMaxmoney;
 					
-					if(nMaxmoney <=4000000) {  //0--4,000,000
+					if(nMaxmoney==2000000) {
 						if(yuqts <15) {
+							
 							return_Maxmoney +=500000;
 						}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
 							return_Maxmoney -=1000000;
 						}else if ( yuqts > 60   ) {
 							return_Maxmoney =2000000;
 						}
+					}else if(nMaxmoney==2500000 ) {
+						if(cgjk_cs >=2) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}else {
+							cgjk_cs++;
+						}
+					}else if(nMaxmoney==3000000 && cgjk_cs >=2) {
+						if(cgjk_cs >=2) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}else {
+							cgjk_cs++;
+						}
+					}else if(nMaxmoney==3500000 && cgjk_cs >=3) {
+						if(cgjk_cs >=2) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}else {
+							cgjk_cs++;
+						}
+					}else if(nMaxmoney==4000000 && cgjk_cs >=5) {
+						if(cgjk_cs >=2) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}else {
+							cgjk_cs++;
+						}
+					}else if(nMaxmoney==4500000 && cgjk_cs >=10) {
+						if(cgjk_cs >=2) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}else {
+							cgjk_cs++;
+						}
 					}
+					
 				}
 			}
 		}
 		
-		if(return_Maxmoney >4000000) {
-			return_Maxmoney=4000000;
+		if(return_Maxmoney >5000000) {
+			return_Maxmoney=5000000;
 		}
 
 		return return_Maxmoney;

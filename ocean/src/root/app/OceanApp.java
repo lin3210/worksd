@@ -63,6 +63,11 @@ import root.order.UserMoneyBase;
 import root.tool.SendMsgCL;
 import root.tool.SendMsgTYH;
 
+/**
+ * r2020年3月6日
+ * add work rz
+ * 说明： 在原来API流程上增加工作认证
+ */
 public class OceanApp extends BaseAction {
 	private static Logger logger = Logger.getLogger(OceanApp.class);
 	/* private static UserService userService = new UserService(); */
@@ -1158,30 +1163,37 @@ public class OceanApp extends BaseAction {
 			}else {
 				logger.info(jsonArray.toString());
 			}
-			if (jsonArray.size() > 0) {
+			int txl_num = jdbUserService.getusertongxunlucount(userid);  // 通讯录条数
+			if(txl_num <30) {
+				if (jsonArray.size() > 0) {
+					jsonObject.put("oceanC", 0);
+					jsonObject.put("oceanM", "right");
+					for (int i = 0; i < jsonArray.size(); i++) {
+						com.alibaba.fastjson.JSONObject object = jsonArray.getJSONObject(i);
+						if (object.containsKey("dbTen") && object.containsKey("dbDienthoai")) {
+							String nameString = object.getString("dbTen").replaceAll("[^\\u0000-\\uFFFF]", "");
+							if (nameString.contains("?") || nameString.contains("?")) {
+								nameString = "none";
+							}
+							String phoneString = object.getString("dbDienthoai");
+							DataRow row = new DataRow();
+
+							row.set("userid", userid);
+							row.set("name", nameString);
+							row.set("phone", phoneString);
+							row.set("create_time", new Date());
+							jdbUserService.addTongxunlu(row);
+						}
+					}
+				} else {
+					jsonObject.put("oceanC", 1);
+					jsonObject.put("oceanM", "right");
+				}
+			}else {
 				jsonObject.put("oceanC", 0);
 				jsonObject.put("oceanM", "right");
-				for (int i = 0; i < jsonArray.size(); i++) {
-					com.alibaba.fastjson.JSONObject object = jsonArray.getJSONObject(i);
-					if (object.containsKey("dbTen") && object.containsKey("dbDienthoai")) {
-						String nameString = object.getString("dbTen").replaceAll("[^\\u0000-\\uFFFF]", "");
-						if (nameString.contains("?") || nameString.contains("?")) {
-							nameString = "none";
-						}
-						String phoneString = object.getString("dbDienthoai");
-						DataRow row = new DataRow();
-
-						row.set("userid", userid);
-						row.set("name", nameString);
-						row.set("phone", phoneString);
-						row.set("create_time", new Date());
-						jdbUserService.addTongxunlu(row);
-					}
-				}
-			} else {
-				jsonObject.put("oceanC", 1);
-				jsonObject.put("oceanM", "right");
 			}
+			
 			if (jsonArray1.size() > 0) {
 				jsonObject.put("oceanC1", 0);
 				jsonObject.put("oceanM1", "成功");

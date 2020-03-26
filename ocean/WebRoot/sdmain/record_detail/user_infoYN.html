@@ -554,11 +554,11 @@ document.onselectstart=new Function("event.returnValue=true");
                                           
                                           <select class="form-control" name="select8" id="bhstate8"">
                                                 <option value="0">Khác</option>
-                                                <option value="1">KH cap nhat lai thoi han vay</option>
-                                                <option value="2">Hinh CMND khong hop le</option>
-                                                <option value="3">Sai thong tin ngan hang</option>
-                                                <option value="4">Sai thong tin cong viec</option>
-                                                <option value="5">Sai thong tin nguoi lien he</option>
+                                                <option value="1">KH cap nhat lai thoi han vay--请更新贷款期限</option>
+                                                <option value="2">Hinh CMND khong hop le--没有身份证图片</option>
+                                                <option value="3">Sai thong tin ngan hang--银行信息不正确</option>
+                                                <option value="4">Sai thong tin cong viec--职位信息不对</option>
+                                                <option value="5">Sai thong tin nguoi lien he--联系信息不正确</option>
                                                 
                                                 <!-- <option value="7">KH chưa nghe máy</option> -->
 
@@ -578,12 +578,12 @@ document.onselectstart=new Function("event.returnValue=true");
                                   <label for="range1" generated="true" class="help-block">
                                           <select class="form-control" name="select" id="bhstate" onChange="gradeChange()">
                                               <option value="0">Vui lòng chọn</option>
-                                                <option value="1">Thông tin tiêu cực</option>
-                                                <option value="2">Tín dụng không tốt</option>
+                                                <option value="1">Thông tin tiêu cực--负面信息</option>
+                                                <option value="2">Tín dụng không tốt--不良信用</option>
                                                <!--  <option value="3">Thông tin sai</option> -->
-                                                <option value="4">15 ngày sau mới được đề xuất vay lại</option>
-                                                <option value="5">Liệt vào DS đen</option>
-                                                <option value="6">KH chua co nhu cau vay</option>
+                                                <option value="4">15 ngày sau mới được đề xuất vay lại--限制15天借款</option>
+                                                <option value="5">Liệt vào DS đen--列入黑名单</option>
+                                                <option value="6">KH chua co nhu cau vay--不需要借款</option>
                                           </select>
                                       </label>
                                   <label for="range1" generated="true" class="help-block">
@@ -2217,9 +2217,7 @@ function load_data(){
 			}
 		
 		}
-		if(bhstatexxcw != 0){
-			bhstate_ = 3;
-		}
+	
 		if(bhstatexxcw == 1){
 				bzremark = "KH cap nhat lai thoi han vay";
 			}else if(bhstatexxcw == 2){
