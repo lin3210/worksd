@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 
 import root.SendFTP;
 import root.SendMsg;
+import root.role.roleAuthorityMangement;
 
 import com.project.service.account.JBDUserService;
 import com.project.service.account.JBDcms2Service;
@@ -43,6 +44,7 @@ public class JBDcms2Action extends BaseAction{
 	private static JBDUserService jbdUserService = new JBDUserService();
 	private static JBDcmsService jbdcmsService = new JBDcmsService();
 	private static AccessVerifivationBase accessVeritifivationbase = new AccessVerifivationBase();
+	private static roleAuthorityMangement roleauthoritymangement  = new roleAuthorityMangement();
 	
 	
 	
@@ -1532,7 +1534,8 @@ public ActionResult doGetYqNList() throws Exception {
 	int temp = getIntParameter("temp",0);
 	String  tempVelue = getStrParameter("tempvl"); 		
 	String  shenheid =  "";		
-	if(cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 888) {
+//	if(cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 888) {
+	if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 		shenheid = getStrParameter("shid");
 	}
 	String  startDate1 =getStrParameter("startDate");

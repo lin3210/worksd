@@ -10,9 +10,12 @@ import com.thinkive.base.jdbc.JdbcTemplate;
 import com.thinkive.base.service.BaseService;
 import com.thinkive.base.util.StringHelper;
 
+import root.role.roleAuthorityMangement;
+
 public class JBDcms2Service extends BaseService {
 
 	private static Logger logger = Logger.getLogger(JBDcms2Service.class);
+	private static roleAuthorityMangement roleauthoritymangement  = new roleAuthorityMangement();
 
 	public JdbcTemplate getJdbcTemplate() {
 		return getJdbcTemplate("web");
@@ -762,7 +765,8 @@ public class JBDcms2Service extends BaseService {
 			sql += " and CONCAT(SUBSTRING(j.hkfq_time,7,4),'-',SUBSTRING(j.hkfq_time,4,2),'-',SUBSTRING(j.hkfq_time,1,2)) <='" + endDate + "'))";
 		
 	}
-		if(cmsuserid != 8 && cmsuserid != 888 && cmsuserid != 8888 && cmsuserid != 6 && cmsuserid != 6868 && cmsuserid != 8015 && cmsuserid !=8023){
+//		if(cmsuserid != 8 && cmsuserid != 888 && cmsuserid != 8888 && cmsuserid != 6 && cmsuserid != 6868 && cmsuserid != 8015 && cmsuserid !=8023){
+		if(!roleauthoritymangement.getRoleAM_JRlist(cmsuserid+"")){
 			sql += " and j.cuishou_id="+cmsuserid;
 		}
 		
@@ -1386,7 +1390,8 @@ public class JBDcms2Service extends BaseService {
 		
 		//}
 		sql += " and j.yuq_ts >0 and j.yuq_ts <4 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 53){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 53){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=" + cuishouzuyqm1[0];
@@ -1457,7 +1462,8 @@ public class JBDcms2Service extends BaseService {
 		
 		//}
 		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 2016 ||cmsuserid==9999 ||cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 2016 ||cmsuserid==9999 ||cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2016 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -1530,7 +1536,8 @@ public class JBDcms2Service extends BaseService {
 		
 		//}
 		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2004 || cmsuserid == 9999 ||cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2004 || cmsuserid == 9999 ||cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2004 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -1601,7 +1608,8 @@ public class JBDcms2Service extends BaseService {
 		
 		//}
 		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2016 || cmsuserid == 5051|| cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2016 || cmsuserid == 5051|| cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2016 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -1673,7 +1681,8 @@ public class JBDcms2Service extends BaseService {
 		
 		//}
 		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018 || cmsuserid == 5051 || cmsuserid == 5053 || cmsuserid == 9999 || cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018 || cmsuserid == 5051 || cmsuserid == 5053 || cmsuserid == 9999 || cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2018 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -1957,7 +1966,8 @@ public class JBDcms2Service extends BaseService {
 		
 		//}
 		sql += " and j.yuq_ts >45 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 16 || cmsuserid == 5151 || cmsuserid == 5153 || cmsuserid == 9999||cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 16 || cmsuserid == 5151 || cmsuserid == 5153 || cmsuserid == 9999||cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=16 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -2114,7 +2124,8 @@ public class JBDcms2Service extends BaseService {
 		}
 		
 		sql += " and  j.yuq_ts >0 and j.yuq_ts <4 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 53){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 53){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=" + cuishouzuyqm1[0];
@@ -2178,7 +2189,8 @@ public class JBDcms2Service extends BaseService {
 		}
 		
 		sql += " and  j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 2016||cmsuserid == 2016 ||cmsuserid ==9999||cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 2016||cmsuserid == 2016 ||cmsuserid ==9999||cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2016 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -2242,7 +2254,8 @@ public class JBDcms2Service extends BaseService {
 		}
 		
 		sql += " and  j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2004 || cmsuserid == 5051 || cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2004 || cmsuserid == 5051 || cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2004 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -2305,7 +2318,8 @@ public class JBDcms2Service extends BaseService {
 		}
 		
 		sql += " and  j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2016 || cmsuserid == 5051 || cmsuserid == 5053){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2016 || cmsuserid == 5051 || cmsuserid == 5053){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2016 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -2368,7 +2382,8 @@ public class JBDcms2Service extends BaseService {
 		}
 		
 		sql += " and  j.yuq_ts >0 and j.yuq_ts <16 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018|| cmsuserid == 5051|| cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018|| cmsuserid == 5051|| cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2018 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -2431,7 +2446,8 @@ public List<DataRow> getYqM2List(String userId,
 		}
 		
 		sql += " and  j.yuq_ts >15  and j.yuq_ts <=60 " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 13){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 13){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=13 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -2495,7 +2511,8 @@ public List<DataRow> getYqM3List(String userId,
 	}
 	
 	sql += " and  j.yuq_ts >45 " ;
-	if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 16 ){
+//	if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 16 ){
+	if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 		for (int i = 0; i < cuishouzuyqm1.length; i++) {
 			if(i == 0){
 				sql +=" and (j.cuishou_id=16 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -4522,7 +4539,8 @@ public List<DataRow> getYqM3List(String userId,
 		
 		//}
 		sql += " and j.yuq_ts >0  " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018 || cmsuserid == 5051 || cmsuserid == 5053 || cmsuserid == 9999 || cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018 || cmsuserid == 5051 || cmsuserid == 5053 || cmsuserid == 9999 || cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2018 or j.cuishou_id=" + cuishouzuyqm1[0];
@@ -4616,7 +4634,8 @@ public List<DataRow> getYqM3List(String userId,
 		}
 		
 		sql += " and  j.yuq_ts >0  " ;
-		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018|| cmsuserid == 5051|| cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+//		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018|| cmsuserid == 5051|| cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
 				if(i == 0){
 					sql +=" and (j.cuishou_id=2018 or j.cuishou_id=" + cuishouzuyqm1[0];

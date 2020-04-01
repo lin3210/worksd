@@ -42,6 +42,7 @@ import root.PostHttp;
 import root.SendFTP;
 import root.SendMsg;
 import root.order.UserMoneyBase;
+import root.role.roleAuthorityMangement;
 import sun.misc.BASE64Decoder;
 import com.alibaba.fastjson.JSON;
 import com.project.service.account.JBDLLpayService;
@@ -71,6 +72,7 @@ public class JBDcms3Action extends BaseAction {
 	private static JBDLLpayService jbdLLpayService = new JBDLLpayService();
 	private static JBDUserService jbdUserService = new JBDUserService();
 	private static AccessVerifivationBase accessVeritifivationbase = new AccessVerifivationBase();
+	private static roleAuthorityMangement roleauthoritymangement  = new roleAuthorityMangement();
 
 	static final String CHARSET_UTF_8 = "UTF-8";
 	static final boolean IS_DEBUG = true;
@@ -4100,8 +4102,9 @@ public class JBDcms3Action extends BaseAction {
 		String shenhezuzz3 = jbdcmsService.getPJGZSHENHEZZ3();
 		//四组
 		String shenhezuzz4 = jbdcmsService.getPJGZSHENHEZZ4();
-		if (!shenhezuzz1.equals(cmsuserid+"") && !shenhezuzz2.equals(cmsuserid+"") && !shenhezuzz3.equals(cmsuserid+"") && !shenhezuzz4.equals(cmsuserid+"") && cmsuserid != 8 && cmsuserid != 888
-				&& cmsuserid != 6 && cmsuserid != 222 && cmsuserid !=9999 && cmsuserid !=8888 && cmsuserid !=2038) {
+		if (!shenhezuzz1.equals(cmsuserid+"") && !shenhezuzz2.equals(cmsuserid+"") && !shenhezuzz3.equals(cmsuserid+"") && !shenhezuzz4.equals(cmsuserid+"") 
+//				&& cmsuserid != 8 && cmsuserid != 888 && cmsuserid != 6 && cmsuserid != 222 && cmsuserid !=9999 && cmsuserid !=8888 && cmsuserid !=2038
+				&&!roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"") ) {
 			jsonObject.put("error", -3);
 			jsonObject.put("msg", "Quyền hạn của chủ quản！");
 			this.getWriter().write(jsonObject.toString());
@@ -4666,8 +4669,8 @@ public class JBDcms3Action extends BaseAction {
 		logger.info("请求ID:" + cmsuser_id);
 		
 		int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());
-		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6
-				|| cmsuserid == 222) {
+//		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6|| cmsuserid == 222) {
+		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			jsonObject.put("error", 1); // Vui lòng đăng nhập trước
 			jsonObject.put("aa", "催收统计列表");
 			jsonObject.put("bb", "筛选条件");
@@ -4730,8 +4733,8 @@ public class JBDcms3Action extends BaseAction {
 		logger.info("请求ID:" + cmsuser_id);
 		
 		int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());
-		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6
-				|| cmsuserid == 222) {
+//		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6|| cmsuserid == 222) {
+		if(roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 			jsonObject.put("error", 1); // Vui lòng đăng nhập trước
 			jsonObject.put("aa", "审核统计列表");
 			jsonObject.put("bb", "筛选条件");
@@ -4792,8 +4795,8 @@ public class JBDcms3Action extends BaseAction {
 		logger.info("请求ID:" + cmsuser_id);
 		
 		int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());
-		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6
-				|| cmsuserid == 222) {
+//		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6|| cmsuserid == 222) {
+		if(roleauthoritymangement.getRoleAM_CWlist(cmsuserid+"")){
 			jsonObject.put("error", 1); // Vui lòng đăng nhập trước
 			jsonObject.put("aa", "待还款列表");
 			jsonObject.put("bb", "筛选条件");
@@ -4848,8 +4851,8 @@ public class JBDcms3Action extends BaseAction {
 		logger.info("请求ID:" + cmsuser_id);
 		
 		int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());
-		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6
-				|| cmsuserid == 222) {
+//		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6|| cmsuserid == 222) {
+		if(roleauthoritymangement.getRoleAM_CWlist(cmsuserid+"")){
 			jsonObject.put("error", 1); // Vui lòng đăng nhập trước
 			jsonObject.put("aa", "成功还款列表");
 			jsonObject.put("bb", "筛选条件");
@@ -4891,8 +4894,8 @@ public class JBDcms3Action extends BaseAction {
 	public ActionResult doGetChangeDFK() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());
-		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6
-				|| cmsuserid == 222) {
+//		if (cmsuserid == 888 || cmsuserid == 8 || cmsuserid == 6 || cmsuserid == 222) {
+		if(roleauthoritymangement.getRoleAM_CWlist(cmsuserid+"")){
 			jsonObject.put("error", 1); // Vui lòng đăng nhập trước
 			jsonObject.put("aa", "待放款列表");
 			jsonObject.put("bb", "筛选条件");
@@ -5037,8 +5040,8 @@ public class JBDcms3Action extends BaseAction {
 			logger.info("进入查看审核信息");
 			JSONObject jsonObject = new JSONObject();
 			int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());		
-			if ( cmsuserid != 8 && cmsuserid != 888
-					&& cmsuserid != 6 && cmsuserid != 222 && cmsuserid !=9999 && cmsuserid !=8888 && cmsuserid !=2038) {
+//			if ( cmsuserid != 8 && cmsuserid != 888 && cmsuserid != 6 && cmsuserid != 222 && cmsuserid !=9999 && cmsuserid !=8888 && cmsuserid !=2038) {
+			if(!roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 				jsonObject.put("error", -3);
 				jsonObject.put("msg", "Quyền hạn của chủ quản！");
 				this.getWriter().write(jsonObject.toString());

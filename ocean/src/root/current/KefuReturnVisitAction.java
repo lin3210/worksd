@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.sf.json.JSONObject;
+import root.role.roleAuthorityMangement;
 
 import org.apache.http.util.TextUtils;
 import org.apache.log4j.Logger;
@@ -22,6 +23,7 @@ public class KefuReturnVisitAction extends BaseAction{
 	
 	private static Logger logger=Logger.getLogger(KefuReturnVisitAction.class);
 	private static KefuReturnVisitService kefuReturnVisitService=new KefuReturnVisitService();
+	private static roleAuthorityMangement roleauthoritymangement  = new roleAuthorityMangement();
 	
 	/**
 	 * 得到需要回访的客户
@@ -288,7 +290,8 @@ public class KefuReturnVisitAction extends BaseAction{
 		}	
 		//默认第一页
 		int code = 0;
-		if(cmsuserid == 8 || cmsuserid == 6 || cmsuserid == 888 || cmsuserid == 222){
+//		if(cmsuserid == 8 || cmsuserid == 6 || cmsuserid == 888 || cmsuserid == 222){
+		if(roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 			code = 1;
 		}
 		int curPage  =getIntParameter("curPage",1);	

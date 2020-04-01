@@ -84,5 +84,10 @@ public class PowerService extends BaseService{
 		}*/
 		return true;
 	}
+	
+	public DataRow getpingjiguize(int index) {
+		String  sql ="  SELECT * FROM sd_pingjiguize WHERE id = " +index;
+		return getJdbcTemplate().queryMap(sql);
+	} 
 
 }

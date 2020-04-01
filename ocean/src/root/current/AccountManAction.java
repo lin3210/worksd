@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.sf.json.JSONObject;
+import root.role.roleAuthorityMangement;
 
 import org.apache.http.util.TextUtils;
 import org.apache.log4j.Logger;
@@ -22,6 +23,7 @@ import com.thinkive.web.base.BaseAction;
 public class AccountManAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(AccountManAction.class);
 	private static AccountManService accountManService = new AccountManService();
+	private static roleAuthorityMangement roleauthoritymangement  = new roleAuthorityMangement();
 
 	/**
 	 * 
@@ -32,7 +34,8 @@ public class AccountManAction extends BaseAction {
 	 */
 	public ActionResult doGetAllChart() throws java.text.ParseException {
 	   int userid = SessionHelper.getInt("cmsuserid", getSession());
-	   if(userid == 8||userid==6||userid==888||userid==222 || userid==4002 || userid==8888 || userid==9999  || userid==135699 ){	  
+//	   if(userid == 8||userid==6||userid==888||userid==222 || userid==4002 || userid==8888 || userid==9999  || userid==135699 ){
+	   if(roleauthoritymangement.getRoleAM_FirstPage(userid+"")){
 		logger.info("统计平台用户");
 		// 1.得到当前日期
 		String data = "{";
@@ -188,7 +191,8 @@ public class AccountManAction extends BaseAction {
 	 */
 	public ActionResult doGetAllChartCS() throws java.text.ParseException {
 		int userid = SessionHelper.getInt("cmsuserid", getSession());
-		if(userid == 8||userid==6||userid==888||userid==222 || userid==4002 || userid==8888 || userid==9999  || userid==135699 ){	  
+//		if(userid == 8||userid==6||userid==888||userid==222 || userid==4002 || userid==8888 || userid==9999  || userid==135699 ){	  
+		if(roleauthoritymangement.getRoleAM_FirstPage(userid+"")){
 			logger.info("统计平台用户");
 			// 1.得到当前日期
 			String data = "{";

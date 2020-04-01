@@ -23,6 +23,7 @@ import com.thinkive.web.base.BaseAction;
 public class UserAction extends BaseAction{
 	private static Logger logger = Logger.getLogger(UserAction.class);
 	private static UserService userService=new UserService();
+	private static roleAuthorityMangement roleauthoritymangement  = new roleAuthorityMangement();
 	
 	/**
 	 * 查询后台所有用户
@@ -249,8 +250,9 @@ public class UserAction extends BaseAction{
 		
 		JSONObject jsonObject = new JSONObject();
 		int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());	
-		if ( cmsuserid != 8 && cmsuserid != 888
-				&& cmsuserid != 6 && cmsuserid != 222 && cmsuserid !=9999 && cmsuserid !=8888 && cmsuserid !=2038) {
+//		if ( cmsuserid != 8 && cmsuserid != 888
+//				&& cmsuserid != 6 && cmsuserid != 222 && cmsuserid !=9999 && cmsuserid !=8888 && cmsuserid !=2038) {
+		if(!roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			jsonObject.put("error", -3);
 			//jsonObject.put("msg", "Quyền hạn của chủ quản！");
 			this.getWriter().write(jsonObject.toString());

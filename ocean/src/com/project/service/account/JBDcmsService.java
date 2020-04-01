@@ -3130,4 +3130,18 @@ public class JBDcmsService extends BaseService {
 			String sql = "select id,user_id,visitdate,jkjl_id,content,kefuid,code from sd_returnvisit where  user_id ="+ userid ;
 			return getJdbcTemplate().query(sql);
 		}
+		
+		/**
+		  * 角色管理 页面  --统计页面权限分配
+		  * @param curPage
+		  * @param numPerPage
+		  * @return
+		  * @throws Exception
+		  */
+		 public DBPage getRoleGuiZeList(int curPage, int numPerPage)throws Exception {
+
+				String sql = "select * from sd_pingjiguize where id >=2000";
+				sql += " order by id ";
+				return getJdbcTemplate().queryPage(sql, curPage, numPerPage);
+			}
 }

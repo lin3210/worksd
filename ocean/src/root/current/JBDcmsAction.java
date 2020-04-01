@@ -51,6 +51,7 @@ import root.SendMsg;
 //import cn.jpush.api.push.model.audience.Audience;
 //import cn.jpush.api.push.model.notification.Notification;
 import root.order.UserMoneyBase;
+import root.role.roleAuthorityMangement;
 
 public class JBDcmsAction extends BaseAction {
 
@@ -60,6 +61,7 @@ public class JBDcmsAction extends BaseAction {
 	private static JBDUserService jbdUserService = new JBDUserService();
 	private static UserMoneyBase  userMoneyBase = new UserMoneyBase();
 	private static AccessVerifivationBase accessVeritifivationbase = new AccessVerifivationBase();
+	private static roleAuthorityMangement roleauthoritymangement  = new roleAuthorityMangement();
 	String jiami = "G0eHIW3op8dYIWsdsdeqFSDeafhklRG";
 
 	public static long sendCount = 0;
@@ -1975,7 +1977,8 @@ public class JBDcmsAction extends BaseAction {
 		String shenhezuzz4 = jbdcmsService.getPJGZSHENHEZZ4();
 		String shzu4[] = shenhezu4.split(",");
 
-		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999 || cmsuserid == 8888 || cmsuserid == 135699 || cmsuserid == 2038) {
+//		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999 || cmsuserid == 8888 || cmsuserid == 135699 || cmsuserid == 2038) {
+		if(roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 			page = jbdcmsService.getRecordListOne(curPage, 15, userId, realName, phone, xypf, cmsuserid, startDate,
 					endDate, commit, off,shenheid);
 
@@ -2173,8 +2176,9 @@ public class JBDcmsAction extends BaseAction {
 		String shenhezuzz4 = jbdcmsService.getPJGZSHENHEZZ4();
 		String shzu4[] = shenhezu4.split(",");
 
-		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999
-				|| cmsuserid == 8888 || cmsuserid == 135699  || cmsuserid == 2038) {
+//		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999
+//				|| cmsuserid == 8888 || cmsuserid == 135699  || cmsuserid == 2038) {
+		if(roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 			page = jbdcmsService.getRecordListTwo(curPage, 15, userId, realName, phone, xypf, cmsuserid, startDate,
 					endDate, commit, off);
 
@@ -2298,8 +2302,9 @@ public class JBDcmsAction extends BaseAction {
 		String shenhezuzz4 = jbdcmsService.getPJGZSHENHEZZ4();
 		String shzu4[] = shenhezu4.split(",");
 
-		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999
-				|| cmsuserid == 8888 || cmsuserid == 135699  || cmsuserid == 2038) {
+//		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999
+//				|| cmsuserid == 8888 || cmsuserid == 135699  || cmsuserid == 2038) {
+		if(roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 			page = jbdcmsService.getRecordListThree(curPage, 15, userId, realName, phone, xypf, cmsuserid, startDate,
 					endDate, commit, off,0);
 
@@ -2421,8 +2426,9 @@ public class JBDcmsAction extends BaseAction {
 		String shenhezuzz4 = jbdcmsService.getPJGZSHENHEZZ4();
 		String shzu4[] = shenhezu4.split(",");
 
-		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999
-				|| cmsuserid == 8888 || cmsuserid == 135699  || cmsuserid == 2038) {
+//		if (cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 222 || cmsuserid == 888 || cmsuserid == 9999
+//				|| cmsuserid == 8888 || cmsuserid == 135699  || cmsuserid == 2038) {
+		if(roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 			page = jbdcmsService.getRecordListThree(curPage, 15, userId, realName, phone, xypf, cmsuserid, startDate,
 					endDate, commit, off,type);
 
@@ -3315,7 +3321,9 @@ public class JBDcmsAction extends BaseAction {
 		String shenhezuzz4 = jbdcmsService.getPJGZSHENHEZZ4();
 		if (sjxt == 1 && cmsuserid != 6 && cmsuserid != 8 && !shenhezuzz1.equals(cmsuserid + "")
 				&& !shenhezuzz2.equals(cmsuserid + "") && !shenhezuzz3.equals(cmsuserid + "")
-				&& !shenhezuzz4.equals(cmsuserid + "") && cmsuserid != 888  &&cmsuserid !=2038) {
+				&& !shenhezuzz4.equals(cmsuserid + "") && 
+//				cmsuserid != 888  &&cmsuserid !=2038
+				!roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")) {
 			jsonObject.put("error", -5);
 			jsonObject.put("msg", "Khách hàng này chuyển cho chủ quản thẩm duyệt!");
 			this.getWriter().write(jsonObject.toString());
@@ -3413,8 +3421,9 @@ public class JBDcmsAction extends BaseAction {
 		logger.info("请求ID:" + cmsuserid);
 		
 		int userid = SessionHelper.getInt("cmsuserid", getSession());
-		if (userid != 8 && userid != 6 && userid != 3 && userid != 888 && userid != 4002 && userid != 8888
-				&& userid != 9999 && userid != 135699) {
+//		if (userid != 8 && userid != 6 && userid != 3 && userid != 888 && userid != 4002 && userid != 8888
+//				&& userid != 9999 && userid != 135699) {
+		if(!roleauthoritymangement.getRoleAM_FirstPage(userid+"")){
 			return null;
 		} else {
 			Date date = new Date();
@@ -5154,7 +5163,8 @@ public class JBDcmsAction extends BaseAction {
 		int ggxxcs = jbdcmsService.getChangeXXCS(cmsuserid);
 
 		int czuserid = userchangexx.getInt("cmsuserid");
-		if (cmsuserid != czuserid && cmsuserid != 888 && cmsuserid != 4002 && cmsuserid != 5) {
+//		if (cmsuserid != czuserid && cmsuserid != 888 && cmsuserid != 4002 && cmsuserid != 5) {
+		if(!roleauthoritymangement.getRoleAM_SHlist(cmsuserid+"")){
 			jsonObject.put("error", -1);
 			jsonObject.put("msg", "KH này không phải của bạn đề xuất nên không thể hủy！");
 			this.getWriter().write(jsonObject.toString());
@@ -5742,4 +5752,29 @@ public class JBDcmsAction extends BaseAction {
 			this.getWriter().write(object.toString());
 			return null;
 		}
+		
+		//角色管理 页面  --统计页面权限分配
+		public ActionResult doGetRoleGuiZeList() throws Exception {
+				
+				JSONObject jsonObject = new JSONObject(); // 后台登录账户
+			    int cmsuserid =SessionHelper.getInt("cmsuserid", getSession());
+			    cmsuserid =accessVeritifivationbase.checkCMSidAndip(cmsuserid, getipAddr());
+			    if(cmsuserid==0){
+						jsonObject.put("error", -1);
+						jsonObject.put("msg", "Vui lòng đăng nhập trước");
+						this.getWriter().write(jsonObject.toString());	
+						return null;		
+				}
+				logger.info("请求ID:" + cmsuserid);
+				
+		
+				// 默认第一页
+				int curPage = getIntParameter("curPage", 1);
+				DBPage page = jbdcmsService.getRoleGuiZeList(curPage, 15);
+				DataRow row = new DataRow();
+				row.set("list", page);
+				JSONObject object = JSONObject.fromBean(row);
+				this.getWriter().write(object.toString());
+				return null;
+			}
 }
