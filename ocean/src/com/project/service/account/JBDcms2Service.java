@@ -1398,7 +1398,11 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -1461,7 +1465,7 @@ public class JBDcms2Service extends BaseService {
 */
 		
 		//}
-		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
+		sql += " and j.yuq_ts >3 and j.yuq_ts <16 " ;
 //		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 2016 ||cmsuserid==9999 ||cmsuserid == 8888){
 		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
@@ -1470,7 +1474,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -1535,7 +1542,7 @@ public class JBDcms2Service extends BaseService {
 		 */
 		
 		//}
-		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
+		sql += " and j.yuq_ts >3 and j.yuq_ts <16 " ;
 //		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2004 || cmsuserid == 9999 ||cmsuserid == 8888){
 		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
@@ -1544,7 +1551,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -1607,7 +1617,7 @@ public class JBDcms2Service extends BaseService {
 		 */
 		
 		//}
-		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
+		sql += " and j.yuq_ts >3 and j.yuq_ts <16 " ;
 //		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2016 || cmsuserid == 5051|| cmsuserid == 5053 || cmsuserid == 9999|| cmsuserid == 8888){
 		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
@@ -1616,7 +1626,11 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -1680,7 +1694,7 @@ public class JBDcms2Service extends BaseService {
 		 */
 		
 		//}
-		sql += " and j.yuq_ts >0 and j.yuq_ts <16 " ;
+		sql += " and j.yuq_ts >3 and j.yuq_ts <16 " ;
 //		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 222 || cmsuserid == 6 || cmsuserid == 8 || cmsuserid == 2018 || cmsuserid == 5051 || cmsuserid == 5053 || cmsuserid == 9999 || cmsuserid == 8888){
 		if(roleauthoritymangement.getRoleAM_CSlist(cmsuserid+"")){
 			for (int i = 0; i < cuishouzuyqm1.length; i++) {
@@ -1689,7 +1703,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -1834,7 +1851,11 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -1974,10 +1995,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1];
 				}
-				if(1==cuishouzuyqm1.length) {
-					sql +=" ) ";
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 				
 			}
@@ -1997,10 +2018,10 @@ public class JBDcms2Service extends BaseService {
 					}else if(i>0 && i<(cuishouzuyqm3.length-1)){
 						sql +=" or j.cuishou_id=" + cuishouzuyqm3[i];
 					}else{
-						sql +=" or j.cuishou_id=" + cuishouzuyqm3[cuishouzuyqm3.length-1] + " )";
+						sql +=" or j.cuishou_id=" + cuishouzuyqm3[cuishouzuyqm3.length-1] ;
 					}
-					if(1==cuishouzuyqm3.length) {
-						sql +=" ) ";
+					if((cuishouzuyqm1.length-1) ==i) {
+						sql+=" ) ";
 					}
 					
 				}
@@ -2132,7 +2153,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -2197,7 +2221,11 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1];
+				}
+				
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -2262,7 +2290,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -2326,7 +2357,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -2390,7 +2424,10 @@ public class JBDcms2Service extends BaseService {
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -2454,7 +2491,10 @@ public List<DataRow> getYqM2List(String userId,
 				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
+				}
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 			}
 		}else{
@@ -2519,10 +2559,10 @@ public List<DataRow> getYqM3List(String userId,
 			}else if(i>0 && i<(cuishouzuyqm1.length-1)){
 				sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
 			}else{
-				sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+				sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] ;
 			}
-			if(1==cuishouzuyqm1.length) {
-				sql +=" ) ";
+			if((cuishouzuyqm1.length-1) ==i) {
+				sql+=" ) ";
 			}
 		}
 	}else{
@@ -2541,10 +2581,10 @@ public List<DataRow> getYqM3List(String userId,
 				}else if(i>0 && i<(cuishouzuyqm3.length-1)){
 					sql +=" or j.cuishou_id=" + cuishouzuyqm3[i];
 				}else{
-					sql +=" or j.cuishou_id=" + cuishouzuyqm3[cuishouzuyqm3.length-1] + " )";
+					sql +=" or j.cuishou_id=" + cuishouzuyqm3[cuishouzuyqm3.length-1] ;
 				}
-				if(1==cuishouzuyqm3.length) {
-					sql +=" ) ";
+				if((cuishouzuyqm1.length-1) ==i) {
+					sql+=" ) ";
 				}
 				
 			}
