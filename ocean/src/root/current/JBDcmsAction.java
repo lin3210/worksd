@@ -5777,4 +5777,65 @@ public class JBDcmsAction extends BaseAction {
 				this.getWriter().write(object.toString());
 				return null;
 			}
+		
+		/**  匹配相同用户信息
+		   * 1、同姓名，同生日，同地址，同银行账户，4个条件里面有两个条件一样的用户都可列为嫌疑欺诈用户，把嫌疑用户列举出来审核人员人工审核，
+		   * 2、姓名/银行账号和定位地址接近的列为嫌疑欺诈用户，关联的几个用户列出来，交给人工审核，把这几个规则更新一下
+		   * 
+		   * @param Userid
+		   * @return
+		   */
+		  public ActionResult doGetUserPPXT() throws Exception {
+			  
+			  logger.info("用户相同信息匹配");
+				JSONObject jsonObject = new JSONObject(); // 后台登录账户
+			    int cmsuserid =SessionHelper.getInt("cmsuserid", getSession());
+			    cmsuserid =accessVeritifivationbase.checkCMSidAndip(cmsuserid, getipAddr());
+			    if(cmsuserid==0){
+						jsonObject.put("error", -1);
+						jsonObject.put("msg", "Vui lòng đăng nhập trước");
+						this.getWriter().write(jsonObject.toString());	
+						return null;		
+				}
+				logger.info("请求ID:" + cmsuserid);
+				
+			  int reid = getIntParameter("reid", 0);
+			  String Userid = jbdcmsService.getUserId(reid)+"";
+			  int curPage = getIntParameter("curPage", 1);
+			  
+			  DataRow urow = jbdcmsService.getUserXtongXXPP(Userid);
+			  if(urow !=null) {
+				  String realname = urow.getString("realname");
+				  String age = urow.getString("age");
+				  String homeaddress = urow.getString("homeaddress");
+				  String idno = urow.getString("idno");
+				  String cardno = urow.getString("cardno");
+				  
+				  DBPage page1   = jbdcmsService.getUserXTongXXPP(curPage, 5,realname, age, homeaddress, cardno, idno,Userid);
+				  
+				  DataRow row = new DataRow();
+				  row.set("list", page1);
+				  row.set("list2", "");
+				  DataRow dwrow = jbdcmsService.getUserXtongXXPP(Userid);
+				  if(null != dwrow) {
+					  double  dwlat = dwrow.getDouble("dwlat");
+					  double  dwlng = dwrow.getDouble("dwlng");
+					  DBPage page2 = jbdcmsService.getUserXTongXXPPDW(curPage, 5,Userid, dwlat, dwlng, realname, cardno);
+					  row.set("list2", page2);
+				  } 
+					row.set("error", 1);
+					row.set("msg", "SS");
+					JSONObject object = JSONObject.fromBean(row);
+					this.getWriter().write(object.toString());
+					return null;
+
+			  }
+			  
+			  DataRow row = new DataRow();
+			  row.set("error", -1);
+			  row.set("msg", "");
+			  JSONObject object = JSONObject.fromBean(row);
+			  this.getWriter().write(object.toString());
+			  return null;
+		  }
 }

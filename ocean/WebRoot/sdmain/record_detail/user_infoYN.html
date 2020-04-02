@@ -342,6 +342,59 @@ document.onselectstart=new Function("event.returnValue=true");
                       </div>
                     </div>
                         
+                        
+                        <!-- 匹配信息  -->
+                   <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    	用户相同信息匹配
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th>
+                          STT(编号)
+                        </th>
+                        <th>
+                          Họ tên(姓名)
+                        </th>
+                        <th>
+                         	Số CMND(身份证号码)
+                        </th>
+                        <th>
+                         	Ngày sinh(生日)
+                        </th>
+                        <th>
+                         	Địa chỉ (地址)
+                        </th>
+                        <th>
+                         	Số tài khoản NH(银行账号)
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="load_data_">
+                      
+                    </tbody>
+                  </table>
+                  
+     <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows_"></font>tin, mỗi trang chứa được <font id="numperpage_"></font>tin, hiện tại trang số<font id="currentpage_"></font> / <font id="totalpages_"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable_"></div></div></div></div>
+                </div>
+                 
+              </div>
+              
+              
                     <div class="row">
                       <div class="col-md-12">
                         <div class="widget box">
@@ -763,6 +816,61 @@ $(function() {
 	radi();
 	
 })
+
+
+function load_data_(){
+	
+	var reid=GetQueryString("record_id");
+	var para={curPage:$("#cupage_").val(),reid:reid};
+	loadGetServer("/servlet/current/JBDcmsAction?function=GetUserPPXT",para,function(data){
+	    $("#load_data_").html("");
+	    if(data.error < 0 ){
+	         $("#load_html").hide();
+		 }
+	    
+		  var list = data.list.data;
+		  var list2 = data.list2.data;
+		  var html_="";
+
+		  if(list.length>0){
+			  for(var i=0;i<list.length;i++){  
+				  html_ +="<tr>";
+				//  html_ +="<td>"+list[i].userid+"</td>";
+				  html_ += "<td>[<a href='javascript:void(0);' onclick='open_user("+list[i].userid+")'><span style='color:#F00'>"+list[i].userid+"</span></a>]</td>";
+				  html_ +="<td>"+list[i].realname+"</td>";
+				  html_ +="<td>"+list[i].idno+"</td>";
+				  html_ +="<td>"+list[i].age+"</td>";
+				  html_ +="<td>"+list[i].homeaddress+"</td>";
+				  html_ +="<td>"+list[i].cardno+"</td>";
+				  html_ +="</tr>";
+			  }
+		  }else if(list2.length>0){
+			  for(var i=0;i<list2.length;i++){  
+				  html_ +="<tr>";
+				  //html_ +="<td>"+list2[i].userId+"</td>";
+				   html_ += "<td>[<a href='javascript:void(0);' onclick='open_user("+list2[i].userid+")'><span style='color:#F00'>"+list2[i].userid+"</span></a>]</td>";
+				  html_ +="<td>"+list2[i].realname+"</td>";
+				  html_ +="<td>"+list2[i].idno+"</td>";
+				  html_ +="<td>"+list2[i].age+"</td>";
+				  html_ +="<td>"+list2[i].homeaddress+"</td>";
+				  html_ +="<td>"+list2[i].cardno+"</td>";
+				  html_ +="</tr>";
+			  }
+			  
+		  } else{
+			  html_+="<tr><td colspan='10' class='nu'> Hiện không có dữ liệu</td></tr>"
+		  }
+
+		  $("#load_data_").append(html_);
+		
+		 
+		  page_value_(data); 
+		  page_data_(); 
+		  $("#btn-loadtxl").button("reset");
+	    });
+   }
+load_data_();
+
 /* load_data();
 load_data_();
 function load_data(){

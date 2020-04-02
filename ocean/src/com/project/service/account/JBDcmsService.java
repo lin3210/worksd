@@ -3144,4 +3144,116 @@ public class JBDcmsService extends BaseService {
 				sql += " order by id ";
 				return getJdbcTemplate().queryPage(sql, curPage, numPerPage);
 			}
+		 
+		 /**
+		  * 相同信息查询
+		  * @param curPage
+		  * @param numPerPage
+		  * @return
+		  * @throws Exception
+		  */
+		 public DataRow getUserXtongXXPP(String userid){
+
+				String sql = "SELECT uf.userId,uf.realname, uf.age,uf.homeaddress,uf.idno,b.cardno FROM  sd_user_finance uf LEFT JOIN sd_bankcard b ON uf.userId =b.userId WHERE  uf.userId =b.userId  AND uf.userid ="+userid;
+				return getJdbcTemplate().queryMap(sql);
+		}
+		 
+		 /**
+		  * 规则1：信息匹配
+		  * @param realname
+		  * @param age
+		  * @param homeaddress
+		  * @param cardno
+		  * @param idno
+		  * @return
+		  */
+		 public DBPage getUserXTongXXPP( int curPage, int numPerPage,String realname,String age ,String homeaddress,String cardno,String idno,String userid){
+		
+			 String  sql =" SELECT uf.userId,uf.realname, uf.age,uf.homeaddress,uf.idno,b.cardno FROM  sd_user_finance uf LEFT JOIN sd_bankcard b ON uf.userId =b.userId WHERE  uf.userId =b.userId  ";
+			 
+			 sql+=" and uf.userId<> "+ userid;
+			 
+			 if( !realname.equals("")&& !age.equals("") || !realname.equals("")&& !homeaddress.equals("") ||  !realname.equals("")&& !cardno.equals("")
+				 || !age.equals("")&& !homeaddress.equals("")  || !age.equals("")&& !cardno.equals("")  || !homeaddress.equals("")&& !cardno.equals("") ) {
+				 sql+=" and ( " ;
+				 
+			 }
+			 
+			 if(!realname.equals("")&& !age.equals("")) {
+				 sql +=" ( uf.realname='"+realname+"' AND uf.age ='"+age+"') OR ";
+			 }
+			if(!realname.equals("")&& !homeaddress.equals("")) {
+				sql +=" ( uf.realname='"+realname+"' AND uf.homeaddress LIKE'%"+homeaddress+"%') OR  ";	 
+			 }
+			if(!realname.equals("")&& !cardno.equals("")) {
+				sql +=" ( uf.realname='"+realname+"' AND b.cardno ='"+cardno+"') OR  ";
+			}
+			if(!age.equals("")&& !homeaddress.equals("")) {
+				sql +=" ( uf.age='"+age+"' AND uf.homeaddress LIKE'%"+homeaddress+"%') OR ";	
+			 }
+			if(!age.equals("")&& !cardno.equals("")) {
+				sql +=" ( uf.age='"+age+"' AND b.cardno ='"+cardno+"') OR ";
+			}
+			if(!homeaddress.equals("")&& !cardno.equals("")) {
+				sql +=" ( b.cardno='"+cardno+"' AND uf.homeaddress LIKE'%"+homeaddress+"%') OR ";	
+			}
+			if( !idno.equals("")) {
+				sql +="  uf.idno='"+idno+"' " ;
+			}
+			
+			if( !realname.equals("")&& !age.equals("") || !realname.equals("")&& !homeaddress.equals("") ||  !realname.equals("")&& !cardno.equals("")
+					 || !age.equals("")&& !homeaddress.equals("")  || !age.equals("")&& !cardno.equals("")  || !homeaddress.equals("")&& !cardno.equals("") ) {
+					 sql+=" ) " ;
+					 
+			}
+			logger.info(sql);
+			return getJdbcTemplate().queryPage(sql, curPage, numPerPage);
+		 }
+		 
+		 /**
+		  * 规则1：信息匹配
+		  * @param realname
+		  * @param age
+		  * @param homeaddress
+		  * @param cardno
+		  * @param idno
+		  * @return
+		  */
+		 public DataRow getUserDW(String userid){
+
+				String sql = "SELECT uf.userId,uf.realname, uf.age,uf.homeaddress,uf.idno,b.cardno FROM  sd_user_finance uf LEFT JOIN sd_bankcard b ON uf.userId =b.userId WHERE  uf.userId =b.userId  AND uf.userid ="+userid;
+				return getJdbcTemplate().queryMap(sql);
+		}
+		
+		 /**
+		  * 规则2：定位信息匹配
+		  * @param realname
+		  * @param age
+		  * @param homeaddress
+		  * @param cardno
+		  * @param idno
+		  * @return
+		  */
+		 public DBPage getUserXTongXXPPDW(int curPage, int numPerPage, String userid,double dwlat, double dwlng , String realname,String cardno){
+		
+			 String  sql =" SELECT uf.userId,uf.realname, uf.age,uf.homeaddress,uf.idno,b.cardno FROM  sd_user_finance uf LEFT JOIN  sd_dwip dw ON uf.userid=dw.userid LEFT JOIN sd_bankcard b ON uf.userId =b.userId  WHERE  uf.userid=dw.userid  ";
+			 
+			 sql+=" and uf.userId<> "+ userid;
+			 
+			 sql+="  AND  (((dw.dwlat+0.05)>= "+dwlat +"  AND (dw.dwlat-0.05)<= "+ dwlat+"    ) AND  ((dw.dwlng+0.05)>=  "+ dwlng+"  AND (dw.dwlng-0.05)<= "+ dwlng+" ))" ;
+			 if( !realname.equals("") ||  !cardno.equals("") ) {
+				 sql+=" and ( " ;
+				 if(!realname.equals("")) {
+					 sql +="  uf.realname='"+realname+"' ";
+				 }
+				
+				if( !cardno.equals("")) {
+					sql +=" OR b.cardno ='"+cardno+"' ";
+				}
+				 sql+=" ) " ;
+				 
+			}
+			 logger.info(sql);
+			 return getJdbcTemplate().queryPage(sql, curPage, numPerPage);
+		 }
 }
