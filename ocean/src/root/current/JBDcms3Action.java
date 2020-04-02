@@ -3905,6 +3905,7 @@ public class JBDcms3Action extends BaseAction {
 
 		String sjshjine = jbdcms3Service.getSJSHJE(recid);
 		String yuqlx = jbdcms3Service.getYQLX(recid);
+		int yuqts = jbdcms3Service.getYQTS(recid);
 		/*int yuqts = jbdcms3Service.getYQTS(recid);
 			if(yuqts > 10){
 			jsonObject.put("error", -1);
@@ -4004,11 +4005,20 @@ public class JBDcms3Action extends BaseAction {
 			DataRow rowre = new DataRow();
 			row.set("id", recid);
 			row.set("cuishou_id", cuishouid);
-			if (cuishouidm1 == 1) {
+			int cuishou_z =0; // c催收组M1\M2\M3
+			if(yuqts >0 && yuqts <=3 ) {
+				cuishou_z =4; 
+				row.set("cuishou_m0", cuishouid);
+	 		}else if(yuqts >3 && yuqts <=15) {
+	 			cuishou_z =1; 
 				row.set("cuishou_m1", cuishouid);
-			} else {
+	 		}else if(yuqts >15 && yuqts <=45 ) {
+	 			cuishou_z =2; 
 				row.set("cuishou_m2", cuishouid);
-			}
+	 		}else if(yuqts >45 ) {
+	 			cuishou_z =3; 
+				row.set("cuishou_m3", cuishouid);
+	 		}
 			row.set("cuishouzz", cuishouzz + "," + cuishouid);
 			jbdcms3Service.updateCuishouID(row);
 
@@ -4039,27 +4049,30 @@ public class JBDcms3Action extends BaseAction {
 			//修改sd_cuishou_fendan信息的
 			//sd_cuishou_fendan 表 lin
 			List<DataRow> cuishoufendanList =jbdcms3Service.getcuishoufendanid(recid,cuishou_id);
-			DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
-			int fendanid = datafendan.getInt("id");
-			int fendancs =datafendan.getInt("fendan_cs");
-			double cuihuijine_old = jbdcms3Service.getfendancuihuijine(recid,cuishou_id,time111.substring(0, 7));  //以前催回金额
-	 		double cuihuijinezs = jbdcms3Service.getrechargeMoneyAccount(recid,cuishou_id,time222.substring(3, 10));  //a总催回金额
-	 		 //f 分出人更新
-	 		DataRow  dataRow1 = new DataRow();
-	 		dataRow1.set("id",fendanid);
-	 		dataRow1.set("cuishou_jine",cuihuijinezs-cuihuijine_old);
-	 		dataRow1.set("recharge_money",cuihuijinezs-cuihuijine_old);
-	 		jbdcms3Service.updatefendandata(dataRow1);
+			int fendancs =0;
+			if(cuishoufendanList.size()>0) {
+				DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
+				int fendanid = datafendan.getInt("id");
+			    fendancs =datafendan.getInt("fendan_cs");
+				double cuihuijine_old = jbdcms3Service.getfendancuihuijine(recid,cuishou_id,time111.substring(0, 7));  //以前催回金额
+		 		double cuihuijinezs = jbdcms3Service.getrechargeMoneyAccount(recid,cuishou_id,time222.substring(3, 10));  //a总催回金额
+		 		 //f 分出人更新
+		 		DataRow  dataRow1 = new DataRow();
+		 		dataRow1.set("id",fendanid);
+		 		dataRow1.set("cuishou_jine",cuihuijinezs-cuihuijine_old);
+		 		dataRow1.set("recharge_money",cuihuijinezs-cuihuijine_old);
+		 		jbdcms3Service.updatefendandata(dataRow1);
+			}
 			
-	 		int cuishou_z =0; // c催收组M1\M2\M3
-	 		//f分入催收单插入数据;
-	 		if(cuishouidm1 ==1) {
-	 			cuishou_z =1;
-	 		}else if(cuishouidm2==1) {
-	 			cuishou_z =2;
-	 		}else {
-	 			cuishou_z =3;
-	 		}
+//	 		int cuishou_z =0; // c催收组M1\M2\M3
+//	 		//f分入催收单插入数据;
+//	 		if(cuishouidm1 ==1) {
+//	 			cuishou_z =1;
+//	 		}else if(cuishouidm2==1) {
+//	 			cuishou_z =2;
+//	 		}else {
+//	 			cuishou_z =3;
+//	 		}
 	 		DataRow  dataRow2 = new DataRow();
 	 		dataRow2.set("user_id",user_id);
 	 		dataRow2.set("jk_id",recid);
@@ -5003,17 +5016,30 @@ public class JBDcms3Action extends BaseAction {
 				// 获取原来订单的催收人员id
 				int roleid = jkInfo.getInt("roleid");
 				int csid = jkInfo.getInt("cuishou_id");
+				int yuq_ts = jkInfo.getInt("yuq_ts");
 				
 				List<DataRow> list = new ArrayList<DataRow>();
 				// 通过角色ID查找
-				if(roleid == 19 || roleid == 20) {
+//				if(roleid == 19 || roleid == 20) {
+//					list = jbdcms3Service.selectUserLeaverList(csid, 4);
+//				}else if (roleid == 50 || roleid == 21) {
+//					list = jbdcms3Service.selectUserLeaverList(csid, 1);
+//				} else if (roleid == 51 || roleid == 24) {
+//					list = jbdcms3Service.selectUserLeaverList(csid, 2);
+//				} else if (roleid == 26 ||roleid == 54 || roleid == 60 ||roleid == 61) {
+//					list = jbdcms3Service.selectUserLeaverList(csid, 3);
+//				}
+				
+				if(yuq_ts>0 && yuq_ts <4) {
 					list = jbdcms3Service.selectUserLeaverList(csid, 4);
-				}else if (roleid == 50 || roleid == 21) {
+				}else if (yuq_ts>3 && yuq_ts <16) {
 					list = jbdcms3Service.selectUserLeaverList(csid, 1);
-				} else if (roleid == 51 || roleid == 24) {
+				} else if (yuq_ts>15 && yuq_ts <46) {
 					list = jbdcms3Service.selectUserLeaverList(csid, 2);
-				} else if (roleid == 26 ||roleid == 54 || roleid == 60 ||roleid == 61) {
+				} else if (yuq_ts>45) {
 					list = jbdcms3Service.selectUserLeaverList(csid, 3);
+				}else {
+					list = jbdcms3Service.selectUserLeaverList(csid, -1);
 				}
 				
 				List<TreeMap> list2 = new ArrayList<TreeMap>();

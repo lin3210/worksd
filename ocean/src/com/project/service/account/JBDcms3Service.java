@@ -53,9 +53,12 @@ public class JBDcms3Service  extends BaseService{
 				sb.append(" AND (roleid=21 OR roleid=50) ");
 			}else if (2==fenzhu){
 				sb.append(" AND (roleid=24 OR roleid=51) ");
-			}else {
+			}else if (3==fenzhu) {
 				sb.append(" AND (roleid=26 OR roleid=54 or roleid = 60 or roleid = 61) ");
+			}else {
+				sb.append(" AND (roleid=19 OR roleid=20 or roleid=21 OR roleid=50 or roleid=24 OR roleid=51 or roleid=26 OR roleid=54 or roleid = 60 or roleid = 61) ");
 			}
+			
 			sb.append( "  AND user_id<> "+cuishouid);
 			sb.append( "  order by  USER_ID desc");
 		
@@ -95,7 +98,7 @@ public class JBDcms3Service  extends BaseService{
 		 public DataRow getCuishouidRoleid(String jkid){
 				
 				StringBuffer sb = new StringBuffer();
-				sb.append(" select cuishou_id ,onesh,userid,name,cl_status,roleid from sd_new_jkyx left join sdcms_user on cuishou_id=sdcms_user.user_id where id ="+jkid);
+				sb.append(" select cuishou_id ,onesh,userid,name,cl_status,roleid,yuq_ts from sd_new_jkyx left join sdcms_user on cuishou_id=sdcms_user.user_id where id ="+jkid);
 				logger.info(sb.toString());	
 				return getJdbcTemplate().queryMap(sb.toString());
 		}
