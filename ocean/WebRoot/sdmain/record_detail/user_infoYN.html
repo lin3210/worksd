@@ -844,7 +844,8 @@ function load_data_(){
 				  html_ +="<td>"+list[i].cardno+"</td>";
 				  html_ +="</tr>";
 			  }
-		  }else if(list2.length>0){
+		  }
+		  if(list2.length>0){
 			  for(var i=0;i<list2.length;i++){  
 				  html_ +="<tr>";
 				  //html_ +="<td>"+list2[i].userId+"</td>";
@@ -857,9 +858,7 @@ function load_data_(){
 				  html_ +="</tr>";
 			  }
 			  
-		  } else{
-			  html_+="<tr><td colspan='10' class='nu'> Hiện không có dữ liệu</td></tr>"
-		  }
+		  } 
 
 		  $("#load_data_").append(html_);
 		

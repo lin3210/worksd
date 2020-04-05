@@ -3172,7 +3172,7 @@ public class JBDcmsService extends BaseService {
 			 String  sql =" SELECT uf.userId,uf.realname, uf.age,uf.homeaddress,uf.idno,b.cardno FROM  sd_user_finance uf LEFT JOIN sd_bankcard b ON uf.userId =b.userId WHERE  uf.userId =b.userId  ";
 			 
 			 sql+=" and uf.userId<> "+ userid;
-			 
+			 sql+=" AND  uf.homeaddress != 'none' ";
 			 if( !realname.equals("")&& !age.equals("") || !realname.equals("")&& !homeaddress.equals("") ||  !realname.equals("")&& !cardno.equals("")
 				 || !age.equals("")&& !homeaddress.equals("")  || !age.equals("")&& !cardno.equals("")  || !homeaddress.equals("")&& !cardno.equals("") ) {
 				 sql+=" and ( " ;
@@ -3239,7 +3239,7 @@ public class JBDcmsService extends BaseService {
 			 String  sql =" SELECT uf.userId,uf.realname, uf.age,uf.homeaddress,uf.idno,b.cardno FROM  sd_user_finance uf LEFT JOIN  sd_dwip dw ON uf.userid=dw.userid LEFT JOIN sd_bankcard b ON uf.userId =b.userId  WHERE  uf.userid=dw.userid  ";
 			 
 			 sql+=" and uf.userId<> "+ userid;
-			 
+			 sql+=" and dw.dwlat<>0.0 and dw.dwlng <> 0.0  ";
 			 sql+="  AND  (((dw.dwlat+0.05)>= "+dwlat +"  AND (dw.dwlat-0.05)<= "+ dwlat+"    ) AND  ((dw.dwlng+0.05)>=  "+ dwlng+"  AND (dw.dwlng-0.05)<= "+ dwlng+" ))" ;
 			 if( !realname.equals("") ||  !cardno.equals("") ) {
 				 sql+=" and ( " ;
