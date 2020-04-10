@@ -1427,23 +1427,9 @@ function load_data(){
 					 html_c +="<tr><td align=''>"+listc[i].visitdate+"</td>";
 					 html_c +="<td>"+listc[i].jkjl_id+"</td>";
 					 html_c +="<td>"+listc[i].content+"</td>";
-					 if(listc[i].kefuid == "5001"){
-					    csr ="bui truong giang";
-					 }else if(listc[i].kefuid == "5002"){
-					 	csr ="nguyen hoang vien";
-					 }else if(listc[i].kefuid == "5003"){
-					 	csr ="vo thi thanh hang";
-					 }else if(listc[i].kefuid == "5004"){
-					 	csr ="pham thi ngan trang";
-					 }else if(listc[i].kefuid == "5005"){
-					 	csr ="vu hao hiep";
-					 }else if(listc[i].kefuid == "5006"){
-					 	csr ="hoang thanh nha";
-					 }else if(listc[i].kefuid == "5007"){
-					 	csr ="vu thi hoa";
-					 }else{
-					 	csr =listc[i].kefuid;
-					 }	 
+					 
+					 csr =listc[i].kefuid;
+					 	 
 					 html_c +="<td>"+csr +"</td>";   					      
 					  				
 					 html_c +="</tr>";
