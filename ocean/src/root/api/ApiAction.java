@@ -447,7 +447,8 @@ public ActionResult doSMSSend() throws Exception {
 //				String returnString = SendMsg.sendMessageByGetOTP(con,phone);
 //				if (returnString.equals("106")) {
 				
-				String content = "Mã đơn hàng của bạn là "+randomCode;
+//				String content = "Mã đơn hàng của bạn là "+randomCode;
+				String content = "TRANSLAND Ma OTP kich hoat tai khoan cua ban la "+randomCode+" ma kich hoat co hieu luc trong 5 phut ";
                 String returnString = SendMsgTYH.SendMsgSMS(content,phone);  
 				logger.info(returnString);
 				if (returnString.contains("1")) {		

@@ -525,7 +525,8 @@ public class OceanApp extends BaseAction {
 					
 //					String content = "Ma xac thuc OTP cua ban la "+randomCode+", ma xac thuc co hieu luc trong thoi gian 5 phut ke tu khi ban gui tin nhan.";
 //                    String returnString = SendMsgCL.sendOTP(content,phone);
-					String content = "Mã đơn hàng của bạn là "+randomCode;
+//					String content = "Mã đơn hàng của bạn là "+randomCode;
+					String content = "TRANSLAND Ma OTP kich hoat tai khoan cua ban la "+randomCode+" ma kich hoat co hieu luc trong 5 phut ";
                     String returnString = SendMsgTYH.SendMsgSMS(content,phone);
                     
 					logger.info(returnString);
