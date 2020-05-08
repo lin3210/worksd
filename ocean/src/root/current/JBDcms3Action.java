@@ -3953,14 +3953,14 @@ public class JBDcms3Action extends BaseAction {
 				cuishouid = cuishou_m1;
 			}
 		}*/
-		if ((cuishouidm1 == 1 && cuishou_idm2 == 1)
-				|| (cuishou_idm1 == 1 && cuishouidm2 == 1)) {
-			jsonObject.put("error", -1);
-			jsonObject.put("msg",
-					"M1 chỉ phân được cho M1, M2 chỉ phân được cho M2 ");
-			this.getWriter().write(jsonObject.toString());
-			return null;
-		} else {
+//		if ((cuishouidm1 == 1 && cuishou_idm2 == 1)
+//				|| (cuishou_idm1 == 1 && cuishouidm2 == 1)) {
+//			jsonObject.put("error", -1);
+//			jsonObject.put("msg",
+//					"M1 chỉ phân được cho M1, M2 chỉ phân được cho M2 ");
+//			this.getWriter().write(jsonObject.toString());
+//			return null;
+//		} else {
 			//查询到了sd_accountuserhk信息
 			DataRow datacs = jbdcms3Service.getCuishouBG(cuishouid, time111);
 			//添加和更新到sd_accountuserhk表中
@@ -4088,7 +4088,7 @@ public class JBDcms3Action extends BaseAction {
 			jsonObject.put("msg", "成功");
 			this.getWriter().write(jsonObject.toString());
 			return null;
-		}
+//		}
 	}
 
 	// 审核信息
