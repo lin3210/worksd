@@ -85,6 +85,11 @@ public class OceanApp extends BaseAction {
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
+		
+		if( jsonObj == null ||  jsonObj.getString("oceanid") == null || jsonObj.equals("") || jsonObj.getString("oceanid").equals("")) {
+			return null;
+		}
+		
 		String miwen = jsonObj.getString("oceantoken");
 		int userId = jsonObj.getInteger("oceanid");
 		String jiamiwen = Encrypt.MD5(userId + jiami);
@@ -1279,6 +1284,9 @@ public class OceanApp extends BaseAction {
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
+		if( jsonObj == null ||  jsonObj.equals("")) {
+			return null;
+		}
 		JSONObject jsonObject = new JSONObject();
 		String jk_money = jsonObj.getString("oceanBm");
 		int jk_date = jsonObj.getInteger("oceanBd");

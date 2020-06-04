@@ -3256,4 +3256,21 @@ public class JBDcmsService extends BaseService {
 			 logger.info(sql);
 			 return getJdbcTemplate().queryPage(sql, curPage, numPerPage);
 		 }
+		 
+		 //	运营商的抓爬
+		 public Integer getYQTS(int userid) {
+				String sql = "select yuq_ts from  sd_new_jkyx where sfyfk=1 and sfyhw=0 and userid ="
+						+ userid;
+				return getJdbcTemplate().queryInt(sql);
+			}
+			public Integer getSJSH(int userid) {
+				String sql = "select REPLACE(sjsh_money,',','') from  sd_new_jkyx where sfyfk=1 and sfyhw=0 and userid ="
+						+ userid;
+				return getJdbcTemplate().queryInt(sql);
+			}
+			public String getUserMobilephone(int userId) {
+				StringBuffer sb = new StringBuffer();
+				sb.append("select mobilephone from sd_user  where id=" + userId);
+				return getJdbcTemplate().queryString(sb.toString());
+		}
 }

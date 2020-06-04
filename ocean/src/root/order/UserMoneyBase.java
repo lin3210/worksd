@@ -49,6 +49,7 @@ public class UserMoneyBase  {
 		return lx;
 	}
 	
+
 	/**
 	 * Maximum loan amount
 	 * @param userid 
@@ -71,7 +72,7 @@ public class UserMoneyBase  {
 				
 				if(nMaxmoney>=return_Maxmoney) {
 					return_Maxmoney = nMaxmoney;
-					
+					cgjk_cs++;
 					if(nMaxmoney==2000000) {
 						if(yuqts <15) {
 							
@@ -82,7 +83,7 @@ public class UserMoneyBase  {
 							return_Maxmoney =2000000;
 						}
 					}else if(nMaxmoney==2500000 ) {
-						if(cgjk_cs >=2) {
+						if(cgjk_cs >=3) {
 							if(yuqts <15) {
 								return_Maxmoney +=500000;
 							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
@@ -90,11 +91,21 @@ public class UserMoneyBase  {
 							}else if ( yuqts > 60   ) {
 								return_Maxmoney =2000000;
 							}
-						}else {
-							cgjk_cs++;
 						}
-					}else if(nMaxmoney==3000000 && cgjk_cs >=2) {
-						if(cgjk_cs >=2) {
+					}else if(nMaxmoney==3000000 ) {
+						if(cgjk_cs >=5) {
+							if(cgjk_cs >=2) {
+								if(yuqts <15) {
+									return_Maxmoney +=500000;
+								}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+									return_Maxmoney -=1000000;
+								}else if ( yuqts > 60   ) {
+									return_Maxmoney =2000000;
+								}
+							}
+						}
+					}else if(nMaxmoney==3500000 ) {
+						if(cgjk_cs >=8) {
 							if(yuqts <15) {
 								return_Maxmoney +=500000;
 							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
@@ -102,11 +113,10 @@ public class UserMoneyBase  {
 							}else if ( yuqts > 60   ) {
 								return_Maxmoney =2000000;
 							}
-						}else {
-							cgjk_cs++;
 						}
-					}else if(nMaxmoney==3500000 && cgjk_cs >=3) {
-						if(cgjk_cs >=2) {
+						
+					}else if(nMaxmoney==4000000) {
+						if(cgjk_cs >=12) {
 							if(yuqts <15) {
 								return_Maxmoney +=500000;
 							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
@@ -114,11 +124,10 @@ public class UserMoneyBase  {
 							}else if ( yuqts > 60   ) {
 								return_Maxmoney =2000000;
 							}
-						}else {
-							cgjk_cs++;
 						}
-					}else if(nMaxmoney==4000000 && cgjk_cs >=5) {
-						if(cgjk_cs >=2) {
+						
+					}else if(nMaxmoney==4500000) {
+						if(cgjk_cs >=22) {
 							if(yuqts <15) {
 								return_Maxmoney +=500000;
 							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
@@ -126,31 +135,17 @@ public class UserMoneyBase  {
 							}else if ( yuqts > 60   ) {
 								return_Maxmoney =2000000;
 							}
-						}else {
-							cgjk_cs++;
 						}
-					}else if(nMaxmoney==4500000 && cgjk_cs >=10) {
-						if(cgjk_cs >=2) {
-							if(yuqts <15) {
-								return_Maxmoney +=500000;
-							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
-								return_Maxmoney -=1000000;
-							}else if ( yuqts > 60   ) {
-								return_Maxmoney =2000000;
-							}
-						}else {
-							cgjk_cs++;
-						}
+						
 					}
 					
 				}
 			}
 		}
-		
-		if(return_Maxmoney >5000000) {
-			return_Maxmoney=5000000;
+		logger.info("userid--return_Maxmoney:"+return_Maxmoney);
+		if(return_Maxmoney >5000000 ) {
+			return_Maxmoney=5000000; 
 		}
-
 		return return_Maxmoney;
 	}
 	

@@ -4100,7 +4100,7 @@ public class JBDcmsAction extends BaseAction {
 		int txl_state =0;
 		int tongxunlucount =0;
 		com.alibaba.fastjson.JSONObject pagelist = new com.alibaba.fastjson.JSONObject();
-		if(tongxunluCount01<=30) {
+		if(false && tongxunluCount01<=30) {
 			tempVelue = URLEncoder.encode(tempVelue);
 			String IdNo = jbdcmsService.getUserNameIdNo(userid);
 			
@@ -4199,51 +4199,105 @@ public class JBDcmsAction extends BaseAction {
 		json.put("tempvl", tempVelue);
 		json.put("curPage", curPage);
 		String url = "http://app.m99vn.com/servlet/current/M99User1?function=GetM99TXL";
-
 		String response = HttpUtil.doPost(url, json, "UTF-8");
-
 		com.alibaba.fastjson.JSONObject json1 = com.alibaba.fastjson.JSONObject.parseObject(response);
-		// String code = json1.getString("status");
-
 		int error = json1.getInteger("error");
-		DataRow row = new DataRow();
+
+		int tongxunluCount01 =0;
+		com.alibaba.fastjson.JSONObject page =null;
 		if (error == 1) {
-			int tongxunlucount = json1.getInteger("tongxunlucount");
-			String list = json1.getString("list");
-
-			row.set("tongxunlucount", tongxunlucount);
-			com.alibaba.fastjson.JSONObject page = com.alibaba.fastjson.JSONObject.parseObject(list);
-			row.set("list", page);
-
-			row.set("temp", json1.getString("temp"));
-			row.set("tempvalu", json1.getString("tempvalu"));
-			row.set("error", "0");
-			row.set("msg", "Normal System");
-			JSONObject object = JSONObject.fromBean(row);
-			this.getWriter().write(object.toString());
-			return null;
-		} else {
-
-			String phone = "";
-			String name = "";
-			String cxid = "";
-			if (temp == 1) {
-
-				cxid = tempVelue;
-			} else if (temp == 2) {
-				phone = tempVelue;
-			} else if (temp == 3) {
-				name = tempVelue;
-			}
-
-			// 京东购物记录
-			//DBPage page = jbdcmsService.getUserTongxunlu(curPage, 15, userid, cxid, phone, name);
-			//int tongxunluCount = jbdcmsService.getTongxunluCountYN(userid);
+			 tongxunluCount01 = json1.getInteger("tongxunlucount");
+			 String list = json1.getString("list");
+			  page = com.alibaba.fastjson.JSONObject.parseObject(list);
+		}
+		
+		//a重新匹配
+		int txl_state =0;
+		int tongxunlucount =0;
+		com.alibaba.fastjson.JSONObject pagelist = new com.alibaba.fastjson.JSONObject();
+		if(tongxunluCount01<=100) {
+		    sfmiwen = Encrypt.MD5(jiami+IdNo);
+			com.alibaba.fastjson.JSONObject json0 = new com.alibaba.fastjson.JSONObject();
+			json0.put("secret", sfmiwen);
+			json0.put("idno", IdNo);
+			json0.put("temp", temp);
+			json0.put("tempvl", tempVelue);
+			json0.put("curPage", curPage);
 			
-			row.set("tongxunlucount", 0);
-			row.set("list", "");
+			/************************3****************/
+			String url0 = "http://app.m99vn.com/servlet/current/M99User2?function=GetUserTXL3";
+			String response0 = HttpUtil.doPost(url0, json0, "UTF-8");
+			com.alibaba.fastjson.JSONObject json10 = com.alibaba.fastjson.JSONObject.parseObject(response0);
+			int error0 = json10.getInteger("error");
+			if (error0 == 1) {
+			    tongxunlucount = json10.getInteger("tongxunlucount");
+			    logger.info("3:"+tongxunlucount);
+				if(tongxunluCount01<tongxunlucount) {
+					String list = json10.getString("list");
+				    pagelist = com.alibaba.fastjson.JSONObject.parseObject(list);
+				    txl_state=1;
+				}
+			}
+			/**********2****************/
+			if(txl_state==0) {
+				 url = "http://app.m99vn.com/servlet/current/M99User2?function=GetUserTXL2";
+				 response = HttpUtil.doPost(url, json, "UTF-8");
+				com.alibaba.fastjson.JSONObject json2 = com.alibaba.fastjson.JSONObject.parseObject(response);
+			    error = json2.getInteger("error");
+				if (error == 1) {
+					 logger.info("2:"+tongxunlucount);
+				    tongxunlucount = json2.getInteger("tongxunlucount");
+					if(tongxunluCount01<tongxunlucount) {
+						String list = json2.getString("list");
+					    pagelist = com.alibaba.fastjson.JSONObject.parseObject(list);
+					    txl_state=1;
+					}
+				}
+			}
+			/**********1****************/
+			if(txl_state==0) {
+				 url = "http://app.m99vn.com/servlet/current/M99User2?function=GetUserTXL1";
+				 response = HttpUtil.doPost(url, json, "UTF-8");
+				com.alibaba.fastjson.JSONObject json2 = com.alibaba.fastjson.JSONObject.parseObject(response);
+			    error = json2.getInteger("error");
+				if (error == 1) {
+				    tongxunlucount = json2.getInteger("tongxunlucount");
+				    logger.info("1:"+tongxunlucount);
+					if(tongxunluCount01<tongxunlucount) {
+						String list = json2.getString("list");
+					    pagelist = com.alibaba.fastjson.JSONObject.parseObject(list);
+					    txl_state=1;
+					}
+				}
+			}
+			
+			/**********4****************/
+			if(txl_state==0) {
+				 url = "http://app.m99vn.com/servlet/current/M99User2?function=GetUserTXL4";
+				 response = HttpUtil.doPost(url, json, "UTF-8");
+				 com.alibaba.fastjson.JSONObject json2 = com.alibaba.fastjson.JSONObject.parseObject(response);
+			     error = json2.getInteger("error");
+				 if (error == 1) {
+				    tongxunlucount = json2.getInteger("tongxunlucount");
+				    logger.info("1:"+tongxunlucount);
+					if(tongxunluCount01<tongxunlucount) {
+						String list = json2.getString("list");
+					    pagelist = com.alibaba.fastjson.JSONObject.parseObject(list);
+					    txl_state=1;
+					}
+				}
+			}
+			
+		}
 
-
+		    DataRow row = new DataRow();
+		    if(1==txl_state) {
+		    	row.set("tongxunlucount", tongxunlucount);
+				row.set("list", pagelist);
+		    }else {
+		    	row.set("tongxunlucount", tongxunluCount01);
+				row.set("list", page);
+		    }
 			row.set("temp", temp);
 			row.set("tempvalu", tempVelue);
 			row.set("error", "0");
@@ -4251,7 +4305,7 @@ public class JBDcmsAction extends BaseAction {
 			JSONObject object = JSONObject.fromBean(row);
 			this.getWriter().write(object.toString());
 			return null;
-		}
+	
 	}
 	/**
 	 * TXL---第三表
@@ -4587,6 +4641,103 @@ public class JBDcmsAction extends BaseAction {
 		}
 	}
 	
+	/**
+	 * 运营商通讯录
+	 * @return
+	 * @throws Exception
+	 */
+
+	public ActionResult doGetMjzxYYS() throws Exception {
+	
+		logger.info("进入到数据分析页面");
+		JSONObject jsonObject = new JSONObject(); // 后台登录账户
+	    int cmsuserid =SessionHelper.getInt("cmsuserid", getSession());
+	    cmsuserid =accessVeritifivationbase.checkCMSidAndip(cmsuserid, getipAddr());
+	    if(cmsuserid==0){
+				jsonObject.put("error", -1);
+				jsonObject.put("msg", "Vui lòng đăng nhập trước");
+				this.getWriter().write(jsonObject.toString());	
+				return null;		
+		}
+		logger.info("请求ID:" + cmsuserid);
+		
+		int temp = getIntParameter("temp", 0);
+		String tempVelue = getStrParameter("tempvl").replace("&nbsp;", " ");
+		tempVelue = URLEncoder.encode(tempVelue);
+		int userid = getIntParameter("user_id", 0);
+		int curPage = getIntParameter("curPage", 1);
+		String IdNo = jbdcmsService.getUserNameIdNo(userid);
+		String mobilephone = jbdcmsService.getUserMobilephone(userid);
+		int thts = getIntParameter("thts");
+		int thsc = getIntParameter("thsc");
+		int thsj = getIntParameter("thsj");
+		int code = 0;
+		if (thts == 1) {
+			code = 1;
+		} else if (thsc == 1) {
+			code = 2;
+		} else if (thsj == 1) {
+			code = 3;
+		}
+		String sfmiwen = Encrypt.MD5(jiami+IdNo);
+		com.alibaba.fastjson.JSONObject json = new com.alibaba.fastjson.JSONObject();
+		json.put("secret", sfmiwen);
+		json.put("idno", IdNo);
+		json.put("mobilephone", mobilephone);
+		json.put("code", code);
+		json.put("temp", temp);
+		json.put("tempvl", tempVelue);
+		json.put("curPage", curPage);
+		String url = "http://app.m99vn.com/servlet/current/M99User3?function=GetUserQDTHJL";
+		String response = HttpUtil.doPost(url, json, "UTF-8");
+		com.alibaba.fastjson.JSONObject json1 = com.alibaba.fastjson.JSONObject.parseObject(response);
+
+		int error = json1.getInteger("error");
+		DataRow row = new DataRow();
+		if (error == 1) {
+			int yuqts = jbdcmsService.getYQTS(userid);
+			int sjsh = jbdcmsService.getSJSH(userid);
+			row.set("yuqts", yuqts);
+			row.set("sjsh", sjsh);
+			// 根据用户ID获取用户信息
+			DataRow user = jbdcmsService.getUserRecOneInfo(userid);
+			DataRow userfinance = jbdcmsService.personFinance(userid);
+			row.set("realname", user.getString("cardusername")); // 姓名
+			row.set("cardid", IdNo); // 身份证
+			row.set("cellphone", user.getString("mobilephone")); // 手机号
+			row.set("csrq", userfinance.getString("age"));// 出生日期
+			//-------------------------------
+			int tongxunlucount = json1.getInteger("tongxunlucount");
+			String list = json1.getString("list");
+			String yys = json1.getString("yys");
+
+			row.set("tonghuaCount", tongxunlucount);
+			com.alibaba.fastjson.JSONObject page = com.alibaba.fastjson.JSONObject.parseObject(list);
+			row.set("list", page);
+			com.alibaba.fastjson.JSONArray pageyys = com.alibaba.fastjson.JSONArray.parseArray(yys);
+			row.set("yys", pageyys);
+
+			row.set("temp", json1.getString("temp"));
+			row.set("tempvalu", json1.getString("tempvalu"));
+			row.set("error", "0");
+			row.set("msg", "Normal System");
+			JSONObject object = JSONObject.fromBean(row);
+			this.getWriter().write(object.toString());
+			return null;
+			
+		} else {
+			row.set("tongxunlucount", 0);
+			row.set("list", "");
+			row.set("temp", temp);
+			row.set("tempvalu", tempVelue);
+			row.set("error", "0");
+			row.set("msg", "Normal System");
+			JSONObject object = JSONObject.fromBean(row);
+			this.getWriter().write(object.toString());
+			return null;
+		}
+		
+	}
 
 	public ActionResult doGetMjzxMsg() throws Exception {
 
