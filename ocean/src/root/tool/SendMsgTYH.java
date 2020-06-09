@@ -441,22 +441,22 @@ public class SendMsgTYH {
 		 
 	}
 	
-//	public static void main(String []arg) throws UnsupportedEncodingException, DocumentException  {
-//		Date date = new Date();
-//		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-//		 System.out.println(dateFormat.format(date));
-//		 
-//		SendMsgSMSYX("ban la gi ","0587321816"); 
-//		 
-////		 try {
-////			 String str ="Mã đơn hàng của bạn là 3568";
-////			//SendMsgSMS(str,"0587321816");
-////			//SendMsgSMSYX("ban la gi ","0587321816");
-////		} catch (UnsupportedEncodingException e) {
-////			// TODO Auto-generated catch block
-////			e.printStackTrace();
-////		}
-//		
-//	}
+	public static void main(String []arg) throws UnsupportedEncodingException, DocumentException  {
+		Date date = new Date();
+		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		 System.out.println(dateFormat.format(date));
+		 
+//		SendMsgSMSYX("Ung dung xin thong bao ma OTP cua ban la 715302 adavigo","0587321816"); 
+		SendMsgSMS("Ung dung xin thong bao ma OTP cua ban la 715302 adavigo","0587321816"); 
+//		 try {
+//			 String str ="Mã đơn hàng của bạn là 3568";
+//			//SendMsgSMS(str,"0587321816");  
+//			//SendMsgSMSYX("ban la gi ","0587321816");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+	}
 
 }
