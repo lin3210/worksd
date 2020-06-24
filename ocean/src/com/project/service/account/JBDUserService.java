@@ -1462,5 +1462,11 @@ public class JBDUserService extends BaseService {
 			getJdbcTemplate().insert("sd_sms_tyh", data);
 		}
 
+		public Integer getJKshviid(int userid) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("select id from sd_new_jkyx where cl_status =1  and cl02_status =1  and cl03_status =0  and userid = ");
+			sb.append(userid);
+			return getJdbcTemplate().queryInt(sb.toString());
+		}
 	
 }

@@ -60,7 +60,7 @@ public class UserMoneyBase  {
 		int return_Maxmoney = 2000000;
 	    List<DataRow> listjkDataMax = jbdUserBaseServiceBean.getUserjkMoneyMax(userid+"");
 	   
-	    int cgjk_cs =1;
+	    int cgjk_cs =0;
 		if( null != listjkDataMax) {
 			for(DataRow jkDataMax:listjkDataMax) {
 				int hkcs=listjkDataMax.size();

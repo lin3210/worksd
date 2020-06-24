@@ -2625,4 +2625,146 @@ public class OceanApp extends BaseAction {
 	}
 	
 	
+	// 更新视频
+	public ActionResult doOceanVideoUpdate() throws Exception {
+		
+		logger.info("请求ip" + getipAddr());
+		HttpServletRequest request = getRequest();
+		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
+		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
+
+		String videoUrl = jsonObj.getString("oceanVu");
+		logger.info("视频地址" + videoUrl);
+		int userid = jsonObj.getInteger("oceanid");
+		String miwen = jsonObj.getString("oceantoken");
+
+		String jiamiwen = Encrypt.MD5(userid + jiami);
+
+		if (jiamiwen.equals(miwen)) {
+			JSONObject jsonObject = new JSONObject();
+
+			if (userid == 0) {
+				jsonObject.put("oceanC", -1);
+				jsonObject.put("oceanM", "Vui lòng đăng nhập trước"); // 请先登录
+				this.getWriter().write(jsonObject.toString());
+				return null;
+			}
+			
+			// 根据用户ID 查询�??要上传视频的借款项目
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			int jkshid = jdbUserService.getJKshviid(userid);
+			if (jkshid == 0) {
+
+				jsonObject.put("oceanC", -2);
+				jsonObject.put("oceanM","Video cần tải không tồn tại, vui lòng liên hệ bộ phận dịch vụ khách hàng để được hỗ trợ"); // 要上传的视频的项目不存在
+				// 请联系客服处�??
+				this.getWriter().write(jsonObject.toString());
+				return null;
+			}
+			
+			//判断视频地址
+			if(videoUrl == null  || videoUrl.isEmpty()) {
+				jsonObject.put("oceanC", -3);
+				jsonObject.put("oceanM","Không thể đăng tải video của bạn do không tim thấy video của bạn. Vui lòng thử lại sau ít phút hoặc liên hệ CSKH của chúng tôi để được hỗ trợ đăng tả."); // 要上传的视频的地址不存在
+				this.getWriter().write(jsonObject.toString());
+				return null;
+			}
+			DataRow row = new DataRow();
+			row.set("id", jkshid);
+			row.set("spdz", videoUrl);
+			row.set("spzt", 1);
+			row.set("spsj", fmtrq.format(calendar.getTime()));
+			jdbUserService.updateJKSPInfo(row);
+
+			jsonObject.put("oceanC", 0);
+			jsonObject.put("oceanM", "Cập nhật thành công video đề nghị vay"); // 更新借款视频成功
+			this.getWriter().write(jsonObject.toString());
+
+			return null;
+		} 
+		return null;
+	}
+	
+	// 更新视频
+		public ActionResult doOceanPhotoUpdate() throws Exception {
+			
+
+			logger.info("请求ip" + getipAddr());
+			HttpServletRequest request = getRequest();
+			com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
+			com.alibaba.fastjson.JSONObject jsonObj = jsonString;
+
+			String userid = jsonObj.getString("oceanid");
+			String miwen = jsonObj.getString("oceantoken");
+			String jiamiwen = Encrypt.MD5(userid + jiami);
+			if (jiamiwen.equals(miwen)) {
+				String p1 = jsonObj.getString("oceanPo");
+				String p2 = jsonObj.getString("oceanPt");
+				String p3 = jsonObj.getString("oceanPtr");
+				String ui = jdbUserService.getUI(userid);
+
+				int yhbd = jdbUserService.getUserBank(userid);
+				int lianxi = jdbUserService.getUserLianXi(userid);
+				int work = mofaUserService.getUserWork(userid);
+				JSONObject jsonObject = new JSONObject();
+				Calendar calendar = Calendar.getInstance();
+				SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+				if ("".equals(p1) || p1 == null || "".equals(p2) || p2 == null || "".equals(p3) || p3 == null) {
+					jsonObject.put("oceanC", -11);
+					jsonObject.put("oceanM", "Lỗi tải lên hình ảnh");// 图片上传错误
+					this.getWriter().write(jsonObject.toString());
+					return null;
+
+				}
+				
+				try {
+					if (ui.equals("")) {
+						DataRow row5 = new DataRow();
+						row5.set("userid", userid);
+						row5.set("p1", p1);
+						row5.set("p2", p2);
+						row5.set("p3", p3);
+						row5.set("create_time", fmtrq.format(calendar.getTime()));
+						jdbUserService.addUserZhaoPian(row5);
+					} else {
+						DataRow row5 = new DataRow();
+						row5.set("userid", userid);
+						row5.set("p1", p1);
+						row5.set("p2", p2);
+						row5.set("p3", p3);
+						row5.set("create_time", fmtrq.format(calendar.getTime()));
+						jdbUserService.updateUserZhaoPian(row5);
+					}
+
+					DataRow row3 = new DataRow();
+					row3.set("id", userid);
+					row3.set("isShenfen", 1);
+					if (yhbd == 1 & lianxi == 1  &&  work==1) {
+						row3.set("vipStatus", 1);// 工作认证�??1
+					} else {
+						row3.set("vipStatus", 0);// 工作认证�??1
+					}
+					jdbUserService.updateUserInfoH(row3);
+					jsonObject.put("oceanC", 0);
+					jsonObject.put("oceanM", "Thành công");// 成功
+				} catch (Exception e) {
+
+					jsonObject.put("oceanC", -3);
+					jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
+					e.printStackTrace();
+				}
+				this.getWriter().write(jsonObject.toString());
+				return null;
+			} else {
+				JSONObject jsObj = new JSONObject();
+				jsObj.put("oceanC", 101);
+				jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				this.getWriter().write(jsObj.toString());
+				return null;
+			}
+		}
+	
+	
 }
