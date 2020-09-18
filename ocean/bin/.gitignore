@@ -1,0 +1,15 @@
+/._com
+/._config.properties
+/._log4j.properties
+/._oscache.properties
+/._root
+/._service
+/com/
+/config.properties
+/configuration.xml
+/datasource.xml
+/log4j.properties
+/memcached.xml
+/oscache.properties
+/root/
+/service/

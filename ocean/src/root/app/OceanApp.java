@@ -1571,6 +1571,7 @@ public class OceanApp extends BaseAction {
 					    data3.set("cl02_yj","Old User");	
 					    data3.set("cl02_ren","888");
 						int nn = Integer.parseInt(borrMoney.replace(",", "").replace(".",""));
+						
 						int fklv = 75;
 						int lx = userMoneyBase.getUMBaseCalculateProductInterest(nn, jk_date, userid2, username);
 						if(lx > 0) {
