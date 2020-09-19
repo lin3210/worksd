@@ -1491,6 +1491,14 @@ public ActionResult doSMSSend() throws Exception {
 					shenheren = oldshenheren;
 				}
 			
+				//2020年9月18日 
+				int tjmoney = Integer.parseInt(borrMoney.replace(",", "").replace(".",""));
+				int Maxmoney = userMoneyBase.getUMBaseMaxLoanMoney(userid2);
+				if(Maxmoney < tjmoney) {
+					tjmoney =Maxmoney;
+					borrMoney = famt.format(tjmoney);
+					logger.info(" 修改金额："+userid2+" "+borrMoney);
+				}
 				
 				Calendar calendar = Calendar.getInstance();
 				SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

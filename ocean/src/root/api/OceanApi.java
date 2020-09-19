@@ -1270,7 +1270,7 @@ public class OceanApi extends BaseAction {
 		JSONObject jsonObject = new JSONObject();
 		String jk_money = jsonObj.getString("oceanBm");
 		int jk_date = jsonObj.getInteger("oceanBd");
-		String borrMoney = jsonObj.getString("oceanBm");
+		//String borrMoney = jsonObj.getString("oceanBm");
 		//String actualMoney = jsonObj.getString("actualMoney");
 		//String interesetFee = jsonObj.getString("interesetFee");
 		SimpleDateFormat famat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1297,13 +1297,13 @@ public class OceanApi extends BaseAction {
 		
 		DecimalFormat famt = new DecimalFormat("###,###");
 		//2019-7-24 lin 格式转换防止点号
-		if(borrMoney.isEmpty()) {
+		if(jk_money.isEmpty()) {
 			jsonObject.put("oceanC", -5);
 			jsonObject.put("oceanM", "Lỗi xảy ra khiến giá trị vay không đúng, vui lòng tắt app thử lại !");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}else {
-			borrMoney = famt.format(Integer.parseInt(borrMoney.replace(",", "").replace(".", "")));
+			jk_money = famt.format(Integer.parseInt(jk_money.replace(",", "").replace(".", "")));
 		}		
 		
 		String time = famat.format(new Date());
@@ -1519,6 +1519,15 @@ public class OceanApi extends BaseAction {
 				if (oldshenheren != 0 && stateold == 1  && oldshenheren !=2004  && oldshenheren !=2015  && oldshenheren !=2038 && oldshenheren !=2043 ) {
 					shenheren = oldshenheren;
 				}
+				
+				//2020年9月18日 
+				int tjmoney = Integer.parseInt(jk_money.replace(",", "").replace(".",""));
+				int Maxmoney = userMoneyBase.getUMBaseMaxLoanMoney(userid2);
+				if(Maxmoney < tjmoney) {
+					tjmoney =Maxmoney;
+					jk_money = famt.format(tjmoney);
+					logger.info(" 修改金额："+userid2+" "+jk_money);
+				}
 				Calendar calendar = Calendar.getInstance();
 				SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 				DataRow data3 = new DataRow();
@@ -1551,16 +1560,16 @@ public class OceanApi extends BaseAction {
 					    data3.set("cl_ren","888");
 					    data3.set("cl02_yj","Old User");	
 					    data3.set("cl02_ren","888");
-						int nn = Integer.parseInt(borrMoney.replace(",", "").replace(".",""));
+						int nn = Integer.parseInt(jk_money.replace(",", "").replace(".",""));
 						int fklv = 75;
 						int lx = userMoneyBase.getUMBaseCalculateProductInterest(nn, jk_date, userid2, username);
 						if(lx > 0) {
 							fklv =100 - lx;
 						}
 						
-						data3.set("sjsh_money", borrMoney);
+						data3.set("sjsh_money", jk_money);
 						data3.set("sjds_money", famt.format(nn * fklv / 100));
-						data3.set("jyfk_money", borrMoney);
+						data3.set("jyfk_money", jk_money);
 						data3.set("lx", famt.format(nn * (100 - fklv) / 100));
 						
 						String userrealname = "!";
@@ -1598,15 +1607,15 @@ public class OceanApi extends BaseAction {
 					    data3.set("cl_ren","888");
 					    data3.set("cl02_yj","Old User");	
 					    data3.set("cl02_ren","888");
-						int nn = Integer.parseInt(borrMoney.replace(",","").replace(".",""));
+						int nn = Integer.parseInt(jk_money.replace(",","").replace(".",""));
 						int fklv = 75;
 						int lx = userMoneyBase.getUMBaseCalculateProductInterest(nn, jk_date, userid2, username);
 						if(lx > 0) {
 							fklv =100 - lx;
 						}
-						data3.set("sjsh_money", borrMoney);
+						data3.set("sjsh_money", jk_money);
 						data3.set("sjds_money", famt.format(nn * fklv / 100));
-						data3.set("jyfk_money", borrMoney);
+						data3.set("jyfk_money", jk_money);
 						data3.set("lx", famt.format(nn * (100 - fklv) / 100));
 						
 						String appName ="OCEAN" ; //APP名字

@@ -1538,6 +1538,16 @@ public class OceanApp extends BaseAction {
 				if (oldshenheren != 0 && stateold == 1  && oldshenheren !=2004  && oldshenheren !=2015  && oldshenheren !=2038 && oldshenheren !=2043 ) {
 					shenheren = oldshenheren;
 				}
+				
+				//2020年9月18日 
+				int tjmoney = Integer.parseInt(borrMoney.replace(",", "").replace(".",""));
+				int Maxmoney = userMoneyBase.getUMBaseMaxLoanMoney(userid2);
+				if(Maxmoney < tjmoney) {
+					tjmoney =Maxmoney;
+					jk_money = famt.format(tjmoney);
+					logger.info(" 修改金额："+userid2+" "+jk_money);
+				}
+				
 				Calendar calendar = Calendar.getInstance();
 				SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 				DataRow data3 = new DataRow();
