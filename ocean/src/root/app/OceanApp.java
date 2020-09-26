@@ -2012,9 +2012,9 @@ public class OceanApp extends BaseAction {
 		if (jiamiwen.equals(miwen)) {
 			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
-			obj.put("oceanAt", "QUACH THI XUYEN");
-			obj.put("oceanCn", "1903 5460 1810 10");
-			obj.put("oceanBn", "Techcombank -Buôn Ma Thuột ");
+			obj.put("oceanAt", "Trần Quang Vinh");
+			obj.put("oceanCn", "19035 46003 8013");
+			obj.put("oceanBn", "Techcombank -  Dak Lak");
 //			JSONObject obj1 = new JSONObject();
 //			obj1.put("oceanAt", "CÔNG TY TNHH F168");
 //			obj1.put("oceanCn", "01810 - 0360 - 2501");

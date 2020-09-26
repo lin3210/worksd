@@ -367,9 +367,14 @@ public class ApiAction extends BaseAction {
 				JSONArray arrayBank = new JSONArray();
 				
 				JSONObject obj = new JSONObject();
-				obj.put("oceanAt", "QUACH THI XUYEN");
-				obj.put("oceanCn", "1903 5460 1810 10");
-				obj.put("oceanBn", "Techcombank -Buôn Ma Thuột ");
+				//obj.put("oceanAt", "QUACH THI XUYEN");
+				//obj.put("oceanCn", "1903 5460 1810 10");
+				//obj.put("oceanBn", "Techcombank -Buôn Ma Thuột ");
+				
+				
+				obj.put("oceanAt", "Trần Quang Vinh");
+				obj.put("oceanCn", "19035 46003 8013");
+				obj.put("oceanBn", "Techcombank -Dak Lak  ");
 				
 				JSONObject objBank1 = new JSONObject();
 				JSONObject objBank2 = new JSONObject();
