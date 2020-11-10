@@ -63,6 +63,21 @@ import root.order.UserMoneyBase;
 import root.tool.SendMsgCL;
 import root.tool.SendMsgTYH;
 
+
+
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Security;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+
+
+
 public class OceanApi extends BaseAction {
 	private static Logger logger = Logger.getLogger(OceanApi.class);
 	/* private static UserService userService = new UserService(); */
@@ -2605,5 +2620,282 @@ public class OceanApi extends BaseAction {
 		}
 
 	}
+	
+	
+	//登录
+		public ActionResult doUploadlogin() throws Exception {
+			
+			JSONObject jsonObject = new JSONObject();
+			
+			String miwen = getStrParameter("uploadkey");
+			String cmsphone = getStrParameter("cmsphone");
+			String password = getStrParameter("cmspwd");
+			
+			String jiamiwen = Encrypt.MD5(cmsphone + jiami);
+			
+			
+			if (jiamiwen.equals(miwen)) {
+				String resPWD = Encrypt.MD5(password + IConstants.PASS_KEY);
+				DataRow dr = jbdcmsService.getUserByNameAndPwd(cmsphone, resPWD);
+				
+				if (dr != null && !dr.isEmpty()) {
+					if (dr.getInt("state") == 0) {
+						jsonObject.put("code", -1);
+						jsonObject.put("error", "Bị cấm đăng nhập, vui lòng liên hệ IT！");
+						this.getWriter().write(jsonObject.toString());
+						return null;
+					}
+
+					jsonObject.put("cmsuseid", dr.getInt("user_id"));
+					jsonObject.put("code", 0);
+					jsonObject.put("error", "ok");
+					
+					this.getWriter().write(jsonObject.toString());
+					return null;
+					
+				}else {
+					jsonObject.put("error", -2);
+					jsonObject.put("msg", "Sai mã xác nhận！");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				}
+				
+			}
+			
+			return null;
+			
+		}
+		
+	
+	// 更新上传照片
+		public ActionResult doupdatephoto() throws Exception {
+			logger.info("请求ip" + getipAddr());
+			int userid = getIntParameter("userid");
+			int cmsuserid = getIntParameter("cmsid");
+			JSONObject jsonObject = new JSONObject();
+			String miwen = getStrParameter("uploadkey");
+			SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			String jiamiwen = Encrypt.MD5(userid+"photo" + jiami);
+			if (jiamiwen.equals(miwen)) {
+				if ( cmsuserid==888   ) {
+					String p1 = mofaUserService.getUserpicP1(userid);
+					String p2 = mofaUserService.getUserpicP2(userid);
+					String p3 = mofaUserService.getUserpicP3(userid);
+
+					String ggp1 = getStrParameter("ggp1");
+					String ggp2 = getStrParameter("ggp2");
+					String ggp3 = getStrParameter("ggp3");
+
+					DataRow row = new DataRow();
+					row.set("userid", userid);
+					row.set("p1", p1);
+					row.set("p2", p2);
+					row.set("p3", p3);
+					row.set("ggp1", ggp1);
+					row.set("ggp2", ggp2);
+					row.set("ggp3", ggp3);
+					row.set("cmsuserid", cmsuserid);
+					row.set("createtime", fmtrq.format(new Date()));
+					mofaUserService.insertChangePictureLoad(row);
+					String ui = mofaUserService.getUI(userid+"");
+					if("".equals(ui)) {
+						DataRow row5 = new DataRow();
+						row5.set("userid", userid);
+						row5.set("p1", ggp1);
+						row5.set("p2", ggp2);
+						row5.set("p3", ggp3);
+						row5.set("create_time", fmtrq.format(new Date()));
+						mofaUserService.addUserZhaoPian(row5);
+					}else {
+						DataRow row1 = new DataRow();
+						row1.set("userid", userid);
+						row1.set("p1", ggp1);
+						row1.set("p2", ggp2);
+						row1.set("p3", ggp3);
+						row1.set("create_time", fmtrq.format(new Date()));
+						mofaUserService.updateUserZhaoPian(row1);
+					}
+
+					
+					jsonObject.put("error", 1);
+					jsonObject.put("msg", "Thành công");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				} else {
+					jsonObject.put("error", -2);
+					jsonObject.put("msg", "Sai mã xác nhận！");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				}
+			} else {
+				return null;
+			}
+
+		}
+		
+		
+		public ActionResult doupdatevideo() throws Exception {
+			logger.info("请求ip" + getipAddr());
+			int userid = getIntParameter("userid");
+			int cmsuserid = getIntParameter("cmsid");
+			JSONObject jsonObject = new JSONObject();
+			String miwen = getStrParameter("uploadkey");
+			SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			String jiamiwen = Encrypt.MD5(userid+"video" + jiami);
+			if (jiamiwen.equals(miwen)) {
+				if ( cmsuserid==888) {
+					int jkid = getIntParameter("jkid");
+					String spzt = mofaUserService.getUserpicVideoZT(userid, jkid);
+					if (TextUtils.isEmpty(spzt)) {
+						jsonObject.put("error", -1);
+						jsonObject.put("msg", "Không có KH vay này !");
+						this.getWriter().write(jsonObject.toString());
+						return null;
+					}
+					String video = mofaUserService.getUserpicVideo(userid, jkid);
+
+					String ggvideo = getStrParameter("ggvideo");
+
+					DataRow row = new DataRow();
+					row.set("video", video);
+					row.set("ggvideo", ggvideo);
+					row.set("cmsuserid", cmsuserid);
+					row.set("createtime", fmtrq.format(new Date()));
+					mofaUserService.insertChangePictureLoad(row);
+
+					DataRow row1 = new DataRow();
+					row1.set("id", jkid);
+					row1.set("spdz", ggvideo);
+					row1.set("spzt", 1);
+					row1.set("spsj", fmtrq.format(new Date()));
+					mofaUserService.updateUserLoadVideo(row1);
+
+					jsonObject.put("error", 1);
+					jsonObject.put("msg", "Thành công");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				} else {
+					jsonObject.put("error", -2);
+					jsonObject.put("msg", "Sai mã xác nhận！");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				}
+			} else {
+				return null;
+			}
+
+		}
+		
+		public ActionResult doupdateOSS() throws Exception {
+			logger.info("请求ip" + getipAddr());
+
+			int cmsuserid = getIntParameter("cmsid");
+			JSONObject jsonObject = new JSONObject();
+			String miwen = getStrParameter("uploadkey");
+			String jiamiwen = Encrypt.MD5(cmsuserid+"oook" + jiami);
+			if (jiamiwen.equals(miwen)) {
+				if ( cmsuserid==888) {
+					OceanApi de1 = new OceanApi();
+					
+					String accessKeyId = "ocean";
+					String accessKeySecret = "LTAI4FmJjtKEwbMf4rRrda51";
+					String bucketName = "qI4a7hGEt88y6MupRp0WjuTA2OAJcm";
+					byte[] encontent1 = de1.Encrytor(accessKeyId);
+					byte[] encontent2 = de1.Encrytor(accessKeySecret);
+					byte[] encontent3 = de1.Encrytor(bucketName);
+
+					jsonObject.put("accessKeyId", new String(encontent1));
+					jsonObject.put("accessKeySecret", new String(encontent2));
+					jsonObject.put("accessKeyName", new String(encontent3));
+					
+					jsonObject.put("error", 1);
+					jsonObject.put("msg", "Thành công");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				} 
+				
+				jsonObject.put("error", -2);
+				jsonObject.put("msg", "Sai mã xác nhận！");
+				this.getWriter().write(jsonObject.toString());
+				return null;
+			}
+			return null;
+		}
+		
+		
+		//KeyGenerator 提供對稱金鑰生成器的功能，支援各種演算法
+		private KeyGenerator keygen;
+		//SecretKey 負責儲存對稱金鑰
+		private SecretKey deskey;
+		//Cipher負責完成加密或解密工作
+		private Cipher c;
+		//該位元組陣列負責儲存加密的結果
+		private byte[] cipherByte;
+		
+		public OceanApi() throws NoSuchAlgorithmException, NoSuchPaddingException{
+			//Security.addProvider(new com.sun.crypto.provider.SunJCE());
+			//例項化支援DES演算法的金鑰生成器(演算法名稱命名需按規定，否則丟擲異常)
+			keygen = KeyGenerator.getInstance("DES");
+			//生成金鑰
+			deskey = keygen.generateKey();
+			//生成Cipher物件,指定其支援的DES演算法
+			c = Cipher.getInstance("DES");
+		}
+		
+		/**
+		 * 對字串加密
+		 * 
+		 * @param str
+		 * @return
+		 * @throws InvalidKeyException
+		 * @throws IllegalBlockSizeException
+		 * @throws BadPaddingException
+		 */
+		public byte[] Encrytor(String str) throws InvalidKeyException,
+				IllegalBlockSizeException, BadPaddingException {
+			// 根據金鑰，對Cipher物件進行初始化，ENCRYPT_MODE表示加密模式
+			c.init(Cipher.ENCRYPT_MODE, deskey);
+			byte[] src = str.getBytes();
+			// 加密，結果儲存進cipherByte
+			cipherByte = c.doFinal(src);
+			return cipherByte;
+		}
+
+		/**
+		 * 對字串解密
+		 * 
+		 * @param buff
+		 * @return
+		 * @throws InvalidKeyException
+		 * @throws IllegalBlockSizeException
+		 * @throws BadPaddingException
+		 */
+		public byte[] Decryptor(byte[] buff) throws InvalidKeyException,
+				IllegalBlockSizeException, BadPaddingException {
+			// 根據金鑰，對Cipher物件進行初始化，DECRYPT_MODE表示加密模式
+			c.init(Cipher.DECRYPT_MODE, deskey);
+			cipherByte = c.doFinal(buff);
+			return cipherByte;
+		}
+
+		/**
+		 * @param args
+		 * @throws NoSuchPaddingException 
+		 * @throws NoSuchAlgorithmException 
+		 * @throws BadPaddingException 
+		 * @throws IllegalBlockSizeException 
+		 * @throws InvalidKeyException 
+		 */
+		public static void main(String[] args) throws Exception {
+			OceanApi de1 = new OceanApi();
+			String msg ="郭XX-搞笑相聲全集";
+			byte[] encontent = de1.Encrytor(msg);
+			byte[] decontent = de1.Decryptor(encontent);
+			System.out.println("明文是:" + msg);
+			System.out.println("加密後:" + new String(encontent));
+			System.out.println("解密後:" + new String(decontent));
+		}
+		
+		
 	
 }

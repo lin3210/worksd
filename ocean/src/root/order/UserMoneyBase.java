@@ -50,6 +50,102 @@ public class UserMoneyBase  {
 	}
 	
 
+	public static void main(String []arg ) {
+		
+
+		int userid =5715;
+		int return_Maxmoney = 2000000;
+	    List<DataRow> listjkDataMax = jbdUserBaseServiceBean.getUserjkMoneyMax(userid+"");
+	   
+	    int cgjk_cs =0;
+		if( null != listjkDataMax) {
+			for(DataRow jkDataMax:listjkDataMax) {
+				int hkcs=listjkDataMax.size();
+				
+				String sjdzMoney = jkDataMax.getString("sjds_money"); // Mas money
+				String  jklx = jkDataMax.getString("lx");    //loan interset
+				int yuqts = jkDataMax.getInt("yuq_ts");  //  overdue days
+				int nMaxmoney =Integer.parseInt(sjdzMoney.replace(",", "").replace(".", ""))+ Integer.parseInt(jklx.replace(",", "").replace(".", ""));
+				
+				if(nMaxmoney>=return_Maxmoney) {
+					return_Maxmoney = nMaxmoney;
+					cgjk_cs++;
+					if(nMaxmoney==2000000) {
+						if(yuqts <15) {
+							
+							return_Maxmoney +=500000;
+						}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+							return_Maxmoney -=1000000;
+						}else if ( yuqts > 60   ) {
+							return_Maxmoney =2000000;
+						}
+					}else if(nMaxmoney==2500000 ) {
+						if(cgjk_cs >=3) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}
+					}else if(nMaxmoney==3000000 ) {
+						if(cgjk_cs >=5) {
+							if(cgjk_cs >=2) {
+								if(yuqts <15) {
+									return_Maxmoney +=500000;
+								}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+									return_Maxmoney -=1000000;
+								}else if ( yuqts > 60   ) {
+									return_Maxmoney =2000000;
+								}
+							}
+						}
+					}else if(nMaxmoney==3500000 ) {
+						if(cgjk_cs >=8) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}
+						
+					}else if(nMaxmoney==4000000) {
+						if(cgjk_cs >=12) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}
+						
+					}else if(nMaxmoney==4500000) {
+						if(cgjk_cs >=22) {
+							if(yuqts <15) {
+								return_Maxmoney +=500000;
+							}else if (yuqts <= 60 && yuqts >= 30 && nMaxmoney >3000000 ) {
+								return_Maxmoney -=1000000;
+							}else if ( yuqts > 60   ) {
+								return_Maxmoney =2000000;
+							}
+						}
+						
+					}
+					
+				}
+			}
+		}
+		logger.info("userid--return_Maxmoney:"+return_Maxmoney);
+		if(return_Maxmoney >5000000 ) {
+			return_Maxmoney=5000000; 
+		}
+		return ;
+	
+	}
 	/**
 	 * Maximum loan amount
 	 * @param userid 
