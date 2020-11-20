@@ -160,7 +160,7 @@ public class SDYQTask implements Task  {
 								 jkInfo.set("id",jkid);
 								 jkInfo.set("tzjx_ts",tzjx_ts+1);
 								 logger.info(zjine*yqannualrate/3000);
-								 jkInfo.set("tzjx_lx",famt.format(tzjxlx+sjsh*yqannualrate*4/3000));							
+								 jkInfo.set("tzjx_lx",famt.format(tzjxlx+sjsh*yqannualrate*5/3000));							
 								 //更新借款信息
 								 service.updateJKinfo(jkInfo); 
 								 
@@ -173,7 +173,7 @@ public class SDYQTask implements Task  {
 								DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
 								int fendanid = datafendan.getInt("id");
 								int cuishoujine = datafendan.getInt("cuishou_jine");
-								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*4/3000;  //原来入催金额+ 每天利息
+								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*5/3000;  //原来入催金额+ 每天利息
 								logger.info("cuishoujine"+cuishoujine+"  totalcuishoujine:"+totalcuishoujine);
 								
 								DataRow dataRowfd = new DataRow();
@@ -192,7 +192,7 @@ public class SDYQTask implements Task  {
 							 jkInfo.set("tzjx_lx","0");
 							 jkInfo.set("yuq_ts",tzjx_ts+yuq_ts+1);
 							 logger.info(zjine*yqannualrate/3000);
-							 jkInfo.set("yuq_lx",famt.format(tzjxlx+yuq+sjsh*yqannualrate*4/3000));							
+							 jkInfo.set("yuq_lx",famt.format(tzjxlx+yuq+sjsh*yqannualrate*5/3000));							
 							 //更新借款信息
 							 service.updateJKinfo(jkInfo);
 							 
@@ -204,7 +204,7 @@ public class SDYQTask implements Task  {
 								DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
 								int fendanid = datafendan.getInt("id");
 								int cuishoujine = datafendan.getInt("cuishou_jine");
-								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*4/3000;  //原来入催金额+ 每天利息
+								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*5/3000;  //原来入催金额+ 每天利息
 								logger.info("cuishoujine"+cuishoujine+"  totalcuishoujine:"+totalcuishoujine);
 								
 								DataRow dataRowfd = new DataRow();

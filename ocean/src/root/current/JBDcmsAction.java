@@ -3799,9 +3799,9 @@ public class JBDcmsAction extends BaseAction {
 				if (ddday > 0) {
 					int dqyqlx = 0;
 					if (jkdate == 3 || jkdate == 4) {
-						dqyqlx = yqlx - (sjsh * 4 / 100) * ddday;
+						dqyqlx = yqlx - (sjsh * 5 / 100) * ddday;
 					} else {
-						dqyqlx = yqlx - (sjsh * 4 / 100) * ddday;
+						dqyqlx = yqlx - (sjsh * 5 / 100) * ddday;
 					}
 					if (dqyqlx > 0) {
 						jsonObject.put("yqlx", df.format(dqyqlx));

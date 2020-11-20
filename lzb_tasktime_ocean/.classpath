@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/ant.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/antlr.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/as1.2.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/asclient1.2.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/bcprov-jdk13-143.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/c3p0-0.9.1-jdk1.3.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/catalina.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/catalina-servlets-ssi.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/classes12.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/com.shovesoft.format.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/com.shovesoft.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-attributes-api.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-beanutils-1.8.3.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-beanutils-bean-collections-1.8.3.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-beanutils-core-1.8.3.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-codec-1.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-dbcp-1.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-discovery-0.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-email-1.2.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-httpclient-3.0.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-lang3-3.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-logging-api-1.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-pool-1.5.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-resources.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/db2java.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/ezmorph-1.0.3.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/fastjson-1.1.8.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/freemarker.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/fuiouFht.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpclient-4.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpclient-cache-4.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpclient-win-4.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpcore-4.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpmime-4.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/itext-2.0.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/java_memcached-release_2.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/javamail.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jdom.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jsdk-15.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/json-lib-2.0-jdk15.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jstl.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jtds-1.2.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/lianlianpay-security-1.0.0.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/log4j-1.2.8.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/merchant-util-1.1.50-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/mysql-connector-java-3.0.14-production-bin.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/mysql-connector-java-5.1.7-bin.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/oscache-2.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/pinyin4j-2.5.0.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/poi-3.5-FINAL-20090928.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/standard.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/struts2-core-2.3.15.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/SX.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-base-1.2.8.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-quote-src-1.0.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-timer-1.0.0.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-web-1.1.4.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/urlrewrite-2.6.0.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/velocity-dep.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/xwork-core-2.3.15.1.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/yintong_api_util.jar"/>
-	<classpathentry kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/zmxy-sdk-java-20170322195651.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/ant.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/antlr.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/as1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/asclient1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/bcprov-jdk13-143.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/c3p0-0.9.1-jdk1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/catalina.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/catalina-servlets-ssi.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/classes12.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/com.shovesoft.format.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/com.shovesoft.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-attributes-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-beanutils-bean-collections-1.8.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-beanutils-core-1.8.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-codec-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-dbcp-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-discovery-0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-email-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-httpclient-3.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-io-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-lang-2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-lang3-3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-logging-api-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-pool-1.5.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/commons-resources.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/db2java.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/dom4j-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/ezmorph-1.0.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/fastjson-1.1.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/freemarker.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/fuiouFht.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpclient-4.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpclient-cache-4.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpclient-win-4.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpcore-4.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/httpmime-4.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/itext-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/java_memcached-release_2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/javamail.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jdom.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jsdk-15.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/json-lib-2.0-jdk15.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jstl.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/jtds-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/lianlianpay-security-1.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/log4j-1.2.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/merchant-util-1.1.50-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/mysql-connector-java-3.0.14-production-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/mysql-connector-java-5.1.7-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/oscache-2.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/pinyin4j-2.5.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/poi-3.5-FINAL-20090928.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/standard.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/struts2-core-2.3.15.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/SX.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-base-1.2.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-quote-src-1.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-timer-1.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/thinkive-web-1.1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/urlrewrite-2.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/velocity-dep.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/xwork-core-2.3.15.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/yintong_api_util.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/team/worksd/lzb_tasktime_ocean/lib/zmxy-sdk-java-20170322195651.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
