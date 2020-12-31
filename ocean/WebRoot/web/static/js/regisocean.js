@@ -6,7 +6,7 @@
         state:"OCEAN", 
         version:"v6.0",
         fbAppEventsEnabled:true,
-        redirect:"https://www.oceanvay.com/web/registered.html",
+        redirect:"https://www.mvaymvn.com/webmvay/registered.html",
 		debug:true
       }
     );

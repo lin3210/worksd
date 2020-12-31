@@ -1950,7 +1950,982 @@ function call_phone3(phone_){
       }
       </script>
       <!--3 end  -->
+      
+      
+       
+<!--------------------------6 start _d -------------------------------------------- -->
+         <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    Dữ liệu danh bạ điện thoại--6
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    
+                    <!-- find head start -->
+                      <tr>
+                        <th colspan="20" style="border-bottom:0px solid #ddd; border-top:0px solid #ddd;">
+                        <div class="row" style="margin-top: 10px;">
+		                <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselecttxl6" onChange="" >
+                                      <option value="0">
+                                      Tất cả
+                                      </option>
+                                       <option value="1">
+                                         ID
+                                      </option>
+                                      <option value="2">
+                                         Số ĐTDĐ
+                                      </option>
+                                      <option value="3">
+                                      Họ Tên
+                                      </option>
+                                      <option value="3">
+                                      Họ Tên
+                                      </option>  
+                                                                            
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVeluetxl6" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+			                  <button id="btn-loadtxl6" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			         </div>
+		             </div>
+                     </th>
+                   </tr>
+                   <!-- find head end -->
+                   
+                   <!-- data start -->
+                   <tr>
+                      <tr>
+                         <th colspan="20" style=" border-bottom:1px;font-family:cursive;font-weight:bold;">Tổng số danh bạ：<span id="ztstxl6" style="color:red; font-size:16px;"></span>&nbsp;số</th>
+                      </tr>
+                   </tr>
+                      <tr>                
+                        <th>
+                        Họ tên
+                        </th>
+                        <th>
+                        Số ĐTDĐ
+                        </th>
+                        <th>
+                        Số CMND
+                        </th>
+                        <th>
+                        Sinh nhật
+                        </th>
+                        <th>
+                        address
+                        </th>
+                        <th>
+                         thời gian
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="load_data_d">
+                      
+                    </tbody>
+                  </table>
+                  <!-- data start -->
+                  
+                  <!-- botton start -->
+	              <div class="row">
+	                    <div class="dataTables_footer clearfix">
+	                       <div class="col-md-6">
+	                           <div class="dataTables_info" id="DataTables_Table_0_info">
+	                               Tổng số
+	                           <font id="totalrows_d"></font>
+	                                tin, mỗi trang chứa được 
+	                           <font id="numperpage_d"></font>
+	                                tin, hiện tại trang số<font id="currentpage_d">
+	                           </font> / <font id="totalpages_d"></font>
+	                               trang
+	                           </div>
+	                       </div>
+	                       <div class="col-md-6">
+	                            <div class="dataTables_paginate paging_bootstrap" id="datatable_d">
+	                            </div>
+	                       </div>
+	                   </div>
+	             </div>
+			   <!-- botton end -->
+            </div>
+                 
+      </div>
+      
+      <script>
+      load_data_d();
+      $("#btn-loadtxl6").on("click", function() {
+ 
+		var a = $(this);
+		a.button("loading");
+		$("#cupage_d").val("1");
+		load_data_d();
+	  }); 
 
+      function load_data_d(){
+	    var tempsele=$("#tempselecttxl6").val();
+	    var tempval=$("#tempVeluetxl6").val();
+	    if(tempsele!=null && tempsele!=0){
+		  if(tempval==""){
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-loadtxl6").button("reset");
+			  return;
+		  }
+	    }
+	 
+	    var user_id_=GetQueryString("user_id");
+	    var para={curPage:$("#cupage_d").val(),user_id:user_id_,temp:tempsele,tempvl:tempval};
+	    loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxTXL_S",para,function(data){
+	    if(data.error < 0 ){
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		}
+	    
+		$("#load_data_d").html("");
+        var list = data.list.data;	
+		var html_="";
+		$("#ztstxl6").html(data.tongxunlucount);
+		if(list.length>0){
+		   for(var i=0;i<list.length;i++){  
+		  	  var str=list[i].phone;
+			  var arr=str.split("/");
+			  
+			  html_ += "<tr><td>"+list[i].name+"</td>";
+			 // html_ += "<td>";
+			 // for(var mm=0;mm<arr.length;mm++){
+			//	  var cphone = arr[mm];
+			//	  var cphoneOne = arr[mm];
+			//	  if(cphone.length > 8){
+			//		  cphone = cphone.replace(/\s*/g,"");
+			//		  if(cphone.substr(0, 2) == "84") {
+			//		 		cphone = "0"+cphone.substr(2);
+			//			 }
+			//		  cphoneOne = cphoneOne.replace(/\s*/g,"");
+			//		  if(cphoneOne.substr(0, 2) == "84") {
+			//			  cphoneOne = "0"+cphoneOne.substr(2);
+			//		  }
+			//	 	 cphone = cphone.substr(0, 3) + "*****"+ cphone.substr(8);
+			//	  }
+			 // 	  html_ += "<a href='javascript:void(0);' onclick=\"call_choice('"+encrypt(cphoneOne)+"')\">"+cphone+"</a>";
+			 // }
+			 // html_ += "</td>"; 
+			  html_ += "<td>"+list[i].phone+"</td>";
+			  html_ += "<td>"+list[i].idno+"</td>";
+			  html_ += "<td>"+list[i].age+"</td>";
+			  html_ += "<td>"+list[i].address+"</td>";
+			  html_ += "<td>"+list[i].create_time+"</td>";
+			  html_ +="</tr>";
+			  }
+		  }
+		  else
+		  {
+			  html_+="<tr><td colspan='15' class='nu'> Hiện không có dữ liệu</td></tr>"
+		  }
+		  
+		  $("#load_data_d").append(html_);
+		  $("#tempselecttxl6").val(data.temp);
+		  $("#tempVeluetxl6").val(data.tempvalu);
+		  page_value_d(data); 
+		  page_data_d(); 
+		  $("#btn-loadtxl6").button("reset");
+	    });
+      }
+      </script>
+<!------------------------6 end  ------------------------------------->  
+      
+<!--------------------------7 start _e  ------------------------------->
+         <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    Dữ liệu danh bạ điện thoại--7
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    
+                    <!-- find head start -->
+                      <tr>
+                        <th colspan="20" style="border-bottom:0px solid #ddd; border-top:0px solid #ddd;">
+                        <div class="row" style="margin-top: 10px;">
+		                <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselecttxl7" onChange="" >
+                                      <option value="0">
+                                      Tất cả
+                                      </option>
+                                       <option value="1">
+                                         ID
+                                      </option>
+                                      <option value="2">
+                                         Số ĐTDĐ
+                                      </option>
+                                      <option value="3">
+                                      Họ Tên
+                                      </option>  
+                                                                            
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVeluetxl7" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+			                  <button id="btn-loadtxl7" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			         </div>
+		             </div>
+                     </th>
+                   </tr>
+                   <!-- find head end -->
+                   
+                   <!-- data start -->
+                   <tr>
+                      <tr>
+                         <th colspan="20" style=" border-bottom:1px;font-family:cursive;font-weight:bold;">Tổng số danh bạ：<span id="ztstxl7" style="color:red; font-size:16px;"></span>&nbsp;số</th>
+                      </tr>
+                   </tr>
+                      <tr>
+                        <th>
+                        Họ tên
+                        </th>
+                        <th>
+                        Số CMND
+                        </th>
+                        <th>
+                        Sinh nhật
+                        </th>
+                        <th>
+                        Số ĐTDĐ
+                        </th>
+                        <th>
+                        Số ĐTDĐ-1
+                        </th>
+                        <th>
+                        Số ĐTDĐ-2
+                        </th>
+                        <th>
+                        Số ĐTDĐ-3
+                        </th>
+                        <th>
+                        Số ĐTDĐ-4
+                        </th>
+                        <th>
+                        Số ĐTDĐ-5
+                        </th>
+                        <th>
+                        address
+                        </th>
+                        <th>
+                         thời gian
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="load_data_e">
+                      
+                    </tbody>
+                  </table>
+                  <!-- data start -->
+              
+                  <!-- botton start -->
+	              <div class="row">
+	                    <div class="dataTables_footer clearfix">
+	                       <div class="col-md-6">
+	                           <div class="dataTables_info" id="DataTables_Table_0_info">
+	                               Tổng số
+	                           <font id="totalrows_e"></font>
+	                                tin, mỗi trang chứa được 
+	                           <font id="numperpage_e"></font>
+	                                tin, hiện tại trang số<font id="currentpage_e">
+	                           </font> / <font id="totalpages_e"></font>
+	                               trang
+	                           </div>
+	                       </div>
+	                       <div class="col-md-6">
+	                            <div class="dataTables_paginate paging_bootstrap" id="datatable_e">
+	                            </div>
+	                       </div>
+	                   </div>
+	             </div>
+			   <!-- botton end -->
+            </div>
+                 
+      </div>
+      
+      <script>
+      load_data_e();
+      $("#btn-loadtxl7").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage_e").val("1");
+		load_data_e();
+	  }); 
+
+      function load_data_e(){
+	    var tempsele=$("#tempselecttxl7").val();
+	    var tempval=$("#tempVeluetxl7").val();
+	    if(tempsele!=null && tempsele!=0){
+		  if(tempval==""){
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-loadtxl7").button("reset");
+			  return;
+		  }
+	    }
+	 
+	    var user_id_=GetQueryString("user_id");
+	    var para={curPage:$("#cupage_e").val(),user_id:user_id_,temp:tempsele,tempvl:tempval};
+	    loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxTXL_Y",para,function(data){
+	    if(data.error < 0 ){
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		}
+	    
+		$("#load_data_e").html("");
+        var list = data.list.data;	
+		var html_="";
+		$("#ztstxl7").html(data.tongxunlucount); 
+		if(list.length>0){
+		   for(var i=0;i<list.length;i++){  
+		  	  var str=list[i].phone;
+			  var arr=str.split("/");
+			  
+			  html_ += "<tr>";
+			  html_ += "<td>"+list[i].name+"</td>";
+			  html_ += "<td>"+list[i].idno+"</td>";
+			  html_ += "<td>"+list[i].age+"</td>";
+			 // html_ += "<td>";
+			 // for(var mm=0;mm<arr.length;mm++){
+			//	  var cphone = arr[mm];
+			//	  var cphoneOne = arr[mm];
+			//	  if(cphone.length > 8){
+			//		  cphone = cphone.replace(/\s*/g,"");
+			//		  if(cphone.substr(0, 2) == "84") {
+			//		 		cphone = "0"+cphone.substr(2);
+			//			 }
+			//		  cphoneOne = cphoneOne.replace(/\s*/g,"");
+			//		  if(cphoneOne.substr(0, 2) == "84") {
+			//			  cphoneOne = "0"+cphoneOne.substr(2);
+			//		  }
+			//	 	 cphone = cphone.substr(0, 3) + "*****"+ cphone.substr(8);
+			//	  }
+			 // 	  html_ += "<a href='javascript:void(0);' onclick=\"call_choice('"+encrypt(cphoneOne)+"')\">"+cphone+"</a>";
+			 //}
+			 // html_ += "</td>"; 
+			  html_ += "<td>"+list[i].phone+"</td>";
+			  html_ += "<td>"+list[i].home_phone+"</td>";
+			  html_ += "<td>"+list[i].work_phone+"</td>";
+			  html_ += "<td>"+list[i].family1_phone+"</td>";
+			  html_ += "<td>"+list[i].family2_phone+"</td>";
+			  html_ += "<td>"+list[i].family3_phone+"</td>";
+			  html_ += "<td>"+list[i].address+"</td>";
+			  html_ += "<td>"+list[i].create_time+"</td>";
+			  html_ +="</tr>";
+			  }
+		  }
+		  else
+		  {
+			  html_+="<tr><td colspan='15' class='nu'> Hiện không có dữ liệu</td></tr>"
+		  }
+		  
+		  $("#load_data_e").append(html_);
+		  $("#tempselecttxl7").val(data.temp);
+		  $("#tempVeluetxl7").val(data.tempvalu);
+		  page_value_e(data); 
+		  page_data_e(); 
+		  $("#btn-loadtxl7").button("reset");
+	    });
+      }
+      </script>
+<!------------------------------7 end ---------------------------- -->  
+      
+ <!--3 start _a  -->
+         <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    Dữ liệu danh bạ điện thoại--3
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    
+                    <!-- find head start -->
+                      <tr>
+                        <th colspan="20" style="border-bottom:0px solid #ddd; border-top:0px solid #ddd;">
+                        <div class="row" style="margin-top: 10px;">
+		                <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselecttxl3" onChange="" >
+                                      <option value="0">
+                                      Tất cả
+                                      </option>
+                                       <option value="1">
+                                         ID
+                                      </option>
+                                      <option value="2">
+                                         Số ĐTDĐ
+                                      </option>
+                                      <option value="3">
+                                      Họ Tên
+                                      </option>  
+                                                                            
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVeluetxl3" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+			                  <button id="btn-loadtxl3" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			         </div>
+		             </div>
+                     </th>
+                   </tr>
+                   <!-- find head end -->
+                   
+                   <!-- data start -->
+                   <tr>
+                      <tr>
+                         <th colspan="20" style=" border-bottom:1px;font-family:cursive;font-weight:bold;">Tổng số danh bạ：<span id="ztstxl3" style="color:red; font-size:16px;"></span>&nbsp;số</th>
+                      </tr>
+                   </tr>
+                      <tr>
+                        <th>
+                          STT
+                        </th>
+                        <th>
+                        Họ tên
+                        </th>
+                        <th>
+                        Số ĐTDĐ
+                        </th>
+                        <th>
+                         thời gian
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="load_data_a">
+                      
+                    </tbody>
+                  </table>
+                  <!-- data start -->
+                  
+                  <!-- botton start -->
+	              <div class="row">
+	                    <div class="dataTables_footer clearfix">
+	                       <div class="col-md-6">
+	                           <div class="dataTables_info" id="DataTables_Table_0_info">
+	                               Tổng số
+	                           <font id="totalrows_a"></font>
+	                                tin, mỗi trang chứa được 
+	                           <font id="numperpage_a"></font>
+	                                tin, hiện tại trang số<font id="currentpage_a">
+	                           </font> / <font id="totalpages_a"></font>
+	                               trang
+	                           </div>
+	                       </div>
+	                       <div class="col-md-6">
+	                            <div class="dataTables_paginate paging_bootstrap" id="datatable_a">
+	                            </div>
+	                       </div>
+	                   </div>
+	             </div>
+			   <!-- botton end -->
+            </div>
+                 
+      </div>
+      
+      <script>
+      load_data_a();
+      $("#btn-loadtxl3").on("click", function() {
+ 
+		var a = $(this);
+		a.button("loading");
+		$("#cupage_a").val("1");
+		load_data_a();
+	  }); 
+
+      function load_data_a(){
+    	
+	    var tempsele=$("#tempselecttxl3").val();
+	    var tempval=$("#tempVeluetxl3").val();
+	    if(tempsele!=null && tempsele!=0){
+		  if(tempval==""){
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-loadtxl3").button("reset");
+			  return;
+		  }
+	    }
+	 
+	    var user_id_=GetQueryString("user_id");
+	    var para={curPage:$("#cupage_a").val(),user_id:user_id_,temp:tempsele,tempvl:tempval};
+	    loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxTXL_3",para,function(data){
+	    if(data.error < 0 ){
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		}
+	    
+		$("#load_data_a").html("");
+        var list = data.list.data;	
+		var html_="";
+		$("#ztstxl3").html(data.tongxunlucount);
+		if(list.length>0){
+		   for(var i=0;i<list.length;i++){  
+		  	  var str=list[i].phone;
+			  var arr=str.split("/");
+			  
+			  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td>";
+			 // html_ += "<td>";
+			  //for(var mm=0;mm<arr.length;mm++){
+				 // var cphone = arr[mm];
+				 // var cphoneOne = arr[mm];
+				 // if(cphone.length > 8){
+					//  cphone = cphone.replace(/\s*/g,"");
+					//  if(cphone.substr(0, 2) == "84") {
+					// 		cphone = "0"+cphone.substr(2);
+					//	 }
+					//  cphoneOne = cphoneOne.replace(/\s*/g,"");
+					//  if(cphoneOne.substr(0, 2) == "84") {
+					//	  cphoneOne = "0"+cphoneOne.substr(2);
+					//  }
+				 	// cphone = cphone.substr(0, 3) + "*****"+ cphone.substr(8);
+				 // }
+			  	//  html_ += "<a href='javascript:void(0);' onclick=\"call_choice('"+encrypt(cphoneOne)+"')\">"+cphone+"</a>";
+			 // }
+			 // html_ += "</td>"; 
+			  html_ += "<td>"+list[i].phone+"</td>";
+			  html_ +="<td>"+list[i].create_time+"</td>";
+			  html_ +="</tr>";
+			  }
+		  }
+		  else
+		  {
+			  html_+="<tr><td colspan='15' class='nu'> Hiện không có dữ liệu</td></tr>";
+		  }
+		  
+		  $("#load_data_a").append(html_);
+		  $("#tempselecttxl3").val(data.temp);
+		  $("#tempVeluetxl3").val(data.tempvalu);
+		  page_value_a(data); 
+		  page_data_a(); 
+		  $("#btn-loadtxl3").button("reset");
+	    });
+      }
+      </script>
+      <!--3 end  -->
+      <!--4 start _b  -->
+         <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    Dữ liệu danh bạ điện thoại--4
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    
+                    <!-- find head start -->
+                      <tr>
+                        <th colspan="20" style="border-bottom:0px solid #ddd; border-top:0px solid #ddd;">
+                        <div class="row" style="margin-top: 10px;">
+		                <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselecttxl4" onChange="" >
+                                      <option value="0">
+                                      Tất cả
+                                      </option>
+                                       <option value="1">
+                                         ID
+                                      </option>
+                                      <option value="2">
+                                         Số ĐTDĐ
+                                      </option>
+                                      <option value="3">
+                                      Họ Tên
+                                      </option>  
+                                                                            
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVeluetxl4" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+			                  <button id="btn-loadtxl4" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			         </div>
+		             </div>
+                     </th>
+                   </tr>
+                   <!-- find head end -->
+                   
+                   <!-- data start -->
+                   <tr>
+                      <tr>
+                         <th colspan="20" style=" border-bottom:1px;font-family:cursive;font-weight:bold;">Tổng số danh bạ：<span id="ztstxl4" style="color:red; font-size:16px;"></span>&nbsp;số</th>
+                      </tr>
+                   </tr>
+                      <tr>
+                        <th>
+                          STT
+                        </th>
+                        
+                  
+                        <th>
+                        Họ tên
+                        </th>
+                        <th>
+                        Số ĐTDĐ
+                        </th>
+                        <th>
+                         thời gian
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="load_data_b">
+                      
+                    </tbody>
+                  </table>
+                  <!-- data start -->
+                  
+                  <!-- botton start -->
+	              <div class="row">
+	                    <div class="dataTables_footer clearfix">
+	                       <div class="col-md-6">
+	                           <div class="dataTables_info" id="DataTables_Table_0_info">
+	                               Tổng số
+	                           <font id="totalrows_b"></font>
+	                                tin, mỗi trang chứa được 
+	                           <font id="numperpage_b"></font>
+	                                tin, hiện tại trang số<font id="currentpage_b">
+	                           </font> / <font id="totalpages_b"></font>
+	                               trang
+	                           </div>
+	                       </div>
+	                       <div class="col-md-6">
+	                            <div class="dataTables_paginate paging_bootstrap" id="datatable_b">
+	                            </div>
+	                       </div>
+	                   </div>
+	             </div>
+			   <!-- botton end -->
+            </div>
+                 
+      </div>
+      
+      <script>
+      load_data_b();
+      $("#btn-loadtxl4").on("click", function() {
+ 
+		var a = $(this);
+		a.button("loading");
+		$("#cupage_b").val("1");
+		load_data_b();
+	  }); 
+
+      function load_data_b(){
+	    var tempsele=$("#tempselecttxl4").val();
+	    var tempval=$("#tempVeluetxl4").val();
+	    if(tempsele!=null && tempsele!=0){
+		  if(tempval==""){
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-loadtxl4").button("reset");
+			  return;
+		  }
+	    }
+	 
+	    var user_id_=GetQueryString("user_id");
+	    var para={curPage:$("#cupage_b").val(),user_id:user_id_,temp:tempsele,tempvl:tempval};
+	    loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxTXL_4",para,function(data){
+	    if(data.error < 0 ){
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		}
+	    
+		$("#load_data_b").html("");
+        var list = data.list.data;	
+		var html_="";
+		$("#ztstxl4").html(data.tongxunlucount);
+		if(list.length>0){
+		   for(var i=0;i<list.length;i++){  
+		  	  var str=list[i].phone;
+			  var arr=str.split("/");
+			  
+			  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td>";
+			  //html_ += "<td>";
+			 // for(var mm=0;mm<arr.length;mm++){
+			 //	  var cphone = arr[mm];
+				//  var cphoneOne = arr[mm];
+			//	  if(cphone.length > 8){
+				//	  cphone = cphone.replace(/\s*/g,"");
+				//	  if(cphone.substr(0, 2) == "84") {
+				//	 		cphone = "0"+cphone.substr(2);
+				//		 }
+				//	  cphoneOne = cphoneOne.replace(/\s*/g,"");
+				//	  if(cphoneOne.substr(0, 2) == "84") {
+				//		  cphoneOne = "0"+cphoneOne.substr(2);
+				//	  }
+				 //	 cphone = cphone.substr(0, 3) + "*****"+ cphone.substr(8);
+				//  }
+			  	//  html_ += "<a href='javascript:void(0);' onclick=\"call_choice('"+encrypt(cphoneOne)+"')\">"+cphone+"</a>";
+			 // }
+			 // html_ += "</td>"; 
+			  html_ += "<td>"+list[i].phone+"</td>";
+			  html_ +="<td>"+list[i].create_time+"</td>";
+			  html_ +="</tr>";
+			  }
+		  }
+		  else
+		  {
+			  html_+="<tr><td colspan='15' class='nu'> Hiện không có dữ liệu</td></tr>";
+		  }
+		  
+		  $("#load_data_b").append(html_);
+		  $("#tempselecttxl4").val(data.temp);
+		  $("#tempVeluetxl4").val(data.tempvalu);
+		  page_value_b(data); 
+		  page_data_b(); 
+		  $("#btn-loadtxl4").button("reset");
+	    });
+      }
+      </script>
+      <!--4 end  -->
+      <!--5 start _c  -->
+         <div class="widget box">
+                <div class="widget-header">
+                  <h4>
+                    <i class="fa fa-reorder">
+                    </i>
+                    Dữ liệu danh bạ điện thoại--5
+                  </h4>
+                  <div class="toolbar no-padding">
+                    <div class="btn-group">
+                      <span class="btn btn-xs widget-collapse">
+                        <i class="fa fa-angle-down">
+                        </i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: block;" class="widget-content">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                    
+                    <!-- find head start -->
+                      <tr>
+                        <th colspan="20" style="border-bottom:0px solid #ddd; border-top:0px solid #ddd;">
+                        <div class="row" style="margin-top: 10px;">
+		                <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselecttxl5" onChange="" >
+                                      <option value="0">
+                                      Tất cả
+                                      </option>
+                                       <option value="1">
+                                         ID
+                                      </option>
+                                      <option value="2">
+                                         Số ĐTDĐ
+                                      </option>
+                                      <option value="3">
+                                      Họ Tên
+                                      </option>  
+                                                                            
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVeluetxl5" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+			                  <button id="btn-loadtxl5" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			         </div>
+		             </div>
+                     </th>
+                   </tr>
+                   <!-- find head end -->
+                   
+                   <!-- data start -->
+                   <tr>
+                      <tr>
+                         <th colspan="20" style=" border-bottom:1px;font-family:cursive;font-weight:bold;">Tổng số danh bạ：<span id="ztstxl5" style="color:red; font-size:16px;"></span>&nbsp;số</th>
+                      </tr>
+                   </tr>
+                      <tr>
+                        <th>
+                          STT
+                        </th>      
+                        <th>
+                        Họ tên
+                        </th>
+                        <th>
+                        Số ĐTDĐ
+                        </th>
+                        <th>
+                         thời gian
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="load_data_c">
+                      
+                    </tbody>
+                  </table>
+                  <!-- data start -->
+                  
+                  <!-- botton start -->
+	              <div class="row">
+	                    <div class="dataTables_footer clearfix">
+	                       <div class="col-md-6">
+	                           <div class="dataTables_info" id="DataTables_Table_0_info">
+	                               Tổng số
+	                           <font id="totalrows_c"></font>
+	                                tin, mỗi trang chứa được 
+	                           <font id="numperpage_c"></font>
+	                                tin, hiện tại trang số<font id="currentpage_c">
+	                           </font> / <font id="totalpages_c"></font>
+	                               trang
+	                           </div>
+	                       </div>
+	                       <div class="col-md-6">
+	                            <div class="dataTables_paginate paging_bootstrap" id="datatable_c">
+	                            </div>
+	                       </div>
+	                   </div>
+	             </div>
+			   <!-- botton end -->
+            </div>
+                 
+      </div>
+      
+      <script>
+      load_data_c();
+      $("#btn-loadtxl5").on("click", function() {
+ 
+		var a = $(this);
+		a.button("loading");
+		$("#cupage_c").val("1");
+		load_data_c();
+	  }); 
+
+      function load_data_c(){
+	    var tempsele=$("#tempselecttxl5").val();
+	    var tempval=$("#tempVeluetxl5").val();
+	    if(tempsele!=null && tempsele!=0){
+		  if(tempval==""){
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-loadtxl5").button("reset");
+			  return;
+		  }
+	    }
+	 
+	    var user_id_=GetQueryString("user_id");
+	    var para={curPage:$("#cupage_c").val(),user_id:user_id_,temp:tempsele,tempvl:tempval};
+	    loadGetServer("/servlet/current/JBDcmsAction?function=GetMjzxTXL_a",para,function(data){
+	    if(data.error < 0 ){
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	         $("#load_html").hide();
+		}
+	    
+		$("#load_data_c").html("");
+        var list = data.list.data;	
+		var html_="";
+		$("#ztstxl5").html(data.tongxunlucount);
+		if(list.length>0){
+		   for(var i=0;i<list.length;i++){  
+		  	  var str=list[i].phone;
+			  var arr=str.split("/");
+			  
+			  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td>";
+			//  html_ += "<td>";
+			//  for(var mm=0;mm<arr.length;mm++){
+			//	  var cphone = arr[mm];
+			//	  var cphoneOne = arr[mm];
+			//	  if(cphone.length > 8){
+			//		  cphone = cphone.replace(/\s*/g,"");
+			//		  if(cphone.substr(0, 2) == "84") {
+			//		 		cphone = "0"+cphone.substr(2);
+			//			 }
+			//		  cphoneOne = cphoneOne.replace(/\s*/g,"");
+			//		  if(cphoneOne.substr(0, 2) == "84") {
+			//			  cphoneOne = "0"+cphoneOne.substr(2);
+			//		  }
+			//	 	 cphone = cphone.substr(0, 3) + "*****"+ cphone.substr(8);
+			//	  }
+			//  	  html_ += "<a href='javascript:void(0);' onclick=\"call_choice('"+encrypt(cphoneOne)+"')\">"+cphone+"</a>";
+			//  }
+			//  html_ += "</td>"; 
+			  html_ += "<td>"+list[i].phone+"</td>";
+			  html_ +="<td>"+list[i].create_time+"</td>";
+			  html_ +="</tr>";
+			  }
+		  }
+		  else
+		  {
+			  html_+="<tr><td colspan='15' class='nu'> Hiện không có dữ liệu</td></tr>";
+		  }
+		  
+		  $("#load_data_c").append(html_);
+		  $("#tempselecttxl5").val(data.temp);
+		  $("#tempVeluetxl5").val(data.tempvalu);
+		  page_value_c(data); 
+		  page_data_c(); 
+		  $("#btn-loadtxl5").button("reset");
+	    });
+      }
+      </script>
+      <!--5 end  -->  
+      
+      
 		    </div>
 		</div>
 	</div>

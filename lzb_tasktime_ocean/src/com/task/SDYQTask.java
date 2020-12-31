@@ -190,7 +190,7 @@ public class SDYQTask implements Task  {
 							 jkInfo.set("hkfq_code",0);
 							 jkInfo.set("tzjx_ts",0);
 							 jkInfo.set("tzjx_lx","0");
-							 jkInfo.set("yuq_ts",tzjx_ts+yuq_ts+1);
+							 jkInfo.set("yuq_ts",tzjx_ts+yuq_ts+1); 
 							 logger.info(zjine*yqannualrate/3000);
 							 jkInfo.set("yuq_lx",famt.format(tzjxlx+yuq+sjsh*yqannualrate*5/3000));							
 							 //更新借款信息

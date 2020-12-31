@@ -744,9 +744,9 @@ function load_data(){
 			 html_g +="<td align=''>"+data.userrealname+"[<span style='color:#0000FF'>"+xm+"</span>]</td>";
 			 html_g +="<td align=''>"+data.cardid+"</td>";
 			 var cellphone = data.cellphone;
-			 if(cellphone.length > 8){
-			 	cellphone = data.cellphone.substr(0, 3) + "*****" + data.cellphone.substr(8);
-			 }
+			 //if(cellphone.length > 8){
+			 //	cellphone = data.cellphone.substr(0, 3) + "*****" + data.cellphone.substr(8);
+			 //}
 			 var dhyddh = yddh;
 			 if(dhyddh.length > 8){
 			 	dhyddh = yddh.substr(0, 3) + "*****" + yddh.substr(8);
@@ -990,9 +990,9 @@ function load_data(){
 				 html_l +="<td align=''>"+data.lianxi.contact1+"</td>";
 				 html_l +="<td>"+data.lianxi.guanxi1+"</td>";
 				 var tel1 = data.lianxi.tel1;
-			     if(tel1.length > 8){
-			 		tel1 = data.lianxi.tel1.substr(0, 3) + "*****" + data.lianxi.tel1.substr(8);
-			 	 }
+			    // if(tel1.length > 8){
+			 	//	tel1 = data.lianxi.tel1.substr(0, 3) + "*****" + data.lianxi.tel1.substr(8);
+			 	// }
 				
 				 html_l +="<td>"+data.lianxi.tel1+"</td>";
 				 
@@ -1003,9 +1003,9 @@ function load_data(){
 				 html_l +="<td align=''>"+data.lianxi.contact2+"</td>";
 				 html_l +="<td>"+data.lianxi.guanxi2+"</td>";
 				 var tel2 = data.lianxi.tel2;
-			     if(tel2.length > 8){
-			 		tel2 = data.lianxi.tel2.substr(0, 3) + "*****" + data.lianxi.tel2.substr(8);
-			 	 }
+			    // if(tel2.length > 8){
+			 	//	tel2 = data.lianxi.tel2.substr(0, 3) + "*****" + data.lianxi.tel2.substr(8);
+			 	// }
 				 html_l +="<td>"+data.lianxi.tel2+"</td>";
 				 
 				 html_l +="</tr>";

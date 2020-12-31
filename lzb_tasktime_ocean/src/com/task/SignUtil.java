@@ -6,8 +6,7 @@ import java.util.List;
 
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lianpay.api.util.TraderRSAUtil;
@@ -15,8 +14,8 @@ import com.lianpay.constant.PaymentConstant;
 
 public class SignUtil {
 
-	private static Logger logger = LoggerFactory.getLogger(SignUtil.class);
-
+	//private static Logger logger = LoggerFactory.getLogger(SignUtil.class);
+	private static Logger logger = Logger.getLogger(SDYQTask.class);
 
 	public static String genRSASign(JSONObject reqObj) {
 		// 生成待签名串
