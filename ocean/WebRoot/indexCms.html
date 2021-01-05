@@ -405,6 +405,12 @@ $("#user_name_top").click(function(){
 	   	       		else if(i==12 && list[i].powername == 'I' ){
 	   	       			html_ += "<li id='yccd12' style='display:none;'><a url='"+list[i].powerurl+"' href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
 	   	       		} 
+		   	       	else if(i==13 && list[i].powername == 'M(123)(>0)' ){
+	   	       			html_ += "<li id='yccd13' style='display:none;'><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu_show4()  ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}	   	      		
+	   	       		else if(i==14 && list[i].powername == 'I' ){
+	   	       			html_ += "<li id='yccd14' style='display:none;'><a url='"+list[i].powerurl+"' href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
+	   	       		}
 	   	       		else{
 	   	       			html_ += "<li ><a url='"+list[i].powerurl+"'  href=javascript:void(0) onclick=location_menu(this) ><i class='"+list[i].powerclass+"'></i>"+list[i].powername+"</a></li>";
 	   	      	    }
@@ -428,24 +434,27 @@ $("#user_name_top").click(function(){
 		var b5 = document.getElementById("yccd4");
 		var b10 = document.getElementById("yccd9");
 		var b12 = document.getElementById("yccd11");
+		var b13 = document.getElementById("yccd13");
 		
        var val3 = b3.style.display;
        var val5 = b5.style.display;
        var val10 = b10.style.display;
        var val12 = b12.style.display;
+       var val13 = b13.style.display;
         
 		if(val5 == 'none'){
 		 	b3.style.display = 'block'; //显示
 		 	b5.style.display = 'block'; //显示
 		 	b10.style.display = 'block'; //显示
 		 	b12.style.display = 'block'; //显示
+		 	b13.style.display = 'block'; //显示
 		 	
     	}else{
         	b3.style.display = 'none'; //隐藏
         	b5.style.display = 'none'; //隐藏
         	b10.style.display = 'none'; //隐藏
         	b12.style.display = 'none'; //隐藏
-        	
+        	b13.style.display = 'none'; //隐藏
     	}
 	}
 	 function location_menu_show0()
@@ -517,6 +526,20 @@ $("#user_name_top").click(function(){
     	}
 	} 
     
+	function location_menu_show4()
+	{
+		var b = document.getElementById("yccd14");
+		
+        var val = b.style.display;
+        
+		if(val == 'none'){
+		 	b.style.display = 'block'; //显示
+		 	
+    	}else{
+        	b.style.display = 'none'; //隐藏
+        	
+    	}
+	}
    
 	function location_menu(obj)
 	{

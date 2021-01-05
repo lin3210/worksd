@@ -5620,7 +5620,7 @@ public class AccountShenheService extends BaseService{
 	  */
 	 public DBPage getcuishoutjUserDbPage(int curPage,int numPerPage, int userId,String name, String phone,String cuishouZ,String startTime,String endtime) {
 	   
-		 String sql =" SELECT a.user_id,a.state,a.name  FROM (SELECT user_id ,state,NAME,roleid FROM sdcms_user   WHERE (roleid=19 OR roleid=20 OR roleid=21 OR roleid=22 OR roleid=23 OR roleid=25 OR roleid=50 OR roleid=24 OR roleid=51 OR roleid=26 OR roleid=54 OR roleid=60 OR roleid=61 )) a";
+		 String sql =" SELECT a.user_id,a.state,a.name  FROM (SELECT user_id ,state,NAME,roleid FROM sdcms_user   WHERE (roleid=19 OR roleid=20 OR roleid=21 OR roleid=22 OR roleid=23 OR roleid=25 OR roleid=50 OR roleid=24 OR roleid=51 OR roleid=26 OR roleid=54 OR roleid=60 OR roleid=61 OR roleid=62 or roleid=63 )) a";
 	       
 	        if (!StringHelper.isEmpty(startTime)) { //f分时间区间
 	        	sql +=" LEFT JOIN (SELECT DISTINCT scf.cuishou_id FROM sd_cuishou_fendan scf WHERE SUBSTRING(scf.fendan_time,1,7)>=SUBSTRING('"+startTime+" ',1,7) "
@@ -5635,6 +5635,8 @@ public class AccountShenheService extends BaseService{
 		   			sql+= " AND scf.cuishou_z= 3) b ON a.user_id =b.cuishou_id";
 		   		 }else if(cuishouZ.equals("M3_A")) {
 			   			sql+= " AND scf.cuishou_z= 3) b ON a.user_id =b.cuishou_id";
+		   		 }else if(cuishouZ.equals("M123")) {
+			   			sql+= " AND scf.cuishou_z= 123) b ON a.user_id =b.cuishou_id";
 			   	 }else {
 		   			sql+= " ) b ON a.user_id =b.cuishou_id";
 		   		 }
@@ -5667,6 +5669,8 @@ public class AccountShenheService extends BaseService{
 		   			sql+= " AND scf.cuishou_z= 3) b ON a.user_id =b.cuishou_id ";
 		   		 }else if(cuishouZ.equals("M3_A")) {
 			   			sql+= " AND scf.cuishou_z= 3) b ON a.user_id =b.cuishou_id";
+		   		 }else if(cuishouZ.equals("M123")) {
+			   			sql+= " AND scf.cuishou_z= 123) b ON a.user_id =b.cuishou_id";
 			   	 }else {
 		   			sql+= " ) b ON a.user_id =b.cuishou_id";
 		   		 }
@@ -5697,6 +5701,8 @@ public class AccountShenheService extends BaseService{
 	   			sql+= " AND  (a.roleid<>61 and a.roleid<>60)";
 	   		 }else if(cuishouZ.equals("M3_A")) {
 		   			sql+= " AND  (a.roleid=61 OR a.roleid=60)";
+	   		 }else if(cuishouZ.equals("M123")) {
+	   			sql+= " AND  ( a.roleid=62 or a.roleid=63)";
 		   	 }else {
 	   			sql+= "";
 	   		 }
@@ -5749,6 +5755,8 @@ public class AccountShenheService extends BaseService{
 	   			 sql+= " and cuishou_z=2";
 	   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 	   			 sql+= " and cuishou_z=3";
+	   		 }else if(cuishouz.equals("M123")) {
+	   			 sql+= " and cuishou_z=123";
 	   		 }
 			//logger.info("getCSTJychzjehk + sql  "+ sql);
 			return this.getJdbcTemplate().queryLong(sql);
@@ -5773,6 +5781,8 @@ public class AccountShenheService extends BaseService{
 				sql+=" AND  yuq_ts > 15 AND  yuq_ts <= 60 and cuishou_id<>0";
 			}else if (cuishouM.equals("M3")||cuishouM.equals("M3_A")) {
 				sql+=" AND  yuq_ts >45 and cuishou_id<>0";
+			}else if (cuishouM.equals("M123")) {
+				sql+=" AND  yuq_ts > 0 and cuishou_id<>0";
 			}else {
 				sql+=" AND  yuq_ts >0 ";
 			}
@@ -5831,6 +5841,8 @@ public class AccountShenheService extends BaseService{
 		   			sql+= " and dqyqts > 15 and dqyqts <=60";
 		   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 		   			sql+= " and dqyqts > 45";
+		   		 }else if(cuishouz.equals("M123")) {
+		   			 sql+= " and dqyqts > 0 ";
 		   		 }
 			}else {
 				if(cuishouz.equals("M0")) {
@@ -5841,6 +5853,8 @@ public class AccountShenheService extends BaseService{
 		   			sql+= " and dqyqts > 15 and dqyqts <=60";
 		   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 		   			sql+= " and dqyqts > 45";
+		   		 }else if(cuishouz.equals("M123")) {
+		   			 sql+= " and dqyqts > 0 ";
 		   		 }
 			}
 			
@@ -5879,6 +5893,8 @@ public class AccountShenheService extends BaseService{
 	   			sb.append( " and cuishou_z=2");
 	   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 	   			sb.append( " and cuishou_z=3");
+	   		}else if(cuishouz.equals("M123")) {
+				sb.append( " and cuishou_z=123");
 	   		 }
 			sb.append( " and cuishou_jine >0 ");
     //logger.info("getCSTJcsds sb-- "+sb);
@@ -5971,6 +5987,8 @@ public class AccountShenheService extends BaseService{
 		   			sb.append( " and r.dqyqts > 15 and r.dqyqts <=60");
 		   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 		   			sb.append( " and r.dqyqts >45");
+		   		}else if(cuishouz.equals("M123")) {
+					sb.append( " and r.dqyqts > 0");
 		   		 }
 			}else {
 				if(cuishouz.equals("M0")) {
@@ -5981,6 +5999,8 @@ public class AccountShenheService extends BaseService{
 		   			sb.append( " and r.dqyqts > 15 and r.dqyqts <=60");
 		   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 		   			sb.append( " and r.dqyqts >45");
+		   		}else if(cuishouz.equals("M123")) {
+					sb.append( " and r.dqyqts > 0");
 		   		 }
 			}
 			
@@ -6044,6 +6064,8 @@ public class AccountShenheService extends BaseService{
 		   			sb.append( " and yuq_ts > 15 and yuq_ts <=60");
 		   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 		   			sb.append( " and yuq_ts >45");
+		   		}else if(cuishouz.equals("M123")) {
+					sb.append( " and yuq_ts > 0");
 		   		 }
 			}else {
 				if(cuishouz.equals("M0")) {
@@ -6054,6 +6076,8 @@ public class AccountShenheService extends BaseService{
 		   			sb.append( " and yuq_ts > 15 and yuq_ts <=60");
 		   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 		   			sb.append( " and yuq_ts >45");
+		   		}else if(cuishouz.equals("M123")) {
+					sb.append( " and yuq_ts > 0");
 		   		 }
 			}
 			
@@ -6097,6 +6121,8 @@ public class AccountShenheService extends BaseService{
 	   			sb.append( " and snj.yuq_ts > 15 and snj.yuq_ts <=60");
 	   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 	   			sb.append( " and snj.yuq_ts >45");
+	   		}else if(cuishouz.equals("M123")) {
+				sb.append( " and snj.yuq_ts > 0 ");
 	   		 }
 		 return getJdbcTemplate().queryInt(sb.toString());
 	 }
@@ -6135,6 +6161,8 @@ public class AccountShenheService extends BaseService{
 	   			sb.append( " and snj.yuq_ts > 15 and snj.yuq_ts <=60");
 	   		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 	   			sb.append( " and snj.yuq_ts >45");
+	   		}else if(cuishouz.equals("M123")) {
+				sb.append( " and snj.yuq_ts > 0 ");
 	   		 }
 			sb.append(" AND  sc.msgtype='备注' ");
 		 return getJdbcTemplate().queryInt(sb.toString());
@@ -6166,6 +6194,8 @@ public class AccountShenheService extends BaseService{
 			sb.append( " and  cuishou_z= 2");
 		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 			sb.append( " and cuishou_z= 3 ");
+		 }else if(cuishouz.equals("M123")) {
+				sb.append( " and cuishou_z= 123 ");
 		 }
 		 if(!StringHelper.isEmpty(startTime)) {
 			 sb.append(" and SUBSTRING(fendan_time,1,10) >= '"+startTime+"' and SUBSTRING(fendan_time,1,10)<='"+curnowTime+"'");
@@ -6219,6 +6249,8 @@ public class AccountShenheService extends BaseService{
 	  			sb.append( " and  dqyqts >15 and dqyqts <=60");
 	  		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 	  			sb.append( " and dqyqts > 46 ");
+	  		}else if(cuishouz.equals("M123")) {
+				sb.append( " and dqyqts > 0");
 	  		 }
 		 }else {
 			 if(cuishouz.equals("M0")) {
@@ -6229,6 +6261,8 @@ public class AccountShenheService extends BaseService{
 	  			sb.append( " and  dqyqts >15 and dqyqts <=60");
 	  		 }else if(cuishouz.equals("M3")||cuishouz.equals("M3_A")) {
 	  			sb.append( " and dqyqts > 46 ");
+	  		}else if(cuishouz.equals("M123")) {
+				sb.append( " and dqyqts > 0");
 	  		 }
 		 }
 		 

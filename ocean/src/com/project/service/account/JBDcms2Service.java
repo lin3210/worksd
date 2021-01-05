@@ -4718,4 +4718,154 @@ public List<DataRow> getYqM3List(String userId,
 		
 		return getJdbcTemplate().query(sql);
 	}
+   
+   /**
+    * 催收M123
+    * @return
+    */
+   public DBPage getYqM123List(int curPage, int numPerPage, String userId,
+			String realName, String phone,String startDate, String endDate,
+			String commit, String idCard, String hkstat, String et_day,
+			String st_day,int cmsuserid,String cuishouid,int[] cuishouzuyqm1,String jkdate,String yuqts,int maproleid ) throws Exception {
+		
+		String sql = " select j.userid, j.id as jkid2 ,u.username, u.mobilePhone,u.heihu_zt,s.realname,w.name as csname ,j.is_selected,  j.yuq_lx ,j.hkfq_cishu,j.yuq_ts ,j.sjsh_money,j.sjds_money,j.lx ,j.hkyq_time,j.hkfq_code,j.hk_time,j.hkfq_time,j.jk_date,j.fkr_time,j.sfyhw,j.hkqd,j.hkstate,j.zxcsbz as msg from sd_new_jkyx j left join sd_user u on "
+				+ "  j.userid = u.id left join sd_user_finance s on s.userId =j.userid left join sdcms_user w on w.USER_ID = j.cuishou_id where j.sfyhw = 0 and j.hkfq_code=0";
+		
+		if (!StringHelper.isEmpty(userId)) {
+			
+			sql += " and  u.id =" + userId;
+		}
+		if (!StringHelper.isEmpty(realName)) {
+			
+			sql += " and  s.realname like'%" + realName + "%'";
+		}
+		if (!StringHelper.isEmpty(phone)) {
+			
+			sql += " and  u.mobilePhone like '%" + phone + "%'";
+		}
+		if (!StringHelper.isEmpty(idCard)) {
+			
+			sql += " and  s.idno='" + idCard + "'";
+		}
+		if (!StringHelper.isEmpty(cuishouid)) {
+			
+			sql += " and  j.cuishou_id=" + cuishouid;
+		}
+		if (!StringHelper.isEmpty(yuqts)) {
+			
+			sql += " and  j.yuq_ts=" + yuqts;
+		}
+		if (!StringHelper.isEmpty(jkdate)) {
+			
+			sql += " and  (j.jk_date=3 or j.jk_date=4) ";
+		}
+		if (!StringHelper.isEmpty(et_day) && !et_day.equals("0")) {
+			
+			sql += " and  j.yuq_ts >= " + et_day;
+		}
+		if (!StringHelper.isEmpty(st_day) && !st_day.equals("0")) {
+			
+			sql += " and  j.yuq_ts <= " + st_day;
+		}
+		/*if (hkstat.equals("1")) {
+
+			sql += " and  j.sfyhw = 1";
+		}
+
+		if (hkstat.equals("2")) {
+		 */
+		
+		//}
+		sql += " and j.yuq_ts >0  " ;
+		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 6 || maproleid == 63 || maproleid==1){
+			for (int i = 0; i < cuishouzuyqm1.length; i++) {
+				if(i == 0){
+					sql +=" and ( j.cuishou_id=" + cuishouzuyqm1[0];
+				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
+				}else{
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+				}
+				if(1==cuishouzuyqm1.length) {
+					sql +=" ) ";
+				}
+			}
+		}else{
+			sql +=" and j.cuishou_id="+cmsuserid;
+		}
+		sql += " order by j.yuq_ts,  LENGTH(j.sjsh_money)>8 DESC,j.sjsh_money>='4,000,000' DESC, j.yuq_lx ";
+		
+		return getJdbcTemplate().queryPage(sql, curPage, numPerPage);
+	}
+   
+   /**
+    * 催收M123
+    * @return
+    */
+   public List<DataRow> getYqM123List(String userId,
+			String realName, String phone, String startDate, String endDate,
+			String commit, String idCard, String hkstat, String et_day,
+			String st_day,int cmsuserid,String cuishouid,int[] cuishouzuyqm1,String jkdate,String yuqts,int maproleid ) throws Exception {
+		
+		String sql = " select j.yuq_lx ,j.sjsh_money from sd_new_jkyx j left join sd_user u on "
+				+ "  j.userid = u.id left join sd_user_finance s on s.userId =j.userid where j.sfyhw = 0 and j.hkfq_code=0";
+		
+		if (!StringHelper.isEmpty(userId)) {
+			
+			sql += " and  u.id =" + userId;
+		}
+		if (!StringHelper.isEmpty(realName)) {
+			
+			sql += " and  s.realname like'%" + realName + "%'";
+		}
+		if (!StringHelper.isEmpty(phone)) {
+			
+			sql += " and  u.mobilePhone like '%" + phone + "%'";
+		}
+		if (!StringHelper.isEmpty(idCard)) {
+			
+			sql += " and  s.idno='" + idCard + "'";
+		}
+		if (!StringHelper.isEmpty(cuishouid)) {
+			
+			sql += " and  j.cuishou_id=" + cuishouid;
+		}
+		if (!StringHelper.isEmpty(yuqts)) {
+			
+			sql += " and  j.yuq_ts=" + yuqts;
+		}
+		if (!StringHelper.isEmpty(jkdate)) {
+			
+			sql += " and  (j.jk_date=3 or j.jk_date=4) ";
+		}
+		if (!StringHelper.isEmpty(et_day) && !et_day.equals("0")) {
+			
+			sql += " and  j.yuq_ts >= " + et_day;
+		}
+		if (!StringHelper.isEmpty(st_day) && !st_day.equals("0")) {
+			
+			sql += " and  j.yuq_ts <= " + st_day;
+		}
+		
+		sql += " and  j.yuq_ts >0  " ;
+		if(cmsuserid == 8 || cmsuserid == 888 || cmsuserid == 6 || maproleid == 63 || maproleid==1){
+			for (int i = 0; i < cuishouzuyqm1.length; i++) {
+				if(i == 0){
+					sql +=" and ( j.cuishou_id=" + cuishouzuyqm1[0];
+				}else if(i>0 && i<(cuishouzuyqm1.length-1)){
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[i];
+				}else{
+					sql +=" or j.cuishou_id=" + cuishouzuyqm1[cuishouzuyqm1.length-1] + " )";
+				}
+				if(1==cuishouzuyqm1.length) {
+					sql +=" ) ";
+				}
+			}
+		}else{
+			sql +=" and j.cuishou_id="+cmsuserid;
+		}
+		sql += " order by j.yuq_ts,  LENGTH(j.sjsh_money)>8 DESC,j.sjsh_money>='4,000,000' DESC, j.yuq_lx ";
+		
+		return getJdbcTemplate().query(sql);
+	}
 }

@@ -184,6 +184,9 @@ public class AotuZDSHALLService extends BaseService
 				}else if (3==cuishouM) {
 					sql+=" AND (roleid=26 OR roleid=54 or roleid=60 OR roleid=61) ";
 									
+				}else if (123==cuishouM) {
+					sql+=" AND (roleid=62) ";
+									
 				}				
 				sql+= bufendansql ;			
 			 logger.info("今天请假的人员sdcms_user=="+sql);
@@ -1388,6 +1391,21 @@ public class AotuZDSHALLService extends BaseService
 		 public String getcuishou_50Needfendan() {
 			 String sql =" SELECT guizebianliang1 FROM sd_pingjiguize WHERE id=30";
 			 return getJdbcTemplate().queryString(sql);
+		 }
+		 
+		 
+		 
+	 /**
+		 * 获取每日逾期状态的用户M123
+		 */
+		 public List<DataRow> getAllYQListYQNewM123(String cuishou_z)
+		 {		
+			 String sql = " select * from  sd_new_jkyx  where   yuq_ts >0 AND   sfyhw=0 and sfyfk=1 ";
+			 
+			 if(!"".equals(cuishou_z)) {
+				 sql += cuishou_z;
+			 }
+			 return getJdbcTemplate().query(sql);
 		 }
 
 }

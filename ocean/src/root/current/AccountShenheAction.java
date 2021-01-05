@@ -4224,6 +4224,10 @@ public class AccountShenheAction extends BaseAction {
 					List<DataRow> listM3 = pageM3.getData();
 					listdataList= getCuishoudansetList(listdataList, listM3, startDate,endDate, curtimeyMd3,curtimeyMd7,curtime, "M3",recode);
 					
+					DBPage pageM123 = accountShenheService.getcuishoutjUserDbPage(curPage,100,userId, name, phone, "M123",startDate,endDate); 
+					List<DataRow> listM123 = pageM123.getData();
+					listdataList= getCuishoudansetList(listdataList, listM123, startDate,endDate, curtimeyMd3,curtimeyMd7,curtime, "M123",recode);
+					
 					if(1==cms_roleid) {
 						DBPage pageM3_A = accountShenheService.getcuishoutjUserDbPage(curPage,100,userId, name, phone, "M3_A",startDate,endDate); 
 						List<DataRow> listM3_A = pageM3_A.getData();

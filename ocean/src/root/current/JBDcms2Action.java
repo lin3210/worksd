@@ -5884,4 +5884,127 @@ public  ActionResult doAddSHBeizfb() throws Exception {
 	  this.getWriter().write(jsonObject.toString());	
       return null ;
    }
+
+	/**
+	 * 催收 M123组
+	 * 	GetYqM123List
+	 */
+	public ActionResult doGetYqM123List() throws Exception {
+		
+		logger.info("待催收用户M123");
+		JSONObject jsonObject = new JSONObject(); // 后台登录账户
+	    int cmsuser_id =SessionHelper.getInt("cmsuserid", getSession());
+	    cmsuser_id =accessVeritifivationbase.checkCMSidAndip(cmsuser_id, getipAddr());
+	    if(cmsuser_id==0){
+				jsonObject.put("error", -1);
+				jsonObject.put("msg", "Vui lòng đăng nhập trước");
+				this.getWriter().write(jsonObject.toString());	
+				return null;		
+		}
+		logger.info("请求ID:" + cmsuser_id);
+		 
+		int cmsuserid = SessionHelper.getInt("cmsuserid", getSession());
+		
+		if(cmsuserid==0){
+			jsonObject.put("error", -1);
+			jsonObject.put("msg", "Vui lòng đăng nhập trước");
+			this.getWriter().write(jsonObject.toString());	
+			return null;				 
+			
+		}
+		int temp = getIntParameter("temp",0);
+		String  tempVelue = getStrParameter("tempvl"); 		
+		
+		String  startDate1 =getStrParameter("startDate");
+		String  endDate1 =getStrParameter("endDate");
+		String startDate="";
+		String endDate="";
+		if(!TextUtils.isEmpty(startDate1) && !TextUtils.isEmpty(endDate1)){
+			String[] sourceStrArray1 = startDate1.split("-");
+			String[] sourceStrArray2 = endDate1.split("-");
+			startDate = sourceStrArray1[2]+"-"+sourceStrArray1[1]+"-"+sourceStrArray1[0];
+			endDate = sourceStrArray2[2]+"-"+sourceStrArray2[1]+"-"+sourceStrArray2[0];
+		}
+		String  hkstat = getStrParameter("hkstat");       
+		//审核状态
+		String commit = getStrParameter("commit");
+	
+		//定义用户选择条件
+		String userId ="" ;
+		String realName="";
+		String phone = "" ;	
+		String idCard ="" ;
+		String cuishouid ="" ;
+		String jkdate ="" ;
+		String yuqts ="" ;
+		
+		//逾期天数
+		String st_day = getStrParameter("s_day");//逾期最小天数
+		
+		String et_day = getStrParameter("e_day");//逾期最大天数
+		
+		if(temp ==1){
+			
+			userId =tempVelue ;
+		}
+		
+		if(temp ==2){
+			
+			realName =tempVelue ;
+		}
+		if(temp ==3) {
+			
+			phone = tempVelue ;
+		}
+		if(temp ==4) {
+			
+			idCard = tempVelue ;
+		}	
+		if(temp ==5) {
+			
+			cuishouid = tempVelue ;
+		}	
+		if(temp ==6) {
+			
+			jkdate = "34" ;
+		}
+	    if(temp ==7) {
+			
+			yuqts = tempVelue ;
+		}
+		
+		//一组的成员
+		List<DataRow> cuishoum1 = jbdcms2Service.getAllcuishouM123();
+		int cuishouzuyqm1[] = new int[cuishoum1.size()];
+		
+		for (int m = 0; m < cuishoum1.size(); m++) {
+			DataRow row = cuishoum1.get(m);
+			cuishouzuyqm1[m] = row.getInt("user_id");
+		}
+		DataRow maprole =jbdcms2Service.getSdcmsUser(cmsuserid);
+		int maproleid=maprole.getInt("roleid");
+		//默认第一页
+		int curPage  =getIntParameter("curPage",1);	
+		DBPage page = jbdcms2Service.getYqM123List(curPage,15,userId,realName,phone,startDate,endDate,commit,idCard,hkstat,st_day,et_day,cmsuserid,cuishouid,cuishouzuyqm1,jkdate,yuqts,maproleid);
+		List<DataRow> list=jbdcms2Service.getYqM123List(userId,realName,phone,startDate,endDate,commit,idCard,hkstat ,st_day,et_day,cmsuserid,cuishouid,cuishouzuyqm1,jkdate,yuqts,maproleid);
+		double hkje=0;
+		DecimalFormat format = new DecimalFormat("###,###");
+		for (int i=0;i<list.size();i++) {
+			DataRow dataRow = list.get(i);
+			String sjshmoney = dataRow.getString("sjsh_money").replace(",", "");
+			String yuqmoney = dataRow.getString("yuq_lx").replace(",", "");
+			int sjsh = Integer.parseInt(sjshmoney);
+			int yuq = Integer.parseInt(yuqmoney);
+			hkje += (sjsh+yuq);
+		}  
+		DataRow row = new DataRow();
+		row.set("list", page);
+		row.set("hkje", format.format(hkje));
+		row.set("temp",temp);
+		row.set("tempvalu",tempVelue);
+		row.set("hkstat",hkstat);
+		JSONObject object = JSONObject.fromBean(row);	
+		this.getWriter().write(object.toString());	
+		return null ;  
+	}
 }
