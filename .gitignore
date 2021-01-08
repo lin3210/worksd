@@ -1,1 +1,10 @@
 /.metadata/
+bin/
+# Java class files
+*.class
+*.iml
+# Log Files
+*.log
+
+*/.idea/
+.idea/
