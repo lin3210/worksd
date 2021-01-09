@@ -188,6 +188,12 @@ a:hover {text-decoration: none;}
                                 <th>
 		                          Ghi chú(备注)
 		                        </th>
+		                        <th>
+	                        Liệt vào DS đen(列入黑名单)
+	                        </th>
+		                        <th>
+	                        Hồ sơ trở lại(还款记录)
+	                        </th>
 		                      </tr>
 		                    </thead>
 		                    <tbody id="load_data">
@@ -292,6 +298,88 @@ a:hover {text-decoration: none;}
             </div>
         </div>
         </div>
+        
+        <div id="bathc_grade_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#bathc_grade_html').hide()">x</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Thông tin khách hàng</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height: 400px;">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                         
+                                            <div class="form-group" id="has-remark">
+                                            <label class="col-md-3 control-label">Ghi chép cuộc gọi
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <textarea rows="15" cols="5" name="coll_ms" class="form-control" id="remark_hmd"></textarea>
+                                                  </div>
+                                              </div>
+                                              <input type="hidden" id="batc_id"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz_hmd()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#bathc_grade_html').hide()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+         <!-- 还款信息 -->
+        <div id="bathc_grade_html_recharge" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                       <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                       	<th>
+		                          Thời gian tài chính<!--财务操作时间  -->
+		                        </th>
+		                        <th>
+		                          Thời gian sử dụng<!--用户还款时间时间  -->
+		                        </th>
+		                        <th>
+		                         Số tiền truy thu<!--催回金额 -->
+		                        </th>		                        
+		                        <th>
+		                         Gia hạn<!--延期  -->
+		                        </th>
+		                        <th>
+		                         Nhân viên truy thu<!-- 催收人员 -->
+		                        </th>
+		                                                                        
+		                    </thead>
+		                    <tbody id="load_recharge">
+		                    </tbody>
+		                  </table>                                         
+		                </div>                               
+                  	<div class="modal-footer">                     
+                         <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#bathc_grade_html_recharge').hide()">Đóng</button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        </div> 
+        
+        
 <script>
 	$("#btn-load").on("click", function() {
 		var a = $(this);
@@ -430,7 +518,12 @@ a:hover {text-decoration: none;}
 					html_ +="<td><button class='btn btn-xs btn-info' onclick='send_yuq("+list[i].userid+","+list[i].jkid2+")'>Gửi SMS</button></td>";
 					html_ +="<td><button class='btn btn-xs btn-primary'  onclick='chg_user_load("+list[i].jkid2+")'>Xem thông tin cá nhân</button></td>";
 					html_ +="<td><button class='btn btn-xs btn-success'  onclick=\"load_beiz('"+list[i].jkid2+"','"+list[i].realname+"','"+list[i].userid+"','"+list[i].csname+"')\">Thêm ghi chú</button></td>";
-					
+					if(list[i].heihu_zt == "0"){
+						html_ +="<td><button class='btn btn-xs btn-danger'  onclick=\"load_beiz_hmd('"+list[i].jkid2+"','"+list[i].userid+"')\">Liệt vào DS đen</button></td>";
+					}else{
+						html_ +="<td>DS đen</td>";
+					}
+					html_ +="<td><button class='btn btn-xs btn-primary'  onclick='get_recharge("+list[i].jkid2+")'>Hoàn vốn</button></td>";
 					html_ +="</tr>";
 		   }
 			$("#load_data").append(html_);
@@ -626,6 +719,62 @@ a:hover {text-decoration: none;}
 		   });
 	
    }
+  
+   function load_beiz_hmd(re_id,user_id)
+   {     
+	   $("#bathc_grade_html").show();
+	   $("#rec_id").val(re_id);
+	   $("#u_id").val(user_id);
+   }
+   
+   function add_beiz_hmd()
+   {
+		   var para={re_id:$("#rec_id").val(),user_id:$("#u_id").val(),remark:$("#remark_hmd").val()};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=addcuisremarkhmd",para,function(data){
+			   if(data.error>0)
+			   {
+				   $("#bathc_grade_html").hide();
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+   
+   
+   function get_recharge(csjkid) {
+ 		
+ 		$("#lab").val(0);
+ 		var para = {
+ 			jkid : csjkid
+ 		};
+ 		loadGetServer("/servlet/current/JBDcms2Action?function=GetRechargeByJkid",para,function(data) {
+ 					
+ 				if (data.error > 0) {
+ 						$("#bathc_grade_html_recharge").show();
+ 						
+ 						 var rec=data.rechargelist;
+ 										 
+ 						 var list = data.rechargelist;						 							 						
+ 						var html_="";
+ 						for (var i = 0; i < list.length; i++) {
+ 						/* 	console.log(csidlist[i].cuishouid); */
+ 														
+ 							html_ += "<tr><td>"+list[i].retime+"</td><td>"+list[i].userhktime+"</td><td>"+list[i].money+"</td><td>"+list[i].yqdate+"</td><td>"+list[i].csname+"</td></tr>";							
+ 						}
+ 											
+ 						$("#load_recharge").html('').append(html_);					
+ 					} else {
+ 						alert(data.msg);
+ 						
+ 					}
+ 				})
+ 	}
+   
    
 </script>
 <script type="text/javascript" src="/sdmain/js/date_time.js"></script>

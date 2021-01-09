@@ -351,6 +351,46 @@ a:hover {text-decoration: none;}
             </div>
         </div>
         </div> 
+        
+          <!-- 还款信息 -->
+        <div id="bathc_grade_html_recharge" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                       <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                       	<th>
+		                          Thời gian tài chính<!--财务操作时间  -->
+		                        </th>
+		                        <th>
+		                          Thời gian sử dụng<!--用户还款时间时间  -->
+		                        </th>
+		                        <th>
+		                         Số tiền truy thu<!--催回金额 -->
+		                        </th>		                        
+		                        <th>
+		                         Gia hạn<!--延期  -->
+		                        </th>
+		                        <th>
+		                         Nhân viên truy thu<!-- 催收人员 -->
+		                        </th>
+		                                                                        
+		                    </thead>
+		                    <tbody id="load_recharge">
+		                    </tbody>
+		                  </table>                                         
+		                </div>                               
+                  	<div class="modal-footer">                     
+                         <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#bathc_grade_html_recharge').hide()">Đóng</button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        </div> 
+        
 <script>
 	$("#btn-load").on("click", function() {
 		var a = $(this);
@@ -536,7 +576,7 @@ a:hover {text-decoration: none;}
 					}else{
 						html_ +="<td>DS đen</td>";
 					}
-					
+					html_ +="<td><button class='btn btn-xs btn-primary'  onclick='get_recharge("+list[i].jkid2+")'>Hoàn vốn</button></td>";
 					/* if(list[i].hkstate == "0"){
 						html_ += "<td>TVTB&nbsp;&nbsp;<button class='btn btn-xs btn-primary'  onclick='change_hkfs2("+list[i].jkid2+")'>TV1P</button>&nbsp;&nbsp;<button class='btn btn-xs btn-primary'  onclick='change_hkfs3("+list[i].jkid2+")'>GH</button></td>"
 					}else if (list[i].hkstate == "1"){
@@ -554,6 +594,35 @@ a:hover {text-decoration: none;}
 			$("#btn-load").button("reset");
 	    });
    }  
+   
+   function get_recharge(csjkid) {
+		
+		$("#lab").val(0);
+		var para = {
+			jkid : csjkid
+		};
+		loadGetServer("/servlet/current/JBDcms2Action?function=GetRechargeByJkid",para,function(data) {
+					
+				if (data.error > 0) {
+						$("#bathc_grade_html_recharge").show();
+						
+						 var rec=data.rechargelist;
+										 
+						 var list = data.rechargelist;						 							 						
+						var html_="";
+						for (var i = 0; i < list.length; i++) {
+						/* 	console.log(csidlist[i].cuishouid); */
+														
+							html_ += "<tr><td>"+list[i].retime+"</td><td>"+list[i].userhktime+"</td><td>"+list[i].money+"</td><td>"+list[i].yqdate+"</td><td>"+list[i].csname+"</td></tr>";							
+						}
+											
+						$("#load_recharge").html('').append(html_);					
+					} else {
+						alert(data.msg);
+						
+					}
+				})
+	}
    
    function gradeChange(){
 	   var tempselect=$("#tempselect").val();
