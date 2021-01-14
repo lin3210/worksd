@@ -2006,9 +2006,15 @@ public class OceanApi extends BaseAction {
 		if (jiamiwen.equals(miwen)) {
 			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
-			obj.put("oceanAt", "Trần Quang Vinh");
-			obj.put("oceanCn", "19035 46003 8013");
-			obj.put("oceanBn", "Techcombank - Dak Lak ");
+			//2021年1月14日
+			obj.put("oceanAt", "Đoàn Trần Thu Trúc");
+			obj.put("oceanCn", "1058 7250 0869");
+			obj.put("oceanBn", "Ngân Hàng Viettinbank chi nhánh Tân Quy");
+			
+//			obj.put("oceanAt", "Trần Quang Vinh");
+//			obj.put("oceanCn", "19035 46003 8013");
+//			obj.put("oceanBn", "Techcombank - Dak Lak ");
+			
 //			JSONObject obj1 = new JSONObject();
 //			obj1.put("oceanAt", "CÔNG TY TNHH F168");
 //			obj1.put("oceanCn", "01810 - 0360 - 2501");

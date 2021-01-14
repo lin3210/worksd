@@ -372,9 +372,14 @@ public class ApiAction extends BaseAction {
 				//obj.put("oceanBn", "Techcombank -Buôn Ma Thuột ");
 				
 				
-				obj.put("oceanAt", "Trần Quang Vinh");
-				obj.put("oceanCn", "19035 46003 8013");
-				obj.put("oceanBn", "Techcombank -Dak Lak  ");
+//				obj.put("oceanAt", "Trần Quang Vinh");
+//				obj.put("oceanCn", "19035 46003 8013");
+//				obj.put("oceanBn", "Techcombank -Dak Lak ");
+				
+				//2021年1月14日
+				obj.put("oceanAt", "Đoàn Trần Thu Trúc");
+				obj.put("oceanCn", "1058 7250 0869");
+				obj.put("oceanBn", "Ngân Hàng Viettinbank chi nhánh Tân Quy");
 				
 				JSONObject objBank1 = new JSONObject();
 				JSONObject objBank2 = new JSONObject();
