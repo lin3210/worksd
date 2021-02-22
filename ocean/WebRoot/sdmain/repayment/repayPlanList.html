@@ -443,15 +443,22 @@ function init2(t){
 		       var userid = list[i].userid;
 		       var sjshmoney = parseInt(list[i].sjds_money.replace(/,/g,""))+ parseInt(list[i].lx.replace(/,/g,"")); 
 		       var jklx = "";
-			  if(list[i].jk_date==1){
-				  jklx="30%";
-			  }else if(list[i].jk_date==2) {
-				  jklx="30%";
-			  }else if(list[i].jk_date==4) {
-				  jklx="30%";
-			  }else if(list[i].jk_date==3) {
-				  jklx="30%";
-			  }
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jk_date==1){
+						  jklx="30%";
+					  }else if(list[i].jk_date==2) {
+						  jklx="30%";
+					  }else if(list[i].jk_date==4) {
+						  jklx="30%";
+					  }else if(list[i].jk_date==3) {
+						  jklx="30%";
+					  }
+			   }
+			  
 			  
 			  html_ += "<tr><td>"+list[i].userid+"</td><td>"+list[i].jkid+"</td><td>"+list[i].realname+"</td>";
 			  if(list[i].userhktime == undefined){
@@ -624,15 +631,22 @@ function init2(t){
 		       var userid = list2[i].userid;
 		       var sjshmoney =  parseInt(list2[i].sjds_money.replace(/,/g,""))+ parseInt(list2[i].lx.replace(/,/g,""));
 		       var jklx = "";
-		       if(list2[i].jk_date==1){
-		    	   jklx="30%";
-			  }else if(list2[i].jk_date==2) {
-				  jklx="30%";
-			  }else if(list2[i].jk_date==4) {
-				  jklx="30%";
-			  }else if(list[i].jk_date==3) {
-				  jklx="30%";
-			  }
+		       if(list2[i].sjds_money!=null &&  list2[i].sjds_money!="" &&  list2[i].sjds_money!="null" && list2[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list2[i].sjds_money.replace(/,/g,""))+parseInt(list2[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list2[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list2[i].jk_date==1){
+			    	   jklx="30%";
+				  }else if(list2[i].jk_date==2) {
+					  jklx="30%";
+				  }else if(list2[i].jk_date==4) {
+					  jklx="30%";
+				  }else if(list2[i].jk_date==3) {
+					  jklx="30%";
+				  } 
+			   }
+		       
 			  
 			  html1_ += "<tr><td>"+list2[i].userid+"</td><td>"+list2[i].jkid+"</td><td>"+list2[i].realname+"</td>";
 			  if(list2[i].userhktime == undefined){
@@ -661,7 +675,7 @@ function init2(t){
 			  }
 			  html1_ +="<td>"+list2[i].rechargemoney+"</td>";
 			 
-			  if(jklx=="30%" || jklx=="25%") {
+			  if(jklx=="35%" || jklx=="25%") {
 				  html1_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
 			  }else {
 				  html1_ += " <td><span>"+jklx+"</span></td>";

@@ -460,67 +460,26 @@ a:hover {text-decoration: none;}
 		      var userid = list[i].userid;
 		      var sjshmoney =  parseInt(list[i].sjsh_money.replace(/,/g,""));
 		      var jklx = "";
-			  if(list[i].jk_date==1){
-				  jklx="30%";
-			  }else if(list[i].jk_date==2) {
-				  jklx="30%";
-			  }else if(list[i].jk_date==4) {
-				  jklx="30%";
-			  }else if(list[i].jk_date==3) {
-				  jklx="30%";
-			  }
+		      if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jk_date==1){
+					  jklx="30%";
+				  }else if(list[i].jk_date==2) {
+					  jklx="30%";
+				  }else if(list[i].jk_date==4) {
+					  jklx="30%";
+				  }else if(list[i].jk_date==3) {
+					  jklx="30%";
+				  }
+			   }
+			  
 			  
 		      html_ += "<tr>";
 		      //if((list[i].fkr_time.substring(0,2)<"09" && list[i].fkr_time.substring(3,5)=="05") || list[i].fkr_time.substring(3,5)<"05"){
-		      if(1 != 1){
-					html_ += "<td><span style='color:#F00'>"+list[i].username+"</span></td><td><span style='color:#F00'>"+list[i].realname+"</span></td><td><span style='color:#F00'>"+list[i].mobilephone+"</span></td>";			
-					
-				   
-					if(list[i].csname!=null)
-					{ 				   				   
-						html_ +="<td><span style='color:#F00'>"+list[i].csname+"</span></td>";
-					}
-					else
-					{   
-						html_ +="<td><span style='color:#F00'>Không có</span></td>";
-					}
-					html_ +="<td><span style='color:#F00'>"+list[i].yuq_ts+"</span></td><td><span style='color:#F00'>"+list[i].yuq_lx+"</span></td><td><span style='color:#F00'>"+list[i].sjsh_money+"</span></td><td><span style='color:#F00'>"+zje+"</span></td><td><span style='color:#F00'>"+jkqx+"</span></td>";
-					if(jklx=="30%" || jklx=="25%") {
-						html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
-			     	}else {
-						html_ += " <td><span style='color:#F00'>"+jklx+"</span></td>";
-				    }
-					
-					html_ +="<td><span style='color:#F00'>"+list[i].fkr_time+"</span></td>";
-					if(list[i].hkqd == "0")
-					{
-						html_+="<td><span style='color:#F00'>Không có</span></td>";
-					}
-					else
-					{
-						html_+="<td><span style='color:#F00'>Xem ủy nhiệm chi</span></td>";
-						
-					}
-					html_ +="<td><span style='color:#F00'>"+list[i].hk_time+"</span></td>";
-					if(list[i].hkfq_time == null || list[i].hkfq_time == "")
-					{
-						html_+="<td><span style='color:#F00'>Không có</span></td>";
-					}
-					else
-					{
-						html_ +="<td><span style='color:#F00'>("+list[i].hkfq_cishu.length+")"+list[i].hkfq_time+"</span></td>";
-						
-					}
-				    if(list[i].msg == null)
-					{
-						html_+="<td><span style='color:#F00'>Không có</span></td>";
-					}
-					else
-					{
-						html_+="<td><span style='color:#F00'>"+list[i].msg+"</span></td>";
-						
-					} 
-			   }else{
+		      
 					html_ += "<td>"+list[i].username+"</td></span><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td>";			
 					
 				   
@@ -533,7 +492,7 @@ a:hover {text-decoration: none;}
 						html_ +="<td>Không có</td>";
 					}
 					html_ +="<td>"+list[i].yuq_ts+"</td><td>"+list[i].yuq_lx+"</td><td>"+list[i].sjsh_money+"</td><td>"+zje+"</td><td>"+jkqx+"</td>";
-					if(jklx=="30%" || jklx=="25%" ) {
+					if(jklx=="35%" || jklx=="25%" ) {
 						html_ += " <td><span style='color:#F82E03;font-weight:bolder'>"+jklx+"</span></td>";
 				    }else {
 						html_ += " <td><span>"+jklx+"</span></td>";
@@ -567,7 +526,7 @@ a:hover {text-decoration: none;}
 						html_+="<td>"+list[i].msg+"</td>";
 						
 					} 
-				}
+				
 					html_ +="<td><button class='btn btn-xs btn-info' onclick='send_yuq("+list[i].userid+","+list[i].jkid2+")'>Gửi SMS</button></td>";
 					html_ +="<td><button class='btn btn-xs btn-primary'  onclick='chg_user_load("+list[i].jkid2+")'>Xem thông tin cá nhân</button></td>";
 					html_ +="<td><button class='btn btn-xs btn-success'  onclick=\"load_beiz('"+list[i].jkid2+"','"+list[i].realname+"','"+list[i].userid+"','"+list[i].csname+"')\">Thêm ghi chú</button></td>";

@@ -219,7 +219,7 @@ public class ApiAction extends BaseAction {
 					row.set("twentyoneDayValue", "0.0135");
 					row.set("twentyeightDayValue", "0.018");
 
-					row.set("values", "{\"7\":[0.009,0.3]}");
+					row.set("values", "{\"7\":[0.006,0.35]}");
 					
 					if (rawUserBankCard != null) {
 						userBankCard.set("cardname", rawUserBankCard.getString("cardusername"));

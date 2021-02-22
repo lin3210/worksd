@@ -262,15 +262,22 @@ document.onselectstart=new Function("event.returnValue=true");
 		       var userid = list[i].userid;
 		       var sjshmoney =parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,"")); 
 		       var jklx = "";
-		       if(list[i].jk_date==1){
-		    	      jklx="30%";
-				  }else if(list[i].jk_date==2) {
-					  jklx="30%";
-				  }else if(list[i].jk_date==4) {
-					  jklx="30%";
-				  }else if(list[i].jk_date==3) {
-					  jklx="30%";
-				  }
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jk_date==1){
+			    	      jklx="30%";
+					  }else if(list[i].jk_date==2) {
+						  jklx="30%";
+					  }else if(list[i].jk_date==4) {
+						  jklx="30%";
+					  }else if(list[i].jk_date==3) {
+						  jklx="30%";
+					  }
+			   }
+		       
 			  
 			  html_ += "<tr><td>"+list[i].userid+"</td><td>"+list[i].jkid+"</td><td>"+list[i].realname+"</td>";
 			  if(list[i].userhktime == undefined){
@@ -298,7 +305,7 @@ document.onselectstart=new Function("event.returnValue=true");
 				  html_ +="<td><span style='color:#0000FF;font-weight:bold'>14Ngày</span></td>";
 			  }
 			  html_ +="<td>"+list[i].rechargemoney+"</td>";
-			  if(jklx=="30%" || jklx=="25%") {
+			  if(jklx=="35%" || jklx=="25%") {
 				   html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
 			  }else {
 					html_ += " <td><span>"+jklx+"</span></td>";

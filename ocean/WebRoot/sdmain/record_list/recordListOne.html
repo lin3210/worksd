@@ -369,67 +369,15 @@ $(function(){
 				  var userid =list[i].id;
 				  var jklx = "";
 				  if(list[i].jk_date==1){
-					  jklx="30%";
+					  jklx="35%";
 				  }else if(list[i].jk_date==2) {
-					  jklx="30%";
+					  jklx="35%";
 				  }else if(list[i].jk_date==4) {
-					  jklx="30%";
+					  jklx="35%";
 				  }else if(list[i].jk_date==3) {
-					  jklx="30%";
+					  jklx="35%";
 				  }
 				  
-		  		if(list[i].username.slice(0,4)=="TAFA"){
-					html_ += "<tr id =id_"+list[i].id+"><td><span style='color:#F00'>"+list[i].jkid+"</span></td><td><span style='color:#F00'>"+list[i].id+"</span></td><td><span style='color:#F00'>"+list[i].username.slice(0,8)+"</span></td>";
-					
-					html_ += "<td><span style='color:#F00'>"+list[i].realname+"</span></td><td><span style='color:#F00'>"+list[i].mobilephone+"</span></td>";
-					if(list[i].refferee=="")
-					{
-						html_ += " <td><span style='color:#F00'>Không có</span></td>";
-					}
-					else
-					{
-						html_ += " <td><span style='color:#F00'>"+list[i].refferee+"</span></td>";
-					}
-					html_ += " <td><span style='color:#F00'>"+list[i].idno+"</span></td>";
-					//判断性别男女
-					var idnoSex = list[i].sex;
-					var sexInfo ;
-					if(idnoSex == 1){
-					   sexInfo="Đàn ông";
-					}else{
-					   sexInfo="đàn bà";
-					}
-					html_ += " <td><span style='color:#F00'>"+sexInfo+"</span></td>";
-					html_ += " <td><span style='color:#F00'>"+list[i].create_date+"</span></td>";
-					html_ += " <td><span style='color:#F00'>"+list[i].jk_money+"</span></td>";
-					if(list[i].jk_date==1){
-					   html_ += " <td><span style='color:#F00'>15Ngày</span></td>";
-					}else if(list[i].jk_date==2) {
-					    html_ += " <td><span style='color:#F00'>30Ngày</span></td>";
-					}else if(list[i].jk_date==3) {
-					    html_ += " <td><span style='color:#0000FF;font-weight:bold'>7Ngày</span></td>";
-					}else if(list[i].jk_date==4) {
-					    html_ += " <td><span style='color:#0000FF;font-weight:bold'>14Ngày</span></td>";
-					}
-					if(jklx=="30%" || jklx=="25%") {
-						html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
-					}else {
-						html_ += " <td><span style='color:#F00'>"+jklx+"</span></td>";
-					}
-					if(list[i].hongbaoid==1){
-					   html_ += " <td><span style='color:#F00'>Có</span></td>";
-					}else{
-					    html_ += " <td><span style='color:#F00'>Không</span></td>";
-					}
-					html_ +="<td><span style='color:#F00'>"+list[i].name+"</span></td>";
-					
-					if(list[i].fsdxtime == null || list[i].fsdxtime == ""){
-						html_ += "<td><button class='btn btn-xs btn-success' onclick='fsdx("+list[i].jkid+")'>Gửi SMS</button></td>";
-					}else{
-						html_ += "<td>"+list[i].fsdxtime+"</td>";
-					}	
-				}
-				else{
 					html_ += "<tr id =id_"+list[i].id+"><td>"+list[i].jkid+"</td><td>"+list[i].id+"</td><td>"+list[i].username.slice(0,8)+"</td>";
 					
 					html_ += "<td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td>";
@@ -462,7 +410,7 @@ $(function(){
 					}else if(list[i].jk_date==4) {
 					    html_ += "<td><span style='color:#0000FF;font-weight:bold'>14Ngày</span></td>";
 					}
-					if(jklx=="30%" || jklx=="25%") {
+					if(jklx=="35%" || jklx=="25%") {
 						html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
 					}else {
 						html_ += " <td><span>"+jklx+"</span></td>";
@@ -479,7 +427,7 @@ $(function(){
 					}else{
 						html_ += "<td>"+list[i].fsdxtime+"</td>";
 					}	
-				}								
+												
 				html_ +="<td><button class='btn btn-xs btn-info' onclick='f_dw("+list[i].id+")'>Định vị</button></td>";
 				if(list[i].username.slice(0,4)=="TAFA"){
 					html_ +="<td><button class='btn btn-xs btn-info' onclick='f_subh5("+list[i].jkid+")'>Thẩm định</button></td><td><button class='btn btn-xs btn-success' onclick='two_ck("+list[i].jkid+")'>Đổi nhân viên thẩm định</button></td><td><button class='btn btn-xs btn-info' onclick='del_ck("+list[i].jkid+")'>XÓA BỎ</button></td></tr>";

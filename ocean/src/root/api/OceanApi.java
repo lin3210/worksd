@@ -145,7 +145,7 @@ public class OceanApi extends BaseAction {
 					
 					row.set("oceanFdv", "0.1955");
 					row.set("oceanTdv", "0.291");
-					row.set("oceanPs", "{\"7\":[0.0045,0.3]}");  //,\"30\":[0.009,0.4]
+					row.set("oceanPs", "{\"7\":[0.006,0.35]}");  //,\"30\":[0.009,0.4]
 					
 					if (rz != null) {
 						isStep1.set("oceanBun", rz.getString("cardusername"));

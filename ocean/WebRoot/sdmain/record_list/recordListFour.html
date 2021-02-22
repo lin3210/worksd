@@ -447,15 +447,21 @@ loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeDFK",{},function
 		        var userid = list[i].id;
 		       var sjshmoney =  parseInt(list[i].sjsh_money.replace(/,/g,""));
 		       var jklx = "";
-			  if(list[i].jkqx==1){
-				  jklx="30%";
-			  }else if(list[i].jkqx==2) {
-				  jklx="30%";
-			  }else if(list[i].jkqx==4) {
-				  jklx="30%";
-			  }else if(list[i].jkqx==3) {
-				  jklx="30%";
-			  }
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+			   	  if(list[i].jkqx==1){
+					  jklx="30%";
+				  }else if(list[i].jkqx==2) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==4) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==3) {
+					  jklx="30%";
+				  }	 
+			   }
 			  
 		     if(list[i].napasbankno == "0"){
 		          html_ += "<tr><td><span style='color:#F00'>"+list[i].username+"</span></td><td><span style='color:#F00'>"+list[i].realname+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].idno+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].cardno+"</span></td><td><span style='color:#F00'>"+list[i].cardname+"</span></td><td><span style='color:#F00'>"+list[i].sjsh_money+"</span></td><td><span style='color:#F00'>"+list[i].sjds_money+"</span></td><td><span style='color:#F00'>"+jkqx+"</span></td>";//<td>"+fwfy+"</td>
@@ -562,15 +568,22 @@ loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeDFK",{},function
 		        var userid = list[i].id;
 		       var sjshmoney =  parseInt(list[i].sjsh_money.replace(/,/g,""));
 		       var jklx = "";
-			  if(list[i].jkqx==1){
-				  jklx="30%";
-			  }else if(list[i].jkqx==2) {
-				  jklx="30%";
-			  }else if(list[i].jkqx==4) {
-				  jklx="30%";
-			  }else if(list[i].jkqx==3) {
-				  jklx="30%";
-			  }
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jkqx==1){
+					  jklx="30%";
+				  }else if(list[i].jkqx==2) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==4) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==3) {
+					  jklx="30%";
+				  }
+			   }
+			  
 			  
 		     if(list[i].napasbankno == "0"){
 		          html_ += "<tr><td><span style='color:#F00'>"+list[i].username+"</span></td><td><span style='color:#F00'>"+list[i].realname+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].idno+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].cardno+"</span></td><td><span style='color:#F00'>"+list[i].cardname+"</span></td><td><span style='color:#F00'>"+list[i].sjsh_money+"</span></td><td><span style='color:#F00'>"+list[i].sjds_money+"</span></td><td><span style='color:#F00'>"+jkqx+"</span></td>";//<td>"+fwfy+"</td>

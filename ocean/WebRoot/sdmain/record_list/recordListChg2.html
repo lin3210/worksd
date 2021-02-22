@@ -400,10 +400,15 @@ a:hover {text-decoration: none;}
                   yhje = 0;
                } */
 		      //利息  
-			       var userid = list[i].id;
-			       var sjshmoney = parseInt(list[i].sjsh_money.replace(/,/g,""));
-			       var jklx = "";
-				  if(list[i].jk_date==1){
+		       var userid = list[i].id;
+		       var sjshmoney = parseInt(list[i].sjsh_money.replace(/,/g,""));
+		       var jklx = "";
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jk_date==1){
 					  jklx="30%";
 				  }else if(list[i].jk_date==2) {
 					  jklx="30%";
@@ -412,6 +417,8 @@ a:hover {text-decoration: none;}
 				  }else if(list[i].jk_date==3) {
 					  jklx="30%";
 				  }
+			   }
+				  
 				  
 				html_ += "<tr><td>"+list[i].username+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].idno+"</td><td>"+list[i].investorname +"</td><td>"+list[i].jk_money+"</td><td>"+list[i].sjsh_money+"</td>";
 				if(list[i].hongbaoid == "1"){

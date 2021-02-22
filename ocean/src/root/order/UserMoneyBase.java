@@ -35,15 +35,15 @@ public class UserMoneyBase  {
 			username =jbdUserBaseServiceBean.getusername(userid+"");
 		}
 		// Ocean lx     7day  30 %
-		int lx=30;;
+		int lx=35;;
 		if (1==nProductType) {    //15
-			lx=30;
+			lx=35;
 		}else if(2==nProductType) {  //30
-			lx=30;
+			lx=35;
 		}else if(3==nProductType) {  //7
-			lx=30;
+			lx=35;
 		}else if(4==nProductType) {  //14
-			 lx =30;
+			 lx =35;
 		}
 		
 		return lx;

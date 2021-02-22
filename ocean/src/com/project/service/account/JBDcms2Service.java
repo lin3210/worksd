@@ -1493,7 +1493,7 @@ public class JBDcms2Service extends BaseService {
 			String commit, String idCard, String hkstat, String et_day,
 			String st_day,int cmsuserid,String cuishouid,int[] cuishouzuyqm1,String jkdate,String yuqts) throws Exception {
 		
-		String sql = " select j.userid, j.id as jkid2 ,u.username, u.mobilePhone,u.heihu_zt,s.realname,w.name as csname , j.yuq_lx ,j.hkfq_cishu,j.yuq_ts ,j.sjsh_money ,j.hkyq_time,j.hkfq_code,j.hk_time,j.hkfq_time,j.jk_date,j.fkr_time,j.sfyhw,j.hkqd,j.hkstate,j.zxcsbz as msg from sd_new_jkyx j left join sd_user u on "
+		String sql = " select j.userid, j.id as jkid2 ,u.username, u.mobilePhone,u.heihu_zt,s.realname,w.name as csname , j.yuq_lx ,j.hkfq_cishu,j.yuq_ts ,j.sjsh_money ,j.hkyq_time,j.hkfq_code,j.hk_time,j.hkfq_time,j.jk_date,j.fkr_time,j.sfyhw,j.hkqd,j.hkstate,j.zxcsbz as msg,j.sjds_money,j.lx from sd_new_jkyx j left join sd_user u on "
 				+ "  j.userid = u.id left join sd_user_finance s on s.userId =j.userid left join sdcms_user w on w.USER_ID = j.cuishou_id where j.sfyhw = 0 and j.hkfq_code=0";
 		
 
@@ -1569,7 +1569,7 @@ public class JBDcms2Service extends BaseService {
 			String commit, String idCard, String hkstat, String et_day,
 			String st_day,int cmsuserid,String cuishouid,int[] cuishouzuyqm1,String jkdate,String yuqts) throws Exception {
 		
-		String sql = " select j.userid, j.id as jkid2 ,u.username, u.mobilePhone,u.heihu_zt,s.realname,w.name as csname , j.yuq_lx ,j.hkfq_cishu,j.yuq_ts ,j.sjsh_money ,j.hkyq_time,j.hkfq_code,j.hk_time,j.hkfq_time,j.jk_date,j.fkr_time,j.sfyhw,j.hkqd,j.hkstate,j.zxcsbz as msg from sd_new_jkyx j left join sd_user u on "
+		String sql = " select j.userid, j.id as jkid2 ,u.username, u.mobilePhone,u.heihu_zt,s.realname,w.name as csname , j.yuq_lx ,j.hkfq_cishu,j.yuq_ts ,j.sjsh_money ,j.hkyq_time,j.hkfq_code,j.hk_time,j.hkfq_time,j.jk_date,j.fkr_time,j.sfyhw,j.hkqd,j.hkstate,j.zxcsbz as msg,j.sjds_money,j.lx from sd_new_jkyx j left join sd_user u on "
 				+ "  j.userid = u.id left join sd_user_finance s on s.userId =j.userid left join sdcms_user w on w.USER_ID = j.cuishou_id where j.sfyhw = 0 and j.hkfq_code=0";
 		
 		if (!StringHelper.isEmpty(userId)) {
