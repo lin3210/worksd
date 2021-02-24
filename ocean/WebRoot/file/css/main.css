@@ -1,0 +1,345 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+body {
+	height: 100%;
+	background-color: #EEEEEE;
+}
+
+/* main1 */
+.main1 {
+	max-width: 1080px;
+	margin: 0 auto;
+}
+
+.main1 .banner {
+	height: 460px;
+	background-image: url(../img/homebackgroung.png);
+	background-size: cover;
+	margin: 0;
+	color: white;
+	background-color: yellow;
+}
+
+.main1 .banner h1 {
+	font-size: 3em;
+	padding: 1.5em 0 0 1em;
+}
+
+.main1 .banner p {
+	font-size: 2em;
+	padding: 1.5em 0 0 1.5em;
+}
+
+.main1 .banner span {
+	font-size: 4em;
+	padding: 0.8em 0 0 0.5em;
+	display: inline-block;
+}
+
+.main1 .banner label {
+	padding-left: 1em;
+	font-size: 2em;
+}
+
+input[type=range] {
+	width: 96%;
+	height: 30px;
+	-webkit-appearance: none;
+	background: -webkit-linear-gradient(indigo, red) no-repeat, #DFDFDF;
+	background-size: 11% 100%;
+	border-radius: 15px;
+	box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112;
+	outline: none;
+	margin: 3em auto;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 60px;
+	width: 60px;
+	margin: -5px 0 0 0px;
+	background: #FFFFFF;
+	border-radius: 50%;
+	border: solid 0.125em rgba(205, 224, 230, 0.5);
+	box-shadow: 0 .125em .125em #3b4547;
+}
+
+.main1 .giveMoney {
+	margin: -3em auto;
+	padding: 4em 3em 3em 3em;
+	width: 76%;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 1px 20px 40px #737373;
+}
+
+.main1 .giveMoney span {
+	font-size: 2.25em;
+}
+
+.main1 .giveMoney label {
+	display: inline-block;
+	margin-top: 1em;
+	font-size: 2em;
+	color: #777777;
+}
+
+.main1 .giveMoney #dayNumber {
+	display: block;
+	margin: 2.5em 0 0 0;
+}
+
+.main1 .radioDiv {
+	text-align: center;
+}
+
+.main1 .radioDiv div {
+	width: 100px;
+	height: 2em;
+	display: inline-block;
+	margin: 2em auto;
+}
+
+.main1 .commit {
+	width: 82%;
+	height: 80px;
+	line-height: 80px;
+	margin: 4em auto 0;
+	text-align: center;
+	font-size: 2em;
+	border-radius: 10px;
+	background: linear-gradient(to right, #ffa52d, #fe5a50);
+	box-shadow: 0 2px 20px #000000;
+}
+
+.main1 .commit a {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.main1 a:hover {
+	background: linear-gradient(to right, #f09114, #e72e23);
+	box-shadow: 0 2px 20px yellow;
+	border-radius: 10px;
+	color: white;
+}
+
+
+
+/* main2 */
+.main2 {
+	width: 1000px;
+	max-width: 1080px;
+	height: 100%;
+	margin: 0 auto;
+	background-color: #EEEEEE;
+}
+
+.main2 .title {
+	position: relative;
+}
+
+.main2 .title span {
+	position: absolute;
+	color: white;
+	font-size: 2em;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.main2 .certificationDiv {
+	margin: 3em 2em;
+}
+
+.main2 .certificationDiv label {
+	font-size: 2em;
+}
+
+.main2 .cerListDiv {
+	margin: 8em 0;
+	height: 5em;
+	line-height: 5em;
+	border-radius: 1em;
+	position: relative;
+}
+
+.main2 .cerListDiv span {
+	color: #b6b7c5;
+	font-size: 2em;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+}
+
+
+/* main3 */
+.main3 {
+	width: 1000px;
+	height: 100%;
+	max-width: 1080px;
+	margin: 0 auto;
+	/* background-color: white; */
+}
+
+.main3 .banner {
+	position: relative;
+}
+
+.main3 .banner span {
+	position: absolute;
+	color: white;
+	font-size: 3em;
+	top: 22%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.main3 .log {
+	position: absolute;
+	top: 50%;
+	left: 8%;
+}
+
+.main3 .setDiv {
+	width: 90%;
+}
+
+.main3 .listDiv {
+	position: relative;
+	margin: 2em 0 2em 3em;
+	/* padding: 2em; */
+}
+
+.main3 .listDiv img {
+	position: absolute;
+	margin-top: 0.8em;
+}
+
+.main3 .listDiv span {
+	position: absolute;
+	margin: 0.3em 0 0 2em;
+	font-size: 2em;
+}
+
+.main3 .listDiv hr {
+	margin-left: 3em;
+	margin-top: 2em;
+	height: 1px;
+	border: none;
+	border-top: 1px solid #DDDDDD;
+}
+
+
+
+/* nav */
+.navigation {
+	width: 1000px;
+	max-width: 1080px;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.navigation span {
+	width: 32%;
+	margin-top: 3em;
+	height: 3em;
+	line-height: 3em;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+}
+
+
+
+/* dialog */
+.commitDialogDiv {
+	width: 90%;
+	z-index: 10;
+	left: 5%;
+	top: 10em;
+	position: absolute;
+	/* background-color: red; */
+}
+
+.commitDialogDiv .dialogData {
+	width: 80%;
+	height: 80%;
+	margin: 20% 0% 15% 10%;
+	background-color: white;
+	border-radius: 2em;
+	box-shadow: 0 2px 50px #000000;
+}
+
+.dialogData p {
+	text-align: center;
+	font-weight: bold;
+	font-size: 2.6em;
+	padding-top: 1em;
+}
+
+.dialogData table {
+	width: 80%;
+	height: 50%;
+	margin: 2em ;
+	font-size: 2em;
+}
+
+.dialogData table tr {
+	height: 3em;
+}
+.dialogData table tr td{
+	width: 60%;
+}
+
+.dialogData hr {
+	margin: 0.5em auto;
+	width: 60%;
+}
+
+.dialogData .commitButton {
+	width: 50%;
+	height: 1.5em;
+	line-height: 1.5em;
+	margin: 2em auto;
+	font-size: 2.6em;
+	color: white;
+	text-align: center;
+	border-radius: 20px;
+	background: linear-gradient(to right, #ffa52d, #fe5a50);
+	box-shadow: 0 2px 20px #000000;
+}
+
+.dialogData .commitButton a {
+	width: 100%;
+	height: 100%;
+	display: block;
+	border-radius: 18px;
+}
+
+.commitDialogDiv .dialogClose {
+	width: 100px;
+	height: 150px;
+	margin: 0 auto;
+}
+
+select {
+	width: 40%;
+	height: 56px;
+	border: none;
+	outline: none;
+	font-size: 0.6em;
+	background: linear-gradient(to bottom right, #FFFFFF, #ffc16e);
+	border-radius: 5px;
+}
+
+select option {
+	font-size: 16px;
+}

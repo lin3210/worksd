@@ -5989,4 +5989,166 @@ public class JBDcmsAction extends BaseAction {
 			  this.getWriter().write(object.toString());
 			  return null;
 		  }
+		  
+		  
+		  //上传文件 更新视频 /照片
+		 public ActionResult doGetUploadUpdatefile() throws Exception {
+				JSONObject jsonObject = new JSONObject(); // 后台登录账户
+			    int cmsuserid =SessionHelper.getInt("cmsuserid", getSession());
+			    logger.info("上传文件 更新视频 /照片:");
+			    cmsuserid =accessVeritifivationbase.checkCMSidAndip(cmsuserid, getipAddr());
+			    if(cmsuserid==0){
+						jsonObject.put("error", -1);
+						jsonObject.put("msg", "Vui lòng đăng nhập trước");
+						this.getWriter().write(jsonObject.toString());	
+						return null;		
+				}
+				logger.info("请求ID:" + cmsuserid);
+				String  cmsid_zu=jbdcmsService.getvideoguize();
+				String userzu_id[] = cmsid_zu.split(",");
+				int state =0;
+				for(String user:userzu_id) {
+					if(!"".equals(user) && !"0".equals(user) && user.contentEquals(cmsuserid+"") ) {
+						state =1;
+					}
+				}
+				if(state==0){
+					jsonObject.put("error", -1);
+					jsonObject.put("msg", "Vui lòng đăng nhập trước");
+					this.getWriter().write(jsonObject.toString());	
+					return null;		
+			    }
+				
+				String filename = getStrParameter("name"); // 用户ID ;
+				int userid = getIntParameter("userId"); // 文件名的id ;
+				int filetype = getIntParameter("filetype"); // 更新类型 ;
+				
+				SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+				String ctreat_time = fmtrq.format(new Date());
+				
+
+				if(userid <=0) {
+					jsonObject.put("error", -1);
+					jsonObject.put("msg", "Sai Mã số KH ");
+					this.getWriter().write(jsonObject.toString());	
+					return null;
+				}
+				
+				int jk_status = jbdcmsService.getuserPhotoJKid(userid+"");
+				if( (filename.contains("jpg")  || filename.contains("png")) &&  (filetype ==1 || filetype ==2 || filetype ==3) &&  jk_status >0) {
+					if(1==filetype) {
+						String p1 = jbdcmsService.getUserpicP1(userid);
+						DataRow row = new DataRow();
+						row.set("userid", userid);
+						row.set("p1", p1);
+						row.set("ggp1", filename);
+						row.set("cmsuserid", cmsuserid);
+						row.set("createtime", fmtrq.format(new Date()));
+						jbdcmsService.insertChangePictureLoad(row);
+						
+						String ui = jbdcmsService.getUI(userid+"");
+						if("".equals(ui)) {
+							DataRow row5 = new DataRow();
+							row5.set("userid", userid);
+							row5.set("p1", filename);
+							row5.set("create_time", fmtrq.format(new Date()));
+							jbdcmsService.addUserZhaoPian(row5);
+						}else {
+							DataRow row1 = new DataRow();
+							row1.set("userid", userid);
+							row1.set("p1", filename);
+							row1.set("create_time", fmtrq.format(new Date()));
+							jbdcmsService.updateUserZhaoPian(row1);
+						}
+						
+					}else if(2==filetype) {
+						String p2 = jbdcmsService.getUserpicP2(userid);
+						DataRow row = new DataRow();
+						row.set("userid", userid);
+						row.set("p2", p2);
+						row.set("ggp2", filename);
+						row.set("cmsuserid", cmsuserid);
+						row.set("createtime", fmtrq.format(new Date()));
+						jbdcmsService.insertChangePictureLoad(row);
+						
+						String ui = jbdcmsService.getUI(userid+"");
+						if("".equals(ui)) {
+							DataRow row5 = new DataRow();
+							row5.set("userid", userid);
+							row5.set("p2", filename);
+							row5.set("create_time", fmtrq.format(new Date()));
+							jbdcmsService.addUserZhaoPian(row5);
+						}else {
+							DataRow row1 = new DataRow();
+							row1.set("userid", userid);
+							row1.set("p2", filename);
+							row1.set("create_time", fmtrq.format(new Date()));
+							jbdcmsService.updateUserZhaoPian(row1);
+						}
+						
+					}else if(3==filetype) {
+						String p3 = jbdcmsService.getUserpicP3(userid);
+						DataRow row = new DataRow();
+						row.set("userid", userid);
+						row.set("p3", p3);
+						row.set("ggp3", filename);
+						row.set("cmsuserid", cmsuserid);
+						row.set("createtime", fmtrq.format(new Date()));
+						jbdcmsService.insertChangePictureLoad(row);
+						
+						
+						String ui = jbdcmsService.getUI(userid+"");
+						if("".equals(ui)) {
+							DataRow row5 = new DataRow();
+							row5.set("userid", userid);
+							row5.set("p3", filename);
+							row5.set("create_time", fmtrq.format(new Date()));
+							jbdcmsService.addUserZhaoPian(row5);
+						}else {
+							DataRow row1 = new DataRow();
+							row1.set("userid", userid);
+							row1.set("p3", filename);
+							row1.set("create_time", fmtrq.format(new Date()));
+							jbdcmsService.updateUserZhaoPian(row1);
+						}
+					}
+					
+					jsonObject.put("error", 1);
+					jsonObject.put("msg", "Đã gửi thành công");
+					this.getWriter().write(jsonObject.toString());
+					return null;
+				}
+
+				//更改视频
+				if( filename.contains("mp4")  && filetype ==4 ) {
+					int jkid = jbdcmsService.getuservideoJKid(userid+"");
+					if(jkid > 0) {
+
+						DataRow row1 = new DataRow();
+						row1.set("id", jkid);
+						row1.set("spdz", filename);
+						row1.set("spzt", 1);
+						row1.set("spsj", fmtrq.format(new Date()));
+						jbdcmsService.updateUserLoadVideo(row1);
+						
+						DataRow row6 = new DataRow();
+						row6.set("userid", userid);
+						row6.set("ggvideo", filename);
+						row6.set("cmsuserid", cmsuserid);
+						row6.set("createtime", fmtrq.format(new Date()));
+						jbdcmsService.insertChangePictureLoad(row6);
+						
+						jsonObject.put("error", 1);
+						jsonObject.put("msg", "Đã gửi thành công");
+						this.getWriter().write(jsonObject.toString());
+						return null;
+					}
+				}
+				
+
+				jsonObject.put("error", -1);
+				jsonObject.put("msg", "error");
+				this.getWriter().write(jsonObject.toString());
+				return null;
+			}
 }

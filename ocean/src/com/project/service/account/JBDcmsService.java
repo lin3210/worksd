@@ -3273,4 +3273,61 @@ public class JBDcmsService extends BaseService {
 				sb.append("select mobilephone from sd_user  where id=" + userId);
 				return getJdbcTemplate().queryString(sb.toString());
 		}
+			
+	 //上传视频借款ID
+		 public String getvideoguize(){
+				String sql = "SELECT guizebianliang1 FROM  sd_pingjiguize WHERE id =19";
+				return getJdbcTemplate().queryString(sql);
+			}
+			
+		 public Integer getuserPhotoJKid(String useridmm) {
+
+				StringBuffer sb = new StringBuffer();
+				sb.append("    SELECT id FROM sd_new_jkyx WHERE (( cl_status=0 AND cl02_status=0 AND cl03_status=0  ) OR ( cl_status=1 AND cl02_status=0 AND cl03_status=0  ) OR ( cl_status=1 AND cl02_status=1 AND cl03_status=0  )  ) AND userid=" + useridmm);
+				return getJdbcTemplate().queryInt(sb.toString());
+			}
+		 
+		 public String  getUserpicP1(int userid){
+			 
+			 String sql = "select p1 from sd_zhaopian where  userid ="+userid ;	 
+			 return getJdbcTemplate().queryString(sql);	 
+		  }
+		  public String  getUserpicP2(int userid){
+				 
+				 String sql = "select p2 from sd_zhaopian where  userid ="+userid ;	 
+				 return getJdbcTemplate().queryString(sql);	 
+			 }
+		  public String  getUserpicP3(int userid){
+				 
+				 String sql = "select p3 from sd_zhaopian where  userid ="+userid ;	 
+				 return getJdbcTemplate().queryString(sql);	 
+			 }
+		  
+		  public void insertChangePictureLoad(DataRow row) {
+			  	 getJdbcTemplate().insert("sd_change_userxx_picture", row);
+			  }
+		  public String getUI(String userid){
+				String sql = "select userid from sd_zhaopian where userid = '"+userid+"' ";
+				return getJdbcTemplate().queryString(sql);
+			}
+		  
+		// 更新资料
+			public void updateUserZhaoPian(DataRow data){
+				getJdbcTemplate().update("sd_zhaopian", data, "userid", data.getString("userid"));
+			}
+
+			public void addUserZhaoPian(DataRow data){
+				getJdbcTemplate().insert("sd_zhaopian", data);
+			}
+			
+			//上传视频借款ID
+			public Integer getuservideoJKid(String useridmm) {
+
+				StringBuffer sb = new StringBuffer();
+				sb.append("    SELECT id FROM sd_new_jkyx WHERE cl_status=1 AND cl02_status=1 AND cl03_status=0 AND spzt=0 AND userid=" + useridmm);
+				return getJdbcTemplate().queryInt(sb.toString());
+			}
+			public void updateUserLoadVideo(DataRow data){
+		  	 getJdbcTemplate().update("sd_new_jkyx", data, "id", data.getString("id"));
+		   }
 }

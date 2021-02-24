@@ -1,0 +1,134 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+
+
+<div  class="container">
+    <!-- ，头导向 -->
+	    <div class="crumbs">
+	    <ul id="breadcrumbs" class="breadcrumb">
+	      <li>
+	        <i class="icon-home">
+	        </i>
+	        <a href="/indexCmscn.html">
+	        </a>
+	      </li>
+	      <li class="current">
+	        <a href="/indexCmscn.html" title="" id="aa">
+	        		Tải lên ảnh /video(上传文件)
+	        </a>
+	      </li>
+	    </ul>
+	   </div>
+  
+    <!-- ，数据区域 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4>
+                        <i class="fa fa-reorder"></i>
+                          	 Tải lên ảnh /video(上传文件)
+                    </h4>
+                   
+                </div>
+                <div class="widget-content">
+                   
+
+			              <div class="modal-body">
+			                <div class="bootbox-body"  style="height: 600px;">
+			                   <div class="col-md-12">
+			                      <div class="widget box">
+			                          <div class="widget-header">
+			                          </div>
+			                          
+			                          <div class="widget-content" style="padding:15px;">
+			                              <form class="form-horizontal row-border" >
+			                              
+			                              <input type="hidden" name="fileUrl" id="fileUrl"/>
+			                              
+			                                  <div class="form-group">
+			                                   <div class="col-md-1" style="width:200px;">
+								                      <select class="form-control" name="select" id="filetype" onChange="gradeChange()" >
+								                          <option value="1">
+								                          		Mặt trước(身份证-正面)
+								                          </option>
+								                          <option value="2">
+								                          		Mặt sau(身份证-反面)
+								                          </option>
+								                          <option value="3">
+								                          		Hình tự cầm(人与身份证合照)
+								                          </option>
+								                          <option value="4">
+								                          		Video (视频)
+								                          </option>
+								                   	  </select>
+								                  </div>
+			                                      
+			                                      <div class="col-md-6">
+			                                          <label class="col-md-3 control-label">Mã số khách hàng：</label>
+			                                          <input type="text" name="fileuserid" id="fileuserid" style="width:200px; height:40px;" placeholder="Xin nhập điều kiện tìm kiếm">
+			                                      </div>
+			                                  </div>
+			                              	                                  
+			                                  
+			                                  <div class="form-group">
+			                                      <div class="col-md-9"  id="container">
+			                                        <label id="col-md-3 control-label">Tải lên ảnh /video：</label>
+			                                           <a id="selectfiles" href="javascript:void(0);" class='btn'>Chọn tệp tải lên</a>
+			                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                                          <a  id="postfiles"   href="javascript:void(0);" class='btn'>Tải lên</a>
+			                                           <a id="ossfile"  align="center" ></a>
+			                                      </div>
+			                                  </div>
+											
+			                              </form>
+			                          </div>
+			                          
+			                      </div>
+			                  </div>
+			              </div>
+			          </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+	<script type="text/javascript" src="file/lib/crypto1/crypto/crypto.js"></script>
+	<script type="text/javascript" src="file/lib/crypto1/hmac/hmac.js"></script>
+	<script type="text/javascript" src="file/lib/crypto1/sha1/sha1.js"></script>
+	<script type="text/javascript" src="file/lib/base64.js"></script>
+	<script type="text/javascript" src="file/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+	<script type="text/javascript" src="file/js/uploadMp4.js"></script>
+	
+	
+<script>
+  
+  function gradeChange(){
+	   var tempselect=$("#filetype").val();
+	   if(tempselect==0){
+	       $("#filetype").val("");
+	   }
+	   $("#filetype").val(tempselect);
+   }
+  var filetype= $("#filetype").val();
+  $("#filetype").val(filetype);
+  $("#fileUrl").val("/servlet/current/JBDcmsAction?function=GetUploadUpdatefile");
+  
+  console.log("fileUrl"+$("#fileUrl").val());
+  
+  </script>
+  
+	
