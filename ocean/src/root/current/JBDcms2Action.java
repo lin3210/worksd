@@ -4122,6 +4122,9 @@ public  ActionResult doGetCuisByid()  throws Exception {
 		row.set("sdyjmoney", fat.format(sdyjmoney));
 		row.set("totaldfk", page.getTotalRows());
 		row.set("totalsjdsmoney", fat.format(total_sjdsmoney));
+		
+		row.set("xszRenyT", list.size());
+		
 		row.set("temp",temp);
 		row.set("tempvalu",tempVelue);	
 		JSONObject object = JSONObject.fromBean(row);	
@@ -4443,9 +4446,14 @@ public ActionResult doGetRecordListChg03() throws Exception {
 		Double yqbl = 0.00;
 		Double yqwhbl = 0.00;
 		Double ylbl = 0.00;
+		double zyl = 0;
+
 		yqbl =  ((double)totalYQZB*100 / (totalDSYQZBJ+totalFmoney-totalCapital));
 		yqwhbl =  ((double)totalDSYQZBJ*100 / (totalDSYQZBJ+totalYmoneyBJ));
 		ylbl =  ((double)(totalLY - totalDHSInterest - totalDSYQZBJ)*100 / (totalFmoney - totalCapital + totalDSYQZBJ));
+		
+		zyl  = (totalLY - totalDHSInterest - totalDSYQZBJ);
+		
 		totalYE = totalLY -totalDHSInterest -totalYQZB ;
 		DataRow row = new DataRow();
 		row.set("hongbaojine", df.format(hongbaojine));
@@ -4457,6 +4465,8 @@ public ActionResult doGetRecordListChg03() throws Exception {
 		row.set("yqwhbl", dfdf.format(yqwhbl));
 		row.set("ylbl", dfdf.format(ylbl));
 		row.set("yqbl", dfdf.format(yqbl));
+		row.set("zyl", df.format(zyl));
+		
 		row.set("totalFmoney", df.format(totalFmoney));
 		row.set("tjttotalFmoney",totalFmoney);
 		row.set("totalWmoney", df.format(totalWmoney));

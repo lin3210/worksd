@@ -26,7 +26,7 @@ public class HongBaoTask implements Task{
 		System.out.println(time);
 		time.setMonth(time.getMonth()-3);
 		String curdate = DateHelper.formatDate(time,"yyyyMMdd");
-		logger.info("¿ªÊ¼Çå³ý"+curdate+"ÒÔÇ°Î´Ê¹ÓÃºì°üµÄÓÃ»§");
+		logger.info("ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½"+curdate+"ï¿½ï¿½Ç°Î´Ê¹ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½");
 		if("20150509".equals(curdate)){
 			curdate = "20150809";
 			List<DataRow> list = new ArrayList();
@@ -41,9 +41,9 @@ public class HongBaoTask implements Task{
 //			list.add(row2);
 			if(list.size()>0){
 				for(DataRow dataRow : list){
-					//²éÑ¯µ±Ç°ÓÃ»§×¢²áºì°ü
+					//ï¿½ï¿½Ñ¯ï¿½ï¿½Ç°ï¿½Ã»ï¿½×¢ï¿½ï¿½ï¿½ï¿½
 					String id = dataRow.getString("id");
-					//²é¿´ºì°ü½ð¶î£¬ÓëÕË»§Óà¶î±È½Ï
+					//ï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½È½ï¿½
 					DataRow data = hongbaoservice.getHb(id);
 					if(data != null){
 						double hb = data.getDouble("money");
@@ -59,7 +59,7 @@ public class HongBaoTask implements Task{
 							row.set("type", 6);
 							row.set("time", now);
 							hongbaoservice.insert(row);
-							logger.info("Çå³ýÓÃ»§£º"+id+"ºì°ü³É¹¦");
+							logger.info("ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½"+id+"ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 						}
 					}
 					try {
@@ -70,12 +70,12 @@ public class HongBaoTask implements Task{
 					}
 				}
 			}
-			logger.info("Çå³ý½áÊø");
+			logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 	}
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		new HongBaoTask().execute();
+//		new HongBaoTask().execute();
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //		Date d = new Date();
 //		String time = sdf.format(d);
@@ -83,5 +83,20 @@ public class HongBaoTask implements Task{
 //		d.setDate(d.getDate()-1);
 //		String time2 = sdf.format(d);
 //		logger.info(time2);
+		DecimalFormat famt = new DecimalFormat("###,###");
+		
+		List<DataRow> list= hongbaoservice.getUserJKList();
+		int fklv = 65;
+		for(DataRow row:list) {
+			int jkid =  row.getInt("id");
+			int shjk= Integer.parseInt(row.getString("sjsh_money").replaceAll(",", ""));
+			System.out.println("jkid:"+jkid);
+			DataRow inrow = new DataRow();
+			inrow.set("sjds_money", famt.format(shjk * fklv / 100));
+			inrow.set("lx", famt.format(shjk * (100 - fklv) / 100));
+			inrow.set("id", jkid);
+			hongbaoservice.updateUserJK(inrow);
+			
+		}
 	}
 }

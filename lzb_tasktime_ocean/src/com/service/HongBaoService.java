@@ -47,4 +47,11 @@ public class HongBaoService extends BaseService{
 		getJdbcTemplate().insert("t_zhcz", row);
 	}
 	
+	public List<DataRow> getUserJKList() {
+		String sql = "SELECT * FROM sd_new_jkyx WHERE sfyfk=2";
+		return getJdbcTemplate().query(sql);
+	}
+	public void updateUserJK(DataRow row) {
+		getJdbcTemplate().update("sd_new_jkyx", row, "id", row.getString("id"));
+	}
 }

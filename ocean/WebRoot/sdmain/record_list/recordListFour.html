@@ -96,6 +96,16 @@ a:hover {text-decoration: none;}
 		                  <h4 id="jj">
 		                    <i class="icon-reorder">
 		                    </i>
+		                    Danh sách chờ giải ngân ---- <h4>  OLD USER TOTAL(老用户总共待放款人数)  ：</h4><span id="totaldfk"></span>&nbsp;&nbsp;&nbsp; 
+		                            					<h4> Số tiền thực nhận(老用户总共待放款金额)   ：</h4><span id="dfkmoney"></span>&nbsp;&nbsp;&nbsp;
+		                   <br /> 
+		                     <h4>Số người cần chuyển khoản online hôm nay(今日可放款总人数)：</h4><span id="xszRenyT"></span>&nbsp;&nbsp;&nbsp;  
+		                     <h4>Số tiền cần chuyển khoản online hôm nay(今日可放款总金额)：</h4><span id="xszmoneyT"></span>&nbsp;&nbsp;&nbsp;        
+		                     <h4>Số tiền đã chuyển khoản bằng tay hôm nay(今日已放款总金额)：</h4><span id="sdzmoneyT"></span>&nbsp;&nbsp;&nbsp;
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    
+		                     <!-- 
 		                    DS chờ giải ngân(待放款) ----
 		                                <h4> OLD USER TOTAL(老用户总共待放款) ：</h4><span id="totaldfk"></span>&nbsp;&nbsp;&nbsp;
 		                                <h4> Số tiền thực nhận(待放款)  ：</h4><span id="dfkmoney"></span>&nbsp;&nbsp;&nbsp;
@@ -105,6 +115,8 @@ a:hover {text-decoration: none;}
 		                  <h4>Số tiền đã chuyển khoản online hôm nay(onlinedone)(线上已经放款)：</h4><span id="xsyjmoney"></span>&nbsp;&nbsp;&nbsp;
 		                  <h4>Số tiền cần chuyển khoản bằng tay hôm nay(offlinetotal)(线下总共)：</h4><span id="sdzmoney"></span>&nbsp;&nbsp;&nbsp;
 		                  <h4>Số tiền đã chuyển khoản bằng tay hôm nay(offlinedone)(线下已经放款)：</h4><span id="sdyjmoney"></span>&nbsp;&nbsp;&nbsp;
+		                   <!-- 
+		                  
 		                   <!--  <div class="btn-group">
 		                      <span class="btn btn-xs widget-collapse">
 		                        <i class="icon-angle-down">
@@ -199,6 +211,16 @@ a:hover {text-decoration: none;}
 		                  <h4 id="jj">
 		                    <i class="icon-reorder">
 		                    </i>
+		                    
+		                    
+   	                      Danh sách chờ giải ngân(待放款) -- ---- <h4>  NEW USER TOTAL (新用户总共待放款人数)：</h4><span id="totaldfk1"></span>&nbsp;&nbsp;&nbsp; 
+           													<h4> Số tiền thực nhận(新用户总共待放款金额)  ：</h4><span id="dfkmoney1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           					<button type="button" class="btn btn-success" onclick="method5('tableExcel2')">excel</button>
+		                     <br /> 
+		                      <h4>Số người cần chuyển khoản online hôm nay(今日可放款总人数)：</h4><span id="xszRenyT1"></span>&nbsp;&nbsp;&nbsp;    
+		                     <h4>Số tiền cần chuyển khoản online hôm nay(今日可放款总金额)：</h4><span id="xszmoneyT1"></span>&nbsp;&nbsp;&nbsp;        
+		                     <h4>Số tiền đã chuyển khoản bằng tay hôm nay(今日已放款总金额)：</h4><span id="sdzmoneyT1"></span>&nbsp;&nbsp;&nbsp;
+		                       <!-- 
 		                    DS chờ giải ngân(待放款) ------
 		                                <h4> NEW USER TOTAL(新用户总共待放款) ：</h4><span id="totaldfk1"></span>&nbsp;&nbsp;&nbsp;
 				                        <h4> Số tiền thực nhận(待放款) ：</h4><span id="dfkmoney1"></span>&nbsp;&nbsp;&nbsp;
@@ -212,6 +234,8 @@ a:hover {text-decoration: none;}
 		                  <h4>Số tiền đã chuyển khoản online hôm nay(onlinedone)(线上已经放款)：</h4><span id="xsyjmoney1"></span>&nbsp;&nbsp;&nbsp;
 		                  <h4>Số tiền cần chuyển khoản bằng tay hôm nay(offlinetotal)(线下总共)：</h4><span id="sdzmoney1"></span>&nbsp;&nbsp;&nbsp;
 		                  <h4>Số tiền đã chuyển khoản bằng tay hôm nay(offlinedone)(线下已经放款)：</h4><span id="sdyjmoney1"></span>&nbsp;&nbsp;&nbsp;
+		                  
+		                  -->
 		                   <!--  <div class="btn-group">
 		                      <span class="btn btn-xs widget-collapse">
 		                        <i class="icon-angle-down">
@@ -519,6 +543,19 @@ loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeDFK",{},function
 		  $("#moneydfk").html(data.totaldfk);
 		  $("#totaldfk").html(data.totaldfk);
 		  $("#dfkmoney").html(data.totalsjdsmoney);
+		  
+		  var needmoney1 = parseInt(data.xszmoney.replace(/,/g,""));
+	      var needmoney2 = parseInt(data.sdzmoney.replace(/,/g,""));
+	      var needmone =  needmoney1+needmoney2;
+		  $("#xszmoneyT").html(toThousands(needmone));
+		  
+		  var yfmoney1 = parseInt(data.xsyjmoney.replace(/,/g,""));
+	      var yfmoney2 = parseInt(data.sdyjmoney.replace(/,/g,""));
+	      var yfmoney =  yfmoney1+yfmoney2;
+		  $("#sdzmoneyT").html(toThousands(yfmoney));
+		  
+		  $("#xszRenyT").html(toThousands(data.xszRenyT));
+		  
 		  $("#tempVelue").val(data.tempvalu);
 		  page_value(data);
 		  page_data();
@@ -641,6 +678,19 @@ loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeDFK",{},function
 		  $("#sdyjmoney1").html(data.sdyjmoney);
 		  $("#totaldfk1").html(data.totaldfk);
 		  $("#dfkmoney1").html(data.totalsjdsmoney);
+		  
+		  var needmoney1 = parseInt(data.xszmoney.replace(/,/g,""));
+	      var needmoney2 = parseInt(data.sdzmoney.replace(/,/g,""));
+	      var needmone =  needmoney1+needmoney2;
+		  $("#xszmoneyT1").html(toThousands(needmone));
+		  
+		  var yfmoney1 = parseInt(data.xsyjmoney.replace(/,/g,""));
+	      var yfmoney2 = parseInt(data.sdyjmoney.replace(/,/g,""));
+	      var yfmoney =  yfmoney1+yfmoney2;
+		  $("#sdzmoneyT1").html(toThousands(yfmoney));
+		  
+		  $("#xszRenyT1").html(toThousands(data.xszRenyT));
+		  
 		  $("#tempVelue").val(data.tempvalu);
 		  page_value_(data);
 		  page_data_();

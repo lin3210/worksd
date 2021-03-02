@@ -155,6 +155,35 @@ a:hover {text-decoration: none;}
 		                                 借款成功列表
 		                  </h4>
 		                  <div class="toolbar no-padding">
+		                  
+		                  <h4>放款总本金 ：</h4><span id="totalFmoney"></span>&nbsp;
+		                  <h4>待收本金：</h4><span id="totalCapital"></span>&nbsp;
+		                  <h4>未到期本金：</h4><span id="totalWDQBJ"></span>&nbsp;
+		                  <h4>待收逾期本金：</h4><span id="totalDSYQZBJ"></span>&nbsp;
+		                  <br /> 
+		                  <h4>已收总手续费：</h4><span id="totalYSZSXF"></span>&nbsp;
+		                  <h4>逾期比例：</h4><span id="yqbl"></span>&nbsp;
+		                  <h4>逾期未还比例：</h4><span id="yqwhbl"></span>&nbsp;
+		                  <h4>盈利比例：</h4><span id="ylbl"></span>&nbsp;
+		                   <h4>总盈利：</h4><span id="zyl"></span>&nbsp;
+		                   
+		                   
+		                  <br />
+		                  <h4>未还总金额：</h4><span id="totalWmoney"></span>&nbsp;
+		                  <h4>已还总金额：</h4><span id="totalYmoney"></span>&nbsp;
+		                  <h4>总手续费：</h4><span id="totalLY"></span>&nbsp;
+		                  <h4>待收手续费：</h4><span id="totalDHSInterest"></span>&nbsp;
+		                  <h4>逾期总本金：</h4><span id="totalYQZB"></span>&nbsp;
+		                  <h4>逾期总本金和手续费：</h4><span id="totalYQZBJ"></span>&nbsp;
+		                  <h4>待收逾期本金和手续费：</h4><span id="totalDSYQZBJLX"></span>&nbsp;
+		                  <h4>总逾期手续费：</h4><span id="totalOverdueInterest"></span>&nbsp;
+		                  <h4>待收逾期手续费：</h4><span id="totalDHSYQLX"></span>&nbsp;
+		                  <h4>免除逾期手续费：</h4><span id="totalWHSYQLX"></span>&nbsp;
+		                  <h4>总延期本金：</h4><span id="totalZFQBJ"></span>&nbsp;
+		                  <h4>待收延期本金：</h4><span id="totalDSFQBJ"></span>&nbsp;
+		                  <h4>已收延期手续费：</h4><span id="totalYSFQLX"></span>&nbsp;
+		                  
+		                  <!-- 
 		                  <h4>放款总本金：</h4><span id="totalFmoney"></span>&nbsp;
 		                  <h4>待收本金：</h4><span id="totalCapital"></span>&nbsp;
 		                  <h4>未还总金额：</h4><span id="totalWmoney"></span>&nbsp;
@@ -373,6 +402,18 @@ a:hover {text-decoration: none;}
 	  	  $("#yqwhbl").html(data.yqwhbl+"%");
 	  	   //var ee = parseInt(data.ylbl.replace(/,/g,""))+11;
 	  	  $("#ylbl").html(data.ylbl+"%");
+	  	  $("#zyl").html(data.zyl);
+	  	  
+	  	  var wdqbj1 = parseInt(data.totalCapital.replace(/,/g,""));
+	      var wdqbj2 = parseInt(data.totalDSYQZBJ.replace(/,/g,""));
+	      var wdqbj =  wdqbj1-wdqbj2;
+	      $("#totalWDQBJ").html(toThousands(wdqbj));
+	  	  
+	      var YSZSXF1 = parseInt(data.totalLY.replace(/,/g,""));
+	      var YSZSXF2 = parseInt(data.totalDHSInterest.replace(/,/g,""));
+	      var YSZSXF =  YSZSXF1-YSZSXF2;
+	      $("#totalYSZSXF").html(toThousands(YSZSXF));
+	      
 		  $("#load_data").html("");
 		  var list = data.list.data;
 		  var html_="";
