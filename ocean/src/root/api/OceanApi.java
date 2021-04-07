@@ -145,7 +145,7 @@ public class OceanApi extends BaseAction {
 					
 					row.set("oceanFdv", "0.1955");
 					row.set("oceanTdv", "0.291");
-					row.set("oceanPs", "{\"7\":[0.006,0.35]}");  //,\"30\":[0.009,0.4]
+					row.set("oceanPs", "{\"7\":[0.006,0.30]}");  //,\"30\":[0.009,0.4]
 					
 					if (rz != null) {
 						isStep1.set("oceanBun", rz.getString("cardusername"));
@@ -1417,6 +1417,11 @@ public class OceanApi extends BaseAction {
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
+			
+			if(hhzt==0) { 
+				hhzt = userMoneyBase.getUMBaseUserHeiHuZT(idno);
+			}
+			
 			if (hhzt == 1 ||  hhzt_indo >0) {
 				jsonObject.put("oceanC", -4);
 				jsonObject.put("oceanM", "Thẩm định không thông qua, vui lòng một tháng sau đề xuất lại.");

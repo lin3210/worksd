@@ -4900,12 +4900,12 @@ public class JBDcmsAction extends BaseAction {
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
-		if (ggxxcs == 0) {
-			jsonObject.put("error", -5);
-			jsonObject.put("msg", "Vượt quá số lần điều chỉnh trong ngày. Vui lòng liên hệ IT tăng số lần điều chỉnh！");
-			this.getWriter().write(jsonObject.toString());
-			return null;
-		}
+//		if (ggxxcs == 0) {
+//			jsonObject.put("error", -5);
+//			jsonObject.put("msg", "Vượt quá số lần điều chỉnh trong ngày. Vui lòng liên hệ IT tăng số lần điều chỉnh！");
+//			this.getWriter().write(jsonObject.toString());
+//			return null;
+//		}
 		if (lab == 1) {
 			String name = jbdcmsService.getUserName(userid);
 			DataRow row = new DataRow();

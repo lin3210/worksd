@@ -2688,7 +2688,9 @@ public List<DataRow> getYqM3List(String userId,
 				+ " sd_new_jkyx j left join sd_user u on j.userid = u.id left join sd_bankcard b on j.userid = b.userid LEFT join sd_user_finance f on f.userId =j.userid  left join sdcms_user q on "
 				+ " q.USER_ID = j.cl03_ren where spzt=1 ";
 		
-		sql +=" and (substring(cl03_time,1,10)='"+time+"' or substring(fkdz_time,1,10)='"+time+"')";
+		//sql +=" and (substring(cl03_time,1,10)='"+time+"' or substring(fkdz_time,1,10)='"+time+"')";
+		sql +=" and (j.sfyfk =2  or substring(fkdz_time,1,10)='"+time+"')";
+		
 		sql+= " and is_old_user="+ isolduser;
 		if (!StringHelper.isEmpty(userId)) {
 			

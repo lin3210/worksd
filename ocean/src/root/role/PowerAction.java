@@ -39,6 +39,7 @@ public class PowerAction extends BaseAction{
 	 */
 	public ActionResult doGetUserPower(){
 		HttpServletRequest request = getRequest();
+		logger.info(request);
 		int roleMain = Integer.valueOf(request.getParameter("roleMain"));
 		int roleId= Integer.valueOf(request.getParameter("roleid"));
 		//²ÎÊý´«µÝ

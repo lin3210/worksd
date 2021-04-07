@@ -60,7 +60,7 @@ public class Fenpeicuishou implements Task {
 		int txhkbl3 = aotuZDSHALLService.getTXHKBL3();
 		
 		
-		
+		int kefufendan=0;
 		try{
 			for(int i=0; i<size; i++){
 				DataRow dataRow = list.get(i);
@@ -68,13 +68,20 @@ public class Fenpeicuishou implements Task {
 				String username = dataRow.getString("username");								
 				
 				cuishou = txhk1;
+				if(kefufendan%2==0) {
+					cuishou = txhk1;
+				}else {
+				    cuishou = txhkbl1;	
+				}	
+				
 				int jkid = dataRow.getInt("id");
 				DataRow row11 = new DataRow();
 				row11.set("id", jkid);
 				row11.set("cuishou_id", cuishou);
 				row11.set("cuishou_tx", cuishou);					
 				//按照规则表-系统设定的一些规则把
-				aotuZDSHALLService.updateUserFP(row11);													
+				aotuZDSHALLService.updateUserFP(row11);	
+				kefufendan++;
 			}
 		}
 			 catch (Exception e) {
@@ -141,121 +148,121 @@ public class Fenpeicuishou implements Task {
 		
 		
 //************************** M 1 2 3 分单**************************//
-		int cuishou_zu_m123 =123;
-		int cuishouM123=0;
-		int[] cuishouzuyqM123= getUserLeavetList(123);
-		// 催收人员的数量
-		int cuishouzuyqm123[] = new int[cuishouzuyqM123.length];
-		// 催收人员的的id数组
-		String  cuishou_M123="";
-		for (int m = 0; m < cuishouzuyqM123.length; m++) {
-			cuishouzuyqm123[m]=cuishouzuyqM123[m] ;
-			cuishou_M123+= " and cuishou_id <>"+cuishouzuyqm123[m] ;
-			logger.info("第"+m+"催收M123人：" +cuishouzuyqM123[m]);
-		}
-				
-		List<DataRow> listyqdayM123 = aotuZDSHALLService.getAllYQListYQNewM123(cuishou_M123);
+//		int cuishou_zu_m123 =123;
+//		int cuishouM123=0;
+//		int[] cuishouzuyqM123= getUserLeavetList(123);
+//		// 催收人员的数量
+//		int cuishouzuyqm123[] = new int[cuishouzuyqM123.length];
+//		// 催收人员的的id数组
+//		String  cuishou_M123="";
+//		for (int m = 0; m < cuishouzuyqM123.length; m++) {
+//			cuishouzuyqm123[m]=cuishouzuyqM123[m] ;
+//			cuishou_M123+= " and cuishou_id <>"+cuishouzuyqm123[m] ;
+//			logger.info("第"+m+"催收M123人：" +cuishouzuyqM123[m]);
+//		}
+//				
+//		List<DataRow> listyqdayM123 = aotuZDSHALLService.getAllYQListYQNewM123(cuishou_M123);
+//		
+//		// 1号统计催收人员剩余催收单数 lin 2019-7-8 M123
+//		if (time111.substring(7, 10).equals("-01")) {
+//			everyMoncuishoudantongji(cuishouzuyqm123, 123);
+//		}
+//		
+//		int ccM123 =0;
+//		int M123 =0;
+//		int ddM123 =cuishouzuyqM123.length;
+//		try{
+//			for(int i=0; i<listyqdayM123.size(); i++){
+//				
+//				int xiabiao = ccM123%ddM123;
+//				int cuishou = cuishouzuyqM123[xiabiao];
+//				
+//				if(findStr(cuishou)) {
+//					if(cuishou==M123) {
+//						cuishouM123++;
+//					}
+//					if(cuishouM123 == 0) {
+//						M123 = cuishou;
+//						cuishouM123++;
+//					}
+//					if(cuishouM123%2==0) {						
+//						Random random1 = new Random();
+//						int xiabiao1= random1.nextInt(cuishouzuyqM123.length);
+//						cuishou = cuishouzuyqM123[xiabiao1];
+//						for(int ij=0;ij<10;ij++) {
+//							 if(findStr(cuishou)) {
+//								int xia= random1.nextInt(cuishouzuyqM123.length);
+//								cuishou = cuishouzuyqM123[xia];
+//							 }else {
+//								 break;
+//							 }
+//						 }
+//					}
+//				}
+//				DataRow dataRow = listyqdayM123.get(i);	
+//				int oldcuishou= dataRow.getInt("cuishou_id");
+//				int jkid = dataRow.getInt("id");
+//				String cuishouzz = aotuZDSHALLService.getCuishouzz(jkid+""); 
+//				
+//				dataRow.set("id", jkid);
+//				dataRow.set("cuishou_id", cuishou);
+//				dataRow.set("cuishou_m0", cuishou);
+//				dataRow.set("cuishou_m1", cuishou);
+//				dataRow.set("cuishou_m2", cuishou);
+//				dataRow.set("cuishou_m3", cuishou);
+//				dataRow.set("cuishouzz", cuishouzz + "," + cuishou);
+//				
+//				DataRow rowre = new DataRow();
+//				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//
+//				String userid = aotuZDSHALLService.getUserid(jkid+""); 
+//				rowre.set("user_id",userid);
+//				rowre.set("rec_id",jkid);
+//				rowre.set("cmsuser_id",cuishou);
+//				rowre.set("create_time",df.format(new Date()));
+//				rowre.set("cmsuserld_id",6);
+//				rowre.set("oldcuishou_id",oldcuishou);
+//				
+//				String sjshjine = aotuZDSHALLService.getSJSHJE(jkid+"");
+//				String yuqlx = aotuZDSHALLService.getYQLX(jkid+"");
+//				int zje = Integer.parseInt(sjshjine.replace(",", ""))+Integer.parseInt(yuqlx.replace(",", ""));
+//				DataRow datacs = aotuZDSHALLService.getCuishouBG(cuishou,time111);
+//				List<DataRow> cuishoufendanList =aotuZDSHALLService.getcuishoufendanid(jkid,time111.substring(0, 7),cuishou_zu_m123);
+//				int a = cuishoufendanList.size();
+//				//f 分出人更新
+//				DataRow  dataRow1 = new DataRow();
+//				if (0!=a ) {
+//					DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
+//					int fendanid = datafendan.getInt("id");
+//					int fendancs =datafendan.getInt("fendan_cs");
+//					int cuishou_id= datafendan.getInt("cuishou_id");
+//					double cuihuijine_old = aotuZDSHALLService.getfendancuihuijine(jkid,cuishou_id,time111.substring(0, 7));  //以前催回金额
+//					double cuihuijinezs = aotuZDSHALLService.getrechargeMoneyAccount(jkid,cuishou_id,today.substring(3, 10));  //a总催回金额
+//					
+//					dataRow1.set("id",fendanid);
+//					dataRow1.set("cuishou_jine",cuihuijinezs-cuihuijine_old);
+//					dataRow1.set("recharge_money",cuihuijinezs-cuihuijine_old);
+//					logger.info("M0 更新 ：fendanid： "+fendanid);
+//				}			 
+//				DataRow  acf = new DataRow();
+//				acf.set("user_id",dataRow.getInt("userid"));
+//				acf.set("jk_id",jkid);
+//				acf.set("cuishou_id",cuishou);
+//				acf.set("fendan_time",time111);
+//				acf.set("cuishou_jine",zje);
+//				acf.set("cuishou_z",cuishou_zu_m123);
+//				acf.set("recharge_money",0);
+//				DataRow row11 = new DataRow();
+//				ccM123++;				
+//				aotuZDSHALLService.FenDanShiWu(dataRow, rowre,a, dataRow1, acf, row11, datacs );
+//			}						
+//		}
+//		catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace() ;
+//		}
 		
-		// 1号统计催收人员剩余催收单数 lin 2019-7-8 M123
-		if (time111.substring(7, 10).equals("-01")) {
-			everyMoncuishoudantongji(cuishouzuyqm123, 123);
-		}
-		
-		int ccM123 =0;
-		int M123 =0;
-		int ddM123 =cuishouzuyqM123.length;
-		try{
-			for(int i=0; i<listyqdayM123.size(); i++){
-				
-				int xiabiao = ccM123%ddM123;
-				int cuishou = cuishouzuyqM123[xiabiao];
-				
-				if(findStr(cuishou)) {
-					if(cuishou==M123) {
-						cuishouM123++;
-					}
-					if(cuishouM123 == 0) {
-						M123 = cuishou;
-						cuishouM123++;
-					}
-					if(cuishouM123%2==0) {						
-						Random random1 = new Random();
-						int xiabiao1= random1.nextInt(cuishouzuyqM123.length);
-						cuishou = cuishouzuyqM123[xiabiao1];
-						for(int ij=0;ij<10;ij++) {
-							 if(findStr(cuishou)) {
-								int xia= random1.nextInt(cuishouzuyqM123.length);
-								cuishou = cuishouzuyqM123[xia];
-							 }else {
-								 break;
-							 }
-						 }
-					}
-				}
-				DataRow dataRow = listyqdayM123.get(i);	
-				int oldcuishou= dataRow.getInt("cuishou_id");
-				int jkid = dataRow.getInt("id");
-				String cuishouzz = aotuZDSHALLService.getCuishouzz(jkid+""); 
-				
-				dataRow.set("id", jkid);
-				dataRow.set("cuishou_id", cuishou);
-				dataRow.set("cuishou_m0", cuishou);
-				dataRow.set("cuishou_m1", cuishou);
-				dataRow.set("cuishou_m2", cuishou);
-				dataRow.set("cuishou_m3", cuishou);
-				dataRow.set("cuishouzz", cuishouzz + "," + cuishou);
-				
-				DataRow rowre = new DataRow();
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
-				String userid = aotuZDSHALLService.getUserid(jkid+""); 
-				rowre.set("user_id",userid);
-				rowre.set("rec_id",jkid);
-				rowre.set("cmsuser_id",cuishou);
-				rowre.set("create_time",df.format(new Date()));
-				rowre.set("cmsuserld_id",6);
-				rowre.set("oldcuishou_id",oldcuishou);
-				
-				String sjshjine = aotuZDSHALLService.getSJSHJE(jkid+"");
-				String yuqlx = aotuZDSHALLService.getYQLX(jkid+"");
-				int zje = Integer.parseInt(sjshjine.replace(",", ""))+Integer.parseInt(yuqlx.replace(",", ""));
-				DataRow datacs = aotuZDSHALLService.getCuishouBG(cuishou,time111);
-				List<DataRow> cuishoufendanList =aotuZDSHALLService.getcuishoufendanid(jkid,time111.substring(0, 7),cuishou_zu_m123);
-				int a = cuishoufendanList.size();
-				//f 分出人更新
-				DataRow  dataRow1 = new DataRow();
-				if (0!=a ) {
-					DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
-					int fendanid = datafendan.getInt("id");
-					int fendancs =datafendan.getInt("fendan_cs");
-					int cuishou_id= datafendan.getInt("cuishou_id");
-					double cuihuijine_old = aotuZDSHALLService.getfendancuihuijine(jkid,cuishou_id,time111.substring(0, 7));  //以前催回金额
-					double cuihuijinezs = aotuZDSHALLService.getrechargeMoneyAccount(jkid,cuishou_id,today.substring(3, 10));  //a总催回金额
-					
-					dataRow1.set("id",fendanid);
-					dataRow1.set("cuishou_jine",cuihuijinezs-cuihuijine_old);
-					dataRow1.set("recharge_money",cuihuijinezs-cuihuijine_old);
-					logger.info("M0 更新 ：fendanid： "+fendanid);
-				}			 
-				DataRow  acf = new DataRow();
-				acf.set("user_id",dataRow.getInt("userid"));
-				acf.set("jk_id",jkid);
-				acf.set("cuishou_id",cuishou);
-				acf.set("fendan_time",time111);
-				acf.set("cuishou_jine",zje);
-				acf.set("cuishou_z",cuishou_zu_m123);
-				acf.set("recharge_money",0);
-				DataRow row11 = new DataRow();
-				ccM123++;				
-				aotuZDSHALLService.FenDanShiWu(dataRow, rowre,a, dataRow1, acf, row11, datacs );
-			}						
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace() ;
-		}
-		
-		if(1!=1) {
 
 			//*******************M0*********************///
 					int suijiM0=0;
@@ -1484,10 +1491,7 @@ public class Fenpeicuishou implements Task {
 						// TODO: handle exception
 						e.printStackTrace() ;
 					}
-		}
-		
-		
-		
+
 	}
 	
 		

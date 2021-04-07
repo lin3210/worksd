@@ -35,15 +35,15 @@ public class UserMoneyBase  {
 			username =jbdUserBaseServiceBean.getusername(userid+"");
 		}
 		// Ocean lx     7day  30 %
-		int lx=35;;
+		int lx=30;;
 		if (1==nProductType) {    //15
-			lx=35;
+			lx=30;
 		}else if(2==nProductType) {  //30
-			lx=35;
+			lx=30;
 		}else if(3==nProductType) {  //7
-			lx=35;
+			lx=30;
 		}else if(4==nProductType) {  //14
-			 lx =35;
+			 lx =30;
 		}
 		
 		return lx;
@@ -443,6 +443,47 @@ public class UserMoneyBase  {
 		}
 		
 		return re_pfedu;
+	}
+	
+	/**
+	 * 用户黑户状态
+	 * @param userIDCard
+	 * @return
+	 */
+	public int getUMBaseUserHeiHuZT(String idno ) {
+	
+		return -1;
+		/*
+		int heihu_zt =-1;
+		
+		if(!"".equals(idno)) {
+			String sfmiwen = Encrypt.MD5(jiami+idno);
+	
+			JSONObject jsonObject = new JSONObject();
+			com.alibaba.fastjson.JSONObject json = new com.alibaba.fastjson.JSONObject();
+			json.put("secret", sfmiwen);
+			json.put("idno", idno);
+			
+			String url = "http://app.m99vn.com/servlet/current/M99User2?function=GetUserHeiHustatus";
+			String response = HttpUtil.doPost(url, json, "UTF-8");
+			com.alibaba.fastjson.JSONObject json1 = com.alibaba.fastjson.JSONObject.parseObject(response);
+			
+			if(json1.containsKey("error")) {
+				int error = json1.getInteger("error");
+				if (error == 1) {
+					 heihu_zt = json1.getInteger("heihu_zt");
+					 int pingtai = json1.getInteger("pingtai");
+					 logger.info("idno:"+idno);
+					 logger.info("heihu_zt:"+heihu_zt);
+					 logger.info("pingtai:"+pingtai);
+		
+					return heihu_zt;
+				}
+			}
+			
+		}
+	
+		return heihu_zt;*/
 	}
 
 }

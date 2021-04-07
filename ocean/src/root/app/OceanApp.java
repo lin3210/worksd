@@ -140,7 +140,7 @@ public class OceanApp extends BaseAction {
 					
 					row.set("oceanFdv", "0.1955");
 					row.set("oceanTdv", "0.291");
-					row.set("oceanPs", "{\"7\":[0.006,0.35]}");  //,\"30\":[0.009,0.4]
+					row.set("oceanPs", "{\"7\":[0.006,0.30]}");  //,\"30\":[0.009,0.4]
 					
 					if (rz != null) {
 						isStep1.set("oceanBun", rz.getString("cardusername"));
@@ -1413,14 +1413,23 @@ public class OceanApp extends BaseAction {
 			// �??测是否有借款项目还未完成
 			String idno = jdbUserService.getIdno(userid2);
 			int jkcount = jdbUserService.getJKCount(userid2);
-			int hhzt = jdbUserService.getHHZT(userid2);
-			int hhzt_indo = jdbUserService.getusercmnd_state(idno);
+			
 			if (jkcount > 0) {
 				jsonObject.put("oceanC", -2);
 				jsonObject.put("oceanM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
+			
+		
+			
+			int hhzt = jdbUserService.getHHZT(userid2);
+			int hhzt_indo = jdbUserService.getusercmnd_state(idno);
+			
+			if(hhzt==0) { 
+				hhzt = userMoneyBase.getUMBaseUserHeiHuZT(idno);
+			}
+			
 			if (hhzt == 1 ||  hhzt_indo >0) {
 				jsonObject.put("oceanC", -4);
 				jsonObject.put("oceanM", "Thẩm định không thông qua, vui lòng một tháng sau đề xuất lại.");

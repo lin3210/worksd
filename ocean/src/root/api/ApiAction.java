@@ -219,7 +219,7 @@ public class ApiAction extends BaseAction {
 					row.set("twentyoneDayValue", "0.0135");
 					row.set("twentyeightDayValue", "0.018");
 
-					row.set("values", "{\"7\":[0.006,0.35]}");
+					row.set("values", "{\"7\":[0.006,0.30]}");
 					
 					if (rawUserBankCard != null) {
 						userBankCard.set("cardname", rawUserBankCard.getString("cardusername"));
@@ -1380,6 +1380,10 @@ public ActionResult doSMSSend() throws Exception {
 				jsonObject.put("msg", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
 				this.getWriter().write(jsonObject.toString());
 				return null;
+			}
+			
+			if(hhzt==0) { 
+				hhzt = userMoneyBase.getUMBaseUserHeiHuZT(idno);
 			}
 			
 			if (hhzt == 1 || hhzt_indo >0) {
