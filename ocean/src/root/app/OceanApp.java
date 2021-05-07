@@ -1581,7 +1581,7 @@ public class OceanApp extends BaseAction {
 				DataRow user = jdbUserService.getUserRecThreeInfo(userid2);
 				if (jkDataLast != null) {
 					int yuqts = jkDataLast.getInt("yuq_ts");
-					if(yuqts<16) {
+					if(yuqts >=0) {
 						data3.set("cl_status", 1);
 						data3.set("cl02_status", 1);
 						data3.set("is_old_user", 1);
