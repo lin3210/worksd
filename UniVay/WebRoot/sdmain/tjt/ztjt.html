@@ -1,0 +1,547 @@
+<script src="/sdmain/tjt/echarts.min.js"></script>
+<div>
+			<div  class="container">
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                          全部
+                                      </option>
+                                      <option value="1">
+                                         审核部门
+                                      </option>
+                                      <option value="2">
+                                         催收部门
+                                      </option>
+                                      <option value="3">
+                                         放款部门
+                                      </option>
+                                  
+                               	  </select>
+                              </div>
+                              <div class="col-md-4" id="shbm" style="width:150px;display:none;">
+                                  <select class="form-control" name="select" id="tempselect2" onChange="gradeChange2()"  >
+                                      <option value="0">
+                                          总笔数（一审）
+                                      </option>
+                                      <option value="1">
+                                         总通过笔数
+                                      </option>
+                                      <option value="2">
+                                         通过率
+                                      </option>
+                                      <option value="3">
+                                         三审通过笔数
+                                      </option>
+                                      <option value="4">
+                                         三审逾期笔数
+                                      </option>
+                                      <option value="5">
+                                         逾期比例
+                                      </option>
+                                      <option value="6">
+                                         逾期未还比例
+                                      </option>
+                                      
+                               	  </select>
+                              </div>
+                              <div class="col-md-4" id="csbm" style="width:150px;display:none;">
+                                  <select class="form-control" name="select" id="tempselect3" onChange="gradeChange3()">
+                                      <option value="0">
+                                          已经催回笔数
+                                      </option>
+                                      <option value="1">
+                                         总催收金额
+                                      </option>
+                                      <option value="2">
+                                        总已催收金额
+                                      </option>
+                                      <option value="3">
+                                         催收比例
+                                      </option>
+                                      <option value="4">
+                                         总提醒还款金额
+                                      </option>
+                                      <option value="5">
+                                         总已还款金额
+                                      </option>
+                                      <option value="6">
+                                         总还款比例
+                                      </option>
+                                      
+                               	  </select>
+                              </div>
+                              <div class="col-md-4" id="fkbm" style="width:150px;display:none;">
+                                  <select class="form-control" name="select" id="tempselect4" onChange="gradeChange4()" >
+                                      <option value="0">
+                                          总笔数（成功+失败）
+                                      </option>
+                                      <option value="1">
+                                             放款成功笔数
+                                      </option>
+                                      <option value="2">
+                                             放款成功金额
+                                      </option>
+                                      <option value="3">
+                                             放款失败笔数
+                                      </option>
+                                      <option value="4">
+                                         放款失败金额
+                                      </option>
+                                        <option value="5">
+                                         放款失败比例
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect1" onChange="gradeChange1()" >
+                                      <option value="0">
+                                          全部
+                                      </option>
+                                      <option value="1">
+                                         最近一个星期
+                                      </option>
+                                      <option value="2">
+                                         最近一个月
+                                      </option>
+                                    
+                               	  </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                      查询
+			                  </button>
+			                 
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+			</div>
+	<div id="main1" style="width: 1600px;height:500px;margin-top:50px;display:none"></div>
+	<div id="main2" style="width: 1600px;height:500px;margin-top:50px;display:none"></div>
+	<div id="main3" style="width: 1600px;height:500px;margin-top:50px;display:none"></div>
+	</div>
+<script type="text/javascript">
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		load_data();
+	
+	});
+
+  function load_data()
+	{
+	  var myChart1 = echarts.init(document.getElementById('main1'));
+	  var myChart2 = echarts.init(document.getElementById('main2'));
+	  var myChart3 = echarts.init(document.getElementById('main3'));
+	  var tempsele=$("#tempselect").val();
+	  var tempsele1=$("#tempselect1").val();
+	  var tempsele2=$("#tempselect2").val();
+	  var tempsele3=$("#tempselect3").val();
+	  var tempsele4=$("#tempselect4").val();
+	  var para = {temp:tempsele,temp1:tempsele1,temp2:tempsele2,temp3:tempsele3,temp4:tempsele4};
+		loadGetServer("/servlet/current/AccountManAction?function=GetRecordListAll",para,function(data_map){
+        // 指定图表的配置项和数据
+        if(data_map.temp == 1){
+	        var alltime = data_map.alltime ;
+	        var shenheshuju = data_map.shenheshuju ;
+	        var shenheuserid = data_map.shenheuserid ;
+	        var datatime = new Array;
+	            for(var i=0;i<alltime.length;i++){
+	            	datatime[i] = alltime[alltime.length-i-1] ;
+	        }
+	        
+	        var datauserid = new Array;
+	        for(var m=0;m<shenheuserid.length;m++){
+		        if(shenheuserid[m] == 6){
+		        	datauserid[m] = "6 Sam";
+		        }else if(shenheuserid[m] == 8){
+		        	datauserid[m] = "8 BRAIN";
+		        }else if(shenheuserid[m] == 100){
+		        	datauserid[m] = "100 TRAN THI THUY VAN";
+		        }else if(shenheuserid[m] == 12){
+		        	datauserid[m] = "12 ngo thi ngoc trang";
+		        }else if(shenheuserid[m] == 14){
+		        	datauserid[m] = "14 nguyen thanh tin";
+		        }else if(shenheuserid[m] == 15){
+		        	datauserid[m] = "15 chau ngoc phuong thao";
+		        }else if(shenheuserid[m] == 16){
+		        	datauserid[m] = "16 nguyen kim thi";
+		        }else if(shenheuserid[m] == 17){
+		        	datauserid[m] = "17 tran tuan kiet";
+		        }else if(shenheuserid[m] == 18){
+		        	datauserid[m] = "18 lang trung thuc";
+		        }else if(shenheuserid[m] == 19){
+		        	datauserid[m] = "19 le thi thuy trang";
+		        }else if(shenheuserid[m] == 20){
+		        	datauserid[m] = "20 tran van phi";
+		        }else if(shenheuserid[m] == 222){
+		        	datauserid[m] = "222 xiao wu";
+		        }else if(shenheuserid[m] == 28){
+		        	datauserid[m] = "28 Le Thi Thu Ha";
+		        }else if(shenheuserid[m] == 29){
+		        	datauserid[m] = "29 TRAN THI Y";
+		        }else if(shenheuserid[m] == 30){
+		        	datauserid[m] = "30 PHAM THI PHUONG THAO";
+		        }else if(shenheuserid[m] == 31){
+		        	datauserid[m] = "31 nguyen dang doan trinh";
+		        }else if(shenheuserid[m] == 5){
+		        	datauserid[m] = "5 红娟";
+		        }else if(shenheuserid[m] == 50){
+		        	datauserid[m] = "50 HUYNH NGUYEN DUONG";
+		        }else if(shenheuserid[m] == 51){
+		        	datauserid[m] = "51 DOAN THI HONG YEN";
+		        }else if(shenheuserid[m] == 52){
+		        	datauserid[m] = "52 LE HOANG MY";
+		        }else if(shenheuserid[m] == 888){
+		        	datauserid[m] = "888 SYSTEM";
+		        }else if(shenheuserid[m] == 98){
+		        	datauserid[m] = "98 PHAM THI MINH";
+		        }else if(shenheuserid[m] == 99){
+		        	datauserid[m] = "99 VO THI NGOC HANG";
+		        }
+	        }
+	        var dataseries = new Array;
+			var datashuju = new Array(datauserid.length);
+			for(var r=0;r<datauserid.length;r++){
+				datashuju[r] = new Array(shenheshuju.length); 
+			}
+	       
+	        for(var k=0;k<datauserid.length;k++){
+	         	for(var j=0;j<shenheshuju.length;j++){
+	         		datashuju[k][j] = shenheshuju[shenheshuju.length-j-1][k] ;
+	         	}
+	        dataseries[k] = {name:datauserid[k],type:'bar',data:datashuju[k]};
+	     	}
+	      option1 = {
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType: {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    legend: {
+	        data:datauserid
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : datatime
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+	            name : '总数',
+	            axisLabel : {
+	                formatter: '{value}'
+	            }
+	        },
+	        {
+	            type : 'value',
+	            name : '总数',
+	            axisLabel : {
+	                formatter: '{value}'
+	            }
+	        }
+	    ],
+	    series : dataseries
+	};
+}else if(data_map.temp == 2){
+	 var alltime = data_map.alltime ;
+	        var shenheshuju = data_map.shenheshuju ;
+	        var shenheuserid = data_map.shenheuserid ;
+	        var datatime = new Array;
+	            for(var i=0;i<alltime.length;i++){
+	            	datatime[i] = alltime[alltime.length-i-1] ;
+	        }
+	        
+	        var datauserid = new Array;
+	        for(var m=0;m<shenheuserid.length;m++){
+		        if(shenheuserid[m] == 6){
+		        	datauserid[m] = "6 Sam";
+		        }else if(shenheuserid[m] == 8){
+		        	datauserid[m] = "8 BRAIN";
+		        }else if(shenheuserid[m] == 100){
+		        	datauserid[m] = "100 TRAN THI THUY VAN";
+		        }else if(shenheuserid[m] == 12){
+		        	datauserid[m] = "12 ngo thi ngoc trang";
+		        }else if(shenheuserid[m] == 14){
+		        	datauserid[m] = "14 nguyen thanh tin";
+		        }else if(shenheuserid[m] == 15){
+		        	datauserid[m] = "15 chau ngoc phuong thao";
+		        }else if(shenheuserid[m] == 16){
+		        	datauserid[m] = "16 nguyen kim thi";
+		        }else if(shenheuserid[m] == 17){
+		        	datauserid[m] = "17 tran tuan kiet";
+		        }else if(shenheuserid[m] == 18){
+		        	datauserid[m] = "18 lang trung thuc";
+		        }else if(shenheuserid[m] == 19){
+		        	datauserid[m] = "19 le thi thuy trang";
+		        }else if(shenheuserid[m] == 20){
+		        	datauserid[m] = "20 tran van phi";
+		        }else if(shenheuserid[m] == 222){
+		        	datauserid[m] = "222 xiao wu";
+		        }else if(shenheuserid[m] == 28){
+		        	datauserid[m] = "28 Le Thi Thu Ha";
+		        }else if(shenheuserid[m] == 29){
+		        	datauserid[m] = "29 TRAN THI Y";
+		        }else if(shenheuserid[m] == 30){
+		        	datauserid[m] = "30 PHAM THI PHUONG THAO";
+		        }else if(shenheuserid[m] == 31){
+		        	datauserid[m] = "31 nguyen dang doan trinh";
+		        }else if(shenheuserid[m] == 5){
+		        	datauserid[m] = "5 红娟";
+		        }else if(shenheuserid[m] == 50){
+		        	datauserid[m] = "50 HUYNH NGUYEN DUONG";
+		        }else if(shenheuserid[m] == 51){
+		        	datauserid[m] = "51 DOAN THI HONG YEN";
+		        }else if(shenheuserid[m] == 52){
+		        	datauserid[m] = "52 LE HOANG MY";
+		        }else if(shenheuserid[m] == 888){
+		        	datauserid[m] = "888 SYSTEM";
+		        }else if(shenheuserid[m] == 98){
+		        	datauserid[m] = "98 PHAM THI MINH";
+		        }else if(shenheuserid[m] == 99){
+		        	datauserid[m] = "99 VO THI NGOC HANG";
+		        }
+	        }
+	        var dataseries = new Array;
+			var datashuju = new Array(datauserid.length);
+			for(var r=0;r<datauserid.length;r++){
+				datashuju[r] = new Array(shenheshuju.length); 
+			}
+	       
+	        for(var k=0;k<datauserid.length;k++){
+	         	for(var j=0;j<shenheshuju.length;j++){
+	         		datashuju[k][j] = shenheshuju[shenheshuju.length-j-1][k] ;
+	         	}
+	        dataseries[k] = {name:datauserid[k],type:'bar',data:datashuju[k]};
+	     	}
+	      option2 = {
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType: {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    legend: {
+	        data:datauserid
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : datatime
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+	            name : '总数',
+	            axisLabel : {
+	                formatter: '{value}'
+	            }
+	        },
+	        {
+	            type : 'value',
+	            name : '总数',
+	            axisLabel : {
+	                formatter: '{value}'
+	            }
+	        }
+	    ],
+	    series : dataseries
+	};
+}else if(data_map.temp == 3){
+	 var alltime = data_map.alltime ;
+	        var shenheshuju = data_map.shenheshuju ;
+	        var shenheuserid = data_map.shenheuserid ;
+	        var datatime = new Array;
+	            for(var i=0;i<alltime.length;i++){
+	            	datatime[i] = alltime[alltime.length-i-1] ;
+	        }
+	        
+	        var datauserid = new Array;
+	        for(var m=0;m<shenheuserid.length;m++){
+		        if(shenheuserid[m] == 6){
+		        	datauserid[m] = "6 Sam";
+		        }else if(shenheuserid[m] == 8){
+		        	datauserid[m] = "8 BRAIN";
+		        }else if(shenheuserid[m] == 100){
+		        	datauserid[m] = "100 TRAN THI THUY VAN";
+		        }else if(shenheuserid[m] == 12){
+		        	datauserid[m] = "12 ngo thi ngoc trang";
+		        }else if(shenheuserid[m] == 14){
+		        	datauserid[m] = "14 nguyen thanh tin";
+		        }else if(shenheuserid[m] == 15){
+		        	datauserid[m] = "15 chau ngoc phuong thao";
+		        }else if(shenheuserid[m] == 16){
+		        	datauserid[m] = "16 nguyen kim thi";
+		        }else if(shenheuserid[m] == 17){
+		        	datauserid[m] = "17 tran tuan kiet";
+		        }else if(shenheuserid[m] == 18){
+		        	datauserid[m] = "18 lang trung thuc";
+		        }else if(shenheuserid[m] == 19){
+		        	datauserid[m] = "19 le thi thuy trang";
+		        }else if(shenheuserid[m] == 20){
+		        	datauserid[m] = "20 tran van phi";
+		        }else if(shenheuserid[m] == 222){
+		        	datauserid[m] = "222 xiao wu";
+		        }else if(shenheuserid[m] == 28){
+		        	datauserid[m] = "28 Le Thi Thu Ha";
+		        }else if(shenheuserid[m] == 29){
+		        	datauserid[m] = "29 TRAN THI Y";
+		        }else if(shenheuserid[m] == 30){
+		        	datauserid[m] = "30 PHAM THI PHUONG THAO";
+		        }else if(shenheuserid[m] == 31){
+		        	datauserid[m] = "31 nguyen dang doan trinh";
+		        }else if(shenheuserid[m] == 5){
+		        	datauserid[m] = "5 红娟";
+		        }else if(shenheuserid[m] == 50){
+		        	datauserid[m] = "50 HUYNH NGUYEN DUONG";
+		        }else if(shenheuserid[m] == 51){
+		        	datauserid[m] = "51 DOAN THI HONG YEN";
+		        }else if(shenheuserid[m] == 52){
+		        	datauserid[m] = "52 LE HOANG MY";
+		        }else if(shenheuserid[m] == 888){
+		        	datauserid[m] = "888 SYSTEM";
+		        }else if(shenheuserid[m] == 98){
+		        	datauserid[m] = "98 PHAM THI MINH";
+		        }else if(shenheuserid[m] == 99){
+		        	datauserid[m] = "99 VO THI NGOC HANG";
+		        }
+	        }
+	        var dataseries = new Array;
+			var datashuju = new Array(datauserid.length);
+			for(var r=0;r<datauserid.length;r++){
+				datashuju[r] = new Array(shenheshuju.length); 
+			}
+	       
+	        for(var k=0;k<datauserid.length;k++){
+	         	for(var j=0;j<shenheshuju.length;j++){
+	         		datashuju[k][j] = shenheshuju[shenheshuju.length-j-1][k] ;
+	         	}
+	        dataseries[k] = {name:datauserid[k],type:'bar',data:datashuju[k]};
+	     	}
+	      option3 = {
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType: {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    legend: {
+	        data:datauserid
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : datatime
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+	            name : '总数',
+	            axisLabel : {
+	                formatter: '{value}'
+	            }
+	        },
+	        {
+	            type : 'value',
+	            name : '总数',
+	            axisLabel : {
+	                formatter: '{value}'
+	            }
+	        }
+	    ],
+	    series : dataseries
+	};
+}
+		  $("#tempselect").val(data_map.temp);
+		  $("#tempselect1").val(data_map.temp1);  
+		  $("#tempselect2").val(data_map.temp2);  
+		  $("#tempselect3").val(data_map.temp3);  
+		  $("#tempselect4").val(data_map.temp4);  
+		  $("#btn-load").button("reset");    
+		  if(data_map.temp == 1){
+		  	document.getElementById("main1").style.display="block";
+	   		document.getElementById("main2").style.display="none";
+	   		document.getElementById("main3").style.display="none";
+		  	myChart1.setOption(option1); 
+		  }else if(data_map.temp == 2){
+		  	document.getElementById("main1").style.display="none";
+	   		document.getElementById("main2").style.display="block";
+	   		document.getElementById("main3").style.display="none";
+		  	myChart2.setOption(option2);
+		  }else if(data_map.temp == 3){
+		  	document.getElementById("main1").style.display="none";
+	   		document.getElementById("main2").style.display="none";
+	   		document.getElementById("main3").style.display="block";
+		  	myChart3.setOption(option3);
+		  }
+		      
+})
+
+}
+ function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect == 1){
+	   		document.getElementById("shbm").style.display="block";
+	   		document.getElementById("csbm").style.display="none";
+	   		document.getElementById("fkbm").style.display="none";
+	   }else if(tempselect == 2){
+	   		document.getElementById("shbm").style.display="none";
+	   		document.getElementById("csbm").style.display="block";
+	   		document.getElementById("fkbm").style.display="none";
+	   }else if(tempselect == 3){
+	   		document.getElementById("shbm").style.display="none";
+	   		document.getElementById("csbm").style.display="none";
+	   		document.getElementById("fkbm").style.display="block";
+	   }
+	}
+   function gradeChange1(){
+	   var tempselect1=$("#tempselect1").val();
+	}
+   
+   load_data();
+        // 使用刚指定的配置项和数据显示图表。
+       
+    </script>

@@ -1,0 +1,719 @@
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>
+
+<script type="text/javascript" src="/plugins/date_page/page_a.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_b.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_c.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_d.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_e.js"></script>
+<script type="text/javascript" src="/plugins/date_page/page_f.js"></script>
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+<div class="container">
+	<div class="crumbs">
+		<ul id="breadcrumbs" class="breadcrumb">
+			<li>
+			<i class="fa fa-home">
+			</i>
+			<a href="index.html">
+			</a>
+			</li>
+			<li class="current">
+			<a href="pages_calendar.html" title="">
+		                               审核列表
+			</a>
+			</li>
+		</ul>
+	</div>
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-md-12">
+			<div class="widget box">
+				<div class="widget-header">
+					<h4><i class="fa fa-reorder"></i> 角色列表</h4>
+					<div class="toolbar no-padding">
+						<div class="btn-group">
+							<span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span><span class="btn btn-xs" onclick="$('#msg_content_role').show()"><i class="icon-plus"></i> 添加新角色</span>
+						</div>
+					</div>
+				</div>
+				<div class="widget-content"  style="height: 215px;overflow-y: scroll;">
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>
+									编号
+								</th>
+								<th>
+									角色名称
+								</th>
+								<th>
+									角色标识
+								</th>
+								<th class="hidden-xs">
+									创建日期
+								</th>
+								<th class="col-md-2">
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody id="role_data">
+							<tr><td colspan="5" align="center">暂无数据...</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="widget box">
+				<div class="widget-header">
+					<h4>
+					<i class="fa fa-reorder">
+					</i>
+		            <span id="role_title"></span> - 角色成员列表
+					</h4>
+					<div class="toolbar no-padding">
+						<div class="btn-group">
+							<span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span><span class="btn btn-xs" onclick="show_admin_user_msg()"><i class="icon-plus"></i> 添加成员到角色</span>
+						</div>
+					</div>
+				</div>
+				<div class="widget-content">
+					<div class="" style="min-height: 400px;">
+						<input type="hidden" id="role_id" />
+						<input type="hidden" id="role_name" />
+						<input type="hidden" id="formurl" value="/tzms/system"/>
+						<input type="hidden" id="cupage" value="1"/>
+						<input type="hidden" id="total" value="1"/>
+						<table class="table table-hover table-striped table-bordered table-highlight-head">
+						<thead>
+						<tr>
+							<th>
+		                         用户标识
+							</th>
+							<th style=" font-weight: bold;">
+		                         用户名称
+							</th>
+							<th style=" font-weight: bold;">
+		                         电话号码
+							</th>
+							<th>
+		                          所在角色
+							</th>
+							<th>
+		                          登录次数
+							</th>
+							<th>
+		                          最后登录时间
+							</th>
+							<th style=" font-weight: bold;">
+		                          用户状态
+							</th>
+							<th>
+		                          操作
+							</th>
+						</tr>
+						</thead>
+						<tbody id="load_data">
+						</tbody>
+						<tfoot id="loading" style="display: none;">
+							<tr><td colspan="8" align="center" height="80px;"><div style="margin-top: 25px;" class="card"><span class="throbber-loader">Loading&#8230;</span></div></td></tr>
+						</tfoot>
+						</table>
+					</div>
+					
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	 <!--  增加统计权限更改     start -->
+			<div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                统计权限规则列表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        
+		                         <th>
+		                         编号
+		                        </th>
+		                        <th>
+		                       权限规则 1
+		                        </th>
+		                        <th>
+		                       权限1组成员
+		                        </th>
+		                        <th>
+		                       权限规则 2
+		                        </th>
+		                        <th>
+		                       权限2组成员
+		                        </th>
+		                        <th>
+		                         更改规则
+		                        </th>
+		                        
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data_a">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ 
+				<!-- botton start -->
+	              <div class="row">
+	                    <div class="dataTables_footer clearfix">
+	                       <div class="col-md-6">
+	                           <div class="dataTables_info" id="DataTables_Table_0_info">
+	                               Tổng số
+	                           <font id="totalrows_a"></font>
+	                                tin, mỗi trang chứa được 
+	                           <font id="numperpage_a"></font>
+	                                tin, hiện tại trang số<font id="currentpage_a">
+	                           </font> / <font id="totalpages_a"></font>
+	                               trang
+	                           </div>
+	                       </div>
+	                       <div class="col-md-6">
+	                            <div class="dataTables_paginate paging_bootstrap" id="datatable_a">
+	                            </div>
+	                       </div>
+	                   </div>
+	             </div>
+			   <!-- botton end -->
+
+
+		                </div>
+		              </div>
+		            </div>
+         </div>
+         
+         
+           <!--修改规则信息- start -->
+     <div id="add_content_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#add_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>更改规则信息列表</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height:360px;" id="div_a">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                        	<div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">规则编号
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_6" id="guizeid" readonly class="form-control required">
+                                                  </div>
+                                           </div>
+                                           <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">规则名称
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_1" id="guizemingchen" readonly class="form-control required">
+                                                  </div>
+                                           </div>
+                                          <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">规则1
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                         			<input type="text" name="grade_2" id="guize1" readonly class="form-control required">
+                                                  </div>
+                                           </div>
+                                           <div class="form-group" id="has_jkid">
+                                            <label class="col-md-3 control-label">更改1
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_3" id="gggz1" class="form-control required">
+                                                  </div>
+                                              </div>
+                                          
+                                            <div class="form-group" id="has_guize2" style="display: none;">
+                                            <label class="col-md-3 control-label">规则2
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_4" id="guize2" readonly class="form-control required">
+                                                  
+                                                  </div>
+                                              </div>
+                                              
+                                              <div class="form-group" id="has_gggz2" style="display: none;">
+                                            <label class="col-md-3 control-label">更改2
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_5" id="gggz2" class="form-control required">
+                                                  </div>
+                                              </div>
+                                              
+                                              <div class="form-group" id="" style="display: block;">
+                                               			注：1.请填入相应员工编号，编号之间使用英文逗号隔开
+                                              </div>
+                                              
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_content_html').hide()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>	
+        
+         <!--  增加统计权限更改     end -->
+	
+</div>
+
+<div id="msg_content_role" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_role').hide()">×</button>
+				<h4 class="modal-title">添加新角色</h4>
+			</div>
+			<div class="modal-body">
+				
+				<div class="bootbox-body" style="height: 200px;">
+					
+					<div class="col-md-12">
+						<div class="widget box">
+							<div class="widget-header">
+							</div>
+							<div class="widget-content">
+								<form class="form-horizontal row-border" >
+									<div class="form-group">
+										<label class="col-md-3 control-label">角色标识：</label>
+										<div class="col-md-9">
+											<input type="text" name="req1" id="role_add_no" class="form-control required">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">角色名称：</label>
+										<div class="col-md-9">
+											<input type="text" name="email1" id="role_add_name" class="form-control required email">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">角色描述：</label>
+										<div class="col-md-9">
+											<input type="text" name="url1" id="role_add_ms" class="form-control required url">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_role()">确认</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_role').hide()">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div id="msg_content_role_list" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_role_list').hide()">×</button>
+				<h4 class="modal-title">添加成员到角色【<span id="admin_role_name"></span>】中</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body" style="padding: 10px;">
+					<table class="table table-hover table-striped table-bordered table-highlight-head">
+						<thead>
+						<tr>
+							<th>
+		                         用户ID
+							</th>
+							<th style=" font-weight: bold;">
+		                         用户名称
+							</th>
+							<th>
+		                          操作
+							</th>
+						</tr>
+						</thead>
+						<tbody id="load_admin_user_data">
+						</tbody>
+						<tfoot id="loading_admin_user" style="display: none;">
+							<tr><td colspan="8" align="center" height="80px;"><div style="margin-top: 25px;" class="card"><span class="throbber-loader">Loading&#8230;</span></div></td></tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_role_list').hide();$('#load_data').html($('#loading').html());window.setTimeout('load_data()',1000);">关闭</button>
+			</div>
+		</div>
+	</div>
+	<div id="qx_role_id" style="display:none;"></div>
+</div>
+</div>
+
+<div id="qx_load"></div>
+<script>
+
+	 $(function(){
+   		load_role();
+     });
+	//$("#container").addClass("sidebar-closed");
+	function load_data()
+	{
+	  var tempsele=$("#role_id").val();
+      $("#role_title").html($("#role_name").val());
+	  var para={curPage:$("#cupage").val(),role_id:tempsele,type:0};
+	  loadGetServer("/servlet/role/UserAction?function=GetUserByRole",para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_= '<tr><td colspan="8" align="center">暂无数据...</td></tr>';
+		  for(var i=0;i<list.length;i++)
+		  {
+		  	    if(i==0){html_ = "";}
+				html_ += "<tr><td>"+list[i].user_id+"</td><td>"+list[i].name+"</td><td>"+list[i].phone+"</td>";
+				html_ += "<td>"+list[i].rolename+"</td><td>"+list[i].login_times+"</td>";
+				var state_value = list[i].state=="1"?"<span class='label btn-success'>正常</span>":"<span class='label btn-danger'>禁用</span>";
+				html_ += "<td>"+list[i].last_time+"</td><td>"+state_value+"</td><td><span class='label label-success' onclick=delete_role_user('"+list[i].user_id+"')>移除成员</span></td>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+  
+  function load_role(){
+	  loadGetServer("/servlet/role/RoleAction?function=GetAllRoleList",{},function(data){
+	   	    if(data!=null)
+	   	    {
+	   	       var list = data.list.data;
+	   	       var html = "";
+	   	       for (var i=0;i<list.length;i++) {
+	   	       	   if(i==0)
+	   	       	   {
+	   	       	   	 $("#role_id").val(list[i].id);
+	   	       	   	 $("#role_name").val(list[i].rolename);
+	   	       	   }
+	   	       	   html += html = '<tr><td>'+list[i].id+'</td><td>'+list[i].rolename+'</td><td>'+list[i].roleidentifying+'</td><td class="hidden-xs">'+list[i].createdate+'</td><td><button class="btn btn-xs btn-info" onclick=show_cy("'+list[i].id+'","'+list[i].rolename+'")>查看成员</button><button class="btn btn-xs btn-info" role_id="'+list[i].id+'" style="margin-left: 15px;" onclick="show_qx(this)">权限更改</button></td></tr>';
+	   	       }
+	   	       $("#role_data").html(html);
+	   	    }
+	   	    $("#load_data").html($("#loading").html());
+	   	    window.setTimeout("load_data()",1000);
+	   });
+  }
+   
+  
+   
+   function delete_role_user(user_id)
+   {
+   	   if($("#role_id").val()==""){alert("参数获取失败");return;}
+   	   loadGetServer("/servlet/role/UserAction?function=UpdateUserById",{"user_id":user_id,"role_id":100},function(data){
+		  if(data==null)
+   	  	  {
+   	  	  	alert("添加成员失败，请检查");
+   	  	  }
+   	  	  else
+   	  	  {
+   	         $("#load_data").html($("#loading").html());window.setTimeout("load_data()",1000);
+   	  	  }
+   	    });
+   }
+   
+   function show_cy(role_id,name)
+   {
+   	    $("#role_id").val(role_id);
+   	    $("#role_name").val(name);
+   	    $("#load_data").html($("#loading").html());
+   	    window.setTimeout("load_data()",1000);
+   }
+   
+   function show_admin_user_msg()
+   {
+   	   $("#admin_role_name").html($("#role_name").val());
+   	   $("#msg_content_role_list").show();
+   	   query_admin_user();
+   }
+   
+   function query_admin_user()
+   {
+   	  $("#load_admin_user_data").html($("#loading_admin_user").html());
+   	  window.setTimeout(function(){
+   	   	  loadGetServer("/servlet/role/UserAction?function=GetNoUserList",{type:1},function(data){
+			  $("#load_data_").html("");
+			  var list = data;
+			  var html_= '<tr><td colspan="3" align="center">暂无数据...</td></tr>';
+			  for(var i=0;i<list.length;i++)
+			  {
+					if(i==0){html_ = "";}
+					html_ += "<tr><td>"+list[i].user_id+"</td><td>"+list[i].name+"</td><td><button class='btn btn-xs btn-success' onclick=add_role_user('"+list[i].user_id+"')>添加到角色</button></td>";
+			  }
+			  $("#load_admin_user_data").html(html_);
+   	      });
+   	   
+   	   },1000);
+   	
+   }
+   
+   function add_role_user(user_id)
+   {
+   	  if($("#role_id").val()==""){alert("参数获取失败");return;}
+   	  loadGetServer("/servlet/role/UserAction?function=UpdateUserById",{"user_id":user_id,"role_id":$("#role_id").val()},function(data){
+		  if(data==null)
+   	  	  {
+   	  	  	alert("添加成员失败，请检查");
+   	  	  }
+   	  	  else
+   	  	  {
+   	  	  	query_admin_user();
+   	  	  }
+	   })	  
+   }
+   
+   
+   function add_role()
+   {
+   	  if($("#role_add_no").val()=="")
+   	  {
+   	  	 alert("角色标识不能为空");
+   	  	 return;
+   	  }
+   	  if($("#role_add_name").val()=="")
+   	  {
+   	  	 alert("角色名称不能为空");
+   	  	 return;
+   	  }
+   	  if($("#role_add_ms").val()=="")
+   	  {
+   	  	 alert("角色描述不能为空");
+   	  	 return;
+   	  }
+   	  
+   	  $.post("/servlet/role/RoleAction?function=AddRole",{role_name:$("#role_add_name").val(),role_no:$("#role_add_no").val(),description:$("#role_add_ms").val()},function(data){
+   	  	  	alert("添加角色成功");
+   	  	  	load_role();
+   	  	  	$("#msg_content_role").hide();
+   	  });
+   	  
+   }
+   
+   /* function show_qx(obj)
+   {
+   	   $("#qx_load").html("");
+   	   $("#qx_role_id").val($(obj).attr("role_id"));
+   	   alert($(obj).attr("role_id"));
+   	   alert("dfsa"+obj);
+   	  /*  $("#qx_load").load("/sdmain/system/qxbox.html?role_id=2"); */
+   	  /* $("#qx_load").load("/sdmain/system/qxbox.html?role_id=2");
+   	   query_menus_list_fp();
+   	   $("#qx_content_role").show();
+   }  */
+   function show_qx(obj2)
+   {
+   	   $("#qx_load").html("");
+   	   $("#qx_role_id").val($(obj2).attr("role_id"));
+   	   $("#qx_load").load("/sdmain/system/qxbox.html");
+   	   query_menus_list_fp();
+   	   $("#qx_content_role").show();
+   }
+   
+ 
+   
+</script>
+
+<script>
+
+console.log(1001);
+$(function(){
+	   console.log(100012);
+		load_data_a();
+});
+
+function load_data_a()
+{
+	console.log(2222222222);
+	
+	var para={curPage:$("#cupage_a").val()};
+	  loadGetServer("/servlet/current/JBDcmsAction?function=GetRoleGuiZeList",para,function(data){
+		  console.log(111156);
+
+		  $("#load_data_a").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var time = getNowFormatDate();
+		  for(var i=0;i<list.length;i++)
+		  {
+		  	   var gznr2="--"
+		  	   var gzbl2="--"
+		       if(list[i].guizeneirong2 != null && list[i].guizeneirong2 != undefined){
+		       		gznr2 = ","+list[i].guizeneirong2;
+		       }
+		       if(list[i].guizebianliang2 != null && list[i].guizebianliang2 != undefined){
+		       		gzbl2 = list[i].guizebianliang2;
+		       }
+				html_ += "<tr><td>"+list[i].id+"</td>";
+				html_ += "<td>"+list[i].guizeneirong1+"</td>";
+				html_ += "<td>"+list[i].guizebianliang1+"</td>";
+				html_ += "<td>"+gznr2+"</td>";
+				html_ += "<td>"+gzbl2+"</td>";
+				html_ += "<td><button class='btn btn-xs btn-info' onclick=\"load_beiz('"+list[i].id+"','"+list[i].guizeneirong1+"','"+list[i].guizebianliang1+"','"+list[i].guizeneirong2+"','"+list[i].guizebianliang2+"','"+list[i].guizejieshao+"')\">更改规则</button></td>";
+				html_ +="</tr>";
+		   }
+		  $("#load_data_a").append(html_);
+		  
+			page_value_a(data);
+			page_data_a();
+	    });
+	  
+}  
+
+
+  function gradeChange1(){
+   var bhstate_=$("#lab").val();
+   
+   if(bhstate_== 3){
+	    var str = document.getElementById("remark");
+	    str.value = "Định dạng ngày sinh:XX-XX-XXXX";
+		str.onfocus = function(){
+			str.value = "";
+		}
+    }
+    if(bhstate_== 5){
+	    var str = document.getElementById("remark");
+	    str.value = "Định dạng tên ngân hàng:XXXX - XXXXXX";
+		str.onfocus = function(){
+			str.value = "";
+		}
+    }
+    
+	if(bhstate_== 6 || bhstate_== 7){
+		document.getElementById("has_jkid").style.display="block";
+	}else{
+		document.getElementById("has_jkid").style.display="none";
+	}
+}
+ /* <!--查询备注类型--> */
+	function load_beiz(id,gznr1,gzbl1,gznr2,gzbl2,gzjs)
+	{     
+		   $("#guizeid").val(id);
+		   $("#guizemingchen").val(gzjs);
+		   $("#guize1").val(gznr1);
+		   $("#gggz1").val(gzbl1);
+		   $("#guize2").val(gznr2);
+		   $("#gggz2").val(gzbl2);
+		   
+		   if(gznr2 == null || gznr2 == undefined || gznr2 == "null"){
+		   		document.getElementById("has_guize2").style.display="none";
+	   		document.getElementById("has_gggz2").style.display="none";
+	   		
+	   }else{
+	   		document.getElementById("has_guize2").style.display="block";
+	   		document.getElementById("has_gggz2").style.display="block";
+	   }
+	   $("#add_content_html").show();
+	   
+	   
+	   
+	   document.getElementById("div_a").style.height="400px";
+	}
+	 /*  <!--添加或者修改催收备注--> */
+	function add_beiz()
+	{
+	  var id_=$("#guizeid").val();
+	  var gggz1_=$("#gggz1").val();
+	  var gggz2_=$("#gggz2").val();
+	  
+	  
+		   var para={id:id_,gggz1:gggz1_,gggz2:gggz2_};
+		   loadGetServer("/servlet/current/JBDcmsAction?function=ChangeGuiZe",para,function(data){
+			   if(data.error>0)
+			   {
+				   $("#add_content_html").hide();
+				   load_data_a();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+	}
+	function getNowFormatDate() {
+	   var date = new Date();
+	   var seperator1 = "-";
+	   var year = date.getFullYear();
+	   var month = date.getMonth() + 1;
+	   var strDate = date.getDate();
+	   if (month >= 1 && month <= 9) {
+	       month = "0" + month;
+	   }
+	   if (strDate >= 0 && strDate <= 9) {
+	       strDate = "0" + strDate;
+	   }
+	   var currentdate = strDate + seperator1 + month + seperator1 + year;
+	   return currentdate;
+	}
+	
+	load_data_a();
+	load_role();
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

@@ -1,0 +1,877 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                DS chờ giải ngân(待放款)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div>
+			    	 <input type="hidden" id="cupage" value="1"/>
+					 <input type="hidden" id="total" value="1"/>
+               		 <input type="hidden" id="cupage_" value="1"/>
+                	 <input type="hidden" id="total_" value="1"/>
+              		 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=getrecordListFour"/>
+                     <input type="hidden" id="starTime" value=""/>
+                     <input type="hidden" id="endTime" value=""/>
+	           </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Tất cả
+                                      </option>
+                                      <option value="1" id="dd">
+                                         Mã số khách hàng
+                                      </option>
+                                      <option value="2" id="ee">
+                                        Họ tên
+                                      </option>
+                                      <option value="3" id="ff">
+                                        Số ĐTDĐ
+                                      </option>
+                                      <option value="4" id="gg">
+                                        Số CMND
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;" id="hh">
+		                                              thời gian xem xét:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading..." >
+			                                     Truy vấn
+			                  </button>
+                              <!--<button class="btn btn-info" onclick="load_batch('id')" >批量提交</button>-->
+                               &nbsp;&nbsp;&nbsp;
+                              <button type="button" class="btn btn-success" onclick="method5('tableExcel')">excel</button>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="jj">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Danh sách chờ giải ngân ---- <h4>  OLD USER TOTAL(老用户总共待放款人数)  ：</h4><span id="totaldfk"></span>&nbsp;&nbsp;&nbsp; 
+		                            					<h4> Số tiền thực nhận(老用户总共待放款金额)   ：</h4><span id="dfkmoney"></span>&nbsp;&nbsp;&nbsp;
+		                   <br /> 
+		                     <h4>Số người cần chuyển khoản online hôm nay(今日可放款总人数)：</h4><span id="xszRenyT"></span>&nbsp;&nbsp;&nbsp;  
+		                     <h4>Số tiền cần chuyển khoản online hôm nay(今日可放款总金额)：</h4><span id="xszmoneyT"></span>&nbsp;&nbsp;&nbsp;        
+		                     <h4>Số tiền đã chuyển khoản bằng tay hôm nay(今日已放款总金额)：</h4><span id="sdzmoneyT"></span>&nbsp;&nbsp;&nbsp;
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    
+		                     <!-- 
+		                    DS chờ giải ngân(待放款) ----
+		                                <h4> OLD USER TOTAL(老用户总共待放款) ：</h4><span id="totaldfk"></span>&nbsp;&nbsp;&nbsp;
+		                                <h4> Số tiền thực nhận(待放款)  ：</h4><span id="dfkmoney"></span>&nbsp;&nbsp;&nbsp;
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                  <h4>Số tiền cần chuyển khoản online hôm nay(onlinetotal)(线上总共)：</h4><span id="xszmoney"></span>&nbsp;&nbsp;&nbsp;
+		                  <h4>Số tiền đã chuyển khoản online hôm nay(onlinedone)(线上已经放款)：</h4><span id="xsyjmoney"></span>&nbsp;&nbsp;&nbsp;
+		                  <h4>Số tiền cần chuyển khoản bằng tay hôm nay(offlinetotal)(线下总共)：</h4><span id="sdzmoney"></span>&nbsp;&nbsp;&nbsp;
+		                  <h4>Số tiền đã chuyển khoản bằng tay hôm nay(offlinedone)(线下已经放款)：</h4><span id="sdyjmoney"></span>&nbsp;&nbsp;&nbsp;
+		                   <!-- 
+		                  
+		                   <!--  <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div> -->
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-striped table-bordered table-hover table-checkable datatable" id="tableExcel">
+		                    <thead>
+		                      <tr>
+                                 <th id="kk">
+		                          Mã số khách hàng(用户编号)
+		                        </th>
+		                        <th id="ll">
+		                          Họ tên(用户姓名) 
+		                        </th>
+		                        
+		                        <th id="nn">
+		                         Số CMND(身份证号码)
+		                        </th>
+		                        <th id="oo">
+		                          Số TK ngân hàng(银行账号) 
+		                        </th>
+		                         <th id="pp">
+		                          Tên ngân hàng(银行名称)
+		                        </th>
+		                        <th id="qq">
+		                          Số tiền được vay(借款金额)
+		                        </th>
+                                <th id="rr">
+                                  Số tiền thực nhận(实际收到的金额)
+                                </th>
+                                <th id="ss">
+		                          Thời hạn vay(借款期限)
+		                        </th>
+		                        <th>
+		                        Lãi và phí dịch vụ(服务费)
+		                        </th>
+                                <th id="tt">
+                                 Thời gian thẩm định lần 3 (三审时间)
+                                </th>
+                                <th id="uu">
+		                          Tên người thẩm định lần 3 (三审人)
+		                        </th>
+                               <th id="vv">
+		                          Thao tác(操作)
+		                        </th>
+		                        <th id="ww">
+		                          thất bại(失败)
+		                        </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                    </tbody>
+		                  </table>
+                          
+	                 <div class="row">
+	                  <div class="dataTables_footer clearfix">
+	              	   <div class="col-md-6">
+	              	    <div class="dataTables_info" id="DataTables_Table_0_info">
+	              	       Tổng số
+	              	    <font id="totalrows">
+		              	   </font>tin, mỗi trang chứa được<font id="numperpage">
+		              	      </font>tin, hiện tại trang số<font id="currentpage">
+		              		  </font> / 
+		              		  <font id="totalpages">
+		              		  </font>
+		              		  trang
+		              		 </div>
+		              	</div>
+		              	<div class="col-md-6">
+		              	    <div class="dataTables_paginate paging_bootstrap" id="datatable">
+		              		</div>
+		              	</div> 
+		              </div>
+		             </div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		          
+		          
+
+		          <div class="row1">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="jj">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    
+		                    
+   	                      Danh sách chờ giải ngân(待放款) -- ---- <h4>  NEW USER TOTAL (新用户总共待放款人数)：</h4><span id="totaldfk1"></span>&nbsp;&nbsp;&nbsp; 
+           													<h4> Số tiền thực nhận(新用户总共待放款金额)  ：</h4><span id="dfkmoney1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           					<button type="button" class="btn btn-success" onclick="method5('tableExcel2')">excel</button>
+		                     <br /> 
+		                      <h4>Số người cần chuyển khoản online hôm nay(今日可放款总人数)：</h4><span id="xszRenyT1"></span>&nbsp;&nbsp;&nbsp;    
+		                     <h4>Số tiền cần chuyển khoản online hôm nay(今日可放款总金额)：</h4><span id="xszmoneyT1"></span>&nbsp;&nbsp;&nbsp;        
+		                     <h4>Số tiền đã chuyển khoản bằng tay hôm nay(今日已放款总金额)：</h4><span id="sdzmoneyT1"></span>&nbsp;&nbsp;&nbsp;
+		                       <!-- 
+		                    DS chờ giải ngân(待放款) ------
+		                                <h4> NEW USER TOTAL(新用户总共待放款) ：</h4><span id="totaldfk1"></span>&nbsp;&nbsp;&nbsp;
+				                        <h4> Số tiền thực nhận(待放款) ：</h4><span id="dfkmoney1"></span>&nbsp;&nbsp;&nbsp;
+				                        &nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;
+				                        &nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;
+				                        <button type="button" class="btn btn-success" onclick="method5('tableExcel2')">excel</button>
+				                        
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                  <h4>Số tiền cần chuyển khoản online hôm nay(onlinetotal)(线上总共)：</h4><span id="xszmoney1"></span>&nbsp;&nbsp;&nbsp;
+		                  <h4>Số tiền đã chuyển khoản online hôm nay(onlinedone)(线上已经放款)：</h4><span id="xsyjmoney1"></span>&nbsp;&nbsp;&nbsp;
+		                  <h4>Số tiền cần chuyển khoản bằng tay hôm nay(offlinetotal)(线下总共)：</h4><span id="sdzmoney1"></span>&nbsp;&nbsp;&nbsp;
+		                  <h4>Số tiền đã chuyển khoản bằng tay hôm nay(offlinedone)(线下已经放款)：</h4><span id="sdyjmoney1"></span>&nbsp;&nbsp;&nbsp;
+		                  
+		                  -->
+		                   <!--  <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div> -->
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-striped table-bordered table-hover table-checkable datatable" id="tableExcel2">
+		                    <thead>
+		                    <tr>
+                            <th id="kk">
+	                          Mã số khách hàng(用户编号)
+	                        </th>
+	                        <th id="ll">
+	                          Họ tên(用户姓名) 
+	                        </th>
+	                        
+	                        <th id="nn">
+	                         Số CMND(身份证号码)
+	                        </th>
+	                        <th id="oo">
+	                          Số TK ngân hàng(银行账号) 
+	                        </th>
+	                         <th id="pp">
+	                          Tên ngân hàng(银行名称)
+	                        </th>
+	                        <th id="qq">
+	                          Số tiền được vay(借款金额)
+	                        </th>
+                           <th id="rr">
+                             Số tiền thực nhận(实际收到的金额)
+                           </th>
+                           <th id="ss">
+	                          Thời hạn vay(借款期限)
+	                        </th>
+	                        <th>
+	                        Lãi và phí dịch vụ(服务费)
+	                        </th>
+                           <th id="tt">
+                            Thời gian thẩm định lần 3 (三审时间)
+                           </th>
+                           <th id="uu">
+	                          Tên người thẩm định lần 3 (三审人)
+	                        </th>
+                          <th id="vv">
+	                          Thao tác(操作)
+	                        </th>
+	                        <th id="ww">
+	                          thất bại(失败)
+	                        </th>
+	                      </tr>
+		                      </thead>
+			                    <tbody id="load_data_">
+			                    </tbody>
+		                  </table>
+  <!--                    
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng cộng <font id="totalrows"></font> tin, mỗi trang chứa được <font id="numperpage"></font>  tin, hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font> Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+ --> 
+					 <div class="row">
+						 <div class="dataTables_footer clearfix"> 
+						     <div class="col-md-6">
+							    <div class="dataTables_info" id="DataTables_Table_0_info">
+								  Tổng số<font id="totalrows_">
+								  </font>
+								 tin, mỗi trang chứa được 
+								  <font id="numperpage_">
+								  </font>
+								 tin, hiện tại trang số
+								 <font id="currentpage_">
+								 </font> / 
+								 <font id="totalpages_">
+								 </font>trang
+							</div>
+						</div>
+						<div class="col-md-6">
+						   <div class="dataTables_paginate paging_bootstrap" id="datatable_">
+						   </div>
+						 </div>
+					</div>
+				
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		          
+		          
+			</div>
+            <!--二次确认-->
+     <div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>Xác nhận</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body">
+					<label class="col-md-0 control-label" style="padding-top:5px;letter-spacing:2px;" id="remark_tr"></label>
+				</div>
+                <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="sub_four()">Xác nhận</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_html').hide()">Đóng</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script>
+function changeLan(){
+loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeDFK",{},function(data){
+	if(data.error == 1){
+		document.getElementById("aa").innerHTML = data.aa;
+		document.getElementById("bb").innerHTML = data.bb;
+		document.getElementById("cc").innerHTML = data.cc;
+		document.getElementById("dd").innerHTML = data.dd;
+		document.getElementById("ee").innerHTML = data.ee;
+		document.getElementById("ff").innerHTML = data.ff;
+		document.getElementById("gg").innerHTML = data.gg;
+		document.getElementById("hh").innerHTML = data.hh;
+		document.getElementById("jj").innerHTML = data.jj;
+		document.getElementById("kk").innerHTML = data.kk;
+		document.getElementById("ll").innerHTML = data.ll;
+		document.getElementById("mm").innerHTML = data.mm;
+		document.getElementById("nn").innerHTML = data.nn;
+		document.getElementById("oo").innerHTML = data.oo;
+		document.getElementById("pp").innerHTML = data.pp;
+		document.getElementById("qq").innerHTML = data.qq;
+		document.getElementById("rr").innerHTML = data.rr;
+		document.getElementById("ss").innerHTML = data.ss;
+		document.getElementById("tt").innerHTML = data.tt;
+		document.getElementById("uu").innerHTML = data.uu;
+		document.getElementById("vv").innerHTML = data.vv;
+		document.getElementById("ww").innerHTML = data.ww;
+		
+	}else{
+		alert("error!");
+	}
+
+});
+	
+
+}
+</script>		
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		$("#cupage_").val("1");
+		load_data_all();
+	
+	});
+	 function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+	
+  function load_data_all() {
+	  load_data();
+	  load_data_();
+  }
+  
+  function toThousands(num) {  
+		var num = (num || 0).toString(), result = '';  
+		while (num.length > 3) {  
+  		result = ',' + num.slice(-3) + result;  
+  		num = num.slice(0, num.length - 3);  
+		}  
+		if (num) { 
+		result = num + result; 
+	}  
+	return result;  
+  }
+	
+	function load_data()
+	{
+	  var isolduser=1;
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,isolduser:isolduser};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var dfk_money =0;
+		  for(var i=0;i<list.length;i++)
+		  {
+		       var jkqx = "15Ngày" ;  //借款期限
+		       if(list[i].jkqx ==1){
+		           jkqx ="15Ngày" ;
+		       }
+		       if(list[i].jkqx ==2){
+		           jkqx ="30Ngày" ;
+		       }
+		       if(list[i].jkqx ==3){
+		           jkqx ="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>" ;
+		       }
+		       if(list[i].jkqx ==4){
+		           jkqx ="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>" ;
+		       }/* 
+		      var fwfy=(list[i].yuq_lx+list[i].sjsh_money-list[i].sjds_money) ; // 服务费用
+		        */
+		        //利息
+		        var userid = list[i].id;
+		       var sjshmoney =  parseInt(list[i].sjsh_money.replace(/,/g,""));
+		       var jklx = "";
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+			   	  if(list[i].jkqx==1){
+					  jklx="30%";
+				  }else if(list[i].jkqx==2) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==4) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==3) {
+					  jklx="30%";
+				  }	 
+			   }
+			  
+		     if(list[i].napasbankno == "0"){
+		          html_ += "<tr><td><span style='color:#F00'>"+list[i].username+"</span></td><td><span style='color:#F00'>"+list[i].realname+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].idno+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].cardno+"</span></td><td><span style='color:#F00'>"+list[i].cardname+"</span></td><td><span style='color:#F00'>"+list[i].sjsh_money+"</span></td><td><span style='color:#F00'>"+list[i].sjds_money+"</span></td><td><span style='color:#F00'>"+jkqx+"</span></td>";//<td>"+fwfy+"</td>
+				 if(jklx=="40%" || jklx=="25%") {
+						html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
+					}else {
+						html_ += " <td><span style='color:#F00'>"+jklx+"</span></td>";
+					}
+				  /* if(list[i].spzt == "1" )
+				  {
+					  html_ +="<td>Vượt qua(通过)</td>";
+				  }
+				  else if(list[i].spzt == "0")
+				  {
+					  html_ +="<td>Không vượt qua được(驳回)</td>";
+				  } */
+				  html_ +="<td><span style='color:#F00'>"+list[i].cl03_time+"</span></td>";			  
+			      html_ +="<td><span style='color:#F00'>"+list[i].sh_name+"</span></td>";
+	 
+				  //html_ +="<td>Đang chờ vay(待放款)</td>";
+				  html_ +="<td><button class='btn btn-xs btn-success' onclick=\"four_ck('"+list[i].id+"','"+list[i].realname+"','"+list[i].sjds_money+"')\">Giải ngân thành công</button></td>";
+				  html_ +="<td><button class='btn btn-xs btn-primary' onclick=\"four_sb('"+list[i].id+"','"+list[i].realname+"','"+list[i].sjds_money+"')\">Giải ngân thất bại</button></td>";
+		      }else{
+		     	  html_ += "<tr><td>"+list[i].username+"</td><td>"+list[i].realname+"</td><td style='mso-number-format:\@;'>"+list[i].idno+"</td><td style='mso-number-format:\@;'>"+list[i].cardno+"</td><td>"+list[i].cardname+"</td><td>"+list[i].sjsh_money+"</td><td>"+list[i].sjds_money+"</td><td>"+jkqx+"</td>";//<td>"+fwfy+"</td>
+		     	 if(jklx=="30%" || jklx=="25%" ) {
+						html_ += " <td><span style='color:#F82E03;font-weight:bolder'>"+jklx+"</span></td>";
+				 }else {
+						html_ += " <td><span>"+jklx+"</span></td>";
+					}
+				  /* if(list[i].spzt == "1" )
+				  {
+					  html_ +="<td>Vượt qua(通过)</td>";
+				  }
+				  else if(list[i].spzt == "0")
+				  {
+					  html_ +="<td>Không vượt qua được(驳回)</td>";
+				  } */
+				  html_ +="<td>"+list[i].cl03_time+"</td>";			  
+			      html_ +="<td>"+list[i].sh_name+"</td>";
+	 
+				  //html_ +="<td>Đang chờ vay(待放款)</td>";
+				  html_ +="<td><button class='btn btn-xs btn-success' onclick=\"sub_foursacombank('"+list[i].id+"')\">Giải ngân thành công</button></td>";
+				  html_ +="<td><button class='btn btn-xs btn-primary' onclick=\"four_sb('"+list[i].id+"','"+list[i].realname+"','"+list[i].sjds_money+"')\">Giải ngân thất bại</button></td>";
+		      }
+			  
+			  html_ +="</tr>";
+		  }
+		  
+		  $("#load_data").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#xszmoney").html(data.xszmoney);
+		  $("#xsyjmoney").html(data.xsyjmoney);
+		  $("#sdzmoney").html(data.sdzmoney);
+		  $("#sdyjmoney").html(data.sdyjmoney);
+		  $("#moneydfk").html(data.totaldfk);
+		  $("#totaldfk").html(data.totaldfk);
+		  $("#dfkmoney").html(data.totalsjdsmoney);
+		  
+		  var needmoney1 = parseInt(data.xszmoney.replace(/,/g,""));
+	      var needmoney2 = parseInt(data.sdzmoney.replace(/,/g,""));
+	      var needmone =  needmoney1+needmoney2;
+		  $("#xszmoneyT").html(toThousands(needmone));
+		  
+		  var yfmoney1 = parseInt(data.xsyjmoney.replace(/,/g,""));
+	      var yfmoney2 = parseInt(data.sdyjmoney.replace(/,/g,""));
+	      var yfmoney =  yfmoney1+yfmoney2;
+		  $("#sdzmoneyT").html(toThousands(yfmoney));
+		  
+		  $("#xszRenyT").html(toThousands(data.xszRenyT));
+		  
+		  $("#tempVelue").val(data.tempvalu);
+		  page_value(data);
+		  page_data();
+		  $("#btn-load").button("reset");
+	    });
+   }
+	function load_data_()
+	{
+		var isolduser2 =0;
+	  var tempsele2=$("#tempselect").val();
+	  var tempval2=$("#tempVelue").val();
+	  var starTime2=$("#starTime").val();
+	  var endTime2=$("#endTime").val();
+	  if(tempsele2!=null && tempsele2!=0)
+	  {
+		  if(tempval2=="")
+		  {
+			  alert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var para={curPage:$("#cupage_").val(),temp:tempsele2,tempvl:tempval2,startDate:starTime2,endDate:endTime2,isolduser:isolduser2};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data_").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var dfk_money1=0;
+		  for(var i=0;i<list.length;i++)
+		  {
+		       var jkqx = "15Ngày" ;  //借款期限
+		       if(list[i].jkqx ==1){
+		           jkqx ="15Ngày" ;
+		       }
+		       if(list[i].jkqx ==2){
+		           jkqx ="30Ngày" ;
+		       }
+		       if(list[i].jkqx ==3){
+		           jkqx ="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>" ;
+		       }
+		       if(list[i].jkqx ==4){
+		           jkqx ="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>" ;
+		       }/* 
+		      var fwfy=(list[i].yuq_lx+list[i].sjsh_money-list[i].sjds_money) ; // 服务费用
+		        */
+		        //利息
+		        var userid = list[i].id;
+		       var sjshmoney =  parseInt(list[i].sjsh_money.replace(/,/g,""));
+		       var jklx = "";
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jkqx==1){
+					  jklx="30%";
+				  }else if(list[i].jkqx==2) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==4) {
+					  jklx="30%";
+				  }else if(list[i].jkqx==3) {
+					  jklx="30%";
+				  }
+			   }
+			  
+			  
+		     if(list[i].napasbankno == "0"){
+		          html_ += "<tr><td><span style='color:#F00'>"+list[i].username+"</span></td><td><span style='color:#F00'>"+list[i].realname+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].idno+"</span></td><td style='mso-number-format:\@;'><span style='color:#F00'>"+list[i].cardno+"</span></td><td><span style='color:#F00'>"+list[i].cardname+"</span></td><td><span style='color:#F00'>"+list[i].sjsh_money+"</span></td><td><span style='color:#F00'>"+list[i].sjds_money+"</span></td><td><span style='color:#F00'>"+jkqx+"</span></td>";//<td>"+fwfy+"</td>
+				  if(jklx=="40%" || jklx=="25%") {
+						html_ += " <td><span style='color:#F82E03;font-weight:bolder'>"+jklx+"</span></td>";
+					}else {
+						html_ += " <td><span style='color:#F00'>"+jklx+"</span></td>";
+					}
+				  /* if(list[i].spzt == "1" )
+				  {
+					  html_ +="<td>Vượt qua(通过)</td>";
+				  }
+				  else if(list[i].spzt == "0")
+				  {
+					  html_ +="<td>Không vượt qua được(驳回)</td>";
+				  } */
+				  html_ +="<td><span style='color:#F00'>"+list[i].cl03_time+"</span></td>";			  
+			      html_ +="<td><span style='color:#F00'>"+list[i].sh_name+"</span></td>";
+	 
+				  //html_ +="<td>Đang chờ vay(待放款)</td>";
+				  html_ +="<td><button class='btn btn-xs btn-success' onclick=\"four_ck('"+list[i].id+"','"+list[i].realname+"','"+list[i].sjds_money+"')\">Giải ngân thành công</button></td>";
+				  html_ +="<td><button class='btn btn-xs btn-primary' onclick=\"four_sb('"+list[i].id+"','"+list[i].realname+"','"+list[i].sjds_money+"')\">Giải ngân thất bại</button></td>";
+		      }else{
+		     	  html_ += "<tr><td>"+list[i].username+"</td><td>"+list[i].realname+"</td><td style='mso-number-format:\@;'>"+list[i].idno+"</td><td style='mso-number-format:\@;'>"+list[i].cardno+"</td><td>"+list[i].cardname+"</td><td>"+list[i].sjsh_money+"</td><td>"+list[i].sjds_money+"</td><td>"+jkqx+"</td>";//<td>"+fwfy+"</td>
+				 if(jklx=="30%" || jklx=="25%") {
+						html_ += " <td><span style='color:#F82E03;font-weight:bolder'>"+jklx+"</span></td>";
+				 }else {
+						html_ += " <td><span>"+jklx+"</span></td>";
+				  }
+				  /* if(list[i].spzt == "1" )
+				  {
+					  html_ +="<td>Vượt qua(通过)</td>";
+				  }
+				  else if(list[i].spzt == "0")
+				  {
+					  html_ +="<td>Không vượt qua được(驳回)</td>";
+				  } */
+				  html_ +="<td>"+list[i].cl03_time+"</td>";			  
+			      html_ +="<td>"+list[i].sh_name+"</td>";
+	 
+				  //html_ +="<td>Đang chờ vay(待放款)</td>";
+				  html_ +="<td><button class='btn btn-xs btn-success' onclick=\"sub_foursacombank('"+list[i].id+"')\">Giải ngân thành công</button></td>";
+				  html_ +="<td><button class='btn btn-xs btn-primary' onclick=\"four_sb('"+list[i].id+"','"+list[i].realname+"','"+list[i].sjds_money+"')\">Giải ngân thất bại</button></td>";
+		      }
+			  
+			  html_ +="</tr>";
+			  
+		  }
+		
+		  $("#load_data_").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#xszmoney1").html(data.xszmoney);
+		  $("#xsyjmoney1").html(data.xsyjmoney);
+		  $("#sdzmoney1").html(data.sdzmoney);
+		  $("#sdyjmoney1").html(data.sdyjmoney);
+		  $("#totaldfk1").html(data.totaldfk);
+		  $("#dfkmoney1").html(data.totalsjdsmoney);
+		  
+		  var needmoney1 = parseInt(data.xszmoney.replace(/,/g,""));
+	      var needmoney2 = parseInt(data.sdzmoney.replace(/,/g,""));
+	      var needmone =  needmoney1+needmoney2;
+		  $("#xszmoneyT1").html(toThousands(needmone));
+		  
+		  var yfmoney1 = parseInt(data.xsyjmoney.replace(/,/g,""));
+	      var yfmoney2 = parseInt(data.sdyjmoney.replace(/,/g,""));
+	      var yfmoney =  yfmoney1+yfmoney2;
+		  $("#sdzmoneyT1").html(toThousands(yfmoney));
+		  
+		  $("#xszRenyT1").html(toThousands(data.xszRenyT));
+		  
+		  $("#tempVelue").val(data.tempvalu);
+		  page_value_(data);
+		  page_data_();
+		  
+		  $("#btn-load").button("reset");
+	    });
+   } 
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+
+   load_data_all();
+
+  
+   function four_ck(id,realname,kjmoney)
+   {
+	   $("#remark_tr").html("Xác nhận để giải ngân cho khách hàng&nbsp;\""+realname+"\"&nbsp;số tiền&nbsp;\""+kjmoney+"\"&nbsp;VNĐ?");
+	   $("#reco_id").val(id);
+	   $("#msg_content_html").show();
+   }
+   function four_sb(id,realname,kjmoney)
+   {
+	   var para={rec_id:id};
+	   loadGetServer("/servlet/current/JBDLLpayAction?function=GetShenhThreeSB",para,function(data){
+		   if(data.error>0)
+		   {
+			   load_data_all();
+		   }
+		   else
+		   {
+		   alert(data.msg);
+		   load_data_all();
+		   }
+	   });
+   }
+   
+  
+   function sub_four()
+   {
+	   var re_id_=$("#reco_id").val();
+	   var para={rec_id:re_id_};
+	   
+	   loadGetServer("/servlet/current/JBDLLpayAction?function=GetShenhThreeCHG",para,function(data){
+		   if(data.error>0)
+		   {
+			   $("#msg_content_html").hide();
+			   load_data_all();
+		   }
+		   else
+		   {
+		   $("#msg_content_html").hide();
+		   alert(data.msg);
+		   load_data_all();
+		   }
+	   });
+   }
+   function sub_foursacombank(id)
+   {
+	   var re_id_=id;
+	   var para={rec_id:re_id_};
+	   loadGetServer("/servlet/current/OLVSacombank?function=PaySacombank",para,function(data){
+		   if(data.error>0)
+		   {
+			   load_data_all();
+		   }
+		   else
+		   {
+		   alert(data.msg);
+		   load_data_all();
+		   }
+	   });
+   }
+    function load_batch(name){
+		if(isChecked(name)){
+			var str="";   
+			$('input[name="id"]:checked').each(function(){
+					var sfruit=$(this).val();
+					str+=sfruit+",";
+			 });
+			 var para={str_:str};
+			loadGetServer("/tzms/record/getAddOrderList",para,function(data){
+			   if(data.error>0)
+			   {
+				   $("#msg_content_html").hide();
+				   load_data_all();
+			   }
+			   else
+			   {
+			   
+			     alert(data.msg);
+			   
+				
+			   }
+		   });
+
+		}else{
+			alert("");
+		}
+   }
+</script>
+
+<script>
+ var idTmr;  
+        function  getExplorer() {  
+            var explorer = window.navigator.userAgent ;  
+            //ie  
+            if (explorer.indexOf("MSIE") >= 0) {  
+                return 'ie';  
+            }  
+            //firefox  
+            else if (explorer.indexOf("Firefox") >= 0) {  
+                return 'Firefox';  
+            }  
+            //Chrome  
+            else if(explorer.indexOf("Chrome") >= 0){  
+                return 'Chrome';  
+            }  
+            //Opera  
+            else if(explorer.indexOf("Opera") >= 0){  
+                return 'Opera';  
+            }  
+            //Safari  
+            else if(explorer.indexOf("Safari") >= 0){  
+                return 'Safari';  
+            }  
+        }  
+        function method5(tableid) {  
+            if(getExplorer()=='ie')  
+            {  
+                var curTbl = document.getElementById(tableid);  
+                var oXL = new ActiveXObject("Excel.Application");  
+                var oWB = oXL.Workbooks.Add();  
+                var xlsheet = oWB.Worksheets(1);  
+                var sel = document.body.createTextRange();  
+                sel.moveToElementText(curTbl);  
+                sel.select();  
+                sel.execCommand("Copy");  
+                xlsheet.Paste();  
+                oXL.Visible = true;  
+  
+                try {  
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");  
+                } catch (e) {  
+                    print("Nested catch caught " + e);  
+                } finally {  
+                    oWB.SaveAs(fname);  
+                    oWB.Close(savechanges = false);  
+                    oXL.Quit();  
+                    oXL = null;  
+                    idTmr = window.setInterval("Cleanup();", 1);  
+                }  
+  
+            }  
+            else  
+            {  
+                tableToExcel(tableid)  
+            }  
+        }  
+        function Cleanup() {  
+            window.clearInterval(idTmr);  
+            CollectGarbage();  
+        }  
+        var tableToExcel = (function() {  
+            var uri = 'data:application/vnd.ms-excel;base64,',  
+                    template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',  
+                    base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },  
+                    format = function(s, c) {  
+                        return s.replace(/{(\w+)}/g,  
+                                function(m, p) { return c[p]; }) }  
+            return function(table, name) {  
+                if (!table.nodeType) table = document.getElementById(table)  
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}  
+                window.location.href = uri + base64(format(template, ctx))  
+            }  
+        })()  
+
+</script>
+        
+
+<script type="text/javascript" src="/main/js/date_time.js"></script>

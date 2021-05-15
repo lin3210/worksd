@@ -1,0 +1,227 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="/indexCms.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               Toàn bộ danh sách thông tin về công việc
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                      Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcmsAction?function=GetJobList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                                <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1">
+                                         Mã số khách hàng
+                                      </option>
+                                      <option value="2">
+                                         Họ tên
+                                      </option>
+                                      <option value="3">
+                                        Số ĐTDĐ
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                              <!--  <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              生成时间:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1">
+                              </div> -->
+                          <!--     <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              审核状态:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="commit">
+                                  <option value="0">
+                                    --请选择--
+                                  </option>
+                                  <option value="-1">
+                                    待审核
+                                  </option>
+                                  <option value="1">
+                                    成功
+                                  </option>
+                                  <option value="2">
+                                    失败
+                                  </option>
+                                </select>
+                              </div> -->
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                Toàn bộ danh sách thông tin về công việc
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          Mã số khách hàng
+		                        </th>
+		                         <!-- <th>
+		                          姓名
+		                        </th> -->
+		                        <th>
+		                          Số ĐTDĐ
+		                        </th>
+		                        <th>
+		                          Tên Công ty
+		                        </th>
+                                <th>
+		                          Số ĐT Công ty
+		                        </th>
+                                <th>
+		                         Địa chỉ Công ty
+		                        </th>
+		                         <th>
+		                          Chức vụ
+		                        </th>
+                                <th>
+		                          Mức lương
+		                        </th>    
+		                        <th>
+		                          Thời gian nhậm chức
+		                        </th>
+		                        <th>
+		                          Loại hình kinh doanh
+		                        </th>
+                               
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>  tin，mỗi trang chứa được  <font id="numperpage"></font>  tin，hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var commit=$("#commit").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,commit:commit};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var shenkzt ;
+		  for(var i=0;i<list.length;i++)
+		  {
+		       
+				html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].phone+"</td><td>"+list[i].workname+"</td><td>"+list[i].tel+"</td><td>"+list[i].address+"</td><td>"+list[i].position+"</td><td>"+list[i].pay+"</td><td>"+list[i].time+"</td><td>"+list[i].company+"</td>";
+				
+				html_ +="</tr>";
+		   }
+		  $("#load_data").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

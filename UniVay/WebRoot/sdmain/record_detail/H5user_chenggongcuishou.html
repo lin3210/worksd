@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>MOFA</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+      <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+    <link href="/assets/css/date_css/dateRange.css" rel="stylesheet" type="text/css" />
+     <script language="Javascript">  
+document.oncontextmenu=new Function("event.returnValue=true");  
+document.onselectstart=new Function("event.returnValue=true");  
+</script> 
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="/assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="/plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.tooltip.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.resize.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.time.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.growraf.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/moment.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/daterangepicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/blockui/jquery.blockUI.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/fullcalendar/fullcalendar.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/jquery.noty.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/layouts/top.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/themes/default.js">
+    </script>
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/select2/select2.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/app.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.form-components.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/page.js">
+    </script>
+	<script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/monthPicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/dateRange.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        Plugins.init();
+        FormComponents.init()
+      });
+    </script>
+    <script type="text/javascript" src="/assets/js/custom.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/json.js">
+    </script>
+    
+
+
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<link rel="stylesheet" href="/assets/css/jquery.artZoom.css" />
+<link href="/assets/css/main_bz.css" rel="stylesheet" type="text/css" />
+<style>.col-md-0{ position: relative; min-height: 1px; padding-left: 15px } .col-md-0{ float: left } .table td{height: 45px;line-height: 45px;} </style></head>
+<body>
+
+   <div id="load_html" style="">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display:block;">
+            <div class="modal-dialog" style="padding-top: 15%;">
+                <div >
+                  <img src="/assets/img/loading-green-160px.gif">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+  <div id="container" class="sidebar-closed">
+    <div id="content">
+      <div class="container">
+        <div class="crumbs">
+          <ul id="breadcrumbs" class="breadcrumb">
+            <li>
+              <i class="fa fa-home"></i>
+              <a href="index.html"></a>
+            </li>
+            <li class="current">
+              <a href="javascript:void(0)" title="">Thông tin người dùng</a></li>
+          </ul>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-md-12">
+            <div class="tabbable tabbable-custom tabbable-full-width">
+              <ul class="nav nav-tabs">
+                <li class="active">
+                  <a href="#tab_overview" data-toggle="tab">Thông tin cơ bản</a></li>
+               <!--  <li>
+                  <a href="#tab_edit_account" data-toggle="tab">征信数据</a></li> -->
+              </ul>
+              <div class="tab-content row" style=" font-size:15px;">
+                <div class="tab-pane  active" id="tab_overview">
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                        
+               
+				
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							    <input type="hidden" id="cupage_" value="1"/>
+							 <input type="hidden" id="total_" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetRecordListChg"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+                             <input type="hidden" id="starTime1" value=""/>
+                             <input type="hidden" id="endTime1" value=""/>
+		       
+                    
+                        </div>
+                      </div>
+                    </div>
+                   <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin cá nhân cơ bản</h4>
+                          </div>
+                          <div class="widget-content">
+                            <table class="table" style="margin-bottom: 0px;">
+                            <input type="hidden" name="cardid" id="cardid"/>
+                            <input type="hidden" name="reid" id="reid"/>
+                            <input type="hidden" name="i_id" id="i_id"/>
+                            <input type="hidden" name="j_id" id="j_id"/>
+                            <input type="hidden" name="user_id" id="user_id"/>
+                            <input type="hidden" name="cardphto" id="cardphto"/>
+                            <input type="hidden" name="positivepic" id="positivepic"/>
+                              <thead>
+                                <tr>
+                                  <th>Mã số</th>
+                                  <th>Loại điện thoại</th>
+                                  <th>Họ tên</th>
+                                  <th>Số CMND</th>
+                                  <th class="hidden-xs">Số ĐTDĐ</th>
+                                  <th>E-mail</th>
+                                  <th>Dòng máy điện thoại</th>
+                                  <th>Thời gian đăng ký</th>
+                                  
+                                  
+                                  </tr>
+                              </thead>
+                             
+                              <tbody id="personal">
+                               
+                              </tbody>
+                              <thead>
+                                  <th>Địa chỉ tạm trú</th>
+                                  <th>Địa chỉ thường trú</th>
+                                  <th>Ngày sinh</th>
+                                  <th>Tuổi</th>
+                                  <!-- <th>Số lần đề xuất vay</th>
+                                  <th>Số lần giải ngân thành công</th>
+                                  <th>Số lần trả vay quá hạn</th>
+                                  <th>Số lần gia hạn vay</th> -->
+                              </thead>
+                             
+                              <tbody id="personal1">
+                               
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+               <!--  <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                          
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin ngân hàng</h4>
+                          </div>
+                          <div class="widget-content">
+                          <div id="ribb_yh" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="yhri">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-top: 0px;">
+                              <tbody>
+                                <tr>
+                                 <th>Số tài khoản NH</th>
+                                  <th>Tên ngân hàng</th>
+                       
+                      </tr> 
+                                <tr id="yh_2">
+                                </tr>
+                                  <tr >
+                                    <td id="rad_yh" colspan="8"></td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                          
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin công việc</h4>
+                          </div>
+                          <div class="widget-content">
+                          <div id="ribb_job" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="jobri">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-top: 0px;">
+                              <tbody>
+                                <tr>
+                                  <th>Tính chất công việc</th>
+                                  <th>Điện thoại cơ quan</th>
+                                  <th>Địa chỉ cơ quan</th>
+                                  <th>Tên cơ quan</th>
+                                  <th>Chức vụ</th>
+                                  <th>Mức lương</th>
+                                  <th>Thời gian nhậm chức</th>
+                                  <th>&nbsp;</th>
+                       <!-- <div id="work"> 
+                       <div >正面</div> 
+                       <div >反面</div> 
+                       <div >手持</div> 
+                       </div> -->
+                      </tr> 
+                                <tr id="job_2">
+                                </tr>
+                                  <tr >
+                                    <td id="rad_j" colspan="8"></td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                          
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin trường học</h4>
+                          </div>
+                          <div class="widget-content">
+                          <div id="ribb_school" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="schoolri">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-top: 0px;">
+                              <tbody>
+                                <tr>
+                                  <th>Tên trường</th>
+                                  <th>Địa chỉ trường</th>
+                                  <th>Tên lớp</th>
+                                  <th>Mã số sinh viên</th>
+                                  <th>Thời gian nhập học</th>
+                                  <th>&nbsp;</th>
+                       <div id="school"> 
+                       <div >Mặt trước</div> 
+                       <div >Mặt sau</div> 
+                       <div >Hình tự cầm</div> 
+                       </div>
+                      </tr> 
+                                <tr id="school_2">
+                                </tr>
+                                  <tr >
+                                    <td id="rad_s" colspan="8"></td>
+                                  </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                        
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                            <h4>
+                              <i class="fa fa-reorder"></i>Thông tin người liên hệ</h4>
+                          </div>
+                          <div class="widget-content">
+                            <div id="ribb_lxr" style="display:none"><div class='ribbon-wrapper ribbon-top-right'> <div class='ribbon orange' id="lxrbr">Chờ thẩm định</div> </div></div>
+                            <table class="table" style="margin-bottom: 0px;" id="lianx">
+                        
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" id="shib1" style="display:none;" >
+                       
+                    </div>
+                    <div class="row" id="shib2" style="display:none;" >
+                       
+                    </div>
+                    <div class="row" id="shib3" style="display:none;">
+                       
+                    </div>
+                    <div class="row" id="win">
+                   
+                    </div>
+                    <div class="row" id="cscs">
+                   
+                    </div>
+                    <!-- 
+                    <div class="row" id="cscsjk">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                            <h4>
+                              <i class="fa fa-reorder"></i>Báo cáo truy thu mới nhất</h4>
+                          </div>
+                          <div class="widget-content">
+                            <div class="form-horizontal row-border" id="validate-2" novalidate>
+                              <div class="form-group">
+                                <label class="col-md-2 control-label">Trạng thái hồ sơ
+                                  <span class="required">*</span></label>
+                                  <div class="col-md-9" id="tond">
+                                 <input type="text" name="shenheid" id="ztselect" readonly class="form-control required email">
+                                  </div>
+                              </div>
+                              
+                               <div class="form-group">
+                                <label class="col-md-2 control-label">Báo cáo công việc:</br>
+                                  Tóm tắt quá trình truy thu:</br>
+                                  Kết quả:</br>
+                                  Cách thức xử lý
+                                  <span class="required">*</span></label>
+                                  
+                                  <div class="col-md-9" id="pingfen">
+                                <textarea rows="6" cols="5" name="textarea" class="form-control" id="remarkbg" readonly placeholder="Vui lòng nhập ghi chú từ chối"></textarea>
+                                  </div>
+                              </div>
+                              
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-header">
+                            <h4>
+                              <i class="fa fa-reorder"></i>Báo cáo truy thu</h4>
+                          </div>
+                          <div class="widget-content">
+                            <div class="form-horizontal row-border" id="validate-2" novalidate>
+                              <div class="form-group">
+                                <label class="col-md-2 control-label">Trạng thái hồ sơ
+                                  <span class="required">*</span></label>
+                                  <div class="col-md-9" id="tond">
+                                 <select class="form-control" name="select" id="tempselect">
+                                      <option value="0">
+                                       	 Toàn bộ
+                                      </option>
+                                      <option value="1">
+                                        KH gia hạn
+                                      </option>
+                                      <option value="2">
+                                        KH hứa thanh toán
+                                      </option>
+                                      <option value="3">
+                                         Không liên hệ được KH
+                                      </option>
+                                      <option value="4">
+                                         KH đã thanh toán, cần xác nhận
+                                      </option>
+                                      <option value="5">
+                                         KH, người thân đều không hợp tác
+                                      </option>
+                                      <option value="6">
+                                         Người thân KH hợp tác
+                                      </option>
+                                      <option value="7">
+                                         KH không thể vay thành công lần nữa
+                                      </option>
+                                      <option value="8">
+                                         Khác
+                                      </option>
+                               	  </select>
+                                  </div>
+                              </div>
+                               <div class="form-group">
+                                <label class="col-md-2 control-label">Báo cáo công việc:</br>
+                                  Tóm tắt quá trình truy thu:</br>
+                                  Kết quả:</br>
+                                  Cách thức xử lý
+                                  <span class="required">*</span></label>
+                                  
+                                  <div class="col-md-9" id="pingfen">
+                                <textarea rows="6" cols="5" name="textarea" class="form-control" id="remark" placeholder="Vui lòng nhập ghi chú từ chối"></textarea>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                              <label class="col-md-2 control-label">Khách hàng có phải mất liên lạc không
+                              <span class="required">*</span></label>
+                              <div class="col-md-9" id="shilian">
+                              <span id="shilian_span" style='color:#F00;font-weight:bolder;display:none'>Đã xác nhận mất liên lạc</span>
+                              <button id="shilian_but" data-bb-handler="success" type="button" class="btn btn-danger" onclick="shilian_qr()">Xác nhận mất liên lạc</button>
+                              </div>
+                              </div>
+                              
+                              <div class="form-group">
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz()">Gửi lên</button>
+                              </div>
+                              
+                           
+                              
+                              <div class="form-actions">
+                              <input type="button" value="Phone/Zalo/FB" class="btn btn-primary pull-right" onClick="get_gaoji()">
+                                 <input type="button" value="Xem thông tin gốc" class="btn btn-primary pull-right" onClick="get_zx()"> 
+                                 <!-- <input type="button" value="确认审核" class="btn btn-success " onClick="sub_form()"> -->
+                                 <input type="button" value="Đóng trang" class="btn btn-inverse  pull-right" onClick="javascript:parent.f_hide_ifm(GetQueryString('record_id'))">                              
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="widget box">
+                      <div class="widget-header">
+                        <h4>
+                          <i class="icon-reorder"></i>Số CMND</h4>
+                        <div class="toolbar no-padding">
+                          <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse">
+                              <i class="icon-angle-down"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="widget-content">
+                               <div id="ribb_phone" style="display:none;">
+                                <div class='ribbon-wrapper ribbon-top-right' style="z-index: 10;"> <div class='ribbon orange' id="ribid" >Chờ thẩm định</div> </div>
+                               </div>
+                        <div class="list-group" id="shenfen">
+                        
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    <input style="display:none" type="hidden"/> 
+                  </form>
+                </div>
+                 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title " style='color:#F00;font-weight:bolder;'><span id="update_name"></span>Xác nhận</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body">
+					<label class="col-md-0 control-label" style="padding-top:0px;letter-spacing:2px;" id="remark_tr"></label>
+				</div>
+                <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_shilian()">Xác nhận</button>
+				&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_html').hide()">Đóng</button>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+
+</html>
+
+<script>$("#btn-load").on("click",
+  function() {
+    var a = $(this);
+    a.button("loading");
+    $("#cupage_").val("1");
+    load_data();
+    load_data_();
+  });</script>
+<script src="/assets/js/jquery.artZoom.js"></script>
+<script>
+$(function() {
+	userdetail();
+	radi();
+	
+})
+/* load_data();
+load_data_();
+function load_data(){
+	var reid=GetQueryString("record_id");
+	console.log("111");
+	var para={curPage:$("#cupage").val(),reid:reid};
+	loadGetServer("/servlet/current/JBDcmsAction?function=GetTongxunlu",para,function(data){
+	$("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr id =id_"+list[i].id+"><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td></tr>";
+				
+		   }
+			$("#load_data").append(html_);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+  function load_data_(){
+	var reid=GetQueryString("record_id");
+	var para={curPage:$("#cupage_").val(),reid:reid};
+	loadGetServer("/servlet/current/JBDcmsAction?function=GetTonghuajilu",para,function(data){
+	$("#load_data1").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr id =id_"+list[i].id+"><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].type+"</td><td>"+list[i].callduration+"</td><td>"+list[i].calldatestr+"</td></tr>";
+				
+		   }
+			$("#load_data1").append(html_);
+			page_value_(data);
+			page_data_();
+			$("#btn-load").button("reset");
+	    });
+   } */
+ function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+ function ChangPhone(phone) {
+			var newphone = "";
+			if("84" == phone.substring(0, 2)){
+				phone = "0" + phone.substring(2);
+			}
+			var changphone = phone.substring(0, 4);
+			if ("0120"==changphone) {
+				newphone = "070" + phone.substring(4);
+			} else if ("0121"==changphone) {
+				newphone = "079" + phone.substring(4);
+			} else if ("0122"==changphone) {
+				newphone = "077" + phone.substring(4);
+			} else if ("0126"==changphone) {
+				newphone = "076" + phone.substring(4);
+			} else if ("0128"==changphone) {
+				newphone = "078" + phone.substring(4);
+			} else if ("0123"==changphone) {
+				newphone = "083" + phone.substring(4);
+			} else if ("0124"==changphone) {
+				newphone = "084" + phone.substring(4);
+			} else if ("0125"==changphone) {
+				newphone = "085" + phone.substring(4);
+			} else if ("0127"==changphone) {
+				newphone = "081" + phone.substring(4);
+			} else if ("0129"==changphone) {
+				newphone = "082" + phone.substring(4);
+			} else if ("0162"==changphone) {
+				newphone = "032" + phone.substring(4);
+			} else if ("0163"==changphone) {
+				newphone = "033" + phone.substring(4);
+			} else if ("0164"==changphone) {
+				newphone = "034" + phone.substring(4);
+			} else if ("0165"==changphone) {
+				newphone = "035" + phone.substring(4);
+			} else if ("0166"==changphone) {
+				newphone = "036" + phone.substring(4);
+			} else if ("0167"==changphone) {
+				newphone = "037" + phone.substring(4);
+			} else if ("0168"==changphone) {
+				newphone = "038" + phone.substring(4);
+			} else if ("0169"==changphone) {
+				newphone = "039" + phone.substring(4);
+			} else if ("0186"==changphone) {
+				newphone = "056" + phone.substring(4);
+			} else if ("0188"==changphone) {
+				newphone = "058" + phone.substring(4);
+			} else if ("0199"==changphone) {
+				newphone = "059" + phone.substring(4);
+			} else {
+				newphone = phone;
+			}
+			return newphone;
+		}
+ function userdetail()
+ {
+	 var reid=GetQueryString("record_id");
+	var userid=GetQueryString("userid");
+	// $("#load_html").show();
+	 var para={reid:reid,userid:userid};
+	 loadGetServer("/servlet/current/JBDcmsAction?function=GetUserRecOneInfoYNH5",para,function(data){
+		 if(data.shilian == 1 )
+		 {
+			document.getElementById("shilian_span").style.display="block";
+			document.getElementById("shilian_but").style.display="none";
+		 }
+		 if(data.error < 0 )
+		 {
+			 alert(data.msg);
+			 parent.f_hide_ifm(reid);
+	       /*  $("#load_html").hide(); */
+		 }
+		 if(data.cuishoubaogao != null){
+			 $("#remarkbg").val(data.cuishoubaogao.msg);
+			 $("#ztselect").val(data.cuishoubaogao.cszt);
+		 }
+		 
+			 var rad_id=0;
+			 /*-----------------个人基本资料---------------------*/
+			 var html_g="";
+			
+			var xm = "";
+			 if(data.xm != undefined){
+			 	xm = data.xm ;
+			 }
+			 var yddh = "";
+			 if(data.xm != undefined){
+			 	yddh = data.yddh ;
+			 }
+			 var czdz = "";
+			 if(data.xm != undefined){
+			 	czdz = data.czdz ;
+			 }
+			 var zzdz = "";
+			 if(data.xm != undefined){
+			 	zzdz = data.zzdz ;
+			 }
+			 var sr = "";
+			 if(data.xm != undefined){
+			 	sr = data.sr.slice(0,10) ;
+			 }
+			 html_g +="<tr>";
+			 html_g +="<td align=''>"+data.user_id+"";
+			 if(data.useridzu[0] != null){
+				 for(var n=0;n<data.useridzu.length;n++){
+				 	html_g +="[<a href='javascript:void(0);' onclick='open_user("+data.useridzu[n]+")'><span style='color:#F00'>"+data.useridzu[n]+"</span></a>]";
+				 }
+			 }
+			 html_g +="</td>";
+			 html_g +="<td align=''>"+data.username.slice(5,8)+"</td>";
+			 html_g +="<td align=''>"+data.userrealname+"[<span style='color:#0000FF'>"+xm+"</span>]</td>";
+			 html_g +="<td align=''>"+data.cardid+"</td>";
+			 var cellphone = data.cellphone;
+			 if(cellphone.length > 8){
+			 	cellphone = data.cellphone.substr(0, 3) + "*****" + data.cellphone.substr(8);
+			 }
+			 var dhyddh = yddh;
+			 if(dhyddh.length > 8){
+			 	dhyddh = yddh.substr(0, 3) + "*****" + yddh.substr(8);
+			 }
+			 var phonezu = data.phonezu;
+			 if(phonezu.length > 8){
+			 	phonezu = phonezu.substr(0, 3) + "*****" + phonezu.substr(8);
+			 }
+			 if(data.cellphone.length == 11){
+			 	html_g +="<td>"+data.cellphone+"--"+ChangPhone(data.cellphone) ;
+			 }else{
+			 	html_g +="<td>"+data.cellphone;
+			 }
+			 html_g +="[<span style='color:#0000FF'>"+yddh+"</span>][<span style='color:#F00'>"+data.phonezu+"</span>]</td>";
+			 
+			 html_g +="<td>"+data.email+"</td>";
+			 html_g +="<td>"+data.phonetype+"</td>";
+			 html_g +="<td>"+data.createtime.substring('0',data.createtime.length-2)+"</td>";
+		
+			 html_g +="</tr>";
+			
+			 $("#personal").html(html_g);	
+			  var html_gg="";
+			  html_gg +="<tr>";
+			  html_gg +="<td>"+data.homeaddress+"[<span style='color:#0000FF'>"+zzdz+"</span>]</td>";
+			  html_gg +="<td>"+data.address+"[<span style='color:#0000FF'>"+czdz+"</span>]</td>";
+			  
+			  html_gg +="<td>"+data.csrq+"[<span style='color:#0000FF'>"+sr+"</span>]</td>";
+			  html_gg +="<td>"+data.age+"</td>";
+			/*  html_gg +="<td><span class='label label-success'>"+data.cou+"</span></td>";
+			 html_gg +="<td class='hidden-xs'><span class='label label-success'>"+data.usercgjk+"</span></td>";
+			 html_gg +="<td><span class='label label-success'>"+data.yuqcount+"</span></td></br>";
+			 html_gg +="<td><span class='label label-success'>"+data.jkfqcs+"</span></td></br>"; */
+			  html_gg +="</tr>";
+			  $("#personal1").html(html_gg);
+			/*   //  银行卡信息
+			   var html_yh2="";
+			  if(data.bank.cardno != "")
+			 {
+				 html_yh2 +="<td>"+data.bank.cardno+"</td>";	
+			 }
+			 else
+			 {
+				 html_yh2 +="<td>Tạm thời không có</td>";	
+			 }
+			 if(data.bank.cardname != null)
+			 {
+				 html_yh2 +="<td>"+data.bank.cardname+"</td>";
+			 }
+			 else
+			 {
+				 html_yh2 +="<td>Tạm thời không có</td>";
+			 }
+			 html_j2 +="<td>&nbsp;</td>";
+			 $("#yh_2").html(html_yh2);	
+			 var html_radyh="";	
+			/*  if(data.profession == 1)
+			 { */
+				 $("#yhri").attr("class","ribbon green");
+				 $("#yhri").html("Đã thẩm định")
+				 $("#ribb_yh").show();
+			 /* }
+			 else
+			 {
+				 //rad_id=rad_id+1;
+				  html_radyh +="<label class='radio-inline'><input name='yh' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_radyh +="<label class='radio-inline'><input name='yh' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 $("#yhri").attr("class","ribbon orange");
+				 $("#ribb_yh").show();
+			 } 
+			 $("#rad_yh").html(html_radyh); 
+			 */
+			/*-----------------工作信息------------------------*/
+
+			 var html_j2="";
+			  if(data.company != "")
+			 {
+				 html_j2 +="<td>"+data.company+"</td>";	
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";	
+			 }
+			 if(data.tel != null)
+			 {
+				 html_j2 +="<td>"+data.tel+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.workaddress != null)
+			 {
+				 html_j2 +="<td>"+data.workaddress+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.workname != null)
+			 {
+				 html_j2 +="<td>"+data.workname+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.position != null)
+			 {
+				 html_j2 +="<td>"+data.position+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.pay != null)
+			 {
+				 html_j2 +="<td>"+data.pay+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.worktime != null)
+			 {
+				 html_j2 +="<td>"+data.worktime+"</td>";
+			 }
+			 else
+			 {
+				 html_j2 +="<td>Tạm thời không có</td>";
+			 }
+			 html_j2 +="<td>&nbsp;</td>";
+			 $("#job_2").html(html_j2);	
+			 /* var html_work="";
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1w +"' class='roomimg' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>正面</a></div>";			 
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p2w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>反面</a></div>";
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p3w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>手持</a></div>";
+			 $("#work").html(html_work); */
+			 var html_radj="";	
+			 /* if(data.status == 1)
+			 { */
+				 $("#jobri").attr("class","ribbon green");
+				 $("#jobri").html("Đã thẩm định")
+				 $("#ribb_job").show();
+			/*  }
+			 else
+			 {
+				 //rad_id=rad_id+1;
+				  html_radj +="<label class='radio-inline'><input name='job' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_radj +="<label class='radio-inline'><input name='job' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 $("#jobri").attr("class","ribbon orange");
+				 $("#ribb_job").show();
+			 } */
+			 $("#rad_j").html(html_radj);
+			  /*-----------------学校信息------------------------*/
+
+			 var html_s2="";
+			 if(data.schoolname != "")
+			 {
+				 html_s2 +="<td>"+data.schoolname+"</td>";	
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";	
+			 }
+			 if(data.schooladdress != null)
+			 {
+				 html_s2 +="<td>"+data.schooladdress+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.classname != null)
+			 {
+				 html_s2 +="<td>"+data.classname+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.stuid != null)
+			 {
+				 html_s2 +="<td>"+data.stuid+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 if(data.schooltime != null)
+			 {
+				 html_s2 +="<td>"+data.schooltime+"</td>";
+			 }
+			 else
+			 {
+				 html_s2 +="<td>Tạm thời không có</td>";
+			 }
+			 html_s2 +="<td>&nbsp;</td>";
+			 $("#school_2").html(html_s2);	
+			 var html_school="";
+			 //html_school +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1s +"' class='roomimgschool' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt trước</a></div>";			 
+			 //html_school +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p2s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt sau</a></div>";
+			 //html_school +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p3s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a></div>";
+			 $("#school").html(html_school);
+			   	$('.roomimgschool').artZoom({
+		  path: '/assets/img',
+		  // 设置artZoom图片文件夹路径
+		  preload: true,
+		  // 设置是否提前缓存视野内的大图片
+		  blur: true,
+		  // 设置加载大图是否有模糊变清晰的效果
+		  // 语言设置
+		  left: 'turn left',
+		  // 左旋转按钮文字
+		  right: 'turn right',
+		  // 右旋转按钮文字
+		  //source: '看原图' // 查看原图按钮文字
+		});
+			 var html_rads="";	
+			 /* if(data.status == 1)
+			 { */
+				 $("#schoolri").attr("class","ribbon green");
+				 $("#schoolri").html("Đã thẩm định")
+				 $("#ribb_school").show();
+			/*  }
+			 else
+			 {
+				 //rad_id=rad_id+1;
+				 html_rads +="<label class='radio-inline'><input name='school' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_rads +="<label class='radio-inline'><input name='school' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 $("#schoolri").attr("class","ribbon orange");
+				 $("#ribb_school").show();
+			 } */
+			 $("#rad_s").html(html_rads);
+			
+			/*-----------------联系人信息-----------------------*/
+			 var html_l="<thead>";
+			
+				 html_l +="<tr><th>Người liên hệ"+(1)+"</th><th>Quan hệ</th><th class='hidden-xs'>Số ĐTDĐ</th></thead>";
+				 html_l +="<tbody><tr>";
+				 html_l +="<td align=''>"+data.lianxi.contact1+"</td>";
+				 html_l +="<td>"+data.lianxi.guanxi1+"</td>";
+				 var tel1 = data.lianxi.tel1;
+			     if(tel1.length > 8){
+			 		tel1 = data.lianxi.tel1.substr(0, 3) + "*****" + data.lianxi.tel1.substr(8);
+			 	 }
+				
+				 html_l +="<td><a href='javascript:void(0);' onclick=\"call_phone('"+data.lianxi.tel1+"')\">"+data.lianxi.tel1+"</a></td>";
+				 
+				 html_l +="</tr>";
+				 
+				 html_l +="<tr><th>Người liên hệ"+(2)+"</th><th>Quan hệ</th><th class='hidden-xs'>Số ĐTDĐ</th></thead>";
+				 html_l +="<tbody><tr>";
+				 html_l +="<td align=''>"+data.lianxi.contact2+"</td>";
+				 html_l +="<td>"+data.lianxi.guanxi2+"</td>";
+				 var tel2 = data.lianxi.tel2;
+			     if(tel2.length > 8){
+			 		tel2 = data.lianxi.tel2.substr(0, 3) + "*****" + data.lianxi.tel2.substr(8);
+			 	 }
+				 html_l +="<td><a href='javascript:void(0);' onclick=\"call_phone('"+data.lianxi.tel2+"')\">"+data.lianxi.tel2+"</a></td>";
+				 
+				 html_l +="</tr>";
+			// if(data.isverified == 0)
+			//{
+				 
+			// }
+			/*  if(data.status == 1)
+			 { */
+				  $("#lxrbr").attr("class","ribbon green");
+				 $("#lxrbr").html("Đã thẩm định");
+				 $("#ribb_lxr").show();
+			 /* }
+			 else
+			 { 
+			  html_l +="<tr><td colspan='8';>";
+				 html_l +="<label class='radio-inline'><input name='con' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_l +="<label class='radio-inline'><input name='con' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 html_l +="</td></tr>";
+				 $("#lxrbr").attr("class","ribbon orange");
+				 $("#ribb_lxr").show();
+			 } */ 
+			
+			 html_l+="</tbody>";
+			 $("#lianx").html(html_l);
+		/* 	/*-----------------第一阶段失败借款记录-----------------------
+			  if(data.numcount1.length>0)
+			 {		
+			     $("#shib1").show();
+				 var html_s="";
+				 html_s +="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='fa fa-reorder'></i>Hồ sơ thẩm định thất bại giai đoạn 1</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='fa fa-angle-down'></i></span></div></div></div>";
+				 html_s +="<div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian vay</th><th>Số tiền vay</th><th>Người thẩm định</th><th>Giai đoạn thất bại</th><th>Lý do thất bại</th><th class='hidden-xs'>Số tiền được duyệt</th><th>Thời gian thẩm định</th></tr></thead><tbody>";
+				 var listd =data.numcount1;
+				 for(var i=0;i<listd.length;i++)
+				 {
+				      var shenhesj ;
+		              var shenheren ="SYSTEM"
+		              var shenheclyj ;
+		              var shibaijieduan ;
+		              var shenped = "0"; 
+				      if(listd[i].cl_status =="3"){
+				           
+				           shenhesj=listd[i].cl_time ;
+				           if(typeof( shenhesj)=="undefined"){ 
+
+                             shenhesj=listd[i].cl_time; 
+
+                           } 
+				          if(listd[i].cl_ren =="6"){
+				                shenheren ="BRAIN" ;
+				            } else if(listd[i].cl_ren=="77"){
+				                shenheren ="phanngoctuan" ;
+				            }else if(listd[i].cl_ren=="98"){
+				                shenheren ="PHAM THI MINH" ;
+				            }else if(listd[i].cl_ren=="99"){
+				                shenheren ="VO THI NGOC HANG" ;
+				            }else if(listd[i].cl_ren=="100"){
+				                shenheren ="TRAN THI THUY VAN" ;
+				            }else if(listd[i].cl_ren=="8"){
+				                shenheren ="Sam" ;
+				            }
+				            else if(listd[i].cl_ren == "50"){
+								shenheren = "HUYNH NGUYEN DUONG";
+							} 
+							else if(listd[i].cl_ren == "51"){
+								shenheren = "DOAN THI HONG YEN";
+							} 
+							else if(listd[i].cl_ren == "52"){
+								shenheren = "LE HOANG MY";
+							} 				            
+							else if(listd[i].cl_ren == "30"){
+								shenheren = "PHAM THI PHUONG THAO";
+							}
+							else if(listd[i].cl_ren == "20"){
+								shenheren = "tran van phi";
+							} 				            
+							else if(listd[i].cl_ren == "54"){
+								shenheren = "Dinh Trong Hieu";
+							}  				            
+							else if(listd[i].cl_ren == "101"){
+								shenheren = "pham anh tuan";
+							}  				            
+							else if(listd[i].cl_ren == "32"){
+								shenheren = "Huỳnh Thị Như Thủy";
+							}  				            
+				            shenheclyj = listd[i].cl_yj;
+				            shibaijieduan="Thẩm định lần 1"
+				        }
+				     html_s +="<td>"+ listd[i].create_date+"</td>";
+				     html_s +="<td>"+ listd[i].jk_money+"</td>";
+					 html_s +="<td align=''>"+shenheren+"</td>";					
+					 html_s +="<td>"+ shibaijieduan+"</td>";
+                     html_s +="<td>"+shenheclyj+"</td>";
+					 html_s +="<td>"+shenped+"</td>";
+					 html_s +="<td>"+shenhesj+"</td></tr>";
+				 }
+				 html_s +="</tbody></table></div></div></div>";
+				 $("#shib1").html(html_s)
+			 }
+        */
+           /*-----------------第二阶段失败借款记录-----------------------
+			  if(data.numcount2.length>0)
+			 {		
+			     $("#shib2").show();
+				 var html_s="";
+				 html_s +="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='fa fa-reorder'></i>Hồ sơ thẩm định thất bại giai đoạn 2</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='fa fa-angle-down'></i></span></div></div></div>";
+				 html_s +="<div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian vay</th><th>Số tiền vay</th><th>Người thẩm định</th><th>Giai đoạn thất bại</th><th>Lý do thất bại</th><th class='hidden-xs'>Số tiền được duyệt</th><th>Thời gian thẩm định</th></tr></thead><tbody>";
+				 var listd =data.numcount2;
+				 for(var i=0;i<listd.length;i++)
+				 {
+				      var shenhesj ;
+		              var shenheren ="SYSTEM"
+		              var shenheclyj ;
+		              var shibaijieduan ;
+		              var shenped = "0"; 
+				        if(listd[i].cl02_status =="3"){
+				            shenhesj=listd[i].cl02_time ;
+				            
+				             if(typeof(shenhesj)=="undefined"){ 
+
+                             shenhesj=listd[i].cl02_time; 
+
+                             } 
+				            if(listd[i].cl02_ren =="6"){
+				                shenheren ="BRAIN" ;
+				            } else if(listd[i].cl02_ren=="77"){
+				                shenheren ="phanngoctuan" ;
+				            }else if(listd[i].cl02_ren=="98"){
+				                shenheren ="PHAM THI MINH" ;
+				            }else if(listd[i].cl02_ren=="99"){
+				                shenheren ="VO THI NGOC HANG" ;
+				            }else if(listd[i].cl02_ren=="100"){
+				                shenheren ="TRAN THI THUY VAN" ;
+				            }else if(listd[i].cl02_ren=="8"){
+				                shenheren ="Sam" ;
+				            }
+				             else if(listd[i].cl02_ren == "50"){
+								shenheren = "HUYNH NGUYEN DUONG";
+							} 
+							else if(listd[i].cl02_ren == "51"){
+								shenheren = "DOAN THI HONG YEN";
+							} 
+							else if(listd[i].cl02_ren == "52"){
+								shenheren = "LE HOANG MY";
+							} 
+							else if(listd[i].cl02_ren == "30"){
+								shenheren = "PHAM THI PHUONG THAO";
+							} 
+							else if(listd[i].cl02_ren == "20"){
+								shenheren = "tran van phi";
+							} 
+							else if(listd[i].cl02_ren == "54"){
+								shenheren = "Dinh Trong Hieu";
+							} 
+							else if(listd[i].cl02_ren == "101"){
+								shenheren = "pham anh tuan";
+							} 
+							else if(listd[i].cl02_ren == "32"){
+								shenheren = "Huỳnh Thị Như Thủy";
+							} 
+				            shenheclyj = listd[i].cl02_yj;
+				            shibaijieduan="Thẩm định lần 2"
+				        }
+				     html_s +="<td>"+ listd[i].create_date+"</td>";
+				     html_s +="<td>"+ listd[i].jk_money+"</td>";
+					 html_s +="<td align=''>"+shenheren+"</td>";					
+					 html_s +="<td>"+ shibaijieduan+"</td>";
+                     html_s +="<td>"+shenheclyj+"</td>";
+					 html_s +="<td>"+shenped+"</td>";
+					 html_s +="<td>"+shenhesj+"</td></tr>";
+				 }
+				 html_s +="</tbody></table></div></div></div>";
+				 $("#shib2").html(html_s)
+			 }
+        */
+         /*-----------------第三阶段失败借款记录-----------------------
+			  if(data.numcount3.length>0)
+			 {		
+			     $("#shib3").show();
+				 var html_s="";
+				 html_s +="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='fa fa-reorder'></i>Hồ sơ thẩm định thất bại giai đoạn 3</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='fa fa-angle-down'></i></span></div></div></div>";
+				 html_s +="<div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian vay</th><th>Số tiền vay</th><th>Người thẩm định</th><th>Giai đoạn thất bại</th><th>Lý do thất bại</th><th class='hidden-xs'>Số tiền được duyệt</th><th>Thời gian thẩm định</th></tr></thead><tbody>";
+				 var listd =data.numcount3;
+				 for(var i=0;i<listd.length;i++)
+				 {
+				      var shenhesj ;
+		              var shenheren ="SYSTEM"
+		              var shenheclyj ;
+		              var shibaijieduan ;
+		              var shenped = "0"; 
+				        if(listd[i].cl03_status =="3"){		            
+				            shenhesj=listd[i].cl03_time ;
+				             if(typeof( shenhesj)=="undefined"){ 
+
+                             shenhesj=listd[i].cl03_time; 
+
+                           } 
+				             if(listd[i].cl03_ren =="6"){
+				                shenheren ="BRAIN" ;
+				            } else if(listd[i].cl03_ren=="77"){
+				                shenheren ="phanngoctuan" ;
+				            }else if(listd[i].cl03_ren=="98"){
+				                shenheren ="PHAM THI MINH" ;
+				            }else if(listd[i].cl03_ren=="99"){
+				                shenheren ="VO THI NGOC HANG" ;
+				            }else if(listd[i].cl03_ren=="100"){
+				                shenheren ="TRAN THI THUY VAN" ;
+				            }else if(listd[i].cl03_ren=="8"){
+				                shenheren ="Sam" ;
+				            }
+				            else if(listd[i].cl03_ren == "50"){
+								shenheren = "HUYNH NGUYEN DUONG";
+							} 
+							else if(listd[i].cl03_ren == "51"){
+								shenheren = "DOAN THI HONG YEN";
+							} 
+							else if(listd[i].cl03_ren == "52"){
+								shenheren = "LE HOANG MY";
+							} 
+							else if(listd[i].cl03_ren == "30"){
+								shenheren = "PHAM THI PHUONG THAO";
+							} 
+							else if(listd[i].cl03_ren == "20"){
+								shenheren = "tran van phi";
+							} 
+							else if(listd[i].cl03_ren == "54"){
+								shenheren = "Dinh Trong Hieu";
+							} 
+							else if(listd[i].cl03_ren == "101"){
+								shenheren = "pham anh tuan";
+							} 
+							else if(listd[i].cl03_ren == "32"){
+								shenheren = "Huỳnh Thị Như Thủy";
+							} 
+				            shenheclyj = listd[i].cl03_yj;
+				            shibaijieduan="Thẩm định lần 3"
+				            shenped =listd[i].sjsh_money;
+				        }
+				     html_s +="<td>"+ listd[i].create_date+"</td>";
+				     html_s +="<td>"+ listd[i].jk_money+"</td>";
+					 html_s +="<td align=''>"+shenheren+"</td>";					
+					 html_s +="<td>"+ shibaijieduan+"</td>";
+                     html_s +="<td>"+shenheclyj+"</td>";
+					 html_s +="<td>"+shenped+"</td>";
+					 html_s +="<td>"+shenhesj+"</td></tr>";
+				 }
+				 html_s +="</tbody></table></div></div></div>";
+				 $("#shib3").html(html_s)
+			 }
+        */
+			 /*-----------------成功借款记录-----------------------
+		      if(data.windrsize.length>0)
+			 {
+				 var html_w="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='icon-reorder'></i>Hồ sơ vay thành công</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='icon-angle-down'></i></span></div></div></div><div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Họ tên người thẩm định lần 1</th><th>Thời gian thẩm định 1</th><th>Họ tên người thẩm định lần 2</th><th>Thời gian thẩm định 2</th><th>Họ tên người thẩm định lần 3</th><th>Thời gian thẩm định 3</th><th>Số tiền giải ngân</th><th>Thời gian giải ngân</th><th class='hidden-xs'>Thời gian khách trả vay</th><th class='hidden-xs'>Thời gian trả vay hệ thống</th></tr></thead><tbody>";
+				 var listw=data.windrsize;
+				 for(var i=0;i<listw.length;i++)
+				 {  
+				     var shenheren1 ="SYSTEM";
+				   var shenheren2 ="SYSTEM";
+				   var shenheren3 ="SYSTEM";
+				   if(listw[i].cl_ren =="6"){
+				                shenheren1 ="BRAIN" ;
+				            } else if(listw[i].cl_ren=="77"){
+				                shenheren1 ="phanngoctuan" ;
+				            }else if(listw[i].cl_ren=="98"){
+				                shenheren1 ="PHAM THI MINH" ;
+				            }else if(listw[i].cl_ren=="99"){
+				                shenheren1 ="VO THI NGOC HANG" ;
+				            }else if(listw[i].cl_ren=="100"){
+				                shenheren1 ="TRAN THI THUY VAN" ;
+				            }else if(listw[i].cl_ren=="8"){
+				                shenheren1 ="Sam" ;
+				            }
+				            else if(listw[i].cl_ren == "50"){
+								shenheren1 = "HUYNH NGUYEN DUONG";
+							} 
+							else if(listw[i].cl_ren == "51"){
+								shenheren1 = "DOAN THI HONG YEN";
+							} 
+							else if(listw[i].cl_ren == "52"){
+								shenheren1 = "LE HOANG MY";
+							} 
+							else if(listw[i].cl_ren == "30"){
+								shenheren1 = "PHAM THI PHUONG THAO";
+							}
+							else if(listw[i].cl_ren == "20"){
+								shenheren1 = "tran van phi";
+							}
+							else if(listw[i].cl_ren == "54"){
+								shenheren1 = "Dinh Trong Hieu";
+							}
+							else if(listw[i].cl_ren == "101"){
+								shenheren1 = "pham anh tuan";
+							}
+							else if(listw[i].cl_ren == "32"){
+								shenheren1 = "Huỳnh Thị Như Thủy";
+							}
+				   if(listw[i].cl02_ren =="6"){
+				                shenheren2 ="BRAIN" ;
+				            } else if(listw[i].cl02_ren=="77"){
+				                shenheren2 ="phanngoctuan" ;
+				            }else if(listw[i].cl02_ren=="98"){
+				                shenheren2 ="PHAM THI MINH" ;
+				            }else if(listw[i].cl02_ren=="99"){
+				                shenheren2 ="VO THI NGOC HANG" ;
+				            }else if(listw[i].cl02_ren=="100"){
+				                shenheren2 ="TRAN THI THUY VAN" ;
+				            }else if(listw[i].cl02_ren=="8"){
+				                shenheren2 ="Sam" ;
+				            }
+				            else if(listw[i].cl02_ren == "50"){
+								shenheren2 = "HUYNH NGUYEN DUONG";
+							} 
+							else if(listw[i].cl02_ren == "51"){
+								shenheren2 = "DOAN THI HONG YEN";
+							} 
+							else if(listw[i].cl02_ren == "52"){
+								shenheren2 = "LE HOANG MY";
+							} 
+							else if(listw[i].cl02_ren == "30"){
+								shenheren2 = "PHAM THI PHUONG THAO";
+							}
+							else if(listw[i].cl02_ren == "20"){
+								shenheren2 = "tran van phi";
+							}
+							else if(listw[i].cl02_ren == "54"){
+								shenheren2 = "Dinh Trong Hieu";
+							}
+							else if(listw[i].cl02_ren == "101"){
+								shenheren2 = "pham anh tuan";
+							}
+							else if(listw[i].cl02_ren == "32"){
+								shenheren2 = "Huỳnh Thị Như Thủy";
+							}
+				   if(listw[i].cl03_ren =="6"){
+				                shenheren3 ="BRAIN" ;
+				            } else if(listw[i].cl03_ren=="77"){
+				                shenheren3 ="phanngoctuan" ;
+				            }else if(listw[i].cl03_ren=="98"){
+				                shenheren3 ="PHAM THI MINH" ;
+				            }else if(listw[i].cl03_ren=="99"){
+				                shenheren3 ="VO THI NGOC HANG" ;
+				            }else if(listw[i].cl03_ren=="100"){
+				                shenheren3 ="TRAN THI THUY VAN" ;
+				            }else if(listw[i].cl03_ren=="8"){
+				                shenheren3 ="Sam" ;
+				            }
+				            else if(listw[i].cl03_ren == "50"){
+								shenheren3 = "HUYNH NGUYEN DUONG";
+							} 
+							else if(listw[i].cl03_ren == "51"){
+								shenheren3 = "DOAN THI HONG YEN";
+							} 
+							else if(listw[i].cl03_ren == "52"){
+								shenheren3 = "LE HOANG MY";
+							} 
+							else if(listw[i].cl03_ren == "30"){
+								shenheren3 = "PHAM THI PHUONG THAO";
+							}
+							else if(listw[i].cl03_ren == "20"){
+								shenheren3 = "tran van phi";
+							}
+							else if(listw[i].cl03_ren == "54"){
+								shenheren3 = "Dinh Trong Hieu";
+							}
+							else if(listw[i].cl03_ren == "101"){
+								shenheren3 = "pham anh tuan";
+							}
+							else if(listw[i].cl03_ren == "32"){
+								shenheren3 = "Huỳnh Thị Như Thủy";
+							}
+					 html_w +="<tr><td align=''>"+shenheren1+"</td>";
+					 html_w +="<td align=''>"+listw[i].cl_time+"</td>";
+					 html_w +="<td align=''>"+shenheren2+"</td>";
+					 html_w +="<td align=''>"+listw[i].cl02_time+"</td>";
+				   	 html_w +="<td align=''>"+shenheren3+"</td>";
+					 html_w +="<td align=''>"+listw[i].cl03_time+"</td>";
+					 html_w +="<td>"+listw[i].sjsh_money+"</td>";
+					 html_w +="<td>"+listw[i].fkdz_time+"</td>";
+					 if(listw[i].sfyhw ==1){					 
+					    html_w +="<td>"+listw[i].hk_time +"</td>";   					      
+					 }else {					 
+					     html_w +="<td>Tạm thời chưa trả vay</td>"; 
+					 }
+					
+					 html_w +="<td>"+listw[i].hkyq_time+"</td>";				
+					 html_w +="</tr>";
+				 }
+				 $("#win").html(html_w);
+			 } 
+			 */
+			 	 /*-----------------催收记录-----------------------*/
+		      if(data.cuishouxx.length>0)
+			 {
+				 var html_c="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='icon-reorder'></i>Ghi chú truy nợ</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='icon-angle-down'></i></span></div></div></div><div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Thời gian ghi chú</th><th>ID vay</th><th>Nội dung ghi chú</th><th class='hidden-xs'>Người truy nợ</th></tr></thead><tbody>";
+				 var listc=data.cuishouxx;
+				 for(var i=0;i<listc.length;i++)
+				 {  
+				   	var csr = "SYSTEM";
+					 html_c +="<tr><td align=''>"+listc[i].visitdate+"</td>";
+					 html_c +="<td>"+listc[i].jkjl_id+"</td>";
+					 html_c +="<td>"+listc[i].content+"</td>";
+					 if(listc[i].kefuid == "5001"){
+					    csr ="bui truong giang";
+					 }else if(listc[i].kefuid == "5002"){
+					 	csr ="nguyen hoang vien";
+					 }else if(listc[i].kefuid == "5003"){
+					 	csr ="vo thi thanh hang";
+					 }else if(listc[i].kefuid == "5004"){
+					 	csr ="pham thi ngan trang";
+					 }else if(listc[i].kefuid == "5005"){
+					 	csr ="vu hao hiep";
+					 }else if(listc[i].kefuid == "5006"){
+					 	csr ="hoang thanh nha";
+					 }else if(listc[i].kefuid == "5007"){
+					 	csr ="vu thi hoa";
+					 }else{
+					 	csr =listc[i].kefuid;
+					 }	 
+					 html_c +="<td>"+csr +"</td>";   					      
+					  				
+					 html_c +="</tr>";
+				 }
+				 $("#cscs").html(html_c);
+			 }
+			  /*-----------------olava-----------------------*/
+		     /*
+				 var html_cs="<div class='col-md-12'><div class='widget box'><div class='widget-header'><h4><i class='icon-reorder'></i>Tình hình vay Olava</h4><div class='toolbar no-padding'><div class='btn-group'><span class='btn btn-xs widget-collapse'><i class='icon-angle-down'></i></span></div></div></div><div class='widget-content'><table class='table' style='margin-bottom: 0px;'><thead><tr><th>Số lần thẩm định lần 1 thất bại</th><th>Số lần thẩm định lần 2 thất bại</th><th>Số lần thẩm định lần 3 thất bại</th><th>Số lần vay thành công</th><th>Số lần quá hạn</th><th class='hidden-xs'>Quá hạn chưa trả</th></tr></thead><tbody>";
+				 
+				
+					 html_cs +="<tr><td align=''>"+data.shibai1+"</td>";
+					 html_cs +="<td>"+data.shibai2+"</td>";
+					 html_cs +="<td>"+data.shibai3+"</td>";
+					 html_cs +="<td>"+data.chenggong +"</td>";   					      
+					 html_cs +="<td>"+data.yuqcs +"</td>";   					      
+					 html_cs +="<td>"+data.yqwh +"</td>";     					      
+					  				
+					 html_cs +="</tr>";
+				 
+				 $("#cscsjk").html(html_cs); */
+				 
+			 /*--------个人照片信息 ---------*/
+			 /*--------个人照片信息 ---------*/
+			  var html_p="";
+			   if(data.p1.slice(0,2) == "H5"){
+			  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
+			   		//html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://htmlhtml.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
+			  		//html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://htmlhtml.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
+			   }else{
+			   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
+			       // html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yuenan.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
+			        html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
+			   }
+			 
+
+              /*  if(data.status == "1")
+			 { */
+				 $("#ribid").attr("class","ribbon green");
+				 $("#ribid").html("Đã thẩm định")
+				 $("#ribb_phone").show();
+			/*  }
+			 else
+			 { */
+				//rad_id=rad_id+1;
+				/*  html_p +="<div style='margin-top:20px;'>"
+				 html_p +="<label class='radio-inline'><input name='ph' value='1' type='radio' onclick='radi()'>YES</label>";
+				 html_p +="<label class='radio-inline'><input name='ph' value='0' type='radio' onclick='radi()' checked='checked'>NO</label>";
+				 html_p +="</div>";
+				 $("#ribid").attr("class","ribbon orange");
+				 $("#ribb_phone").show();
+			 } */
+			 
+			  $(".list-group").html(html_p);
+			  $("#reid").val(data.user_id);
+			  $("#i_id").val(data.jk_id);
+			  //评分
+			 // $("#pingfen").html(data.pingfen);
+			 
+	    /*   $("#load_html").hide(); */
+		});
+	}
+ 
+
+ /*-------判断审核状态------*/
+ function radi()
+ {
+	var job=$("input:radio[name='job']:checked").val();
+	var school=$("input:radio[name='school']:checked").val();
+	var con=$("input:radio[name='con']:checked").val();
+	var ph=$("input:radio[name='ph']:checked").val();
+	//alert("job---->"+job+"con---->"+con+"ph-------->"+ph);
+	if(job==0 || con==0 || ph==0||school==0)
+	{
+		document.getElementById("has-sh_end").style.display="none";
+		document.getElementById("nobeco").style.display="block";
+		document.getElementById("has-group").style.display="none";
+	}
+	else if(job==1 || con==1 || ph==1||school)
+	{
+		document.getElementById("has-sh_end").style.display="none";
+		document.getElementById("nobeco").style.display="none";
+		document.getElementById("has-group").style.display="block";
+	}
+	else if(job==null && con==null && ph==null&&school==null)
+	{
+		document.getElementById("nobeco").style.display="none";
+		document.getElementById("has-group").style.display="block";
+		document.getElementById("has-sh_end").style.display="block";
+	}
+ }
+ function radi_end()
+ {
+	 var job=$("input:radio[name='sh_end']:checked").val();
+	 if(job == 1)
+	 {
+		document.getElementById("has-group").style.display="block";
+		 document.getElementById("nobeco").style.display="none";
+	 }
+	 else
+	 {
+		 document.getElementById("has-group").style.display="none";
+		 document.getElementById("nobeco").style.display="block";
+	 }
+ }
+ 
+  function get_zx()
+    {
+	  var reid=GetQueryString("record_id");
+	 window.open("/sdmain/zx/H5CSYNindex.html?user_id="+$("#reid").val()+"&rec_id="+reid);
+	 } 
+	   function open_user(userid)
+   {
+	   window.open("/sdmain/record_detail/user_chenggong.html?record_id=0&userid="+userid);
+   }
+	 function get_gaoji()
+    {
+
+	  loadGetServer("/servlet/current/JBDcms3Action?function=GetGaoji",{},function(data){
+					if(data.error == 1)
+					{
+						window.open("/sdmain/zx/Zaloindex.html?user_id="+$("#reid").val());
+					}
+					else
+					{
+						alert(data.msg);
+					}
+				});
+	 } 
+  $("#load_html").hide();
+  
+   /*  <!--添加或者修改催收备注--> */
+   function add_beiz()
+   {
+	   var select_=$("#tempselect").val();
+	   var ztselect_ = "";
+       if(select_ == 0)
+		{
+			alert("Vui lòng chọn！");
+		}else if(select_ == 1){
+			ztselect_ = "KH gia hạn";
+		}else if(select_ == 2){
+			ztselect_ = "KH hứa thanh toán";
+		}else if(select_ == 3){
+			ztselect_ = "Không liên hệ được KH";
+		}else if(select_ == 4){
+			ztselect_ = "KH đã thanh toán, cần xác nhận";
+		}else if(select_ == 5){
+			ztselect_ = "KH, người thân đều không hợp tác";
+		}else if(select_ == 6){
+			ztselect_ = "Người thân KH không hợp tác";
+		}else if(select_ == 7){
+			ztselect_ = "KH không thể vay thành công lần nữa";
+		}else if(select_ == 8){
+			ztselect_ = "Khác";
+		}   
+	   var reid=GetQueryString("record_id");
+	   
+		   var para={re_id:reid,remark:$("#remark").val(),ztselect:ztselect_};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=Addcuishoubaogao",para,function(data){
+			   if(data.error>0)
+			   {
+				 	
+				   $("#remarkbg").val(data.remark);
+				   $("#ztselect").val(data.cszt);
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }	 
+   function shilian_qr()
+   {
+	   $("#remark_tr").html("Vui lòng xác nhận không thể liên lạc với khách hàng bằng bất cứ phương thức nào?");
+	   $("#msg_content_html").show();
+   }
+   function add_shilian()
+   {
+	   var reid=GetQueryString("record_id");
+	   
+		   var para={re_id:reid,remark:$("#remark").val()};
+		   loadGetServer("/servlet/current/JBDcms2Action?function=Addcuisremarkhshilian",para,function(data){
+			   if(data.error>0)
+			   {
+				  $("#msg_content_html").hide();
+				  document.getElementById("shilian_span").style.display="block";
+				  document.getElementById("shilian_but").style.display="none";
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+  </script>
+<script>
+
+   function call_phone(phone_)
+   {
+	  
+		   var para={phone:phone_};
+		   loadGetServer("/servlet/current/JBDcms3Action?function=DHGSphone",para,function(data){
+			   if(data.error>0)
+			   {
+			   	   alert(data.msg);
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+
+</script>
+  

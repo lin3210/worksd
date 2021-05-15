@@ -1,0 +1,327 @@
+package com.util;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.json.JSONObject;
+
+import org.apache.log4j.Logger;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
+
+import service.bfpay.SignServlet;
+import sun.misc.BASE64Decoder;
+
+import com.RonBao.config.DsfFunction;
+import com.RonBao.util.HttpClientUtil;
+import com.fuiou.model.Payforreq;
+import com.fuiou.model.Qrytransreq;
+import com.service.AotuSDFKService;
+import com.service.AotuTxService;
+import com.thinkive.base.config.Configuration;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.util.StringHelper;
+
+public class SDFKUtil 
+{
+	
+	private static Logger logger = Logger.getLogger(SDFKUtil.class);
+	private static AotuSDFKService aotuSDFKService = new AotuSDFKService();
+	static String url253 = "https://sms.253.com/msg/send";// 应用地址
+	static String un253 = "N4064842";// 账号
+	static String pw253 = "1O9AgpU3Y257ae";// 密码	
+	static String rd253 = "0";// 是否需要状态报告，需要1，不需要0
+	static String ex253 = null;// 扩展码	
+	
+	
+	//富有支付
+	public static void fy_query(DataRow data) throws Exception
+	{
+		 logger.info("[富有支付]：提现富有处理>>>>>>>");
+		
+		 String batchCurrnum =data.getString("orderid");
+		 String checkTime2 =data.getString("checktime2");		
+		 SimpleDateFormat fmtrq2 = new SimpleDateFormat("yyyyMMdd");
+		 SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 //当前时间加1天
+		 Calendar calendar2 = Calendar.getInstance();    
+		 calendar2.setTime(fmtrq2.parse(checkTime2)); 
+         calendar2.add(Calendar.DATE, 1);
+
+		//进行支付状态查询
+    	Qrytransreq queryTrans = new Qrytransreq();
+    	 queryTrans.setVer("1.0");
+    	 queryTrans.setOrderno(batchCurrnum);
+    	 queryTrans.setStartdt(checkTime2);
+    	 queryTrans.setEnddt(fmtrq2.format(calendar2.getTime()));
+    	 queryTrans.setMchntCd(FuyouPay.mchntCd);
+    	 queryTrans.setBusicd("AP01");
+    	 String queryTrans2 =FuyouPay.queryTrans(queryTrans);
+    	 // System.out.println(queryTrans2);
+    	  Document doc;   
+          doc = DocumentHelper.parseText(queryTrans2);   
+          Element root = doc.getRootElement();  
+          Element eResponsecode = root.element("ret");
+          Element eMemo= root.element("memo");
+          logger.info("借款放款状态"+eResponsecode.getTextTrim());
+          //用户 id
+	     String   userid  =data.getString("userid");
+	     //通过用户id 查出银行卡号
+	     DataRow bankInfo= aotuSDFKService.getBankInfo(userid);
+	    
+         DataRow withdraw = new DataRow();
+		 if(eResponsecode.getTextTrim().equals("000000"))
+		 {
+			  Element etrans = root.element("trans");
+	          Element reason= etrans.element("reason");
+	          Element state= etrans.element("state");
+	          Element result= etrans.element("result");
+			if(reason.getTextTrim().equals("交易成功")||reason.getTextTrim().equals("成功")||reason.getTextTrim().equals(":交易受理成功")){ 
+				 withdraw.set("status", 2);
+				 withdraw.set("id", data.getString("id"));
+				 withdraw.set("remarkresult",result.getTextTrim() );
+				 withdraw.set("checktime",new Date() );
+				 aotuSDFKService.updateWithdraw(withdraw);		 
+				 if(data.getString("remark").equals("放款")){
+					
+			         //通过用户借款信息
+			         DataRow jkxx =  aotuSDFKService.getUserJK(userid);
+			         String xmid = jkxx.getString("id");
+			         String investor_id =jkxx.getString("investor_id");
+			         //还款时间		  
+			         Date  date = new Date(); 
+			         Calendar calendar = Calendar.getInstance();  
+			         //还款期限			       
+			         if(jkxx.getString("jk_date").equals("2")){
+			        	 //当前时间加30天
+			        	  calendar.add(Calendar.DATE, 30);		        	
+			         }
+			         if(jkxx.getString("jk_date").equals("1")){
+			        	 //当前时间加15天
+			        	  calendar.add(Calendar.DATE, 15);    	 
+			         }
+			        System.out.println("最终时间："+sf.format(calendar.getTime()));
+			         jkxx.set("fkdz_time", new Date()) ; 
+			         jkxx.set("hkyq_time", sf.format(calendar.getTime())) ; 
+			         jkxx.set("hk_time", sf.format(calendar.getTime())) ; 
+			         jkxx.set("sfyfk", "1");
+			         aotuSDFKService.updateJk(jkxx);
+			         String bankcard =bankInfo.getString("cardno");
+			         bankcard =bankcard.substring(bankcard.length()-4,bankcard.length());
+			    	 DataRow row3 =  new DataRow();	
+					  row3.set("userid", userid);
+					  row3.set("title", "放款到账通知") ;
+					  row3.set("neirong" ,"亲爱的"+bankInfo.getString("cardusername") +
+							               "您申请的借款已经成功发放至您尾数为"+ bankcard+"的银行卡上，请注意银行信息（1-2小时到账）");
+					  row3.set("fb_time", new Date());
+					 aotuSDFKService.insertUserMsg(row3);
+					  String appName ="光速贷";
+					  String userName =bankInfo.getString("username");
+					  userName=userName.substring(0,3);
+					   if(userName.equals("GSD")){
+						   
+					    	appName="光速贷";					    	
+					    }else if(userName.equals("JBD")){	
+					    	
+					    	appName="绿洲闪贷";
+					    } else if(userName.equals("SDX")){	
+					    	
+					    	appName="闪贷侠";
+					    }
+					   
+					  //发送短信					
+				     String msg253 ="【"+appName+"】亲爱的"+bankInfo.getString("cardusername")+ ",您申请的借款已经成功发放至您尾数为"+ bankcard+"的银行卡上，请注意银行信息（1-2小时到账）" ;
+					
+				     String returnString = HttpSender.batchSend(url253, un253, pw253,bankInfo.getString("mobilephone"), msg253, rd253, ex253);  
+				      
+				     //给投资人转账利息（减去20的手续费）加到可用余额（短信提醒）
+					 //得到借款项目 的利息情况						   
+					 String sjsh = aotuSDFKService.getSHMoney(xmid) ;
+					 String sjdz = aotuSDFKService.getSjdz(xmid);					
+					 Double lx = Double.parseDouble(sjsh)-Double.parseDouble(sjdz)-20;
+					
+					 //获取投资人的信息					
+					 DataRow investor =  aotuSDFKService.getBankInfo(investor_id);
+					 DataRow investor2 =  aotuSDFKService.getInvestorInfo(investor_id);
+					 String investorId = investor2.getString("id");
+					 //更新用户的可用余额
+						DataRow addorder = new DataRow();
+				    	int orderpaytype = 2;
+				    	String remark = "投资利息";
+				    	String payNumber = "sd"+System.currentTimeMillis();
+				     
+					    //生成订单
+					    addorder.set("userid", jkxx.getString("investor_id"));
+					    addorder.set("rechargetime", new Date());
+					    addorder.set("rechargetype", 22);//余额充值
+					    addorder.set("rechargemoney", lx);
+					    addorder.set("result", 1);
+					    addorder.set("rzcode", "0000");
+					    addorder.set("paynumber", payNumber);
+					    addorder.set("rechargenumber", payNumber);					   
+					    addorder.set("remark", remark);
+					    addorder.set("ordertype", 1);
+					    addorder.set("rechargeId",jkxx.getString("id"));				  
+					    addorder.set("orderpaytype", orderpaytype);			 
+					    aotuSDFKService.addOrder(addorder);	
+					    investor2.set("usablesum", investor2.getDouble("usablesum")+lx);
+					    //更新流水
+					    double money =lx ;
+					    aotuSDFKService.updateUserJLMoney2(investor2,lx,payNumber ,userid);
+					    String appName2 ="光速贷";
+					    String userName2 =investor2.getString("username");
+						   if(userName2.equals("GSD")){
+						    	appName2="光速贷";					    	
+						    }else if(userName2.equals("JBD")){					    	
+						    	appName2="绿洲闪贷";
+						    } else if(userName2.equals("SDX")){
+						    	
+						    	appName2="闪贷侠";
+						    }
+					    
+					  String msg256 ="【"+appName2+"】亲爱的"+investor.getString("cardusername")+"，您有一笔借款的收益"+lx+"元已转存到财富余额中，借款人为"+bankInfo.getString("cardusername")+"，请注意查收！";
+                      String returnString3 = HttpSender.batchSend(url253, un253, pw253,investor.getString("mobilephone"), msg256, rd253, ex253);  
+					 
+                     //app 添加消息
+                     DataRow row4 =  new DataRow();	
+					  row4.set("userid", investor.getString("userid"));
+					  row4.set("title", "投资收益提醒") ;
+					  row4.set("neirong" ,"【"+appName2+"】亲爱的"+investor.getString("cardusername")+"，您有一笔借款的收益"+lx+"元已转存到财富余额中，借款人为"+bankInfo.getString("cardusername")+"，请注意查收！");
+					  row4.set("fb_time", new Date());
+					 aotuSDFKService.insertUserMsg(row4); 
+					 
+					 
+					    //每投资成功一笔 邀请人得到10元的奖励 
+						//判断用户是否有推荐人，如果有给推荐用户加上10元的奖励
+						  String refferCount =aotuSDFKService.findReffer(investorId);
+						
+						  if(!refferCount.equals("")&&!refferCount.equals(null)){
+							  //查找出推荐账户				
+							  DataRow user3 = aotuSDFKService.getRefferUser(refferCount);  
+							   if(!user3.getString("id").equals(investor2.getString("id"))&&!StringHelper.isEmpty(user3.getString("id"))){//判断推荐人是否为自身并且存在该用户								
+								DataRow addorder2 = new DataRow();
+						    	int orderpaytype2 = 2;
+						    	String remark2 = "推荐用户投资奖励";
+						    	String payNumber2 = "sd"+System.currentTimeMillis();
+							    //生成订单
+							    addorder2.set("userid", user3.getString("id"));
+							    addorder2.set("rechargetime", new Date());
+							    addorder2.set("rechargetype", 56);
+							    addorder2.set("rechargemoney", 10);
+							    addorder2.set("result", 1);
+							    addorder2.set("rzcode", "0000");
+							    addorder2.set("paynumber", payNumber2);
+							    addorder2.set("rechargenumber", payNumber2);					 	 
+							    addorder2.set("remark", remark2);
+							    addorder2.set("ordertype", 1);
+							    addorder2.set("orderpaytype", orderpaytype2);			 
+							    aotuSDFKService.addOrder(addorder2);	
+							    user3.set("usablesum",user3.getDouble("usablesum")+10);//给推荐用户
+							    //更新流水
+							    double money2 =10 ;
+							    aotuSDFKService.updateUserJLMoney(user3, money2,payNumber2 ,investorId);							   
+							   } 
+							   
+						  }			 					  
+				 }else if(data.getString("remark").equals("提现")){
+					 String bankcard =bankInfo.getString("cardno");
+				     bankcard =bankcard.substring(bankcard.length()-4,bankcard.length());
+					 DataRow row3 =  new DataRow();	
+					  row3.set("userid", userid);
+					  row3.set("title", "提现到账通知") ;
+					  row3.set("neirong" ,"亲爱的"+bankInfo.getString("cardusername") +
+				               "您申请的提现"+data.getString("sum")+"已经成功发放至您尾数为"+ bankcard+"的银行卡上，请注意银行信息（1-2小时到账）");
+					  row3.set("fb_time", new Date());
+					  aotuSDFKService.insertUserMsg(row3);	
+					   String userName =bankInfo.getString("username");
+					    userName =userName.substring(0,3);	
+					    String appName ="光速贷";
+					    if(userName.equals("GSD")){
+					    	appName="光速贷";					    	
+					    }else if(userName.equals("JBD")){					    	
+					    	appName="绿洲闪贷";
+					    } else if(userName.equals("SDX")){
+					    	
+					    	appName="闪贷侠";
+					    }					   
+					 //发送短信					
+				     String msg253 ="【"+appName+"】亲爱的"+bankInfo.getString("cardusername") +
+				              "您申请的提现"+data.getString("sum")+"已经成功发放至您尾数为"+ bankcard+"的银行卡上，请注意银行信息（1-2小时到账）" ;
+					 String returnString = HttpSender.batchSend(url253, un253, pw253,bankInfo.getString("mobilephone"), msg253, rd253, ex253);  
+					  
+				 }else if(data.getString("remark").equals("投资还本")){
+					  //投资还本 +利息 到账检测
+					 String bankcard =bankInfo.getString("cardno");
+					  //根据项目的id 找出借款人姓名
+					  String jkUsername = aotuSDFKService.getJKname(data.getString("versoin"));
+				     bankcard =bankcard.substring(bankcard.length()-4,bankcard.length());
+					 DataRow row3 =  new DataRow();	
+					  row3.set("userid", userid);
+					  row3.set("title", "投资还款 ") ;
+					  row3.set("neirong" ,"亲爱的"+bankInfo.getString("cardusername") +
+				               "："+jkUsername+"已将"+data.getString("sum")+"成功还款至您尾数为"+ bankcard+"的银行卡上，请注意银行信息（1-2小时到账）");
+					  row3.set("fb_time", new Date());
+					  aotuSDFKService.insertUserMsg(row3);	
+					   String userName =bankInfo.getString("username");
+					    userName =userName.substring(0,3);	
+					    String appName ="光速贷";
+					    if(userName.equals("GSD")){
+					    	appName="光速贷";					    	
+					    }else if(userName.equals("JBD")){					    	
+					    	appName="绿洲闪贷";
+					    } else if(userName.equals("SDX")){
+					    	
+					    	appName="闪贷侠";
+					    }					   
+					  //发送短信					
+				     String msg253 ="【"+appName+"】亲爱的"+bankInfo.getString("cardusername") +
+				               "："+jkUsername+"已将"+data.getString("sum")+"成功还款至您尾数为"+ bankcard+"的银行卡上，请注意银行信息（1-2小时到账）" ;
+					 String returnString = HttpSender.batchSend(url253, un253, pw253,bankInfo.getString("mobilephone"), msg253, rd253, ex253);
+					 
+				 }
+			} else {
+				
+				if(state.getTextTrim().equals("0")){
+					 withdraw.set("status", 4);
+					 withdraw.set("id", data.getString("id"));
+					 withdraw.set("remarkresult",result.getTextTrim() );
+					 withdraw.set("checktime",new Date() );
+					 aotuSDFKService.updateWithdraw(withdraw);
+				}
+					
+			}
+		 }else if(eResponsecode.getTextTrim().equals("111167")){				 
+			 withdraw.set("status", 6);
+			 withdraw.set("id", data.getString("id"));
+			 withdraw.set("remarkresult",eMemo.getTextTrim() );
+			 aotuSDFKService.updateWithdraw(withdraw);
+			 
+		 }else{			 
+			 withdraw.set("status", 5);
+			 withdraw.set("id", data.getString("id"));
+			 withdraw.set("remarkresult",eMemo.getTextTrim() );
+			 aotuSDFKService.updateWithdraw(withdraw); 
+		 }
+       
+		 
+		
+	}
+	
+	
+	public static void main(String[] args) throws DocumentException {
+//<?xml version="1.0" encoding="UTF-8" standalone="yes"?><qrytransrsp><ret>000000</ret><memo>成功</memo><trans><merdt>20170405</merdt><orderno>sd1491374576833</orderno><accntno>6228481098930864676</accntno><accntnm>彭惠玲</accntnm><amt>68000</amt><entseq></entseq><memo></memo><state>1</state><result>渠道资金到账已复核,交易已发送</result><reason>交易成功</reason></trans></qrytransrsp>
+		  String userName ="JBD2";
+		  userName=userName.substring(0,3);
+		  System.out.println(userName);
+       
+	} 
+		
+}

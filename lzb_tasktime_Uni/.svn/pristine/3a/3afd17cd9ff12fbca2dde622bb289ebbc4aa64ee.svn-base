@@ -1,0 +1,64 @@
+package com.task;
+
+import java.net.HttpURLConnection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import service.encrypt.RSA;
+import service.encrypt.TripleDes;
+import service.util.Base64;
+import service.util.SslConnection;
+import service.util.Strings;
+import service.util.Tools;
+import service.util.Util;
+import service.version2.MsgBean;
+import service.version2.MsgBody;
+
+import com.service.AotuTxService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.connection.Configure;
+import com.thinkive.timerengine.Task;
+import com.util.TxUtil;
+/**
+ * 自动转账task
+ * @author Administrator
+ *
+ */
+public class AotuTxCxTask implements Task
+{
+
+	private static Logger logger = Logger.getLogger(AotuTxCxTask.class);
+	private static AotuTxService aotuTxService = new AotuTxService();
+	public void execute() 
+	{
+		//提现需要查询的数据
+		List<DataRow> list = aotuTxService.getAllTxCxList();
+		for (DataRow dataRow : list) 
+		{
+			try {
+				TxUtil.rb_query(dataRow);//融宝
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.error(e);
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		Configure.getInstance();
+		//提现需要查询的数据
+		List<DataRow> list = aotuTxService.getAllTxCxList();
+		for (DataRow dataRow : list) 
+		{
+			try {
+				TxUtil.rb_query(dataRow);//融宝
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.error(e);
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+input[type="radio"]+label::before {
+	content: "\a0";
+	/*不换行空格*/
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 1em;
+	width: 2em;
+	height: 2em;
+	margin-right: .4em;
+	border-radius: 50%;
+	border: 1px solid #01cd78;
+	text-indent: .15em;
+	line-height: 1;
+}
+
+input[type="radio"]:checked+label::before {
+	background-color: #01cd78;
+	background-clip: content-box;
+	padding: .2em;
+}
+
+input[type="radio"] {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+}

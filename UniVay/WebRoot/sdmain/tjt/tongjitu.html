@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="/sdmain/tjt/echarts.min.js"></script>
+</head>
+<body>
+   
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1600px;height:500px;margin-top:100px;display:block"></div>
+    <div id="main1" style="width: 1600px;height:500px;margin-top:100px;display:none"></div>
+    <div id="main2" style="width: 1600px;height:500px;margin-top:100px;display:none"></div>
+    <div id="main111" style="width: 600px;margin:0 auto;margin-top:50px">
+    <input type="button" style=" font-size: 20px;width:150px;height:50px;margin:auto;" class="btn btn-xs btn-success" onclick="ChangeQB();" value="全部统计列表">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button"  style=" font-size: 20px;width:150px;height:50px;margin:auto;" class="btn btn-xs btn-success" onclick="ChangeJR();" value="金融公司统计列表">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button"  style=" font-size: 20px;width:150px;height:50px;margin:auto;" class="btn btn-xs btn-success" onclick="ChangeDD();" value="典当行统计列表">
+    </div>
+    
+    
+    <div id="main3" style="width: 1600px;height:600px;margin-top:100px;"></div>
+     <script type="text/javascript">
+    function ChangeQB(){
+        document.getElementById("main").style.display = "block";
+        document.getElementById("main1").style.display = "none";
+        document.getElementById("main2").style.display = "none";    
+	}
+    function ChangeJR(){
+        document.getElementById("main").style.display = "none";
+        document.getElementById("main1").style.display = "block";
+        document.getElementById("main2").style.display = "none";      
+	}
+    function ChangeDD(){
+        document.getElementById("main").style.display = "none";
+        document.getElementById("main1").style.display = "none";
+        document.getElementById("main2").style.display = "block";     
+	}
+    
+    
+  </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        option = null;
+		loadGetServer("/servlet/current/JBDcms2Action?function=GetRecordListChg03","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '放款统计列表(总金额)',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['放款总本金','待收本金','未还总金额','总利息','待收利息','逾期总本金','逾期总本息','待收逾期本金','待收逾期本息','总逾期利息','待收逾期利息','未还逾期利息','盈亏金额']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '50%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'总金额(万元)',
+            type:'pie',
+            radius : '80%',
+            center: ['50%', '60%'],
+            data:[
+            
+                {value:data_map.tjttotalFmoney/10000, name:'放款总本金'},
+                {value:data_map.tjttotalCapital/10000, name:'待收本金'},
+                {value:data_map.tjttotalWmoney/10000, name:'未还总金额'},
+                {value:data_map.tjttotalLY/10000, name:'总利息'},
+                {value:data_map.tjttotalDHSInterest/10000, name:'待收利息'},
+                {value:data_map.tjttotalYQZB/10000, name:'逾期总本金'},
+                {value:data_map.tjttotalYQZBJ/10000, name:'逾期总本息'},
+                {value:data_map.tjttotalDSYQZBJ/10000, name:'待收逾期本金'},
+                {value:data_map.tjttotalDSYQZBJLX/10000, name:'待收逾期本息'},
+                {value:data_map.tjttotalOverdueInterest/10000, name:'总逾期利息'},
+                {value:data_map.tjttotalDHSYQLX/10000, name:'待收逾期利息'},
+                {value:data_map.tjttotalWHSYQLX/10000 , name:'未还逾期利息'},
+                {value:data_map.tjttotalYE/10000 , name:'盈亏金额'}
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main1'));
+        option = null;
+		loadGetServer("/servlet/current/JBDcms2Action?function=GetRecordListChg14","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '金融公司统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['放款总本金','待收本金','未还总金额','总服务费','待收服务费','逾期总本金','逾期总本金和服务费','待收逾期本金','待收逾期本金和服务费','总逾期服务费','待收逾期服务费','未还逾期服务费','盈亏金额']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'金融公司(万元)',
+            type:'pie',
+            radius : '80%',
+            center: ['50%', '50%'],
+            data:[
+            
+                {value:data_map.tjttotalFmoney/10000, name:'放款总本金'},
+                {value:data_map.tjttotalCapital/10000, name:'待收本金'},
+                {value:data_map.tjttotalWmoney/10000, name:'未还总金额'},
+                {value:data_map.tjttotalLY/10000, name:'总服务费'},
+                {value:data_map.tjttotalDHSInterest/10000, name:'待收服务费'},
+                {value:data_map.tjttotalYQZB/10000, name:'逾期总本金'},
+                {value:data_map.tjttotalYQZBJ/10000, name:'逾期总本金和服务费'},
+                {value:data_map.tjttotalDSYQZBJ/10000, name:'待收逾期本金'},
+                {value:data_map.tjttotalDSYQZBJLX/10000, name:'待收逾期本金和服务费'},
+                {value:data_map.tjttotalOverdueInterest/10000, name:'总逾期服务费'},
+                {value:data_map.tjttotalDHSYQLX/10000, name:'待收逾期服务费'},
+                {value:data_map.tjttotalWHSYQLX/10000, name:'未还逾期服务费'},
+                {value:data_map.tjttotalYE/10000 , name:'盈亏金额'}
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main2'));
+        option = null;
+		loadGetServer("/servlet/current/JBDcms2Action?function=GetRecordListChg15","",function(data_map){
+        // 指定图表的配置项和数据
+        option = {
+       
+    title : {
+        text: '典当行统计列表',
+        //subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : '15%',
+        y : '20%',
+        data:['放款总本金','待收本金','未还总金额','总利息','待收利息','逾期总本金','逾期总本息','待收逾期本金','待收逾期本息','总逾期利息','待收逾期利息','未还逾期利息','盈亏金额']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'典当行(万元)',
+            type:'pie',
+            radius : '80%',
+            center: ['50%', '50%'],
+            data:[
+            
+                {value:data_map.tjttotalFmoney/10000, name:'放款总本金'},
+                {value:data_map.tjttotalCapital/10000, name:'待收本金'},
+                {value:data_map.tjttotalWmoney/10000, name:'未还总金额'},
+                {value:data_map.tjttotalLY/10000, name:'总利息'},
+                {value:data_map.tjttotalDHSInterest/10000, name:'待收利息'},
+                {value:data_map.tjttotalYQZB/10000, name:'逾期总本金'},
+                {value:data_map.tjttotalYQZBJ/10000, name:'逾期总本息'},
+                {value:data_map.tjttotalDSYQZBJ/10000, name:'待收逾期本金'},
+                {value:data_map.tjttotalDSYQZBJLX/10000, name:'待收逾期本息'},
+                {value:data_map.tjttotalOverdueInterest/10000, name:'总逾期利息'},
+                {value:data_map.tjttotalDHSYQLX/10000, name:'待收逾期利息'},
+                {value:data_map.tjttotalWHSYQLX/10000, name:'未还逾期利息'},
+                {value:data_map.tjttotalYE/10000 , name:'盈亏金额'}
+            ]
+            
+        }
+    ]
+   
+};
+})
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('main3'));
+         option = null;
+        loadGetServer("/servlet/current/JBDcms2Action?function=GetRecordListChg13","",function(data_map){
+        // 指定图表的配置项和数据
+        option2 = {
+    baseOption: {
+        timeline: {
+            // y: 0,
+            axisType: 'category',
+            // realtime: false,
+            // loop: false,
+            autoPlay: false,
+            //currentIndex: 2,
+            playInterval: 1000,
+            // controlStyle: {
+            //     position: 'left'
+            // },
+            data: [
+                '2018-03','2018-04','2018-05','2018-06','2018-07','2018-08','2018-09','2018-10','2018-11','2018-12'
+            ],
+            label: {
+                formatter : function(s) {
+                    return (new Date(s)).getMonth()+1;
+                }
+            }
+        },
+        legend: {
+                        data:['全部', '金融公司', '典当行']
+                    },
+        title: {
+            subtext: '数据统计图'
+        },
+        tooltip: {
+            trigger:'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        calculable: true,
+        grid: {
+            top:80, bottom: 100
+        },
+        xAxis: {
+            'type':'category',
+            'axisLabel':{'interval':0},
+            'data':[
+                '\n放款总本金','\n待收本金','\n未还总金额','\n总利息','\n待收利息','\n逾期总本金','\n逾期总本息','\n待收逾期本金','\n待收逾期本息','\n总逾期利息','\n待收逾期利息','\n未还逾期利息','\n盈亏金额'
+            ],
+            splitLine: {show: false}
+        },
+        yAxis: [
+            {
+                type: 'value',
+                name: '金额（VND）'
+            }
+        ],
+        series: [
+        ]
+    },
+    options: [
+        {
+            series: [
+                {id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[0], data_map.tjttotalCapital10[0],data_map.tjttotalWmoney10[0],data_map.tjttotalLY10[0],data_map.tjttotalDHSInterest10[0],data_map.tjttotalYQZB10[0],data_map.tjttotalYQZBJ10[0],data_map.tjttotalDSYQZBJ10[0],data_map.tjttotalDSYQZBJLX10[0],data_map.tjttotalOverdueInterest10[0],data_map.tjttotalDHSYQLX10[0],data_map.tjttotalWHSYQLX10[0],data_map.tjttotalYE10[0]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[0], data_map.tjttotalCapital11[0],data_map.tjttotalWmoney11[0],data_map.tjttotalLY11[0],data_map.tjttotalDHSInterest11[0],data_map.tjttotalYQZB11[0],data_map.tjttotalYQZBJ11[0],data_map.tjttotalDSYQZBJ11[0],data_map.tjttotalDSYQZBJLX11[0],data_map.tjttotalOverdueInterest11[0],data_map.tjttotalDHSYQLX11[0],data_map.tjttotalWHSYQLX11[0],data_map.tjttotalYE11[0]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[0], data_map.tjttotalCapital12[0],data_map.tjttotalWmoney12[0],data_map.tjttotalLY12[0],data_map.tjttotalDHSInterest12[0],data_map.tjttotalYQZB12[0],data_map.tjttotalYQZBJ12[0],data_map.tjttotalDSYQZBJ12[0],data_map.tjttotalDSYQZBJLX12[0],data_map.tjttotalOverdueInterest12[0],data_map.tjttotalDHSYQLX12[0],data_map.tjttotalWHSYQLX12[0],data_map.tjttotalYE12[0]]}
+            ]
+        },
+        {
+            series: [
+                {id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[1], data_map.tjttotalCapital10[1],data_map.tjttotalWmoney10[1],data_map.tjttotalLY10[1],data_map.tjttotalDHSInterest10[1],data_map.tjttotalYQZB10[1],data_map.tjttotalYQZBJ10[1],data_map.tjttotalDSYQZBJ10[1],data_map.tjttotalDSYQZBJLX10[1],data_map.tjttotalOverdueInterest10[1],data_map.tjttotalDHSYQLX10[1],data_map.tjttotalWHSYQLX10[1],data_map.tjttotalYE10[1]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[1], data_map.tjttotalCapital11[1],data_map.tjttotalWmoney11[1],data_map.tjttotalLY11[1],data_map.tjttotalDHSInterest11[1],data_map.tjttotalYQZB11[1],data_map.tjttotalYQZBJ11[1],data_map.tjttotalDSYQZBJ11[1],data_map.tjttotalDSYQZBJLX11[1],data_map.tjttotalOverdueInterest11[1],data_map.tjttotalDHSYQLX11[1],data_map.tjttotalWHSYQLX11[1],data_map.tjttotalYE11[1]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[1], data_map.tjttotalCapital12[1],data_map.tjttotalWmoney12[1],data_map.tjttotalLY12[1],data_map.tjttotalDHSInterest12[1],data_map.tjttotalYQZB12[1],data_map.tjttotalYQZBJ12[1],data_map.tjttotalDSYQZBJ12[1],data_map.tjttotalDSYQZBJLX12[1],data_map.tjttotalOverdueInterest12[1],data_map.tjttotalDHSYQLX12[1],data_map.tjttotalWHSYQLX12[1],data_map.tjttotalYE12[1]]}
+            ]
+        },
+        {
+            series: [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[2], data_map.tjttotalCapital10[2],data_map.tjttotalWmoney10[2],data_map.tjttotalLY10[2],data_map.tjttotalDHSInterest10[2],data_map.tjttotalYQZB10[2],data_map.tjttotalYQZBJ10[2],data_map.tjttotalDSYQZBJ10[2],data_map.tjttotalDSYQZBJLX10[2],data_map.tjttotalOverdueInterest10[2],data_map.tjttotalDHSYQLX10[2],data_map.tjttotalWHSYQLX10[2],data_map.tjttotalYE10[2]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[2], data_map.tjttotalCapital11[2],data_map.tjttotalWmoney11[2],data_map.tjttotalLY11[2],data_map.tjttotalDHSInterest11[2],data_map.tjttotalYQZB11[2],data_map.tjttotalYQZBJ11[2],data_map.tjttotalDSYQZBJ11[2],data_map.tjttotalDSYQZBJLX11[2],data_map.tjttotalOverdueInterest11[2],data_map.tjttotalDHSYQLX11[2],data_map.tjttotalWHSYQLX11[2],data_map.tjttotalYE11[2]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[2], data_map.tjttotalCapital12[2],data_map.tjttotalWmoney12[2],data_map.tjttotalLY12[2],data_map.tjttotalDHSInterest12[2],data_map.tjttotalYQZB12[2],data_map.tjttotalYQZBJ12[2],data_map.tjttotalDSYQZBJ12[2],data_map.tjttotalDSYQZBJLX12[2],data_map.tjttotalOverdueInterest12[2],data_map.tjttotalDHSYQLX12[2],data_map.tjttotalWHSYQLX12[2],data_map.tjttotalYE12[2]]}
+            ]
+        },
+        {
+            series: [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[3], data_map.tjttotalCapital10[3],data_map.tjttotalWmoney10[3],data_map.tjttotalLY10[3],data_map.tjttotalDHSInterest10[3],data_map.tjttotalYQZB10[3],data_map.tjttotalYQZBJ10[3],data_map.tjttotalDSYQZBJ10[3],data_map.tjttotalDSYQZBJLX10[3],data_map.tjttotalOverdueInterest10[3],data_map.tjttotalDHSYQLX10[3],data_map.tjttotalWHSYQLX10[3],data_map.tjttotalYE10[3]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[3], data_map.tjttotalCapital11[3],data_map.tjttotalWmoney11[3],data_map.tjttotalLY11[3],data_map.tjttotalDHSInterest11[3],data_map.tjttotalYQZB11[3],data_map.tjttotalYQZBJ11[3],data_map.tjttotalDSYQZBJ11[3],data_map.tjttotalDSYQZBJLX11[3],data_map.tjttotalOverdueInterest11[3],data_map.tjttotalDHSYQLX11[3],data_map.tjttotalWHSYQLX11[3],data_map.tjttotalYE11[3]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[3], data_map.tjttotalCapital12[3],data_map.tjttotalWmoney12[3],data_map.tjttotalLY12[3],data_map.tjttotalDHSInterest12[3],data_map.tjttotalYQZB12[3],data_map.tjttotalYQZBJ12[3],data_map.tjttotalDSYQZBJ12[3],data_map.tjttotalDSYQZBJLX12[3],data_map.tjttotalOverdueInterest12[3],data_map.tjttotalDHSYQLX12[3],data_map.tjttotalWHSYQLX12[3],data_map.tjttotalYE12[3]]}
+            ]
+        },
+        {
+            series: [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[4], data_map.tjttotalCapital10[4],data_map.tjttotalWmoney10[4],data_map.tjttotalLY10[4],data_map.tjttotalDHSInterest10[4],data_map.tjttotalYQZB10[4],data_map.tjttotalYQZBJ10[4],data_map.tjttotalDSYQZBJ10[4],data_map.tjttotalDSYQZBJLX10[4],data_map.tjttotalOverdueInterest10[4],data_map.tjttotalDHSYQLX10[4],data_map.tjttotalWHSYQLX10[4],data_map.tjttotalYE10[4]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[4], data_map.tjttotalCapital11[4],data_map.tjttotalWmoney11[4],data_map.tjttotalLY11[4],data_map.tjttotalDHSInterest11[4],data_map.tjttotalYQZB11[4],data_map.tjttotalYQZBJ11[4],data_map.tjttotalDSYQZBJ11[4],data_map.tjttotalDSYQZBJLX11[4],data_map.tjttotalOverdueInterest11[4],data_map.tjttotalDHSYQLX11[4],data_map.tjttotalWHSYQLX11[4],data_map.tjttotalYE11[4]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[4], data_map.tjttotalCapital12[4],data_map.tjttotalWmoney12[4],data_map.tjttotalLY12[4],data_map.tjttotalDHSInterest12[4],data_map.tjttotalYQZB12[4],data_map.tjttotalYQZBJ12[4],data_map.tjttotalDSYQZBJ12[4],data_map.tjttotalDSYQZBJLX12[4],data_map.tjttotalOverdueInterest12[4],data_map.tjttotalDHSYQLX12[4],data_map.tjttotalWHSYQLX12[4],data_map.tjttotalYE12[4]]}
+            ]
+        },
+        {
+            series: [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[5], data_map.tjttotalCapital10[5],data_map.tjttotalWmoney10[5],data_map.tjttotalLY10[5],data_map.tjttotalDHSInterest10[5],data_map.tjttotalYQZB10[5],data_map.tjttotalYQZBJ10[5],data_map.tjttotalDSYQZBJ10[5],data_map.tjttotalDSYQZBJLX10[5],data_map.tjttotalOverdueInterest10[5],data_map.tjttotalDHSYQLX10[5],data_map.tjttotalWHSYQLX10[5],data_map.tjttotalYE10[5]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[5], data_map.tjttotalCapital11[5],data_map.tjttotalWmoney11[5],data_map.tjttotalLY11[5],data_map.tjttotalDHSInterest11[5],data_map.tjttotalYQZB11[5],data_map.tjttotalYQZBJ11[5],data_map.tjttotalDSYQZBJ11[5],data_map.tjttotalDSYQZBJLX11[5],data_map.tjttotalOverdueInterest11[5],data_map.tjttotalDHSYQLX11[5],data_map.tjttotalWHSYQLX11[5],data_map.tjttotalYE11[5]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[5], data_map.tjttotalCapital12[5],data_map.tjttotalWmoney12[5],data_map.tjttotalLY12[5],data_map.tjttotalDHSInterest12[5],data_map.tjttotalYQZB12[5],data_map.tjttotalYQZBJ12[5],data_map.tjttotalDSYQZBJ12[5],data_map.tjttotalDSYQZBJLX12[5],data_map.tjttotalOverdueInterest12[5],data_map.tjttotalDHSYQLX12[5],data_map.tjttotalWHSYQLX12[5],data_map.tjttotalYE12[5]]}
+            ]
+        },
+        {
+            series: [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[6], data_map.tjttotalCapital10[6],data_map.tjttotalWmoney10[6],data_map.tjttotalLY10[6],data_map.tjttotalDHSInterest10[6],data_map.tjttotalYQZB10[6],data_map.tjttotalYQZBJ10[6],data_map.tjttotalDSYQZBJ10[6],data_map.tjttotalDSYQZBJLX10[6],data_map.tjttotalOverdueInterest10[6],data_map.tjttotalDHSYQLX10[6],data_map.tjttotalWHSYQLX10[6],data_map.tjttotalYE10[6]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[6], data_map.tjttotalCapital11[6],data_map.tjttotalWmoney11[6],data_map.tjttotalLY11[6],data_map.tjttotalDHSInterest11[6],data_map.tjttotalYQZB11[6],data_map.tjttotalYQZBJ11[6],data_map.tjttotalDSYQZBJ11[6],data_map.tjttotalDSYQZBJLX11[6],data_map.tjttotalOverdueInterest11[6],data_map.tjttotalDHSYQLX11[6],data_map.tjttotalWHSYQLX11[6],data_map.tjttotalYE11[6]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[6], data_map.tjttotalCapital12[6],data_map.tjttotalWmoney12[6],data_map.tjttotalLY12[6],data_map.tjttotalDHSInterest12[6],data_map.tjttotalYQZB12[6],data_map.tjttotalYQZBJ12[6],data_map.tjttotalDSYQZBJ12[6],data_map.tjttotalDSYQZBJLX12[6],data_map.tjttotalOverdueInterest12[6],data_map.tjttotalDHSYQLX12[6],data_map.tjttotalWHSYQLX12[6],data_map.tjttotalYE12[6]]}
+            ]
+        },
+        {
+            series: [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[7], data_map.tjttotalCapital10[7],data_map.tjttotalWmoney10[7],data_map.tjttotalLY10[7],data_map.tjttotalDHSInterest10[7],data_map.tjttotalYQZB10[7],data_map.tjttotalYQZBJ10[7],data_map.tjttotalDSYQZBJ10[7],data_map.tjttotalDSYQZBJLX10[7],data_map.tjttotalOverdueInterest10[7],data_map.tjttotalDHSYQLX10[7],data_map.tjttotalWHSYQLX10[7],data_map.tjttotalYE10[7]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[7], data_map.tjttotalCapital11[7],data_map.tjttotalWmoney11[7],data_map.tjttotalLY11[7],data_map.tjttotalDHSInterest11[7],data_map.tjttotalYQZB11[7],data_map.tjttotalYQZBJ11[7],data_map.tjttotalDSYQZBJ11[7],data_map.tjttotalDSYQZBJLX11[7],data_map.tjttotalOverdueInterest11[7],data_map.tjttotalDHSYQLX11[7],data_map.tjttotalWHSYQLX11[7],data_map.tjttotalYE11[7]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[7], data_map.tjttotalCapital12[7],data_map.tjttotalWmoney12[7],data_map.tjttotalLY12[7],data_map.tjttotalDHSInterest12[7],data_map.tjttotalYQZB12[7],data_map.tjttotalYQZBJ12[7],data_map.tjttotalDSYQZBJ12[7],data_map.tjttotalDSYQZBJLX12[7],data_map.tjttotalOverdueInterest12[7],data_map.tjttotalDHSYQLX12[7],data_map.tjttotalWHSYQLX12[7],data_map.tjttotalYE12[7]]}
+            ]
+        },
+        {
+            series: [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[8], data_map.tjttotalCapital10[8],data_map.tjttotalWmoney10[8],data_map.tjttotalLY10[8],data_map.tjttotalDHSInterest10[8],data_map.tjttotalYQZB10[8],data_map.tjttotalYQZBJ10[8],data_map.tjttotalDSYQZBJ10[8],data_map.tjttotalDSYQZBJLX10[8],data_map.tjttotalOverdueInterest10[8],data_map.tjttotalDHSYQLX10[8],data_map.tjttotalWHSYQLX10[8],data_map.tjttotalYE10[8]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[8], data_map.tjttotalCapital11[8],data_map.tjttotalWmoney11[8],data_map.tjttotalLY11[8],data_map.tjttotalDHSInterest11[8],data_map.tjttotalYQZB11[8],data_map.tjttotalYQZBJ11[8],data_map.tjttotalDSYQZBJ11[8],data_map.tjttotalDSYQZBJLX11[8],data_map.tjttotalOverdueInterest11[8],data_map.tjttotalDHSYQLX11[8],data_map.tjttotalWHSYQLX11[8],data_map.tjttotalYE11[8]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[8], data_map.tjttotalCapital12[8],data_map.tjttotalWmoney12[8],data_map.tjttotalLY12[8],data_map.tjttotalDHSInterest12[8],data_map.tjttotalYQZB12[8],data_map.tjttotalYQZBJ12[8],data_map.tjttotalDSYQZBJ12[8],data_map.tjttotalDSYQZBJLX12[8],data_map.tjttotalOverdueInterest12[8],data_map.tjttotalDHSYQLX12[8],data_map.tjttotalWHSYQLX12[8],data_map.tjttotalYE12[8]]}
+            ]
+        },
+        {
+            series : [
+            	{id: 'a', name:'全部',type: 'bar', data: [data_map.tjttotalFmoney10[9], data_map.tjttotalCapital10[9],data_map.tjttotalWmoney10[9],data_map.tjttotalLY10[9],data_map.tjttotalDHSInterest10[9],data_map.tjttotalYQZB10[9],data_map.tjttotalYQZBJ10[9],data_map.tjttotalDSYQZBJ10[9],data_map.tjttotalDSYQZBJLX10[9],data_map.tjttotalOverdueInterest10[9],data_map.tjttotalDHSYQLX10[9],data_map.tjttotalWHSYQLX10[9],data_map.tjttotalYE10[9]]},
+                {id: 'b', name:'金融公司' ,type: 'bar', data: [data_map.tjttotalFmoney11[9], data_map.tjttotalCapital11[9],data_map.tjttotalWmoney11[9],data_map.tjttotalLY11[9],data_map.tjttotalDHSInterest11[9],data_map.tjttotalYQZB11[9],data_map.tjttotalYQZBJ11[9],data_map.tjttotalDSYQZBJ11[9],data_map.tjttotalDSYQZBJLX11[9],data_map.tjttotalOverdueInterest11[9],data_map.tjttotalDHSYQLX11[9],data_map.tjttotalWHSYQLX11[9],data_map.tjttotalYE11[9]]},
+                {id: 'c', name:'典当行' ,type: 'bar', data: [data_map.tjttotalFmoney12[9], data_map.tjttotalCapital12[9],data_map.tjttotalWmoney12[9],data_map.tjttotalLY12[9],data_map.tjttotalDHSInterest12[9],data_map.tjttotalYQZB12[9],data_map.tjttotalYQZBJ12[9],data_map.tjttotalDSYQZBJ12[9],data_map.tjttotalDSYQZBJLX12[9],data_map.tjttotalOverdueInterest12[9],data_map.tjttotalDHSYQLX12[9],data_map.tjttotalWHSYQLX12[9],data_map.tjttotalYE12[9]]}
+            ]
+        }
+    ]
+};
+})
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    </script>
+</body>
+</html>

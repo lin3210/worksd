@@ -1,0 +1,64 @@
+package com.service;
+
+
+import org.apache.log4j.Logger;
+
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.JdbcTemplate;
+import com.thinkive.base.jdbc.session.Session;
+import com.thinkive.base.service.BaseService;
+
+public class AccountUserService extends BaseService{
+	private static Logger logger = Logger.getLogger(AccountUserService.class);
+	
+	public int getCreateTimeByDate(String startDate,String endDate){
+		JdbcTemplate template = new JdbcTemplate();
+		String sql=" select count(id) from sd_user where createTime BETWEEN '"+startDate+"' and '"+endDate+"'";
+		return template.queryInt(sql);
+	}
+	
+	/**
+	 * 查询每天认证的人数
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public int getVipCreateTimeByDate(String startDate,String endDate){
+		JdbcTemplate template = new JdbcTemplate();
+		String sql=" select count(id) from sd_user where yhbd =1 and vipCreateTime BETWEEN '"+startDate+"' and '"+endDate+"'";
+		return template.queryInt(sql);
+	}
+	
+	/**
+	 * 新增一条统计记录
+	 * @param tableName
+	 * @param dr
+	 */
+	public void addAcountUser(String tableName,DataRow dr){
+		JdbcTemplate template = new JdbcTemplate();
+		template.insert(tableName, dr);
+	}
+	
+	/**
+	 * 删除当天的记录
+	 * @param time
+	 * @return
+	 */
+	public Boolean deleteAcountByTime(String time){
+		JdbcTemplate template = new JdbcTemplate();
+		Session session = getSession("web");
+		session.beginTrans();
+		try {
+			String sql="delete from sd_accountuser where time='"+time+"'";
+			template.update(sql);
+			session.commitTrans();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+			e.printStackTrace();
+			session.rollbackTrans();
+		}finally{session.close();}
+		return false;
+	}
+}

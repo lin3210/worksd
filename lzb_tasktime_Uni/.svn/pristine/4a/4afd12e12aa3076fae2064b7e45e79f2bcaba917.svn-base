@@ -1,0 +1,68 @@
+package com.task;
+
+import java.net.HttpURLConnection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import service.encrypt.RSA;
+import service.encrypt.TripleDes;
+import service.util.Base64;
+import service.util.SslConnection;
+import service.util.Strings;
+import service.util.Tools;
+import service.util.Util;
+import service.version2.MsgBean;
+import service.version2.MsgBody;
+
+import com.fuiou.model.Qrytransreq;
+import com.service.AotuSDFKService;
+import com.service.AotuTxService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.connection.Configure;
+import com.thinkive.timerengine.Task;
+import com.util.FuyouPay;
+import com.util.SDFKUtil;
+import com.util.TxUtil;
+/**
+ * 自动转账task
+ * @author Administrator
+ *
+ */
+public class AotuSDFKCxTask implements Task
+{
+
+	private static Logger logger = Logger.getLogger(AotuSDFKCxTask.class);
+	private static AotuSDFKService aotuSDFKService = new AotuSDFKService();
+	public void execute() 
+	{
+		//提现需要查询的数据
+		List<DataRow> list = aotuSDFKService.getAllFKCxList();
+		for (DataRow dataRow : list) 
+		{
+			try {
+				SDFKUtil.fy_query(dataRow);//富有
+			} catch (Exception e) {
+				
+				logger.error(e);
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		   //提现需要查询的数据
+				List<DataRow> list = aotuSDFKService.getAllFKCxList();
+				for (DataRow dataRow : list) 
+				{
+				   try {   
+						SDFKUtil.fy_query(dataRow);//富有
+						
+					} catch (Exception e) {	
+						
+						logger.error(e);
+					}
+				}
+	}
+}

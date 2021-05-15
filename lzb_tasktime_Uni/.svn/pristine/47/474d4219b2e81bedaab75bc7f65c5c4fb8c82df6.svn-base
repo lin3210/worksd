@@ -1,0 +1,230 @@
+package com.task;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.service.SDYQService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.timerengine.Task;
+import com.util.SDFKUtil;
+
+public class SDYQTask implements Task  {
+
+	private static Logger logger = Logger.getLogger(SDYQTask.class);
+	private static SDYQService service = new SDYQService();
+	static String url253 = "https://sms.253.com/msg/send";// 应用地址
+	static String un253 = "N4064842";// 账号
+	static String pw253 = "1O9AgpU3Y257ae";// 密码	
+	static String rd253 = "0";// 是否需要状态报告，需要1，不需要0
+	static String ex253 = null;// 扩展码	
+	
+	/**
+	 * 逾期利息计算 (和短信提醒 ）
+	 */
+	@Override
+	public void execute() 
+	{
+		logger.info("开始执行逾期计算："+new Date().toLocaleString());
+		//提现需要查询的数据
+		 List<DataRow> list = service.getAllYQCxList();//获取所有
+		 //获取当前 +3天的时间
+		 SimpleDateFormat fmtrq = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 SimpleDateFormat fmtrq2 = new SimpleDateFormat("yyyy-MM-dd");
+		 
+		 Calendar calendar = Calendar.getInstance();  
+		 calendar.add(Calendar.DATE, 3);	
+		 Calendar calendar2 = Calendar.getInstance(); 	
+		 Date nowDate = new Date() ;
+		 String jkyq_time ;//还款截止时间
+		 double yqannualrate ;//逾期利率
+		 double sjsh_money ;//借款金额
+		 double yuq_lx ; //逾期利息
+		 String mobilePhone ; //手机号
+		 String cardUserName ; //真实姓名 
+		 double yuq_ts ;//逾期天数
+		 String jkid ; //借款id 
+		 String userName ; //用户名
+		 String appName ="光速贷" ; //APP名字
+		 String userId ; //用户id
+		 for (DataRow dataRow : list) 			 
+				{
+					try {
+						//计算逾期利息							
+						jkyq_time =dataRow.getString("hkyq_time");
+					    yqannualrate =Double.parseDouble(dataRow.getString("yqannualrate"));
+						sjsh_money =Double.parseDouble(dataRow.getString("sjsh_money"));
+						yuq_lx =Double.parseDouble(dataRow.getString("yuq_lx"));
+						yuq_ts =Double.parseDouble(dataRow.getString("yuq_ts"));
+						mobilePhone =dataRow.getString("mobilephone") ; //手机号
+					    cardUserName =dataRow.getString("cardusername") ; //真实姓名 	
+					    jkid =dataRow.getString("id");
+					    userId =dataRow.getString("userid");
+					    Date date_01 = fmtrq.parse(jkyq_time);
+					    //用户名
+					    userName =dataRow.getString("username");
+					    userName =userName.substring(0,3);					  
+					    if(userName.equals("GSD")){
+					    	appName="光速贷";					    	
+					    }else if(userName.equals("JBD")){					    	
+					    	appName="绿洲闪贷";
+					    } else if(userName.equals("SDX")){
+					    	
+					    	appName="闪贷侠";
+					    }
+					   
+						//截取截止还款时间的年月日
+						jkyq_time = jkyq_time.substring(0,10);
+						//提前三天提醒用户还款
+						if(jkyq_time.equals(fmtrq2.format(calendar.getTime()))){
+							 //短信提醒用户去还款
+							
+							String msg253 ="【"+appName+"】亲爱的"+cardUserName+"，您的借款将于"+jkyq_time+"到期，还款金额为"+(sjsh_money+yuq_lx)+"元，请及时登录"+appName+"APP还款，谢谢!"; 
+							String returnString = com.util.HttpSender.batchSend(url253, un253, pw253, mobilePhone, msg253, rd253, ex253);						   						   
+						     //手机APP 生成提示消息
+							 DataRow row3 =  new DataRow();	
+							  row3.set("userid", userId);
+							  row3.set("title", "还款提醒") ;
+							  row3.set("neirong" ,"【"+appName+"】亲爱的"+cardUserName+"，您的借款将于"+jkyq_time+"到期，还款金额为"+(sjsh_money+yuq_lx)+"元，请及时登录"+appName+"APP还款，谢谢!");
+							  row3.set("fb_time", new Date());
+							  service.insertUserMsg(row3);	 
+						}
+						//到期当天提醒用户还款
+						if(jkyq_time.equals(fmtrq2.format(calendar2.getTime()))){
+							//短信提醒用户去还款
+							String msg253 ="【"+appName+"】亲爱的"+cardUserName+"，您的借款将于今天到期，还款金额为"+sjsh_money+"元，请及时登录"+appName+"APP还款，谢谢!"; 
+							String returnString = com.util.HttpSender.batchSend(url253, un253, pw253, mobilePhone, msg253, rd253, ex253);
+                            //手机APP 生成提示消息
+							 DataRow row3 =  new DataRow();	
+							  row3.set("userid", userId);
+							  row3.set("title", "还款提醒") ;
+							  row3.set("neirong" ,"【"+appName+"】亲爱的"+cardUserName+"，您的借款将于今天到期，还款金额为"+(sjsh_money+yuq_lx)+"元，请及时登录"+appName+"APP还款，谢谢!");
+							  row3.set("fb_time", new Date());
+							  service.insertUserMsg(row3);	  
+						}
+						//超过还款截止时间（加上逾期利息）
+						if(date_01.before(nowDate)){	
+							
+							 //获取当前逾期利息 和逾期
+							 DataRow jkInfo = new DataRow() ;
+							 jkInfo.set("id",jkid);
+							 jkInfo.set("yuq_ts",yuq_ts+1);
+							 jkInfo.set("yuq_lx",yuq_lx+(sjsh_money+yuq_lx)*yqannualrate/3000);							
+							 //更新借款信息
+							 service.updateJKinfo(jkInfo); 							 							
+						}
+							
+					} catch (Exception e) {
+						
+						logger.error(e);
+					}
+				}
+		logger.info("结束执行逾期计算："+new Date().toLocaleString());
+	}
+	
+	public static void main(String[] args) {
+		
+		logger.info("开始执行逾期计算："+new Date().toLocaleString());
+		//提现需要查询的数据
+		 List<DataRow> list = service.getAllYQCxList();//获取所有
+		 //获取当前 +3天的时间
+		 SimpleDateFormat fmtrq = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 SimpleDateFormat fmtrq2 = new SimpleDateFormat("yyyy-MM-dd");
+		
+		 Calendar calendar = Calendar.getInstance();  
+		 calendar.add(Calendar.DATE, 3);	
+		 Calendar calendar2 = Calendar.getInstance(); 	
+		 Date nowDate = new Date() ;
+		 String jkyq_time ;//还款截止时间
+		 double yqannualrate ;//逾期利率
+		 double sjsh_money ;//借款金额
+		 double yuq_lx ; //逾期利息
+		 String mobilePhone ; //手机号
+		 String cardUserName ; //真实姓名 
+		 double yuq_ts ;//逾期天数
+		 String jkid ; //借款id 
+		 String userName ; //用户名
+		 String appName ="光速贷" ; //APP名字
+		 String userId ; //用户id
+		 for (DataRow dataRow : list) 			 
+				{
+					try {
+						//计算逾期利息							
+						jkyq_time =dataRow.getString("hkyq_time");
+					    yqannualrate =Double.parseDouble(dataRow.getString("yqannualrate"));
+						sjsh_money =Double.parseDouble(dataRow.getString("sjsh_money"));
+						yuq_lx =Double.parseDouble(dataRow.getString("yuq_lx"));
+						yuq_ts =Double.parseDouble(dataRow.getString("yuq_ts"));
+						mobilePhone =dataRow.getString("mobilephone") ; //手机号
+					    cardUserName =dataRow.getString("cardusername") ; //真实姓名 	
+					    jkid =dataRow.getString("id");
+					    userId =dataRow.getString("userid");
+					    Date date_01 = fmtrq.parse(jkyq_time);
+					    //用户名
+					    userName =dataRow.getString("username");
+					    userName =userName.substring(0,3);					  
+					    if(userName.equals("GSD")){
+					    	appName="光速贷";					    	
+					    }else if(userName.equals("JBD")){					    	
+					    	appName="绿洲闪贷";
+					    } else if(userName.equals("SDX")){
+					    	
+					    	appName="闪贷侠";
+					    }
+					   
+						//截取截止还款时间的年月日
+						jkyq_time = jkyq_time.substring(0,10);
+						//提前三天提醒用户还款
+						if(jkyq_time.equals(fmtrq2.format(calendar.getTime()))){
+							 //短信提醒用户去还款
+							
+							String msg253 ="【"+appName+"】亲爱的"+cardUserName+"，您的借款将于"+jkyq_time+"到期，还款金额为"+(sjsh_money+yuq_lx)+"元，请及时登录"+appName+"APP还款，以免影响征信记录，谢谢!"; 
+							//String returnString = com.util.HttpSender.batchSend(url253, un253, pw253, mobilePhone, msg253, rd253, ex253);						   						   
+						     //手机APP 生成提示消息
+							 DataRow row3 =  new DataRow();	
+							  row3.set("userid", userId);
+							  row3.set("title", "还款提醒") ;
+							  row3.set("neirong" ,"【"+appName+"】亲爱的"+cardUserName+"，您的借款将于"+jkyq_time+"到期，还款金额为"+(sjsh_money+yuq_lx)+"元，请及时登录"+appName+"APP还款，以免影响征信记录，谢谢!");
+							  row3.set("fb_time", new Date());
+							  service.insertUserMsg(row3);	 
+						}
+						//到期当天提醒用户还款
+						if(jkyq_time.equals(fmtrq2.format(calendar2.getTime()))){
+							//短信提醒用户去还款
+							String msg253 ="【"+appName+"】亲爱的"+cardUserName+"，您的借款将于今天到期，还款金额为"+sjsh_money+"元，请及时登录"+appName+"APP还款，以免影响征信记录，谢谢!"; 
+						//	String returnString = com.util.HttpSender.batchSend(url253, un253, pw253, mobilePhone, msg253, rd253, ex253);
+                            //手机APP 生成提示消息
+							 DataRow row3 =  new DataRow();	
+							  row3.set("userid", userId);
+							  row3.set("title", "还款提醒") ;
+							  row3.set("neirong" ,"【"+appName+"】亲爱的"+cardUserName+"，您的借款将于今天到期，还款金额为"+(sjsh_money+yuq_lx)+"元，请及时登录"+appName+"APP还款，以免影响征信记录，谢谢!");
+							  row3.set("fb_time", new Date());
+							  service.insertUserMsg(row3);	  
+						}
+						//超过还款截止时间（加上逾期利息）
+						
+						if(date_01.before(nowDate)){	
+							System.out.println("借款时间："+date_01);
+							System.out.println("现在时间"+nowDate);
+							 //获取当前逾期利息 和逾期
+							 DataRow jkInfo = new DataRow() ;
+							 jkInfo.set("id",jkid);
+							 jkInfo.set("yuq_ts",yuq_ts+1);
+							 jkInfo.set("yuq_lx",yuq_lx+(sjsh_money+yuq_lx)*yqannualrate/3000);							
+							 //更新借款信息
+							 service.updateJKinfo(jkInfo); 							 							
+						}
+						
+						
+					} catch (Exception e) {
+						
+						logger.error(e);
+					}
+				}
+		logger.info("结束执行逾期计算："+new Date().toLocaleString());
+	}
+	
+}

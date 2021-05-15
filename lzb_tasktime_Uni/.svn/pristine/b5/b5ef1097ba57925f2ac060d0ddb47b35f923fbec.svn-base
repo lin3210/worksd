@@ -1,0 +1,88 @@
+package com.service;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import sun.security.jca.GetInstance.Instance;
+
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.JdbcTemplate;
+import com.thinkive.base.service.BaseService;
+import com.thinkive.base.util.DateHelper;
+
+public class SDYQService extends BaseService {
+
+	private static Logger logger = Logger.getLogger(DealmakingService.class);
+	
+	public JdbcTemplate getJdbcTemplate() {
+		
+		return getJdbcTemplate("web");
+	}
+	/***
+	 * 借款逾期计算
+	 */
+	public void yqjs()
+	{
+		logger.info("逾期利息计算");
+		JdbcTemplate template = new JdbcTemplate();
+	    Date  investTime = new Date();		
+	    String curdate = DateHelper.formatDate(investTime, "yyyyMMdd");	
+	    
+		//String sql = "";
+		//String id = "select MIN(id) as idmin,MAX(id) as maxid from t_current_invest where DATE_FORMAT(DATE_ADD(investTime,INTERVAL hasDeadline month),'%Y%m%d') = '"+curdate+"' and flag = 0";
+		//DataRow numData = template.queryMap(id);
+		//当前时间加一天  （ 逾期计息时间 过后的第二天的开始计息）
+	    Calendar calendar  =Calendar.getInstance() ; 
+	    //calendar.add(investTime);
+	   
+	    
+	}
+	
+	  public void insertUserMsg(DataRow row)
+	  	{
+	  		getJdbcTemplate().insert(" sd_msg", row);
+	  	}
+	
+	
+	/**
+	 * 获取放款成功还未还款的借款记录
+	 */
+	public List<DataRow> getAllYQCxList()
+	{
+		//获取放款成功还未还款的借款记录
+		String sql = "select s.userid ,s.id,s.yqannualrate , s.sjsh_money , s.hkyq_time ,s.yuq_lx ," +
+				" s.yuq_ts  , u.mobilePhone ,u.username ,b.cardUserName  from " +
+				" sd_new_jkyx s  left join sd_user u on s.userid = u.id left join " +
+				" sd_bankcard b on b.userid =s.userid  where s.sfyhw = 0  and  s.sfyfk =1 ";
+		return getJdbcTemplate().query(sql);
+	}
+	/**
+	 * 更新借款信息
+	 * 
+	 */
+  	public void updateJKinfo(DataRow jkInfo)
+	{
+	
+		getJdbcTemplate().update("sd_new_jkyx", jkInfo, "id", jkInfo.getInt("id"));
+	}
+	
+	/**
+	 * 主测试方法
+	 * author:李磊
+	 */
+	public static void main(String[] args) {
+		//获取当前时间加一天
+		Date  data = new  Date() ;
+		Calendar calendar =  Calendar.getInstance();
+
+		//将日期格式化
+		 String curdate = DateHelper.formatDate(calendar.getTime(), "yyyyMMdd");
+		 System.out.println(curdate) ;
+		 
+		//SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("")
+	}
+}

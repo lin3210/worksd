@@ -1,0 +1,239 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="/indexCms.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                            Danh sách mất liên lạc(失联名单)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcmsAction?function=GetAllUserSlmd"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                                <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        Toàn bộ<!-- 全部 -->
+                                      </option>
+                                      <option value="1">
+                                       Mã khách hàng<!--  用户编号 -->
+                                      </option>
+                                      <option value="2">
+                                       Mã vay <!--  借款编号 -->
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập điều kiện tìm kiếm" >
+		                      </div>
+                              
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                   Tìm kiếm<!--   查询 -->
+			                  </button>
+			                 
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                               Liệt kê DS mất liên lạc(失联名单)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        
+		                         <th>
+		                        Mã khách hàng(用户编号)
+		                        </th>
+		                        <th>
+		                       Mã vay(借款编号)
+		                        </th>
+		                        <th>
+		                      Nội dung ghi chú(备注内容)
+		                        </th>
+		                        <th>
+		                       Số ngày đã quá hạn lúc cho vào ds mất liên lạc(拉入失联名单时的逾期天数)
+		                        </th>
+		                        <th>
+		                       Truy thu ghi chú(备注催收人)
+		                        </th>
+		                        <th>
+		                      Thời gian ghi chú(备注时间)
+		                        </th>
+		                        <th>
+		                       Tìm kiếm thông tin cá nhân(查看个人信息)
+		                        </th>
+		                     
+		                       <!--  <th>
+		                         撤销失联名单 
+		                        </th> -->
+		                        
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>  tin，mỗi trang chứa được<font id="numperpage"></font>   tin，hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+  		
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập điều kiện tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var shenkzt ;
+		  var time = getNowFormatDate();
+		  for(var i=0;i<list.length;i++)
+		  {
+		  	   
+				html_ += "<tr><td>"+list[i].user_id+"</td><td>"+list[i].jkjl_id+"</td><td>"+list[i].content+"</td><td>"+list[i].yuqts+"</td><td>"+list[i].name+"</td><td>"+list[i].visitdate+"</td>";
+				html_ +="<td><button class='btn btn-xs btn-primary'  onclick='chg_user_load("+list[i].jkjl_id+")'>Tìm kiếm thông tin cá nhân</button></td>";
+				/* if(list[i].state == "1"){
+					html_ += "<td><button class='btn btn-xs btn-info' onclick='che_xiao("+list[i].id+","+list[i].user_id+")'>撤销失联名单</button></td>";
+				}else{
+					var name = "";
+					if(list[i].state == "6003"){
+						name="项锡禧";
+					}else if(list[i].state == "6"){
+						name="BRAIN";
+					}else if(list[i].state == "888"){
+						name="LeeJaa";
+					} 
+					html_ += "<td>"+list[i].name+"</td>";
+				}*/
+				html_ +="</tr>";
+		   }
+		  $("#load_data").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+    /* <!--读取用户信息--> */
+   function chg_user_load(id)
+   {
+	   window.open("/sdmain/record_detail/user_chenggongcuishou.html?record_id="+id);
+   }
+    function che_xiao(id_,userid_){
+   		var para={id:id_,userid:userid_};
+		   loadGetServer("/servlet/current/JBDcmsAction?function=CheXiaoSlmd",para,function(data){
+			   if(data.error>0)
+			   {
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+   }
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = strDate + seperator1 + month + seperator1 + year;
+        return currentdate;
+    }
+    
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

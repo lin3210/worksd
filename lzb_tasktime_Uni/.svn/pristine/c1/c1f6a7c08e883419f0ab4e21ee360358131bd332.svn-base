@@ -1,0 +1,115 @@
+package com.service;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.JdbcTemplate;
+import com.thinkive.base.service.BaseService;
+
+/**
+ * 自动提现service
+ * @author Administrator
+ *
+ */
+public class AotuZDSHALLService extends BaseService
+{
+
+	private static Logger logger = Logger.getLogger(AotuZDSHALLService.class);
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return getJdbcTemplate("web");
+	}
+
+	/**
+	 * 获取每日待审核状态的借款信息
+	 */
+	public List<DataRow> getAllSHList()
+	{		
+		String sql = " select id as jkid , userid from  sd_new_jkyx  where  cl_status=0 and jk_type is null    ";
+		
+		return getJdbcTemplate().query(sql);
+	}
+	
+	/**
+	 * 用户成功借款记录
+	 * 
+	 */
+	public Integer getSuccessfulLoanCount(String userid){
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("select count(1) from sd_new_jkyx where  jksfwc =1  and userid = "+userid);		
+		return getJdbcTemplate().queryInt(sb.toString());
+	}
+	
+	/**
+	 * 
+	 * 更新借款记录
+	 * 
+	 */
+	public void updateUserJk(DataRow row) throws Exception {
+		
+		getJdbcTemplate().update("sd_new_jkyx", row, "id", row.getString("id"));
+	}
+	
+	/**
+	 * 审核消息
+	 * 
+	 */
+	  public void insertUserMsg(DataRow row)
+	  	{
+	  		getJdbcTemplate().insert("sd_msg", row);
+	  	}
+	  
+	  public Integer getZmscore(String userid){
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append("select zm_score from sd_zmrz where   userid = "+userid);		
+			return getJdbcTemplate().queryInt(sb.toString());
+		}
+	  public void  updateUserInfo(DataRow row) throws Exception {
+	 		
+	 		getJdbcTemplate().update("sd_user", row, "id", row.getString("id"));
+	 	}
+	  public Integer getTonghuats(String userId){
+	 		StringBuffer sb = new StringBuffer();
+	 		sb.append("select count(1) from sd_tonghuajl where  userid = ");
+	 		sb.append(userId);
+	 		return getJdbcTemplate().queryInt(sb.toString());
+	 	}
+	  
+	  public Integer getLxThts(String userid ,String phone){
+	 		StringBuffer sb = new StringBuffer();
+	 		sb.append("select count(*) from sd_tonghuajl where userid ="+userid+" and peer_number='"+phone +"'"  ); 		
+	 		return getJdbcTemplate().queryInt(sb.toString());
+	 	}
+ 
+	  public DataRow getAllZMSHList(String userid){
+			
+		   String sql = "select p.contactPhone ,p.contactPhone02 from   sd_personjk p where  userId ="+userid;
+			return getJdbcTemplate().queryMap(sql);
+		}
+	  public DataRow getUserZmfs(String  userid ){			
+		    StringBuffer sb = new StringBuffer();
+			sb.append("select * from sd_zmrz where successjg='true'  and userid ="+userid );
+			
+			return getJdbcTemplate().queryMap(sb.toString());
+		}
+	  public String getUserZt(String userid){
+			
+			String sql ="select heihu_zt from sd_user where id ="+userid ;
+			return getJdbcTemplate().queryString(sql);
+
+		}
+	  
+	  public DataRow getPersonYdInfo(String  userid)
+		{
+		 
+			String sql = "select orderid ,idnumber,loanplatformcount,loanlastmodifiedtime,repaymentplatformcount ,repaymenttimescount ,totaltrackcount from sduser_portrait  where  userid = " +userid  +" and smrenzhen =1 order by lasttracktime desc limit 1  ";		
+			
+			
+			return getJdbcTemplate().queryMap(sql);
+		}
+	  
+}

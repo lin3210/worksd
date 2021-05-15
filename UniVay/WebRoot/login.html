@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+   	 <title>Ocean login</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+   
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/login.css" rel="stylesheet" type="text/css" />
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+        <link href="font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE]>
+      <link href="fontawesome-4.2.0/css/font-awesome-ie7.min.css" rel="stylesheet" />
+     <![endif]-->
+    <!--[if IE 8]>
+      <link href="assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700'
+    rel='stylesheet' type='text/css'>-->
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/validation/jquery.validate.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/nprogress/nprogress.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/login.js"></script>
+    <script type="text/javascript" src="/assets/js/json.js"></script>
+  </head>
+</head>
+  
+<body class="login" style="background-image: url(/assets/img/bjtbody.jpg);background-size:100% 100%;">
+    <div class="logo" style="margin-top: 10%;    opacity: .85;">
+    <strong>Hệ thống quản lý(管理系统)</strong>
+    <div class="box">
+      <div class="content">
+        <form class="form-vertical login-form" action="indexCms.html" method="post">
+          <h3 class="form-title">
+            Đăng nhập（登录）
+          </h3>
+          <div class="form-group">
+            <div class="input-icon">
+              <i class="icon-user">
+              </i>
+              <input type="text" id="username" name="username" class="form-control" placeholder="Số tài khoản(账号)" autofocus="autofocus" data-rule-required="true" data-msg-required="Số tài khoản."/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-icon">
+              <i class="icon-lock">
+              </i>
+              <input type="password" id="password" name="password" class="form-control" placeholder="mật khẩu(密码)" data-rule-required="true" data-msg-required="mật khẩu."/>
+            </div>
+          </div>
+          <div id="error_div" style="display: none;">              
+  
+	          <div class="form-group">
+	          	<div class="input-icon">
+	              <label for="password" generated="true" class="has-error help-block pull-left" id="error_value" style="color: darkred;">请输入密码.</label>
+	            </div>
+	          </div>
+	          <div>&nbsp;</div>
+          </div>
+          <div class="form-actions">
+            <label class="checkbox pull-left">
+            </label>
+            <button type="button" class="submit btn btn-primary pull-right" onclick="submit_login()">
+                                       Đăng nhập（登录）
+              <i class="fa fa-angle-right">
+              </i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+   <!--  <div class="single-sign-on">
+      <span>
+        or
+      </span>
+      <button class="btn btn-facebook btn-block" onclick="ewm_login()">
+        <i class="icon-facebook">
+        </i>
+                微信登录
+      </button>
+      
+      <button class="btn btn-twitter btn-block">
+        <i class="icon-twitter">
+        </i>
+        QQ登录
+      </button>
+    </div> -->
+    
+<div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>二维码登录</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body">
+					   <img width="250px" id="ewm_src" src=""/>
+					   <p style="color: coral;font-size: 16px;" style="display: none;" id="loading_ewm"></p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_html').hide()">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+  </body>
+</html>
+<script type="text/javascript">  
+  
+        function myBrowser(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1;
+    if (isOpera) {
+        return "Opera"
+    }; //判断是否Opera浏览器
+    if (userAgent.indexOf("Firefox") > -1) {
+        return "FF";
+    } //判断是否Firefox浏览器
+    if (userAgent.indexOf("Chrome") > -1){
+  return "Chrome";
+ }
+    if (userAgent.indexOf("Safari") > -1) {
+        return "Safari";
+    } //判断是否Safari浏览器
+    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+        return "IE";
+    }; //判断是否IE浏览器
+}
+/* //以下是调用上面的函数
+var mb = myBrowser();
+if ("IE" == mb) {
+    alert("我是 IE");
+}
+if ("FF" == mb) {
+    alert("我是 Firefox");
+}
+if ("Chrome" == mb) {
+    alert("我是 Chrome");
+}
+if ("Opera" == mb) {
+    alert("我是 Opera");
+}
+if ("Safari" == mb) {
+    alert("我是 Safari");
+}else {
+	alert("我是 xx");
+} */
+    </script>
+<script>
+   document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+             if(e && e.keyCode==13){ // enter 键
+                 submit_login();
+            }
+        }; 
+	
+	function submit_login()
+	{
+	  	var mb = myBrowser();
+	  	var aa =1;
+	    if ("Chrome" == mb) {
+    		aa =1;		
+    	}
+	    $("#error_value").html("");
+		$("#error_div").hide();
+		if($("#username").val()==""||$("#password").val()=="")
+		{
+			$("#error_value").html("Tài khoản và mật khẩu không được để trống");
+			$("#error_div").show();
+		}
+		loadGetServer("/servlet/current/JBDcmsAction?function=loginCms",{phone:$("#username").val(),pwd:$("#password").val(),code:aa},function(data){
+			
+			  if(data.code!=0)
+			  {
+			  	$("#error_value").html(data.error);
+			    $("#error_div").show();
+			  }
+			  else
+			  {
+			  	window.location.href = "/indexCms.html";
+			  }
+		}) 
+		
+	}
+	
+	function ewm_login()
+	{
+		loadGetServer("/tzms/login/ewmLogin",{},function(data){
+			
+			  if(data!=null)
+			  {
+			  	$("#msg_content_html").show();
+			    $("#ewm_src").attr("src",data.url);
+			    var t_ = data.ticket
+			    var t = window.setInterval(function(){
+			    	
+			    	loadGetServer("/tzms/login/getewmLoginStatus",{t:t_},function(data){
+			    	     	
+			    		 if(data==0)
+			    		 {
+			    		 	  t = window.clearInterval(t);
+			    		 	  $("#loading_ewm").html("Đăng nhập thành công");
+			    		 	  loadGetServer("/tzms/index",{},function(data){
+			    		 	  	  if(data.code==0){window.location.href="/indexCms.html"}
+			    		 	  })
+			    		 }
+			    	})
+			    	
+			    },2000)
+			  }
+		})
+	}
+	
+	
+</script>

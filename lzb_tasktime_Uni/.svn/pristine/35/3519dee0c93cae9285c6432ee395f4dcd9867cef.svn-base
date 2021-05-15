@@ -1,0 +1,95 @@
+package com.task;
+
+import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import service.encrypt.RSA;
+import service.encrypt.TripleDes;
+import service.util.Base64;
+import service.util.SslConnection;
+import service.util.Strings;
+import service.util.Tools;
+import service.util.Util;
+import service.version2.MsgBean;
+import service.version2.MsgBody;
+
+import com.service.AotuTHTSSHService;
+import com.service.AotuTxService;
+import com.service.AotuZMSHService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.connection.Configure;
+import com.thinkive.timerengine.Task;
+import com.util.TxUtil;
+/**
+ * 自动审核借款
+ * @author Administrator
+ *
+ */
+public class AotuTHTSSHTask implements Task
+{
+
+	private static Logger logger = Logger.getLogger(AotuTHTSSHTask.class);
+	private static AotuTHTSSHService aotuTHTSSHService = new AotuTHTSSHService();
+	public void execute() 
+	{
+		//查询所有芝麻分小于580分 正在初步审核状态中的借款项目
+		List<DataRow> list = aotuTHTSSHService.getTHTSSHList();
+		for (DataRow dataRow : list) 
+		{
+			try {				
+			
+				String userid =	dataRow.getString("userid");//借款用户id
+			    String jkid = dataRow.getString("jkid"); //借款id ; 
+				//根据用户ID 判断该用户是否芝麻信用分小于580		
+			    int tonghuajilu  = aotuTHTSSHService.getTonghuats(userid);
+			    if(tonghuajilu < 800){
+				    //根据用户id 查询出用户的通话记录条数
+			    	//更新借款项目
+			    	Date  date = new Date();
+					Calendar calendar =Calendar.getInstance();
+					SimpleDateFormat fmtrq  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
+			 		DataRow row = new DataRow() ;
+					row.set("id", jkid);
+					row.set("cl_status","3");
+					row.set("cl_yj","通话记录条数过少。");	
+					row.set("cl_ren",161);				
+					row.set("cl_time",fmtrq.format(calendar.getTime()));
+					aotuTHTSSHService.updateUserJk(row);
+					
+					//更新用户信息（将用户拉黑）
+					DataRow row2 = new DataRow() ;
+					row2.set("id", userid );
+					row2.set("heihu_zt",1);
+					aotuTHTSSHService.updateUserInfo(row2);
+			     	//更新消息	
+					DataRow row3 =  new DataRow();	
+				    row3.set("userid", userid);
+				    row3.set("title", "审核通知") ;
+				    row3.set("neirong" ,"抱歉，本次审核未通过，可能由以下一个或多个原因造成：" +
+				    		"1.还款能力不足，负债比过高；2.工作和收入稳定性不足；3.信用记录不良；4.未按要求提供资料或提供的资料不够详尽；5.系统综合评分不足。");
+				    row3.set("fb_time", new Date());
+				    aotuTHTSSHService.insertUserMsg(row3);
+			   }	
+			} catch (Exception e) {
+				
+				logger.error(e);
+			}
+		}
+		
+	
+	}
+    
+	public static void main(String[] args) 
+	{
+		
+						
+	}
+	
+	
+}

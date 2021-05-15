@@ -1,0 +1,409 @@
+
+<!-- <script type="text/javascript" src="/main/js/date_time.js"></script> -->
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+<div class="container">
+	<div class="crumbs">
+		<ul id="breadcrumbs" class="breadcrumb">
+			<li>
+			<i class="icon-home">
+			</i>
+			<a href="index.html">
+			</a>
+			</li>
+			<li class="current">
+			<a href="pages_calendar.html" title="">
+		          后台用户管理
+			</a>
+			</li>
+		</ul>
+	</div>
+	
+    <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        Điều kiện tìm kiếm
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+		                
+					<div>
+						<input type="hidden" id="cupage" value="1"/>
+						<input type="hidden" id="total" value="1"/>
+						<input type="hidden" id="formurl" value="/servlet/role/UserAction?function=OLAVAGetUserList"/>
+						<input type="hidden" id="starTime" value=""/>
+						<input type="hidden" id="endTime" value=""/>
+					</div>
+					<div class="form-group">
+					              <div class="col-md-4" style="width:150px;">
+					                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >   
+					                      <option value="0">
+					                                                            全部                  
+					                      </option>
+					                     <option value="1">
+					                                                         编号
+					                      </option>
+					                      <option value="2">
+					                                                     电话号码
+					                      </option>
+					                   </select>
+					              </div>
+					              <div class="col-md-1" style="width:200px;">
+					          <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+					        </div>
+					     <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+					                                   查询
+					     </button>
+					   </div>
+	        </div>
+           </div>
+         </div>
+     </div>
+     
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-md-12">
+			<div class="widget box">
+				<div class="widget-header">
+					<h4>
+					<i class="fa fa-reorder">
+					</i>
+		                                 系统用户管理列表
+					</h4>
+					<div class="toolbar no-padding">
+						<div class="btn-group">
+							<span class="btn btn-xs" onclick="show_div_add()"><i class="icon-plus"></i> 添加新用户</span>
+						</div>
+					</div>
+				</div>
+				<div class="widget-content" >
+					<div class="" style="min-height: 550px;">
+						<table class="table table-hover table-striped table-bordered table-highlight-head">
+						<thead>
+						<tr>
+							<th>
+		                         用户标识
+							</th>
+							<th style=" font-weight: bold;">
+		                         用户名称
+							</th>
+							<th style=" font-weight: bold;">
+		                         电话号码
+							</th>
+							<th>
+		                          所在角色
+							</th>
+							<th>
+		                          登录次数
+							</th>
+							<th>
+		                          最后登录时间
+							</th>
+							<th style=" font-weight: bold;">
+		                          用户状态
+							</th>
+							<th>
+		                          操作
+							</th>
+						</tr>
+						</thead>
+						<tbody id="load_data">
+						</tbody>
+						</table>
+					</div>
+					
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>-修改密码</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body" style="padding: 40px;">
+					<label class="col-md-0 control-label" style="padding-top:5px;">
+	                                              新密码：
+					</label>
+					<div class="col-md-5">
+						<input class="form-control input-width-xlarge" maxlength="15" onkeydown="if($(this).val()!=''){$('#msg_pass').hide()}"  id="new_pass" type="password" placeholder="输入新的管理密码" style="display: block; ">
+						<label id="msg_pass" generated="true" class="has-error help-block" style="display: none;color: #a94442;"></label>
+					</div>
+					<input type="hidden" id="hide_user_id" value="" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="update_password()">确认</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_html').hide()">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div id="add_user_manage" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#add_user_manage').hide()">×</button>
+				<h4 class="modal-title">添加或修改用户</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bootbox-body" style="height: 290px;">
+					<div class="col-md-12">
+						<div class="widget box">
+							<div class="widget-header">
+							</div>
+							<div class="widget-content" style="padding: 15px;">
+								<form class="form-horizontal row-border" >
+									<input type="hidden" id="update_user_id" />
+									<div class="form-group">
+										<label class="col-md-3 control-label">用户名称：</label>
+										<div class="col-md-9">
+											<input type="text" name="req1" id="add_user_name" class="form-control required">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">用户密码：</label>
+										<div class="col-md-9">
+											<input type="password" name="email1" id="add_user_pwd" class="form-control required ">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">手机号码：</label>
+										<div class="col-md-9">
+											<input type="text" name="url1" id="add_user_phone" class="form-control required ">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">用户编号：</label>
+										<div class="col-md-9">
+											<input type="text" name="bh1" id="add_user_bh" class="form-control required ">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">用户状态：</label>
+										<div class="col-md-9">
+											<label class="checkbox">
+					                          <input type="checkbox" id="add_user_state" value="">
+					                                                                 是否禁用
+					                        </label>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div id="add_btn_user">
+					<button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_user_manage_f()">确认</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_user_manage').hide()">关闭</button>
+				</div>
+				<div id="update_btn_user" style="display: none;">
+				    <button data-bb-handler="success" type="button" class="btn btn-success" onclick="update_user_info(0)">确认</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_user_manage').hide()">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script>
+	 $(function(){
+	 		load_data();
+	   		
+     });
+	$("#btn-load").on("click", function() {
+			var a = $(this);
+			a.button("loading");
+			$("#cupage").val("1");
+			load_data();
+		    });
+	//$("#container").addClass("sidebar-closed");
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  //alert("请输入查询数据");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var para={curPage:$("#cupage").val(),type:0,temp:tempsele,tempvl:tempval};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr><td state="+list[i].state+">"+list[i].user_id+"</td><td>"+list[i].name+"</td><td>"+list[i].phone+"</td>";
+				html_ += "<td>"+list[i].rolename+"</td><td>"+list[i].login_times+"</td>";
+				var state_value = list[i].state=="1"?"<span class='label btn-success'>正常</span>":"<span class='label btn-danger'>禁用</span>";
+				html_ += "<td>"+list[i].last_time+"</td><td>"+state_value+"</td><td><span class='label label-success' onclick=update_user_info(1,this)>编辑</span> | <a data-toggle='modal' href='#myModal1'><span class='label label-info' onclick=update_password_msg('"+list[i].user_id+"')>修改密码</span></a></td>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   function update_password_msg(user_id)
+   {
+   	  $("#hide_user_id").val(user_id);
+   	  $("#new_pass").val("");
+   	  $("#msg_content_html").show();
+   }
+   
+   function update_password()
+   {
+   	  if($("#new_pass").val()=="")
+   	  {
+   	  	 $("#msg_pass").html("密码不能为空").show();
+   	  }
+	  else
+	  {
+		  var password=$("#new_pass").val();
+		  var user_id=$("#hide_user_id").val();
+		   var par = {user_id:user_id,pwd:password};
+	   	   loadGetServer("/servlet/role/UserAction?function=OLAVAUpdateUserPwd",par,function(data){
+	   	   	   if(data.code==null)
+	   	   	   {
+	   	   	   	   alert("修改成功");
+				  $("#msg_content_html").hide();
+	   	   	   }
+	   	   	   else
+	   	   	   {
+	   	   	   	   alert("修改失败");
+	   	   	   }
+	   	   });
+	  }
+   }
+   
+   
+   
+   function add_user_manage_f()
+   {
+   	   
+   	   var state = $("#add_user_state").is(':checked');
+   	   var add_user_name = $("#add_user_name").val();
+   	   var add_user_phone = $("#add_user_phone").val();
+   	   var add_user_pwd = $("#add_user_pwd").val();
+   	   var add_user_bh = $("#add_user_bh").val();
+   	   
+   	   if(add_user_name.length==0||add_user_phone.length==0||add_user_pwd.length==0)
+   	   {
+   	   	   alert("请填写完整的参数");
+   	   	   return;
+   	   }
+   	   
+   	   if(state==true){state="0"}else{state="1"}
+   	   var par = {user_name:add_user_name,password:add_user_pwd,phone:add_user_phone,bh:add_user_bh,state:state};
+   	   loadGetServer("/servlet/role/UserAction?function=OLAVAAddUser",par,function(data){
+   	   	   if(data!=null)
+   	   	   {
+   	   	   	   alert("添加成功");
+			   $("#content").load($("#current_url_value").val());
+   	   	   }
+   	   	   else
+   	   	   {
+   	   	   	   alert("添加失败");
+   	   	   }
+   	   })
+   }
+   
+   function update_user_info(type,obj)
+   {
+   	    if(type==1)
+   	    {
+   	       $("#add_user_name").val($(obj).parent().parent().find("td").eq(1).html());
+   	       $("#add_user_phone").val($(obj).parent().parent().find("td").eq(2).html());
+   	       $("#add_user_pwd").parent().parent().hide();
+   	       $("#update_user_id").val($(obj).parent().parent().find("td").eq(0).html());
+   	       var state = $(obj).parent().parent().find("td").eq(0).attr("state");
+   	       if(state==1)
+   	       {
+   	       	 $("#add_user_state").removeAttr("checked");
+   	       }
+   	       else
+   	       {
+   	       	 $("#add_user_state").attr("checked","checked");
+   	       }
+   	       $("#add_btn_user").hide();
+   	       $("#update_btn_user").show();
+   	       $("#add_user_manage").show();
+   	    }
+   	    else
+   	    {
+    	   var state = $("#add_user_state").is(':checked');
+	   	   var add_user_name = $("#add_user_name").val();
+	   	   var add_user_phone = $("#add_user_phone").val();
+	   	   var add_user_pwd = $("#add_user_pwd").val();
+	   	   if(add_user_name.length==0||add_user_phone.length==0)
+	   	   {
+	   	   	   alert("请填写完整的参数");
+	   	   	   return;
+	   	   }
+	   	   if(state==true){state="0"}else{state="1"}
+	   	   var par = {user_name:add_user_name,user_id:$("#update_user_id").val(),phone:add_user_phone,state:state};
+	   	   loadGetServer("/servlet/role/UserAction?function=OLAVAUpdateUser",par,function(data){
+	   	   	   if(data!=null)
+	   	   	   {
+	   	   	   	   alert("修改成功");
+				   $("#content").load($("#current_url_value").val());
+	   	   	   }
+	   	   	   else
+	   	   	   {
+	   	   	   	   alert("修改失败");
+	   	   	   }
+	   	   })
+   	    }
+   }
+   
+   function show_div_add()
+   {
+   	 $("#add_user_name").val("");
+   	 $("#add_user_phone").val("");
+   	 $("#add_user_state").removeAttr("checked");
+   	 $("#add_user_pwd").val(""); 
+   	 $("#add_user_pwd").parent().parent().show();
+   	 $("#add_user_manage").show();
+   	 $("#add_btn_user").show();
+   	 $("#update_btn_user").hide();
+   	 
+   }
+  
+   
+   
+</script>

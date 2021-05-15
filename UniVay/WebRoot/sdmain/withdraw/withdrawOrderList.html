@@ -1,0 +1,261 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               放款订单列表
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                        筛选条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/tzms/withOrder/getWinBankCardList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        全部
+                                      </option>
+                                      <option value="1">
+                                         用户编号
+                                      </option>
+                                      <option value="2">
+                                        真实姓名
+                                      </option>
+                                      <option value="3">
+                                        手机号码
+                                      </option>
+                                      <option value="4">
+                                        入账银行卡
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="请输入查询条件" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              到账时间:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              到账状态:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="dzst">
+                                  <option value="0">
+                                    --请选择--
+                                  </option>
+                                  <option value="1">
+                                    处理中
+                                  </option>
+                                  <option value="2">
+                                    交易成功
+                                  </option>
+                                  <option value="3">
+                                    交易失败
+                                  </option>
+                                </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="加载中...">
+			                                     查 询
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                 放款订单列表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          用户编号
+		                        </th>
+		                        <th>
+		                          用户姓名
+		                        </th>
+		                        <th>
+		                          手机号码
+		                        </th>
+		                        <th>
+		                          借款编号
+		                        </th>
+		                        <th>
+		                          交易金额
+		                        </th>
+		                        <th>
+		                          创建时间
+		                        </th>
+                                <th>
+		                          入账银行卡
+		                        </th>
+                                <th>
+		                          银行卡名称
+		                        </th>
+                                <th>
+		                          到账时间
+		                        </th>
+                                <th>
+		                          订单编号
+		                        </th>
+                                <th>
+		                          订单反馈
+		                        </th>
+                                <th>
+		                          订单状态
+		                        </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("请输入查询数据");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,dzst:$("#dzst").val()};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr><td>"+list[i].userid+"</td><td>"+list[i].name+"</td><td>"+list[i].cellphone+"</td><td>"+list[i].recordid+"</td><td>"+list[i].sum+"</td><td>"+list[i].applytime+"</td><td>"+list[i].bankid+"</td><td>"+list[i].bankname+"</td>";
+				if(list[i].checktime == null)
+				{
+					html_ +="<td>暂无到账时间</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].checktime+"</td>";
+				}
+				html_ +="<td>"+list[i].orderid+"</td>";
+				if(list[i].remark == null)
+				{
+					html_ +="<td>无反馈信息</td>"
+				}
+				else
+				{
+					html_ +="<td>"+list[i].remark+"</td>"
+
+				}
+				if(list[i].status == 2)
+				{
+					html_ +="<td>已完成</td>";
+				}
+				else if(list[i].status == 4 || list[i].status == 6)
+				{
+					html_ +="<td>正在处理</td>";
+				}
+				else if(list[i].status == 5)
+				{
+					html_ +="<td>交易失败</td>";
+				}
+				html_ +="</tr>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			$("#hkst").val(data.hkstat);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>人人闪贷后台业务管理系统</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+      <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+	<!--
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+    <link href="/assets/css/date_css/dateRange.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="/assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="/plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="/plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.tooltip.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.resize.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.time.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/flot/jquery.flot.growraf.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/moment.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/daterangepicker/daterangepicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/blockui/jquery.blockUI.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/fullcalendar/fullcalendar.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/jquery.noty.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/layouts/top.js">
+    </script>
+    <script type="text/javascript" src="/plugins/noty/themes/default.js">
+    </script>
+    <script type="text/javascript" src="/plugins/uniform/jquery.uniform.min.js">
+    </script>
+    <script type="text/javascript" src="/plugins/select2/select2.min.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/app.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/plugins.form-components.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/page.js">
+    </script>
+	<script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/monthPicker.js">
+    </script>
+    <script type="text/javascript" src="/plugins/date_page/dateRange.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        Plugins.init();
+        FormComponents.init()
+      });
+    </script>
+    <script type="text/javascript" src="/assets/js/custom.js">
+    </script>
+    <script type="text/javascript" src="/assets/js/json.js">
+    </script>
+    
+
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<link rel="stylesheet" href="/assets/css/jquery.artZoom.css" />
+<link href="/assets/css/main_bz.css" rel="stylesheet" type="text/css" />
+<style>.col-md-0{ position: relative; min-height: 1px; padding-left: 15px } .col-md-0{ float: left } .table td{height: 45px;line-height: 45px;} </style></head>
+<body>
+ <div id="map"></div>
+    <script>
+var reid = "";
+var dwlat = new Array;
+var dwlng = new Array;
+var locations = new Array;
+load_data();
+
+function load_data(){
+	reid=GetQueryString("record_id");
+	var para={reid:reid};
+	loadGetServer("/servlet/current/JBDcmsAction?function=GetIP",para,function(data){
+	      $("#load_data").html("");
+		  var list = data.listdt;
+		  for(var i=0;i<list.length;i++)
+		  {
+				dwlat[i] = list[i].dwlat;
+				dwlng[i] = list[i].dwlng;
+		   }
+			$("#btn-load").button("reset");
+	    });
+   }  
+      function initMap() {
+        load_data();
+        var p1 = new Array;
+        var p2 = new Array;
+          for(var i=0;i<dwlat.length;i++)
+		  {
+				p1[i] = parseFloat(dwlat[i]);
+				p2[i] = parseFloat(dwlng[i]);
+		   }
+	     for(var i=0;i<dwlat.length;i++)
+		 {
+		  locations[i]={lat:p1[i], lng: p2[i]};
+		 }
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 10.6653387, lng: 106.6780408}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+      
+      }
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-w4Gq2lAEe15VHVK5y7T4JZEi5PgDMqY&callback=initMap">
+    </script>
+        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    
+		                                DS vị trí địa lý của KH
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                <div>
+						     <input type="hidden" id="cupage_" value="1"/>
+							 <input type="hidden" id="total_" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcmsAction?function=GetIP"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          Mã số khách hàng
+		                        </th>
+                                <th>
+		                          Vị trí địa lý
+		                        </th>
+                                <th>
+		                          Thời gian lấy dữ liệu
+		                        </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data_">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số <font id="totalrows_"></font>tin, mỗi trang chứa được <font id="numperpage_"></font>tin, hiện tại trang số <font id="currentpage_"></font> / <font id="totalpages_"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable_"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>       
+                   
+                   
+                   
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="widget box">
+                          <div class="widget-content">
+                            <div class="form-horizontal row-border" id="validate-2" novalidate>
+                              <div class="form-actions">
+                                 <input type="button" value="Đóng trang" class="btn btn-inverse  pull-right" onClick="javascript:parent.f_hide_ifm(GetQueryString('record_id'))">                              
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+</body>
+
+</html>
+
+<script>
+$("#btn-load").on("click",
+  function() {
+    var a = $(this);
+    a.button("loading");
+    $("#cupage_").val("1");
+    load_data_();
+  });</script>
+<script src="/assets/js/jquery.artZoom.js"></script>
+<script>
+
+ 
+ function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+function load_data_()
+	{
+	reid=GetQueryString("record_id");
+	
+	  var para={curPage:$("#cupage_").val(),reid:reid};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data_").html("");
+		  var list = data.list.data;
+		  var html_="";
+		
+		  for(var i=0;i<list.length;i++)
+		  {
+				html_ += "<tr><td>"+list[i].userid+"</td><td>"+list[i].jtdz+"</td><td>"+list[i].create_time+"</td></tr>";
+				
+		   }
+			$("#load_data_").append(html_);
+			page_value_(data);
+			page_data_();
+			$("#btn-load").button("reset");
+	    });
+   }  
+
+load_data_();
+  $("#load_html").hide();
+	 
+  </script>
+  <script type="text/javascript" src="/plugins/date_page/page_.js">
+    </script>

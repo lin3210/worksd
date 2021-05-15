@@ -1,0 +1,351 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="/indexCms.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               所有规则列表
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                     查询条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcmsAction?function=GetAllGuiZeList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                                <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        全部
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="请输入查询条件" >
+		                      </div>
+                              
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     查询
+			                  </button>
+			                 
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                                所有规则列表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        
+		                         <th>
+		                         编号
+		                        </th>
+		                        <th>
+		                          规则内容
+		                        </th>
+		                        <th>
+		                          规则介绍
+		                        </th>
+		                        <th>
+		                         更改规则
+		                        </th>
+		                        
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>  tin，mỗi trang chứa được<font id="numperpage"></font>   tin，hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+  <!--添加逾期备注信息-->
+     <div id="add_content_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 8%;">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#add_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>更改规则信息列表</h4>
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height:360px;" id="div_a">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                        	<div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">规则编号
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_6" id="guizeid" readonly class="form-control required">
+                                                  </div>
+                                           </div>
+                                           <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">规则名称
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_1" id="guizemingchen" readonly class="form-control required">
+                                                  </div>
+                                           </div>
+                                          <div class="form-group" id="has-rec_id">
+                                            <label class="col-md-3 control-label">规则1
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                         			<input type="text" name="grade_2" id="guize1" readonly class="form-control required">
+                                                  </div>
+                                           </div>
+                                           <div class="form-group" id="has_jkid">
+                                            <label class="col-md-3 control-label">更改1
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_3" id="gggz1" class="form-control required" style="width:100px;">
+                                                  </div>
+                                              </div>
+                                          
+                                            <div class="form-group" id="has_guize2" style="display: none;">
+                                            <label class="col-md-3 control-label">规则2
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_4" id="guize2" readonly class="form-control required">
+                                                  
+                                                  </div>
+                                              </div>
+                                              
+                                              <div class="form-group" id="has_gggz2" style="display: none;">
+                                            <label class="col-md-3 control-label">更改2
+                                              <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                  <input type="text" name="grade_5" id="gggz2" class="form-control required" style="width:100px;">
+                                                  </div>
+                                              </div>
+                                              
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="add_beiz()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#add_content_html').hide()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>			
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("请输入查询数据");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var shenkzt ;
+		  var time = getNowFormatDate();
+		  for(var i=0;i<list.length;i++)
+		  {
+		  	   var gznr2=""
+		  	   var gzbl2=""
+		       if(list[i].guizeneirong2 != null && list[i].guizeneirong2 != undefined){
+		       		gznr2 = ","+list[i].guizeneirong2;
+		       }
+		       if(list[i].guizebianliang2 != null && list[i].guizebianliang2 != undefined){
+		       		gzbl2 = list[i].guizebianliang2;
+		       }
+				html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].guizeneirong1+""+list[i].guizebianliang1+""+gznr2+""+gzbl2+"</td><td>"+list[i].guizejieshao+"</td>";
+				html_ += "<td><button class='btn btn-xs btn-info' onclick=\"load_beiz('"+list[i].id+"','"+list[i].guizeneirong1+"','"+list[i].guizebianliang1+"','"+list[i].guizeneirong2+"','"+list[i].guizebianliang2+"','"+list[i].guizejieshao+"')\">更改规则</button></td>";
+				html_ +="</tr>";
+		   }
+		  $("#load_data").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+	
+	  function gradeChange1(){
+	   var bhstate_=$("#lab").val();
+	   
+	   if(bhstate_== 3){
+		    var str = document.getElementById("remark");
+		    str.value = "Định dạng ngày sinh:XX-XX-XXXX";
+			str.onfocus = function(){
+				str.value = "";
+			}
+	    }
+	    if(bhstate_== 5){
+		    var str = document.getElementById("remark");
+		    str.value = "Định dạng tên ngân hàng:XXXX - XXXXXX";
+			str.onfocus = function(){
+				str.value = "";
+			}
+	    }
+	    
+		if(bhstate_== 6 || bhstate_== 7){
+			document.getElementById("has_jkid").style.display="block";
+		}else{
+			document.getElementById("has_jkid").style.display="none";
+		}
+	}
+	 /* <!--查询备注类型--> */
+   function load_beiz(id,gznr1,gzbl1,gznr2,gzbl2,gzjs)
+   {     
+   	   $("#guizeid").val(id);
+   	   $("#guizemingchen").val(gzjs);
+   	   $("#guize1").val(gznr1);
+   	   $("#gggz1").val(gzbl1);
+   	   $("#guize2").val(gznr2);
+   	   $("#gggz2").val(gzbl2);
+   	   
+   	   if(gznr2 == null || gznr2 == undefined || gznr2 == "null"){
+   	   		document.getElementById("has_guize2").style.display="none";
+	   		document.getElementById("has_gggz2").style.display="none";
+	   		
+	   }else{
+	   		document.getElementById("has_guize2").style.display="block";
+	   		document.getElementById("has_gggz2").style.display="block";
+	   }
+	   $("#add_content_html").show();
+	   
+	   
+	   
+	   document.getElementById("div_a").style.height="400px";
+   }
+      /*  <!--添加或者修改催收备注--> */
+   function add_beiz()
+   {
+	  var id_=$("#guizeid").val();
+	  var gggz1_=$("#gggz1").val();
+	  var gggz2_=$("#gggz2").val();
+	  
+	  
+		   var para={id:id_,gggz1:gggz1_,gggz2:gggz2_};
+		   loadGetServer("/servlet/current/JBDcmsAction?function=ChangeGuiZe",para,function(data){
+			   if(data.error>0)
+			   {
+				   $("#add_content_html").hide();
+				   load_data();
+			   }
+			   else
+			   {
+				    
+				   alert(data.msg);
+			   }
+		   });
+	
+   }
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = strDate + seperator1 + month + seperator1 + year;
+        return currentdate;
+    }
+    
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

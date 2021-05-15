@@ -1,0 +1,597 @@
+
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               借款成功列表
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        筛选条件
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetRecordListChg03"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        全部
+                                      </option>
+                                      <option value="1">
+                                         用户编号
+                                      </option>
+                                      <option value="2">
+                                        真实姓名
+                                      </option>
+                                      <option value="3">
+                                        手机号码
+                                      </option>
+                                      <option value="4">
+                                        身份证
+                                      </option>
+                                   <option value="5">
+                                        放款人编号
+                                     </option>
+                                   <option value="6">
+                                        放款人姓名
+                                     </option>                                         
+                                   <option value="7">
+                                        学生是1/工作是2
+                                     </option>                                         
+                                   <option value="8">
+                                        使用红包是1/有红包没有使用是0
+                                     </option>                                         
+                                   <option value="9">
+                                        评分
+                                     </option>                                         
+                                   <option value="10">
+                                        线上转账是1/线下转账是0
+                                     </option>                                         
+                                   <option value="11">
+                15天是1/30天是2
+                                     </option>                                         
+                                   <option value="12">
+                7天是3/14天是4
+                                     </option>                                         
+                                   <option value="13">
+                推广ID
+                                     </option>
+                                     <option value="14">
+       h5
+                                     </option>                                          
+       <option value="15">
+       	渠道查询0/1
+       </option>                                          
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="请输入查询条件" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                            到账时间:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              还款状态:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="hkst">
+                                  <option value="0">
+                                    --请选择--
+                                  </option>
+                                  <option value="1">
+                                    已还款
+                                  </option>
+                                  <option value="2">
+                                    未还款
+                                  </option>
+                                  <option value="3">
+                                    逾期已还款
+                                  </option>
+                                  <option value="4">
+                                    逾期未还款
+                                  </option>
+                                   <option value="5">
+                                    分期已还款
+                                  </option>
+                                  <option value="6">
+                                    分期未还款
+                                  </option>
+                                </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="加载中...">
+			                                     查 询
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                 借款成功列表
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                  
+		                  <h4>放款总本金 ：</h4><span id="totalFmoney"></span>&nbsp;
+		                  <h4>待收本金：</h4><span id="totalCapital"></span>&nbsp;
+		                  <h4>未到期本金：</h4><span id="totalWDQBJ"></span>&nbsp;
+		                  <h4>待收逾期本金：</h4><span id="totalDSYQZBJ"></span>&nbsp;
+		                  <br /> 
+		                  <h4>已收总手续费：</h4><span id="totalYSZSXF"></span>&nbsp;
+		                  <h4>逾期比例：</h4><span id="yqbl"></span>&nbsp;
+		                  <h4>逾期未还比例：</h4><span id="yqwhbl"></span>&nbsp;
+		                  <h4>盈利比例：</h4><span id="ylbl"></span>&nbsp;
+		                   <h4>总盈利：</h4><span id="zyl"></span>&nbsp;
+		                   
+		                   
+		                  <br />
+		                  <h4>未还总金额：</h4><span id="totalWmoney"></span>&nbsp;
+		                  <h4>已还总金额：</h4><span id="totalYmoney"></span>&nbsp;
+		                  <h4>总手续费：</h4><span id="totalLY"></span>&nbsp;
+		                  <h4>待收手续费：</h4><span id="totalDHSInterest"></span>&nbsp;
+		                  <h4>逾期总本金：</h4><span id="totalYQZB"></span>&nbsp;
+		                  <h4>逾期总本金和手续费：</h4><span id="totalYQZBJ"></span>&nbsp;
+		                  <h4>待收逾期本金和手续费：</h4><span id="totalDSYQZBJLX"></span>&nbsp;
+		                  <h4>总逾期手续费：</h4><span id="totalOverdueInterest"></span>&nbsp;
+		                  <h4>待收逾期手续费：</h4><span id="totalDHSYQLX"></span>&nbsp;
+		                  <h4>免除逾期手续费：</h4><span id="totalWHSYQLX"></span>&nbsp;
+		                  <h4>总延期本金：</h4><span id="totalZFQBJ"></span>&nbsp;
+		                  <h4>待收延期本金：</h4><span id="totalDSFQBJ"></span>&nbsp;
+		                  <h4>已收延期手续费：</h4><span id="totalYSFQLX"></span>&nbsp;
+		                  
+		                  <!-- 
+		                  <h4>放款总本金：</h4><span id="totalFmoney"></span>&nbsp;
+		                  <h4>待收本金：</h4><span id="totalCapital"></span>&nbsp;
+		                  <h4>未还总金额：</h4><span id="totalWmoney"></span>&nbsp;
+		                  <h4>已还总金额：</h4><span id="totalYmoney"></span>&nbsp;
+		                  <h4>总手续费：</h4><span id="totalLY"></span>&nbsp;
+		                  <h4>待收手续费：</h4><span id="totalDHSInterest"></span>&nbsp;
+		                  <h4>逾期总本金：</h4><span id="totalYQZB"></span>&nbsp;
+		                  <h4>逾期总本金和手续费：</h4><span id="totalYQZBJ"></span>&nbsp;
+		                  <h4>待收逾期本金：</h4><span id="totalDSYQZBJ"></span>&nbsp;
+		                  <h4>待收逾期本金和手续费：</h4><span id="totalDSYQZBJLX"></span>&nbsp;
+		                  <h4>总逾期手续费：</h4><span id="totalOverdueInterest"></span>&nbsp;
+		                  <h4>待收逾期手续费：</h4><span id="totalDHSYQLX"></span>&nbsp;
+		                  <h4>免除逾期手续费：</h4><span id="totalWHSYQLX"></span>&nbsp;
+		                  <h4>总延期本金：</h4><span id="totalZFQBJ"></span>&nbsp;
+		                  <h4>待收延期本金：</h4><span id="totalDSFQBJ"></span>&nbsp;
+		                  <h4>已收延期手续费：</h4><span id="totalYSFQLX"></span>&nbsp;
+		                  <h4>逾期比例：</h4><span id="yqbl"></span>&nbsp;
+		                  <h4>逾期未还比例：</h4><span id="yqwhbl"></span>&nbsp;
+		                  <h4>盈利比例：</h4><span id="ylbl"></span>&nbsp;
+		                  
+		                    <!-- <div class="btn-group">
+		                    <h4>盈利金额：</h4><span id="hongbaojine"></span>&nbsp;
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div> -->
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          用户编号
+		                        </th>
+		                        <th>
+		                          用户姓名
+		                        </th>
+		                        <th>
+		                          手机号码
+		                        </th>
+		                        <th>
+		                          身份证
+		                        </th>
+		                         <th>
+		                          放款人姓名
+		                        </th>             
+		                        <th>
+		                          申请借款金额
+		                        </th>
+		                        <th>
+		                          需还款金额
+		                        </th>
+		                        <th>
+		                          红包金额
+		                        </th>
+                                <th>
+		                          实际到账金额
+		                        </th>
+                                <th>
+		                          借款期限
+		                        </th>
+		                        <th>
+			                   利息和服务费
+			                      </th>
+                              <!--   <th>
+		                          服务费用
+		                        </th>
+                                <th>
+		                          已还金额
+		                        </th> -->
+                                <th>
+		                          转账方式
+		                        </th>
+                                <th>
+		                          到账时间
+		                        </th>
+                                <th>
+		                          还款时间
+		                        </th>
+                                <th>
+		                          延期期限
+		                        </th>
+                                <th>
+		                          延期手续费
+		                        </th>
+                                <th>
+		                          延期还款时间
+		                        </th>
+                                <th>
+		                          用户还款时间
+		                        </th>
+		                        <!--  <th>
+		                          扣款
+		                        </th> -->
+                                <th>
+		                          回访状态
+		                        </th>
+                                <th>
+		                          还款状态
+		                        </th>
+                                <th>
+                                 备注
+                                </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">共 <font id="totalrows"></font> 条记录，每页 <font id="numperpage"></font> 条，当前第 <font id="currentpage"></font> / <font id="totalpages"></font> 页</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+		<!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+<script>
+
+    function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	function toThousands(num) {  
+	    		var num = (num || 0).toString(), result = '';  
+	    		while (num.length > 3) {  
+	        		result = ',' + num.slice(-3) + result;  
+	        		num = num.slice(0, num.length - 3);  
+	    		}  
+	    		if (num) { 
+				result = num + result; 
+			}  
+    			return result;  
+		     }
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0 &&tempsele!=14)
+	  {
+		  if(tempval=="" && tempsele!=11 && tempsele!=12)
+		  {
+			  alert("请输入查询数据");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val()};
+	  loadGetServer($("#formurl").val(),para,function(data){
+	  	  //var aa = parseInt(data.totalFmoney.replace(/,/g,""))*2;
+	  	  $("#totalFmoney").html(data.totalFmoney);
+	  	  
+	  	  $("#totalCapital").html(data.totalCapital);
+	  	  //var bb = parseInt(data.totalWmoney.replace(/,/g,""))*2;
+	  	  $("#totalWmoney").html(data.totalWmoney);
+	  	  //var cc = parseInt(data.totalYmoney.replace(/,/g,""))*2;
+	  	  $("#totalYmoney").html(data.totalYmoney);
+	  	  
+	  	  $("#totalLY").html(data.totalLY);
+	  	  $("#totalDHSInterest").html(data.totalDHSInterest);
+	  	  $("#totalYQZB").html(data.totalYQZB);
+	  	  $("#totalYQZBJ").html(data.totalYQZBJ);
+	  	  $("#totalDSYQZBJ").html(data.totalDSYQZBJ);
+	  	  $("#totalDSYQZBJLX").html(data.totalDSYQZBJLX);
+	  	  $("#totalOverdueInterest").html(data.totalOverdueInterest);
+	  	  $("#totalDHSYQLX").html(data.totalDHSYQLX);
+	  	  $("#totalWHSYQLX").html(data.totalWHSYQLX);
+	  	  $("#totalZFQBJ").html(data.totalZFQBJ);
+	  	  $("#totalDSFQBJ").html(data.totalDSFQBJ);
+	  	  $("#totalYSFQLX").html(data.totalYSFQLX);
+	  	  var aa = parseInt(data.totalLY.replace(/,/g,""));
+		  var bb = parseInt(data.totalDHSInterest.replace(/,/g,""));
+		  var dd = parseInt(data.totalDSYQZBJ.replace(/,/g,""));
+		  var cc = aa - bb -dd;
+		  var zje = toThousands(cc);
+	  	  $("#hongbaojine").html(zje);
+	  	  $("#yqbl").html(data.yqbl+"%");
+	  	  
+	  	   //var dd = parseInt(data.yqwhbl.replace(/,/g,""))-10;
+	  	  $("#yqwhbl").html(data.yqwhbl+"%");
+	  	   //var ee = parseInt(data.ylbl.replace(/,/g,""))+11;
+	  	  $("#ylbl").html(data.ylbl+"%");
+	  	  $("#zyl").html(data.zyl);
+	  	  
+	  	  var wdqbj1 = parseInt(data.totalCapital.replace(/,/g,""));
+	      var wdqbj2 = parseInt(data.totalDSYQZBJ.replace(/,/g,""));
+	      var wdqbj =  wdqbj1-wdqbj2;
+	      $("#totalWDQBJ").html(toThousands(wdqbj));
+	  	  
+	      var YSZSXF1 = parseInt(data.totalLY.replace(/,/g,""));
+	      var YSZSXF2 = parseInt(data.totalDHSInterest.replace(/,/g,""));
+	      var YSZSXF =  YSZSXF1-YSZSXF2;
+	      $("#totalYSZSXF").html(toThousands(YSZSXF));
+	      
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jkqx ="15天" ;
+		  var fwfy ;
+		  var yhje = 0;
+		  for(var i=0;i<list.length;i++)
+		  {
+		       
+		        fwfy=(list[i].yuq_lx+list[i].sjsh_money-list[i].sjds_money).toFixed(2) ;
+
+		        if(list[i].jk_date ==2){		        
+		            jkqx="30天";
+		        }else if(list[i].jk_date ==1){
+		            jkqx="15天";
+		        }else if(list[i].jk_date ==3){
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>7天</span>";
+		        }else if(list[i].jk_date ==4){
+		            jkqx="<span style='color:#0000FF;font-weight:bold'>14天</span>";
+		        }
+               //已还金额   
+              /*  if(list[i].sfyhw == "1"){
+                   yhje =(list[i].sjsh_money+list[i].yuq_lx).toFixed(2);
+               }else {
+                  yhje = 0;
+               } */
+		      //利息  
+		       var userid = list[i].id;
+		       var sjshmoney = parseInt(list[i].sjsh_money.replace(/,/g,""));
+		       var jklx = "";
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jk_date==1){
+					  jklx="30%";
+				  }else if(list[i].jk_date==2) {
+					  jklx="30%";
+				  }else if(list[i].jk_date==4) {
+					  jklx="30%";
+				  }else if(list[i].jk_date==3) {
+					  jklx="30%";
+				  }
+			   }
+				  
+				  
+				html_ += "<tr><td>"+list[i].username+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].idno+"</td><td>"+list[i].investorname +"</td><td>"+list[i].jk_money+"</td><td>"+list[i].sjsh_money+"</td>";
+				if(list[i].hongbaoid == "1"){
+					if(list[i].fkdz_time_day>"2018-08-27 15:20:00" && list[i].fkdz_time_day<"2018-09-18 14:11:00"){
+						html_ += "<td>30,000</td>";	
+					}else if(list[i].fkdz_time_day>"2018-09-18 14:10:00"){
+						html_ += "<td>10,000</td>";	
+					}else{
+						html_ += "<td>50,000</td>";	
+					}
+					
+				
+				}else{
+					html_ += "<td>0</td>";
+				}
+				html_ += "<td>"+list[i].sjds_money+"</td><td>"+jkqx+"</td>";
+				
+				if(jklx=="35%" || jklx=="25%") {
+					html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
+				}else {
+					html_ += " <td><span>"+jklx+"</span></td>";
+				}
+				
+				if(list[i].versoin == 0)
+				{
+					html_ +="<td>手动转账</td>";
+				}
+				else
+				{
+					html_ +="<td>线上转账</td>";
+				}
+				
+				if(list[i].sfyfk == 2)
+				{
+					html_ +="<td>暂无到账时间</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].fkr_time+"</td>";
+				}
+				if(list[i].sfyfk == 2)
+				{
+					html_ +="<td>暂未还款</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].hkyq_time+"</td>";
+				}
+				
+				
+				if(list[i].hkfq_code == 1)
+				{
+					html_ +="<td>"+list[i].hkfq_day+" 天</td><td>"+list[i].hkfq_lx+"</td><td>"+list[i].hkfq_time+"</td>";
+				}
+				else
+				{
+					html_ +="<td>暂无</td><td>暂无</td><td>暂无</td>";
+				}
+				
+				if(list[i].sfyhw == "0")
+				{
+				html_ += " <td>暂无还款时间</td>";
+				}
+				else
+				{
+				   html_ += " <td>"+list[i].hk_time+"</td>";
+				}
+				/*var totolMoney=parseInt(list[i].sjsh_money+list[i].yuq_lx);
+               
+				if(list[i].sfyhw == "0")
+				{
+				html_ += " <td><button class='btn btn-xs btn-info'  onclick=\"kk_ck('"+list[i].jkid+"','"+list[i].id+"','"+totolMoney+"')\">扣款</button></td>";
+				}
+				else
+				{
+				   html_ += " <td>"+list[i].hk_time.time+"</td>";
+				}      */    
+				if(list[i].kfhf_cgfk != 0){
+					html_ +=" <td>已回访</td>";
+				}else{
+					html_ +=" <td>无</td>";
+				}    
+					
+				if(list[i].sfyhw == "0"){
+			        html_ +=" <td><span class='label label-info'>暂未还款</span></td>";
+				}else{
+				    html_ +=" <td><span class='label label-success'>用户已还款</span></td>";
+				}
+				html_ +=" <td><span class='label label-warning' onclick='get_zx("+list[i].jkid+")'>查看用户信息</span></td>";
+				html_ +="</tr>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			$("#hkst").val(data.hkstat);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+
+ function kk_ck(jkId,userId,money){
+ 	var con = confirm("是否确定扣款？");
+ 	if(con==true){
+ 		var para={money_order:money,userid:userId,jkid:jkId};
+	    loadGetServer("/servlet/current/JBDLLpayAction?function=QYPayment",para,function(data){
+	  		alert(data.msg);
+	  	});
+	  	load_data();
+	 }
+ }
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+    function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+    /*------查看更多信息(征信数据)------*/
+ function get_zx(jk_id)
+ {
+	 $("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/user_chenggong.html?record_id="+jk_id);	 
+ }
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

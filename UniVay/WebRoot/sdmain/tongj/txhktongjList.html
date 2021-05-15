@@ -1,0 +1,452 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container" style="width:1600px">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                DS TK nhắc trả(提醒还款统计)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetTXHKAccount"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1" id="dd">
+                                        Họ tên người xét duyệt
+                                      </option>
+                                      <option value="2" id="ee">
+                                       Số ĐTDĐ
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                             <label class="col-md-0 control-label" style="padding-top:5px;" id="ff">
+		                                             Thời gian thống kê:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text=loading...">
+			                                     Tìm kiếm
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="gg">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    DS TK nhắc trả(提醒还款统计)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;" id="hh">
+                                          Mã số người truy thu(提醒人编号)
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="ii">
+                                         Họ tên người truy thu(提醒人姓名)
+                                    </th>
+                                    <th colspan="5" style=" font-size:14px; font-weight:bold;" id="kk">
+                                          Thống kê số món vay trong ngày(当天的贷款统计)
+                                    </th>
+                                   
+                                     <th colspan="6"  style=" font-size:14px; font-weight:bold;" id="lll">
+                                        Thống kê Tổng số món vay(统计贷款总额)
+                                    </th>
+                                    
+		                      </tr>
+                              <tr  style="text-align:center">
+
+                                    <th id="mm">
+                                         KH đáo hạn TN(当天打电话总数)
+                                    </th>
+                                    <th id="mmm">
+                                         KH đáo hạn đã trả TN(到期日期已支付)
+                                    </th>
+                                    <th id="fffff">
+                                         Ghi chú TN(备注数)
+                                    </th>
+                                    <th id="mmmm">
+                                         Số nhắc vay hiện tại(当前的贷款提醒数)
+                                    </th>
+                                    <th id="mmmmm">
+                                         Tổng trả vay TN(贷款偿还总额)
+                                    </th>
+                                    <th id="nnn">
+                                         Tổng nhắc vay(一般提醒借)
+                                    </th>
+                                    <th id="ddd">
+                                        Tổng trả vay(偿还贷款总额)
+                                    </th>
+                                    <th id="dddd">
+                                        Tỷ lệ tổng số món(占总比例)
+                                    </th>
+                                    <th id="eee">
+                                        Tổng số tiền nhắc vay(催贷总额)
+                                    </th>
+                                    <th id="fff">
+                                        Tổng số tiền trả vay(贷款总额)
+                                    </th>
+                                    <th id="ggg">
+                                        Tỷ lệ tổng số tiền(总金额的比例)
+                                    </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font>tin, mỗi trang chứa được <font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="gg">
+		                    <i class="icon-reorder">
+		                    </i>
+		                               Thống kê ghi chú nhắc vay
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;">
+                                          Mã số người truy thu(提醒人编号)
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;">
+                                         Họ tên người truy thu(提醒人姓名)
+                                    </th>
+                                    <th colspan="7" style=" font-size:14px; font-weight:bold;">
+                                          Thống kê nhắc vay trong ngày(统计提醒当天的贷款)
+                                    </th>
+                                    <th colspan="7" style=" font-size:14px; font-weight:bold;">
+                                          Thống kê tổng nhắc vay(汇总贷款统计)
+                                    </th>
+                                   
+                                    
+		                      </tr>
+                              <tr  style="text-align:center">
+
+                                    <th>
+                                         KH trả vay đúng hạn(客户按时还贷)
+                                    </th>
+                                    <th>
+                                         KH hẹn trả vay(客户预约偿还贷款)
+                                    </th>
+                                    <th>
+                                        KH xin gia hạn 15 ngày(客户要求延长15天)
+                                    </th>
+                                    <th>
+                                         KH xin gia hạn 30 ngày(客户申请延期30天)
+                                    </th>
+                                    <th>
+                                         Không nghe máy(不听电话)
+                                    </th>
+                                    <th>
+                                         Khóa máy(手机锁)
+                                    </th>
+                                    <th>
+                                      Tắt máy(关闭手机)
+                                    </th>
+                                    <th>
+                                         KH trả vay đúng hạn(客户按时还贷)
+                                    </th>
+                                    <th>
+                                         KH hẹn trả vay(客户预约偿还贷款)
+                                    </th>
+                                    <th>
+                                       KH xin gia hạn 15 ngày(客户要求延长15天)
+                                    </th>
+                                    <th>
+                                         KH xin gia hạn 30 ngày(客户申请延期30天)
+                                    </th>
+                                    <th>
+                                         Không nghe máy(不听电话)
+                                    </th>
+                                    <th>
+                                         Khóa máy(手机锁)
+                                    </th>
+                                    <th>
+                                      Tắt máy(关闭手机)
+                                    </th>
+                                    
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data1">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+function changeLan(){
+	document.getElementById("aa").innerHTML = "催收统计列表";
+	document.getElementById("bb").innerHTML = "筛选条件";
+	document.getElementById("cc").innerHTML = "全部";
+	document.getElementById("dd").innerHTML = "审核人姓名";
+	document.getElementById("ee").innerHTML = "手机号码";
+	document.getElementById("ff").innerHTML = "统计时间";
+	document.getElementById("gg").innerHTML = "催收统计列表";
+	document.getElementById("hh").innerHTML = "催收人编号";
+	document.getElementById("ii").innerHTML = "催收人姓名";
+	document.getElementById("jj").innerHTML = "手机号码";
+	document.getElementById("kk").innerHTML = "当天笔数统计";
+	document.getElementById("ll").innerHTML = "总笔数统计";
+	document.getElementById("mm").innerHTML = "当天新增笔数";
+	document.getElementById("mmm").innerHTML = "当天还款笔数";
+	document.getElementById("fffff").innerHTML = "当天打电话备注总笔数";
+	document.getElementById("mmmm").innerHTML = "目前待提醒总数";
+	document.getElementById("mmmmm").innerHTML = "当天总还款笔数";
+	document.getElementById("nnn").innerHTML = "总提醒笔数";
+	document.getElementById("ddd").innerHTML = "总还款笔数";
+	document.getElementById("dddd").innerHTML = "总笔数比例";
+	document.getElementById("eee").innerHTML = "总提醒金额";
+	document.getElementById("fff").innerHTML = "总还款金额";
+	document.getElementById("ggg").innerHTML = "总比例";
+
+}
+
+</script>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+		load_data();
+	
+	});
+	function toThousands(num) {  
+	    		var num = (num || 0).toString(), result = '';  
+	    		while (num.length > 3) {  
+	        		result = ',' + num.slice(-3) + result;  
+	        		num = num.slice(0, num.length - 3);  
+	    		}  
+	    		if (num) { 
+				result = num + result; 
+			}  
+    			return result;  
+	}
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jrzbs = 0;
+			var jrxztxzbs = 0;
+			var jrtxzbs = 0;
+			var mqzbs = 0;
+			var dtzbs = 0;
+			var dtddh = 0;
+			var txzbs = 0;
+			var txyhzbs = 0;
+			var zszsbl = 0;
+			var txzje = 0;
+			var txyhzje = 0;
+			var txyhzbl = 0;
+		  for(var i=0;i<list.length;i++)
+		  {
+			var aa = list[i].jrtotalYCSmoney.replace(/,/g,"");
+			var bb = list[i].jrtotalCSmoney.replace(/,/g,"");
+			var jrcsbl = 0; 
+			var zsbl = 0;
+			
+			if(parseInt(aa) == 0){
+				jrcsbl=0;
+			}else{
+				jrcsbl= parseInt(parseInt(aa) *100 / parseInt(bb)) ;
+			}
+			var zszs = parseInt(list[i].jrcount) + parseInt(list[i].count);
+			//var zszs = parseInt(list[i].jrcount);
+			if(list[i].jrycscount == 0){
+				zsbl=0;
+			}else{
+				zsbl= parseInt(list[i].jrycscount *100 / zszs) ;
+			}
+			
+			
+				html_ += "<tr><td>BPXLN"+list[i].userid+"</td><td>"+list[i].userName+"</td><td><span class='label label-success'>"+list[i].dtxztxhk+"</span></td><td>"+list[i].jrnowOnesh+"</td><td>"+list[i].dtddh+"</td><td>"+list[i].mqdtxzs+"</td><td>"+list[i].dtzbs+"</td><td><span class='label label-success'>"+zszs+"</span></td><td><span style='color:#F00'>"+list[i].jrycscount+"</span></td><td>"+zsbl+"%</td><td>"+list[i].jrtotalCSmoney+"</td><td>"+list[i].jrtotalYCSmoney+"</td><td>"+jrcsbl+"%</td>";
+				html_ +="</tr>";
+			
+			jrxztxzbs += list[i].dtxztxhk;
+			mqzbs += list[i].mqdtxzs;
+			dtzbs += list[i].dtzbs;
+			dtddh += list[i].dtddh;
+			jrtxzbs += list[i].jrnowOnesh;
+			txzbs += zszs;
+			txyhzbs += list[i].jrycscount;
+			txzje += parseInt(list[i].jrtotalCSmoney.replace(/,/g,""));
+			txyhzje += parseInt(list[i].jrtotalYCSmoney.replace(/,/g,""));
+		   }
+		    if(txzje != 0){
+		   		txyhzbl = parseInt(txyhzje * 100 / txzje);
+		   	}
+		    if(txyhzbs != 0){
+		   		zszsbl = parseInt(txyhzbs * 100 / txzbs);
+		   	}
+		   	
+		   	html_ += "<tr><td>Thống kê tổng</td><td>Thống kê tổng</td><td><span class='label label-success'>"+jrxztxzbs+"</span></td><td>"+jrtxzbs+"</td><td>"+dtddh+"</td><td>"+mqzbs+"</td><td>"+dtzbs+"</td><td><span class='label label-success'>"+txzbs+"</span></td><td><span style='color:#F00'>"+txyhzbs+"</span></td><td>"+zszsbl+"%</td><td>"+toThousands(txzje)+"</td><td>"+toThousands(txyhzje)+"</td><td>"+txyhzbl+"%</td>";
+			html_ +="</tr>";
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+   load_data();
+   
+
+   
+</script>
+
+<script>
+function load_data1(){
+	  var para={};
+	  loadGetServer("/servlet/current/AccountShenheAction?function=GetTXHKTJAccount",para,function(data){
+	  $("#load_data1").html("");
+	  var list = data.list.data;
+	  var html_="";
+	  
+	  var ashk=0;
+	  var yqhk=0;
+	  var sqyq15=0;
+	  var sqyq30=0;
+	  var bjdh=0;
+	  var gj=0;
+	  var tj=0;
+	  
+	  var dtashk=0;
+	  var dtyqhk=0;
+	  var dtsqyq15=0;
+	  var dtsqyq30=0;
+	  var dtbjdh=0;
+	  var dtgj=0;
+	  var dttj=0;
+	  for(var i=0;i<list.length;i++)
+	  {
+		  html_ += "<tr><td>BPXLN"+list[i].user_id+"</td><td>"+list[i].name+"</td><td>"+data.dtashk[i]+"</td><td>"+data.dtyqhk[i]+"</td><td>"+data.dtsqyq15[i]+"</td><td>"+data.dtsqyq30[i]+"</td><td>"+data.dtbjdh[i]+"</td><td>"+data.dtgj[i]+"</td><td>"+data.dttj[i]+"</td><td>"+data.ashk[i]+"</td><td>"+data.yqhk[i]+"</td><td>"+data.sqyq15[i]+"</td><td>"+data.sqyq30[i]+"</td><td>"+data.bjdh[i]+"</td><td>"+data.gj[i]+"</td><td>"+data.tj[i]+"</td>";
+					html_ +="</tr>";
+					
+		  ashk += data.ashk[i];
+		  yqhk += data.yqhk[i];
+		  sqyq15 += data.sqyq15[i];
+		  sqyq30 += data.sqyq30[i];
+		  bjdh += data.bjdh[i];
+		  gj += data.gj[i];
+		  tj += data.tj[i];
+		  
+		  dtashk += data.dtashk[i];
+		  dtyqhk += data.dtyqhk[i];
+		  dtsqyq15 += data.dtsqyq15[i];
+		  dtsqyq30 += data.dtsqyq30[i];
+		  dtbjdh += data.dtbjdh[i];
+		  dtgj += data.dtgj[i];
+		  dttj += data.dttj[i];
+		  
+	  }
+  		html_ += "<tr><td>Thống kê tổng</td><td>Thống kê tổng</td><td>"+dtashk+"</td><td>"+dtyqhk+"</td><td>"+dtsqyq15+"</td><td>"+dtsqyq30+"</td><td>"+dtbjdh+"</td><td>"+dtgj+"</td><td>"+dttj+"</td><td>"+ashk+"</td><td>"+yqhk+"</td><td>"+sqyq15+"</td><td>"+sqyq30+"</td><td>"+bjdh+"</td><td>"+gj+"</td><td>"+tj+"</td>";
+		html_ +="</tr>";
+		$("#load_data1").append(html_);
+		});
+}
+load_data1();
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

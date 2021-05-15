@@ -1,0 +1,356 @@
+
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                               Danh sách vay tiền thành công
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                        Điều kiện chọn
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetRecordListChg"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+                             <input type="hidden" id="starTime1" value=""/>
+                             <input type="hidden" id="endTime1" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1">
+                                         Mã số khách hàng
+                                      </option>
+                                      <option value="2">
+                                        Họ tên
+                                      </option>
+                                      <option value="3">
+                                        Số ĐTDĐ
+                                      </option>
+                                      <option value="4">
+                                        Nền tảng ID
+                                      </option>
+                                      <option value="5">
+                                        h5
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              Thời gian trả vay:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              Trạng thái trả vay:
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="hkst">
+                                  <option value="0">
+                                    --Vui lòng chọn--
+                                  </option>
+                                  <option value="1">
+                                    Đã trả vay
+                                  </option>
+                                  <option value="2">
+                                    Chưa trả vay
+                                  </option>
+                                </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                 Danh sách vay tiền thành công
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                         Mã số khách hàng
+		                        </th>
+		                        <th>
+		                          Họ tên khách hàng
+		                        </th>
+		                        <th>
+		                          Số ĐTDĐ
+		                        </th>
+		                        <th>
+		                          Nền tảng id
+		                        </th>
+		                        <th>
+		                          Số tiền có thể vay
+		                        </th>
+		                        <th>
+		                           Số tiền được vay
+		                        </th>
+                                <th>
+		                           Số tiền thực nhận
+		                        </th>
+                                <th>
+		                          Thời hạn vay
+		                        </th>
+                               <!--  <th>
+		                          服务费用
+		                        </th>
+                                <th>
+		                          已还金额
+		                        </th> -->
+                                <th>
+		                          Thời gian giải ngân
+		                        </th>
+                                <th>
+		                          Thời gian trả vay
+		                        </th>
+                                <th>
+		                          Thời gian khách hàng trả vay
+		                        </th>
+                           
+                                <th>
+		                          Trạng thái
+		                        </th>
+                                <th>
+		                          Trạng thái trả vay
+		                        </th>
+                                <th>
+                                 Ghi chú
+                                </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số <font id="totalrows"></font> tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+		<!--加载图片-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+<script>
+
+    function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0 && tempsele!=5)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var starTime1=$("#starTime1").val();
+	  var endTime1=$("#endTime1").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val(),startDate1:starTime1,endDate1:endTime1};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jkqx ="15ngày" ;
+		  var fwfy ;
+		  var yhje = 0;
+		  for(var i=0;i<list.length;i++)
+		  {
+		       
+		        //fwfy=(list[i].yuq_lx+list[i].sjsh_money-list[i].sjds_money).toFixed(2) ;
+
+		        if(list[i].jk_date ==2){		        
+		            jkqx="30ngày";
+		        }else if(list[i].jk_date ==1){
+		            jkqx="15ngày";
+		        }else if(list[i].jk_date ==3){
+		            jkqx="7ngày";
+		        }else if(list[i].jk_date ==4){
+		            jkqx="14ngày";
+		        }
+               //已还金额   
+              /*  if(list[i].sfyhw == "1"){
+                   yhje =(list[i].sjsh_money+list[i].yuq_lx).toFixed(2);
+               }else {
+                  yhje = 0;
+               } */
+				
+				html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].username+"</td><td>"+list[i].jk_money+"</td><td>"+list[i].sjsh_money+"</td><td>"+list[i].sjds_money+"</td><td>"+jkqx+"</td>";
+				if(list[i].sfyfk == 2)
+				{
+					html_ +="<td>Không có</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].fkdz_time+"</td>";
+				}
+				if(list[i].sfyfk == 2)
+				{
+					html_ +="<td>Không có</td>";
+				}
+				else
+				{
+					html_ +="<td>"+list[i].hkyq_time+"</td>";
+				}
+				
+				if(list[i].sfyhw == "0")
+				{
+				html_ += " <td>Không có</td>";
+				}
+				else
+				{
+				   html_ += " <td>"+list[i].hk_time+"</td>";
+				}
+                             
+				html_ +="<td><button class='btn btn-xs btn-info' onclick='f_dw("+list[i].id+")'>Định vị</button></td>";	
+				if(list[i].sfyhw == "0"){
+			        html_ +=" <td><span class='label label-info'>Không có</span></td>";
+				}else{
+				    html_ +=" <td><span class='label label-success'>Khách hàng đã trả vay</span></td>";
+				}
+				html_ +=" <td><span class='label label-warning' onclick='get_zx("+list[i].jkid+")'>Xem thông tin khách hàng</span></td>";
+				html_ +="</tr>";
+		   }
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			$("#hkst").val(data.hkstat);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+     function f_dw(id)
+   {
+	   $("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/dwxt.html?record_id="+id);
+   }
+    function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+    /*------查看更多信息(征信数据)------*/
+ function get_zx(jk_id)
+ {
+	$("#load_one").width($(document).width()-50);
+	   $("#load_one").height($(document).height()-60);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/user_chenggong.html?record_id="+jk_id);
+	
+	 
+ }
+   load_data();
+   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

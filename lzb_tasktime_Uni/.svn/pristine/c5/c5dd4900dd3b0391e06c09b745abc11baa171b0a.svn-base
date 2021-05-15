@@ -1,0 +1,66 @@
+package com.task;
+
+import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import service.encrypt.RSA;
+import service.encrypt.TripleDes;
+import service.util.Base64;
+import service.util.SslConnection;
+import service.util.Strings;
+import service.util.Tools;
+import service.util.Util;
+import service.version2.MsgBean;
+import service.version2.MsgBody;
+
+import com.service.AotuTHTSSHService;
+import com.service.AotuTxService;
+import com.service.AotuZDQRService;
+import com.service.AotuZMSHService;
+import com.thinkive.base.jdbc.DataRow;
+import com.thinkive.base.jdbc.connection.Configure;
+import com.thinkive.timerengine.Task;
+import com.util.TxUtil;
+/**
+ * 自动审核借款
+ * @author Administrator
+ *
+ */
+public class AotuZDQRTask implements Task
+{
+
+	private static Logger logger = Logger.getLogger(AotuZDQRTask.class);
+	private static AotuZDQRService aotuZDQRService = new AotuZDQRService();
+	public void execute() 
+	{
+		
+		List<DataRow> list = aotuZDQRService.getZDQRList();
+		for (DataRow dataRow : list) 
+		{
+			try {				
+			
+				// 确认投资
+			   	
+			} catch (Exception e) {
+				
+				logger.error(e);
+			}
+		}
+		
+	
+	}
+    
+	public static void main(String[] args) 
+	{
+		
+						
+	}
+	
+	
+}

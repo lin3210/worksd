@@ -1,0 +1,439 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+<script type="text/javascript" src="/plugins/video_play/ckplayer/ckplayer.js">
+
+    </script>
+
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="">
+		                Thẩm định lần cuối(三审)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        		        
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcmsAction?function=GetRecordListThree"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1">
+                                         Mã số khách hàng
+                                      </option>
+                                      <option value="2">
+                                        Họ tên
+                                      </option>
+                                      <option value="3">
+                                        Số ĐTDĐ
+                                      </option>
+                                      <option value="4">
+                                        Số CMND
+                                      </option>
+                                       <option value="5">
+                                        Điểm tín dụng
+                                      </option>
+                                      <option value="6">
+                                       h5
+                                      </option>
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;">
+		                                              Thời gian thẩm định:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                     Tìm kiếm
+			                  </button>
+			                  
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4>
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Thẩm định lần cuối(三审)
+		                  </h4>		                  
+		                  <div class="toolbar no-padding" id="sendall" >
+		                    <!-- <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down"></i>
+		                      </span>		                      
+		                    </div> -->
+		                    <div class="toolbar no-padding">
+		                    <!--
+		                  <h4>Số lượng gửi tin hôm nay：</h4><span id="sendUser"></span>&nbsp;
+		                  <h4>Số lượng quá hạn chưa update video：</h4><span id="userNum"></span>&nbsp;
+		                  <h4>Số lượng update video thành công：</h4><span id="sendVideo"></span>&nbsp;
+		                  <h4>Tổng tin nhắn gửi đi：</h4><span id="sendUserAll"></span>&nbsp;
+		                  <button data-bb-handler="success" type="button" class="btn btn-success" onclick="four_ck()">send</button>&nbsp; 	-->	                  		                   
+		                  </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head">
+		                    <thead>
+		                      <tr>
+		                        <th>
+		                          Mã số vay(借款编号)
+		                        </th>
+		                        <th>
+		                          Mã số khách hàng(用户编号)
+		                        </th>
+		                        <th>
+		                          Họ tên khách hàng(用户姓名)
+		                        </th>
+		                        <th>
+		                          Số ĐTDĐ(手机号码)
+		                        </th>
+		                        <th>
+		                          Số CMND(身份证号码)
+		                        </th>
+		                        <th>
+		                          Số tiền đề xuất vay(申请金额)
+		                        </th>
+		                        <th>
+		                          Số tiền có thể vay(审批金额)
+		                        </th>
+                                <th>
+		                          Thời hạn vay(借款期限)
+		                        </th>
+                                <th>
+                                Thời gian tải video lên(视频)
+                                </th>
+                                <th>
+		                          Thao tác(操作)
+		                        </th>
+                                <th>
+		                          Họ tên người thẩm định lần 2(二审人)
+		                        </th>
+                                
+                                <th>
+                                Thông tin cá nhân(客户个人信息)
+                                </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số <font id="totalrows"></font> tin, mỗi trang chứa được <font id="numperpage"></font> tin, hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font> trang </div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+			<!--加载图片-->
+     <div id="load_html1" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one1" style="margin-left:10px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!--视频审核(2.0)-->
+     <div id="load_html" style="display: none;">
+        <div class="modal-backdrop fade in"></div>
+         <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 1%; width:100%;">
+                <div >
+                 <iframe id="load_one" style="margin-left:80px; margin-top:50px;" ></iframe>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+         <!--二次确认-->
+     <div id="msg_content_html" style="display: none;">
+<div class="modal-backdrop fade in"></div>
+<div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+	<div class="modal-dialog" style="padding-top: 15%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="bootbox-close-button close" onclick="$('#msg_content_html').hide()">×</button>
+				<h4 class="modal-title"><span id="update_name"></span>SMS</h4>
+			</div>			
+			<div class="modal-footer">
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="send_left_user()">Xác nhận</button><button data-bb-handler="main" type="button" class="btn btn-primary" onclick="$('#msg_content_html').hide()">Đóng</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+		show_left_user();
+	});
+	
+	/* 获取短信 */
+	function show_left_user() {
+						
+            loadGetServer("/servlet/current/JBDcmsAction?function=GetSendUserId",{},function(data){
+            var msg=data.msg;
+            if(1==msg){            	
+            $("#userNum").html(data.userNum);
+            $("#sendUser").html(data.sendUser);
+            $("#sendUserAll").html(data.sendUserAll);
+            $("#sendVideo").html(data.sendVideo);
+            }else{
+            $("#sendall").hide();	
+            }	            
+        })
+    }
+	show_left_user();
+	
+	function four_ck()
+	   {		  
+		   $("#msg_content_html").show();
+	   }
+	
+	function send_left_user() {
+		
+        loadGetServer("/servlet/current/JBDcmsAction?function=SendUserId",{},function(data){
+        var msg=data.msg;
+        var err=data.error;
+        if(1==err){            	
+        	 alert(msg);
+        	 /* load_data(); */
+        	 show_left_user()
+        }else if(0==err){
+        	 alert(msg);
+        	/*  load_data(); */
+        	/* show_left_user() */
+        }else{
+        	 alert(msg);
+        	 /* load_data(); */
+        	/*  show_left_user() */
+        }	            
+    })
+}
+	
+	
+	
+	/* <!--获取数据源--> */
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  if(tempsele!=null && tempsele!=0 &&tempselect ==6)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jkqx ="";
+		 
+		  for(var i=0;i<list.length;i++)
+		  {
+		      if(list[i].jk_date==1){
+		        jkqx="15" ;
+		     }
+		     if(list[i].jk_date==2){
+		        jkqx="30" ;
+		     }
+		     if(list[i].jk_date==3){
+		        jkqx="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>" ;
+		     }
+		     if(list[i].jk_date==4){
+		        jkqx="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>" ;
+		     }
+		  
+		     if(list[i].spsj==null){
+			      html_ += "<tr id =id_"+list[i].jkid+"><td>"+list[i].jkid+"</td><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].idno+"</td><td>"+list[i].jk_money+"</td><td>"+list[i].sjsh_money+"</td><td>"+jkqx+"</td><td>Tạm thời chưa upload video</td>";
+			 } else{
+			 
+			       html_ += "<tr id =id_"+list[i].jkid+"><td>"+list[i].jkid+"</td><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].mobilephone+"</td><td>"+list[i].idno+"</td><td>"+list[i].jk_money+"</td><td>"+list[i].sjsh_money+"</td><td>"+jkqx+"</td><td>"+list[i].spsj+"</td>";
+			 } 
+			
+			  if(list[i].spdz == null|| list[i].spdz=="")
+			  {
+				  //html_ +="<td><button class='btn btn-xs'>暂无视频</button></td><td><button class='btn btn-xs btn-inverse'> 等待审核 </button></td>";
+				  html_ +="<td><button class='btn btn-xs btn-inverse'> Đang chờ xem xét </button></td>";
+			  }
+			  else
+			  {
+				  //html_ +="<td><button class='btn btn-xs btn-warning' onclick='sip_load("+list[i].id+")'>视频播放</button></td><td><button class='btn btn-xs btn-success' onclick='two_ck("+list[i].id+")'> 视频审核 </button></td>";
+				    html_ +="<td><button class='btn btn-xs btn-success' onclick='sip_load("+list[i].jkid+")'> Đánh giá video </button></td>";
+			  }
+			  if(list[i].skname == "" || list[i].skname == 0 || list[i].skname == null)
+			  {
+				   html_ +="<td>admin</td>";
+			  }
+			  else
+			  {
+				  html_ +="<td>"+list[i].skname+"</td>";
+			  }
+			  //if(list[i].username.slice(0,4)=="F168"){
+			  //	 html_ +="<td><button class='btn btn-xs btn-info' onclick='chg_user_loadF168("+list[i].jkid+","+list[i].id+")'>Xem thông tin cá nhân</button></td>";
+			  //}else{
+			  	html_ +="<td><button class='btn btn-xs btn-info' onclick='chg_user_load("+list[i].jkid+","+list[i].id+")'>Xem thông tin cá nhân</button></td>";
+			  //}
+			  html_ +="</tr>";
+		  }
+		  $("#load_data").append(html_);
+		  $("#tempselect").val(data.temp);
+		  $("#tempVelue").val(data.tempvalu);
+		  page_value(data);
+		  page_data();
+		  $("#btn-load").button("reset");
+	    });
+   }  
+   
+	
+	
+							
+	
+	
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   load_data();
+ 
+   
+  /*-------判断审核状态------*/
+ function radi()
+ {
+	var shh=$("input:radio[name='shh_end']:checked").val();
+	if(shh==1)
+	{
+		$("#shh_remark").val("thẩm định đã thông qua");
+	}
+	else if(shh==2)
+	{
+		$("#shh_remark").val("video bị trả về ");
+	}
+	else if(shh==3)
+	{
+		$("#shh_remark").val("thẩm định không thông qua ");
+	}
+	else if(shh==4)
+	{
+		$("#shh_remark").val("mức độ tín dụng không đủ ");
+	}
+ }
+  
+  /* <!--读取用户信息--> */
+   function chg_user_load(id,userid)
+   {
+	    $("#load_one1").width($(document).width()-50);
+	   $("#load_one1").height($(document).height()-60);
+	   $("#load_html1").show();
+	   $("#load_one1").attr("src","/sdmain/record_detail/user_chenggong.html?record_id="+id+"&userid="+userid);
+   }
+   
+   function chg_user_loadF168(id,userid)
+   {
+	    $("#load_one1").width($(document).width()-50);
+	   $("#load_one1").height($(document).height()-60);
+	   $("#load_html1").show();
+	   $("#load_one1").attr("src","/sdmain/record_detail/F168user_chenggong.html?record_id="+id+"&userid="+userid);
+   }
+   
+   function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+
+   /* <!--视频审核--> */
+   function sip_load(apply_id_)
+   {
+	   $("#load_one").width($(document).width()-170);
+	   $("#load_one").height($(document).height()-160);
+	   $("#load_html").show();
+	   $("#load_one").attr("src","/sdmain/record_detail/media_info.html?apply_id="+apply_id_);
+
+   }
+
+    function f_hide_ifm(id)
+   {
+	   $("#load_html").hide();
+	   $("#load_html1").hide();
+	   load_data();
+	   $("#id_"+id).css("background-color","powderblue");
+   }
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

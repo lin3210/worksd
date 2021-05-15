@@ -1,0 +1,439 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                               Danh sách trả vay thành công(催收还款)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box" style="width:1400px;">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=getRepayPlanList"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                          Toàn bộ
+                                      </option> 
+                                      <option value="1" id="dd">
+                                         Mã số khách hàng
+                                      </option>
+                                      <!-- <option value="2" id="ee">
+                                         Mã số vay
+                                      </option>
+                                      <option value="3" id="ff">
+                                         Mã số đơn hàng
+                                      </option>
+                                      <option value="4" id="gg">
+                                         Số ĐTDĐ
+                                      </option>
+                                      <option value="5" id="ggg">
+                                         Trả vay toàn bộ
+                                      </option>
+                                      <option value="6" id="gggg">
+                                         Trả vay một phần
+                                      </option>
+                                      <option value="7" id="ggggg">
+                                         Miễn trừ phí lãi quá hạn còn lại
+                                      </option>
+                                      <option value="8" id="gggggg">
+                                         Gia hạn trả vay
+                                       </option>-->
+                                      <option value="9" id="ggggkk">
+                                         ID truy thu
+                                      </option> 
+                                     <!--  <option value="10" id="ggggkkhh">
+                                         Ngân hàng trả vay
+                                      </option>-->
+                                      <option value="11" id="ggggkkhhll">
+                                         Số CMND
+                                      </option>
+                                    <!--  <option value="12" id="gggkkhl">
+                                         Time
+                                      </option>
+                                     <option value="13">
+                                         funpay
+                                     </option> -->
+                                  
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;" id="hh">
+		                                              Thời gian trả vay:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect1" onChange="gradeChange1()" >
+                                      <option value="0" id="ccc">
+                                          Toàn bộ
+                                      </option>
+                                      <option value="1" id="ddd">
+                                         Bình thường
+                                      </option>
+                                      <option value="2" id="eee">
+                                         Quá hạn
+                                      </option>
+                               	  </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                      Tìm kiếm
+			                  </button>
+			                  
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row" >
+		            <div class="col-md-12" >
+		              <div class="widget box" style="width:1400px;">
+		                <div class="widget-header">
+		                  <h4 id="ii">
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                                  Danh sách trả vay thành công(催收还款)
+		                  </h4>
+		                  
+		                  <div class="toolbar no-padding">
+		                     <h4 id="jj">Tổng số tiền trả vay：</h4><span id="sumsj"></span>&nbsp;
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" id="tableExcel1">
+		                    <thead>
+		                      <tr>
+		                        <th id="nnaa">
+		                         Mã số khách hàng(用户编号)
+		                        </th>
+                                <th id="ll">
+                                              Mã số vay (借款编号)
+                                </th>
+		                        <th id="mm">
+		                          Họ tên khách hàng(用户姓名)
+		                        </th>
+		                        <th id="qqqq">
+                                             Thời gian khách hàng trả vay(还款时间)
+                                </th>
+		                        <th id="qqqqss">
+                                             Số tiền vay(借款金额)
+                                </th>
+		                        
+		                        <th id="qq">
+                                             Thời hạn cho vay(借款期限)
+                                </th>
+                                
+                                <th id="oo">
+                                              Số tiền trả vay(还款金额)
+                                </th>
+                                <th>
+                                Lãi và phí dịch vụ(服务费)  <!--利息 -->
+		                        </th>
+                                <th id="xx">
+		                          Thời gian giải ngân(到期时间)
+		                        </th>
+                                <th id="ooo">
+                                              số tiền khuyến mãi(优惠券)
+                                </th>
+                                <th id="ppp">
+		                          Phương thức trả vay(还款方式)
+		                        </th>
+		                        <th >
+		                          Thời gian gia hạn(延期)
+		                        </th>
+                                <th id="rr">
+                                            Nv truy thu(催收人员名字)
+                                </th>
+                                <th id="ss">
+                                           Thời gian thao tác(操作时间)
+                                </th>
+                                <th id="ssfgsssssgs">
+                                         	 Ngày tiền vào(入账时间)
+                                </th>
+                                 <th id="tt">
+                                           Số ngày quá hạn(逾期天数)
+                                </th> 
+                                 <th id="uu">
+                                 Phí phạt quá hạn(逾期罚息)
+                                </th>     
+                                <!-- <th id="uuuuuu">
+                                          Nhân viên thao tác
+                                </th>     
+                                 <th id="zzzzzz">
+		                          Thao tác
+		                        </th>     -->     
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được <font id="numperpage"></font> tin, hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font>Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>		                
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script language="Javascript">  
+document.oncontextmenu=new Function("event.returnValue=true");  
+document.onselectstart=new Function("event.returnValue=true");  
+</script> 
+		
+<script>
+
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempsele1=$("#tempselect1").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  if(tempsele!=null && tempsele!=0 && tempsele!=5 && tempsele!=6 && tempsele!=7 && tempsele!=8)
+	  {
+		  if(tempval=="")
+		  {
+			  //ssalert("Vui lòng nhập thông tin tìm kiếm");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	  var para={curPage:$("#cupage").val(),temp:tempsele,temp1:tempsele1,tempvl:tempval,startDate:starTime,endDate:endTime};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");		
+		  $("#sumsj").html(data.hkcount);
+		  var list = data.list.data;
+		 
+		  var html_="";
+		  var html1_="";
+		  for(var i=0;i<list.length;i++)
+		  {
+		  	  var aa = list[i].sjds_money.replace(/,/g,"");
+			  var bb = list[i].lx.replace(/,/g,"");
+			  var jeje =parseInt(aa)+parseInt(bb);
+			  var zjezje = toThousands(jeje);
+			//利息
+		       var userid = list[i].userid;
+		       var sjshmoney =parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,"")); 
+		       var jklx = "";
+		       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+			       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+			       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+			        jklx = sv_js_lx;
+			   }else{
+				   if(list[i].jk_date==1){
+			    	      jklx="30%";
+					  }else if(list[i].jk_date==2) {
+						  jklx="30%";
+					  }else if(list[i].jk_date==4) {
+						  jklx="30%";
+					  }else if(list[i].jk_date==3) {
+						  jklx="30%";
+					  }
+			   }
+		       
+			  
+			  html_ += "<tr><td>"+list[i].userid+"</td><td>"+list[i].jkid+"</td><td>"+list[i].realname+"</td>";
+			  if(list[i].userhktime == undefined){
+			  	html_ +="<td>"+list[i].rechargetime+"</td>";
+			  }else{
+			  	html_ +="<td>"+list[i].userhktime+"</td>";
+			  }
+			  
+			  html_ +="<td>"+zjezje+"</td>";
+			  
+			   if(list[i].jk_date == 1)
+			  {
+				  html_ +="<td>15 Ngày</td>";
+			  }
+			  else if(list[i].jk_date == 2)
+			  {
+				  html_ +="<td>30 Ngày</td>";
+			  }
+			  else if(list[i].jk_date == 3)
+			  {
+				  html_ +="<td><span style='color:#0000FF;font-weight:bold'>7Ngày</span></td>";
+			  }
+			  else if(list[i].jk_date == 4)
+			  {
+				  html_ +="<td><span style='color:#0000FF;font-weight:bold'>14Ngày</span></td>";
+			  }
+			  html_ +="<td>"+list[i].rechargemoney+"</td>";
+			  if(jklx=="35%" || jklx=="25%") {
+				   html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
+			  }else {
+					html_ += " <td><span>"+jklx+"</span></td>";
+			  }
+			  html_ += " <td><span>"+list[i].fkdz_time+"</span></td>";
+			  
+			  if(list[i].hongbaoid == "1"){
+						if(list[i].fkdz_time_day>"2018-08-27 15:20:00" && list[i].fkdz_time_day<"2018-09-18 14:11:00"){
+							html_ += "<td>30,000</td>";	
+						}else if(list[i].fkdz_time_day>"2018-09-18 14:10:00"){
+							html_ += "<td>10,000</td>";	
+						}else{
+							html_ += "<td>50,000</td>";	
+						}
+			 }else{
+				 html_ += "<td>0</td>";
+			 }
+			
+			  if(list[i].remark == "全额还款")
+			  {
+				  html_ +="<td>Trả vay toàn bộ(A)</td>";
+			  }
+			  else if(list[i].remark == "逾期利息还款" || list[i].remark == "逾期利息还完，部分本金还款" || list[i].remark == "部分本金还款")
+			  {
+				  html_ +="<td>Trả vay một phần(B)</td>";
+			  }
+			  else if(list[i].remark == "完成还款，部分逾期利息还款")
+			  {
+				  html_ +="<td>Miễn trừ phí lãi quá hạn còn lại(C)</td>";
+			  }
+			  else if(list[i].remark == "延期还款")
+			  {
+				  html_ +="<td>Gia hạn trả vay(D)</td>";
+			  }
+			  
+			   //延期期限
+			  var yqdate = list[i].yqdate;
+			  var yqdateType = "Không có";
+			  if(list[i].remark == "延期还款"){
+				  if(1==yqdate){
+					  yqdateType = "15 Ngày";
+				  }else if(2==yqdate){
+					  yqdateType = "30 Ngày";
+				  }else if(3==yqdate){
+					  yqdateType = "7 Ngày";
+				  }else if(4==yqdate){
+					  yqdateType = "14 Ngày";
+				  }
+			  }
+			  html_ += "<td>"+yqdateType+"</td>";
+			  
+			  var czname = "";
+			  var qrname = "";
+			  if(list[i].qrhkcode == "3001"){
+			  		qrname = "PHAM THI NGA" ;
+			  }else if(list[i].qrhkcode == "3002"){
+			  		qrname = "tra ket toan" ;
+			  }
+			  
+			
+			  
+			 /*  html_ +="<td>"+list[i].dqyqts+"</td>"; */
+			  html_ +="<td>"+list[i].cuishouname+"</td>";
+			  html_ +="<td>"+list[i].rechargetime+"</td>";
+			
+			  if(list[i].bankjztime == undefined){
+			  		html_ +="<td>khong</td>";
+			  }else{
+			  		html_ +="<td>"+list[i].bankjztime+"</td>";
+			  }
+			  html_ +="<td>"+list[i].dqyqts+"</td>";
+			  if(list[i].dqyqlx == undefined){
+			  		html_ +="<td>"+list[i].yuq_lx+"</td>";
+			  }else{
+			  		html_ +="<td>"+toThousands(list[i].dqyqlx)+"</td>";
+			  }
+			 // html_ +="<td>"+list[i].caiwuname+"</td>";
+			 
+			  html_ +="</tr>";
+		  }		 
+		  $("#load_data").append(html_);		 
+		  $("#tempselect").val(data.temp);
+		  $("#tempselect1").val(data.temp1);
+		  $("#tempVelue").val(data.tempvalu);
+		  page_value(data);
+		  page_data();
+		  $("#btn-load").button("reset");
+	    });
+   }  
+function qr_hk(hkid_){
+ 	var para={hkid:hkid_};
+	loadGetServer("/servlet/current/JBDcms2Action?function=QRHKorder",para,function(data){
+	  	if(data.error<0){
+	  	
+	  		alert(data.msg);
+	  	}
+	});
+	load_data();
+ }
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   function gradeChange1(){
+	   var tempselect1=$("#tempselect1").val();
+	}
+   
+   load_data();
+   
+   $("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+   
+   function toThousands(num) {  
+	    var num = (num || 0).toString(), result = '';  
+	    while (num.length > 3) {  
+	        result = ',' + num.slice(-3) + result;  
+	        num = num.slice(0, num.length - 3);  
+	    }  
+	    if (num) { result = num + result; }  
+	   	return result;  
+	}
+</script>
+
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

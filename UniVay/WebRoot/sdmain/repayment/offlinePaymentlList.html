@@ -1,0 +1,1036 @@
+
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+</style>
+
+			<div  class="container" style="width:2000px">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="fa fa-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                DS trả vay(操作还款)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/JBDcms2Action?function=GetRecordListChg02"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                       Toàn bộ
+                                      </option>
+                                      <option value="1" id="dd">
+                                       Mã số khách hàng
+                                      </option>
+                                      <option value="2" id="ee">
+                                    Họ tên khách hàng
+                                      </option>
+                                      <option value="4" id="ff">
+                                         Số CMND
+                                      </option>
+                                      <option value="7" id="gg">
+                                        Kênh thanh toán
+                                      </option>
+               
+                                 
+                                                               
+                               	  </select>
+                              </div>
+                              <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Điều kiện truy vấn">
+		                      </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;" id="hh">
+		                                            Thời gian tiền vào TK
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+                              <label class="col-md-0 control-label" style="padding-top:5px;" id="ii">
+		                                              Trạng thái trả vay
+		                      </label>
+                              <div class="col-md-1">
+                                <select class="form-control" name="select" id="hkst">
+                                  <option value="0" id="jj">
+                                    Vui lòng chọn
+                                  </option>
+                                  <option value="1" id="kk">
+                                    Chưa trả vay
+                                  </option>
+                                  <option value="2" id="ll">
+                                    Đã trả vay 
+                                  </option>
+                                </select>
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                      Tìm kiếm
+			                  </button>
+			                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                  
+			                  <button type="button" class="btn btn-success" onclick="method5('tableExcel')">excel</button>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="mm">
+		                    <i class="fa fa-reorder">
+		                    </i>
+		                    DS trả vay(操作还款)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="fa fa-angle-down">
+		                        </i>
+		                      </span>
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" id="tableExcel1">
+		                    <thead>
+		                      <tr>
+		                        <th id="nn">
+		                         Mã số khách hàng(用户编号)
+		                        </th>
+		                        <th id="oo">
+		                           Họ tên khách hàng(用户姓名)
+		                        </th>
+		                        <th id="pp">
+		                          Số CMND(身份证号码)
+		                        </th>
+		                        
+		                        <th id="rr">
+		                         Chưa trả(尚未付款)
+		                        </th> 
+		                         <th id="ss">
+		                         Đăng ủy nhiệm chi(还款凭证)
+		                        </th>     
+		                         <th id="bbb">
+		                         Dừng tính lãi(停止计算利息)
+		                        </th>     
+		                         <th id="aaa">
+		                         Thời gian đăng ủy nhiệm chi(上次凭证时间)
+		                        </th>     
+		                        <th id="qqqqqq">
+		                         Phiếu khuyến mãi(优惠券)
+		                        </th>
+		                        <th id="tt">
+		                          Số tiền trả vay(借款金额)
+		                        </th>
+		                        <th id="uu">
+		                        Phí phạt quá hạn(逾期服务费)
+		                        </th>
+		                        <th id="vv">
+		                          Tổng số tiền(总还款金额)
+		                        </th>
+                                <th id="ww">
+		                          Thời hạn vay(借款期限)
+		                        </th>
+		                         <th>
+		                         Lãi và phí dịch vụ(服务费)  <!--利息 -->
+		                        </th>
+                                <th id="xx">
+		                          Thời gian giải ngân(放款时间)
+		                        </th>
+                                <th id="yy">
+		                          Thời gian trả vay(到期时间)
+		                        </th>
+		                        <th id="ccc">
+		                         Thời hạn gia hạn(延期天数)
+		                        </th>     
+		                         <th id="ddd">
+		                         Thời hạn gia hạn trả vay(延期到期时间)
+		                        </th> 
+                                <th id="zz">
+		                          Thao tác(操作)
+		                        </th>
+                      
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng cộng<font id="totalrows"></font> tin, mỗi trang chứa được <font id="numperpage"></font> tin, hiện tại trang số <font id="currentpage"></font> / <font id="totalpages"></font> Trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+		<!--还款审核-->
+     <div id="two_content_html" style="display: none;height:1000px;width:1000px;">
+        <div class="modal-backdrop fade in"></div>
+        <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog" style="padding-top: 10%;">
+                <div class="modal-content" style="height:900px;width:850px;">
+                    <div class="modal-header">
+                        <button type="button" class="bootbox-close-button close" onclick="$('#two_content_html').hide()">×</button>
+                        <h4 class="modal-title"><span id="update_name"></span>Thẩm định trả vay</h4> <!-- 还款审核 -->
+                    </div>
+                    <div class="modal-body">
+                          <div class="bootbox-body"  style="height:760px;width:800px;">
+                             <div class="col-md-12">
+                                <div class="widget box">
+                                    <div class="widget-header">
+                                    </div>
+                                    <div class="widget-content" style="padding:15px;">
+                                        <form class="form-horizontal row-border" >
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Mã số khách hàng：</label><!-- 用户编号 -->
+                                                <div class="col-md-9">
+                                                    <input type="text" name="user_id" id="user_id" readonly class="form-control required">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Thời gian đáo hạn：</label><!-- 到期时间-->
+                                                <div class="col-md-9" >
+                                                    <input type="text" name="dq_sj" id="dq_sj" readonly class="form-control required url">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Thời gian trả vay：</label><!-- 还款时间-->
+                                                <div class="col-md-6" >
+                                                    <input type="text" name="re_sj" id="re_sj" class="form-control required url" style="width:200px;">
+                                                    
+                                                </div>
+                                                <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="confirmhksj()">Tìm kiếm số tiền</button>
+                                            </div>
+                                            
+                                            <div class="form-group" id="hkjehkje">
+                                                <label class="col-md-3 control-label">Số tiền trả vay：</label><!-- 还款金额 -->
+                                                <div class="col-md-9">
+                                                    <input type="text" name="re_money" id="re_money" readonly class="form-control required email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="yqjeyqje" >
+                                                <label class="col-md-3 control-label">Số tiền quá hạn：</label><!-- 逾期金额 -->
+                                                <div class="col-md-9">
+                                                    <input type="text" name="yq_money" id="yq_money" readonly class="form-control required email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="zjezje" >
+                                                <label class="col-md-3 control-label">Tổng số tiền cần trả：</label><!-- 总应还款金额 -->
+                                                <div class="col-md-9">
+                                                    <input type="text" name="zje_money" id="zje_money" readonly class="form-control required email">
+                                                </div>
+                                            </div>
+                                            <div id="hkje" class="form-group  has-error" id="has-group" style="display: none;">
+                                		<label class="col-md-3 control-label">Số tiền trả vay：<!-- 还款金额-->
+                                  		</label>
+                                		<div class="col-md-9">
+                                  		<input type="text" name="minl1" id="edu" class="form-control required" minlength="5" onBlur="iblur()" onkeyup="onKeyPrice(this);">
+                                  		<label for="range1" generated="true" class="has-error help-block" id="lab">Vui lòng nhập số tiền trả vay</label><!--请输入还款金额-->
+                                  		</div>
+                              			</div>
+                              			<div class="form-group">
+                                                <label class="col-md-3 control-label">Ngân hàng trả vay：</label><!-- 审核结果-->
+                                                <div class="col-md-9">
+                                                    <label class='radio-inline'><input name='hk_bank' value='1'  type='radio'  onclick="radibank()">Agribank</label>
+                                                    <label class='radio-inline'><input name='hk_bank' value='2'  type='radio' checked="checked" onclick="radibank()">Vietcombank</label>
+                                                    <label class='radio-inline'><input name='hk_bank' value='3'  type='radio' checked="checked" onclick="radibank()">Sacombank</label>
+                                                    <label class='radio-inline'><input name='hk_bank' value='4'  type='radio' checked="checked" onclick="radibank()">Seabank</label>
+                                                </div>
+                                         </div>
+                                         <div class="form-group">
+                                                <label class="col-md-3 control-label">Ngày tiền vào：</label><!-- 银行进账时间-->
+                                                <div class="col-md-6" >
+                                                    <input type="text" name="re_jz" id="re_jz" class="form-control required url" style="width:200px;">
+                                                </div>
+                                            </div>
+                                        <div id="hkbankorder" class="form-group  has-success" id="has-group">
+                                		<label class="col-md-3 control-label">Mã đơn：<!-- 订单号-->
+                                  		</label>
+                                		<div class="col-md-9">
+                                  		<input type="text" name="minl1" id="orderid" class="form-control required" minlength="5" >
+                                  		<label for="range1" generated="true" class="has-success help-block" id="laborderid">Vui lòng nhập mã đơn</label><!--请输入订单号-->
+                                  		</div>
+                              			</div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Kết quả thẩm định：</label><!-- 审核结果-->
+                                                <div class="col-md-9">
+                                                    <label class='radio-inline'><input name='shh_end' value='1'  type='radio'  onclick="radi()">Trả vay toàn bộ</label><!--全额还款-->
+                                                    <label class='radio-inline'><input name='shh_end' value='2'  type='radio' checked="checked" onclick="radi()">Trả vay một phần</label><!--部分还款-->
+                                                    <label class='radio-inline'><input name='shh_end' value='3'  type='radio' checked="checked" onclick="radi()">Miễn trừ phí lãi quá hạn còn lại</label><!--免除剩余逾期利息-->
+                                                    <label class='radio-inline'><input name='shh_end' value='4'  type='radio' checked="checked" onclick="radi()">Gia hạn trả vay</label><!-- 延期还款-->
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="yqhk" style="display: none;">
+                                                <label class="col-md-3 control-label">Thời gian gia hạn：</label><!-- 延期期限-->
+                                                <div class="col-md-9">
+                                                    <label class='radio-inline'><input name='shh_fenq' value='1'  type='radio'   onclick="radifq()">15 Ngày</label>
+                                                    <label class='radio-inline'><input name='shh_fenq' value='2'  type='radio'   onclick="radifq()">30 Ngày</label>
+                                                    <label class='radio-inline'><input name='shh_fenq' value='3'  type='radio'   onclick="radifq()">7 Ngày</label>
+                                                    <label class='radio-inline'><input name='shh_fenq' value='4'  type='radio'   onclick="radifq()">14 Ngày</label>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group" id="jsyqts" style="display: none;">
+                                                <label class="col-md-3 control-label">Giảm số ngày quá hạn：</label>延期期限
+                                                <div class="col-md-9">
+                                                    <label class='radio-inline'><input name='shh_jsyqts' value='0'  type='radio'   onclick="radijs()">0 Ngày</label>
+                                                    <label class='radio-inline'><input name='shh_jsyqts' value='1'  type='radio'   onclick="radijs()">1 Ngày</label>
+                                                    <label class='radio-inline'><input name='shh_jsyqts' value='2'  type='radio'   onclick="radijs()">2 Ngày</label>
+                                                </div>
+                                            </div> -->
+                                             
+                                            <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
+                                            <input type="hidden" name="jkqx" id="jkqx" class="form-control required url">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bb-handler="success" type="button" class="btn btn-success" onclick="sub_Two()">Xác nhận</button>
+                        <button data-bb-handler="main" type="button" class="btn btn-primary" onclick="clos_ck()">Đóng trang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+		<div class="widget-content"  style="display: none;">
+			<table class="table table-hover table-striped table-bordered table-highlight-head" id="tableExcel">
+				<thead>
+					<tr>
+						<th id="nn">Mã số khách hàng</th>
+						<th id="oo">Họ tên khách hàng</th>
+						<th id="pp">Số CMND</th>
+		
+						<th id="rr">Chưa trả</th>
+						<th id="ss">Đăng ủy nhiệm chi</th>
+						<th id="bbb">Dừng tính lãi</th>
+						<th id="aaa">Thời gian đăng ủy nhiệm chi</th>
+						<th id="qqqqqq">Phiếu khuyến mãi</th>
+						<th id="tt">Số tiền trả vay</th>
+						<th id="uu">Phí phạt quá hạn</th>
+						<th id="vv">Tổng số tiền</th>
+						<th id="ww">Thời hạn vay</th>
+						<th>Lãi và phí dịch vụ <!--利息 -->
+						</th>
+						<th id="xx">Thời gian giải ngân</th>
+						<th id="yy">Thời gian trả vay</th>
+						<th id="ccc">Thời hạn gia hạn</th>
+						<th id="ddd">Thời hạn gia hạn trả vay</th>
+						<th id="zz">Thao tác</th>
+		
+					</tr>
+				</thead>
+				<tbody id="load_data1">
+				</tbody>
+			</table>
+		</div>
+<script language="Javascript">
+	document.oncontextmenu = new Function("event.returnValue=true");
+	document.onselectstart = new Function("event.returnValue=true");
+</script> 
+<script>
+	function changeLan() {
+		loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeDHK",
+				{}, function(data) {
+					if (data.error == 1) {
+						document.getElementById("aa").innerHTML = data.aa;
+						document.getElementById("bb").innerHTML = data.bb;
+						document.getElementById("cc").innerHTML = data.cc;
+						document.getElementById("dd").innerHTML = data.dd;
+						document.getElementById("ee").innerHTML = data.ee;
+						document.getElementById("ff").innerHTML = data.ff;
+						document.getElementById("gg").innerHTML = data.gg;
+						document.getElementById("hh").innerHTML = data.hh;
+						document.getElementById("ii").innerHTML = data.ii;
+						document.getElementById("jj").innerHTML = data.jj;
+						document.getElementById("kk").innerHTML = data.kk;
+						document.getElementById("ll").innerHTML = data.ll;
+						document.getElementById("mm").innerHTML = data.mm;
+						document.getElementById("nn").innerHTML = data.nn;
+						document.getElementById("oo").innerHTML = data.oo;
+						document.getElementById("pp").innerHTML = data.pp;
+						document.getElementById("qq").innerHTML = data.qq;
+						document.getElementById("rr").innerHTML = data.rr;
+						document.getElementById("ss").innerHTML = data.ss;
+						document.getElementById("tt").innerHTML = data.tt;
+						document.getElementById("uu").innerHTML = data.uu;
+						document.getElementById("vv").innerHTML = data.vv;
+						document.getElementById("ww").innerHTML = data.ww;
+						document.getElementById("xx").innerHTML = data.xx;
+						document.getElementById("yy").innerHTML = data.yy;
+						document.getElementById("zz").innerHTML = data.zz;
+						document.getElementById("aaa").innerHTML = data.aaa;
+						document.getElementById("bbb").innerHTML = data.bbb;
+						document.getElementById("ccc").innerHTML = data.ccc;
+						document.getElementById("ddd").innerHTML = data.ddd;
+
+					} else {
+						alert("error!");
+					}
+
+				});
+
+	}
+</script>
+<script>
+
+    function init2(t){
+      var d=new Date(t);
+	  var year=d.getFullYear();
+	  var day=d.getDate();
+	  var month=+d.getMonth()+1;
+	  var hour=d.getHours();
+	  var minute=d.getMinutes();
+	  var second=d.getSeconds();
+	  var misec=d.getMilliseconds();
+	  var f=year+"-"+formate(month)+"-"+formate(day)+" "+formate(hour)+":"+formate(minute)+":"+formate(second);
+	  return f ;
+	//window.setTimeout(init,1);
+	}
+  function formate(d){
+	  return d>9?d:'0'+d;
+ }
+
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	function onKeyPrice(t)
+            {
+               var stmp = "";
+               if(t.value==stmp) return;
+               var ms = t.value.replace(/[^\d\.]/g,"").replace(/(\.\d{2}).+$/,"$1").replace(/^0+([1-9])/,"$1").replace(/^0+$/,"0");
+               var txt = ms.split(".");
+               while(/\d{4}(,|$)/.test(txt[0]))
+                 txt[0] = txt[0].replace(/(\d)(\d{3}(,|$))/,"$1,$2");
+               t.value = stmp = txt[0]+(txt.length>1?"."+txt[1]:"");
+            }
+	
+	function toThousands(num) {  
+	    var num = (num || 0).toString(), result = '';  
+	    while (num.length > 3) {  
+	        result = ',' + num.slice(-3) + result;  
+	        num = num.slice(0, num.length - 3);  
+	    }  
+	    if (num) { result = num + result; }  
+    return result;  
+}
+	function load_data()
+	{
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  if(tempsele!=null && tempsele!=0)
+	  {
+		  if(tempval=="")
+		  {
+			  alert("Vui lòng nhập dữ liệu truy vấn");
+			  $("#btn-load").button("reset");
+			  return;
+		  }
+	  }
+	 
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,hkstat:$("#hkst").val()};
+	  loadGetServer($("#formurl").val(),para,function(data){
+		  $("#load_data").html("");
+		  $("#load_data1").html("");
+		  if(data.error> 0)
+		  {
+			  var list = data.list.data;
+			  var list2 = data.list2.data;			  
+			  var html_="";
+			  var html1_="";
+			  var jkqx ="15Ngày";
+			  var fwfy ;
+			  var yhje = 0;
+			  for(var i=0;i<list.length;i++)
+			  {
+			       
+			        //fwfy=(list[i].yuq_lx+list[i].sjsh_money-list[i].sjds_money).toFixed(2) ;
+	
+			        if(list[i].jk_date ==2){		        
+			            jkqx="30Ngày";
+			        }else if(list[i].jk_date ==1){
+			            jkqx="15Ngày";
+			        }else if(list[i].jk_date ==3){
+			            jkqx="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>";
+			        }else if(list[i].jk_date ==4){
+			            jkqx="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>";
+			        }
+	               //宸茶繕閲戦   
+	              /*  if(list[i].sfyhw == "1"){
+	                   yhje =(list[i].sjsh_money+list[i].yuq_lx).toFixed(2);
+	               }else {
+	                  yhje = 0;
+	               } */
+					
+			      //利息
+				       var userid = list[i].id;
+	                   var sjshmoney = parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+				       var jklx = "";
+				       if(list[i].sjds_money!=null &&  list[i].sjds_money!="" &&  list[i].sjds_money!="null" && list[i].sjsh_money != undefined){
+					       var sjsh_money =  parseInt(list[i].sjds_money.replace(/,/g,""))+parseInt(list[i].lx.replace(/,/g,""));
+					       var sv_js_lx=  parseInt(list[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+					        jklx = sv_js_lx;
+					   }else{
+						   if(list[i].jk_date==1){
+								  jklx="30%";
+							  }else if(list[i].jk_date==2) {
+								  jklx="30%";
+							  }else if(list[i].jk_date==4) {
+								  jklx="30%";
+							  }else if(list[i].jk_date==3) {
+								  jklx="30%";
+							  } 
+					   }
+					  
+					  
+					html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td>"+list[i].idno+"</td>";
+					if(list[i].hkqd == "1" &&list[i].sfyhw == "0"){
+						if(list[i].hksb == "1"){
+							html_ +="<td><button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list[i].jkid+"')\">Chưa nhận được</button></td>";
+						}else{
+							html_ +="<td>đã nhấn</td>";
+						}
+						html_ +="<td><button class='btn btn-success btn-info' onclick=\"window.open('http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Xem ủy nhiệm chi</button></td>";//
+						if(list[i].tzjx == "0"){
+							html_ += "<td><button class='btn btn-xs btn-info'  onclick=\"tzjx('"+list[i].jkid+"')\">Dừng tính lãi</button></td>";
+						}else{
+							html_ += "<td>Đã dừng</td>";
+						}
+						html_ +="<td>"+list[i].hkpz_time+"</td>";
+					}/* else if(list[i].hkqd == "2"&&list[i].sfyhw == "0"){
+						html_ +="<td>Kênh 2<button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list[i].jkid+"')\">未收到（Chưa nhận được）</button></td>";
+					}else if(list[i].hkqd == "3"&&list[i].sfyhw == "0"){
+						html_ +="<td>Kênh 3<button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list[i].jkid+"')\">未收到（Chưa nhận được）</button></td>";
+					}else if(list[i].hkqd == "4"&&list[i].sfyhw == "0"){
+						html_ +="<td>Kênh 4<button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list[i].jkid+"')\">未收到（Chưa nhận được）</button></td>";
+					} */else{
+						html_ +="<td>Không có</td><td>Không có</td><td>Không có</td><td>Không có</td>";
+					}
+					  var aa = list[i].sjsh_money.replace(/,/g,"");
+			      
+			      
+			      var bb = list[i].yuq_lx.replace(/,/g,"")
+			      
+			        var hkjeje =parseInt(aa)+parseInt(bb);
+			        var hkje = toThousands(hkjeje);
+			        if(list[i].hongbaoid == "1"){
+						if(list[i].fkdz_time_day>"2018-08-27 15:20:00" && list[i].fkdz_time_day<"2018-09-18 14:11:00"){
+							html_ += "<td>30,000</td>";	
+						}else if(list[i].fkdz_time_day>"2018-09-18 14:10:00"){
+							html_ += "<td>10,000</td>";	
+						}else{
+							html_ += "<td>50,000</td>";	
+						}
+					}else{
+						html_ += "<td>0</td>";
+					}
+					html_ +="<td>"+list[i].sjsh_money+"</td><td>"+list[i].yuq_lx+"</td><td>"+hkje+"</td><td>"+jkqx+"</td>";
+					
+					if(jklx=="35%" || jklx=="25%") {
+						   html_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
+					}else {
+							html_ += " <td><span>"+jklx+"</span></td>";
+					}
+					html_ +="<td>"+list[i].fkr_time+"</td>";
+					html_ +="<td>"+list[i].hkyq_time+"</td>";
+					if(list[i].hkfq_time != undefined){
+			         	html_ +="<td>"+list[i].hkfq_day+"Ngày</td><td>"+list[i].hkfq_time+"</td>";
+			        }else{
+			        	html_ +="<td>Không có</td><td>Không có</td>";
+			        }
+					 //var totolMoney=parseInt(list[i].sjds_money)+parseInt(fwfy);
+					if(list[i].sfyhw == "0")
+					{
+					html_ += " <td><button class='btn btn-xs btn-info'  onclick=\"two_ck('"+list[i].jkid+"')\">Thao tác</button></td>";
+					}
+					else
+					{
+					   html_ += " <td>"+list[i].hk_time+"</td>";
+					}
+					html_ +="</tr>";
+			   }
+			  
+			  /*隐藏的方法  */			  
+			  for(var i=0;i<list2.length;i++)
+			  {
+				  				  
+			        //fwfy=(list2[i].yuq_lx+list2[i].sjsh_money-list2[i].sjds_money).toFixed(2) ;
+	
+			        if(list2[i].jk_date ==2){		        
+			            jkqx="30Ngày";
+			        }else if(list2[i].jk_date ==1){
+			            jkqx="15Ngày";
+			        }else if(list2[i].jk_date ==3){
+			            jkqx="<span style='color:#0000FF;font-weight:bold'>7Ngày</span>";
+			        }else if(list2[i].jk_date ==4){
+			            jkqx="<span style='color:#0000FF;font-weight:bold'>14Ngày</span>";
+			        
+			        }
+	               //宸茶繕閲戦   
+	              /*  if(list2[i].sfyhw == "1"){
+	                   yhje =(list2[i].sjsh_money+list2[i].yuq_lx).toFixed(2);
+	               }else {
+	                  yhje = 0;
+	               } */
+			        //利息
+				       var userid = list2[i].id;
+	               
+	               		
+	               		
+				       var sjshmoney = parseInt(list2[i].sjds_money.replace(/,/g,""))+parseInt(list2[i].lx.replace(/,/g,""));
+				       var jklx = "";
+				       
+				       if(list2[i].sjds_money!=null &&  list2[i].sjds_money!="" &&  list2[i].sjds_money!="null" && list2[i].sjsh_money != undefined){
+					       var sjsh_money =  parseInt(list2[i].sjds_money.replace(/,/g,""))+parseInt(list2[i].lx.replace(/,/g,""));
+					       var sv_js_lx=  parseInt(list2[i].lx.replace(/,/g,""))*100 / sjsh_money+"%";
+					        jklx = sv_js_lx;
+					   }else{
+						   if(list2[i].jk_date==1){
+								  jklx="30%";
+							  }else if(list2[i].jk_date==2) {
+								  jklx="30%";
+							  }else if(list2[i].jk_date==4) {
+								  jklx="30%";
+							  }else if(list[i].jk_date==3) {
+								  jklx="30%";
+							  }
+					   }
+					  
+					  
+					html1_ += "<tr><td>"+list2[i].id+"</td><td>"+list2[i].realname+"</td><td>"+list2[i].idno+"</td>";
+					if(list2[i].hkqd == "1" &&list2[i].sfyhw == "0"){
+						if(list2[i].hksb == "1"){
+							html1_ +="<td><button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list2[i].jkid+"')\">Chưa nhận được</button></td>";
+						}else{
+							html1_ +="<td>đã nhấn</td>";
+						}
+						
+						html1_ +="<td><button class='btn btn-success btn-info' onclick=\"window.open('http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Xem ủy nhiệm chi</button></td>";//
+						
+						if(list2[i].tzjx == "0"){
+							html1_ += "<td><button class='btn btn-xs btn-info'  onclick=\"tzjx('"+list2[i].jkid+"')\">Dừng tính lãi</button></td>";
+						}else{
+							html1_ += "<td>Đã dừng</td>";
+						}
+						html1_ +="<td>"+list2[i].hkpz_time+"</td>";
+					}/* else if(list2[i].hkqd == "2"&&list2[i].sfyhw == "0"){
+						html1_ +="<td>Kênh 2<button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list2[i].jkid+"')\">未收到（Chưa nhận được）</button></td>";
+					}else if(list2[i].hkqd == "3"&&list2[i].sfyhw == "0"){
+						html1_ +="<td>Kênh 3<button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list2[i].jkid+"')\">未收到（Chưa nhận được）</button></td>";
+					}else if(list2[i].hkqd == "4"&&list2[i].sfyhw == "0"){
+						html1_ +="<td>Kênh 4<button class='btn btn-xs btn-info'  onclick=\"tx_sb('"+list2[i].jkid+"')\">未收到（Chưa nhận được）</button></td>";
+					} */else{
+						html1_ +="<td>Không có</td><td>Không có</td><td>Không có</td><td>Không có</td>";
+					}
+					  var aa = list2[i].sjsh_money.replace(/,/g,"");
+			      
+			      
+			      var bb = list2[i].yuq_lx.replace(/,/g,"")
+			      
+			        var hkjeje =parseInt(aa)+parseInt(bb);
+			        var hkje = toThousands(hkjeje);
+			        if(list2[i].hongbaoid == "1"){
+						if(list2[i].fkdz_time_day>"2018-08-27 15:20:00" && list2[i].fkdz_time_day<"2018-09-18 14:11:00"){
+							html1_ += "<td>30,000</td>";	
+						}else if(list2[i].fkdz_time_day>"2018-09-18 14:10:00"){
+							html1_ += "<td>10,000</td>";	
+						}else{
+							html1_ += "<td>50,000</td>";	
+						}
+					}else{
+						html1_ += "<td>0</td>";
+					}
+					html1_ +="<td>"+list2[i].sjsh_money+"</td><td>"+list2[i].yuq_lx+"</td><td>"+hkje+"</td><td>"+jkqx+"</td>";
+					if(jklx=="30%" || jklx=="25%") {
+						   html1_ += " <td><span style='color:#FF00FF;font-weight:bolder'>"+jklx+"</span></td>";
+					}else {
+							html1_ += " <td><span>"+jklx+"</span></td>";
+					}
+					
+					html1_ +="<td>"+list2[i].fkr_time+"</td>";
+					html1_ +="<td>"+list2[i].hkyq_time+"</td>";
+					if(list2[i].hkfq_time != undefined){
+			         	html1_ +="<td>"+list2[i].hkfq_day+"Ngày</td><td>"+list2[i].hkfq_time+"</td>";
+			        }else{
+			        	html1_ +="<td>Không có</td><td>Không có</td>";
+			        }
+					 //var totolMoney=parseInt(list2[i].sjds_money)+parseInt(fwfy);
+					if(list2[i].sfyhw == "0")
+					{
+					html1_ += " <td><button class='btn btn-xs btn-info'  onclick=\"two_ck('"+list2[i].jkid+"')\">Thao tác</button></td>";
+					}
+					else
+					{
+					   html1_ += " <td>"+list2[i].hk_time+"</td>";
+					}
+					html1_ +="</tr>";
+			   }
+			  
+				$("#load_data").append(html_);				
+				$("#load_data1").append(html1_);
+				$("#tempselect").val(data.temp);
+				$("#tempVelue").val(data.tempvalu);
+				$("#hkst").val(data.hkstat);
+				page_value(data);
+				page_data();
+				$("#btn-load").button("reset");
+		  }
+		  else
+		  {
+			  alert(data.msg);
+		  }
+	    });
+   }  
+   
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+  /*  <!-------二次审核-------> */
+  function two_ck(reid)
+  {
+	  get_Detail(reid);
+	  radi();
+  }
+  function confirmhksj() {
+		var hksj = $("#re_sj").val();
+		var jkid = $("#reco_id").val();
+		$("#hkje").hide();
+		$("#yqhk").hide();
+		$("#jsyqts").hide();
+		$("#edu").val("");
+		get_Detail(jkid,hksj);
+	}
+   /*  <!--查询还款的数据--> */
+  function get_Detail(reid,hksj)
+  {
+	  /* $("#shh_money").val("");
+	  iblur(); */
+	  var para={recid:reid,hktime:hksj};
+	  loadGetServer("/servlet/current/JBDcmsAction?function=GetHKinformation",para,function(data){		    
+		  if(data.error> 0)
+		  {
+			  $("#two_content_html").show();
+			  $("input[name='shh_end']").get(0).checked=true;
+			  $("input[name='hk_bank']").get(0).checked=true;
+			  //$("input[name='shh_jsyqts']").get(0).checked=true;
+			  $("input[name='shh_fenq']").get(0).checked=true;
+			  var rec=data.jkinfo;
+			  var jkqx ="" ;
+			  if(rec.jk_date=="1"){
+			     jkqx =15 ;
+			  }else if (rec.jk_date=="2"){
+			     jkqx =30 ;
+			  }else if (rec.jk_date=="3"){
+			     jkqx =7 ;
+			  }else if (rec.jk_date=="4"){
+			     jkqx =14 ;
+			  }
+			  $("#user_id").val(rec.userid);
+			  $("#re_money").val(rec.sjsh_money);
+			  $("#yq_money").val(data.yqlx);
+			  $("#zje_money").val(data.zje);
+			  $("#re_qx").val(jkqx+"天");
+			  $("#dq_sj").val(data.dqsj);
+			  $("#re_sj").val(data.hksj);
+			  $("#re_jz").val(data.hksj);
+			  $("#reco_id").val(rec.id);
+			  $("#jkqx").val(jkqx);
+		  }
+		  else
+		  {
+			  alert(data.msg);
+			  load_data();
+		  }
+	  }) 
+  }
+  	 function clos_ck()
+  {
+	  $('#two_content_html').hide();
+	  load_data();
+	  
+  }
+  function iblur()
+ {
+	//验证非零的正整数
+	var num = $("#edu").val(), result = '';  
+	    while (num.length > 3) {  
+	        result = ',' + num.slice(-3) + result;  
+	        num = num.slice(0, num.length - 3);  
+	    }  
+	if (num) { result = num + result; }
+	$("#edu").html(result);
+	var type = /^\+?[1-9][0-9]*$/;
+	var reg = new RegExp(type);
+	var obj = $("#edu").val();
+	$("#has-group").attr("class","form-group  has-error");
+	console.log(obj);
+	if(obj == null)
+	{
+		$("#lab").html("Số tiền trả vay không được để trống"); //还款金额不能为空
+	}
+	else
+	{
+		// class="form-group  has-error" id="has-group"
+		$("#lab").html("");
+		$("#has-group").attr("class","form-group  has-success");
+		
+	}
+ } 
+  /* <!--提交二次审核结果--> */
+  function sub_Two()
+  {
+	  var state_=$("input:radio[name='shh_end']:checked").val();
+	  var yqstate_=$("input:radio[name='shh_fenq']:checked").val();
+	  var jsyqts_=$("input:radio[name='shh_jsyqts']:checked").val();
+	  var hkbank_=$("input:radio[name='hk_bank']:checked").val();
+	  var hkmoney_=0;
+	  var f=0;
+	  var jine_=$("#lab").val();
+	  var bankorderid_=$("#orderid").val();
+	  if(state_ == 2 || state_ == 3 || state_ == 4)
+	  {
+		  
+		hkmoney_ = $("#edu").val();
+
+	  }
+	  if(f==0)
+	  {   
+	 
+	      var jkqx_=$("#jkqx").val();
+	      var hksj_=$("#re_sj").val();
+	      var hkjz_=$("#re_jz").val();
+	      var yuqlx_=$("#yq_money").val();
+	     
+		  var rec_id_=$("#reco_id").val();
+		  var user_id =$("#user_id").val();
+		  var para={rec_id:rec_id_,hkmoney:hkmoney_,yuqlx:yuqlx_,state:state_,yqstate:yqstate_,jsyqts:jsyqts_,hksj:hksj_,hkjz:hkjz_,user_id:user_id,jkqx:jkqx_,bankorderid:bankorderid_,hkbank:hkbank_};
+		  loadGetServer("/servlet/current/JBDcms3Action?function=OfflinePaymentlTest",para,function(data){
+		  	if(data.error>0)
+			{
+				$("#two_content_html").hide();
+				load_data();
+			}
+			else if(data.error<0)
+			{
+				alert(data.msg);
+				$("#two_content_html").hide();
+				load_data();
+			}else if(data.error==0)
+			{
+				alert(data.msg);
+				load_data();
+			}
+		  });
+	  }	  
+  }
+  /*  function tx_ck(jkId,userId,sjsh,yqlx){
+ 	var time1 = prompt("Định dạng thời gian 01012018000000","");
+ 	if(time1){
+ 		var para={sjsh_money:sjsh,yuq_lx:yqlx,userid:userId,jkid:jkId,time:time1};
+	    loadGetServer("/servlet/current/JBDcms3Action?function=OfflinePaymentl",para,function(data){
+	  		alert(data.msg);
+	  	});
+	  	load_data();
+	 }
+ } */
+ function radibank(){
+ 	var shh=$("input:radio[name='hk_bank']:checked").val();
+ }
+    /*-------判断审核状态------*/
+ function radi()
+ {
+ 
+	var shh=$("input:radio[name='shh_end']:checked").val();
+	if(shh==2)
+	{
+		//document.getElementById("has-group").style.display="block";
+		$("#hkje").show();
+		$("#yqhk").hide();
+		$("#jsyqts").show();
+		$("#shh_remark").val("部分还款");
+	}
+	else if(shh==3)
+	{
+		//document.getElementById("has-group").style.display="none";
+		$("#hkje").show();
+		$("#yqhk").hide();
+		$("#jsyqts").show();
+		$("#shh_remark").val("部分逾期利息");
+	}
+	else if(shh==1)
+	{
+		//document.getElementById("has-group").style.display="none";
+		$("#hkje").hide();
+		$("#yqhk").hide();
+		$("#jsyqts").hide();
+		$("#shh_remark").val("全额还款");
+	}
+	else if(shh==4)
+	{
+		//document.getElementById("has-group").style.display="none";
+		$("#hkje").show();
+		$("#yqhk").show();
+		$("#jsyqts").hide();
+		$("#shh_remark").val("延期还款");
+	}
+	
+ }
+  
+    /*------鏌ョ湅鏇村淇℃伅(寰佷俊鏁版嵁)------*/
+ function get_zx(jk_id)
+ {
+	window.open("/sdmain/record_detail/user_chenggong.html?record_id="+jk_id);	 
+ }
+
+ 
+  function tx_sb(jkId){
+ 	var para={jkid:jkId};
+	loadGetServer("/servlet/current/JBDcms3Action?function=OfflineSB",para,function(data){
+	  	if(data.error<0){
+	  	
+	  		alert(data.msg);
+	  	}
+	});
+	load_data();
+ }
+  function tzjx(jkId){
+ 	var para={jkid:jkId};
+	loadGetServer("/servlet/current/JBDcms3Action?function=OfflineTZJX",para,function(data){
+	  	if(data.error<0){
+	  	
+	  		alert(data.msg);
+	  	}
+	});
+	load_data();
+ }
+load_data();
+   
+</script>
+
+<script>
+ var idTmr;  
+        function  getExplorer() {  
+            var explorer = window.navigator.userAgent ;  
+            //ie  
+            if (explorer.indexOf("MSIE") >= 0) {  
+                return 'ie';  
+            }  
+            //firefox  
+            else if (explorer.indexOf("Firefox") >= 0) {  
+                return 'Firefox';  
+            }  
+            //Chrome  
+            else if(explorer.indexOf("Chrome") >= 0){  
+                return 'Chrome';  
+            }  
+            //Opera  
+            else if(explorer.indexOf("Opera") >= 0){  
+                return 'Opera';  
+            }  
+            //Safari  
+            else if(explorer.indexOf("Safari") >= 0){  
+                return 'Safari';  
+            }  
+        }  
+        function method5(tableid) {  
+            if(getExplorer()=='ie')  
+            {  
+                var curTbl = document.getElementById(tableid);  
+                var oXL = new ActiveXObject("Excel.Application");  
+                var oWB = oXL.Workbooks.Add();  
+                var xlsheet = oWB.Worksheets(1);  
+                var sel = document.body.createTextRange();  
+                sel.moveToElementText(curTbl);  
+                sel.select();  
+                sel.execCommand("Copy");  
+                xlsheet.Paste();  
+                oXL.Visible = true;  
+  
+                try {  
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");  
+                } catch (e) {  
+                    print("Nested catch caught " + e);  
+                } finally {  
+                    oWB.SaveAs(fname);  
+                    oWB.Close(savechanges = false);  
+                    oXL.Quit();  
+                    oXL = null;  
+                    idTmr = window.setInterval("Cleanup();", 1);  
+                }  
+  
+            }  
+            else  
+            {  
+                tableToExcel(tableid)  
+            }  
+        }  
+        function Cleanup() {  
+            window.clearInterval(idTmr);  
+            CollectGarbage();  
+        }  
+        var tableToExcel = (function() {  
+            var uri = 'data:application/vnd.ms-excel;base64,',  
+                    template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',  
+                    base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },  
+                    format = function(s, c) {  
+                        return s.replace(/{(\w+)}/g,  
+                                function(m, p) { return c[p]; }) }  
+            return function(table, name) {  
+                if (!table.nodeType) table = document.getElementById(table)  
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}  
+                window.location.href = uri + base64(format(template, ctx))  
+            }  
+        })()  
+
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>

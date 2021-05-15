@@ -1,0 +1,422 @@
+
+<style>
+.col-md-0{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px
+}
+.col-md-0{
+    float: left
+}
+a:hover {text-decoration: none;}
+th{text-align:center;}
+</style>
+			<div  class="container">
+				<div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb">
+		              <li>
+		                <i class="icon-home">
+		                </i>
+		                <a href="index.html">
+		                </a>
+		              </li>
+		              <li class="current">
+		                <a href="pages_calendar.html" title="" id="aa">
+		                thẩm định thống kê(审核统计)
+		                </a>
+		              </li>
+		            </ul>
+		        </div>
+		        <div class="row" style="margin-top: 10px;">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="bb">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    Điều kiện chọn(选择条件)
+		                  </h4>
+		                </div>
+		                <div class="widget-content">
+						  <div>
+						     <input type="hidden" id="cupage" value="1"/>
+							 <input type="hidden" id="total" value="1"/>
+							 <input type="hidden" id="h5formurl" value="/servlet/current/H5AccountShenheAction?function=GetShenheAccount"/>
+							 <input type="hidden" id="formurl" value="/servlet/current/AccountShenheAction?function=GetShenheAccount"/>
+                             <input type="hidden" id="starTime" value=""/>
+                             <input type="hidden" id="endTime" value=""/>
+						  </div>
+		                    <div class="form-group">
+                              <div class="col-md-4" style="width:150px;">
+                                  <select class="form-control" name="select" id="tempselect" onChange="gradeChange()" >
+                                      <option value="0" id="cc">
+                                        Toàn bộ
+                                      </option>
+                                      <option value="1" id="dd">
+                                      Họ tên người thẩm định
+                                      </option>
+                                      <option value="2" id="ee">
+                                        Số ĐTDĐ
+                                      </option>
+                                      <option value="3">
+                                         h5
+                                      </option>
+                               	  </select>
+                              </div>
+                               <div class="col-md-1" style="width:200px;">
+		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                      </div>
+                             <label class="col-md-0 control-label" style="padding-top:5px;" id="fff">
+		                                             Thời gian thống kê:
+		                      </label>
+                               <div class="col-md-2">
+                                <input type="text" name="regular" class="form-control datepicker" id="date1" onBlur="onb()">
+                              </div>
+			                  <button id="btn-load" class="btn btn-primary" data-loading-text="loading...">
+			                                    Tìm kiếm
+			                  </button>
+			                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="changeLan()">Change</button> 
+			                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			               <button type="button" class="btn btn-success" onclick="loadQB()">hiển thị tất cả</button>
+			                <input type="hidden" id="recode">
+		                    </div>
+		                  
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12">
+		              <div class="widget box">
+		                <div class="widget-header">
+		                  <h4 id="ff">
+		                    <i class="icon-reorder">
+		                    </i>
+		                    thẩm định thống kê(审核统计)
+		                  </h4>
+		                  <div class="toolbar no-padding">
+		                   
+		                    <div class="btn-group">
+		                      <span class="btn btn-xs widget-collapse">
+		                        <i class="icon-angle-down">
+		                        </i>
+		                      </span>
+		                      
+		                    </div>
+		                  </div>
+		                </div>
+		                <div class="widget-content">
+		                  <table class="table table-hover table-striped table-bordered table-highlight-head" style="text-align:center">
+		                    <thead>
+		                      <tr style="text-align:center">
+		                         <th rowspan="2" style=" line-height:50px;" id="gg">
+                                         ID 
+                                    </th>
+                                    <th rowspan="2"  style=" line-height:50px;" id="hh">
+                                         Name(姓名)
+                                    </th>
+                                    <th colspan="8" style=" font-size:14px; font-weight:bold;" id="jj">
+                                         Today(今日)
+                                    </th>
+                                   
+                                     <th colspan="12"  style=" font-size:14px; font-weight:bold;" id="kk">
+                                         Total(总计)
+                                    </th>
+                                    <th colspan="1"  style=" font-size:14px; font-weight:bold;" id="ll">
+                                         Customer queries(查询次数)
+                                    </th>
+                                    
+		                      </tr>
+                              <tr  style="text-align:center">
+
+                                    <th id="mm">
+                                         total(总计)
+                                    </th>
+                                    <th id="mmm">
+                                         totalpeople(总人数)
+                                    </th>
+                                    <th id="nnnnnnnn">
+                                         old people(老用户)
+                                    </th>
+                                    <th id="nn">
+                                         one(一审)
+                                    </th>
+                                    <th id="nnnn">
+                                         one IE(一审信息错误数)
+                                    </th>
+                                    
+                                    <th id="nnnnnn">
+                                         BL(比例)
+                                    </th>
+                                    <th id="oo">
+                                         two(二审)
+                                    </th>
+                                    <th id="pp">
+                                        three(三审)
+                                    </th>
+                                     <th id="qq">
+                                         total(总计)
+                                    </th>
+                                     <th id="qqq">
+                                         totalpeople(总人数)
+                                    </th>
+                                    <th id="rr">
+                                         one(一审)
+                                    </th>
+                                    <!-- <th id="rrrr">
+                                         one IE
+                                    </th>
+                                    <th id="rrrrrr">
+                                         BL
+                                    </th> -->
+                                    <th id="rrr">
+                                         one proportion(一审比例)
+                                    </th>
+                                    <th id="ss">
+                                         two(二审)
+                                    </th>
+                                    <th id="tt">
+                                         three(三审)
+                                    </th>
+                                    <th id="uu">
+                                        pass three(三审通过数)
+                                    </th>
+                                    <th id="uuu">
+                                        pass two(二审通过数)
+                                    </th>
+                                    <th id="vv">
+                                        overdue three(三审拒绝数)
+                                    </th>
+                                    <th id="ww">
+                                        overdue(Yes+No) proportion(逾期数)
+                                    </th>
+                                    <th id="xxx">
+                                        overdue(No) two(二审通过逾期比例)
+                                    </th>
+                                    <th id="xx">
+                                        overdue(No) proportion(逾期未还比例)
+                                    </th>
+                                    <th id="yy">
+                                        Times(查询次数)
+                                    </th>
+		                      </tr>
+		                    </thead>
+		                    <tbody id="load_data">
+		                      
+		                    </tbody>
+		                  </table>
+                          
+ <div class="row"><div class="dataTables_footer clearfix"><div class="col-md-6"><div class="dataTables_info" id="DataTables_Table_0_info">Tổng số<font id="totalrows"></font> tin, mỗi trang chứa được<font id="numperpage"></font>tin, hiện tại trang số<font id="currentpage"></font> / <font id="totalpages"></font>trang</div></div><div class="col-md-6"><div class="dataTables_paginate paging_bootstrap" id="datatable"></div></div></div></div>
+
+
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			</div>
+<script>
+function changeLan(){
+loadGetServer("/servlet/current/JBDcms3Action?function=GetChangeSH",{},function(data){
+	if(data.error == 1){
+		document.getElementById("aa").innerHTML = data.aa;
+		document.getElementById("bb").innerHTML = data.bb;
+		document.getElementById("cc").innerHTML = data.cc;
+		document.getElementById("dd").innerHTML = data.dd;
+		document.getElementById("ee").innerHTML = data.ee;
+		document.getElementById("fff").innerHTML = data.fff;
+		document.getElementById("ff").innerHTML = data.ff;
+		document.getElementById("gg").innerHTML = data.gg;
+		document.getElementById("hh").innerHTML = data.hh;
+		document.getElementById("ii").innerHTML = data.ii;
+		document.getElementById("jj").innerHTML = data.jj;
+		document.getElementById("kk").innerHTML = data.kk;
+		document.getElementById("ll").innerHTML = data.ll;
+		document.getElementById("mm").innerHTML = data.mm;
+		document.getElementById("mmm").innerHTML = data.mmm;
+		document.getElementById("nn").innerHTML = data.nn;
+		document.getElementById("nnnn").innerHTML = data.nnnn;
+		document.getElementById("nnnnnn").innerHTML = data.nnnnnn;
+		document.getElementById("nnnnnnnn").innerHTML = data.nnnnnnnn;
+		document.getElementById("nn").innerHTML = data.nn;
+		document.getElementById("oo").innerHTML = data.oo;
+		document.getElementById("pp").innerHTML = data.pp;
+		document.getElementById("qq").innerHTML = data.qq;
+		document.getElementById("qqq").innerHTML = data.qqq;
+		document.getElementById("rr").innerHTML = data.rr;
+		/* document.getElementById("rrrr").innerHTML = data.rrrr;
+		document.getElementById("rrrrrr").innerHTML = data.rrrrrr; */
+		document.getElementById("rrr").innerHTML = data.rrr;
+		document.getElementById("ss").innerHTML = data.ss;
+		document.getElementById("tt").innerHTML = data.tt;
+		document.getElementById("uu").innerHTML = data.uu;
+		document.getElementById("uuu").innerHTML = data.uuu;
+		document.getElementById("vv").innerHTML = data.vv;
+		document.getElementById("ww").innerHTML = data.ww;
+		document.getElementById("xxx").innerHTML = data.xxx;
+		document.getElementById("xx").innerHTML = data.xx;
+		document.getElementById("yy").innerHTML = data.yy;
+		
+	}else{
+		alert("error!");
+	}
+
+});
+	
+
+}
+</script>
+<script>
+	$("#btn-load").on("click", function() {
+		var a = $(this);
+		a.button("loading");
+		$("#cupage").val("1");
+		load_data();
+	
+	});
+	
+	function load_data()
+	{
+	  var recode_ =$("#recode").val();
+	  
+	  var tempsele=$("#tempselect").val();
+	  var tempval=$("#tempVelue").val();
+	  var starTime=$("#starTime").val();
+	  var endTime=$("#endTime").val();
+	  var para={curPage:$("#cupage").val(),temp:tempsele,tempvl:tempval,startDate:starTime,endDate:endTime,recode:recode_};
+	  var formurl = null;
+	   if(tempsele==3){
+	       formurl= $("#h5formurl").val();
+	   }else{
+	   	   formurl =$("#formurl").val();
+	   }
+	  loadGetServer(formurl,para,function(data){
+		  $("#load_data").html("");
+		  var list = data.list.data;
+		  var html_="";
+		  var jrzbs =0 ;
+		  var jrzbssjrs =0 ;
+		  var jrsbzbs =0 ;
+		  var jrlyhzbs = 0;
+		  var jryszbs = 0;
+		  var jryssbzbs = 0;
+		  var jryssbzbsxxcw = 0;
+		  var jreszbs = 0;
+		  var jressbzbs = 0;
+		  var jrsszbs = 0;
+		  var jrsssbzbs = 0;
+		  var zbs = 0;
+		  var zbssjrs = 0;
+		  var sbzbs = 0;
+		  var yszbs = 0;
+		  var yssbzbs = 0;
+		  var yssbzbsxxcw = 0;
+		  var tgl = 0;
+		  var jrjjl = 0;
+		  var jjl = 0;
+		  var eszbs = 0;
+		  var essbzbs = 0;
+		  var sszbs = 0;
+		  var sssbzbs = 0;
+		  var estgzbs = 0;
+		  var estghkzbs = 0;
+		  var sstgzbs = 0;
+		  var yqzbs = 0;
+		  var yqzbl = 0;
+		  var yqwhzbs = 0;
+		  var yqwhzbl = 0;
+		  var zcxcs = 0;
+		  
+		  for(var i=0;i<list.length;i++)
+		  {	
+		  	    var ystgbl =0;
+		  	    var jrysjjbl =0;
+		  	    var ysjjbl =0;
+		  	    
+		  	    if(list[i].one != "0"){
+		  			var ystgbl = parseInt((parseInt(list[i].one) - parseInt(list[i].oneSB))*100/parseInt(list[i].one));
+				}
+		  	    if(list[i].nowOnesh != "0"){
+		  			var jrysjjbl = parseInt((parseInt(list[i].nowOneshSB) - parseInt(list[i].nowOneshSBXXCW))*100/parseInt(list[i].nowOnesh));
+				}
+		  	    if(list[i].one != "0"){
+		  			var ysjjbl = parseInt((parseInt(list[i].oneSB) - parseInt(list[i].oneSBXXCW))*100/parseInt(list[i].one));
+				}
+				html_ += "<tr><td>BPTD"+list[i].userid+"</td><td>"+list[i].userName+"</td><td><span class='label label-success'>"+list[i].nowCount+"</span>--<span style='color:#F00'>"+list[i].nowCountSB+"</span></td><td><span class='label label-info'>"+list[i].nowCountsjrs+"</span></td><td>"+list[i].nowlyh+"</td><td>"+list[i].nowOnesh+"--<span style='color:#F00'>"+list[i].nowOneshSB+"</span></td><td><span style='color:#0000FF'>"+list[i].nowOneshSBXXCW+"</span></td><td>"+jrysjjbl+"%</td><td>"+list[i].nowTwosh+"--<span style='color:#F00'>"+list[i].nowTwoshSB+"</span></td><td>"+list[i].nowThreesh+"--<span style='color:#F00'>"+list[i].nowThreeshSB+"</span></td><td><span class='label label-success'>"+list[i].count+"</span>--<span style='color:#F00'>"+list[i].countSB+"</span></td><td><span class='label label-info'>"+list[i].countsjrs+"</span></td><td>"+list[i].one+"--<span style='color:#F00'>"+list[i].oneSB+"</span></td><td>"+ystgbl+"%</td><td>"+list[i].two+"--<span style='color:#F00'>"+list[i].twoSB+"</span></td><td>"+list[i].three+"--<span style='color:#F00'>"+list[i].threeSB+"</span></td><td>"+list[i].threeTG+"</td><td>"+list[i].twotgfk+"--<span style='color:blue'>"+list[i].twotgzhk+"</span></td><td>"+list[i].four+"</td><td>"+list[i].yqbl+"%"+"</td><td><a href='javascript:void(0);' onclick='open_user("+list[i].userid+")'><span style='color:#F00'>"+list[i].twotgfkyqwh+"</span></a></td><td>"+list[i].yqwhbl+"%"+"</td><td><span class='label label-success'>"+list[i].kfcxcs+"</span></td>";
+				//<td><span style='color:#0000FF'>"+list[i].oneSBXXCW+"</span></td><td>"+ysjjbl+"%</td>
+				html_ +="</tr>";
+		   jrzbs += list[i].nowCount;
+		   jrzbssjrs += list[i].nowCountsjrs;
+		   jrlyhzbs += list[i].nowlyh;
+		   jrsbzbs += list[i].nowCountSB;
+		   jryszbs += list[i].nowOnesh;
+		   jryssbzbs += list[i].nowOneshSB;
+		   jryssbzbsxxcw += list[i].nowOneshSBXXCW;
+		   jreszbs += list[i].nowTwosh;
+		   jressbzbs += list[i].nowTwoshSB;
+		   jrsszbs += list[i].nowThreesh;
+		   jrsssbzbs += list[i].nowThreeshSB;
+		   zbs += list[i].count;
+		   zbssjrs += list[i].countsjrs;
+		   sbzbs += list[i].countSB;
+		   yszbs += list[i].one;
+		   yssbzbs += list[i].oneSB;
+		   yssbzbsxxcw += list[i].oneSBXXCW;
+		   eszbs += list[i].two;
+		   essbzbs += list[i].twoSB;
+		   sszbs += list[i].three;
+		   sssbzbs += list[i].threeSB;
+		   sstgzbs += list[i].threeTG;
+		   estgzbs += list[i].twotgfk;
+		   estghkzbs += list[i].twotgzhk;
+		   
+		   yqzbs += list[i].four;
+		   yqwhzbs += list[i].twotgfkyqwh;
+		   zcxcs += parseInt(list[i].kfcxcs); 
+		   
+		   }
+		   if(yszbs != 0){
+		   	  tgl = parseInt((yszbs-yssbzbs) * 100 / yszbs) ;
+		   }
+		   if(jryszbs != 0){
+		   	  jrjjl = parseInt((jryssbzbs-jryssbzbsxxcw) * 100 / jryszbs) ;
+		   }
+		   if(yszbs != 0){
+		   	  jjl = parseInt((yssbzbs-yssbzbsxxcw) * 100 / yszbs) ;
+		   }
+		   if(estghkzbs != 0){
+		   	  yqzbl = parseInt(yqzbs * 100 / estghkzbs) ;
+		   }
+		   if(estghkzbs != 0){
+		   	  yqwhzbl = parseInt(yqwhzbs * 100 / estghkzbs) ;
+		   }
+		   html_ += "<tr><td>Thống kê tổng</td><td>Thống kê tổng</td><td><span class='label label-success'>"+jrzbs+"</span>--<span style='color:#F00'>"+jrsbzbs+"</span></td><td><span class='label label-info'>"+jrzbssjrs+"</span></td><td>"+jrlyhzbs+"</td><td>"+jryszbs+"--<span style='color:#F00'>"+jryssbzbs+"</span></td><td><span style='color:#0000FF'>"+jryssbzbsxxcw+"</span></td><td>"+jrjjl+"%</td><td>"+jreszbs+"--<span style='color:#F00'>"+jressbzbs+"</span></td><td>"+jrsszbs+"--<span style='color:#F00'>"+jrsssbzbs+"</span></td><td><span class='label label-success'>"+zbs+"</span>--<span style='color:#F00'>"+sbzbs+"</span></td><td><span class='label label-info'>"+zbssjrs+"</span></td><td>"+yszbs+"--<span style='color:#F00'>"+yssbzbs+"</span></td><td>"+tgl+"%</td><td>"+eszbs+"--<span style='color:#F00'>"+essbzbs+"</span></td><td>"+sszbs+"--<span style='color:#F00'>"+sssbzbs+"</span></td><td>"+sstgzbs+"</td><td>"+estgzbs+"--<span style='color:red'>"+estghkzbs+"</span></td><td>"+yqzbs+"</td><td>"+yqzbl+"%"+"</td><td>"+yqwhzbs+"</td><td>"+yqwhzbl+"%"+"</td><td><span class='label label-success'>"+zcxcs+"</span></td>";
+		  //<td><span style='color:#0000FF'>"+yssbzbsxxcw+"</span></td><td>"+jjl+"%</td>
+		   html_ +="</tr>";
+			$("#load_data").append(html_);
+			$("#tempselect").val(data.temp);
+			$("#tempVelue").val(data.tempvalu);
+			page_value(data);
+			page_data();
+			$("#btn-load").button("reset");
+	    });
+   }  
+   function open_user(shenheid)
+   {
+	   window.open("/sdmain/record_detail/recordYuqNList.html?shenheid="+shenheid);
+   }
+   function gradeChange(){
+	   var tempselect=$("#tempselect").val();
+	   if(tempselect==0){
+	       $("#tempVelue").val("");
+	   }
+	}
+   
+   load_data();
+
+function loadQB(){
+	$("#recode").val(1);
+	load_data();
+}   
+</script>
+<script type="text/javascript" src="/sdmain/js/date_time.js"></script>
