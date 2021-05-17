@@ -68,8 +68,8 @@ import root.tool.SendMsgTYH;
  * add work rz
  * 说明： 在原来API流程上增加工作认证
  */
-public class OceanApp extends BaseAction {
-	private static Logger logger = Logger.getLogger(OceanApp.class);
+public class VayAppAction extends BaseAction {
+	private static Logger logger = Logger.getLogger(VayAppAction.class);
 	/* private static UserService userService = new UserService(); */
 	private static JBDUserService jdbUserService = new JBDUserService();
 	private static JBDcms3Service jbdcms3Service = new JBDcms3Service();
@@ -77,21 +77,21 @@ public class OceanApp extends BaseAction {
 	private static JBDcmsService jbdcmsService = new JBDcmsService();
 	private static UserMoneyBase  userMoneyBase = new UserMoneyBase();
 	
-	String jiami = "S9uKJD8HEOI9j9O89ujhdf8H093kfld12NVbvc";
+	String jiami = "S9uKJD8HEOI9j9O89ujhdf8H093kfld12NVtestapi";
 	long time = 1000 * 60 * 3;
 
-	public ActionResult doOceanHome() throws IOException {  
+	public ActionResult dovayHome() throws IOException {  
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 		
-		if( jsonObj == null ||  jsonObj.getString("oceanid") == null || jsonObj.equals("") || jsonObj.getString("oceanid").equals("")) {
+		if( jsonObj == null ||  jsonObj.getString("vayid") == null || jsonObj.equals("") || jsonObj.getString("vayid").equals("")) {
 			return null;
 		}
 		
-		String miwen = jsonObj.getString("oceantoken");
-		int userId = jsonObj.getInteger("oceanid");
+		String miwen = jsonObj.getString("vaytoken");
+		int userId = jsonObj.getInteger("vayid");
 		String jiamiwen = Encrypt.MD5(userId + jiami);
 		if (jiamiwen.equals(miwen)) {
 
@@ -120,77 +120,77 @@ public class OceanApp extends BaseAction {
 				int sjshmoneyshow = userMoneyBase.getUMBaseMaxLoanMoney_showApp(userId);   //最大额度显示
 				int sjshmoney = userMoneyBase.getUMBaseMaxLoanMoney(userId);   //最大额度选择
 				int maxCount = userMoneyBase.getUMBaseSuccessfulLoanNum(userId, maxMoney);
-				row.set("oceanMm", famt.format(sjshmoney));
-				row.set("oceanMmShow", famt.format(sjshmoneyshow));
-				row.set("oceanMc", maxCount);
-				row.set("oceanSsr", 1);
-				row.set("oceanVc", 8);
+				row.set("vayMm", famt.format(sjshmoney));
+				row.set("vayMmShow", famt.format(sjshmoneyshow));
+				row.set("vayMc", maxCount);
+				row.set("vaySsr", 1);
+				row.set("vayVc", 8);
 				if (data != null) {
 					String username = data.getString("username");
 					String phone = data.getString("mobilephone");
-					row.set("oceanCp", phone);
+					row.set("vayCp", phone);
 
 					if (data4 != null) {
-						row.set("oceanIr", data4.getString("hkqd"));
+						row.set("vayIr", data4.getString("hkqd"));
 					} else {
-						row.set("oceanIr", "0");
+						row.set("vayIr", "0");
 					}
 					
-					row.set("oceanPd", data.getString("changejkts"));//1为7天和14天，0为15天和30天
+					row.set("vayPd", data.getString("changejkts"));//1为7天和14天，0为15天和30天
 					
-					row.set("oceanFdv", "0.1955");
-					row.set("oceanTdv", "0.291");
-					row.set("oceanPs", "{\"7\":[0.006,0.30]}");  //,\"30\":[0.009,0.4]
+					row.set("vayFdv", "0.1955");
+					row.set("vayTdv", "0.291");
+					row.set("vayPs", "{\"7\":[0.006,0.30]}");  //,\"30\":[0.009,0.4]
 					
 					if (rz != null) {
-						isStep1.set("oceanBun", rz.getString("cardusername"));
-						isStep1.set("oceanBn", rz.getString("bankname"));
-						isStep1.set("oceanCn", rz.getString("cardname"));
+						isStep1.set("vayBun", rz.getString("cardusername"));
+						isStep1.set("vayBn", rz.getString("bankname"));
+						isStep1.set("vayCn", rz.getString("cardname"));
 						if (rz.getString("cardno").length() > 9) {
-							isStep1.set("oceanCd", "********" + rz.getString("cardno")
+							isStep1.set("vayCd", "********" + rz.getString("cardno")
 									.substring(rz.getString("cardno").length() - 4, rz.getString("cardno").length()));
 
 						} else {
-							isStep1.set("oceanCd", "********" + rz.getString("cardno")
+							isStep1.set("vayCd", "********" + rz.getString("cardno")
 									.substring(rz.getString("cardno").length() - 4, rz.getString("cardno").length()));
 
 						}
 					}
 
 					if (rzsf != null) {
-						isStep2.set("oceanIc", rzsf.getString("idno"));
-						isStep2.set("oceanHa", rzsf.getString("homeaddress"));
-						isStep2.set("oceanBir", rzsf.getString("age"));
-						isStep2.set("oceanAdd", rzsf.getString("address"));
+						isStep2.set("vayIc", rzsf.getString("idno"));
+						isStep2.set("vayHa", rzsf.getString("homeaddress"));
+						isStep2.set("vayBir", rzsf.getString("age"));
+						isStep2.set("vayAdd", rzsf.getString("address"));
 					} else {
-						isStep2.set("oceanIc", null);
+						isStep2.set("vayIc", null);
 					}
 
 					if ("1".equals(data.getString("yhbd"))) {
-						isStep1.set("oceanS1", 1);
+						isStep1.set("vayS1", 1);
 					} else {
-						isStep1.set("oceanS1", 0);
+						isStep1.set("vayS1", 0);
 					}
 					if ("1".equals(data.getString("isshenfen"))) {
-						isStep2.set("oceanS2", 1);
+						isStep2.set("vayS2", 1);
 					} else {
-						isStep2.set("oceanS2", 0);
+						isStep2.set("vayS2", 0);
 					}
 					if ("1".equals(data.getString("islianxi"))) {
-						isStep3.set("oceanS3", 1);
+						isStep3.set("vayS3", 1);
 					} else {
-						isStep3.set("oceanS3", 0);
+						isStep3.set("vayS3", 0);
 					}
 					if ("1".equals(data.getString("isjop"))) {
-						isStep4.set("oceanS4", 1);
+						isStep4.set("vayS4", 1);
 					} else {
-						isStep4.set("oceanS4", 0);
+						isStep4.set("vayS4", 0);
 					}
 				}
 				DataRow dataJK = jdbUserService.findUserJKByuserid(userId + "");
 				DataRow dataJKSB = jdbUserService.findUserJKByuseridSB(userId + "");
 				if (dataJKSB != null) {
-					row.set("oceanIfd", 3);
+					row.set("vayIfd", 3);
 				}
 				if (dataJK != null) {
 
@@ -214,15 +214,15 @@ public class OceanApp extends BaseAction {
 					String hkfqcode = dataJK.getString("hkfq_code");
 					String hkfqcishu = dataJK.getString("hkfq_cishu");
 					if ("1".equals(hkfqcode)) {
-						row.set("oceanEt", hkfq);
+						row.set("vayEt", hkfq);
 					} else {
-						row.set("oceanEt", hkyq);
+						row.set("vayEt", hkyq);
 					}
-					row.set("oceanLd", jk_date);
-					row.set("oceanEd", yueqTs);
-					row.set("oceanIls", jksfwc);
-					row.set("oceanFam", sjdsMoney);
-					row.set("oceanFm", sjshMoney);
+					row.set("vayLd", jk_date);
+					row.set("vayEd", yueqTs);
+					row.set("vayIls", jksfwc);
+					row.set("vayFam", sjdsMoney);
+					row.set("vayFm", sjshMoney);
 					int yanqi15 = 0;
 					if(Integer.parseInt(sjshMoney.replaceAll(",", "").replace(".", ""))<=1000000) {
 						yanqi15 = Integer.parseInt(sjshMoney.replaceAll(",", "").replace(".", "")) * 3 / 10;
@@ -231,42 +231,42 @@ public class OceanApp extends BaseAction {
 					}
 					int yanqi30 = Integer.parseInt(sjshMoney.replaceAll(",", "").replace(".", "")) * 3 / 10;
 					if(hkfqcishu.length()>=2 || Integer.parseInt(yueqTs)>15) {
-						row.set("oceanEs", 0);
+						row.set("vayEs", 0);
 					}else {
-						row.set("oceanEs", 1);
+						row.set("vayEs", 1);
 					}
-					row.set("oceanE15", famt.format(yanqi15));
-					row.set("oceanE30", famt.format(yanqi30));
+					row.set("vayE15", famt.format(yanqi15));
+					row.set("vayE30", famt.format(yanqi30));
 
-					row.set("oceanIuv", spzt);
-					row.set("oceanIltv", sfyfk);
-					row.set("oceanEif", yuqLx);
-					row.set("oceanLvl", jkMoney);
-					row.set("oceanIcrd", hk);
+					row.set("vayIuv", spzt);
+					row.set("vayIltv", sfyfk);
+					row.set("vayEif", yuqLx);
+					row.set("vayLvl", jkMoney);
+					row.set("vayIcrd", hk);
 					if ("1".equals(cl) && "1".equals(cl02) && "0".equals(cl03) && "0".equals(spzt)) {
-						row.set("oceanIco", 3);// 上传视频
+						row.set("vayIco", 3);// 上传视频
 					} else if ("1".equals(cl) && "1".equals(cl02) && "1".equals(cl03) && "1".equals(spzt)
 							&& "1".equals(sfyfk)) {
 						if ("0".equals(hkqd)) {
-							row.set("oceanIco", 4);// 还没上传还款凭证
+							row.set("vayIco", 4);// 还没上传还款凭证
 						} else {
-							row.set("oceanIco", 5);// 已经上传还款凭证
+							row.set("vayIco", 5);// 已经上传还款凭证
 						}
 					} else if ("1".equals(cl) && "1".equals(cl02) && "1".equals(cl03) && "1".equals(spzt) && "2".equals(sfyfk) ) {
-						row.set("oceanIco", 6);// 等待放款
+						row.set("vayIco", 6);// 等待放款
 					}else if("1".equals(cl) && "1".equals(cl02) && "1".equals(cl03) && "1".equals(spzt) && "3".equals(sfyfk)) {
-						row.set("oceanIco", 2); //重新提交借款
+						row.set("vayIco", 2); //重新提交借款
 					} else {
-						row.set("oceanIco", 7);// 审核中
+						row.set("vayIco", 7);// 审核中
 					}
 				} else {
-					row.set("oceanIco", 2);// 提交借款
+					row.set("vayIco", 2);// 提交借款
 				}
-				row.set("oceanS1", isStep1);
-				row.set("oceanS2", isStep2);
-				row.set("oceanS3", isStep3);
-				row.set("oceanS4", isStep4);
-				row.set("oceanurl", "https://m.me/vaytienocean");
+				row.set("vayS1", isStep1);
+				row.set("vayS2", isStep2);
+				row.set("vayS3", isStep3);
+				row.set("vayS4", isStep4);
+				row.set("vayurl", "https://m.me/vaytienvay");
 				
 				DataRow dataAuth = jbdcms3Service.getAuthRow(userId+"");
 				if(dataAuth != null) {
@@ -284,8 +284,8 @@ public class OceanApp extends BaseAction {
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("oceanC", 101);
-			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("vayC", 101);
+			jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 
 			return null;
@@ -294,16 +294,16 @@ public class OceanApp extends BaseAction {
 	
 
 //olava注册登录接口(FB)
-	public ActionResult doOceanLogin() throws Exception {
+	public ActionResult dovayLogin() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		JSONObject jsonObject = new JSONObject();
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String phone = jsonObj.getString("oceanPhone").trim().replaceAll(" ", "");// 手机�??
+		String phone = jsonObj.getString("vayPhone").trim().replaceAll(" ", "");// 手机�??
 		String appid = jsonObj.getString("appid");//app版本号
-		int phonetype = jsonObj.getInteger("oceanPhTy");
-		String miwen = jsonObj.getString("oceantoken");
+		int phonetype = jsonObj.getInteger("vayPhTy");
+		String miwen = jsonObj.getString("vaytoken");
 
 		String jiamiwen = Encrypt.MD5(phone + phonetype + jiami);
 		if (jiamiwen.equals(miwen)) {
@@ -318,16 +318,16 @@ public class OceanApp extends BaseAction {
 			logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			logger.info("当前注册用户:手机号：" + phone + "IP:" + ip + "当前时间" + lastDate);
 			String code ="";
-			if (jsonObj.containsKey("oceanotp")) {
-			    code = jsonObj.getString("oceanotp");
+			if (jsonObj.containsKey("vayotp")) {
+			    code = jsonObj.getString("vayotp");
 			    String memyzm= "";
 				if(MemCachedUtil.cachedClient.keyExists(phone+"_HAHA"))
 				{
 					memyzm = (String)MemCachedUtil.cachedClient.get(phone+"_HAHA");
 				}
 			    if(!code.equals(memyzm)){
-					jsonObject.put("oceanC", -3);
-					jsonObject.put("oceanM", "Mã xác minh không chính xác");//验证码不正确
+					jsonObject.put("vayC", -3);
+					jsonObject.put("vayM", "Mã xác minh không chính xác");//验证码不正确
 					logger.warn("验证码不正确");
 					this.getWriter().write(jsonObject.toString());
 					return null;
@@ -335,9 +335,9 @@ public class OceanApp extends BaseAction {
 			}
 			long str = jdbUserService.getCountByPhone(phone);
 			if (str > 0) {
-				jsonObject.put("oceanC", 0);
+				jsonObject.put("vayC", 0);
 				jsonObject.put("userId", respUserId);
-				jsonObject.put("oceanM", "Login Success");// 账号已注册，直接登录
+				jsonObject.put("vayM", "Login Success");// 账号已注册，直接登录
 				jsonObject.put("isRegister", 1);// 账号已注册，直接登录
 				logger.info("账号已注册，直接登录");
 				this.getWriter().write(jsonObject.toString());
@@ -362,9 +362,9 @@ public class OceanApp extends BaseAction {
 			String userid = jdbUserService.getIdByPhone(phone);
 			String username = "";
 			if (phonetype == 1) {
-				username = "OCEAN-AND" + userid;
+				username = "vay-AND" + userid;
 			} else {
-				username = "OCEAN-IOS" + userid;
+				username = "vay-IOS" + userid;
 			}
 
 			data.set("username", username);
@@ -413,8 +413,8 @@ public class OceanApp extends BaseAction {
 						data11.set("isemulator", isemulator);
 						data11.set("createtime", new Date());
 						jdbUserService.addUserErrorPhoneType(data11);
-						jsonObject.put("oceanC", 8);
-						jsonObject.put("oceanM", "Tài khoản này đã bị hạn chế để đăng nhập");// 此帐户已被限制登�??
+						jsonObject.put("vayC", 8);
+						jsonObject.put("vayM", "Tài khoản này đã bị hạn chế để đăng nhập");// 此帐户已被限制登�??
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					}
@@ -453,8 +453,8 @@ public class OceanApp extends BaseAction {
 				jsonObject.put("cellphone", mobile);
 				jsonObject.put("userId", userid);
 				jsonObject.put("userName", username);
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Đăng nhập thành công");// 注册成功
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Đăng nhập thành công");// 注册成功
 				this.getSession().setAttribute("phone", phone);// —�?��?��??++—�??+—�??+—�??+LL
 
 				this.getWriter().write(jsonObject.toString());
@@ -462,27 +462,27 @@ public class OceanApp extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.error("登录失败" + e);
-				jsonObject.put("oceanC", 10);
-				jsonObject.put("oceanM", "Lỗi hệ thống, đăng ký không thành công!");// 系统错误，注册失�??
+				jsonObject.put("vayC", 10);
+				jsonObject.put("vayM", "Lỗi hệ thống, đăng ký không thành công!");// 系统错误，注册失�??
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
 		} else {
-			jsonObject.put("oceanC", 101);
-			jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsonObject.put("vayC", 101);
+			jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
 
 	}  
-	public ActionResult doOceanOTP() throws Exception {
+	public ActionResult dovayOTP() throws Exception {
 		logger.info("请求ip"+getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonObj = getRequestJson(request);
 		String ip = getipAddr();
-		String miwen = jsonObj.getString("oceantoken");
+		String miwen = jsonObj.getString("vaytoken");
 		String type ="1";
-		String phone = jsonObj.getString("oceanPhone").trim().replaceAll(" ", "");
+		String phone = jsonObj.getString("vayPhone").trim().replaceAll(" ", "");
 			
 		String jiamiwen = Encrypt.MD5(phone+jiami);
 		JSONObject jsonObject = new JSONObject();
@@ -494,8 +494,8 @@ public class OceanApp extends BaseAction {
 			 String  dateTE =fmtrq2.format(calendar.getTime());
 			int  dxtiaoshu  = jdbUserService.getDxtiaoshu(phone,dateTS,dateTE);
 			if(dxtiaoshu  >3){
-				jsonObject.put("oceanC", -1);
-				jsonObject.put("oceanM", "sms error");
+				jsonObject.put("vayC", -1);
+				jsonObject.put("vayM", "sms error");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -516,8 +516,8 @@ public class OceanApp extends BaseAction {
 					logger.info(Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY)+"___"+Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 					//存到缓存服务器
 					MemCachedUtil.cachedClient.set(phone+"_"+type, Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY), new Date(time));
-					jsonObject.put("oceanRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
-					jsonObject.put("oceanRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
+					jsonObject.put("vayRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
+					jsonObject.put("vayRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 					MemCachedUtil.cachedClient.set(phone+"_HAHA", randomCode, new Date(time));
 					logger.info("短信发送成功-----"+phone);
 					int smscode = jdbUserService.getSmsCode();
@@ -537,13 +537,13 @@ public class OceanApp extends BaseAction {
                     
 					logger.info(returnString);
 					if (returnString.contains("1")) {	
-						jsonObject.put("oceanC", 0);
-						jsonObject.put("oceanM", "Đã gửi thành công");
+						jsonObject.put("vayC", 0);
+						jsonObject.put("vayM", "Đã gửi thành công");
 						logger.info(Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY)+"___"+Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 						//存到缓存服务器
 						MemCachedUtil.cachedClient.set(phone+"_"+type, Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY), new Date(time));
-						jsonObject.put("oceanRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
-						jsonObject.put("oceanRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
+						jsonObject.put("vayRc", Encrypt.encryptSES(randomCode, IConstants.PWD_SES_KEY));
+						jsonObject.put("vayRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 						MemCachedUtil.cachedClient.set(phone+"_HAHA", randomCode, new Date(time));
 						logger.info("短信发送成功-----"+phone);
 						DataRow  ipInfo = new  DataRow();
@@ -555,8 +555,8 @@ public class OceanApp extends BaseAction {
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					}else{
-						jsonObject.put("oceanC", 4);
-						jsonObject.put("oceanM", "Gửi không thành công"); //发送失败
+						jsonObject.put("vayC", 4);
+						jsonObject.put("vayM", "Gửi không thành công"); //发送失败
 						logger.error("短信发送失败-----"+phone);
 						this.getWriter().write(jsonObject.toString());
 						return null;
@@ -564,11 +564,11 @@ public class OceanApp extends BaseAction {
 				}
 				else
 				{
-					jsonObject.put("oceanC", 5);
-					jsonObject.put("oceanM", "Mã xác thực đã gửi đi, thời hạn 3 phút"); //验证码已发送，3分钟内有效
+					jsonObject.put("vayC", 5);
+					jsonObject.put("vayM", "Mã xác thực đã gửi đi, thời hạn 3 phút"); //验证码已发送，3分钟内有效
 					logger.error("缓存内的验证码-----"+MemCachedUtil.cachedClient.get(phone+"_HAHA"));
-					jsonObject.put("oceanRc", memyzm.toString());
-					jsonObject.put("oceanRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
+					jsonObject.put("vayRc", memyzm.toString());
+					jsonObject.put("vayRp", Encrypt.encryptSES(phone, IConstants.PWD_SES_KEY));
 					this.getWriter().write(jsonObject.toString());
 					return null;
 				}
@@ -576,8 +576,8 @@ public class OceanApp extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.info("由于系统原因，验证码发送失败"+e);
-				jsonObject.put("oceanC", 10);
-				jsonObject.put("oceanM", "Do lỗi hệ thống, mã xác thực không gửi được");//由于系统原因，验证码发送失败
+				jsonObject.put("vayC", 10);
+				jsonObject.put("vayM", "Do lỗi hệ thống, mã xác thực không gửi được");//由于系统原因，验证码发送失败
 				logger.error("短信发送失败-----"+phone);
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -586,23 +586,23 @@ public class OceanApp extends BaseAction {
 			return null;
 		}
 	}
-	public ActionResult doOceanSubCard() throws Exception {
+	public ActionResult dovaySubCard() throws Exception {
 
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String userid = jsonObj.getString("oceanid");
-		String numberId = jsonObj.getString("oceanNi");
-		String addr = jsonObj.getString("oceanAddr");
-		String birthday = jsonObj.getString("oceanBir");
-		String miwen = jsonObj.getString("oceantoken");
+		String userid = jsonObj.getString("vayid");
+		String numberId = jsonObj.getString("vayNi");
+		String addr = jsonObj.getString("vayAddr");
+		String birthday = jsonObj.getString("vayBir");
+		String miwen = jsonObj.getString("vaytoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 		if (jiamiwen.equals(miwen)) {
-			String p1 = jsonObj.getString("oceanPo");
-			String p2 = jsonObj.getString("oceanPt");
-			String p3 = jsonObj.getString("oceanPtr");
+			String p1 = jsonObj.getString("vayPo");
+			String p2 = jsonObj.getString("vayPt");
+			String p3 = jsonObj.getString("vayPtr");
 			String ui = jdbUserService.getUI(userid);
 			String bankcard = jdbUserService.getBK(userid);
 
@@ -615,8 +615,8 @@ public class OceanApp extends BaseAction {
 
 			if ("".equals(p1) || p1 == null || "".equals(p2) || p2 == null || "".equals(p3) || p3 == null) {
 
-				jsonObject.put("oceanC", -11);
-				jsonObject.put("oceanM", "Lỗi tải lên hình ảnh");// 图片上传错误
+				jsonObject.put("vayC", -11);
+				jsonObject.put("vayM", "Lỗi tải lên hình ảnh");// 图片上传错误
 				this.getWriter().write(jsonObject.toString());
 				return null;
 
@@ -669,39 +669,39 @@ public class OceanApp extends BaseAction {
 				}
 
 				jdbUserService.updateUserInfoH(row3);
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Thành công");// 成功
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Thành công");// 成功
 			} catch (Exception e) {
 
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("oceanC", 101);
-			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("vayC", 101);
+			jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 
 	}
 
-	public ActionResult doOceanBankCopy() throws Exception {
+	public ActionResult dovayBankCopy() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String name = jsonObj.getString("oceanUn").replace("&nbsp;", " ");
-		String userid = jsonObj.getString("oceanid");
+		String name = jsonObj.getString("vayUn").replace("&nbsp;", " ");
+		String userid = jsonObj.getString("vayid");
 
-		String cardId = jsonObj.getString("oceanUci");
-		String miwen = jsonObj.getString("oceantoken");
-		String bankName = jsonObj.getString("oceanBn");
-		String branchName = jsonObj.getString("oceanBcn");
+		String cardId = jsonObj.getString("vayUci");
+		String miwen = jsonObj.getString("vaytoken");
+		String bankName = jsonObj.getString("vayBn");
+		String branchName = jsonObj.getString("vayBcn");
 		String jiamiwen = Encrypt.MD5(userid + cardId + jiami);
 
 		if (jiamiwen.equals(miwen)) {
@@ -710,8 +710,8 @@ public class OceanApp extends BaseAction {
 			String uisf = jdbUserService.getBK(userid);
 			int yhbd = dataRow.getInt("yhbd");
 			if (yhbd == 1) {
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
 
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -726,7 +726,7 @@ public class OceanApp extends BaseAction {
 			SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
 			String bankzu[] = { "Sacombank", "VietcomBank", "VietinBank", "Techcombank", "BIDV", "VPBank", "Eximbank",
-					"DongA Bank", "VIB", "MB Bank", "Viet Capital Bank", "OceanBank", "VietABank", "TPBank", "HDBank",
+					"DongA Bank", "VIB", "MB Bank", "Viet Capital Bank", "vayBank", "VietABank", "TPBank", "HDBank",
 					"SCB", "LienVietPostBank", "SeABank", "ABBank", "Nam A Bank", "OCB", "GBBank", "PG Bank", "SHBank",
 					"Saigon Bank", "Kien Long Bank", "NCB", "BacABank", "PVcomBank", "VRB", "Vietbank", "BVB",
 					"Wooribank" };
@@ -735,7 +735,7 @@ public class OceanApp extends BaseAction {
 					"NH TMCP Dau Tu va Phat Trien VN (BIDV)", "NH TMCP Viet Nam Thinh Vuong (VP Bank)",
 					"NH TMCP Xuat Nhap khau VN (Eximbank)", "NH TMCP Dong A (DongA Bank)", "NH TMCP Quoc Te VN (VIB)",
 					"NH TMCP Quan Doi (MB)", "NH TMCP Ban Viet (Viet Capital Bank)",
-					"NH TM TNHH MTV Dai Duong (OceanBank)", "NH TMCP Viet A (VietABank)", "NH TMCP Tien Phong (TPBank)",
+					"NH TM TNHH MTV Dai Duong (vayBank)", "NH TMCP Viet A (VietABank)", "NH TMCP Tien Phong (TPBank)",
 					"NH TMCP Phat Trien TP HCM (HDBank)", "NH TMCP Sai Gon (SCB)",
 					"NH TMCP Buu Dien Lien Viet (LienVietPostBank)", "NH TMCP Dong Nam A(SeABank)",
 					"NH TMCP An Binh (ABBank)", "NH TMCP Nam A (NamABank)", "NH TMCP Phuong Dong (OCB)",
@@ -868,32 +868,32 @@ public class OceanApp extends BaseAction {
 								row3.set("id", userid);
 								row3.set("yhbd", 1);// 银行卡认证为1
 								mofaUserService.updateUserInfoH(row3);
-								jsonObject.put("oceanC", 0);
-								jsonObject.put("oceanM", "Thành công");// 成功
+								jsonObject.put("vayC", 0);
+								jsonObject.put("vayM", "Thành công");// 成功
 								this.getWriter().write(jsonObject.toString());
 								return null;
 							} catch (Exception e) {
 
-								jsonObject.put("oceanC", -3);
-								jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
+								jsonObject.put("vayC", -3);
+								jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
 								e.printStackTrace();
 								this.getWriter().write(jsonObject.toString());
 								return null;
 							}
 						} else {
-							jsonObject.put("oceanC", -2);
-							jsonObject.put("oceanM", "Sai tên, vui lòng kiểm tra lại họ tên và số tài khoản ngân hàng");// 成功
+							jsonObject.put("vayC", -2);
+							jsonObject.put("vayM", "Sai tên, vui lòng kiểm tra lại họ tên và số tài khoản ngân hàng");// 成功
 							this.getWriter().write(jsonObject.toString());
 							return null;
 						}
 					} else if ("1".equals(checkstatus)) {
-						jsonObject.put("oceanC", -1);
-						jsonObject.put("oceanM", "Sai số tài khoản NH, vui lòng xác nhận lại");// 成功
+						jsonObject.put("vayC", -1);
+						jsonObject.put("vayM", "Sai số tài khoản NH, vui lòng xác nhận lại");// 成功
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					} else {
-						jsonObject.put("oceanC", -3);
-						jsonObject.put("oceanM", "Lỗi mạng, vui lòng đề xuất lại");// 成功
+						jsonObject.put("vayC", -3);
+						jsonObject.put("vayM", "Lỗi mạng, vui lòng đề xuất lại");// 成功
 						this.getWriter().write(jsonObject.toString());
 						return null;
 					}
@@ -941,14 +941,14 @@ public class OceanApp extends BaseAction {
 				row3.set("id", userid);
 				row3.set("yhbd", 1);// 银行卡认证为1
 				mofaUserService.updateUserInfoH(row3);
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Thành công");// 成功
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Thành công");// 成功
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			} catch (Exception e) {
 
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试！
 				e.printStackTrace();
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -959,18 +959,18 @@ public class OceanApp extends BaseAction {
 
 	}
 
-	public ActionResult doOceanBank() throws Exception {
+	public ActionResult dovayBank() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String name = jsonObj.getString("oceanUn").replace("&nbsp;", " ");
-		String userid = jsonObj.getString("oceanid");
+		String name = jsonObj.getString("vayUn").replace("&nbsp;", " ");
+		String userid = jsonObj.getString("vayid");
 
-		String cardId = jsonObj.getString("oceanUci");
-		String miwen = jsonObj.getString("oceantoken");
-		String bankName = jsonObj.getString("oceanBn");
-		String branchName = jsonObj.getString("oceanBcn");
+		String cardId = jsonObj.getString("vayUci");
+		String miwen = jsonObj.getString("vaytoken");
+		String bankName = jsonObj.getString("vayBn");
+		String branchName = jsonObj.getString("vayBcn");
 		String jiamiwen = Encrypt.MD5(userid + cardId + jiami);
 
 		if (jiamiwen.equals(miwen)) {
@@ -981,8 +981,8 @@ public class OceanApp extends BaseAction {
 			if(dataRow!=null) {
 				int yhbd = dataRow.getInt("yhbd");
 				if (yhbd == 1) {
-					jsonObject.put("oceanC", -3);
-					jsonObject.put("oceanM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
+					jsonObject.put("vayC", -3);
+					jsonObject.put("vayM", "Bạn cần phải xác minh tài khoản ngân hàng");// 此用户已经绑定银行卡
 
 					this.getWriter().write(jsonObject.toString());
 					return null;
@@ -1028,42 +1028,42 @@ public class OceanApp extends BaseAction {
 				row3.set("id", userid);
 				row3.set("yhbd", 1);// 银行卡认证为1
 				jdbUserService.updateUserInfoH(row3);
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Thành công");// 成功
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Thành công");// 成功
 			} catch (Exception e) {
 
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("oceanC", 101);
-			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("vayC", 101);
+			jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 
 	}
 
-	public ActionResult doOceanContact() throws Exception {
+	public ActionResult dovayContact() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String userid = jsonObj.getString("oceanid");
+		String userid = jsonObj.getString("vayid");
 
-		String contact1 = jsonObj.getString("oceanCo").trim().replace("&nbsp;", " ");
-		String contact2 = jsonObj.getString("oceanCt").trim().replace("&nbsp;", " ");
-		String tel1 = jsonObj.getString("oceanTo").trim().replace("&nbsp;", " ");
-		String tel2 = jsonObj.getString("oceanTt").trim().replace("&nbsp;", " ");
-		String miwen = jsonObj.getString("oceantoken");
+		String contact1 = jsonObj.getString("vayCo").trim().replace("&nbsp;", " ");
+		String contact2 = jsonObj.getString("vayCt").trim().replace("&nbsp;", " ");
+		String tel1 = jsonObj.getString("vayTo").trim().replace("&nbsp;", " ");
+		String tel2 = jsonObj.getString("vayTt").trim().replace("&nbsp;", " ");
+		String miwen = jsonObj.getString("vaytoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 		if (jiamiwen.equals(miwen)) {
-			String guanxi1 = jsonObj.getString("oceanRo").trim().replace("&nbsp;", " ");
-			String guanxi2 = jsonObj.getString("oceanRt").trim().replace("&nbsp;", " ");
+			String guanxi1 = jsonObj.getString("vayRo").trim().replace("&nbsp;", " ");
+			String guanxi2 = jsonObj.getString("vayRt").trim().replace("&nbsp;", " ");
 			String ui = jdbUserService.getUILianxi(userid);
 			JSONObject jsonObject = new JSONObject();
 
@@ -1109,32 +1109,32 @@ public class OceanApp extends BaseAction {
 					row3.set("vipStatus", 0);// 工作认证�??1
 				}
 				jdbUserService.updateUserInfoH(row3);
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Thành công");
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Thành công");
 			} catch (Exception e) {
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("oceanC", 101);
-			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("vayC", 101);
+			jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 	}
 
-	public void doOceanAddBook() throws ServletException, IOException {
+	public void dovayAddBook() throws ServletException, IOException {
 		logger.info("用户ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		JSONObject jsonObject = new JSONObject();
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String userid = jsonObj.getString("oceanid");
-		String miwen = jsonObj.getString("oceantoken");
+		String userid = jsonObj.getString("vayid");
+		String miwen = jsonObj.getString("vaytoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 
 		if (jiamiwen.equals(miwen)) {
@@ -1173,8 +1173,8 @@ public class OceanApp extends BaseAction {
 			int txl_num = jdbUserService.getusertongxunlucount(userid);  // 通讯录条数
 			if(txl_num <30) {
 				if (jsonArray.size() > 0) {
-					jsonObject.put("oceanC", 0);
-					jsonObject.put("oceanM", "right");
+					jsonObject.put("vayC", 0);
+					jsonObject.put("vayM", "right");
 					for (int i = 0; i < jsonArray.size(); i++) {
 						com.alibaba.fastjson.JSONObject object = jsonArray.getJSONObject(i);
 						if (object.containsKey("dbTen") && object.containsKey("dbDienthoai")) {
@@ -1193,17 +1193,17 @@ public class OceanApp extends BaseAction {
 						}
 					}
 				} else {
-					jsonObject.put("oceanC", 1);
-					jsonObject.put("oceanM", "right");
+					jsonObject.put("vayC", 1);
+					jsonObject.put("vayM", "right");
 				}
 			}else {
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "right");
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "right");
 			}
 			
 			if (jsonArray1.size() > 0) {
-				jsonObject.put("oceanC1", 0);
-				jsonObject.put("oceanM1", "成功");
+				jsonObject.put("vayC1", 0);
+				jsonObject.put("vayM1", "成功");
 				for (int i = 0; i < jsonArray1.size(); i++) {
 					com.alibaba.fastjson.JSONObject object = jsonArray1.getJSONObject(i);
 					if (object.containsKey("type") && object.containsKey("name") && object.containsKey("number")
@@ -1229,12 +1229,12 @@ public class OceanApp extends BaseAction {
 					}
 				}
 			} else {
-				jsonObject.put("oceanC1", 1);
-				jsonObject.put("oceanM1", "失败");
+				jsonObject.put("vayC1", 1);
+				jsonObject.put("vayM1", "失败");
 			}
 			if (jsonArray2.size() > 0) {
-				jsonObject.put("oceanC2", 0);
-				jsonObject.put("oceanM2", "成功");
+				jsonObject.put("vayC2", 0);
+				jsonObject.put("vayM2", "成功");
 				for (int i = 0; i < jsonArray2.size(); i++) {
 					com.alibaba.fastjson.JSONObject object = jsonArray2.getJSONObject(i);
 					if (object.containsKey("type") && object.containsKey("phone") && object.containsKey("person")
@@ -1261,13 +1261,13 @@ public class OceanApp extends BaseAction {
 					}
 				}
 			} else {
-				jsonObject.put("oceanC2", 1);
-				jsonObject.put("oceanM2", "Fail");
+				jsonObject.put("vayC2", 1);
+				jsonObject.put("vayM2", "Fail");
 			}
 			this.getWriter().write(jsonObject.toString());
 		} else {
-			jsonObject.put("oceanC", 1);
-			jsonObject.put("oceanM", "Right!");
+			jsonObject.put("vayC", 1);
+			jsonObject.put("vayM", "Right!");
 			this.getWriter().write(jsonObject.toString());
 		}
 
@@ -1279,7 +1279,7 @@ public class OceanApp extends BaseAction {
 	 * 
 	 */
 
-	public ActionResult doOceanBorJ() throws Exception {
+	public ActionResult dovayBorJ() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1289,28 +1289,28 @@ public class OceanApp extends BaseAction {
 			return null;
 		}
 		JSONObject jsonObject = new JSONObject();
-		String jk_money = jsonObj.getString("oceanBm");
-		int jk_date = jsonObj.getInteger("oceanBd");
-		String borrMoney = jsonObj.getString("oceanBm");
+		String jk_money = jsonObj.getString("vayBm");
+		int jk_date = jsonObj.getInteger("vayBd");
+		String borrMoney = jsonObj.getString("vayBm");
 		//String actualMoney = jsonObj.getString("actualMoney");
 		//String interesetFee = jsonObj.getString("interesetFee");
 		SimpleDateFormat famat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		if(jk_date==7) {   //2020年2月6日 ocean  只放7天
+		if(jk_date==7) {   //2020年2月6日 vay  只放7天
 			jk_date=3;
 		}else {
 			jk_date=3;
 		}
 		
-		int userid2 = jsonObj.getInteger("oceanid");
+		int userid2 = jsonObj.getInteger("vayid");
 		String username = jdbUserService.getUsername(userid2);
 		String mobilePhone = jdbUserService.getMobilePhone(userid2);
 		DataRow jkDataLast = jdbUserService.getjkNumLast(userid2 + "");
 //		//拒绝自然用户  2019年12月19日
 //		int user_num = jdbUserService.getUserPhoneDXSH(mobilePhone) +jdbUserService.getUserPhoneDXHK(mobilePhone);
 //		if(user_num <=0 && jkDataLast == null) {
-//			jsonObject.put("oceanC", -1);
-//			jsonObject.put("oceanM", "Kính chào quý khách hàng, xin thông báo hệ thống OCEAN tạm thời ngưng dịch vụ giải ngân, sẽ hoạt động bình thường vào ngày 02/02/2020, xin cám ơn ");
+//			jsonObject.put("vayC", -1);
+//			jsonObject.put("vayM", "Kính chào quý khách hàng, xin thông báo hệ thống vay tạm thời ngưng dịch vụ giải ngân, sẽ hoạt động bình thường vào ngày 02/02/2020, xin cám ơn ");
 //			this.getWriter().write(jsonObject.toString());
 //			return null;
 //		}
@@ -1319,8 +1319,8 @@ public class OceanApp extends BaseAction {
 		DecimalFormat famt = new DecimalFormat("###,###");
 		//2019-7-24 lin 格式转换防止点号
 		if(borrMoney.isEmpty()) {
-			jsonObject.put("oceanC", -5);
-			jsonObject.put("oceanM", "Lỗi xảy ra khiến giá trị vay không đúng, vui lòng tắt app thử lại !");
+			jsonObject.put("vayC", -5);
+			jsonObject.put("vayM", "Lỗi xảy ra khiến giá trị vay không đúng, vui lòng tắt app thử lại !");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}else {
@@ -1331,8 +1331,8 @@ public class OceanApp extends BaseAction {
 		int aaa = time.compareTo("2018-12-24");
 		int bbb = "2019-01-08".compareTo(time);
 		if (jk_date == 2 && aaa > 0 && bbb > 0) {
-			jsonObject.put("oceanC", -1);
-			jsonObject.put("oceanM", "Thời điểm này OCEAN chỉ cung cấp khoản vay 15 ngày");
+			jsonObject.put("vayC", -1);
+			jsonObject.put("vayM", "Thời điểm này vay chỉ cung cấp khoản vay 15 ngày");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1340,8 +1340,8 @@ public class OceanApp extends BaseAction {
 		int ccc = time.compareTo("2019-01-15");
 		int ddd = "2019-01-29".compareTo(time);
 		if (jk_date == 1 && ccc > 0 && ddd > 0) {
-			jsonObject.put("oceanC", -1);
-			jsonObject.put("oceanM", "Thời điểm này OCEAN chỉ cung cấp khoản vay 30 ngày");
+			jsonObject.put("vayC", -1);
+			jsonObject.put("vayM", "Thời điểm này vay chỉ cung cấp khoản vay 30 ngày");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1350,8 +1350,8 @@ public class OceanApp extends BaseAction {
 		int ddd14 = "2020-01-19".compareTo(time);
 		
 		if (jk_date == 4 && ccc14 > 0 && ddd14 > 0) {
-			jsonObject.put("oceanC", -1);
-			jsonObject.put("oceanM", "Thời điểm này OCEAN chỉ cung cấp khoản vay 14 ngày");
+			jsonObject.put("vayC", -1);
+			jsonObject.put("vayM", "Thời điểm này vay chỉ cung cấp khoản vay 14 ngày");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1360,8 +1360,8 @@ public class OceanApp extends BaseAction {
 		int fff = "2020-02-01".compareTo(time);
 		// 1月8-14号不放款
 		if (eee > 0 && fff > 0) {
-			jsonObject.put("oceanC", -1);
-			jsonObject.put("oceanM"," Từ 20/01/2020 -01/02/2020, OCEAN tạm ngừng cung cấp dịch vụ vay. Qúy khách vui lòng đề xuất vay trước, Ocean sẽ xử lý hồ sơ vào 02/02/2020.");
+			jsonObject.put("vayC", -1);
+			jsonObject.put("vayM"," Từ 20/01/2020 -01/02/2020, vay tạm ngừng cung cấp dịch vụ vay. Qúy khách vui lòng đề xuất vay trước, vay sẽ xử lý hồ sơ vào 02/02/2020.");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
@@ -1369,19 +1369,19 @@ public class OceanApp extends BaseAction {
 		// �??测是否全部已经认�??
 		DataRow datarow = jdbUserService.getALLRZ(userid2);
 		if (!(datarow.getInt("isshenfen") == 1 && datarow.getInt("yhbd") == 1 && datarow.getInt("islianxi") == 1 && datarow.getInt("isjop") == 1)) {
-			jsonObject.put("oceanC", -1);
-			jsonObject.put("oceanM", "Còn những mục chưa xác minh, vui lòng hoàn tất xác minh");
+			jsonObject.put("vayC", -1);
+			jsonObject.put("vayM", "Còn những mục chưa xác minh, vui lòng hoàn tất xác minh");
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}
 
-		String miwen = jsonObj.getString("oceantoken");
+		String miwen = jsonObj.getString("vaytoken");
 
 		String jiamiwen = Encrypt.MD5(userid2 + jiami);
 		if (jiamiwen.equals(miwen)) {
 			if (userid2 == 0) {
-				jsonObject.put("oceanC", -1);
-				jsonObject.put("oceanM", "Vui lòng đăng nhập trước");
+				jsonObject.put("vayC", -1);
+				jsonObject.put("vayM", "Vui lòng đăng nhập trước");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1398,8 +1398,8 @@ public class OceanApp extends BaseAction {
 					row3.set("cfrz_cs", rzcs+1);
 					mofaUserService.updateUserInfoH(row3);
 					
-					jsonObject.put("oceanC", -1);
-					jsonObject.put("oceanM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
+					jsonObject.put("vayC", -1);
+					jsonObject.put("vayM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
 					this.getWriter().write(jsonObject.toString());
 					return null;
 				}
@@ -1415,8 +1415,8 @@ public class OceanApp extends BaseAction {
 			int jkcount = jdbUserService.getJKCount(userid2);
 			
 			if (jkcount > 0) {
-				jsonObject.put("oceanC", -2);
-				jsonObject.put("oceanM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
+				jsonObject.put("vayC", -2);
+				jsonObject.put("vayM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1431,8 +1431,8 @@ public class OceanApp extends BaseAction {
 			}
 			
 			if (hhzt == 1 ||  hhzt_indo >0) {
-				jsonObject.put("oceanC", -4);
-				jsonObject.put("oceanM", "Thẩm định không thông qua, vui lòng một tháng sau đề xuất lại.");
+				jsonObject.put("vayC", -4);
+				jsonObject.put("vayM", "Thẩm định không thông qua, vui lòng một tháng sau đề xuất lại.");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1440,8 +1440,8 @@ public class OceanApp extends BaseAction {
 			//借款金额不能小于150万
 			int money_jk=Integer.parseInt(jk_money.replace(",","").replace(".",""));
 			if(money_jk<1500000) {
-				jsonObject.put("oceanC", -1);
-				jsonObject.put("oceanM", "Tạm thời ngừng chức năng vay 1000.000 vnđ, vui lòng đề xuất lại khoản vay khác.");
+				jsonObject.put("vayC", -1);
+				jsonObject.put("vayM", "Tạm thời ngừng chức năng vay 1000.000 vnđ, vui lòng đề xuất lại khoản vay khác.");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1488,8 +1488,8 @@ public class OceanApp extends BaseAction {
 				long datemin = ((chazhi % (1000 * 60 * 60 * 24)) % (1000 * 60 * 60)) / (1000 * 60);
 				long datesec = (((chazhi % (1000 * 60 * 60 * 24)) % (1000 * 60 * 60)) % (1000 * 60)) / 1000;
 				if (chazhi > 0) {
-					jsonObject.put("oceanC", -4);
-					jsonObject.put("oceanM", "Cách lần vay kế tiếp còn " + dateday + " ngày " + datehour + " tiếng "
+					jsonObject.put("vayC", -4);
+					jsonObject.put("vayM", "Cách lần vay kế tiếp còn " + dateday + " ngày " + datehour + " tiếng "
 							+ datemin + " phút " + datesec + " giây");
 					this.getWriter().write(jsonObject.toString());
 					return null;
@@ -1510,8 +1510,8 @@ public class OceanApp extends BaseAction {
 					sfzu[i] = row11.getInt("userid");
 					jkcountzu[i] = jdbUserService.getJKCount(sfzu[i]);
 					if (jkcountzu[i] > 0) {
-						jsonObject.put("oceanC", -3);
-						jsonObject.put("oceanM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
+						jsonObject.put("vayC", -3);
+						jsonObject.put("vayM", "Vẫn còn những mục chưa hoàn thành, không thể gửi thông tin trùng lặp");
 						DataRow row = new DataRow();
 						row.set("userid", userid2);
 						row.set("idno", idno);
@@ -1622,9 +1622,9 @@ public class OceanApp extends BaseAction {
 					    data3.set("sfyfk","2");
 					    data3.set("cl03_time",fmtrq.format(calendar.getTime()));
 			    		
-						String appName ="OCEAN" ; //APP名字
-					    if(username.substring(0,4).equals("OCEAN")){
-					    	appName="OCEAN";					    	
+						String appName ="vay" ; //APP名字
+					    if(username.substring(0,4).equals("vay")){
+					    	appName="vay";					    	
 					    }
 //						String content   =  appName+" chao "+userrealname+" de xuat vay cua ban da duoc chap thuan, sau 24h chua nhan duoc khoan vay xin"+appurl;
 //						SendFTP sms = new SendFTP();
@@ -1648,9 +1648,9 @@ public class OceanApp extends BaseAction {
 						data3.set("jyfk_money", borrMoney);
 						data3.set("lx", famt.format(nn * (100 - fklv) / 100));
 						
-						String appName ="OCEAN" ; //APP名字
-					    if(username.substring(0,4).equals("OCEAN")){
-					    	appName="OCEAN";					    	
+						String appName ="vay" ; //APP名字
+					    if(username.substring(0,4).equals("vay")){
+					    	appName="vay";					    	
 					    }
 //						String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut."+appurl;
 //						SendFTP sms = new SendFTP();
@@ -1661,8 +1661,8 @@ public class OceanApp extends BaseAction {
 				if (jkcount == 0) {
 					jdbUserService.insertJKInfo(data3);
 				}
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Đề nghị đã được gửi đi, nhân viên cần 1 ngày làm việc để xác nhận.");
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Đề nghị đã được gửi đi, nhân viên cần 1 ngày làm việc để xác nhận.");
 				// 增加消息
 				DataRow row = new DataRow();
 				row.set("userid", userid2);
@@ -1671,8 +1671,8 @@ public class OceanApp extends BaseAction {
 				row.set("fb_time", fmtrq.format(calendar.getTime()));
 				jdbUserService.insertUserMsg(row);
 			} catch (Exception e) {
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Lỗi hệ thống, đề nghị vay gửi đi không thành công");
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Lỗi hệ thống, đề nghị vay gửi đi không thành công");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -1684,46 +1684,46 @@ public class OceanApp extends BaseAction {
 	}
 
 	// ShowJKJD
-	public ActionResult doOceanBorHRe() throws Exception {
+	public ActionResult dovayBorHRe() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		int userId = jsonObj.getInteger("oceanid");
+		int userId = jsonObj.getInteger("vayid");
 		// 根据id 获取被邀请人的信�??
-		String miwen = jsonObj.getString("oceantoken");
+		String miwen = jsonObj.getString("vaytoken");
 
 		String jiamiwen = Encrypt.MD5(userId + jiami);
 
 		if (jiamiwen.equals(miwen)) {
 			DataRow row = new DataRow();
 			// 默认第一�??
-			int curPage = jsonObj.getInteger("oceanPn");
+			int curPage = jsonObj.getInteger("vayPn");
 			JSONArray jsonArray = new JSONArray();
 			List<DataRow> list = jdbUserService.getBorrHisRecordListPage(curPage, 10, userId);
 
 			for (DataRow object : list) {
 				DataRow data = new DataRow();
 				data.put("id", object.getString("id"));
-				data.put("oceanIr", object.getString("hkqd"));
-				data.put("oceanFm", object.getString("sjsh_money"));
-				data.put("oceanDlo", object.getString("jk_date"));
-				data.put("oceanFam", object.getString("sjds_money"));
-				data.put("oceanLvl", object.getString("jk_money"));
-				data.put("oceanCd", object.getString("create_date"));
+				data.put("vayIr", object.getString("hkqd"));
+				data.put("vayFm", object.getString("sjsh_money"));
+				data.put("vayDlo", object.getString("jk_date"));
+				data.put("vayFam", object.getString("sjds_money"));
+				data.put("vayLvl", object.getString("jk_money"));
+				data.put("vayCd", object.getString("create_date"));
 				jsonArray.add(JSONObject.fromBean(data));
 			}
 
 			int moneycode = jdbUserService.getMoneyCode(userId);
-			row.set("oceanHlist", jsonArray);
-			row.set("oceanCv", moneycode + "");
+			row.set("vayHlist", jsonArray);
+			row.set("vayCv", moneycode + "");
 			JSONObject object = JSONObject.fromBean(row);
 			this.getWriter().write(object.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("oceanC", 101);
-			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("vayC", 101);
+			jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
@@ -1731,22 +1731,22 @@ public class OceanApp extends BaseAction {
 	}
 
 	// 项目进行还款(详情)
-	public ActionResult doOceanRfuRe() throws Exception {
+	public ActionResult dovayRfuRe() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		int jkid = jsonObj.getInteger("oceanjkid");
+		int jkid = jsonObj.getInteger("vayjkid");
 		JSONObject jsonObject = new JSONObject();
-		String miwen = jsonObj.getString("oceantoken");
+		String miwen = jsonObj.getString("vaytoken");
 
 		String jiamiwen = Encrypt.MD5(jkid + jiami);
 
 		if (jiamiwen.equals(miwen)) {
 			if (jkid == 0) {
-				jsonObject.put("oceanC", -1);
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("vayC", -1);
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1760,9 +1760,9 @@ public class OceanApp extends BaseAction {
 				dataJK = jdbUserService.findUserJKById(jkid);
 			}
 			JSONObject object = JSONObject.fromBean(dataJK);
-			object.put("oceanC", 0);
-			object.put("oceanYq15", yanqi15);
-			object.put("oceanYq30", yanqi30);
+			object.put("vayC", 0);
+			object.put("vayYq15", yanqi15);
+			object.put("vayYq30", yanqi30);
 			this.getWriter().write(object.toString());
 			return null;
 		} else {
@@ -1772,16 +1772,16 @@ public class OceanApp extends BaseAction {
 	}
 
 	// 确定借款视频是否上传（返回结果）
-	public ActionResult doOceanViCh() throws Exception {
+	public ActionResult dovayViCh() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String videoUrl = jsonObj.getString("oceanVu");
+		String videoUrl = jsonObj.getString("vayVu");
 		logger.info("视频地址" + videoUrl);
-		int userid = jsonObj.getInteger("oceanid");
-		String miwen = jsonObj.getString("oceantoken");
+		int userid = jsonObj.getInteger("vayid");
+		String miwen = jsonObj.getString("vaytoken");
 
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 
@@ -1789,8 +1789,8 @@ public class OceanApp extends BaseAction {
 			JSONObject jsonObject = new JSONObject();
 
 			if (userid == 0) {
-				jsonObject.put("oceanC", -1);
-				jsonObject.put("oceanM", "Vui lòng đăng nhập trước"); // 请先登录
+				jsonObject.put("vayC", -1);
+				jsonObject.put("vayM", "Vui lòng đăng nhập trước"); // 请先登录
 				this.getWriter().write(jsonObject.toString());
 
 				return null;
@@ -1803,8 +1803,8 @@ public class OceanApp extends BaseAction {
 			int jkshid = jdbUserService.getJKshid(userid);
 			if (jkshid == 0) {
 
-				jsonObject.put("oceanC", -2);
-				jsonObject.put("oceanM",
+				jsonObject.put("vayC", -2);
+				jsonObject.put("vayM",
 						"Video cần tải không tồn tại, vui lòng liên hệ bộ phận dịch vụ khách hàng để được hỗ trợ"); // 要上传的视频的项目不存在
 																													// 请联系客服处理
 				// 请联系客服处�??
@@ -1814,8 +1814,8 @@ public class OceanApp extends BaseAction {
 			
 			//判断视频地址
 			if(videoUrl == null  || videoUrl.isEmpty()) {
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM","Không thể đăng tải video của bạn do không tim thấy video của bạn. Vui lòng thử lại sau ít phút hoặc liên hệ CSKH của chúng tôi để được hỗ trợ đăng tả."); // 要上传的视频的地址不存在
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM","Không thể đăng tải video của bạn do không tim thấy video của bạn. Vui lòng thử lại sau ít phút hoặc liên hệ CSKH của chúng tôi để được hỗ trợ đăng tả."); // 要上传的视频的地址不存在
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -1832,8 +1832,8 @@ public class OceanApp extends BaseAction {
 			row3.set("neirong", "Video của bạn đã đăng lên thành công , hãy lưu ý đến kết quả xét duyệt cuối cùng."); // 您的借款申请视频已上传成功，请留意最终审核结果
 			row3.set("fb_time", fmtrq.format(calendar.getTime()));
 			jdbUserService.insertUserMsg(row3);
-			jsonObject.put("oceanC", 0);
-			jsonObject.put("oceanM", "Cập nhật thành công video đề nghị vay"); // 更新借款视频成功
+			jsonObject.put("vayC", 0);
+			jsonObject.put("vayM", "Cập nhật thành công video đề nghị vay"); // 更新借款视频成功
 			this.getWriter().write(jsonObject.toString());
 
 			return null;
@@ -1843,15 +1843,15 @@ public class OceanApp extends BaseAction {
 
 	}
 
-	public ActionResult doOceanReMo() throws Exception {
+	public ActionResult dovayReMo() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String userid = jsonObj.getString("oceanid");
-		String hkqd = jsonObj.getString("oceanHk");
+		String userid = jsonObj.getString("vayid");
+		String hkqd = jsonObj.getString("vayHk");
 
-		String miwen = jsonObj.getString("oceantoken");
+		String miwen = jsonObj.getString("vaytoken");
 
 		String jiamiwen = Encrypt.MD5(hkqd + userid + jiami);
 
@@ -1867,10 +1867,10 @@ public class OceanApp extends BaseAction {
 				row3.set("hkpz", hkqd);
 				row3.set("hkpz_time", fmtrq.format(calendar.getTime()));
 				jdbUserService.updateUserHKQD(row3);
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Thành công");
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Thành công");
 			} catch (Exception e) {
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -1881,19 +1881,19 @@ public class OceanApp extends BaseAction {
 
 	}
 
-	public ActionResult doOceanUsIoC() throws Exception {
+	public ActionResult dovayUsIoC() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String userid = jsonObj.getString("oceanid");
-		String miwen = jsonObj.getString("oceantoken");
+		String userid = jsonObj.getString("vayid");
+		String miwen = jsonObj.getString("vaytoken");
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 
 		if (jiamiwen.equals(miwen)) {
-			String dwlat = jsonObj.getString("oceanDa");
-			String dwlng = jsonObj.getString("oceanDn");
+			String dwlat = jsonObj.getString("vayDa");
+			String dwlng = jsonObj.getString("vayDn");
 
 			JSONObject jsonObject = new JSONObject();
 			try {
@@ -1914,12 +1914,12 @@ public class OceanApp extends BaseAction {
 				row5.set("create_time", new Date());
 				jdbUserService.addUserDWIP(row5);
 
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Location Success");
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Location Success");
 			} catch (Exception e) {
 
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -2010,57 +2010,57 @@ public class OceanApp extends BaseAction {
 		return json.toString();
 	}
 
-	public ActionResult doOceanBaCRf() throws Exception {
+	public ActionResult dovayBaCRf() throws Exception {
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		JSONObject jsonObject = new JSONObject();
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String miwen = jsonObj.getString("oceantoken");
+		String miwen = jsonObj.getString("vaytoken");
 		String jiamiwen = Encrypt.MD5("ourbk" + jiami);
 		if (jiamiwen.equals(miwen)) {
 			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
 		
 			//2021年1月14日
-			obj.put("oceanAt", "Đoàn Trần Thu Trúc");
-			obj.put("oceanCn", "1058 7250 0869");
-			obj.put("oceanBn", "Ngân Hàng Viettinbank chi nhánh Tân Quy");
+			obj.put("vayAt", "Đoàn Trần Thu Trúc");
+			obj.put("vayCn", "1058 7250 0869");
+			obj.put("vayBn", "Ngân Hàng Viettinbank chi nhánh Tân Quy");
 			
-//			obj.put("oceanAt", "Trần Quang Vinh");
-//			obj.put("oceanCn", "19035 46003 8013");
-//			obj.put("oceanBn", "Techcombank -  Dak Lak");
+//			obj.put("vayAt", "Trần Quang Vinh");
+//			obj.put("vayCn", "19035 46003 8013");
+//			obj.put("vayBn", "Techcombank -  Dak Lak");
 
 //			JSONObject obj1 = new JSONObject();
-//			obj1.put("oceanAt", "CÔNG TY TNHH F168");
-//			obj1.put("oceanCn", "01810 - 0360 - 2501");
-//			obj1.put("oceanBn", "VIETCOMBANK - CN Nam Sài Gòn");
+//			obj1.put("vayAt", "CÔNG TY TNHH F168");
+//			obj1.put("vayCn", "01810 - 0360 - 2501");
+//			obj1.put("vayBn", "VIETCOMBANK - CN Nam Sài Gòn");
 //			JSONObject obj2 = new JSONObject();
-//			obj2.put("oceanAt", "CÔNG TY TNHH F168");
-//			obj2.put("oceanCn", "63402 - 0101 - 7335");
-//			obj2.put("oceanBn", "AGRIBANK - CN Nhà Bè");
+//			obj2.put("vayAt", "CÔNG TY TNHH F168");
+//			obj2.put("vayCn", "63402 - 0101 - 7335");
+//			obj2.put("vayBn", "AGRIBANK - CN Nhà Bè");
 			array.add(obj);
 //			array.add(obj1);
 //			array.add(obj2);
-			jsonObject.put("oceanBl", array);
+			jsonObject.put("vayBl", array);
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("oceanC", 101);
-			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("vayC", 101);
+			jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 			return null;
 		}
 
 	}
 
-	public ActionResult doOceanMeGt() throws Exception {
+	public ActionResult dovayMeGt() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
-		String miwen = jsonObj.getString("oceantoken");
+		String miwen = jsonObj.getString("vaytoken");
 		String jiamiwen = Encrypt.MD5("msg" + jiami);
 		JSONObject jsonObject = new JSONObject();
 		if (jiamiwen.equals(miwen)) {
@@ -2071,12 +2071,12 @@ public class OceanApp extends BaseAction {
 				jsonArray.add(JSONObject.fromBean(object));
 			}
 
-			jsonObject.put("oceanMl", jsonArray);
+			jsonObject.put("vayMl", jsonArray);
 
 		} else {
 			JSONObject jsObj = new JSONObject();
-			jsObj.put("oceanC", 101);
-			jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+			jsObj.put("vayC", 101);
+			jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 			this.getWriter().write(jsObj.toString());
 		}
 
@@ -2109,7 +2109,7 @@ public class OceanApp extends BaseAction {
 	public ActionResult doGetFBBook() throws Exception {
 		logger.info("用户ip" + getipAddr());
 		JSONObject jsonObject = new JSONObject();
-		String userid = getStrParameter("oceanid");
+		String userid = getStrParameter("vayid");
 		
 		logger.info("认证Facebook："+userid);
 		SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -2205,8 +2205,8 @@ public class OceanApp extends BaseAction {
 				row111.set("rztime_fb", fmtrq.format(new Date()));
 				jbdcms3Service.addReporttoken(row111);
 			}
-			jsonObject.put("oceanC", 0);
-			jsonObject.put("oceanM", "Thành công");
+			jsonObject.put("vayC", 0);
+			jsonObject.put("vayM", "Thành công");
 			this.getWriter().write(jsonObject.toString());
 		}
 		return null;
@@ -2215,7 +2215,7 @@ public class OceanApp extends BaseAction {
 	public ActionResult doGetZaloAuth() throws Exception {
 		logger.info("用户ip" + getipAddr());
 		JSONObject jsonObject = new JSONObject();
-		String userid = getStrParameter("oceanid");
+		String userid = getStrParameter("vayid");
 
 		logger.info("认证Zalo："+userid);
 		SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -2385,8 +2385,8 @@ public class OceanApp extends BaseAction {
 				row111.set("rztime_zalo", fmtrq.format(new Date()));
 				jbdcms3Service.addReporttoken(row111);
 			}
-			jsonObject.put("oceanC", 0);
-			jsonObject.put("oceanM", "Thành công");
+			jsonObject.put("vayC", 0);
+			jsonObject.put("vayM", "Thành công");
 			this.getWriter().write(jsonObject.toString());
 		}
 		return null;
@@ -2395,7 +2395,7 @@ public class OceanApp extends BaseAction {
 	public ActionResult doGetYYSPhone() throws Exception {
 		logger.info("用户ip" + getipAddr());
 		JSONObject jsonObject = new JSONObject();
-		String userid = getStrParameter("oceanid");
+		String userid = getStrParameter("vayid");
 		
 		logger.info("认证运营商："+userid);
 		SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -2544,8 +2544,8 @@ public class OceanApp extends BaseAction {
 						row111.set("rztime_yys", fmtrq.format(new Date()));
 						jbdcms3Service.addReporttoken(row111);
 					}
-					jsonObject.put("oceanC", 0);
-					jsonObject.put("oceanM", "Thành công");
+					jsonObject.put("vayC", 0);
+					jsonObject.put("vayM", "Thành công");
 					this.getWriter().write(jsonObject.toString());
 				}
 			}
@@ -2554,7 +2554,7 @@ public class OceanApp extends BaseAction {
 	}
 	
 	//a工作认证
-	public ActionResult doOceanWorkRZ() throws Exception {
+	public ActionResult dovayWorkRZ() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		
@@ -2635,12 +2635,12 @@ public class OceanApp extends BaseAction {
 
 				row3.set("profession", 2);// 工作认证为1
 				mofaUserService.updateUserInfoH(row3);
-				jsonObject.put("oceanC", 0);
-				jsonObject.put("oceanM", "Thành công");
+				jsonObject.put("vayC", 0);
+				jsonObject.put("vayM", "Thành công");
 			} catch (Exception e) {
 
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				e.printStackTrace();
 			}
 			this.getWriter().write(jsonObject.toString());
@@ -2653,17 +2653,17 @@ public class OceanApp extends BaseAction {
 	
 	
 	// 更新视频
-	public ActionResult doOceanVideoUpdate() throws Exception {
+	public ActionResult dovayVideoUpdate() throws Exception {
 		
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-		String videoUrl = jsonObj.getString("oceanVu");
+		String videoUrl = jsonObj.getString("vayVu");
 		logger.info("视频地址" + videoUrl);
-		int userid = jsonObj.getInteger("oceanid");
-		String miwen = jsonObj.getString("oceantoken");
+		int userid = jsonObj.getInteger("vayid");
+		String miwen = jsonObj.getString("vaytoken");
 
 		String jiamiwen = Encrypt.MD5(userid + jiami);
 
@@ -2671,8 +2671,8 @@ public class OceanApp extends BaseAction {
 			JSONObject jsonObject = new JSONObject();
 
 			if (userid == 0) {
-				jsonObject.put("oceanC", -1);
-				jsonObject.put("oceanM", "Vui lòng đăng nhập trước"); // 请先登录
+				jsonObject.put("vayC", -1);
+				jsonObject.put("vayM", "Vui lòng đăng nhập trước"); // 请先登录
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -2683,8 +2683,8 @@ public class OceanApp extends BaseAction {
 			int jkshid = jdbUserService.getJKshviid(userid);
 			if (jkshid == 0) {
 
-				jsonObject.put("oceanC", -2);
-				jsonObject.put("oceanM","Video cần tải không tồn tại, vui lòng liên hệ bộ phận dịch vụ khách hàng để được hỗ trợ"); // 要上传的视频的项目不存在
+				jsonObject.put("vayC", -2);
+				jsonObject.put("vayM","Video cần tải không tồn tại, vui lòng liên hệ bộ phận dịch vụ khách hàng để được hỗ trợ"); // 要上传的视频的项目不存在
 				// 请联系客服处�??
 				this.getWriter().write(jsonObject.toString());
 				return null;
@@ -2692,8 +2692,8 @@ public class OceanApp extends BaseAction {
 			
 			//判断视频地址
 			if(videoUrl == null  || videoUrl.isEmpty()) {
-				jsonObject.put("oceanC", -3);
-				jsonObject.put("oceanM","Không thể đăng tải video của bạn do không tim thấy video của bạn. Vui lòng thử lại sau ít phút hoặc liên hệ CSKH của chúng tôi để được hỗ trợ đăng tả."); // 要上传的视频的地址不存在
+				jsonObject.put("vayC", -3);
+				jsonObject.put("vayM","Không thể đăng tải video của bạn do không tim thấy video của bạn. Vui lòng thử lại sau ít phút hoặc liên hệ CSKH của chúng tôi để được hỗ trợ đăng tả."); // 要上传的视频的地址不存在
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			}
@@ -2704,8 +2704,8 @@ public class OceanApp extends BaseAction {
 			row.set("spsj", fmtrq.format(calendar.getTime()));
 			jdbUserService.updateJKSPInfo(row);
 
-			jsonObject.put("oceanC", 0);
-			jsonObject.put("oceanM", "Cập nhật thành công video đề nghị vay"); // 更新借款视频成功
+			jsonObject.put("vayC", 0);
+			jsonObject.put("vayM", "Cập nhật thành công video đề nghị vay"); // 更新借款视频成功
 			this.getWriter().write(jsonObject.toString());
 
 			return null;
@@ -2714,7 +2714,7 @@ public class OceanApp extends BaseAction {
 	}
 	
 	// 更新视频
-		public ActionResult doOceanPhotoUpdate() throws Exception {
+		public ActionResult dovayPhotoUpdate() throws Exception {
 			
 
 			logger.info("请求ip" + getipAddr());
@@ -2722,13 +2722,13 @@ public class OceanApp extends BaseAction {
 			com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 			com.alibaba.fastjson.JSONObject jsonObj = jsonString;
 
-			String userid = jsonObj.getString("oceanid");
-			String miwen = jsonObj.getString("oceantoken");
+			String userid = jsonObj.getString("vayid");
+			String miwen = jsonObj.getString("vaytoken");
 			String jiamiwen = Encrypt.MD5(userid + jiami);
 			if (jiamiwen.equals(miwen)) {
-				String p1 = jsonObj.getString("oceanPo");
-				String p2 = jsonObj.getString("oceanPt");
-				String p3 = jsonObj.getString("oceanPtr");
+				String p1 = jsonObj.getString("vayPo");
+				String p2 = jsonObj.getString("vayPt");
+				String p3 = jsonObj.getString("vayPtr");
 				String ui = jdbUserService.getUI(userid);
 
 				int yhbd = jdbUserService.getUserBank(userid);
@@ -2739,8 +2739,8 @@ public class OceanApp extends BaseAction {
 				SimpleDateFormat fmtrq = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
 				if ("".equals(p1) || p1 == null || "".equals(p2) || p2 == null || "".equals(p3) || p3 == null) {
-					jsonObject.put("oceanC", -11);
-					jsonObject.put("oceanM", "Lỗi tải lên hình ảnh");// 图片上传错误
+					jsonObject.put("vayC", -11);
+					jsonObject.put("vayM", "Lỗi tải lên hình ảnh");// 图片上传错误
 					this.getWriter().write(jsonObject.toString());
 					return null;
 
@@ -2774,20 +2774,20 @@ public class OceanApp extends BaseAction {
 						row3.set("vipStatus", 0);// 工作认证�??1
 					}
 					jdbUserService.updateUserInfoH(row3);
-					jsonObject.put("oceanC", 0);
-					jsonObject.put("oceanM", "Thành công");// 成功
+					jsonObject.put("vayC", 0);
+					jsonObject.put("vayM", "Thành công");// 成功
 				} catch (Exception e) {
 
-					jsonObject.put("oceanC", -3);
-					jsonObject.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
+					jsonObject.put("vayC", -3);
+					jsonObject.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");// 系统异常，请稍后再试�??
 					e.printStackTrace();
 				}
 				this.getWriter().write(jsonObject.toString());
 				return null;
 			} else {
 				JSONObject jsObj = new JSONObject();
-				jsObj.put("oceanC", 101);
-				jsObj.put("oceanM", "Lỗi hệ thống, vui lòng thử lại sau！");
+				jsObj.put("vayC", 101);
+				jsObj.put("vayM", "Lỗi hệ thống, vui lòng thử lại sau！");
 				this.getWriter().write(jsObj.toString());
 				return null;
 			}
