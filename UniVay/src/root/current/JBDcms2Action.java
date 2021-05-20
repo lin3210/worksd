@@ -1260,7 +1260,7 @@ public ActionResult doGetYqList() throws Exception {
 	DecimalFormat famt = new DecimalFormat("###,###");
     DataRow userInfo  =jbdcms2Service.getUserYqInfo(jkid) ;
     DataRow userShen  =jbdcms2Service.getUserYqShenFen(userid) ;
-	String appName ="OCEAN";
+	String appName ="UNI";
 	String userName = userInfo.getString("username");//用户名
 	String cardUserName=userShen.getString("realname");//真实姓名
 	String yuq_ts =userInfo.getString("yuq_ts");  //逾期天数
@@ -1268,9 +1268,9 @@ public ActionResult doGetYqList() throws Exception {
 	String sjsh_money =userInfo.getString("sjsh_money").replace(",", "");
 	String yuq_lx =userInfo.getString("yuq_lx").replace(",", "");
 	String hkje =famt.format((Integer.parseInt(sjsh_money)+Integer.parseInt(yuq_lx)));
-	userName = userName.substring(0, 4);
-	  if(userName.equals("OCEAN")){
-	    	appName="OCEAN";					    	
+	userName = userName.substring(0, 3);
+	  if(userName.equals("UNI")){
+	    	appName="UNI";					    	
 	    }
   	String content = "[{\"PhoneNumber\":\""+mobilePhone+"\",\"Message\":\""+appName+" xin thong bao:Khoan vay cua ban da qua han "+yuq_ts+" ngay, so tien phai tra la "+hkje+" VND, vui long dang nhap APP "+appName+" de tra no. Cam on ban!\",\"SmsGuid\":\""+mobilePhone+"\",\"ContentType\":1}]";
 	String con = URLEncoder.encode(content, "utf-8");
@@ -3425,13 +3425,11 @@ public  ActionResult doGetCuisByid()  throws Exception {
  	  //通过项目id 查询出用户的信息  
  	  DecimalFormat famt = new DecimalFormat("###,###");
  	  DataRow userInfo  =jbdcms2Service.getUserYqInfoYX(userid) ;
- 	  String appName ="Mofa";
+ 	  String appName ="UNI VAY";
  	  String userName = userInfo.getString("username");//用户名
  	  String mobilePhone =userInfo.getString("mobilephone");
  	  userName = userName.substring(0, 7);
- 	  if(userName.equals("ABCDong")){
- 		  appName="ABCDong";					    	
- 	  }
+
 // 	  String content   ="Tai ngay "+appName+" de co co hoi vay tien nhanh len den 10.000.000vnd. Dang ky tai: http://bit.ly/2KIzoEe. Hotline: 1900234558";
 //	  SendFTP sms = new SendFTP();
 //      String  response = sms.sendMessageFTP(content,mobilePhone);
@@ -3989,10 +3987,10 @@ public  ActionResult doGetCuisByid()  throws Exception {
 	   String time=format.format(date);
 	   //添加催收备注
 	   DataRow  dataRow2 = jbdcms2Service.getUserInfo(rec_id);
-	   String userName = dataRow2.getString("username").substring(0, 4);
-		String appName = "OCEAN";
-		if (userName.equals("OCEAN")) {
-			appName = "OCEAN";
+	   String userName = dataRow2.getString("username").substring(0, 3);
+		String appName = "UNI";
+		if (userName.equals("UNI")) {
+			appName = "UNI";
 		}
 //	   if(dxmb != 0){
 //		   String smscontent="";

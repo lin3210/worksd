@@ -296,6 +296,7 @@ public class JBDcms3Action extends BaseAction {
 		addorder.set("orderpaytype", orderpaytype);
 		addorder.set("cuishouid", dataRowjk.getString("cuishou_id"));
 
+		int  yuq_faxi = 6;    // 2021年5月20日 逾期罚息
 		if (state == 1) {
 			logger.info("------------------1-------");
 			//不管用户有没有延期，在延期和正常的时间内还款，都是扣掉催收的总金额
@@ -306,9 +307,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				
 				DataRow jkxm2 = new DataRow();
@@ -440,9 +441,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				addorder.set("rechargemoney", df.format(sjsh + yqlx - ddyqlx));
 				addorder.set("dqyqts", yqts - ddday);
@@ -600,9 +601,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				//算出原有的天数和利息
 				//差值小于0，表示在规定时间内还款的
@@ -630,9 +631,9 @@ public class JBDcms3Action extends BaseAction {
 						xsjsh = sjsh;
 						xyqlx = 0;
 						if(jkdate ==3 || jkdate ==4){
-							xyqlx = yylx + (xsjsh * 5 / 100) * ddday;
+							xyqlx = yylx + (xsjsh * yuq_faxi / 100) * ddday;
 						}else{
-							xyqlx = yylx + (xsjsh * 5 / 100) * ddday;
+							xyqlx = yylx + (xsjsh * yuq_faxi / 100) * ddday;
 						}
 						jkxm2.set("yuq_yhlx", df.format(hkm + yqyhlx));
 						jkxm2.set("yuq_lx", df.format(xyqlx - hkm));
@@ -640,9 +641,9 @@ public class JBDcms3Action extends BaseAction {
 						xsjsh = sjsh + yylx - hkm;
 						xyqlx = 0;
 						if(jkdate ==3 || jkdate ==4){
-							xyqlx = (xsjsh * 5 / 100) * ddday;
+							xyqlx = (xsjsh * yuq_faxi / 100) * ddday;
 						}else{
-							xyqlx = (xsjsh * 5 / 100) * ddday;
+							xyqlx = (xsjsh * yuq_faxi / 100) * ddday;
 						}
 						jkxm2.set("sjsh_money", df.format(xsjsh));
 						jkxm2.set("yuq_yhlx", df.format(yylx + yqyhlx));
@@ -754,9 +755,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				int yylx = yqlx - ddyqlx;
 				int yyts = yqts - ddday;
@@ -769,9 +770,9 @@ public class JBDcms3Action extends BaseAction {
 				if (hkm >= yylx) {
 					xsjsh = sjsh - hkm + yylx;
 					if(jkdate == 3 || jkdate == 4){
-						xyqlx = (xsjsh * 5 / 100) * ddday;
+						xyqlx = (xsjsh * yuq_faxi / 100) * ddday;
 					}else{
-						xyqlx = (xsjsh * 5 / 100) * ddday;
+						xyqlx = (xsjsh * yuq_faxi / 100) * ddday;
 					}
 					
 					jkxm2.set("sjsh_money", df.format(xsjsh));
@@ -779,9 +780,9 @@ public class JBDcms3Action extends BaseAction {
 					jkxm2.set("yuq_lx", df.format(xyqlx));
 				} else {
 					if(jkdate == 3 || jkdate == 4){
-						xyqlx = yylx - hkm + (sjsh * 5 / 100) * ddday;
+						xyqlx = yylx - hkm + (sjsh * yuq_faxi / 100) * ddday;
 					}else{
-						xyqlx = yylx - hkm + (sjsh * 5 / 100) * ddday;
+						xyqlx = yylx - hkm + (sjsh * yuq_faxi / 100) * ddday;
 					}
 					jkxm2.set("yuq_yhlx", df.format(hkm + yqyhlx));
 					jkxm2.set("yuq_lx", df.format(xyqlx));
@@ -919,9 +920,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				// 有逾期天数和利息,算出原有的天数和利息
 				int yylx = 0;
@@ -1059,9 +1060,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				int yylx = 0;
 				if(yqlx - ddyqlx>0) {
@@ -1242,9 +1243,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				// 有逾期天数和利息,算出原有的天数和利息
 				int yylx = 0;
@@ -1269,9 +1270,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0;
 						if(jkdate==3 || jkdate == 4){
-							yqjdts = yylx / (sjsh * 5 / 100) ;
+							yqjdts = yylx / (sjsh * yuq_faxi / 100) ;
 						}else{
-							yqjdts = yylx / (sjsh * 5 / 100) ;
+							yqjdts = yylx / (sjsh * yuq_faxi / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts - yqjdts);
 						yqtsadd = yqtsadd + yqjdts;
@@ -1281,9 +1282,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0 ;
 						if(jkdate==3 || jkdate == 4){
-							yqjdts = (hkm - yqyqlx) / (sjsh * 5 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * yuq_faxi / 100) ;
 						}else{
-							yqjdts = (hkm - yqyqlx) / (sjsh * 5 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * yuq_faxi / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts- yqjdts);
 						yqtsadd = yqtsadd + yqjdts;
@@ -1399,9 +1400,9 @@ public class JBDcms3Action extends BaseAction {
 				int ddday = (int) (chazhi / (1000 * 60 * 60 * 24));// 产生的多的逾期天数
 				int ddyqlx = 0 ;
 				if(jkdate == 3 || jkdate == 4 ){
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}else{
-					ddyqlx = (sjsh * 5 / 100) * ddday; // 产生的多的逾期利息
+					ddyqlx = (sjsh * yuq_faxi / 100) * ddday; // 产生的多的逾期利息
 				}
 				int yylx = yqlx - ddyqlx;
 				int yyts = yqts - ddday;
@@ -1417,9 +1418,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0;
 						if(jkdate ==3 || jkdate ==4){
-							yqjdts = yylx / (sjsh * 5 / 100) ;
+							yqjdts = yylx / (sjsh * yuq_faxi / 100) ;
 						}else{
-							yqjdts = yylx / (sjsh * 5 / 100) ;
+							yqjdts = yylx / (sjsh * yuq_faxi / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts - yqjdts);
 						yqtsadd = yqtsadd + yqjdts;
@@ -1429,9 +1430,9 @@ public class JBDcms3Action extends BaseAction {
 						//减掉用户还的逾期利息天数
 						int yqjdts = 0;
 						if(jkdate ==3 || jkdate ==4){
-							yqjdts = (hkm - yqyqlx) / (sjsh * 5 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * yuq_faxi / 100) ;
 						}else{
-							yqjdts = (hkm - yqyqlx) / (sjsh * 5 / 100) ;
+							yqjdts = (hkm - yqyqlx) / (sjsh * yuq_faxi / 100) ;
 						}
 						jkxm2.set("yuq_ts", yyts - yqjdts);
 						yqtsadd = yqtsadd + yqjdts;
@@ -1618,9 +1619,9 @@ public class JBDcms3Action extends BaseAction {
 		jbdcms3Service.insertUserMsg(row6);
 		// 给还款人短信
 		String userName = dataRow2.getString("username").substring(0, 7);
-		String appName = "OCEAN";
-		if (userName.equals("OCEAN")) {
-			appName = "OCEAN";
+		String appName = "UNI";
+		if (userName.equals("UNI")) {
+			appName = "UNI";
 		}
 		/*
 		 * String content =
@@ -2362,9 +2363,9 @@ public class JBDcms3Action extends BaseAction {
 		jbdcms3Service.insertUserMsg(row6);
 		// 给还款人短信
 		String userName = dataRow2.getString("username").substring(0, 4);
-		String appName = "OCEAN";
-		if (userName.equals("OCEAN")) {
-			appName = "OCEAN";
+		String appName = "UNI";
+		if (userName.equals("UNI")) {
+			appName = "UNI";
 		} 
 		
 		String SEND_INFO_TYPE="HK_success";
@@ -2701,9 +2702,9 @@ public class JBDcms3Action extends BaseAction {
 			jbdcms3Service.insertUserMsg(row6);
 			// 给还款人短信
 			String userName = dataRow2.getString("username").substring(0, 4);
-			String appName = "OCEAN";
-			if (userName.equals("OCEAN")) {
-				appName = "OCEAN";
+			String appName = "UNI";
+			if (userName.equals("UNI")) {
+				appName = "UNI";
 			}
 			String content = "[{\"PhoneNumber\":\""+dataRow2.getString("mobilephone")+"\",\"Message\":\""+appName+" xin thong bao: Ban da thanh toan so tien "+money+". Moi thac mac vui long inbox http://bit.ly/2QJAh16, hotline: 1900234558.\",\"SmsGuid\":\""+dataRow2.getString("mobilephone")+"\",\"ContentType\":1}]";
 			String con = URLEncoder.encode(content, "utf-8");
@@ -4169,10 +4170,10 @@ public class JBDcms3Action extends BaseAction {
 		int userId = jbdcmsService.getUserID(recid);
 		DataRow dataRow2 = jbdcmsService.getUserInfo(userId);
 		String userName = dataRow2.getString("username");
-		String appName = "OCEAN";
+		String appName = "UNI";
 		userName = userName.substring(0, 4);
-		if (userName.equals("OCEAN")) {
-			appName = "OCEAN";
+		if (userName.equals("UNI")) {
+			appName = "UNI";
 		}
 		String realname = jbdcmsService.getUserName(userId);
 		String content = "[{\"PhoneNumber\":\""+dataRow2.getString("mobilephone")+"\",\"Message\":\""+appName+" xin chao "+realname+".Vui long nghe may tu Mofa de hoan tat xac minh. Moi thac mac vui long inbox http://bit.ly/2QJAh16, hotline: 1900234558.\",\"SmsGuid\":\""+dataRow2.getString("mobilephone")+"\",\"ContentType\":1}]";
@@ -4182,8 +4183,8 @@ public class JBDcms3Action extends BaseAction {
 		DataRow row = new DataRow();
 		row.set("userid", userId);
 		row.set("msg",
-				"mofa xin chao "+ realname
-						+ ". Vui long nghe may tu OCEAN de hoan tat xac minh. Moi thac mac vui long inbox http://bit.ly/2QJAh16, hotline: 1900234558.");
+				"UNI VAY xin chao "+ realname
+						+ ". Vui long nghe may tu UNI de hoan tat xac minh. Moi thac mac vui long inbox http://bit.ly/2QJAh16, hotline: 1900234558.");
 		row.set("msgtype", "未接短信");
 		row.set("create_time", time);
 		row.set("cl_ren", cmsuserid);
@@ -4224,10 +4225,10 @@ public class JBDcms3Action extends BaseAction {
 		int userId = jbdcmsService.getUserID(recid);
 		DataRow dataRow2 = jbdcmsService.getUserInfo(userId);
 		String userName = dataRow2.getString("username");
-		String appName = "OCEAN";
+		String appName = "UNI";
 		userName = userName.substring(0, 4);
-		if (userName.equals("OCEAN")) {
-			appName = "OCEAN";
+		if (userName.equals("UNI")) {
+			appName = "UNI";
 		}
 		String realname = jbdcmsService.getUserName(userId);
 		if (dxnr == 0) {

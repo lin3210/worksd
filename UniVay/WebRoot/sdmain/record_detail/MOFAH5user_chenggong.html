@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>MOFA</title>
+    <title>UNI　VAY</title>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
     />
     <!--[if lt IE 9]>
@@ -601,9 +601,9 @@ document.onselectstart=new Function("event.returnValue=true");
                 <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
 			</div>
 			<div class="modal-footer" style="text-align:center">
-				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone1()">MOFA</button>
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone1()">CALL 1</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<!--<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone2()">MOFA</button>-->
+				<!--<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone2()">CALL 2</button>-->
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="call_phone3()">Thẩm định</button>
 			</div>
@@ -886,9 +886,9 @@ function load_data(){
 			 html_j2 +="<td>&nbsp;</td>";
 			 $("#job_2").html(html_j2);	
 			 /* var html_work="";
-			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1w +"' class='roomimg' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>正面</a></div>";			 
-			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p2w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>反面</a></div>";
-			 html_work +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p3w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>手持</a></div>";
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p1w +"' class='roomimg' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>正面</a></div>";			 
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p2w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>反面</a></div>";
+			 html_work +=" <div style='float:left; width:30%;'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p3w +"' class='roomimg' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>手持</a></div>";
 			 $("#work").html(html_work); */
 			 var html_radj="";	
 			 /* if(data.status == 1)
@@ -952,9 +952,9 @@ function load_data(){
 			 html_s2 +="<td>&nbsp;</td>";
 			 $("#school_2").html(html_s2);	
 			 var html_school="";
-			 html_school +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1s +"' class='roomimgschool' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt trước</a></div>";			 
-			 html_school +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p2s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt sau</a></div>";
-			 html_school +=" <div style='float:left; width:30%;'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p3s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a></div>";
+			 html_school +=" <div style='float:left; width:30%;'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p1s +"' class='roomimgschool' style='height: 300px;width:100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt trước</a></div>";			 
+			 html_school +=" <div style='float:left; width:30%;'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p2s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Mặt sau</a></div>";
+			 html_school +=" <div style='float:left; width:30%;'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p3s +"' class='roomimgschool' style='height: 300px;width: 100%;' alt=''><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a></div>";
 			 $("#school").html(html_school);
 			   	$('.roomimgschool').artZoom({
 		  path: '/assets/img',
@@ -1912,13 +1912,13 @@ function load_data(){
 			 /*--------个人照片信息 ---------*/
 			  var html_p="";
 			   if(data.p1.slice(0,2) == "H5"){
-			  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
-			   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
-			  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
+			  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
+			   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
+			  		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
 			   }else{
-			   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
-			   html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
-			   html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
+			   		html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p1 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt trước</a>";			 
+			   html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p2 +"' class='roomimg' style='height: 350px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Mặt sau</a>";
+			   html_p +=" <li class='list-group-item no-padding' id='shenfen'> <img src='http://univay.oss-cn-hongkong.aliyuncs.com/" + data.p3 +"' class='roomimg' style='height: 300px;width: 100%;' alt=''></li><a href='javascript:void();' class='list-group-item'>Hình tự cầm</a>";
 			   }
 
               /*  if(data.status == "1")

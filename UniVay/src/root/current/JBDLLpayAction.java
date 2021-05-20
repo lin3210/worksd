@@ -432,10 +432,10 @@ public class JBDLLpayAction extends BaseAction{
     		rowhong111.set("oldyonghu", oldyonghu+1);
     		jbdLLpayService.updateUserHongbao(rowhong111);
 			String userName =user.getString("username");
-			  String appName ="OCEAN";
-			    userName =userName.substring(0,4);					  
-			    if(userName.equals("OCEAN")){
-			    	appName="OCEAN";					    	
+			  String appName ="UNI";
+			    userName =userName.substring(0,3);					  
+			    if(userName.equals("UNI")){
+			    	appName="UNI";					    	
 			    }
 		   String content = "[{\"PhoneNumber\":\""+user.getString("mobilephone")+"\",\"Message\":\""+appName+" thong bao: So tien vay "+sjds_money+" da chuyen khoan den TK Ngan hang so cuoi "+user.getString("cardno").substring(user.getString("cardno").length()-4, user.getString("cardno").length())+".Neu sau 24 tieng chua nhan duoc tien, vui long goi hotline: 1900234558, inbox http://bit.ly/2QJAh16.\",\"SmsGuid\":\""+user.getString("mobilephone")+"\",\"ContentType\":1}]";
 		   String con = URLEncoder.encode(content, "utf-8");

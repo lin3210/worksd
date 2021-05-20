@@ -2927,10 +2927,10 @@ public class JBDcmsAction extends BaseAction {
 			jbdcmsService.insertUserMsg(row3);
 			
 			String userName = dataRow2.getString("username");
-			String appName = "OCEAN";
-			userName = userName.substring(0, 4);
-			if (userName.equals("OCEAN")) {
-				appName = "OCEAN";
+			String appName = "UNI";
+			userName = userName.substring(0, 3);
+			if (userName.equals("UNI")) {
+				appName = "UNI";
 			}
 			String content = "";
 			// 发送上传视频短信提醒
@@ -5714,7 +5714,7 @@ public class JBDcmsAction extends BaseAction {
 		}
 		String smscontent = "";
 		if (lab == 1) {
-			smscontent = "mofa thong bao : Quy khach vui long tai app MOFA theo link http://bit.ly/2QJAh16, hotline: 1900234558.";
+			smscontent = "UNI VAY thong bao : Quy khach vui long tai app UNI VAY theo link http://bit.ly/2QJAh16, hotline: 1900234558.";
 		}
 		String content = "[{\"PhoneNumber\":\"" + phone + "\",\"Message\":\"" + smscontent + "\",\"SmsGuid\":\"" + phone
 				+ "\",\"ContentType\":1}]";
@@ -5823,7 +5823,7 @@ public class JBDcmsAction extends BaseAction {
 			user_pvi[3] = userjkinfo.getString("spdz");
 		}
 		logger.info("userid:"+userid+"realName:"+realName+"usercmnd"+usercmnd+"user_p1:"+user_pvi[0]+"user_vi:"+user_pvi[3]);
-	    String url ="https://yn-ocean.oss-cn-hongkong.aliyuncs.com/";
+	    String url ="https://univay.oss-cn-hongkong.aliyuncs.com/";
 		//String url ="https://m99.oss-cn-hongkong.aliyuncs.com/";
 	    logger.info("url:"+url);
 		for (int i = 0; i < user_pvi.length; i++) {

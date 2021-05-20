@@ -43,7 +43,7 @@ public class SDYQTask implements Task  {
 		 Calendar calendar2 = Calendar.getInstance(); 	
 		 Date nowDate = new Date() ;
 		 String jkyq_time ;//还款截止时间
-		 int yqannualrate ;//逾期利率
+		 int yqannualrate = 30 ;//逾期利率
 		 String sjsh_money ;//借款金额
 		 String yuq_lx ; //逾期利息
 		 String tzjx_lx ; //停止计息利息
@@ -59,10 +59,11 @@ public class SDYQTask implements Task  {
 		 int tzjx_ts ;//停止计息天数
 		 String jkid ; //借款id 
 		 String userName ; //用户名
-		 String appName ="OCEAN" ; //APP名字
+		 String appName ="UNI VAY" ; //APP名字
 		 String userId ; //用户id
 		 int threenum = 0;
 		 int dtnum = 0;
+		 
 		 
 		 for (DataRow dataRow : list) 			 
 				{
@@ -73,7 +74,7 @@ public class SDYQTask implements Task  {
 						}else{
 							jkyq_time =dataRow.getString("hkyq_time");
 						}
-					    yqannualrate =dataRow.getInt("yqannualrate");
+					    //yqannualrate =dataRow.getInt("yqannualrate");
 						sjsh_money =dataRow.getString("sjsh_money").replace(",", "");
 						yuq_lx =dataRow.getString("yuq_lx").replace(",", "");
 						tzjx_lx =dataRow.getString("tzjx_lx").replace(",", "");
@@ -92,9 +93,9 @@ public class SDYQTask implements Task  {
 					    Date date_01 = fmtrq.parse(jkyq_time);
 					    //用户名
 					    userName =dataRow.getString("username");
-					    userName =userName.substring(0,4);					  
-					    if(userName.equals("OCEAN")){
-					    	appName="OCEAN";					    	
+					    userName =userName.substring(0,3);					  
+					    if(userName.equals("UNI")){
+					    	appName="UNI";					    	
 					    }
 					   
 						//截取截止还款时间的年月日
@@ -160,7 +161,7 @@ public class SDYQTask implements Task  {
 								 jkInfo.set("id",jkid);
 								 jkInfo.set("tzjx_ts",tzjx_ts+1);
 								 logger.info(zjine*yqannualrate/3000);
-								 jkInfo.set("tzjx_lx",famt.format(tzjxlx+sjsh*yqannualrate*5/3000));							
+								 jkInfo.set("tzjx_lx",famt.format(tzjxlx+sjsh*yqannualrate*6/3000));							
 								 //更新借款信息
 								 service.updateJKinfo(jkInfo); 
 								 
@@ -173,7 +174,7 @@ public class SDYQTask implements Task  {
 								DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
 								int fendanid = datafendan.getInt("id");
 								int cuishoujine = datafendan.getInt("cuishou_jine");
-								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*5/3000;  //原来入催金额+ 每天利息
+								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*6/3000;  //原来入催金额+ 每天利息
 								logger.info("cuishoujine"+cuishoujine+"  totalcuishoujine:"+totalcuishoujine);
 								
 								DataRow dataRowfd = new DataRow();
@@ -192,7 +193,7 @@ public class SDYQTask implements Task  {
 							 jkInfo.set("tzjx_lx","0");
 							 jkInfo.set("yuq_ts",tzjx_ts+yuq_ts+1); 
 							 logger.info(zjine*yqannualrate/3000);
-							 jkInfo.set("yuq_lx",famt.format(tzjxlx+yuq+sjsh*yqannualrate*5/3000));							
+							 jkInfo.set("yuq_lx",famt.format(tzjxlx+yuq+sjsh*yqannualrate*6/3000));							
 							 //更新借款信息
 							 service.updateJKinfo(jkInfo);
 							 
@@ -204,7 +205,7 @@ public class SDYQTask implements Task  {
 								DataRow datafendan = cuishoufendanList.get(0);   //只获取最大id，（最新的数据）
 								int fendanid = datafendan.getInt("id");
 								int cuishoujine = datafendan.getInt("cuishou_jine");
-								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*5/3000;  //原来入催金额+ 每天利息
+								int totalcuishoujine = cuishoujine +sjsh*yqannualrate*6/3000;  //原来入催金额+ 每天利息
 								logger.info("cuishoujine"+cuishoujine+"  totalcuishoujine:"+totalcuishoujine);
 								
 								DataRow dataRowfd = new DataRow();

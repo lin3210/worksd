@@ -334,11 +334,11 @@ public class HtmlOceanAction extends BaseAction {
 				data.set("tokenhtml", token);//注册入口
 				if(vipstatus == 0){
 					if(phonetype == 1){
-						username = "OCEAN-AND"+userid+"-on";
+						username = "UNI-AND"+userid+"-on";
 					}else if(phonetype == 2){
-						username = "OCEAN-IOS"+userid+"-on";
+						username = "UNI-IOS"+userid+"-on";
 					}else{
-						username = "OCEAN-WIN"+userid+"-on";
+						username = "UNI-WIN"+userid+"-on";
 					}
 				}
 				data.set("username", username);
@@ -393,11 +393,11 @@ public class HtmlOceanAction extends BaseAction {
 			
 			String username = "";
 			if(phonetype == 1){
-				username = "OCEAN-AND"+userid+"-off";
+				username = "UNI-AND"+userid+"-off";
 			}else if(phonetype == 2){
-				username = "OCEAN-IOS"+userid+"-off";
+				username = "UNI-IOS"+userid+"-off";
 			}else{
-				username = "OCEAN-WIN"+userid+"-off";
+				username = "UNI-WIN"+userid+"-off";
 			}
 			data.set("username", username);
 			jdbUserService.updateUser(userid, data);
@@ -503,11 +503,11 @@ public class HtmlOceanAction extends BaseAction {
 						data.set("tokenhtml", token);//注册入口
 						if(vipstatus == 0){
 							if(phonetype == 1){
-								username = "OCEAN-AND"+userid+"-on";
+								username = "UNI-AND"+userid+"-on";
 							}else if(phonetype == 2){
-								username = "OCEAN-IOS"+userid+"-on";
+								username = "UNI-IOS"+userid+"-on";
 							}else{
-								username = "OCEAN-WIN"+userid+"-on";
+								username = "UNI-WIN"+userid+"-on";
 							}
 						}
 						data.set("username", username);
@@ -562,11 +562,11 @@ public class HtmlOceanAction extends BaseAction {
 					
 					String username = "";
 					if(phonetype == 1){
-						username = "OCEAN-AND"+userid+"-off";
+						username = "UNI-AND"+userid+"-off";
 					}else if(phonetype == 2){
-						username = "OCEAN-IOS"+userid+"-off";
+						username = "UNI-IOS"+userid+"-off";
 					}else{
-						username = "OCEAN-WIN"+userid+"-off";
+						username = "UNI-WIN"+userid+"-off";
 					}
 					data.set("username", username);
 					jdbUserService.updateUser(userid, data);
@@ -1572,9 +1572,9 @@ public ActionResult doHtmlTJJK() throws Exception
 						    data3.set("sfyfk","2");
 						    data3.set("cl03_time",fmtrq.format(calendar.getTime()));
 				    		
-							String appName ="OCEAN" ; //APP名字
-						    if(username.substring(0,4).equals("OCEAN")){
-						    	appName="OCEAN";					    	
+							String appName ="UNI" ; //APP名字
+						    if(username.substring(0,3).equals("UNI")){
+						    	appName="UNI";					    	
 						    }																
 //							String content   =  appName+" chao "+user.getString("realname")+" de xuat vay cua ban da duoc chap thuan, sau 24h chua nhan duoc khoan vay xin lien he: http://bit.ly/2KIzoEe Hotline: 1900234558";
 //							SendFTP sms = new SendFTP();
@@ -1604,9 +1604,9 @@ public ActionResult doHtmlTJJK() throws Exception
 							data3.set("jyfk_money", famt.format(nn));
 							data3.set("lx", famt.format(nn * (100 - fklv) / 100));
 							
-							String appName ="OCEAN" ; //APP名字
-						    if(username.substring(0,4).equals("OCEAN")){
-						    	appName="OCEAN";					    	
+							String appName ="UNI" ; //APP名字
+						    if(username.substring(0,4).equals("UNI")){
+						    	appName="UNI";					    	
 						    }
 //							String content   =  appName+" chao! Vui long vao ung dung hoan tat quay video de vay tien lien tay chi voi 10 phut. Dang ky tai: http://bit.ly/2KIzoEe Hotline: 1900234558";
 //							SendFTP sms = new SendFTP();

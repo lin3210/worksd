@@ -65,22 +65,17 @@ function gradeChange() {
 	//测试
 	if (jk_date == 3) {
 		/* 展示的金额 = 申请金额 - （ 十五天的服务费 + 十五天利息） x 申请金额 */
-		var showManey = jk_money * 291 / 1000;
+		var showManey = jk_money * 271 / 1000;
 		var showlixi = jk_money * 9 / 1000;
-		var showsjds = jk_money * 70 / 100;
+		var showsjds = jk_money * 72 / 100;
 		//设置格式
 		$("#fuwufei").val(toThousands(showManey));
 		$("#lixi").val(toThousands(showlixi));
 		$("#sjds").val(toThousands(showsjds));
 	}else if (jk_date == 1) {
-		var showManey = jk_money * 1955 / 10000;
-		var showlixi = jk_money * 45 / 10000;
-		var showsjds = jk_money * 80 / 100;
-		if(jk_money ==10000000){
-			showManey = jk_money * 291 / 1000;
-			showlixi = jk_money * 9 / 1000;
-			showsjds = jk_money * 70 / 100;
-		}
+		var showManey = jk_money * 271 / 1000;
+		var showlixi = jk_money * 9 / 1000;
+		var showsjds = jk_money * 72 / 100;
 		//设置格式
 		$("#fuwufei").val(toThousands(showManey));
 		$("#lixi").val(toThousands(showlixi));

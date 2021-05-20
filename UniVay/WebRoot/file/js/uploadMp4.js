@@ -7,9 +7,9 @@ var policyText = {
 
 
 
-accessid = 'LTAI4FmJjtKEwbMf4rRrda51';
-accesskey = 'qI4a7hGEt88y6MupRp0WjuTA2OAJcm';
-host = 'http://yn-ocean.oss-cn-hongkong.aliyuncs.com';
+accessid = 'LTAI5tRaxkWRD7fBncv4Kdrz';
+accesskey = 'WYyzflQXRIfV7NpaWYrYzjp8FoMudj';
+host = 'http://univay.oss-cn-hongkong.aliyuncs.com';
 
 
 var policyBase64 = Base64.encode(JSON.stringify(policyText))

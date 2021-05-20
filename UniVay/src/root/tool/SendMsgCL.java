@@ -43,7 +43,7 @@ public class SendMsgCL {
 		mobile="84"+mobile;
 		
 		//用户收到短信之后显示的发件人，国内不支持自定义，国外支持，但是需要提前和运营商沟通注册，具体请与TIG对接人员确定。选填
-		String senderId = "OCEAN";
+		String senderId = "UNI";
 		
 		//组装请求参数
 		JSONObject map=new JSONObject();
@@ -102,7 +102,7 @@ public class SendMsgCL {
 		mobile="84"+mobile;
 		
 		//用户收到短信之后显示的发件人，国内不支持自定义，国外支持，但是需要提前和运营商沟通注册，具体请与TIG对接人员确定。选填
-		String senderId = "OCEAN";
+		String senderId = "UNI";
 		
 		//组装请求参数
 		JSONObject map=new JSONObject();

@@ -34,16 +34,16 @@ public class UserMoneyBase  {
 		if(username.isEmpty() || username.length()<5) {
 			username =jbdUserBaseServiceBean.getusername(userid+"");
 		}
-		// Ocean lx     7day  30 %
-		int lx=30;;
+		// UNI lx     7day  28 %
+		int lx=28;;
 		if (1==nProductType) {    //15
-			lx=30;
+			lx=28;
 		}else if(2==nProductType) {  //30
-			lx=30;
+			lx=28;
 		}else if(3==nProductType) {  //7
-			lx=30;
+			lx=28;
 		}else if(4==nProductType) {  //14
-			 lx =30;
+			 lx =28;
 		}
 		
 		return lx;

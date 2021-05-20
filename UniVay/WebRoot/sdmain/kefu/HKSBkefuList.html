@@ -254,9 +254,9 @@ a:hover {text-decoration: none;}
                 <input type="hidden" name="reco_id" id="reco_id" class="form-control required url">
 			</div>
 			<div class="modal-footer" style="text-align:center">
-				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone1()">MOFA</button>
+				<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone1()">CALL 1</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<!--<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone2()">MOFA</button>-->
+				<!--<button data-bb-handler="success" type="button" class="btn btn-success" onclick="call_phone2()">CALL 2</button>-->
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button data-bb-handler="main" type="button" class="btn btn-primary" onclick="call_phone3()">Thẩm định</button>
 			</div>
@@ -302,7 +302,7 @@ a:hover {text-decoration: none;}
 		     	//if(mobilephone.length > 8){
 		 		//	mobilephone = mobilephone.substr(0, 3) + "*****" + mobilephone.substr(8);
 		 	 	//}
-			  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td><a href='javascript:void(0);' onclick=\"call_choice('"+list[i].mobilephone+"')\">"+mobilephone+"</a></td><td><button class='btn btn-success btn-info' onclick=\"window.open('http://yn-ocean.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Tải chứng chỉ</button></td>";
+			  html_ += "<tr><td>"+list[i].id+"</td><td>"+list[i].realname+"</td><td><a href='javascript:void(0);' onclick=\"call_choice('"+list[i].mobilephone+"')\">"+mobilephone+"</a></td><td><button class='btn btn-success btn-info' onclick=\"window.open('http://univay.oss-cn-hongkong.aliyuncs.com/" + list[i].hkpz +"')\" >Tải chứng chỉ</button></td>";
 			  if(list2[i] != null){
 			  	html_ += "<td>"+list2[i]+"</td>";
 			  }else{
