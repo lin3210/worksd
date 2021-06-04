@@ -80,7 +80,7 @@ public class VayAppAction extends BaseAction {
 	String jiami = "S9uKJD8HEOI9j9O89ujhdf8H093kfld12NVtestapi";
 	long time = 1000 * 60 * 3;
 
-	public ActionResult dovayHome() throws IOException {  
+	public ActionResult doVayHome() throws IOException {  
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -294,7 +294,7 @@ public class VayAppAction extends BaseAction {
 	
 
 //olava注册登录接口(FB)
-	public ActionResult dovayLogin() throws Exception {
+	public ActionResult doVayLogin() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -362,9 +362,9 @@ public class VayAppAction extends BaseAction {
 			String userid = jdbUserService.getIdByPhone(phone);
 			String username = "";
 			if (phonetype == 1) {
-				username = "vay-AND" + userid;
+				username = "UNI-AND" + userid;
 			} else {
-				username = "vay-IOS" + userid;
+				username = "UNI-IOS" + userid;
 			}
 
 			data.set("username", username);
@@ -475,7 +475,7 @@ public class VayAppAction extends BaseAction {
 		}
 
 	}  
-	public ActionResult dovayOTP() throws Exception {
+	public ActionResult doVayOTP() throws Exception {
 		logger.info("请求ip"+getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonObj = getRequestJson(request);
@@ -586,7 +586,7 @@ public class VayAppAction extends BaseAction {
 			return null;
 		}
 	}
-	public ActionResult dovaySubCard() throws Exception {
+	public ActionResult doVaySubCard() throws Exception {
 
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
@@ -689,7 +689,7 @@ public class VayAppAction extends BaseAction {
 
 	}
 
-	public ActionResult dovayBankCopy() throws Exception {
+	public ActionResult doVayBankCopy() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 
@@ -959,7 +959,7 @@ public class VayAppAction extends BaseAction {
 
 	}
 
-	public ActionResult dovayBank() throws Exception {
+	public ActionResult doVayBank() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1048,7 +1048,7 @@ public class VayAppAction extends BaseAction {
 
 	}
 
-	public ActionResult dovayContact() throws Exception {
+	public ActionResult doVayContact() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1127,7 +1127,7 @@ public class VayAppAction extends BaseAction {
 		}
 	}
 
-	public void dovayAddBook() throws ServletException, IOException {
+	public void doVayAddBook() throws ServletException, IOException {
 		logger.info("用户ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1279,7 +1279,7 @@ public class VayAppAction extends BaseAction {
 	 * 
 	 */
 
-	public ActionResult dovayBorJ() throws Exception {
+	public ActionResult doVayBorJ() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1439,7 +1439,7 @@ public class VayAppAction extends BaseAction {
 			
 			//借款金额不能小于150万
 			int money_jk=Integer.parseInt(jk_money.replace(",","").replace(".",""));
-			if(money_jk<1500000) {
+			if(money_jk<1000000) {
 				jsonObject.put("vayC", -1);
 				jsonObject.put("vayM", "Tạm thời ngừng chức năng vay 1000.000 vnđ, vui lòng đề xuất lại khoản vay khác.");
 				this.getWriter().write(jsonObject.toString());
@@ -1684,7 +1684,7 @@ public class VayAppAction extends BaseAction {
 	}
 
 	// ShowJKJD
-	public ActionResult dovayBorHRe() throws Exception {
+	public ActionResult doVayBorHRe() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1731,7 +1731,7 @@ public class VayAppAction extends BaseAction {
 	}
 
 	// 项目进行还款(详情)
-	public ActionResult dovayRfuRe() throws Exception {
+	public ActionResult doVayRfuRe() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1772,7 +1772,7 @@ public class VayAppAction extends BaseAction {
 	}
 
 	// 确定借款视频是否上传（返回结果）
-	public ActionResult dovayViCh() throws Exception {
+	public ActionResult doVayViCh() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1843,7 +1843,7 @@ public class VayAppAction extends BaseAction {
 
 	}
 
-	public ActionResult dovayReMo() throws Exception {
+	public ActionResult doVayReMo() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -1881,7 +1881,7 @@ public class VayAppAction extends BaseAction {
 
 	}
 
-	public ActionResult dovayUsIoC() throws Exception {
+	public ActionResult doVayUsIoC() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -2010,7 +2010,7 @@ public class VayAppAction extends BaseAction {
 		return json.toString();
 	}
 
-	public ActionResult dovayBaCRf() throws Exception {
+	public ActionResult doVayBaCRf() throws Exception {
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
 		JSONObject jsonObject = new JSONObject();
@@ -2055,7 +2055,7 @@ public class VayAppAction extends BaseAction {
 
 	}
 
-	public ActionResult dovayMeGt() throws Exception {
+	public ActionResult doVayMeGt() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		com.alibaba.fastjson.JSONObject jsonString = getRequestJson(request);
@@ -2554,7 +2554,7 @@ public class VayAppAction extends BaseAction {
 	}
 	
 	//a工作认证
-	public ActionResult dovayWorkRZ() throws Exception {
+	public ActionResult doVayWorkRZ() throws Exception {
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
 		
@@ -2653,7 +2653,7 @@ public class VayAppAction extends BaseAction {
 	
 	
 	// 更新视频
-	public ActionResult dovayVideoUpdate() throws Exception {
+	public ActionResult doVayVideoUpdate() throws Exception {
 		
 		logger.info("请求ip" + getipAddr());
 		HttpServletRequest request = getRequest();
@@ -2714,7 +2714,7 @@ public class VayAppAction extends BaseAction {
 	}
 	
 	// 更新视频
-		public ActionResult dovayPhotoUpdate() throws Exception {
+		public ActionResult doVayPhotoUpdate() throws Exception {
 			
 
 			logger.info("请求ip" + getipAddr());
