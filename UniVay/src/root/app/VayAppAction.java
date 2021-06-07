@@ -2023,9 +2023,9 @@ public class VayAppAction extends BaseAction {
 			JSONObject obj = new JSONObject();
 		
 			//2021年1月14日
-			obj.put("vayAt", "Đoàn Trần Thu Trúc");
-			obj.put("vayCn", "1058 7250 0869");
-			obj.put("vayBn", "Ngân Hàng Viettinbank chi nhánh Tân Quy");
+			obj.put("vayAt", "PHAM QUOC TAI");
+			obj.put("vayCn", "0368 95257 3333");
+			obj.put("vayBn", "Ngân hàng MB PGD Phú Xuân Hồ Chí Minh");
 			
 //			obj.put("vayAt", "Trần Quang Vinh");
 //			obj.put("vayCn", "19035 46003 8013");
