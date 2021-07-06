@@ -1186,7 +1186,7 @@ load_data_();
                                	  </select>
                               </div>
                               <div class="col-md-1" style="width:200px;">
-		                        <input type="text" name="regular" class="form-control" id="tempVelue" placeholder="Vui lòng nhập thông tin tìm kiếm" >
+		                        <input type="text" name="regular" class="form-control" id="tempVeluemsg" placeholder="Vui lòng nhập thông tin tìm kiếm" >
 		                      </div>
 			                  <button id="btn-loadmsg" class="btn btn-primary" data-loading-text="loading...">
 			                                     Tìm kiếm
@@ -1223,12 +1223,33 @@ load_data_();
                         </th>
                       </tr>
                     </thead>
-                    <tbody id="load_msg">
+                    <tbody id="load_data_msg">
                       
                     </tbody>
                   </table>
                   
 
+			<!-- botton start -->
+		              <div class="row">
+	                    <div class="dataTables_footer clearfix">
+	                       <div class="col-md-6">
+	                           <div class="dataTables_info" id="DataTables_Table_0_info">
+	                               Tổng số
+	                           <font id="totalrows_msg"></font>
+	                                tin, mỗi trang chứa được 
+	                           <font id="numperpage_msg"></font>
+	                                tin, hiện tại trang số<font id="currentpage_msg">
+	                           </font> / <font id="totalpages_msg"></font>
+	                               trang
+	                           </div>
+	                       </div>
+	                       <div class="col-md-6">
+	                            <div class="dataTables_paginate paging_bootstrap" id="datatable_msg">
+	                            </div>
+	                       </div>
+	                   </div>
+	             </div>
+			   <!-- botton end -->
 
                 </div>
                  
@@ -1241,21 +1262,21 @@ load_data_();
 
 <script src="/assets/js/jquery.artZoom.js"></script>
  <script>
-	load_msg();
+	load_data_msg();
 	 $("#btn-loadmsg").on("click", function() {
  
 		var a = $(this);
 		a.button("loading");
 		$("#cupage_msg").val("1");
-		load_msg();
+		load_data_msg();
 	}); 
 	  function gradeChange(){
 	   var tempselect=$("#tempselectmsg").val();
 	   if(tempselect==0){
-	       $("#tempVelue").val("");
+	       $("#tempVeluemsg").val("");
 	   }
 	}
-  function load_msg()
+  function load_data_msg()
 	{
 	    var tempsele=$("#tempselectmsg").val();
 	  var tempval=$("#tempVelue").val();
@@ -1281,7 +1302,7 @@ load_data_();
 	         $("#load_html").hide();
 	         
 		   }
-		  $("#load_msg").html("");
+		  $("#load_data_msg").html("");
 		 
 		  var list = data.list.data;	
 		  var html_="";
@@ -1336,10 +1357,13 @@ load_data_();
 		  {
 			  $("#tempselect").val(data.th_phone);
 		  }   */
-		  $("#load_msg").append(html_);
+		  $("#load_data_msg").append(html_);
 		 
-			$("#tempselectmsg").val(data.temp);
-			$("#tempVelue").val(data.tempvalu);
+		  $("#tempselectmsg").val(data.temp);
+		  $("#tempVeluemsg").val(data.tempvalu);
+			  
+		  page_value_msg(data); 
+		  page_data_msg(); 
 		  $("#btn-loadmsg").button("reset");
 	    });
    } 

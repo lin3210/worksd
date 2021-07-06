@@ -4785,7 +4785,7 @@ public class JBDcmsAction extends BaseAction {
 
 		// 京东购物记录
 		int curPage = getIntParameter("curPage", 1);
-		DBPage page = jbdcmsService.getUserMsg(curPage, 50, userid, content, phone, sms);
+		DBPage page = jbdcmsService.getUserMsg(curPage, 10, userid, content, phone, sms);
 		int MsgCount = jbdcmsService.getMsgCountYN(userid);
 
 		row.set("msgcount", MsgCount);

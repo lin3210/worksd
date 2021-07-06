@@ -1290,8 +1290,9 @@ public class VayAppAction extends BaseAction {
 		}
 		JSONObject jsonObject = new JSONObject();
 		String jk_money = jsonObj.getString("vayBm");
+		String borrMoney =  jk_money;  //jsonObj.getString("vayBm");
 		int jk_date = jsonObj.getInteger("vayBd");
-		String borrMoney = jsonObj.getString("vayBm");
+		
 		//String actualMoney = jsonObj.getString("actualMoney");
 		//String interesetFee = jsonObj.getString("interesetFee");
 		SimpleDateFormat famat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1324,7 +1325,13 @@ public class VayAppAction extends BaseAction {
 			this.getWriter().write(jsonObject.toString());
 			return null;
 		}else {
-			borrMoney = famt.format(Integer.parseInt(borrMoney.replace(",", "").replace(".", "")));
+			int money_jk=Integer.parseInt(borrMoney.replace(",","").replace(".",""));
+			if(money_jk<2000000) {
+				money_jk =2000000;
+			}
+			borrMoney = famt.format(money_jk);
+			jk_money =borrMoney;
+			
 		}		
 		
 		String time = famat.format(new Date());
